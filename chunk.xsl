@@ -4,4 +4,5 @@
   <xsl:import href="mutt.xsl"/>
   <xsl:param name="use.id.as.filename" select="1"/>
   <xsl:param name="chunk.section.depth" select="0"/>
+  <xsl:param name="root.filename">manual</xsl:param>
 </xsl:stylesheet>
