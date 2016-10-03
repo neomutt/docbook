@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xsltproc --nonet chunk.xsl manual.xml
+
