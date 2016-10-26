@@ -9,7 +9,7 @@
 <firstname>Michael</firstname><surname>Elkins</surname>
 <email>me@cs.hmc.edu</email>
 </author>
-<releaseinfo>version 20161003 (1.7.0)</releaseinfo>
+<releaseinfo>version 20161014 (1.7.1)</releaseinfo>
 
 <abstract>
 <para>
@@ -2364,9 +2364,9 @@ See also the <link linkend="postpone">$postpone</link> quad-option.
     <tbody>
       <row><entry>$XDG_CONFIG_DIRS/neomutt/config</entry></row>
       <row><entry>/etc/NeoMuttrc</entry></row>
-      <row><entry>/etc/Muttrc-1.7.0-neo</entry></row>
+      <row><entry>/etc/Muttrc-1.7.1-neo</entry></row>
       <row><entry>/etc/Muttrc</entry></row>
-      <row><entry>/share/mutt/Muttrc-1.7.0-neo</entry></row>
+      <row><entry>/share/mutt/Muttrc-1.7.1-neo</entry></row>
       <row><entry>/share/mutt/Muttrc</entry></row>
     </tbody>
   </tgroup>
@@ -2397,9 +2397,9 @@ See also the <link linkend="postpone">$postpone</link> quad-option.
       <row><entry>$XDG_CONFIG_HOME/neomutt/config</entry></row>
       <row><entry>~/.neomuttrc</entry></row>
       <row><entry>~/.mutt/neomuttrc</entry></row>
-      <row><entry>~/.muttrc-1.7.0-neo</entry></row>
+      <row><entry>~/.muttrc-1.7.1-neo</entry></row>
       <row><entry>~/.muttrc</entry></row>
-      <row><entry>~/.mutt/muttrc-1.7.0-neo</entry></row>
+      <row><entry>~/.mutt/muttrc-1.7.1-neo</entry></row>
       <row><entry>~/.mutt/muttrc</entry></row>
     </tbody>
   </tgroup>
@@ -8328,7 +8328,7 @@ would contain:
 Mutt may also be <quote>patched</quote> to support smaller features.
 These patches should add a free-form string to the end Mutt's version string.
 Running <literal>mutt -v</literal> might show:
-<screen>patch-1.7.0.sidebar.20160709</screen>
+<screen>patch-1.7.1.sidebar.20160709</screen>
 </para>
 </sect2>
 
@@ -8963,7 +8963,7 @@ please have a look at the mixmaster documentation.
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -9064,7 +9064,7 @@ color   attach_headers     brightmagenta   default        &quot;invalid node wit
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -9159,7 +9159,7 @@ bind index,pager @ compose-to-sender
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -9522,7 +9522,7 @@ close-hook  '\.gpg$' &quot;gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
       <listitem><para><link linkend="feature/nested-if">nested-if patch</link></para></listitem>
     </itemizedlist>
 
@@ -9907,7 +9907,7 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -10034,7 +10034,7 @@ set pgp_encrypt_self = &quot;no&quot;
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
       <listitem><para><literal>open_memstream()</literal>, <literal>fmemopen()</literal> from glibc</para></listitem>
     </itemizedlist>
 
@@ -10110,7 +10110,7 @@ set pgp_encrypt_self = &quot;no&quot;
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -10123,7 +10123,8 @@ set pgp_encrypt_self = &quot;no&quot;
       The 'forgotten-attachment' patch provides a new setting for Mutt that
       alerts the user if the message body contains a certain keyword but there are
       no attachments added. This is meant to ensure that the user does not forget
-      to attach a file after promising to do so in the mail.
+      to attach a file after promising to do so in the mail. The attachment keyword
+      will not be scanned in text matched by <link linkend="quote-regexp">$quote_regexp</link>.
     </para>
   </sect1>
 
@@ -10144,7 +10145,7 @@ set pgp_encrypt_self = &quot;no&quot;
           <row>
             <entry><literal>attach_keyword</literal></entry>
             <entry>regular expression</entry>
-            <entry><literal>\\&lt;attach(|ed|ments?)\\&gt;</literal></entry>
+            <entry><literal>\\&lt;(attach|attached|attachments?)\\&gt;</literal></entry>
           </row>
           <row>
             <entry><literal>abort_noattach</literal></entry>
@@ -10213,6 +10214,7 @@ set attach_keyword = &quot;\\&lt;attach(|ed|ments?)\\&gt;&quot;
     <listitem><para>Darshit Shah <email>darnir@gmail.com</email></para></listitem>
     <listitem><para>Richard Russon <email>rich@flatcap.org</email></para></listitem>
     <listitem><para>Johannes Wei&szlig;l <email>jargon@molb.org</email></para></listitem>
+    <listitem><para>Steven! Ragnar&ouml;k <email>steven@nuclearsandwich.com</email></para></listitem>
     </itemizedlist>
   </sect1>
 </chapter>
@@ -10232,7 +10234,7 @@ set attach_keyword = &quot;\\&lt;attach(|ed|ments?)\\&gt;&quot;
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -10369,7 +10371,7 @@ ifndef USE_SIDEBAR finish
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
       <listitem><para><link linkend="feature/status-color">status-color patch</link></para></listitem>
     </itemizedlist>
 
@@ -10571,7 +10573,7 @@ color index_size cyan default
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -10675,7 +10677,7 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -10905,7 +10907,7 @@ bind index,pager y edit-label
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
       <listitem><para><ulink url="http://fallabs.com/kyotocabinet/">Kyoto Cabinet libraries</ulink></para></listitem>
     </itemizedlist>
 
@@ -10961,7 +10963,7 @@ bind index,pager y edit-label
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -11061,7 +11063,7 @@ bind index &lt;esc&gt;L limit-current-thread
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -11122,7 +11124,7 @@ bind index &lt;esc&gt;L limit-current-thread
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -11188,7 +11190,7 @@ bind index &lt;esc&gt;L limit-current-thread
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -11371,7 +11373,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
   </sect1>
 </chapter>
 
-<chapter id="feature/new-mail-hook">
+<chapter id="feature/new-mail">
   <title>new-mail Feature</title>
   <subtitle>Execute a command upon the receipt of new mail.</subtitle>
 
@@ -11386,7 +11388,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -11522,7 +11524,7 @@ set new_mail_command = &quot;&quot;
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -11943,7 +11945,7 @@ bind index \CG get-message
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
       <listitem><para><link linkend="feature/quasi-delete">quasi-delete patch</link></para></listitem>
       <listitem><para><link linkend="feature/index-color">index-color patch</link></para></listitem>
       <listitem><para>Notmuch libraries</para></listitem>
@@ -11963,13 +11965,6 @@ bind index \CG get-message
       <listitem><para>For more information, see:
       <ulink url="http://notmuchmail.org/">http://notmuchmail.org/</ulink>
       </para></listitem>
-      <listitem><para>Home page (wiki) and git:
-      <ulink url="https://github.com/karelzak/mutt-kz">https://github.com/karelzak/mutt-kz</ulink>
-      </para></listitem>
-      <listitem><para>Mailing list:
-      <ulink url="https://admin.fedoraproject.org/mailman/listinfo/mutt-kz">https://admin.fedoraproject.org/mailman/listinfo/mutt-kz</ulink>
-      </para></listitem>
-
       <listitem><para>More examples:
       <ulink url="http://notmuchmail.org/mutttips/">http://notmuchmail.org/mutttips/</ulink>
       </para></listitem>
@@ -12523,7 +12518,7 @@ color index_tags green default
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -12618,7 +12613,7 @@ color progress white red
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -12699,7 +12694,7 @@ bind index,pager Q quasi-delete
   </sect1>
 </chapter>
 
-<chapter id="feature/reply-with-xorig-patch">
+<chapter id="feature/reply-with-xorig">
   <title>Reply With X-Original-To Feature</title>
   <subtitle>Adds a configuration variable to allow direct reply to a mail using X-Original-To header
       as a From: in the answer.
@@ -12716,7 +12711,7 @@ bind index,pager Q quasi-delete
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -12796,7 +12791,7 @@ set reply_with_xorig = &quot;yes&quot;
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -12918,7 +12913,7 @@ set sort_browser="reverse-size"
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -13393,7 +13388,7 @@ color sidebar_ordinary color245 default
   </sect1>
 </chapter>
 
-<chapter id="feature/skip-quoted-patch">
+<chapter id="feature/skip-quoted">
   <title>Skip-Quoted Feature</title>
   <subtitle>Leave some context visible</subtitle>
 
@@ -13408,7 +13403,7 @@ color sidebar_ordinary color245 default
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -13420,7 +13415,7 @@ color sidebar_ordinary color245 default
     <para>
       When viewing an email, the
       <literal>&lt;skip-to-quoted&gt;</literal> function (by default the
-      <literal>S</literal> key) will scroll past any quoted text.
+      <literal>S</literal> key) will scroll past any email headers or quoted text.
       Sometimes, a little context is useful.
     </para>
 
@@ -13507,7 +13502,7 @@ set skip_quoted_offset = 3
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -13676,7 +13671,7 @@ color status brightwhite default 'Mutt: ([^ ]+)' 1
   </sect1>
 </chapter>
 
-<chapter id="feature/timeout-hook">
+<chapter id="feature/timeout">
   <title>Timeout Feature</title>
   <subtitle>Run a command periodically</subtitle>
 
@@ -13691,7 +13686,7 @@ color status brightwhite default 'Mutt: ([^ ]+)' 1
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
     </itemizedlist>
 
     <para>This feature is part of the <ulink url="http://www.neomutt.org/">NeoMutt Project</ulink>.</para>
@@ -13773,7 +13768,7 @@ timeout-hook . 'exec sync-mailbox'
 
     <itemizedlist>
       <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.0</para></listitem>
+      <listitem><para>mutt-1.7.1</para></listitem>
       <listitem><para>OpenSSL</para></listitem>
     </itemizedlist>
 
@@ -15440,7 +15435,7 @@ For an explanation of <quote>soft-fill</quote>, see the <link linkend="index-for
 <sect2 id="attach-keyword">
 <title>attach_keyword</title>
 <literallayout>Type: regular expression
-Default: <quote><literal>\&lt;attach(|ed|ments?)\&gt;</literal></quote></literallayout>
+Default: <quote><literal>\&lt;(attach|attached|attachments?)\&gt;</literal></quote></literallayout>
 
 <para>
 If <link linkend="abort-noattach">abort_noattach</link> is not set to no, then the body of the message
