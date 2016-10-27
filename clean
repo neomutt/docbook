@@ -2,4 +2,5 @@
 
 rm -fr manual
 rm -fr feature
+rm -f *.html
 
