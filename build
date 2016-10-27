@@ -2,3 +2,59 @@
 
 xsltproc --nonet chunk.xsl manual.xml
 
+echo "Extracting:"
+echo -ne "\t"
+for FILE in feature/*.html manual/*.html; do
+	ID=${FILE%.html}
+	echo -n "${ID#*/} "
+	SECTION="chapter"
+	[ $FILE = "manual/index.html" ] && SECTION="book"
+	sed -i 's/.*<html [^>]\+>/<html>/' $FILE
+	xmlstarlet sel -t -c "//div[@class='$SECTION']" $FILE \
+		| tidy -q -xml \
+		| sed 's/<a id=\([^ ]\+\) \/>/<a class="offset" id=\1><\/a>/g' \
+		| sed 's/Chapter&#160;[0-9]\+\.&#160;//' \
+		| sed "s/id=\"${ID#*/}-/id=\"/g" \
+		| sed 's/ \+$//' \
+		| sponge $FILE
+done
+echo
+
+echo "Wrapping:" 
+echo -ne "\t"
+for FILE in feature/*.html; do
+	ID=${FILE%.html}
+	echo -n "${ID#*/} "
+	ID=${ID/\//\\/}
+	TITLE=$(sed -n "/id=\"$ID\">/s/.*a>\(.*\) Feature.*/\1/p" $FILE)
+	DESC=$(sed -n '/class="subtitle"/{n;s/ *<[^>]\+>//g;p}' $FILE)
+
+	(
+		echo "---"
+		echo "layout: features"
+		echo "title: $TITLE"
+		echo "description: $DESC"
+		echo "status: stable"
+		echo "---"
+		echo "{% raw %}"
+		cat $FILE
+		echo "{% endraw %}"
+	) | sponge $FILE
+done
+
+for FILE in manual/*.html; do
+	ID=${FILE%.html}
+	echo -n "${ID#*/} "
+	TITLE=$(sed -n -e '/<h1 /{n;p}' $FILE | sed -e 's:</h1.*::' -e 's/.*[;>]//')
+	(
+		echo "---"
+		echo "layout: manual"
+		echo "title: $TITLE"
+		echo "---"
+		echo "{% raw %}"
+		cat $FILE
+		echo "{% endraw %}"
+	) | sponge $FILE
+done
+echo
+
