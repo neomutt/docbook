@@ -5,6 +5,8 @@ xsltproc --nonet chunk.xsl manual.xml
 echo "Extracting:"
 echo -ne "\t"
 for FILE in feature/*.html manual/*.html; do
+	[ $FILE = "feature/sidebar-intro.html" ] && continue
+	[ $FILE = "feature/virt-un.html" ] && continue
 	ID=${FILE%.html}
 	echo -n "${ID#*/} "
 	SECTION="chapter"
@@ -16,13 +18,25 @@ for FILE in feature/*.html manual/*.html; do
 		| sed 's/Chapter&#160;[0-9]\+\.&#160;//' \
 		| sed "s/id=\"${ID#*/}-/id=\"/g" \
 		| sed 's/ \+$//' \
+		| sed 's!\.\./feature!/feature!' \
+		| sed 's!\.\./manual!/manual!' \
+		| sed 's!/feature/\([-a-z]\+\)\.html\(#\)*\(\1-\)*!/feature/\1\2!' \
+		| sed "s/${FILE#*/}#/#/" \
 		| sponge $FILE
 done
 echo
 
+for FILE in feature/*.html; do
+	[ $FILE = "feature/sidebar-intro.html" ] && continue
+	[ $FILE = "feature/virt-un.html" ] && continue
+	sed -i 's/href="\([-a-z]\+\)\.html/href="..\/\1/' $FILE
+done
+
 echo "Wrapping:" 
 echo -ne "\t"
 for FILE in feature/*.html; do
+	[ $FILE = "feature/sidebar-intro.html" ] && continue
+	[ $FILE = "feature/virt-un.html" ] && continue
 	ID=${FILE%.html}
 	echo -n "${ID#*/} "
 	ID=${ID/\//\\/}
