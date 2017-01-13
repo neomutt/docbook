@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm -fr manual
+rm -fr guide
 rm -fr feature
 

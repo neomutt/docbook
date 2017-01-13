@@ -9,7 +9,7 @@
 <firstname>Michael</firstname><surname>Elkins</surname>
 <email>me@cs.hmc.edu</email>
 </author>
-<releaseinfo>version 20161014 (1.7.1)</releaseinfo>
+<releaseinfo>version 20170113 (1.7.2)</releaseinfo>
 
 <abstract>
 <para>
@@ -19,7 +19,7 @@ me, circa 1995
 </abstract>
 </bookinfo>
 
-<chapter id="manual/intro">
+<chapter id="guide/intro">
 <title>Introduction</title>
 
 <para>
@@ -128,7 +128,7 @@ at <ulink url="http://wiki.mutt.org/">http://wiki.mutt.org/</ulink>.
 <listitem>
 <para>
 For the IRC user community, visit channel <emphasis>#mutt</emphasis> on
-<ulink url="http://www.freenode.net/">irc.freenode.net</ulink>.
+<ulink url="http://freenode.net/">irc.freenode.net</ulink>.
 </para>
 </listitem>
 </varlistentry>
@@ -248,7 +248,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 </chapter>
 
-<chapter id="manual/gettingstarted">
+<chapter id="guide/gettingstarted">
 <title>Getting Started</title>
 
 <para>
@@ -1756,7 +1756,7 @@ there is a large amount of quoted text in the way.
 
 <varlistentry>
 <term>
-<literal>&lt;skip-quoted&gt;</literal><anchor id="skip-quoted"/>
+<literal>&lt;skip-quoted&gt;</literal><anchor id="feature/skip-quoted"/>
 (default: S)
 </term>
 <listitem>
@@ -2286,6 +2286,15 @@ linkend="mime-forward">$mime_forward</link> is set.
 </para>
 
 <para>
+By default a forwarded message does not reference the messages it
+contains. When <link linkend="forward-references">$forward_references</link>
+is set, a forwarded message includes the <quote>In-Reply-To:</quote>
+and <quote>References:</quote> headers, just like a reply would. Hence
+the forwarded message becomes part of the original thread instead of
+starting a new one.
+</para>
+
+<para>
 Editing the message to forward follows the same procedure as sending or
 replying to a message does.
 </para>
@@ -2333,81 +2342,133 @@ See also the <link linkend="postpone">$postpone</link> quad-option.
 
 </chapter>
 
-<chapter id="manual/configuration">
+<chapter id="guide/configuration">
 <title>Configuration</title>
 
 <sect1 id="configuration-files">
 <title>Location of Initialization Files</title>
 
 <para>
-  When Mutt starts up it looks for two configuration files -- a
-  <quote>system</quote> file and a <quote>user</quote> file.
+  When Mutt starts up it looks for two configuration files -- one
+  <quote>system</quote> file and one <quote>user</quote> file.
 </para>
 
 <para>
-  Mutt will search for a system config file in several places.  The filenames
-  may depend on the version number of Mutt.  Mutt will read just one file, the
-  first file it finds, from the list below.
+  Mutt searches for several different file names when looking for config.  It
+  looks for NeoMutt config files before Mutt config files and versioned config
+  before plain config.  For example:
 </para>
 
-<para>
-  The system config file will not be read if the <quote>-n</quote>
-  option is used on the <link linkend="commandline">command line</link>.
-</para>
-
-<table id="system-muttrc">
-  <title>Mutt system config file locations</title>
+<table id="muttrc-order">
+  <title>Mutt config file search order</title>
   <tgroup cols="1">
-    <thead>
-      <row><entry>File Location</entry></row>
-    </thead>
     <tbody>
-      <row><entry>$XDG_CONFIG_DIRS/neomutt/config</entry></row>
-      <row><entry>/etc/NeoMuttrc</entry></row>
-      <row><entry>/etc/Muttrc-1.7.1-neo</entry></row>
-      <row><entry>/etc/Muttrc</entry></row>
-      <row><entry>/share/mutt/Muttrc-1.7.1-neo</entry></row>
-      <row><entry>/share/mutt/Muttrc</entry></row>
+      <row><entry>neomuttrc-20161126</entry></row>
+      <row><entry>neomuttrc</entry></row>
+      <row><entry>muttrc-1.7.2</entry></row>
+      <row><entry>muttrc</entry></row>
     </tbody>
   </tgroup>
 </table>
 
 <para>
-  <emphasis>($XDG_CONFIG_DIRS defaults to "/etc/xdg".)</emphasis>
+  This allows the user to create separate Mutt and NeoMutt config files on the
+  same system.
 </para>
 
-<para>
-  Mutt will search for a user config file in several places in your home
-  directory.  The filenames may depend on the version number of Mutt.  Mutt
-  will read just one file, the first file it finds, from the list below.
-</para>
+<sect2 id="muttrc-system">
+  <title>Location of Mutt system config files</title>
 
-<para>
-  You may specify your own location for the user config file using the
-  <quote>-F</quote> option on the <link linkend="commandline">command line</link>.
-</para>
+  <para>
+    Mutt will search for a system config file in a <literal>mutt</literal>
+    directory in several places.  First it searches the locations specified in
+    the <literal>XDG_CONFIG_DIRS</literal> environment variable, which defaults
+    to <literal>/etc/xdg</literal>.  Next, it looks in <literal>/etc</literal>.
+    Finally, it tries <literal>/usr/share</literal>.
+  </para>
 
-<table id="user-muttrc">
-  <title>Mutt user config file locations</title>
-  <tgroup cols="1">
-    <thead>
-      <row><entry>File Location</entry></row>
-    </thead>
-    <tbody>
-      <row><entry>$XDG_CONFIG_HOME/neomutt/config</entry></row>
-      <row><entry>~/.neomuttrc</entry></row>
-      <row><entry>~/.mutt/neomuttrc</entry></row>
-      <row><entry>~/.muttrc-1.7.1-neo</entry></row>
-      <row><entry>~/.muttrc</entry></row>
-      <row><entry>~/.mutt/muttrc-1.7.1-neo</entry></row>
-      <row><entry>~/.mutt/muttrc</entry></row>
-    </tbody>
-  </tgroup>
-</table>
+  <para>
+    The system config file will not be read if the <quote>-n</quote>
+    option is used on the <link linkend="commandline">command line</link>.
+  </para>
 
-<para>
-  <emphasis>($XDG_CONFIG_HOME defaults to "$HOME/.config".)</emphasis>
-</para>
+  <para>
+    Mutt will read just one file, the first file it finds, from the list below.
+  </para>
+
+  <table id="muttrc-system-files">
+    <title>Mutt system config file locations</title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>File Location</entry>
+          <entry>Notes</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row><entry>/etc/xdg/mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>/etc/xdg/mutt/neomuttrc</entry></row>
+        <row><entry>/etc/xdg/mutt/Muttrc-1.7.2</entry><entry>Mutt release version, Note the case of the filename</entry></row>
+        <row><entry>/etc/xdg/mutt/Muttrc</entry><entry>Note the case of the filename</entry></row>
+        <row><entry>/etc/mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>/etc/mutt/neomuttrc</entry></row>
+        <row><entry>/etc/mutt/Muttrc-1.7.2</entry><entry>Mutt release version, Note the case of the filename</entry></row>
+        <row><entry>/etc/mutt/Muttrc</entry><entry>Note the case of the filename</entry></row>
+        <row><entry>/usr/share/mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>/usr/share/mutt/neomuttrc</entry></row>
+        <row><entry>/usr/share/mutt/Muttrc-1.7.2</entry><entry>Mutt release version, Note the case of the filename</entry></row>
+        <row><entry>/usr/share/mutt/Muttrc</entry><entry>Note the case of the filename</entry></row>
+      </tbody>
+    </tgroup>
+  </table>
+</sect2>
+
+<sect2 id="muttrc-user">
+  <title>Location of Mutt system config files</title>
+
+  <para>
+    Mutt will search for a user config file in several places.  First it looks
+    in the directory specified in the <literal>XDG_CONFIG_HOME</literal>
+    environment variable, which defaults to <literal>~/.config/mutt</literal>.
+    Next, it looks in <literal>~</literal> (your home directory).  Finally, it
+    tries <literal>~/.mutt</literal>.
+  </para>
+
+  <para>
+    You may specify your own location for the user config file using the
+    <quote>-F</quote> option on the <link linkend="commandline">command line</link>.
+  </para>
+
+  <para>
+    Mutt will read just one file, the first file it finds, from the list below.
+  </para>
+
+  <table id="muttrc-user-files">
+    <title>Mutt user config file locations</title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>File Location</entry>
+          <entry>Notes</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row><entry>~/.config/mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>~/.config/mutt/neomuttrc</entry></row>
+        <row><entry>~/.config/mutt/muttrc-1.7.2</entry><entry>Mutt release version</entry></row>
+        <row><entry>~/.config/mutt/muttrc</entry></row>
+        <row><entry>~/.neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>~/.neomuttrc</entry></row>
+        <row><entry>~/.muttrc-1.7.2</entry><entry>Mutt release version</entry></row>
+        <row><entry>~/.muttrc</entry></row>
+        <row><entry>~/.mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>~/.mutt/neomuttrc</entry></row>
+        <row><entry>~/.mutt/muttrc-1.7.2</entry><entry>Mutt release version</entry></row>
+        <row><entry>~/.mutt/muttrc</entry></row>
+      </tbody>
+    </tgroup>
+  </table>
+</sect2>
 
 </sect1>
 
@@ -2987,8 +3048,8 @@ addition, <emphasis>key</emphasis> may be a symbolic name as shown in
 <row><entry>&lt;backtab&gt;</entry><entry>backtab / shift-tab</entry></row>
 <row><entry>\r</entry><entry>carriage return</entry></row>
 <row><entry>\n</entry><entry>newline</entry></row>
-<row><entry>\e</entry><entry>escape</entry></row>
-<row><entry>&lt;esc&gt;</entry><entry>escape</entry></row>
+<row><entry>\e</entry><entry>escape/alt</entry></row>
+<row><entry>&lt;esc&gt;</entry><entry>escape/alt</entry></row>
 <row><entry>&lt;up&gt;</entry><entry>up arrow</entry></row>
 <row><entry>&lt;down&gt;</entry><entry>down arrow</entry></row>
 <row><entry>&lt;left&gt;</entry><entry>left arrow</entry></row>
@@ -3968,7 +4029,7 @@ linkend="imap"/> respectively.
 <para>
 Mutt provides a number of advanced features for handling (possibly many)
 folders and new mail within them, please refer to <xref
-linkend="new-mail"/> for details (including in what situations and how
+linkend="feature/new-mail"/> for details (including in what situations and how
 often Mutt checks for new mail).
 </para>
 
@@ -5438,7 +5499,7 @@ by the <literal>mailto:</literal> specification in RFC2368.
 
 </chapter>
 
-<chapter id="manual/advancedusage">
+<chapter id="guide/advancedusage">
 <title>Advanced Usage</title>
 
 <sect1 id="charset-handling">
@@ -5881,6 +5942,31 @@ recipients from Germany.
 </screen>
 </example>
 
+<para>
+You can restrict address pattern matching to aliases that you have
+defined with the "@" modifier.  This example matches messages whose
+recipients are all from Germany, and who are known to your alias list.
+</para>
+
+<example id="ex-restrict-to-aliases">
+<title>Matching restricted to aliases</title>
+<screen>
+^@~C \.de$
+</screen>
+</example>
+
+<para>
+To match any defined alias, use a regular expression that matches any
+string.  This example matches messages whose senders are known aliases.
+</para>
+
+<example id="ex-match-alias">
+<title>Matching any defined alias</title>
+<screen>
+@~f .
+</screen>
+</example>
+
 </sect2>
 
 <sect2 id="simple-searches">
@@ -6150,6 +6236,27 @@ dates shown in the main index.
 
 </sect2>
 
+</sect1>
+
+<sect1 id="markmsg">
+<title>Marking Messages</title>
+
+<para>
+There are times that it's useful to ask Mutt to "remember" which message
+you're currently looking at, while you move elsewhere in your mailbox.
+You can do this with the <quote>mark-message</quote> operator, which
+is bound to the <quote>~</quote> key by default.  Press this key to
+enter an identifier for the marked message. When you want to return to
+this message, press <quote>'</quote> and the name that you previously
+entered.
+</para>
+
+<para>
+(Message marking is really just a shortcut for defining a macro
+that returns you to the current message by searching for its
+Message-ID.  You can choose a different prefix by setting the <link
+linkend="mark-macro-prefix">$mark_macro_prefix</link> variable.)
+</para>
 </sect1>
 
 <sect1 id="tags">
@@ -6424,6 +6531,24 @@ if the mailbox shortcut results in an empty regexp.
 
 </sect2>
 
+</sect1>
+
+<sect1 id="setenv">
+<title>Managing the Environment</title>
+
+<para>
+You can alter the environment that Mutt passes on to its child processes
+using the <quote>setenv</quote> and <quote>unsetenv</quote> operators.
+(N.B. These follow Mutt-style syntax, not shell-style!)  You can also
+query current environment values by prefixing a <quote>?</quote> character.
+</para>
+
+<screen>
+setenv TERM vt100
+setenv ORGANIZATION "The Mutt Development Team"
+unsetenv DISPLAY
+setenv ?LESS
+</screen>
 </sect1>
 
 <sect1 id="query">
@@ -6815,7 +6940,7 @@ to your inbox, and it is fully compatible with the new keywords code.
 
 </sect1>
 
-<sect1 id="new-mail">
+<sect1 id="feature/new-mail">
 <title>New Mail Detection</title>
 
 <para>
@@ -6893,7 +7018,7 @@ When unset, Mutt will notify you of any new mail in the mailbox.
 
 <para>
 When in the index menu and being idle (also see <link
-linkend="timeout">$timeout</link>), Mutt periodically checks for new
+linkend="timeout-hook-intro">$timeout</link>), Mutt periodically checks for new
 mail in all folders which have been configured via the
 <command>mailboxes</command> command. The interval depends on the folder
 type: for local/IMAP folders it consults <link
@@ -7105,7 +7230,7 @@ selection. Highest priority has the mailbox given with the
 
 </chapter>
 
-<chapter id="manual/mimesupport">
+<chapter id="guide/mimesupport">
 <title>Mutt's MIME Support</title>
 
 <para>
@@ -8291,7 +8416,7 @@ for example, in a global <literal>.muttrc</literal>.
 
 </chapter>
 
-<chapter id="manual/optionalfeatures">
+<chapter id="guide/optionalfeatures">
 <title>Optional Features</title>
 
 <sect1 id="optionalfeatures-notes">
@@ -8502,7 +8627,7 @@ linkend="imap-list-subscribed">$imap_list_subscribed</link> variable.
 Polling for new mail on an IMAP server can cause noticeable delays. So,
 you'll want to carefully tune the <link
 linkend="mail-check">$mail_check</link> and <link
-linkend="timeout">$timeout</link> variables. Reasonable values are:
+linkend="timeout-hook-intro">$timeout</link> variables. Reasonable values are:
 </para>
 
 <screen>
@@ -8800,6 +8925,14 @@ in lower performance), but one file per folder if it points to a
 directory.
 </para>
 
+<para>
+Additionally, <link linkend="header-cache-backend">$header_cache_backend</link>
+can be used to specify which backend to use. The list of available backends can
+be specified at configure time with a set of --with-&lt;backend&gt; options.
+Currently, the following backends are supported: tokyocabinet, kyotocabinet,
+qdbm, gdbm, bdb, lmdb.
+</para>
+
 </sect2>
 
 <sect2 id="body-caching">
@@ -8955,18 +9088,8 @@ please have a look at the mixmaster documentation.
   <sect1 id="attach-headers-color-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>attach-headers-color</quote>, look for
-      <quote>patch-attach-headers-color</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="attach-headers-color-intro">
@@ -9030,7 +9153,6 @@ color   attach_headers     brightmagenta   default        &quot;invalid node wit
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="color">Color command</link></para></listitem>
       <listitem><para><link linkend="regexp">Regular Expressions</link></para></listitem>
     </itemizedlist>
@@ -9056,18 +9178,8 @@ color   attach_headers     brightmagenta   default        &quot;invalid node wit
   <sect1 id="compose-to-sender-support">
     <title>Support</title>
 
-    <para>
-      To check if Mutt supports <quote>compose-to-sender</quote>, look for
-      <quote>patch-compose-to-sender</quote> in the mutt version.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-10-02</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="compose-to-sender-intro">
@@ -9151,18 +9263,8 @@ bind index,pager @ compose-to-sender
   <sect1 id="compress-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Compress Folders</quote>, look for
-      <quote>+USE_COMPRESSED</quote> in the version info.
-      See: <xref linkend="compile-time-features"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-05-30</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="compress-intro">
@@ -9219,8 +9321,9 @@ bind index,pager @ compose-to-sender
     <para>
       The shell-command must contain two placeholders for filenames:
       <literal>%f</literal> and <literal>%t</literal>.  These represent
-      <quote>from</quote> and <quote>to</quote> filenames.  It's a good idea to
-      put quotes around these placeholders.
+      <quote>from</quote> and <quote>to</quote> filenames.  These placeholders
+      should be placed inside single-quotes to prevent unintended shell
+      expansions.
     </para>
 
     <para>
@@ -9300,9 +9403,9 @@ bind index,pager @ compose-to-sender
       </para>
 
       <sect3 id="compress-open-hook-example">
-        <title>Example of open-hook</title>
+        <title>Example of <literal>open-hook</literal></title>
 
-        <screen>open-hook '\.gz$' &quot;gzip -cd '%f' &gt; '%t'&quot;</screen>
+        <screen>open-hook '\.gz$' &quot;gzip --stdout --decompress '%f' &gt; '%t'&quot;</screen>
 
         <itemizedlist>
           <listitem><para>Mutt finds a file, <quote>example.gz</quote>,
@@ -9336,9 +9439,9 @@ bind index,pager @ compose-to-sender
       </note>
 
       <sect3 id="compress-close-hook-example">
-        <title>Example of close-hook</title>
+        <title>Example of <literal>close-hook</literal></title>
 
-        <screen>close-hook '\.gz$' &quot;gzip -c '%t' &gt; '%f'&quot;</screen>
+        <screen>close-hook '\.gz$' &quot;gzip --stdout '%t' &gt; '%f'&quot;</screen>
 
         <itemizedlist>
           <listitem><para>Mutt has finished with a folder, <quote>example.gz</quote>,
@@ -9349,6 +9452,13 @@ bind index,pager @ compose-to-sender
           <listitem><para>Mutt uses the command <literal>gzip -c</literal>
               to create a new compressed file</para></listitem>
         </itemizedlist>
+
+        <note>
+          <para>
+            The <literal>close-hook</literal> can also include extra options,
+            e.g. compression level: <literal>--best</literal>
+          </para>
+        </note>
       </sect3>
     </sect2>
 
@@ -9389,9 +9499,9 @@ bind index,pager @ compose-to-sender
       </note>
 
       <sect3 id="compress-append-hook-example">
-        <title>Example of append-hook</title>
+        <title>Example of <literal>append-hook</literal></title>
 
-        <screen>append-hook '\.gz$' &quot;gzip -c '%t' &gt;&gt; '%f'&quot;</screen>
+        <screen>append-hook '\.gz$' &quot;gzip --stdout '%t' &gt;&gt; '%f'&quot;</screen>
 
         <itemizedlist>
           <listitem><para>Mutt wants to append an email to a folder, <quote>example.gz</quote>,
@@ -9403,8 +9513,14 @@ bind index,pager @ compose-to-sender
           <listitem><para>Mutt uses the command <literal>gzip -c</literal>
               to append to an existing compressed file</para></listitem>
         </itemizedlist>
-      </sect3>
 
+        <note>
+          <para>
+            The <literal>append-hook</literal> can also include extra options,
+            e.g. compression level: <literal>--best</literal>
+          </para>
+        </note>
+      </sect3>
     </sect2>
 
     <sect2 id="compress-empty">
@@ -9445,19 +9561,19 @@ bind index,pager @ compose-to-sender
 # The 'append-hook' is optional.
 
 # Handler for gzip compressed mailboxes</emphasis>
-open-hook   '\.gz$'  &quot;gzip -cd  '%f' &gt;  '%t'&quot;
-close-hook  '\.gz$'  &quot;gzip -c   '%t' &gt;  '%f'&quot;
-append-hook '\.gz$'  &quot;gzip -c   '%t' &gt;&gt; '%f'&quot;
+open-hook   '\.gz$' &quot;gzip --stdout --decompress '%f' &gt;  '%t'&quot;
+close-hook  '\.gz$' &quot;gzip --stdout              '%t' &gt;  '%f'&quot;
+append-hook '\.gz$' &quot;gzip --stdout              '%t' &gt;&gt; '%f'&quot;
 
 <emphasis role="comment"># Handler for bzip2 compressed mailboxes</emphasis>
-open-hook   '\.bz2$' &quot;bzip2 -cd '%f' &gt;  '%t'&quot;
-close-hook  '\.bz2$' &quot;bzip2 -c  '%t' &gt;  '%f'&quot;
-append-hook '\.bz2$' &quot;bzip2 -c  '%t' &gt;&gt; '%f'&quot;
+open-hook   '\.bz2$' &quot;bzip2 --stdout --decompress '%f' &gt;  '%t'&quot;
+close-hook  '\.bz2$' &quot;bzip2 --stdout              '%t' &gt;  '%f'&quot;
+append-hook '\.bz2$' &quot;bzip2 --stdout              '%t' &gt;&gt; '%f'&quot;
 
 <emphasis role="comment"># Handler for xz compressed mailboxes</emphasis>
-open-hook   '\.xz$'  &quot;xz    -cd '%f' &gt;  '%t'&quot;
-close-hook  '\.xz$'  &quot;xz    -c  '%t' &gt;  '%f'&quot;
-append-hook '\.xz$'  &quot;xz    -c  '%t' &gt;&gt; '%f'&quot;
+open-hook   '\.xz$' &quot;xz --stdout --decompress '%f' &gt;  '%t'&quot;
+close-hook  '\.xz$' &quot;xz --stdout              '%t' &gt;  '%f'&quot;
+append-hook '\.xz$' &quot;xz --stdout              '%t' &gt;&gt; '%f'&quot;
 
 <emphasis role="comment"># Handler for pgp encrypted mailboxes
 # PGP does not support appending to an encrypted file</emphasis>
@@ -9477,21 +9593,12 @@ close-hook  '\.gpg$' &quot;gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="compile-time-features">Compile-Time Features</link></para></listitem>
       <listitem><para><link linkend="regexp">Regular Expressions</link></para></listitem>
       <listitem><para><link linkend="tmpdir">$tmpdir</link></para></listitem>
       <listitem><para><link linkend="mbox-type">$mbox_type</link></para></listitem>
       <listitem><para><link linkend="save-empty">$save_empty</link></para></listitem>
       <listitem><para><link linkend="folder-hook">folder-hook</link></para></listitem>
-    </itemizedlist>
-  </sect1>
-
-  <sect1 id="compress-known-bugs">
-    <title>Known Bugs</title>
-
-    <itemizedlist>
-      <listitem><para>The Compressed Folder hooks cannot deal with filenames that contains quotes/apostrophes.</para></listitem>
     </itemizedlist>
   </sect1>
 
@@ -9514,21 +9621,13 @@ close-hook  '\.gpg$' &quot;gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '
   <sect1 id="cond-date-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Conditional Dates</quote>, look for
-      <quote>patch-cond-date</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-      <listitem><para><link linkend="feature/nested-if">nested-if patch</link></para></listitem>
-    </itemizedlist>
-
-    <para>
-      This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.
-    </para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+      <variablelist>
+        <varlistentry>
+          <term><emphasis role="bold">Dependencies:</emphasis></term>
+          <listitem><para><link linkend="feature/nested-if">nested-if feature</link></para></listitem>
+        </varlistentry>
+      </variablelist>
   </sect1>
 
   <sect1 id="cond-date-intro">
@@ -9862,7 +9961,6 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="index-format">$index_format</link></para></listitem>
       <listitem><para><link linkend="feature/nested-if">nested-if patch</link></para></listitem>
       <listitem><para><literal>strftime(3)</literal></para></listitem>
@@ -9899,18 +9997,8 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
   <sect1 id="encrypt-to-self-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>encrypt-to-self</quote>, look for
-      <quote>patch-encrypt-to-self</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-07-23</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="encrypt-to-self-intro">
@@ -9996,14 +10084,6 @@ set pgp_encrypt_self = &quot;no&quot;
 </screen>
   </sect1>
 
-  <sect1 id="encrypt-to-self-see-also">
-    <title>See Also</title>
-
-    <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
-    </itemizedlist>
-  </sect1>
-
   <sect1 id="encrypt-to-self-known-bugs">
     <title>Known Bugs</title>
     <para>None</para>
@@ -10026,56 +10106,49 @@ set pgp_encrypt_self = &quot;no&quot;
   <sect1 id="fmemopen-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>fmemopen</quote>, look for
-      <quote>patch-fmemopen</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-      <listitem><para><literal>open_memstream()</literal>, <literal>fmemopen()</literal> from glibc</para></listitem>
-    </itemizedlist>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+      <variablelist>
+        <varlistentry>
+          <term><emphasis role="bold">Dependencies:</emphasis></term>
+          <listitem><para><literal>open_memstream()</literal>, <literal>fmemopen()</literal> from glibc</para></listitem>
+        </varlistentry>
+      </variablelist>
 
     <para>
-      This feature can be disabled by running <literal>configure</literal> with
-      the option <literal>--disable-fmemopen</literal>
+      This feature can be enabled by running <literal>configure</literal> with
+      the option <literal>--enable-fmemopen</literal>
     </para>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
   </sect1>
 
   <sect1 id="fmemopen-intro">
     <title>Introduction</title>
 
-        <para>
+    <para>
     The <quote>fmemopen</quote> patch speeds up some searches.
-        </para>
+    </para>
 
-        <para>
+    <para>
     This feature changes a few places where Mutt creates temporary files.
     It replaces them with in-memory buffers.  This should improve the
     performance when searching the header or body using the
     <link linkend="thorough-search">$thorough_search</link> option.
-        </para>
+    </para>
 
-        <para>
+    <para>
     There are no user-configurable parts.
-        </para>
+    </para>
 
-        <para>
+    <para>
     This feature depends on <literal>open_memstream()</literal> and
     <literal>fmemopen()</literal>.  They are provided by glibc.  Without
     them, Mutt will simply create temporary files.
-        </para>
+    </para>
   </sect1>
 
   <sect1 id="fmemopen-see-also">
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="compile-time-features">Compile-Time Features</link></para></listitem>
       <listitem><para><literal>fmemopen(3)</literal></para></listitem>
     </itemizedlist>
@@ -10102,18 +10175,8 @@ set pgp_encrypt_self = &quot;no&quot;
   <sect1 id="forgotten-attachment-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>forgotten-attachment</quote>, look for
-      <quote>patch-forgotten-attachment</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="forgotten-attachment-intro">
@@ -10197,7 +10260,6 @@ set attach_keyword = &quot;\\&lt;attach(|ed|ments?)\\&gt;&quot;
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="attach-menu">The Attachment Menu</link></para></listitem>
       <listitem><para><link linkend="attachment-map">The Attachment Menu key mappings</link></para></listitem>
     </itemizedlist>
@@ -10219,6 +10281,125 @@ set attach_keyword = &quot;\\&lt;attach(|ed|ments?)\\&gt;&quot;
   </sect1>
 </chapter>
 
+<chapter id="feature/global-hooks">
+  <title>Global Hooks</title>
+  <subtitle>Define actions to run globally within Mutt</subtitle>
+
+  <sect1 id="global-hooks-intro">
+    <title>Introduction</title>
+
+    <para>
+      These hooks are called when global events take place in Mutt.
+    </para>
+
+    <itemizedlist>
+      <title>Run a command...</title>
+      <listitem><para><emphasis role="bold">timeout-hook</emphasis> - periodically</para></listitem>
+      <listitem><para><emphasis role="bold">startup-hook</emphasis> - when mutt starts up, before opening the first mailbox</para></listitem>
+      <listitem><para><emphasis role="bold">shutdown-hook</emphasis> - mutt shuts down, before closing the last mailbox</para></listitem>
+    </itemizedlist>
+
+    <sect2 id="timeout-hook-intro">
+      <title>Timeout Hook</title>
+      <subtitle>Run a command periodically</subtitle>
+      <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-08-08</para>
+      <para>
+        This feature implements a new hook that is called periodically when Mutt
+        checks for new mail. This hook is called every <literal>$timeout</literal> seconds.
+      </para>
+    </sect2>
+
+    <sect2 id="startup-hook-intro">
+      <title>Startup Hook</title>
+      <subtitle>Run a command when mutt starts up, before opening the first mailbox</subtitle>
+      <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-11-25</para>
+      <para>
+        This feature implements a new hook that is called when Mutt first
+        starts up, but before opening the first mailbox.  This is most likely
+        to be useful to users of <link linkend="feature/notmuch">notmuch</link>.
+      </para>
+    </sect2>
+
+    <sect2 id="shutdown-hook">
+      <title>Shutdown Hook</title>
+      <subtitle>Run a command when mutt shuts down, before closing the last mailbox</subtitle>
+      <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-11-25</para>
+      <para>
+        This feature implements a hook that is called when Mutt shuts down, but
+        before closing the first mailbox. This is most likely to be useful to
+        users of <link linkend="feature/notmuch">notmuch</link>.
+      </para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="global-hooks-commands">
+    <title>Commands</title>
+
+    <cmdsynopsis>
+      <command>timeout-hook</command>
+      <arg choice="plain">
+        <replaceable class="parameter">MUTT-COMMAND</replaceable>
+      </arg>
+    </cmdsynopsis>
+    <cmdsynopsis>
+      <command>startup-hook</command>
+      <arg choice="plain">
+        <replaceable class="parameter">MUTT-COMMAND</replaceable>
+      </arg>
+    </cmdsynopsis>
+    <cmdsynopsis>
+      <command>shutdown-hook</command>
+      <arg choice="plain">
+        <replaceable class="parameter">MUTT-COMMAND</replaceable>
+      </arg>
+    </cmdsynopsis>
+  </sect1>
+
+  <sect1 id="global-hooks-muttrc">
+    <title>Muttrc</title>
+<screen>
+<emphasis role="comment"># Example NeoMutt config file for the global hooks feature.
+
+# --------------------------------------------------------------------------
+# COMMANDS - shown with an example argument
+# --------------------------------------------------------------------------
+
+# After $timeout seconds of inactivity, run this mutt command</emphasis>
+timeout-hook 'exec sync-mailbox'
+
+<emphasis role="comment"># When mutt first loads, run this mutt command</emphasis>
+startup-hook 'exec sync-mailbox'
+
+<emphasis role="comment"># When mutt quits, run this mutt command</emphasis>
+shutdown-hook 'exec sync-mailbox'
+
+<emphasis role="comment"># vim: syntax=muttrc</emphasis>
+</screen>
+  </sect1>
+
+  <sect1 id="timeout-see-also">
+    <title>See Also</title>
+
+    <itemizedlist>
+      <listitem><para><link linkend="timeout-hook-intro">$timeout</link></para></listitem>
+    </itemizedlist>
+  </sect1>
+
+  <sect1 id="global-hooks-known-bugs">
+    <title>Known Bugs</title>
+    <para>None</para>
+  </sect1>
+
+  <sect1 id="global-hooks-credits">
+    <title>Credits</title>
+    <itemizedlist>
+    <listitem><para>Armin Wolfermann <email>armin@wolfermann.org</email></para></listitem>
+    <listitem><para>Richard Russon <email>rich@flatcap.org</email></para></listitem>
+    <listitem><para>Thomas Adam <email>thomas@xteddy.org</email></para></listitem>
+    </itemizedlist>
+  </sect1>
+</chapter>
+
 <chapter id="feature/ifdef">
   <title>Ifdef Feature</title>
   <subtitle>Conditional config options</subtitle>
@@ -10226,18 +10407,8 @@ set attach_keyword = &quot;\\&lt;attach(|ed|ments?)\\&gt;&quot;
   <sect1 id="ifdef-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>ifdef</quote>, look for
-      <quote>patch-ifdef</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="ifdef-intro">
@@ -10333,14 +10504,6 @@ ifndef USE_SIDEBAR finish
 </screen>
   </sect1>
 
-  <sect1 id="ifdef-see-also">
-    <title>See Also</title>
-
-    <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
-    </itemizedlist>
-  </sect1>
-
   <sect1 id="ifdef-known-bugs">
     <title>Known Bugs</title>
     <para>None</para>
@@ -10363,19 +10526,13 @@ ifndef USE_SIDEBAR finish
   <sect1 id="index-color-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Index Color</quote>, look for
-      <quote>patch-index-color</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-      <listitem><para><link linkend="feature/status-color">status-color patch</link></para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+      <variablelist>
+        <varlistentry>
+          <term><emphasis role="bold">Dependencies:</emphasis></term>
+          <listitem><para><link linkend="feature/status-color">status-color patch</link></para></listitem>
+        </varlistentry>
+      </variablelist>
   </sect1>
 
   <sect1 id="index-color-intro">
@@ -10530,7 +10687,6 @@ color index_size cyan default
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="regexp">Regular Expressions</link></para></listitem>
       <listitem><para><link linkend="patterns">Patterns</link></para></listitem>
       <listitem><para><link linkend="index-format">$index_format</link></para></listitem>
@@ -10565,18 +10721,8 @@ color index_size cyan default
   <sect1 id="initials-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Initials</quote>, look for
-      <quote>patch-initials</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="initials-intro">
@@ -10641,7 +10787,6 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="index-format">$index_format</link></para></listitem>
       <listitem><para><link linkend="feature/index-color">index-color patch</link></para></listitem>
       <listitem><para><link linkend="folder-hook">folder-hook</link></para></listitem>
@@ -10669,18 +10814,8 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
   <sect1 id="keywords-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Keywords</quote>, look for
-      <quote>patch-keywords</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-05-30</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="keywords-intro">
@@ -10865,7 +11000,6 @@ bind index,pager y edit-label
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="index-format">$index_format</link></para></listitem>
       <listitem><para><link linkend="feature/index-color">index-color patch</link></para></listitem>
       <listitem><para><link linkend="folder-hook">folder-hook</link></para></listitem>
@@ -10895,6 +11029,14 @@ bind index,pager y edit-label
   <sect1 id="kyoto-cabinet-support">
     <title>Support</title>
 
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-10-02</para>
+      <variablelist>
+        <varlistentry>
+          <term><emphasis role="bold">Dependencies:</emphasis></term>
+          <listitem><para><ulink url="http://fallabs.com/kyotocabinet/">Kyoto Cabinet libraries</ulink></para></listitem>
+        </varlistentry>
+      </variablelist>
+
     <para>
       To check if Mutt supports Kyoto Cabinet, look for
 
@@ -10905,13 +11047,6 @@ bind index,pager y edit-label
       </itemizedlist>
     </para>
 
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-      <listitem><para><ulink url="http://fallabs.com/kyotocabinet/">Kyoto Cabinet libraries</ulink></para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
   </sect1>
 
   <sect1 id="kyoto-cabinet-intro">
@@ -10929,7 +11064,6 @@ bind index,pager y edit-label
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="caching">Local Caching</link></para></listitem>
       <listitem><para><ulink url="http://fallabs.com/kyotocabinet/">Kyoto Cabinet</ulink></para></listitem>
     </itemizedlist>
@@ -10955,18 +11089,8 @@ bind index,pager y edit-label
   <sect1 id="limit-current-thread-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>limit-current-thread</quote>, look for
-      <quote>patch-limit-current-thread</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-28</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="limit-current-thread-intro">
@@ -11026,14 +11150,6 @@ bind index &lt;esc&gt;L limit-current-thread
 </screen>
   </sect1>
 
-  <sect1 id="limit-current-thread-see-also">
-    <title>See Also</title>
-
-    <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
-    </itemizedlist>
-  </sect1>
-
   <sect1 id="limit-current-thread-known-bugs">
     <title>Known Bugs</title>
     <para>None</para>
@@ -11055,18 +11171,8 @@ bind index &lt;esc&gt;L limit-current-thread
   <sect1 id="lmdb-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>lmdb</quote>, look for
-      <quote>patch-lmdb</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-07-23</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="lmdb-intro">
@@ -11089,7 +11195,6 @@ bind index &lt;esc&gt;L limit-current-thread
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="caching">Local Caching</link></para></listitem>
     </itemizedlist>
   </sect1>
@@ -11116,18 +11221,8 @@ bind index &lt;esc&gt;L limit-current-thread
   <sect1 id="multiple-fcc-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>multiple-fcc</quote>, look for
-      <quote>patch-multiple-fcc</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-08-08</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="multiple-fcc-intro">
@@ -11155,7 +11250,6 @@ bind index &lt;esc&gt;L limit-current-thread
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="record">$record</link></para></listitem>
       <listitem><para><link linkend="fcc-hook">fcc-hook</link></para></listitem>
     </itemizedlist>
@@ -11182,18 +11276,8 @@ bind index &lt;esc&gt;L limit-current-thread
   <sect1 id="nested-if-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Nested If</quote>, look for
-      <quote>patch-nested-if</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="nested-if-intro">
@@ -11350,7 +11434,6 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="feature/cond-date">cond-date patch</link></para></listitem>
       <listitem><para><link linkend="index-format">$index_format</link></para></listitem>
       <listitem><para><link linkend="status-format">$status_format</link></para></listitem>
@@ -11373,25 +11456,15 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
   </sect1>
 </chapter>
 
-<chapter id="feature/new-mail">
+<chapter id="feature/new-mail-hook">
   <title>New Mail Feature</title>
   <subtitle>Execute a command upon the receipt of new mail.</subtitle>
 
   <sect1 id="new-mail-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>new-mail</quote>, look for
-      <quote>patch-new-mail</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-07-23</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="new-mail-intro">
@@ -11481,22 +11554,15 @@ set new_mail_command = &quot;&quot;
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="folder-hook">folder-hook</link></para></listitem>
     </itemizedlist>
   </sect1>
 
   <sect1 id="new-mail-known-bugs">
     <title>Known Bugs</title>
-    <itemizedlist>
-      <listitem>
-        <para>
-          Notifies about spurious <emphasis role="bold">new email</emphasis>
-          when an email is saved, see
-          <ulink url="https://github.com/neomutt/neomutt/issues/20">Issue #20</ulink>
-        </para>
-    </listitem>
-    </itemizedlist>
+    <para>
+      None
+    </para>
   </sect1>
 
   <sect1 id="new-mail-credits">
@@ -11516,37 +11582,29 @@ set new_mail_command = &quot;&quot;
   <sect1 id="nntp-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>NNTP</quote>, look for
-      <quote>+USE_NNTP</quote> in the version info.
-      See: <xref linkend="compile-time-features"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-05-30</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="nntp-intro">
     <title>Introduction</title>
 
     <para>Reading news via NNTP</para>
+
     <para>
-    If compiled with <emphasis>--enable-nntp</emphasis> option, Mutt can
-    read news from news server via NNTP.  You can open a newsgroup with
-    function ``change-newsgroup'' (default: ``i'').  Default news server
-    can be obtained from <literal>$NNTPSERVER</literal> environment
-    variable or from <literal>/etc/nntpserver</literal> file.  Like other
-    news readers, info about subscribed newsgroups is saved in file by
-    <link linkend="newsrc">$newsrc</link> variable.  The variable <link
-    linkend="news-cache-dir">$news_cache_dir</link> can be used to point
-    to a directory.  Mutt will create a hierarchy of subdirectories named
-    like the account and newsgroup the cache is for.  Also the hierarchy
-    is used to store header cache if Mutt was compiled with <link
-    linkend="header-caching">header cache</link> support.
+    If Mutt is compiled with the <emphasis>--enable-nntp</emphasis> option, it can read from a news server using NNTP.
+    </para>
+
+    <para>
+    The default news server can be obtained from the <literal>$NNTPSERVER</literal> environment variable or from the <literal>/etc/nntpserver</literal> file.
+    Like in other news readers, information about the subscribed newsgroups is saved in the file specified by the <link linkend="newsrc">$newsrc</link> variable.
+    You can open a newsgroup with the function <literal>&lt;change-newsgroup&gt;</literal>
+    </para>
+
+    <para>
+    The variable <link linkend="news-cache-dir">$news_cache_dir</link> can be used to point to a directory.
+    Mutt will create a hierarchy of subdirectories named like the account and newsgroup the cache is for.
+    The hierarchy is also used to store header cache if Mutt was compiled with <link linkend="header-caching">header cache</link> support.
     </para>
   </sect1>
 
@@ -11908,7 +11966,6 @@ bind index \CG get-message
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="compile-time-features">Compile-Time Features</link></para></listitem>
     </itemizedlist>
   </sect1>
@@ -11937,21 +11994,13 @@ bind index \CG get-message
   <sect1 id="notmuch-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Notmuch</quote>, look for
-      <quote>+USE_NOTMUCH</quote> in the version info.
-      See: <xref linkend="compile-time-features"/>.
-    </para>
-
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-17</para>
+    <para><emphasis role="bold">Dependencies:</emphasis></para>
     <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
       <listitem><para><link linkend="feature/quasi-delete">quasi-delete patch</link></para></listitem>
       <listitem><para><link linkend="feature/index-color">index-color patch</link></para></listitem>
       <listitem><para>Notmuch libraries</para></listitem>
     </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
   </sect1>
 
   <sect1 id="notmuch-intro">
@@ -11963,10 +12012,10 @@ bind index \CG get-message
 
     <itemizedlist>
       <listitem><para>For more information, see:
-      <ulink url="http://notmuchmail.org/">http://notmuchmail.org/</ulink>
+      <ulink url="https://notmuchmail.org/">https://notmuchmail.org/</ulink>
       </para></listitem>
       <listitem><para>More examples:
-      <ulink url="http://notmuchmail.org/mutttips/">http://notmuchmail.org/mutttips/</ulink>
+      <ulink url="https://notmuchmail.org/mutttips/">https://notmuchmail.org/mutttips/</ulink>
       </para></listitem>
     </itemizedlist>
 
@@ -12036,7 +12085,7 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
 
       <para>
         For more details about Xapian queries, see:
-        <ulink url="http://xapian.org/docs/queryparser.html">http://xapian.org/docs/queryparser.html</ulink>
+        <ulink url="https://xapian.org/docs/queryparser.html">https://xapian.org/docs/queryparser.html</ulink>
       </para>
 
       <para>
@@ -12246,6 +12295,21 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
             <entry><literal>&lt;vfolder-from-query&gt;</literal></entry>
             <entry>generate virtual folder from query</entry>
           </row>
+          <row>
+            <entry>index,pager</entry>
+            <entry><literal>&lt;windowed-vfolder-from-query&gt;</literal></entry>
+            <entry>generate virtual folder from query with window applied</entry>
+          </row>
+          <row>
+            <entry>index,pager</entry>
+            <entry><literal>&lt;windowed-vfolder-forward&gt;</literal></entry>
+            <entry>generate virtual folder by moving the query's time window forward</entry>
+          </row>
+          <row>
+            <entry>index,pager</entry>
+            <entry><literal>&lt;windowed-vfolder-backward&gt;</literal></entry>
+            <entry>generate virtual folder by moving the query's time window backward</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
@@ -12268,6 +12332,16 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
           <arg choice="plain">
             <replaceable class="parameter">notmuch-URI</replaceable>
           </arg>
+        </arg>
+      </group>
+
+      <command>unvirtual-mailboxes</command>
+      <group choice="req">
+        <arg choice="plain">
+          <replaceable class="parameter">*</replaceable>
+        </arg>
+        <arg choice="plain" rep="repeat">
+          <replaceable class="parameter">mailbox</replaceable>
         </arg>
       </group>
 
@@ -12387,6 +12461,11 @@ set vfolder_format = &quot;%6n(%6N) %f&quot;
 # as a spoolfile.</emphasis>
 set virtual_spoolfile = no
 
+<emphasis role="comment"># setup time window preferences
+# first setup the duration, and then the time unit of that duration</emphasis>
+set nm_query_window_duration=2
+set nm_query_window_timebase="week" # or "hour", "day", "week", "month", "year"
+
 <emphasis role="comment"># --------------------------------------------------------------------------
 # FUNCTIONS - shown with an example mapping
 # --------------------------------------------------------------------------
@@ -12403,6 +12482,11 @@ bind index,pager \` modify-labels
 <emphasis role="comment"># generate virtual folder from query</emphasis>
 bind index,pager \eX vfolder-from-query
 
+<emphasis role="comment"># generate virtual folder from query with time window</emphasis>
+bind index,pager \\ windowed-vfolder-from-query
+bind index,pager &lt; windowed-vfolder-backward
+bind index,pager &gt; windowed-vfolder-forward
+
 <emphasis role="comment"># modify labels and then hide message
 # bind index,pager ??? modify-labels-then-hide
 
@@ -12415,6 +12499,8 @@ bind index,pager \eX vfolder-from-query
 
 # virtual-mailboxes description notmuch-URI { description notmuch-URI ...}
 # virtual-mailboxes &quot;Climbing&quot; &quot;notmuch://?query=climbing&quot;
+
+# unvirtual-mailboxes { * | mailbox ...}
 
 # Replace some tags with icons
 # tag-transforms tag transformed-string { tag transformed-string ...}
@@ -12462,7 +12548,6 @@ color index_tags green default
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="compile-time-features">Compile-Time Features</link></para></listitem>
     </itemizedlist>
   </sect1>
@@ -12499,6 +12584,7 @@ color index_tags green default
     <listitem><para>Vladimir Marek <email>Vladimir.Marek@oracle.com</email></para></listitem>
     <listitem><para>Víctor Manuel Jáquez Leal <email>vjaquez@igalia.com</email></para></listitem>
     <listitem><para>Richard Russon <email>rich@flatcap.org</email></para></listitem>
+    <listitem><para>Bernard 'Guyzmo' Pratz <email>guyzmo+github+pub@m0g.net</email></para></listitem>
     </itemizedlist>
   </sect1>
 </chapter>
@@ -12510,18 +12596,8 @@ color index_tags green default
   <sect1 id="progress-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Progress Bar</quote>, look for
-      <quote>patch-progress</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="progress-intro">
@@ -12576,7 +12652,6 @@ color progress white red
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="color">Color command</link></para></listitem>
     </itemizedlist>
   </sect1>
@@ -12605,18 +12680,8 @@ color progress white red
   <sect1 id="quasi-delete-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Quasi-Delete</quote>, look for
-      <quote>patch-quasi-delete</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="quasi-delete-intro">
@@ -12675,7 +12740,6 @@ bind index,pager Q quasi-delete
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="feature/notmuch">notmuch patch</link></para></listitem>
     </itemizedlist>
   </sect1>
@@ -12694,7 +12758,7 @@ bind index,pager Q quasi-delete
   </sect1>
 </chapter>
 
-<chapter id="feature/reply-with-xorig">
+<chapter id="feature/reply-with-xorig-patch">
   <title>Reply With X-Original-To Feature</title>
   <subtitle>Direct reply to email using X-Original-To header
   </subtitle>
@@ -12702,18 +12766,8 @@ bind index,pager Q quasi-delete
   <sect1 id="reply-with-xorig-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Reply With X-Original-To</quote>, look for
-      <quote>patch-reply-with-xorig</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="reply-with-xorig-intro">
@@ -12782,18 +12836,8 @@ set reply_with_xorig = &quot;yes&quot;
   <sect1 id="sensible-browser-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>sensible-browser</quote>, look for
-      <quote>patch-sensible-browser</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="sensible-browser-intro">
@@ -12877,7 +12921,6 @@ set sort_browser="reverse-size"
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="folder-format">$folder_format</link></para></listitem>
     </itemizedlist>
   </sect1>
@@ -12904,18 +12947,8 @@ set sort_browser="reverse-size"
   <sect1 id="sidebar-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Sidebar</quote>, look for
-      <quote>+USE_SIDEBAR</quote> in the version info.
-      See: <xref linkend="compile-time-features"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10, Mutt 1.7.0</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="sidebar-intro">
@@ -13097,10 +13130,10 @@ set sort_browser="reverse-size"
 
       <command>unsidebar_whitelist<anchor id="unsidebar-whitelist"/></command>
       <arg choice="plain">
-	<replaceable class="parameter">*</replaceable>
+        <replaceable class="parameter">*</replaceable>
       </arg>
       <arg choice="plain" rep="repeat">
-	<replaceable class="parameter">mailbox</replaceable>
+        <replaceable class="parameter">mailbox</replaceable>
       </arg>
     </cmdsynopsis>
 
@@ -13387,25 +13420,15 @@ color sidebar_ordinary color245 default
   </sect1>
 </chapter>
 
-<chapter id="feature/skip-quoted">
+<chapter id="feature/skip-quoted-patch">
   <title>Skip Quoted Feature</title>
   <subtitle>Leave some context visible</subtitle>
 
   <sect1 id="skip-quoted-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>skip-quoted</quote>, look for
-      <quote>patch-skip-quoted</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-28</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="skip-quoted-intro">
@@ -13464,14 +13487,6 @@ set skip_quoted_offset = 3
 </screen>
   </sect1>
 
-  <sect1 id="skip-quoted-see-also">
-    <title>See Also</title>
-
-    <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
-    </itemizedlist>
-  </sect1>
-
   <sect1 id="skip-quoted-known-bugs">
     <title>Known Bugs</title>
     <para>None</para>
@@ -13493,18 +13508,8 @@ set skip_quoted_offset = 3
   <sect1 id="status-color-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>Status Color</quote>, look for
-      <quote>patch-status-color</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+    <para><emphasis role="bold">Dependencies:</emphasis> None</para>
   </sect1>
 
   <sect1 id="status-color-intro">
@@ -13645,7 +13650,6 @@ color status brightwhite default 'Mutt: ([^ ]+)' 1
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="compile-time-features">Compile-Time Features</link></para></listitem>
       <listitem><para><link linkend="regexp">Regular Expressions</link></para></listitem>
       <listitem><para><link linkend="patterns">Patterns</link></para></listitem>
@@ -13670,88 +13674,6 @@ color status brightwhite default 'Mutt: ([^ ]+)' 1
   </sect1>
 </chapter>
 
-<chapter id="feature/timeout">
-  <title>Timeout Feature</title>
-  <subtitle>Run a command periodically</subtitle>
-
-  <sect1 id="timeout-support">
-    <title>Support</title>
-
-    <para>
-      To check if NeoMutt supports <quote>timeout</quote>, look for
-      <quote>patch-timeout</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
-  </sect1>
-
-  <sect1 id="timeout-intro">
-    <title>Introduction</title>
-
-    <para>
-      This feature implements a new hook that is called periodically when Mutt
-      checks for new mail. This hook is called every <literal>$timeout</literal> seconds.
-    </para>
-  </sect1>
-
-  <sect1 id="timeout-commands">
-    <title>Commands</title>
-    <cmdsynopsis>
-      <command>timeout-hook</command>
-      <arg choice="plain">
-        <replaceable class="parameter">.</replaceable>
-      </arg>
-      <arg choice="plain">
-        <replaceable class="parameter">MUTT-COMMAND</replaceable>
-      </arg>
-    </cmdsynopsis>
-  </sect1>
-
-  <sect1 id="timeout-muttrc">
-    <title>Muttrc</title>
-<screen>
-<emphasis role="comment"># Example NeoMutt config file for the timeout feature.
-
-# --------------------------------------------------------------------------
-# COMMANDS - shown with an example arguments
-# --------------------------------------------------------------------------
-
-# After $timeout seconds of inactivity, run this mutt command</emphasis>
-timeout-hook . 'exec sync-mailbox'
-
-<emphasis role="comment"># vim: syntax=muttrc</emphasis>
-</screen>
-  </sect1>
-
-  <sect1 id="timeout-see-also">
-    <title>See Also</title>
-
-    <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
-      <listitem><para><link linkend="timeout">$timeout</link></para></listitem>
-    </itemizedlist>
-  </sect1>
-
-  <sect1 id="timeout-known-bugs">
-    <title>Known Bugs</title>
-    <para>None</para>
-  </sect1>
-
-  <sect1 id="timeout-credits">
-    <title>Credits</title>
-    <itemizedlist>
-    <listitem><para>Armin Wolfermann <email>armin@wolfermann.org</email></para></listitem>
-    <listitem><para>Richard Russon <email>rich@flatcap.org</email></para></listitem>
-    </itemizedlist>
-  </sect1>
-</chapter>
-
 <chapter id="feature/tls-sni">
   <title>TLS-SNI Feature</title>
   <subtitle>Negotiate with a server for a TSL/SSL certificate</subtitle>
@@ -13759,19 +13681,13 @@ timeout-hook . 'exec sync-mailbox'
   <sect1 id="tls-sni-support">
     <title>Support</title>
 
-    <para>
-      To check if NeoMutt supports <quote>TLS-SNI</quote>, look for
-      <quote>patch-tls-sni</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-      <listitem><para>OpenSSL</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07</para>
+      <variablelist>
+        <varlistentry>
+          <term><emphasis role="bold">Dependencies:</emphasis></term>
+          <listitem><para>OpenSSL</para></listitem>
+        </varlistentry>
+      </variablelist>
   </sect1>
 
   <sect1 id="tls-sni-intro">
@@ -13804,14 +13720,6 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
 </screen>
   </sect1>
 
-  <sect1 id="tls-sni-see-also">
-    <title>See Also</title>
-
-    <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
-    </itemizedlist>
-  </sect1>
-
   <sect1 id="tls-sni-known-bugs">
     <title>Known Bugs</title>
     <para>None</para>
@@ -13827,33 +13735,23 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
   </sect1>
 </chapter>
 
-<chapter id="feature/trash">
+<chapter id="feature/trash-folder">
   <title>Trash Folder Feature</title>
   <subtitle>Automatically move deleted emails to a trash bin</subtitle>
 
-  <sect1 id="trash-support">
+  <sect1 id="trash-folder-support">
     <title>Support</title>
 
-    <para>
-      To check if Mutt supports <quote>Trash Folder</quote>, look for
-      <quote>patch-trash</quote> in the version info.
-      See: <xref linkend="mutt-patches"/>.
-    </para>
-
-    <para>
-      If IMAP is enabled, this patch will use it
-    </para>
-
-    <itemizedlist>
-      <title>Dependencies:</title>
-      <listitem><para>mutt-1.7.1</para></listitem>
-      <listitem><para>IMAP support</para></listitem>
-    </itemizedlist>
-
-    <para>This feature is part of the <ulink url="https://www.neomutt.org/">NeoMutt Project</ulink>.</para>
+    <para><emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10, Mutt 1.7.0</para>
+    <variablelist>
+      <varlistentry>
+        <term><emphasis role="bold">Dependencies:</emphasis></term>
+        <listitem><para>If IMAP is enabled, the trash folder will use it wisely</para></listitem>
+      </varlistentry>
+    </variablelist>
   </sect1>
 
-  <sect1 id="trash-intro">
+  <sect1 id="trash-folder-intro">
     <title>Introduction</title>
 
     <para>
@@ -13869,7 +13767,7 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
     </para>
 
     <para>
-    The <link linkend="trash">$trash</link> variable defines a folder in
+    The <link linkend="feature/trash">$trash</link> variable defines a folder in
     which to keep old emails.  As before, first you mark emails for
     deletion.  When &lt;sync-mailbox&gt; is called the emails are moved to
     the trash folder.
@@ -13888,7 +13786,7 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
     </note>
   </sect1>
 
-  <sect1 id="trash-variables">
+  <sect1 id="trash-folder-variables">
     <title>Variables</title>
     <table id="table-trash-variables">
       <title>Trash Variables</title>
@@ -13911,7 +13809,7 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
     </table>
   </sect1>
 
-  <sect1 id="trash-functions">
+  <sect1 id="trash-folder-functions">
     <title>Functions</title>
     <table id="table-trash-functions">
       <title>Trash Functions</title>
@@ -13936,43 +13834,42 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
     </table>
   </sect1>
 
-  <sect1 id="trash-muttrc">
+  <sect1 id="trash-folder-muttrc">
     <title>Muttrc</title>
 <screen>
 <emphasis role="comment"># Example Mutt config file for the 'trash' feature.
- 
+
 # This feature defines a new 'trash' folder.
 # When mail is deleted it will be moved to this folder.
- 
+
 # Folder in which to put deleted emails</emphasis>
 set trash='+Trash'
 set trash='/home/flatcap/Mail/Trash'
- 
+
 <emphasis role="comment"># The default delete key 'd' will move an email to the 'trash' folder
 # Bind 'D' to REALLY delete an email</emphasis>
 bind index D purge-message
- 
+
 <emphasis role="comment"># Note: Deleting emails from the 'trash' folder will REALLY delete them.
- 
+
 # vim: syntax=muttrc</emphasis>
 </screen>
   </sect1>
 
-  <sect1 id="trash-see-also">
+  <sect1 id="trash-folder-see-also">
     <title>See Also</title>
 
     <itemizedlist>
-      <listitem><para><ulink url="https://www.neomutt.org/">NeoMutt Project</ulink></para></listitem>
       <listitem><para><link linkend="folder-hook">folder-hook</link></para></listitem>
     </itemizedlist>
   </sect1>
 
-  <sect1 id="trash-known-bugs">
+  <sect1 id="trash-folder-known-bugs">
     <title>Known Bugs</title>
     <para>None</para>
   </sect1>
 
-  <sect1 id="trash-credits">
+  <sect1 id="trash-folder-credits">
     <title>Credits</title>
     <itemizedlist>
     <listitem><para>Cedric Duval <email>cedricduval@free.fr</email></para></listitem>
@@ -13983,7 +13880,7 @@ bind index D purge-message
   </sect1>
 </chapter>
 
-<chapter id="manual/security">
+<chapter id="guide/security">
 <title>Security Considerations</title>
 
 <para>
@@ -14114,7 +14011,7 @@ mailcap.
 </chapter>
 
 
-<chapter id="manual/tuning">
+<chapter id="guide/tuning">
 <title>Performance Tuning</title>
 
 <sect1 id="tuning-mailboxes">
@@ -14229,7 +14126,7 @@ case-insensitivity).
 
 </chapter>
 
-<chapter id="manual/reference">
+<chapter id="guide/reference">
 <title>Reference</title>
 
 <sect1 id="commandline">
@@ -15184,6 +15081,23 @@ The following are the commands understood by Mutt:
 </listitem>
 
 <listitem>
+  <cmdsynopsis>
+    <command><link linkend="setenv">setenv</link></command>
+    <arg choice="plain">
+      <replaceable class="parameter">[?]variable</replaceable>
+    </arg>
+    <arg choice="opt">
+      <replaceable class="parameter">value</replaceable>
+    </arg>
+
+    <command><link linkend="setenv">unsetenv</link></command>
+    <arg choice="plain">
+      <replaceable class="parameter">variable</replaceable>
+    </arg>
+  </cmdsynopsis>
+</listitem>
+
+<listitem>
 <cmdsynopsis>
 <command><link linkend="sidebar-whitelist">sidebar_whitelist</link></command>
 <arg choice="plain">
@@ -15294,11 +15208,18 @@ Default: no</literallayout>
 
 <para>
 If set to <emphasis>yes</emphasis>, when composing messages containing the regular expression
-specified by <link linkend="attach-keyword">attach_keyword</link> (default is "\\&lt;attach(|ed|ments?)\\&gt;") and no attachments
-are given, composition will be aborted. If set to <emphasis>no</emphasis>, composing
-messages as such will never be aborted.
+specified by <link linkend="attach-keyword">attach_keyword</link> and no attachments ** are given, composition
+will be aborted. If set to <emphasis>no</emphasis>, composing ** messages as such will never
+be aborted.
 </para>
-</sect2>
+<para>
+Example:
+
+</para>
+
+<screen>
+set attach_keyword = "\\&lt;attach(|ed|ments?)\\&gt;"
+</screen></sect2>
 
 <sect2 id="abort-nosubject">
 <title>abort_nosubject</title>
@@ -15552,6 +15473,8 @@ following <literal>printf(3)</literal>-style sequences are understood:
 </entry></row>
 <row><entry>%e  </entry><entry>MIME content-transfer-encoding
 </entry></row>
+<row><entry>%F  </entry><entry>filename for content-disposition header
+</entry></row>
 <row><entry>%f  </entry><entry>filename
 </entry></row>
 <row><entry>%I  </entry><entry>disposition (<quote>I</quote> for inline, <quote>A</quote> for attachment)
@@ -15693,18 +15616,6 @@ Also see <link linkend="fast-reply">$fast_reply</link>.
 <title>beep</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
-
-<para>
-If <emphasis>set</emphasis>, Mutt will call this command after a new message is received.
-See the <link linkend="status-format">$status_format</link> documentation for the values that can be formatted
-into this command.
-</para>
-</sect2>
-
-<sect2 id="new-mail-command">
-<title>new_mail_command</title>
-<literallayout>Type: path
-Default: <quote><literal>NULL</literal></quote></literallayout>
 
 <para>
 When this variable is <emphasis>set</emphasis>, mutt will beep when an error occurs.
@@ -16486,6 +16397,16 @@ signed.
 </para>
 </sect2>
 
+<sect2 id="flag-safe">
+<title>flag_safe</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+If set, flagged messages cannot be deleted.
+</para>
+</sect2>
+
 <sect2 id="folder">
 <title>folder</title>
 <literallayout>Type: path
@@ -16682,6 +16603,19 @@ message (when <link linkend="mime-forward">$mime_forward</link> is <emphasis>uns
 </para>
 </sect2>
 
+<sect2 id="forward-references">
+<title>forward_references</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, forwarded messages set the <quote>In-Reply-To:</quote> and
+<quote>References:</quote> headers in the same way as normal replies would. Hence the
+forwarded message becomes part of the original thread instead of starting
+a new one.
+</para>
+</sect2>
+
 <sect2 id="from">
 <title>from</title>
 <literallayout>Type: e-mail address
@@ -16694,6 +16628,46 @@ can be overridden using <quote><link linkend="my-hdr">my_hdr</link></quote> (inc
 </para>
 <para>
 This setting defaults to the contents of the environment variable <literal>$EMAIL</literal>.
+</para>
+</sect2>
+
+<sect2 id="from-chars">
+<title>from_chars</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+Controls the character used to prefix the %F and %L fields in the
+index.
+
+</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry><emphasis role="bold">Character</emphasis> </entry><entry><emphasis role="bold">Description</emphasis>
+</entry></row>
+<row><entry>1 </entry><entry>Mail is written by you and has a To address, or has a known mailing list in the To address.
+</entry></row>
+<row><entry>2 </entry><entry>Mail is written by you and has a Cc address, or has a known mailing list in the Cc address.
+</entry></row>
+<row><entry>3 </entry><entry>Mail is written by you and has a Bcc address.
+</entry></row>
+<row><entry>4 </entry><entry>All remaining cases.
+</entry></row></tbody></tgroup></informaltable>
+
+<para>
+If this is empty or unset (default), the traditional long "To ",
+"Cc " and "Bcc " prefixes are used.  If set but too short to
+include a character for a particular case, a single space will be
+prepended to the field.  To prevent any prefix at all from being
+added in a particular case, use the special value CR (aka ^M)
+for the corresponding character.
+</para>
+<para>
+This slightly odd interface is necessitated by mutt's handling of
+string variables; one cannot tell a variable that is unset from one
+that is set to the empty string.
 </para>
 </sect2>
 
@@ -16793,6 +16767,16 @@ caching will be used.
 <para>
 Header caching can greatly improve speed when opening POP, IMAP
 MH or Maildir folders, see <quote><link linkend="caching">caching</link></quote> for details.
+</para>
+</sect2>
+
+<sect2 id="header-cache-backend">
+<title>header_cache_backend</title>
+<literallayout>Type: -none-
+Default: 0</literallayout>
+
+<para>
+This variable specifies the header cache backend.
 </para>
 </sect2>
 
@@ -17491,9 +17475,13 @@ news server.  The following printf-style sequence is understood:
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
-Example: set inews="/usr/local/bin/inews -hS"
+Example:
+
 </para>
-</sect2>
+
+<screen>
+set inews="/usr/local/bin/inews -hS"
+</screen></sect2>
 
 <sect2 id="ispell">
 <title>ispell</title>
@@ -17558,7 +17546,7 @@ Default: 5</literallayout>
 
 <para>
 This variable configures how often (in seconds) mutt should look for
-new mail. Also see the <link linkend="timeout">$timeout</link> variable.
+new mail. Also see the <link linkend="timeout-hook-intro">$timeout</link> variable.
 </para>
 </sect2>
 
@@ -17670,6 +17658,18 @@ programs interacting with the folder (e.g. dovecot) are moving new
 messages to the cur directory.  Note that setting this option may
 slow down polling for new messages in large folders, since mutt has
 to scan all cur messages.
+</para>
+</sect2>
+
+<sect2 id="mark-macro-prefix">
+<title>mark_macro_prefix</title>
+<literallayout>Type: string
+Default: <quote><literal>'</literal></quote></literallayout>
+
+<para>
+Prefix for macros created using mark-message.  A new macro
+automatically generated with <emphasis>&lt;mark-message&gt;a</emphasis> will be composed
+from this prefix and the letter <emphasis>a</emphasis>.
 </para>
 </sect2>
 
@@ -18024,6 +18024,18 @@ See also <link linkend="read-inc">$read_inc</link>, <link linkend="write-inc">$w
 </para>
 </sect2>
 
+<sect2 id="new-mail-command">
+<title>new_mail_command</title>
+<literallayout>Type: path
+Default: <quote><literal>NULL</literal></quote></literallayout>
+
+<para>
+If <emphasis>set</emphasis>, Mutt will call this command after a new message is received.
+See the <link linkend="status-format">$status_format</link> documentation for the values that can be formatted
+into this command.
+</para>
+</sect2>
+
 <sect2 id="news-cache-dir">
 <title>news_cache_dir</title>
 <literallayout>Type: path
@@ -18282,6 +18294,49 @@ Default: (empty)</literallayout>
 
 <para>
 This variable specifies the default tags applied to messages stored to the mutt record.
+</para>
+</sect2>
+
+<sect2 id="nm-query-window-duration">
+<title>nm_query_window_duration</title>
+<literallayout>Type: number
+Default: 2</literallayout>
+
+<para>
+This variable sets the time base of a windowed notmuch query.
+Accepted values are 'minute', 'hour', 'day', 'week', 'month', 'year'
+</para>
+</sect2>
+
+<sect2 id="nm-query-window-timebase">
+<title>nm_query_window_timebase</title>
+<literallayout>Type: string
+Default: <quote><literal>week</literal></quote></literallayout>
+
+<para>
+This variable sets the time duration of a windowed notmuch query.
+Accepted values all non negative integers. A value of 0 disables the feature.
+</para>
+</sect2>
+
+<sect2 id="nm-query-window-current-search">
+<title>nm_query_window_current_search</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+This variable sets the time duration of a windowed notmuch query.
+Accepted values all non negative integers. A value of 0 disables the feature.
+</para>
+</sect2>
+
+<sect2 id="nm-query-window-current-position">
+<title>nm_query_window_current_position</title>
+<literallayout>Type: number
+Default: 0</literallayout>
+
+<para>
+This variable contains the currently setup notmuch search for window based vfolder.
 </para>
 </sect2>
 
@@ -19381,7 +19436,7 @@ the mailbox.
 </para>
 <para>
 Also see the <link linkend="write-inc">$write_inc</link>, <link linkend="net-inc">$net_inc</link> and <link linkend="time-inc">$time_inc</link> variables and the
-<quote><link linkend="manual/tuning">tuning</link></quote> section of the manual for performance considerations.
+<quote><link linkend="guide/tuning">tuning</link></quote> section of the manual for performance considerations.
 </para>
 </sect2>
 
@@ -19539,7 +19594,7 @@ message to the author of a message.
 </para>
 </sect2>
 
-<sect2 id="reply-with-xorig">
+<sect2 id="feature/reply-with-xorig">
 <title>reply_with_xorig</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
@@ -19842,7 +19897,10 @@ Default: <quote><literal>/usr/sbin/sendmail -oem -oi</literal></quote></literall
 <para>
 Specifies the program and arguments used to deliver mail sent by Mutt.
 Mutt expects that the specified program interprets additional
-arguments as recipient addresses.
+arguments as recipient addresses.  Mutt appends all recipients after
+adding a <literal>--</literal> delimiter (if not already present).  Additional
+flags, such as for <link linkend="use-8bitmime">$use_8bitmime</link>, <link linkend="use-envelope-from">$use_envelope_from</link>,
+<link linkend="dsn-notify">$dsn_notify</link>, or <link linkend="dsn-return">$dsn_return</link> will be added before the delimiter.
 </para>
 </sect2>
 
@@ -19954,7 +20012,7 @@ set sidebar_delim_chars='.'
 <sect2 id="sidebar-divider-char">
 <title>sidebar_divider_char</title>
 <literallayout>Type: string
-Default: <quote><literal>|</literal></quote></literallayout>
+Default: (empty)</literallayout>
 
 <para>
 This specifies the characters to be drawn between the sidebar (when
@@ -20229,7 +20287,7 @@ Default: 0</literallayout>
 
 <para>
 Lines of quoted text that are displayed before the unquoted text after
-"skip to quoted" command (S)
+<quote>skip to quoted</quote> command (S)
 </para>
 </sect2>
 
@@ -20706,9 +20764,16 @@ are:
 
 <para>
 You may optionally use the <quote>reverse-</quote> prefix to specify reverse sorting
-order (example: <quote><literal>set sort=reverse-date-sent</literal></quote>).
+order.
 </para>
-</sect2>
+<para>
+Example:
+
+</para>
+
+<screen>
+set sort=reverse-date-sent
+</screen></sect2>
 
 <sect2 id="sort-alias">
 <title>sort_alias</title>
@@ -21262,7 +21327,7 @@ apart. This can improve throughput on systems with slow terminals,
 or when running mutt on a remote system.
 </para>
 <para>
-Also see the <quote><link linkend="manual/tuning">tuning</link></quote> section of the manual for performance considerations.
+Also see the <quote><link linkend="guide/tuning">tuning</link></quote> section of the manual for performance considerations.
 </para>
 </sect2>
 
@@ -21307,20 +21372,69 @@ used.  If <literal>$TMPDIR</literal> is not set then <quote><literal>/tmp</liter
 Default: <quote><literal> +TCFL</literal></quote></literallayout>
 
 <para>
-Controls the character used to indicate mail addressed to you.  The
-first character is the one used when the mail is <emphasis>not</emphasis> addressed to your
-address.  The second is used when you are the only
-recipient of the message.  The third is when your address
-appears in the <quote>To:</quote> header field, but you are not the only recipient of
-the message.  The fourth character is used when your
-address is specified in the <quote>Cc:</quote> header field, but you are not the only
-recipient.  The fifth character is used to indicate mail that was sent
-by <emphasis>you</emphasis>.  The sixth character is used to indicate when a mail
-was sent to a mailing-list you subscribe to.
+Controls the character used to indicate mail addressed to you.
+
 </para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry><emphasis role="bold">Character</emphasis> </entry><entry><emphasis role="bold">Default</emphasis> </entry><entry><emphasis role="bold">Description</emphasis>
+</entry></row>
+<row><entry>1 </entry><entry>&lt;space&gt; </entry><entry>The mail is <emphasis>not</emphasis> addressed to your address.
+</entry></row>
+<row><entry>2 </entry><entry>+ </entry><entry>You are the only recipient of the message.
+</entry></row>
+<row><entry>3 </entry><entry>T </entry><entry>Your address appears in the <quote>To:</quote> header field, but you are not the only recipient of the message.
+</entry></row>
+<row><entry>4 </entry><entry>C </entry><entry>Your address is specified in the <quote>Cc:</quote> header field, but you are not the only recipient.
+</entry></row>
+<row><entry>5 </entry><entry>F </entry><entry>Indicates the mail that was sent by <emphasis>you</emphasis>.
+</entry></row>
+<row><entry>6 </entry><entry>L </entry><entry>Indicates the mail was sent to a mailing-list you subscribe to.
+</entry></row></tbody></tgroup></informaltable>
 </sect2>
 
-<sect2 id="trash">
+<sect2 id="flag-chars">
+<title>flag_chars</title>
+<literallayout>Type: string
+Default: <quote><literal>*!DdrONon- </literal></quote></literallayout>
+
+<para>
+Controls the characters used in several flags.
+
+</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry><emphasis role="bold">Character</emphasis> </entry><entry><emphasis role="bold">Default</emphasis> </entry><entry><emphasis role="bold">Description</emphasis>
+</entry></row>
+<row><entry>1 </entry><entry>* </entry><entry>The mail is tagged.
+</entry></row>
+<row><entry>2 </entry><entry>! </entry><entry>The mail is flagged as important.
+</entry></row>
+<row><entry>3 </entry><entry>D </entry><entry>The mail is marked for deletion.
+</entry></row>
+<row><entry>4 </entry><entry>d </entry><entry>The mail has attachments marked for deletion.
+</entry></row>
+<row><entry>5 </entry><entry>r </entry><entry>The mail has been replied to.
+</entry></row>
+<row><entry>6 </entry><entry>O </entry><entry>The mail is Old (Unread but seen).
+</entry></row>
+<row><entry>7 </entry><entry>N </entry><entry>The mail is New (Unread but not seen).
+</entry></row>
+<row><entry>8 </entry><entry>o </entry><entry>The mail thread is Old (Unread but seen).
+</entry></row>
+<row><entry>9 </entry><entry>n </entry><entry>The mail thread is New (Unread but not seen).
+</entry></row>
+<row><entry>10 </entry><entry>- </entry><entry>The mail is read - %S expando.
+</entry></row>
+<row><entry>11 </entry><entry>&lt;space&gt; </entry><entry>The mail is read - %Z expando.
+</entry></row></tbody></tgroup></informaltable>
+</sect2>
+
+<sect2 id="feature/trash">
 <title>trash</title>
 <literallayout>Type: path
 Default: (empty)</literallayout>
@@ -21404,6 +21518,19 @@ Default: no</literallayout>
 <para>
 When <emphasis>set</emphasis>, Mutt will jump to the next unread message, if any,
 when the current thread is <emphasis>un</emphasis>collapsed.
+</para>
+</sect2>
+
+<sect2 id="uncollapse-new">
+<title>uncollapse_new</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, Mutt will automatically uncollapse any collapsed thread
+that receives a new message. When <emphasis>unset</emphasis>, collapsed threads will
+remain collapsed. the presence of the new message will still affect
+index sorting, though.
 </para>
 </sect2>
 
@@ -21641,7 +21768,7 @@ single message will be displayed before writing a mailbox.
 </para>
 <para>
 Also see the <link linkend="read-inc">$read_inc</link>, <link linkend="net-inc">$net_inc</link> and <link linkend="time-inc">$time_inc</link> variables and the
-<quote><link linkend="manual/tuning">tuning</link></quote> section of the manual for performance considerations.
+<quote><link linkend="guide/tuning">tuning</link></quote> section of the manual for performance considerations.
 </para>
 </sect2>
 
@@ -21673,6 +21800,16 @@ Default: no</literallayout>
 <para>
 If <emphasis>set</emphasis>, Mutt will add <quote>X-Comment-To:</quote> field (that contains full
 name of original article author) to article that followuped to newsgroup.
+</para>
+</sect2>
+
+<sect2 id="collapse-all">
+<title>collapse_all</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, Mutt will collapse all threads when entering a folder.
 </para>
 </sect2>
 
@@ -21835,6 +21972,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;catchup&gt;</literal></entry><entry></entry><entry>mark all articles in newsgroup as read</entry></row>
 <row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>display a message</entry></row>
 <row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>display a message</entry></row>
+<row><entry><literal>&lt;mark-message&gt;</literal></entry><entry>~</entry><entry>create a hotkey macro for the current message</entry></row>
 <row><entry><literal>&lt;buffy-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
 <row><entry><literal>&lt;sync-mailbox&gt;</literal></entry><entry>$</entry><entry>save changes to mailbox</entry></row>
 <row><entry><literal>&lt;display-address&gt;</literal></entry><entry>@</entry><entry>display full address of sender</entry></row>
@@ -21846,6 +21984,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>jump to the next unread message</entry></row>
 <row><entry><literal>&lt;previous-unread&gt;</literal></entry><entry></entry><entry>jump to the previous unread message</entry></row>
 <row><entry><literal>&lt;parent-message&gt;</literal></entry><entry>P</entry><entry>jump to parent message in thread</entry></row>
+<row><entry><literal>&lt;root-message&gt;</literal></entry><entry></entry><entry>jump to root message in thread</entry></row>
 <row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>extract supported public keys</entry></row>
 <row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>wipe passphrase(s) from memory</entry></row>
 <row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>check for classic PGP</entry></row>
@@ -21864,6 +22003,9 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
 <row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>open a different virtual folder</entry></row>
 <row><entry><literal>&lt;vfolder-from-query&gt;</literal></entry><entry></entry><entry>generate virtual folder from query</entry></row>
+<row><entry><literal>&lt;windowed-vfolder-from-query&gt;</literal></entry><entry></entry><entry>generate virtual folder from query and time window</entry></row>
+<row><entry><literal>&lt;windowed-vfolder-backward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window backwards</entry></row>
+<row><entry><literal>&lt;windowed-vfolder-forward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window forwards</entry></row>
 <row><entry><literal>&lt;modify-labels&gt;</literal></entry><entry></entry><entry>modify (notmuch) tags</entry></row>
 <row><entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry><entry></entry><entry>modify labels and then hide message</entry></row>
 <row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
@@ -21935,6 +22077,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>reply to a message</entry></row>
 <row><entry><literal>&lt;recall-message&gt;</literal></entry><entry>R</entry><entry>recall a postponed message</entry></row>
+<row><entry><literal>&lt;reconstruct-thread&gt;</literal></entry><entry></entry><entry>reconstruct thread containing current message</entry></row>
 <row><entry><literal>&lt;read-thread&gt;</literal></entry><entry>^R</entry><entry>mark the current thread as read</entry></row>
 <row><entry><literal>&lt;read-subthread&gt;</literal></entry><entry>Esc r</entry><entry>mark the current subthread as read</entry></row>
 <row><entry><literal>&lt;resend-message&gt;</literal></entry><entry>Esc e</entry><entry>use the current message as a template for a new one</entry></row>
@@ -21975,6 +22118,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;previous-line&gt;</literal></entry><entry></entry><entry>scroll up one line</entry></row>
 <row><entry><literal>&lt;bottom&gt;</literal></entry><entry></entry><entry>jump to the bottom of the message</entry></row>
 <row><entry><literal>&lt;parent-message&gt;</literal></entry><entry>P</entry><entry>jump to parent message in thread</entry></row>
+<row><entry><literal>&lt;root-message&gt;</literal></entry><entry></entry><entry>jump to root message in thread</entry></row>
 <row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>check for classic PGP</entry></row>
 <row><entry><literal>&lt;mail-key&gt;</literal></entry><entry>Esc k</entry><entry>mail a PGP public key</entry></row>
 <row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>extract supported public keys</entry></row>
@@ -22125,6 +22269,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;edit-x-comment-to&gt;</literal></entry><entry></entry><entry>edit the X-Comment-To field</entry></row>
 <row><entry><literal>&lt;postpone-message&gt;</literal></entry><entry>P</entry><entry>save this message to send later</entry></row>
 <row><entry><literal>&lt;edit-reply-to&gt;</literal></entry><entry>r</entry><entry>edit the Reply-To field</entry></row>
+<row><entry><literal>&lt;rename-attachment&gt;</literal></entry><entry>^O</entry><entry>send attachment with a different name</entry></row>
 <row><entry><literal>&lt;rename-file&gt;</literal></entry><entry>R</entry><entry>rename/move an attached file</entry></row>
 <row><entry><literal>&lt;edit-subject&gt;</literal></entry><entry>s</entry><entry>edit the subject of this message</entry></row>
 <row><entry><literal>&lt;edit-to&gt;</literal></entry><entry>t</entry><entry>edit the TO list</entry></row>
@@ -22319,7 +22464,7 @@ bindings for all menus (except as noted).
 
 </chapter>
 
-<chapter id="manual/miscellany">
+<chapter id="guide/miscellany">
 <title>Miscellany</title>
 
 <sect1 id="acknowledgements">
