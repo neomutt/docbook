@@ -68,7 +68,3 @@ for FILE in guide/*.html; do
 done
 echo
 
-for i in feature/*-patch.html feature/*-hook.html feature/*-folder.html; do
-	mv $i ${i%-*.html}.html
-done
-

@@ -9,7 +9,7 @@
 <firstname>Michael</firstname><surname>Elkins</surname>
 <email>me@cs.hmc.edu</email>
 </author>
-<releaseinfo>version 20170113 (1.7.2)</releaseinfo>
+<releaseinfo>version 20170306 (1.8.0)</releaseinfo>
 
 <abstract>
 <para>
@@ -629,8 +629,12 @@ set sidebar_divider_char = '│'          <emphasis role="comment"># Pretty line
         including the section about <link linkend="formatstrings-conditionals">conditionals</link>.
       </para>
       <para>
-        The default value is <literal>%B%*  %n</literal>
-        The default value is <literal>%B%?F? [%F]?%* %?N?%N/?%S</literal>
+        The default value is:
+        <literal>%B%*  %n</literal>
+      </para>
+      <para>
+        A more detailed value is:
+        <literal>%B%?F? [%F]?%* %?N?%N/?%S</literal>
       </para>
       <itemizedlist>
         <title>Which breaks down as:</title>
@@ -1756,7 +1760,7 @@ there is a large amount of quoted text in the way.
 
 <varlistentry>
 <term>
-<literal>&lt;skip-quoted&gt;</literal><anchor id="feature/skip-quoted"/>
+<literal>&lt;skip-quoted&gt;</literal><anchor id="skip-quoted"/>
 (default: S)
 </term>
 <listitem>
@@ -2363,9 +2367,9 @@ See also the <link linkend="postpone">$postpone</link> quad-option.
   <title>Mutt config file search order</title>
   <tgroup cols="1">
     <tbody>
-      <row><entry>neomuttrc-20161126</entry></row>
+      <row><entry>neomuttrc-20170306</entry></row>
       <row><entry>neomuttrc</entry></row>
-      <row><entry>muttrc-1.7.2</entry></row>
+      <row><entry>muttrc-1.8.0</entry></row>
       <row><entry>muttrc</entry></row>
     </tbody>
   </tgroup>
@@ -2377,7 +2381,7 @@ See also the <link linkend="postpone">$postpone</link> quad-option.
 </para>
 
 <sect2 id="muttrc-system">
-  <title>Location of Mutt system config files</title>
+  <title>Location of system config files</title>
 
   <para>
     Mutt will search for a system config file in a <literal>mutt</literal>
@@ -2406,17 +2410,17 @@ See also the <link linkend="postpone">$postpone</link> quad-option.
         </row>
       </thead>
       <tbody>
-        <row><entry>/etc/xdg/mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>/etc/xdg/mutt/neomuttrc-20170306</entry><entry>NeoMutt release version</entry></row>
         <row><entry>/etc/xdg/mutt/neomuttrc</entry></row>
-        <row><entry>/etc/xdg/mutt/Muttrc-1.7.2</entry><entry>Mutt release version, Note the case of the filename</entry></row>
+        <row><entry>/etc/xdg/mutt/Muttrc-1.8.0</entry><entry>Mutt release version, Note the case of the filename</entry></row>
         <row><entry>/etc/xdg/mutt/Muttrc</entry><entry>Note the case of the filename</entry></row>
-        <row><entry>/etc/mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>/etc/mutt/neomuttrc-20170306</entry><entry>NeoMutt release version</entry></row>
         <row><entry>/etc/mutt/neomuttrc</entry></row>
-        <row><entry>/etc/mutt/Muttrc-1.7.2</entry><entry>Mutt release version, Note the case of the filename</entry></row>
+        <row><entry>/etc/mutt/Muttrc-1.8.0</entry><entry>Mutt release version, Note the case of the filename</entry></row>
         <row><entry>/etc/mutt/Muttrc</entry><entry>Note the case of the filename</entry></row>
-        <row><entry>/usr/share/mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>/usr/share/mutt/neomuttrc-20170306</entry><entry>NeoMutt release version</entry></row>
         <row><entry>/usr/share/mutt/neomuttrc</entry></row>
-        <row><entry>/usr/share/mutt/Muttrc-1.7.2</entry><entry>Mutt release version, Note the case of the filename</entry></row>
+        <row><entry>/usr/share/mutt/Muttrc-1.8.0</entry><entry>Mutt release version, Note the case of the filename</entry></row>
         <row><entry>/usr/share/mutt/Muttrc</entry><entry>Note the case of the filename</entry></row>
       </tbody>
     </tgroup>
@@ -2424,7 +2428,7 @@ See also the <link linkend="postpone">$postpone</link> quad-option.
 </sect2>
 
 <sect2 id="muttrc-user">
-  <title>Location of Mutt system config files</title>
+  <title>Location of user config files</title>
 
   <para>
     Mutt will search for a user config file in several places.  First it looks
@@ -2453,17 +2457,17 @@ See also the <link linkend="postpone">$postpone</link> quad-option.
         </row>
       </thead>
       <tbody>
-        <row><entry>~/.config/mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>~/.config/mutt/neomuttrc-20170306</entry><entry>NeoMutt release version</entry></row>
         <row><entry>~/.config/mutt/neomuttrc</entry></row>
-        <row><entry>~/.config/mutt/muttrc-1.7.2</entry><entry>Mutt release version</entry></row>
+        <row><entry>~/.config/mutt/muttrc-1.8.0</entry><entry>Mutt release version</entry></row>
         <row><entry>~/.config/mutt/muttrc</entry></row>
-        <row><entry>~/.neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>~/.neomuttrc-20170306</entry><entry>NeoMutt release version</entry></row>
         <row><entry>~/.neomuttrc</entry></row>
-        <row><entry>~/.muttrc-1.7.2</entry><entry>Mutt release version</entry></row>
+        <row><entry>~/.muttrc-1.8.0</entry><entry>Mutt release version</entry></row>
         <row><entry>~/.muttrc</entry></row>
-        <row><entry>~/.mutt/neomuttrc-20161126</entry><entry>NeoMutt release version</entry></row>
+        <row><entry>~/.mutt/neomuttrc-20170306</entry><entry>NeoMutt release version</entry></row>
         <row><entry>~/.mutt/neomuttrc</entry></row>
-        <row><entry>~/.mutt/muttrc-1.7.2</entry><entry>Mutt release version</entry></row>
+        <row><entry>~/.mutt/muttrc-1.8.0</entry><entry>Mutt release version</entry></row>
         <row><entry>~/.mutt/muttrc</entry></row>
       </tbody>
     </tgroup>
@@ -3412,7 +3416,8 @@ patterns.
 <listitem><para>quoted (text matching <link linkend="quote-regexp">$quote_regexp</link> in the body of a message)</para></listitem>
 <listitem><para>quoted1, quoted2, ..., quoted<emphasis>N</emphasis> (higher levels of quoting)</para></listitem>
 <listitem><para>search (highlighting of words in the pager)</para></listitem>
-<listitem><para>signature</para></listitem><listitem><para>status (mode lines used to display info about the mailbox or message)</para></listitem>
+<listitem><para>signature</para></listitem>
+<listitem><para>status (mode lines used to display info about the mailbox or message)</para></listitem>
 <listitem><para>tilde (the <quote>~</quote> used to pad blank lines in the pager)</para></listitem>
 <listitem><para>tree (thread tree drawn in the message index and attachment menu)</para></listitem>
 <listitem><para>underline (highlighting underlined patterns in the body of messages)</para></listitem>
@@ -4029,7 +4034,7 @@ linkend="imap"/> respectively.
 <para>
 Mutt provides a number of advanced features for handling (possibly many)
 folders and new mail within them, please refer to <xref
-linkend="feature/new-mail"/> for details (including in what situations and how
+linkend="new-mail"/> for details (including in what situations and how
 often Mutt checks for new mail).
 </para>
 
@@ -5860,7 +5865,11 @@ shows several ways to select messages.
 <row><entry>~L <emphasis>EXPR</emphasis></entry><entry>messages either originated or received by <emphasis>EXPR</emphasis></entry></row>
 <row><entry>%L <emphasis>GROUP</emphasis></entry><entry>message either originated or received by any member of <emphasis>GROUP</emphasis></entry></row>
 <row><entry>~l</entry><entry>messages addressed to a known mailing list</entry></row>
-<row><entry>~m [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry><entry>messages in the range <emphasis>MIN</emphasis> to <emphasis>MAX</emphasis> *)</entry></row>
+<row><entry>~m [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry><entry>messages with numbers in the range <emphasis>MIN</emphasis> to <emphasis>MAX</emphasis> ***)</entry></row>
+<row><entry>~m &lt;[<emphasis>MAX</emphasis>]</entry><entry>messages with numbers less than <emphasis>MAX</emphasis> ***)</entry></row>
+<row><entry>~m &gt;[<emphasis>MIN</emphasis>]</entry><entry>messages with numbers greater than <emphasis>MIN</emphasis> ***)</entry></row>
+<row><entry>~m [<emphasis>M</emphasis>]</entry><entry>just message number <emphasis>M</emphasis> ***)</entry></row>
+<row><entry>~m [<emphasis>MIN</emphasis>],[<emphasis>MAX</emphasis>]</entry><entry>messages with offsets (from selected message) in the range <emphasis>MIN</emphasis> to <emphasis>MAX</emphasis> ***)</entry></row>
 <row><entry>~n [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry><entry>messages with a score in the range <emphasis>MIN</emphasis> to <emphasis>MAX</emphasis> *)</entry></row>
 <row><entry>~N</entry><entry>new messages</entry></row>
 <row><entry>~O</entry><entry>old messages</entry></row>
@@ -5905,6 +5914,12 @@ Where <emphasis>EXPR</emphasis> is a <link linkend="regexp">regular expression</
 <para>
 **) The suffixes <quote>K</quote> and <quote>M</quote> are allowed to
 specify kilobyte and megabyte respectively.
+</para>
+
+<para>
+  ***) The message number ranges (introduced by <literal>~m</literal>)
+  are even more general and powerful than the other
+  types of ranges.  Read on and see <xref linkend="message-ranges"/> below.
 </para>
 
 <para>
@@ -5966,6 +5981,168 @@ string.  This example matches messages whose senders are known aliases.
 @~f .
 </screen>
 </example>
+
+<sect3 id="message-ranges">
+  <title>Message Ranges</title>
+
+  <para>
+    If a message number range (from now on: MNR) contains a comma (<literal>,</literal>),
+    it is a <emphasis>relative</emphasis> MNR.  That means the numbers denote
+    <emphasis>offsets</emphasis> from the highlighted message.  For example:
+  </para>
+
+  <table id="relative-mnrs">
+    <title>Relative Message Number Ranges</title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Pattern</entry>
+          <entry>Explanation</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>
+            <literal>~m -2,2</literal>
+          </entry>
+          <entry>Previous 2, highlighted and next 2 emails</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>~m 0,1</literal>
+          </entry>
+          <entry>Highlighted and next email</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>
+    In addition to numbers, either side of the range can also contain one
+    of the special characters (shortcuts)<literal>.^$</literal>.  The meaning is:
+  </para>
+
+  <table id="mnrs-shortcuts">
+    <title>Message Number Shortcuts</title>
+    <tgroup cols="4">
+      <thead>
+        <row>
+          <entry>Shortcut</entry>
+          <entry>Explanation</entry>
+          <entry>Example</entry>
+          <entry>Meaning</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>
+            <literal>.</literal>
+          </entry>
+          <entry>Current / Highlighted</entry>
+          <entry>
+            <literal>~m -3,.</literal>
+          </entry>
+          <entry>Previous 3 emails plus the highlighted one</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>$</literal>
+          </entry>
+          <entry>Last</entry>
+          <entry>
+            <literal>~m .,$</literal>
+          </entry>
+          <entry>Highlighted email and all the later ones</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>^</literal>
+          </entry>
+          <entry>First</entry>
+          <entry>
+            <literal>~m ^,1</literal>
+          </entry>
+          <entry>Highlighted, next and all preceding ones</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>
+    Lastly, you can also leave either side of the range blank, to make it
+    extend as far as possible.  For example, <literal>~m ,1</literal> has
+    the same meaning as the last example in <xref
+    linkend="mnrs-shortcuts"/>.
+  </para>
+
+  <para>
+    Otherwise, if a MNR <emphasis>doesn't</emphasis> contain a comma, the
+    meaning is similar to other ranges, except that the shortcuts are
+    still available.  Examples:
+  </para>
+
+  <table id="mnrs-absolute">
+    <title>Absolute Message Number Ranges</title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Pattern</entry>
+          <entry>Explanation</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>
+            <literal>~m 3-10</literal>
+          </entry>
+          <entry>Emails 3 to 10</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>~m -10</literal>
+          </entry>
+          <entry>Emails 1 to 10</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>~m 10-</literal>
+          </entry>
+          <entry>Emails 10 to last</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>~m &lt;3</literal>
+          </entry>
+          <entry>First and second email</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>~m ^-2</literal>
+          </entry>
+          <entry>First and second email</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>~m &gt;1</literal>
+          </entry>
+          <entry>Everything but first email</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>~m 2-$</literal>
+          </entry>
+          <entry>Everything but first email</entry>
+        </row>
+        <row>
+          <entry>
+            <literal>~m 2</literal>
+          </entry>
+          <entry>Just the second email</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+</sect3>
 
 </sect2>
 
@@ -6813,6 +6990,15 @@ field.  When set to <emphasis>yes</emphasis>, the
 </para>
 
 <para>
+You can change or delete the <quote>X-Label:</quote> field within
+Mutt using the <quote>edit-label</quote> command, bound to the
+<quote>y</quote> key by default.  This works for tagged messages, too.
+While in the edit-label function, pressing the &lt;complete&gt;
+binding (TAB, by default) will perform completion against all labels
+currently in use.
+</para>
+
+<para>
 Lastly, Mutt has the ability to <link linkend="sort">sort</link> the
 mailbox into <link linkend="threads">threads</link>.  A thread is a
 group of messages which all relate to the same subject.  This is usually
@@ -6837,13 +7023,12 @@ known as <quote>keywords</quote> or <quote>tags</quote>.
 </para>
 
 <para>
-If you are new to Mutt or to using keywords in Mutt, you only need
-to know that the &lt;edit-label&gt; binding (<literal>y</literal> by
-default) will edit keywords, and that you can search for keywords
-using the <literal>~y</literal> pattern, and use the <literal>%y</literal>
-expando to display it in your <literal>$index_format</literal>.  You also
-can sort by keyword.  Keywords that you set will be stored to the
-<literal>X-Label:</literal> header by default.
+If you are new to Mutt or to using keywords in Mutt, you only need to know that
+the &lt;edit-label&gt; binding will edit keywords, and that you can search for
+keywords using the <literal>~y</literal> pattern, and use the
+<literal>%y</literal> expando to display it in your
+<literal>$index_format</literal>.  You also can sort by keyword.  Keywords that
+you set will be stored to the <literal>X-Label:</literal> header by default.
 </para>
 
 <para>
@@ -6940,7 +7125,79 @@ to your inbox, and it is fully compatible with the new keywords code.
 
 </sect1>
 
-<sect1 id="feature/new-mail">
+<sect1 id="display-munging">
+<title>Display Munging</title>
+
+<para>
+Working within the confines of a console or terminal window, it is
+often useful to be able to modify certain information elements in a
+non-destructive way -- to change how they display, without changing
+the stored value of the information itself.  This is especially so of
+message subjects, which may often be polluted with extraneous metadata
+that either is reproduced elsewhere, or is of secondary interest.
+</para>
+
+<cmdsynopsis>
+<command>subjectrx</command>
+<arg choice="plain">
+<replaceable class="parameter">pattern</replaceable>
+</arg>
+<arg choice="plain">
+<replaceable class="parameter">replacement</replaceable>
+</arg>
+
+<command>unsubjectrx</command>
+<group choice="req">
+<arg choice="plain">
+<replaceable class="parameter">*</replaceable>
+</arg>
+<arg choice="plain">
+<replaceable class="parameter">pattern</replaceable>
+</arg>
+</group>
+</cmdsynopsis>
+
+<para>
+<literal>subjectrx</literal> specifies a regular expression
+<quote>pattern</quote> which, if detected in a message subject, causes
+the subject to be replaced with the <quote>replacement</quote> value.
+The replacement is subject to substitutions in the same way as for the
+<link linkend="spam">spam</link> command: <literal>%L</literal> for the text
+to the left of the match, <literal>%R</literal> for text to the right of the
+match, and <literal>%1</literal> for the first subgroup in the match (etc).
+If you simply want to erase the match, set it to <quote>%L%R</quote>.
+Any number of <literal>subjectrx</literal> commands may coexist.
+</para>
+
+<para>
+Note this well: the <quote>replacement</quote> value replaces the
+entire subject, not just the match!
+</para>
+
+<para>
+<literal>unsubjectrx</literal> removes a given subjectrx from the
+substitution list.  If <literal>*</literal> is used as the pattern,
+all substitutions will be removed.
+</para>
+
+<example id="ex-subjectrx">
+<title>Subject Munging</title>
+<screen>
+# Erase [rt #12345] tags from Request Tracker (RT) e-mails
+subjectrx '\[rt #[0-9]+\] *' '%L%R'
+
+# Servicedesk is another RT that sends more complex subjects.
+# Keep the ticket number.
+subjectrx '\[servicedesk #([0-9]+)\] ([^.]+)\.([^.]+) - (new|open|pending|update) - ' '%L[#%1] %R'
+
+# Strip out annoying [listname] prefixes in subjects
+subjectrx '\[[^\]]*\]:? *' '%L%R'
+</screen>
+</example>
+
+</sect1>
+
+<sect1 id="new-mail">
 <title>New Mail Detection</title>
 
 <para>
@@ -8453,7 +8710,7 @@ would contain:
 Mutt may also be <quote>patched</quote> to support smaller features.
 These patches should add a free-form string to the end Mutt's version string.
 Running <literal>mutt -v</literal> might show:
-<screen>patch-1.7.1.sidebar.20160709</screen>
+<screen>patch-1.8.0.sidebar.20170306</screen>
 </para>
 </sect2>
 
@@ -10156,7 +10413,7 @@ set pgp_encrypt_self = &quot;no&quot;
 
   <sect1 id="fmemopen-known-bugs">
     <title>Known Bugs</title>
-    <para>None</para>
+    <para><ulink url="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=834408"> debian bug 834408 </ulink></para>
   </sect1>
 
   <sect1 id="fmemopen-credits">
@@ -11456,7 +11713,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
   </sect1>
 </chapter>
 
-<chapter id="feature/new-mail-hook">
+<chapter id="feature/new-mail">
   <title>New Mail Feature</title>
   <subtitle>Execute a command upon the receipt of new mail.</subtitle>
 
@@ -12057,8 +12314,8 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
       </para>
 
       <para>
-        See SEARCH SYNTAX in notmuch man page. Don't forget to use
-        <quote>and</quote> and <quote>or</quote> operators in your queries.
+        See SEARCH SYNTAX in notmuch man page. Don't forget to use operators
+        (<quote>and</quote> / <quote>or</quote>) in your queries.
       </para>
 
       <para>
@@ -12283,7 +12540,7 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
           <row>
             <entry>index,pager</entry>
             <entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry>
-            <entry>modify labels and then hide message</entry>
+            <entry>modify labels and then hide message by applying the "quasi-deleted" state. Normal redisplay rules apply here, so the user must call &lt;sync-mailbox&gt; for the changes to be displayed</entry>
           </row>
           <row>
             <entry>index,pager</entry>
@@ -12297,17 +12554,12 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
           </row>
           <row>
             <entry>index,pager</entry>
-            <entry><literal>&lt;windowed-vfolder-from-query&gt;</literal></entry>
-            <entry>generate virtual folder from query with window applied</entry>
-          </row>
-          <row>
-            <entry>index,pager</entry>
-            <entry><literal>&lt;windowed-vfolder-forward&gt;</literal></entry>
+            <entry><literal>&lt;vfolder-window-forward&gt;</literal></entry>
             <entry>generate virtual folder by moving the query's time window forward</entry>
           </row>
           <row>
             <entry>index,pager</entry>
-            <entry><literal>&lt;windowed-vfolder-backward&gt;</literal></entry>
+            <entry><literal>&lt;vfolder-window-backward&gt;</literal></entry>
             <entry>generate virtual folder by moving the query's time window backward</entry>
           </row>
         </tbody>
@@ -12462,7 +12714,8 @@ set vfolder_format = &quot;%6n(%6N) %f&quot;
 set virtual_spoolfile = no
 
 <emphasis role="comment"># setup time window preferences
-# first setup the duration, and then the time unit of that duration</emphasis>
+# first setup the duration, and then the time unit of that duration
+# when set to 0 (the default) the search window feature is disabled</emphasis>
 set nm_query_window_duration=2
 set nm_query_window_timebase="week" # or "hour", "day", "week", "month", "year"
 
@@ -12479,13 +12732,15 @@ bind index,pager + entire-thread
 <emphasis role="comment"># modify (notmuch) tags</emphasis>
 bind index,pager \` modify-labels
 
+<emphasis role="comment"># modify (notmuch) tag non-interactively.</emphasis>
+bind index,pager tt "&lt;modify-labels&gt;!todo\n" "Toggle the 'todo' tag"
+
 <emphasis role="comment"># generate virtual folder from query</emphasis>
 bind index,pager \eX vfolder-from-query
 
 <emphasis role="comment"># generate virtual folder from query with time window</emphasis>
-bind index,pager \\ windowed-vfolder-from-query
-bind index,pager &lt; windowed-vfolder-backward
-bind index,pager &gt; windowed-vfolder-forward
+bind index,pager &lt; vfolder-window-backward
+bind index,pager &gt; vfolder-window-forward
 
 <emphasis role="comment"># modify labels and then hide message
 # bind index,pager ??? modify-labels-then-hide
@@ -12522,7 +12777,7 @@ bind index,pager &gt; windowed-vfolder-forward
 #              &quot;deleted&quot; &quot;GD&quot; \
 #              &quot;invites&quot; &quot;Gi&quot;
 
-# set index_format='4C %S %[%y.%m.%d] %-18.18n %?GU?%GU&amp; ? %?GR?%GR&amp; ? %?GI?%GI&amp; ? %s'
+# set index_format='%4C %S %[%y.%m.%d] %-18.18n %?GU?%GU&amp; ? %?GR?%GR&amp; ? %?GI?%GI&amp; ? %s'
 
 # --------------------------------------------------------------------------
 # COLORS - some unpleasant examples are given
@@ -12758,7 +13013,7 @@ bind index,pager Q quasi-delete
   </sect1>
 </chapter>
 
-<chapter id="feature/reply-with-xorig-patch">
+<chapter id="feature/reply-with-xorig">
   <title>Reply With X-Original-To Feature</title>
   <subtitle>Direct reply to email using X-Original-To header
   </subtitle>
@@ -13129,12 +13384,14 @@ set sort_browser="reverse-size"
       </arg>
 
       <command>unsidebar_whitelist<anchor id="unsidebar-whitelist"/></command>
+      <group choice="req">
       <arg choice="plain">
         <replaceable class="parameter">*</replaceable>
       </arg>
       <arg choice="plain" rep="repeat">
         <replaceable class="parameter">mailbox</replaceable>
       </arg>
+      </group>
     </cmdsynopsis>
 
     <para>
@@ -13241,11 +13498,15 @@ set sort_browser="reverse-size"
           </row>
           <row>
             <entry><literal>new</literal></entry>
-            <entry>Number of new messages</entry>
+            <entry>Number of unread messages</entry>
           </row>
           <row>
             <entry><literal>path</literal></entry>
             <entry>Alphabetically by path</entry>
+          </row>
+          <row>
+            <entry><literal>unread</literal></entry>
+            <entry>Number of unread messages</entry>
           </row>
           <row>
             <entry><literal>unsorted</literal></entry>
@@ -13420,7 +13681,7 @@ color sidebar_ordinary color245 default
   </sect1>
 </chapter>
 
-<chapter id="feature/skip-quoted-patch">
+<chapter id="feature/skip-quoted">
   <title>Skip Quoted Feature</title>
   <subtitle>Leave some context visible</subtitle>
 
@@ -13735,7 +13996,7 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
   </sect1>
 </chapter>
 
-<chapter id="feature/trash-folder">
+<chapter id="feature/trash">
   <title>Trash Folder Feature</title>
   <subtitle>Automatically move deleted emails to a trash bin</subtitle>
 
@@ -14151,6 +14412,7 @@ mailboxes and to send messages from the command line as well.
 <row><entry>-c</entry><entry>specify a carbon-copy (Cc) address</entry></row>
 <row><entry>-d</entry><entry>log debugging output to ~/.muttdebug0 if mutt was compiled with +DEBUG; it can range from 1-5 and affects verbosity (a value of 2 is recommended)</entry></row>
 <row><entry>-D</entry><entry>print the value of all Mutt variables to stdout</entry></row>
+<row><entry>-D -S</entry><entry>like -D but hide the value of sensitive variables</entry></row>
 <row><entry>-E</entry><entry>edit the draft (-H) or include (-i) file</entry></row>
 <row><entry>-e</entry><entry>specify a config command to be run after initialization files are read</entry></row>
 <row><entry>-f</entry><entry>specify a mailbox to load</entry></row>
@@ -15152,6 +15414,28 @@ The following are the commands understood by Mutt:
 
 <listitem>
 <cmdsynopsis>
+<command><link linkend="display-munging">subjectrx</link></command>
+<arg choice="plain">
+<replaceable class="parameter">pattern</replaceable>
+</arg>
+<arg choice="plain">
+<replaceable class="parameter">replacement</replaceable>
+</arg>
+
+<command><link linkend="display-munging">unsubjectrx</link></command>
+<group choice="req">
+<arg choice="plain">
+<replaceable class="parameter">*</replaceable>
+</arg>
+<arg choice="plain">
+<replaceable class="parameter">pattern</replaceable>
+</arg>
+</group>
+</cmdsynopsis>
+</listitem>
+
+<listitem>
+<cmdsynopsis>
 <command><link linkend="subscribe">subscribe</link></command>
 <arg choice="opt" rep="repeat">
 <option>-group</option>
@@ -15469,11 +15753,11 @@ following <literal>printf(3)</literal>-style sequences are understood:
 </entry></row>
 <row><entry>%D  </entry><entry>deleted flag
 </entry></row>
-<row><entry>%d  </entry><entry>description
+<row><entry>%d  </entry><entry>description (if none, falls back to %F)
 </entry></row>
 <row><entry>%e  </entry><entry>MIME content-transfer-encoding
 </entry></row>
-<row><entry>%F  </entry><entry>filename for content-disposition header
+<row><entry>%F  </entry><entry>filename in content-disposition header (if none, falls back to %f)
 </entry></row>
 <row><entry>%f  </entry><entry>filename
 </entry></row>
@@ -16311,6 +16595,17 @@ where <emphasis>string</emphasis> is the expansion of <literal><link linkend="ed
 </para>
 </sect2>
 
+<sect2 id="empty-subject">
+<title>empty_subject</title>
+<literallayout>Type: string
+Default: <quote><literal>Re: your mail</literal></quote></literallayout>
+
+<para>
+This variable specifies the subject to be used when replying to an email
+with an empty subject.  It defaults to "Re: your mail".
+</para>
+</sect2>
+
 <sect2 id="encode-from">
 <title>encode_from</title>
 <literallayout>Type: boolean
@@ -17024,6 +17319,20 @@ to the list, and will ignore this field.  To direct a response to the
 mailing list when this option is <emphasis>set</emphasis>, use the <literal><link linkend="list-reply">&lt;list-reply&gt;</link></literal>
 function; <literal>&lt;group-reply&gt;</literal> will reply to both the sender and the
 list.
+</para>
+</sect2>
+
+<sect2 id="show-multipart-alternative">
+<title>show_multipart_alternative</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+When <emphasis>set</emphasis> to <literal>info</literal>, the multipart/alternative information is shown.
+When <emphasis>set</emphasis> to <literal>inline</literal>, all of the alternatives are displayed.
+When not set, the default behavior is to show only the chosen alternative.
+</para>
+<para>
 </para>
 </sect2>
 
@@ -18294,13 +18603,14 @@ Default: (empty)</literallayout>
 
 <para>
 This variable specifies the default tags applied to messages stored to the mutt record.
+When set to 0 this variable disable the window feature.
 </para>
 </sect2>
 
 <sect2 id="nm-query-window-duration">
 <title>nm_query_window_duration</title>
 <literallayout>Type: number
-Default: 2</literallayout>
+Default: 0</literallayout>
 
 <para>
 This variable sets the time base of a windowed notmuch query.
@@ -19594,7 +19904,7 @@ message to the author of a message.
 </para>
 </sect2>
 
-<sect2 id="feature/reply-with-xorig">
+<sect2 id="reply-with-xorig">
 <title>reply_with_xorig</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
@@ -20053,7 +20363,7 @@ sequences:
 </entry></row>
 <row><entry>%S  </entry><entry>* Size of mailbox (total number of messages)
 </entry></row>
-<row><entry>%N  </entry><entry>* Number of New messages in the mailbox
+<row><entry>%N  </entry><entry>* Number of unread messages in the mailbox
 </entry></row>
 <row><entry>%n  </entry><entry>N if mailbox has new mail, blank otherwise
 </entry></row>
@@ -20185,7 +20495,10 @@ entries are sorted alphabetically.  Valid values:
 <listitem><para>alpha (alphabetically)
 </para></listitem><listitem><para>count (all message count)
 </para></listitem><listitem><para>flagged (flagged message count)
-</para></listitem><listitem><para>new (new message count)
+</para></listitem><listitem><para>name (alphabetically)
+</para></listitem><listitem><para>new (unread message count)
+</para></listitem><listitem><para>path (alphabetically)
+</para></listitem><listitem><para>unread (unread message count)
 </para></listitem><listitem><para>unsorted
 </para></listitem></itemizedlist>
 
@@ -20686,11 +20999,13 @@ Default: (empty)</literallayout>
 <para>
 This is a colon-delimited list of authentication methods mutt may
 attempt to use to log in to an SMTP server, in the order mutt should
-try them.  Authentication methods are any SASL mechanism, e.g.
+try them.  Authentication methods are any SASL mechanism, e.g. <quote>plain</quote>,
 <quote>digest-md5</quote>, <quote>gssapi</quote> or <quote>cram-md5</quote>.
 This option is case-insensitive. If it is <quote>unset</quote>
 (the default) mutt will try all available methods, in order from
-most-secure to least-secure.
+most-secure to least-secure. Support for the <quote>plain</quote> mechanism is
+bundled; other mechanisms are provided by an external SASL library (look
+for +USE_SASL in the output of mutt -v).
 </para>
 <para>
 Example:
@@ -21084,17 +21399,28 @@ required.)
 Default: <quote><literal>-*%A</literal></quote></literallayout>
 
 <para>
-Controls the characters used by the <quote>%r</quote> indicator in
-<link linkend="status-format">$status_format</link>. The first character is used when the mailbox is
-unchanged. The second is used when the mailbox has been changed, and
-it needs to be resynchronized. The third is used if the mailbox is in
-read-only mode, or if the mailbox will not be written when exiting
-that mailbox (You can toggle whether to write changes to a mailbox
-with the <literal>&lt;toggle-write&gt;</literal> operation, bound by default to <quote>%</quote>). The fourth
-is used to indicate that the current folder has been opened in attach-
-message mode (Certain operations like composing a new mail, replying,
-forwarding, etc. are not permitted in this mode).
+Controls the characters used by the <quote>%r</quote> indicator in <link linkend="status-format">$status_format</link>.
+
 </para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry><emphasis role="bold">Character</emphasis> </entry><entry><emphasis role="bold">Default</emphasis> </entry><entry><emphasis role="bold">Description</emphasis>
+</entry></row>
+<row><entry>1 </entry><entry>- </entry><entry>Mailbox is unchanged
+</entry></row>
+<row><entry>2 </entry><entry>* </entry><entry>Mailbox has been changed and needs to be resynchronized
+</entry></row>
+<row><entry>3 </entry><entry>% </entry><entry>Mailbox is read-only, or will not be written when exiting.
+(You can toggle whether to write changes to a mailbox
+with the <literal>&lt;toggle-write&gt;</literal> operation, bound by default
+to <quote>%</quote>)
+</entry></row>
+<row><entry>4 </entry><entry>A </entry><entry>Folder opened in attach-message mode.
+(Certain operations like composing a new mail, replying,
+forwarding, etc. are not permitted in this mode)
+</entry></row></tbody></tgroup></informaltable>
 </sect2>
 
 <sect2 id="status-format">
@@ -21434,7 +21760,7 @@ Controls the characters used in several flags.
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
-<sect2 id="feature/trash">
+<sect2 id="trash">
 <title>trash</title>
 <literallayout>Type: path
 Default: (empty)</literallayout>
@@ -21912,7 +22238,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;delete-thread&gt;</literal></entry><entry>^D</entry><entry>delete all messages in thread</entry></row>
 <row><entry><literal>&lt;delete-subthread&gt;</literal></entry><entry>Esc d</entry><entry>delete all messages in subthread</entry></row>
 <row><entry><literal>&lt;edit&gt;</literal></entry><entry>e</entry><entry>edit the raw message</entry></row>
-<row><entry><literal>&lt;edit-label&gt;</literal></entry><entry></entry><entry>add, change, or delete a message's label</entry></row>
+<row><entry><literal>&lt;edit-label&gt;</literal></entry><entry>Y</entry><entry>add, change, or delete a message's label</entry></row>
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
 <row><entry><literal>&lt;forward-message&gt;</literal></entry><entry>f</entry><entry>forward a message with comments</entry></row>
 <row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>forward to newsgroup</entry></row>
@@ -22003,9 +22329,8 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
 <row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>open a different virtual folder</entry></row>
 <row><entry><literal>&lt;vfolder-from-query&gt;</literal></entry><entry></entry><entry>generate virtual folder from query</entry></row>
-<row><entry><literal>&lt;windowed-vfolder-from-query&gt;</literal></entry><entry></entry><entry>generate virtual folder from query and time window</entry></row>
-<row><entry><literal>&lt;windowed-vfolder-backward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window backwards</entry></row>
-<row><entry><literal>&lt;windowed-vfolder-forward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window forwards</entry></row>
+<row><entry><literal>&lt;vfolder-window-backward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window backwards</entry></row>
+<row><entry><literal>&lt;vfolder-window-forward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window forwards</entry></row>
 <row><entry><literal>&lt;modify-labels&gt;</literal></entry><entry></entry><entry>modify (notmuch) tags</entry></row>
 <row><entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry><entry></entry><entry>modify labels and then hide message</entry></row>
 <row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
@@ -22043,7 +22368,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>set a status flag on a message</entry></row>
 <row><entry><literal>&lt;clear-flag&gt;</literal></entry><entry>W</entry><entry>clear a status flag from a message</entry></row>
 <row><entry><literal>&lt;edit&gt;</literal></entry><entry>e</entry><entry>edit the raw message</entry></row>
-<row><entry><literal>&lt;edit-label&gt;</literal></entry><entry></entry><entry>add, change, or delete a message's label</entry></row>
+<row><entry><literal>&lt;edit-label&gt;</literal></entry><entry>Y</entry><entry>add, change, or delete a message's label</entry></row>
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
 <row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>followup to newsgroup</entry></row>
 <row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>forward to newsgroup</entry></row>
@@ -22095,6 +22420,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;search-toggle&gt;</literal></entry><entry>\\</entry><entry>toggle search pattern coloring</entry></row>
 <row><entry><literal>&lt;display-address&gt;</literal></entry><entry>@</entry><entry>display full address of sender</entry></row>
 <row><entry><literal>&lt;next-new&gt;</literal></entry><entry></entry><entry>jump to the next new message</entry></row>
+<row><entry><literal>&lt;next-new-then-unread&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>jump to the next new or unread message</entry></row>
 <row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>this screen</entry></row>
 <row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>move to the next page</entry></row>
@@ -22112,6 +22438,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;jump&gt;</literal></entry><entry></entry><entry>jump to an index number</entry></row>
 <row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>jump to the next unread message</entry></row>
 <row><entry><literal>&lt;previous-new&gt;</literal></entry><entry></entry><entry>jump to the previous new message</entry></row>
+<row><entry><literal>&lt;previous-new-then-unread&gt;</literal></entry><entry></entry><entry>jump to the previous new or unread message</entry></row>
 <row><entry><literal>&lt;previous-unread&gt;</literal></entry><entry></entry><entry>jump to the previous unread message</entry></row>
 <row><entry><literal>&lt;half-up&gt;</literal></entry><entry></entry><entry>scroll up 1/2 page</entry></row>
 <row><entry><literal>&lt;half-down&gt;</literal></entry><entry></entry><entry>scroll down 1/2 page</entry></row>
