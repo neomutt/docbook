@@ -9,7 +9,7 @@
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 20170421 (1.8.2)</releaseinfo>
+    <releaseinfo>version 20170526 (1.8.2)</releaseinfo>
     <abstract>
       <para>
       <quote>All mail clients suck. This one just sucks less.</quote>— me,
@@ -27,9 +27,9 @@
     pattern matching language for selecting groups of messages.</para>
 
     <sect1 id="homepage">
-      <title>Mutt Home Page</title>
-      <para>The official homepage can be found at
-      <ulink url="http://www.mutt.org/">http://www.mutt.org/</ulink>.</para>
+      <title>NeoMutt Home Page</title>
+      <para>The homepage can be found at
+      <ulink url="https://www.neomutt.org/">https://www.neomutt.org/</ulink>.</para>
     </sect1>
 
     <sect1 id="mailinglists">
@@ -37,7 +37,7 @@
       <itemizedlist>
         <listitem>
           <para>
-            <email>neomutt-users@neomutt.org</email>— help, bug reports and
+            <email>neomutt-users@neomutt.org</email> — help, bug reports and
             feature requests. To subscribe to this list, please send a mail to
             <email>neomutt-users-request@neomutt.org</email> with the subject
             "subscribe".
@@ -45,7 +45,7 @@
         </listitem>
         <listitem>
           <para>
-            <email>neomutt-devel@neomutt.org</email>— development mailing list.
+            <email>neomutt-devel@neomutt.org</email> — development mailing list.
             To subscribe to this list, please send a mail to
             <email>neomutt-devel-request@neomutt.org</email> with the subject
             "subscribe".
@@ -54,50 +54,22 @@
       </itemizedlist>
     </sect1>
 
-    <sect1 id="distribution">
-      <title>Getting Mutt</title>
-      <para>Mutt releases can be downloaded from
-      <ulink url="ftp://ftp.mutt.org/mutt/">ftp://ftp.mutt.org/mutt/</ulink>.
-      For a list of mirror sites, please refer to
-      <ulink url="http://www.mutt.org/download.html">
-      http://www.mutt.org/download.html</ulink>.</para>
-      <para>For nightly tarballs and version control access, please refer to
-      the
-      <ulink url="http://dev.mutt.org/">Mutt development site</ulink>.</para>
-    </sect1>
-
     <sect1 id="irc">
-      <title>Mutt Online Resources</title>
+      <title>NeoMutt Online Resources</title>
       <variablelist>
         <varlistentry>
-          <term>Bug Tracking System</term>
+          <term>Issue Tracking System</term>
           <listitem>
-            <para>The official Mutt bug tracking system can be found at
-            <ulink url="http://bugs.mutt.org/">
-            http://bugs.mutt.org/</ulink></para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>Wiki</term>
-          <listitem>
-            <para>An (unofficial) wiki can be found at
-            <ulink url="http://wiki.mutt.org/">
-            http://wiki.mutt.org/</ulink>.</para>
+            <para>Bugs may be reported on the devel mailing list, or on GitHub:
+            <ulink url="https://github.com/neomutt/neomutt/issues">https://github.com/neomutt/neomutt/issues</ulink></para>
           </listitem>
         </varlistentry>
         <varlistentry>
           <term>IRC</term>
           <listitem>
             <para>For the IRC user community, visit channel
-            <emphasis>#mutt</emphasis>on
-            <ulink url="http://freenode.net/">irc.freenode.net</ulink>.</para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>USENET</term>
-          <listitem>
-            <para>For USENET, see the newsgroup
-            <ulink url="news:comp.mail.mutt">comp.mail.mutt</ulink>.</para>
+            <emphasis>#neomutt</emphasis>on
+            <ulink url="https://webchat.freenode.net">irc.freenode.net</ulink>.</para>
           </listitem>
         </varlistentry>
       </variablelist>
@@ -114,8 +86,8 @@
       help improve and continue to maintain stale translations.</para>
       <para>For contributing code patches for new features and bug fixes,
       please refer to the developer pages at
-      <ulink url="http://dev.mutt.org/">http://dev.mutt.org/</ulink>for more
-      details.</para>
+      <ulink url="https://www.neomutt.org/dev.html">https://www.neomutt.org/dev.html</ulink>
+      for more details.</para>
     </sect1>
 
     <sect1 id="typo">
@@ -397,9 +369,7 @@ bind index,pager \CO sidebar-open       <emphasis role="comment"># Ctrl-Shift-O 
 Fruit [1]     3/8|  1      Jan 03  Tia Gibson       (362)  Caiman
 <emphasis role="indicator">Animals [1]   2/6</emphasis>|  2    + Jan 22  Rhys Lee         ( 48)  Dolphin
 Cars            4|  3    ! Aug 16  Ewan Brown       (333)  Hummingbird
-
-          <emphasis role="highlight">
-          Seas          1/7</emphasis>|  4      Sep 25  Grace Hall       ( 27)  Capybara
+<emphasis role="highlight">Seas          1/7</emphasis>|  4      Sep 25  Grace Hall       ( 27)  Capybara
                  |<emphasis role="indicator">  5 N  + Nov 12  Evelyn Rogers    (453)  Tapir              </emphasis>
                  |  6 N  + Nov 16  Callum Harrison  (498)  Hedgehog
                  |
@@ -423,8 +393,7 @@ Cars            4|  3    ! Aug 16  Ewan Brown       (333)  Hummingbird
 Fruit [1]     3/8|  1    ! Mar 07  Finley Jones     (139)  Molucca Sea
 Animals [1]   2/6|  2    + Mar 24  Summer Jackson   ( 25)  Arafura Sea
 Cars            4|  3    + Feb 28  Imogen Baker     (193)  Pechora Sea
-
-          <emphasis role="indicator">Seas          1/7</emphasis>|<emphasis role="indicator">  4 N  + Feb 23  Isla Hussain     (348)  Balearic Sea       </emphasis>
+<emphasis role="indicator">Seas          1/7</emphasis>|<emphasis role="indicator">  4 N  + Feb 23  Isla Hussain     (348)  Balearic Sea       </emphasis>
                  |
                  |
                  |
@@ -1392,7 +1361,8 @@ color sidebar_divider   color8  default
         items is controlled by the
         <link linkend="history">$history</link>variable and can be made
         persistent using an external file specified using
-        <link linkend="history-file">$history_file</link>. You may cycle
+        <link linkend="history-file">$history_file</link>and
+        <link linkend="save-history">$save_history</link>. You may cycle
         through them at an editor prompt by using the
         <literal>&lt;history-up&gt;</literal>and/or
         <literal>&lt;history-down&gt;</literal>commands. Mutt will remember the
@@ -1422,10 +1392,12 @@ color sidebar_divider   color8  default
           </listitem>
         </itemizedlist>
         <para>Mutt automatically filters out consecutively repeated items from
-        the history. It also mimics the behavior of some shells by ignoring
-        items starting with a space. The latter feature can be useful in macros
-        to not clobber the history's valuable entries with unwanted
-        entries.</para>
+        the history. If
+        <link linkend="history-remove-dups">$history_remove_dups</link>is set,
+        all repeated items are removed from the history. It also mimics the
+        behavior of some shells by ignoring items starting with a space. The
+        latter feature can be useful in macros to not clobber the history's
+        valuable entries with unwanted entries.</para>
       </sect2>
     </sect1>
 
@@ -3908,6 +3880,19 @@ folder-hook mutt "set sort=threads"
         <arg choice="plain">
           <replaceable class="parameter">pattern</replaceable>
         </arg>
+	<command>color</command>
+	<arg choice="plain">
+	  <option>compose</option>
+	</arg>
+	<arg choice="plain">
+	  <replaceable class="parameter">composeobject</replaceable>
+	</arg>
+	<arg choice="plain">
+	  <replaceable class="parameter">foreground</replaceable>
+	</arg>
+	<arg choice="plain">
+	  <replaceable class="parameter">background</replaceable>
+	</arg>
         <command>uncolor</command>
         <group choice="req">
           <arg choice="plain">
@@ -3943,6 +3928,13 @@ folder-hook mutt "set sort=threads"
       <xref linkend="patterns" />) in the message index. Note that IMAP
       server-side searches (=b, =B, =h) are not supported for color index
       patterns.</para>
+      <para>When
+      <link linkend="header-color-partial">$header_color_partial</link>is unset
+      (the default), a
+      <emphasis>header</emphasis>matched by
+      <emphasis>regexp</emphasis>will have color applied to the entire header.
+      When set, color is applied only to the exact text matched by
+      <emphasis>regexp</emphasis>.</para>
       <para>
       <emphasis>object</emphasis>can be one of:</para>
       <itemizedlist>
@@ -4041,6 +4033,25 @@ folder-hook mutt "set sort=threads"
           <para>underline (highlighting underlined patterns in the body of
           messages)</para>
         </listitem>
+      </itemizedlist>
+      <para>
+      <emphasis>composeobject</emphasis>can be one of:</para>
+      <itemizedlist>
+	<listitem>
+	  <para>header</para>
+	</listitem>
+	<listitem>
+	  <para>security_encrypt</para>
+	</listitem>
+	<listitem>
+	  <para>security_sign</para>
+	</listitem>
+	<listitem>
+	  <para>security_both</para>
+	</listitem>
+	<listitem>
+	  <para>security_none</para>
+	</listitem>
       </itemizedlist>
       <para>
       <emphasis>index-object</emphasis>can be one of the following:</para>
@@ -4562,6 +4573,9 @@ unignore posted-to:
       <link linkend="shortcuts">mailbox shortcut</link>expansion performed on
       the first character. See
       <xref linkend="mailbox-hook" />for more details.</para>
+      <para>Note that execution of mbox-hooks is dependent on the 
+      <link linkend="move">$move</link>configuration variable. If set to 
+      <quote>no</quote>(the default), mbox-hooks will not be executed.</para>
       <para>Unlike some of the other
       <emphasis>hook</emphasis>commands, only the
       <emphasis>first</emphasis>matching regexp is used (it is not possible to
@@ -4602,7 +4616,7 @@ unignore posted-to:
       <xref linkend="imap" />respectively.</para>
       <para>Mutt provides a number of advanced features for handling (possibly
       many) folders and new mail within them, please refer to
-      <xref linkend="new-mail" />for details (including in what situations and
+      <xref linkend="feature/new-mail" />for details (including in what situations and
       how often Mutt checks for new mail).</para>
       <para>The
       <quote>unmailboxes</quote>command is used to remove a token from the list
@@ -5049,6 +5063,17 @@ message-hook '~f freshmeat-news' 'set pager="less \"+/^  subject: .*\""'
       <command>score</command>command for it to be removed. The pattern
       <quote>*</quote>is a special token which means to clear the list of all
       score entries.</para>
+
+      <para>Scoring occurs as the messages are read in, before the mailbox is
+      sorted. Because of this, patterns which depend on threading, such as 
+      <emphasis>~=</emphasis>, 
+      <emphasis>~$</emphasis>, and 
+      <emphasis>~()</emphasis>, will not work by default. A workaround is to push
+      the scoring command in a folder hook. This will cause the mailbox to be
+      rescored after it is opened and input starts being processed:</para>
+      <screen>
+folder-hook . 'push "&lt;enter-command&gt;score ~= 10&lt;enter&gt;"'
+</screen>
     </sect1>
 
     <sect1 id="spam">
@@ -5777,10 +5802,9 @@ mailboxes $my_mx +mailbox3</screen>
 
       <sect2 id="formatstrings-conditional-dates">
         <title>Conditional Dates</title>
-        <para>This patch allows the format of dates in the index to vary based
+        <para>This feature allows the format of dates in the index to vary based
         on how recent the message is. This is especially useful in combination
-        with David Champion's patch to allow if-else sequences to be
-        nested.</para>
+        with the <link linkend="feature/nested-if">nested-if feature</link>.</para>
         <para>For example, using
         <literal>
         %&lt;[y?%&lt;[d?%[%H:%M]&amp;%[%m/%d]&gt;&amp;%[%y.%m]&gt;</literal>for
@@ -7809,7 +7833,7 @@ subjectrx '\[[^\]]*\]:? *' '%L%R'
       <sect2 id="new-mail-polling">
         <title>Polling For New Mail</title>
         <para>When in the index menu and being idle (also see
-        <link linkend="timeout-hook-intro">$timeout</link>), Mutt periodically checks for
+        <link linkend="feature/timeout">$timeout</link>), Mutt periodically checks for
         new mail in all folders which have been configured via the
         <command>mailboxes</command>command. The interval depends on the folder
         type: for local/IMAP folders it consults
@@ -9026,15 +9050,6 @@ attachments   -I message/external-body
         <screen>-USE_SSL_OPENSSL +USE_SSL_GNUTLS</screen>
       </sect2>
 
-      <sect2 id="mutt-patches">
-        <title>Mutt Patches</title>
-        <para>Mutt may also be
-        <quote>patched</quote>to support smaller features. These patches should
-        add a free-form string to the end Mutt's version string. Running
-        <literal>mutt -v</literal>might show:
-        <screen>patch-1.8.2.sidebar.20170421</screen></para>
-      </sect2>
-
       <sect2 id="url-syntax">
         <title>URL Syntax</title>
         <para>Mutt optionally supports the IMAP, POP3 and SMTP protocols which
@@ -9163,7 +9178,7 @@ smtp://user@host:587/
       <para>Polling for new mail on an IMAP server can cause noticeable delays.
       So, you'll want to carefully tune the
       <link linkend="mail-check">$mail_check</link>and
-      <link linkend="timeout-hook-intro">$timeout</link>variables. Reasonable values
+      <link linkend="feature/timeout">$timeout</link>variables. Reasonable values
       are:</para>
       <screen>
 set mail_check=90
@@ -9219,9 +9234,7 @@ set timeout=15
       <sect2 id="imap-authentication">
         <title>Authentication</title>
         <para>Mutt supports four authentication methods with IMAP servers:
-        SASL, GSSAPI, CRAM-MD5, and LOGIN (there is a patch by Grant Edwards to
-        add NTLM authentication for you poor exchange users out there, but it
-        has yet to be integrated into the main tree). There is also support for
+        SASL, GSSAPI, CRAM-MD5, and LOGIN. There is also support for
         the pseudo-protocol ANONYMOUS, which allows you to log in to a public
         IMAP server without having an account. To use ANONYMOUS, simply make
         your username blank or
@@ -9624,7 +9637,7 @@ color   attach_headers     brightmagenta   default        "invalid node with pac
 
     <sect1 id="compose-to-sender-intro">
       <title>Introduction</title>
-      <para>The compose-to-sender patch adds a new command to start composing
+      <para>The compose-to-sender feature adds a new command to start composing
       a new email to the sender of the current message. This is not a reply,
       but a new, separate, message.</para>
       <para>It works on tagged messages too, sending one email to all of the
@@ -9708,12 +9721,12 @@ bind index,pager @ compose-to-sender
 
     <sect1 id="compress-intro">
       <title>Introduction</title>
-      <para>The Compressed Folder patch allows Mutt to read mailbox files
+      <para>The Compressed Folder feature allows Mutt to read mailbox files
       that are compressed. But it isn't limited to compressed files. It works
       well with encrypted files, too. In fact, if you can create a
       program/script to convert to and from your format, then Mutt can read
       it.</para>
-      <para>The patch adds three hooks to Mutt:
+      <para>The feature adds three hooks to Mutt:
       <literal>open-hook</literal>,
       <literal>close-hook</literal>and
       <literal>append-hook</literal>. They define commands to: uncompress a
@@ -10104,7 +10117,7 @@ close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &
     <sect1 id="cond-date-intro">
       <title>Introduction</title>
       <para>The
-      <quote>cond-date</quote>patch allows you to construct
+      <quote>Conditional Dates</quote>feature allows you to construct
       <link linkend="index-format">$index_format</link>expressions based on
       the age of the email.</para>
       <para>Mutt's default
@@ -10397,8 +10410,8 @@ close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &
     <sect1 id="cond-date-variables">
       <title>Variables</title>
       <para>The
-      <quote>cond-date</quote>patch doesn't have any config of its own. It
-      modifies the behavior of the format strings.</para>
+      <quote>Conditional Dates</quote>feature doesn't have any config of its own.
+      It modifies the behavior of the format strings.</para>
     </sect1>
 
     <sect1 id="cond-date-muttrc">
@@ -10432,7 +10445,7 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
         </listitem>
         <listitem>
           <para>
-            <link linkend="feature/nested-if">nested-if patch</link>
+            <link linkend="feature/nested-if">nested-if feature</link>
           </para>
         </listitem>
         <listitem>
@@ -10612,7 +10625,7 @@ set pgp_encrypt_self = "no"
     <sect1 id="fmemopen-intro">
       <title>Introduction</title>
       <para>The
-      <quote>fmemopen</quote>patch speeds up some searches.</para>
+      <quote>fmemopen</quote> feature speeds up some searches.</para>
       <para>This feature changes a few places where Mutt creates temporary
       files. It replaces them with in-memory buffers. This should improve the
       performance when searching the header or body using the
@@ -10679,12 +10692,13 @@ set pgp_encrypt_self = "no"
 
     <sect1 id="forgotten-attachment-intro">
       <title>Introduction</title>
-      <para>The 'forgotten-attachment' patch provides a new setting for Mutt
-      that alerts the user if the message body contains a certain keyword but
-      there are no attachments added. This is meant to ensure that the user
-      does not forget to attach a file after promising to do so in the mail.
-      The attachment keyword will not be scanned in text matched by
-      <link linkend="quote-regexp">$quote_regexp</link>.</para>
+      <para>The <quote>forgotten-attachment</quote> feature provides a new
+      setting for Mutt that alerts the user if the message body contains a
+      certain keyword but there are no attachments added. This is meant to
+      ensure that the user does not forget to attach a file after promising
+      to do so in the mail.  The attachment keyword will not be scanned in
+      text matched by <link linkend="quote-regexp">$quote_regexp</link>.
+      </para>
     </sect1>
 
     <sect1 id="forgotten-attachment-variables">
@@ -10906,7 +10920,7 @@ shutdown-hook 'exec sync-mailbox'
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="timeout-hook-intro">$timeout</link>
+            <link linkend="feature/timeout">$timeout</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -10951,7 +10965,7 @@ shutdown-hook 'exec sync-mailbox'
     <sect1 id="ifdef-intro">
       <title>Introduction</title>
       <para>The
-      <quote>ifdef</quote>patch introduces three new commands to Mutt and
+      <quote>ifdef</quote> feature introduces three new commands to Mutt and
       allow you to share one config file between versions of Mutt that may
       have different features compiled in.</para>
       <screen>
@@ -11070,7 +11084,7 @@ ifndef USE_SIDEBAR finish
           </term>
           <listitem>
             <para>
-              <link linkend="feature/status-color">status-color patch</link>
+              <link linkend="feature/status-color">status-color feature</link>
             </para>
           </listitem>
         </varlistentry>
@@ -11080,7 +11094,7 @@ ifndef USE_SIDEBAR finish
     <sect1 id="index-color-intro">
       <title>Introduction</title>
       <para>The
-      <quote>index-color</quote>patch allows you to specify colors for
+      <quote>index-color</quote> feature allows you to specify colors for
       individual parts of the email index. e.g. Subject, Author,
       Flags.</para>
       <para>First choose which part of the index you'd like to color. Then,
@@ -11240,12 +11254,12 @@ color index_size cyan default
         </listitem>
         <listitem>
           <para>
-            <link linkend="feature/status-color">Status-Color patch</link>
+            <link linkend="feature/status-color">Status-Color feature</link>
           </para>
         </listitem>
         <listitem>
           <para>
-            <link linkend="feature/keywords">Keywords patch</link>
+            <link linkend="feature/keywords">Keywords feature</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -11303,7 +11317,7 @@ color index_size cyan default
     <sect1 id="initials-intro">
       <title>Introduction</title>
       <para>The
-      <quote>initials</quote>patch adds an expando (%I) for an author's
+      <quote>initials</quote> feature adds an expando (%I) for an author's
       initials.</para>
       <para>The index panel displays a list of emails. Its layout is
       controlled by the
@@ -11358,7 +11372,7 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
         </listitem>
         <listitem>
           <para>
-            <link linkend="feature/index-color">index-color patch</link>
+            <link linkend="feature/index-color">index-color feature</link>
           </para>
         </listitem>
         <listitem>
@@ -11571,7 +11585,7 @@ bind index,pager y edit-label
         </listitem>
         <listitem>
           <para>
-            <link linkend="feature/index-color">index-color patch</link>
+            <link linkend="feature/index-color">index-color feature</link>
           </para>
         </listitem>
         <listitem>
@@ -11627,8 +11641,7 @@ bind index,pager y edit-label
       <itemizedlist>
         <listitem>
           <para>
-          <quote>patch-kyoto</quote>in the mutt version. See:
-          <xref linkend="mutt-patches" />.</para>
+          <quote>kyoto</quote>in the mutt version.</para>
         </listitem>
         <listitem>
           <para>
@@ -11961,7 +11974,7 @@ bind index &lt;esc&gt;L limit-current-thread
     <sect1 id="nested-if-variables">
       <title>Variables</title>
       <para>The
-      <quote>nested-if</quote>patch doesn't have any config of its own. It
+      <quote>nested-if</quote> feature doesn't have any config of its own. It
       modifies the behavior of the format strings.</para>
     </sect1>
 
@@ -11999,7 +12012,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="feature/cond-date">cond-date patch</link>
+            <link linkend="feature/cond-date">cond-date feature</link>
           </para>
         </listitem>
         <listitem>
@@ -12017,7 +12030,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
 
     <sect1 id="nested-if-known-bugs">
       <title>Known Bugs</title>
-      <para>Patch overwrites $&lt;fmt&gt; handler in
+      <para>Feature overwrites $&lt;fmt&gt; handler in
       <literal>$index_format</literal></para>
     </sect1>
 
@@ -12677,12 +12690,12 @@ bind index \CG get-message
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="feature/quasi-delete">quasi-delete patch</link>
+            <link linkend="feature/quasi-delete">quasi-delete feature</link>
           </para>
         </listitem>
         <listitem>
           <para>
-            <link linkend="feature/index-color">index-color patch</link>
+            <link linkend="feature/index-color">index-color feature</link>
           </para>
         </listitem>
         <listitem>
@@ -12962,7 +12975,10 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <entry>
                 <literal>&lt;change-vfolder&gt;</literal>
               </entry>
-              <entry>open a different virtual folder</entry>
+              <entry>
+                switch to another virtual folder, a new folder maybe be
+                specified by vfolder description (see virtual-mailboxes) or
+                URI. the default is next vfolder with unread messages</entry>
             </row>
             <row>
               <entry>index,pager</entry>
@@ -12976,17 +12992,21 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <entry>
                 <literal>&lt;modify-labels&gt;</literal>
               </entry>
-              <entry>modify (notmuch) tags</entry>
+              <entry>add, remove, or toggle notmuch tags; [+]&lt;tag&gt; to
+                add, -&lt;tag&gt; to remove, !&lt;tag&gt; to toggle(notmuch)
+                tags. Note: Tab completion of tag names is available</entry>
             </row>
             <row>
               <entry>index,pager</entry>
               <entry>
                 <literal>&lt;modify-labels-then-hide&gt;</literal>
               </entry>
-              <entry>modify labels and then hide message by applying the
-              "quasi-deleted" state. Normal redisplay rules apply here, so
-              the user must call &lt;sync-mailbox&gt; for the changes to be
-              displayed</entry>
+              <entry>add, remove, or toggle notmuch tags; [+]&lt;tag&gt; to
+                add, -&lt;tag&gt; to remove, !&lt;tag&gt; to togglelabels and
+                then hide message by applying the "quasi-deleted" state.
+                Normal redisplay rules apply here, so the user must call
+                &lt;sync-mailbox&gt; for the changes to be displayed. Note:
+                Tab completion of tag names is available.</entry>
             </row>
             <row>
               <entry>index,pager</entry>
@@ -13000,7 +13020,10 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <entry>
                 <literal>&lt;vfolder-from-query&gt;</literal>
               </entry>
-              <entry>generate virtual folder from query</entry>
+              <entry>
+                generate virtual folder from notmuch search query.
+                Note: TAB completion of 'tag:' names is available.
+              </entry>
             </row>
             <row>
               <entry>index,pager</entry>
@@ -13085,7 +13108,7 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
 
     <sect1 id="notmuch-colors">
       <title>Colors</title>
-      <para>Adds these to index-color patch:</para>
+      <para>Adds these to index-color feature:</para>
 
       <table id="table-notmuch-colors">
         <title>Index Colors</title>
@@ -13141,15 +13164,30 @@ set nm_open_timeout = 5
 <emphasis role="comment"># This variable specifies notmuch query type, supported types: 'threads' and
 # 'messages'.</emphasis>
 set nm_query_type = messages
-<emphasis role="comment"># Add messages stored to the mutt record (see $record in the mutt docs)
-# also to notmuch DB.</emphasis>
+<emphasis role="comment"># Add messages stored to the mutt record (see $record in the mutt docs) also to notmuch DB. If you reply to an email then the new email inherits tags from the original email.
+</emphasis>
 set nm_record = no
-<emphasis role="comment"># Tags that should be removed or added to the to the messages stored in the mutt record.</emphasis>
+<emphasis role="comment"># Tags that should be removed or added to the to the messages stored in the mutt record.
+
+example:
+set record = "~/sent-mails"
+set nm_record = yes
+set nm_record_tags = "-inbox,archive,me"
+</emphasis>
 set nm_record_tags = ""
 <emphasis role="comment"># This variable specifies notmuch tag which is used for unread messages.</emphasis>
 set nm_unread_tag = unread
 <emphasis role="comment"># This variable allows you to customize the file browser display for virtual
-# folders to your personal taste.</emphasis>
+# folders to your personal taste.
+# %C   current folder number
+# %f   folder name (description)
+# %m   number of messages in the mailbox *
+# %n   number of unread messages in the mailbox *
+# %N   N if mailbox has new mail, blank otherwise
+# %>X  right justify the rest of the string and pad with character ``X''
+# %|X  pad to the end of the line with character ``X''
+# %*X  soft-fill with character ``X'' as pad
+</emphasis>
 set vfolder_format = "%6n(%6N) %f"
 <emphasis role="comment"># When set, mutt will use the first virtual mailbox (see virtual-mailboxes)
 # as a spoolfile.</emphasis>
@@ -13194,7 +13232,8 @@ bind index,pager &gt; vfolder-window-forward
 #                "todo"    "T"   \
 #                "deleted" "DEL" \
 #                "invites" "CAL"
-# See README.notmuch for an explanation
+
+# The formats must start with 'G' and the entire sequence is case sensitive.
 # tag-formats tag format-string { tag format-string ...}
 # tag-formats "inbox"   "GI" \
 #              "unread"  "GU" \
@@ -13203,7 +13242,15 @@ bind index,pager &gt; vfolder-window-forward
 #              "todo"    "Gt" \
 #              "deleted" "GD" \
 #              "invites" "Gi"
+
+# Now instead of using '%g' in your $index_format, which lists all tags
+# in a non-deterministic order, you can something like the following which puts
+# a transformed tag name in a specific spot on the index line:
 # set index_format='%4C %S %[%y.%m.%d] %-18.18n %?GU?%GU&amp; ? %?GR?%GR&amp; ? %?GI?%GI&amp; ? %s'
+
+# The %G formatting sequence may display all tags including tags hidden by
+# nm_hidden_tags.
+#
 # --------------------------------------------------------------------------
 # COLORS - some unpleasant examples are given
 # --------------------------------------------------------------------------
@@ -13358,8 +13405,8 @@ color index_tags green default
     <sect1 id="progress-intro">
       <title>Introduction</title>
       <para>The
-      <quote>progress</quote>patch shows a visual progress bar on slow tasks,
-      such as indexing a large folder over the net.</para>
+      <quote>progress</quote> feature shows a visual progress bar on slow
+      tasks, such as indexing a large folder over the net.</para>
     </sect1>
 
     <sect1 id="progress-colors">
@@ -13514,7 +13561,7 @@ bind index,pager Q quasi-delete
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="feature/notmuch">notmuch patch</link>
+            <link linkend="feature/notmuch">notmuch feature</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -14233,7 +14280,7 @@ color sidebar_ordinary color245 default
         </listitem>
         <listitem>
           <para>
-            <link linkend="feature/notmuch">notmuch patch</link>
+            <link linkend="feature/notmuch">notmuch feature</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -14395,8 +14442,8 @@ set skip_quoted_offset = 3
     <sect1 id="status-color-intro">
       <title>Introduction</title>
       <para>The
-      <quote>status-color</quote>patch allows you to theme different parts of
-      the status bar (also when it's used by the index).</para>
+      <quote>status-color</quote> feature allows you to theme different parts
+      of the status bar (also when it's used by the index).</para>
       <para>Unlike normal color commands,
       <literal>color status</literal>can now take up to 2 extra parameters
       (regex, num).</para>
@@ -14523,7 +14570,7 @@ color status brightwhite default 'Mutt: ([^ ]+)' 1
         </listitem>
         <listitem>
           <para>
-            <link linkend="feature/index-color">index-color patch</link>
+            <link linkend="feature/index-color">index-color feature</link>
           </para>
         </listitem>
         <listitem>
@@ -14564,7 +14611,7 @@ color status brightwhite default 'Mutt: ([^ ]+)' 1
 
   <chapter id="feature/tls-sni">
     <title>TLS-SNI Feature</title>
-    <subtitle>Negotiate with a server for a TSL/SSL certificate</subtitle>
+    <subtitle>Negotiate with a server for a TLS/SSL certificate</subtitle>
 
     <sect1 id="tls-sni-support">
       <title>Support</title>
@@ -14585,7 +14632,7 @@ color status brightwhite default 'Mutt: ([^ ]+)' 1
     <sect1 id="tls-sni-intro">
       <title>Introduction</title>
       <para>The
-      <quote>TLS-SNI</quote>patch adds support for TLS virtual hosting. If
+      <quote>TLS-SNI</quote> feature adds support for TLS virtual hosting. If
       your mail server doesn't support this everything will still work
       normally.</para>
       <para>TLS supports sending the expected server hostname during the
@@ -15923,7 +15970,7 @@ folder-hook ^pop 'set read_inc=1'</screen>
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="score">score</link>
+              <link linkend="score-command">score</link>
             </command>
             <arg choice="plain">
               <replaceable class="parameter">pattern</replaceable>
@@ -15932,7 +15979,7 @@ folder-hook ^pop 'set read_inc=1'</screen>
               <replaceable class="parameter">value</replaceable>
             </arg>
             <command>
-              <link linkend="score">unscore</link>
+              <link linkend="score-command">unscore</link>
             </command>
             <group choice="req">
               <arg choice="plain">
@@ -17107,6 +17154,31 @@ English).
 </para>
 </sect2>
 
+<sect2 id="debug-level">
+<title>debug_level</title>
+<literallayout>Type: number
+Default: 0</literallayout>
+
+<para>
+The debug level. Note: to debug the early startup process (before the
+configuration is loaded), <quote>-d</quote> mutt argument must be used.
+debug_level/debug_file are ignored until it's read from the configuration
+file.
+</para>
+</sect2>
+
+<sect2 id="debug-file">
+<title>debug_file</title>
+<literallayout>Type: path
+Default: <quote><literal>~/.muttdebug</literal></quote></literallayout>
+
+<para>
+The location prefix of the debug file, 0 is append to the debug file
+Old debug files are renamed with the prefix 1, 2, 3 and 4.
+See <quote>debug_level</quote> for more detail.
+</para>
+</sect2>
+
 <sect2 id="default-hook">
 <title>default_hook</title>
 <literallayout>Type: string
@@ -17807,6 +17879,24 @@ or less optimal for most use cases.
 </para>
 </sect2>
 
+<sect2 id="header-color-partial">
+<title>header_color_partial</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, color header regexps behave like color body regexps:
+color is applied to the exact text matched by the regexp.  When
+<emphasis>unset</emphasis>, color is applied to the entire header.
+</para>
+<para>
+One use of this option might be to apply color to just the header labels.
+</para>
+<para>
+See <quote><link linkend="color">color</link></quote> for more details.
+</para>
+</sect2>
+
 <sect2 id="help">
 <title>help</title>
 <literallayout>Type: boolean
@@ -17915,6 +18005,21 @@ Default: <quote><literal>~/.mutthistory</literal></quote></literallayout>
 
 <para>
 The file in which Mutt will save its history.
+</para>
+<para>
+Also see <link linkend="save-history">$save_history</link>.
+</para>
+</sect2>
+
+<sect2 id="history-remove-dups">
+<title>history_remove_dups</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, all of the string history will be scanned for duplicates
+when a new entry is added.  Duplicate entries in the <link linkend="history-file">$history_file</link> will
+also be removed when it is periodically compacted.
 </para>
 </sect2>
 
@@ -18363,6 +18468,8 @@ The following sequences are defined in Mutt:
 </entry></row>
 <row><entry>%H </entry><entry>spam attribute(s) of this message
 </entry></row>
+<row><entry>%I </entry><entry>initials of author
+</entry></row>
 <row><entry>%i </entry><entry>message-id of the current message
 </entry></row>
 <row><entry>%K </entry><entry>the list to which the letter was sent (if any; otherwise: empty).
@@ -18387,6 +18494,8 @@ stashed the message: list name or recipient name
 if not sent to a list
 </entry></row>
 <row><entry>%P </entry><entry>progress indicator for the built-in pager (how much of the file has been displayed)
+</entry></row>
+<row><entry>%q </entry><entry>newsgroup name (if compiled with NNTP support)
 </entry></row>
 <row><entry>%r </entry><entry>comma separated list of <quote>To:</quote> recipients
 </entry></row>
@@ -18417,7 +18526,13 @@ if not sent to a list
 <emphasis>(2)</emphasis> at the top of a thread, or <emphasis>(3)</emphasis> <quote>X-Label:</quote> is different from
 preceding message's <quote>X-Label:</quote>.
 </entry></row>
-<row><entry>%Z </entry><entry>message status flags
+<row><entry>%Z </entry><entry>Combined message flags
+</entry></row>
+<row><entry>%zs </entry><entry>message status flags
+</entry></row>
+<row><entry>%zc </entry><entry>message crypto flags
+</entry></row>
+<row><entry>%zt </entry><entry>message tag flags
 </entry></row>
 <row><entry>%{fmt} </entry><entry>the date and time of the message is converted to sender's
 time zone, and <quote>fmt</quote> is expanded by the library function
@@ -18500,7 +18615,7 @@ set inews="/usr/local/bin/inews -hS"
 <sect2 id="ispell">
 <title>ispell</title>
 <literallayout>Type: path
-Default: <quote><literal>/usr/bin/hunspell</literal></quote></literallayout>
+Default: <quote><literal>/usr/bin/ispell</literal></quote></literallayout>
 
 <para>
 How to invoke ispell (GNU's spell-checking software).
@@ -18560,7 +18675,7 @@ Default: 5</literallayout>
 
 <para>
 This variable configures how often (in seconds) mutt should look for
-new mail. Also see the <link linkend="timeout-hook-intro">$timeout</link> variable.
+new mail. Also see the <link linkend="feature/timeout">$timeout</link> variable.
 </para>
 </sect2>
 
@@ -19635,6 +19750,8 @@ has its own set of <literal>printf(3)</literal>-like sequences:
 </entry></row>
 <row><entry>%l     </entry><entry>key length
 </entry></row>
+<row><entry>%p     </entry><entry>protocol
+</entry></row>
 <row><entry>%f     </entry><entry>flags
 </entry></row>
 <row><entry>%c     </entry><entry>capabilities
@@ -19855,6 +19972,31 @@ If <emphasis>set</emphasis>, signed and encrypted messages will consist of neste
 This is useful for applications like encrypted and signed mailing
 lists, where the outer layer (<literal>multipart/encrypted</literal>) can be easily
 removed, while the inner <literal>multipart/signed</literal> part is retained.
+(PGP only)
+</para>
+</sect2>
+
+<sect2 id="pgp-self-encrypt">
+<title>pgp_self_encrypt</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, PGP encrypted messages will also be encrypted
+using the key in <link linkend="pgp-self-encrypt-as">$pgp_self_encrypt_as</link>.
+(PGP only)
+</para>
+</sect2>
+
+<sect2 id="pgp-self-encrypt-as">
+<title>pgp_self_encrypt_as</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+This is an additional key used to encrypt messages when <link linkend="pgp-self-encrypt">$pgp_self_encrypt</link>
+is <emphasis>set</emphasis>.  It is also used to specify the key for <link linkend="postpone-encrypt">$postpone_encrypt</link>.
+It should be in keyid or fingerprint form (e.g. 0x00112233).
 (PGP only)
 </para>
 </sect2>
@@ -20229,7 +20371,9 @@ Default: no</literallayout>
 
 <para>
 When <emphasis>set</emphasis>, postponed messages that are marked for encryption will be
-encrypted using the key in <link linkend="postpone-encrypt-as">$postpone_encrypt_as</link> before saving.
+self-encrypted.  Mutt will first try to encrypt using the value specified
+in <link linkend="pgp-self-encrypt-as">$pgp_self_encrypt_as</link> or <link linkend="smime-self-encrypt-as">$smime_self_encrypt_as</link>.  If those are not
+set, it will try the deprecated <link linkend="postpone-encrypt-as">$postpone_encrypt_as</link>.
 (Crypto only)
 </para>
 </sect2>
@@ -20240,9 +20384,8 @@ encrypted using the key in <link linkend="postpone-encrypt-as">$postpone_encrypt
 Default: (empty)</literallayout>
 
 <para>
-This is the key used to encrypt postponed messages.  It should be in
-keyid or fingerprint form (e.g. 0x00112233 for PGP or the
-hash-value that OpenSSL generates for S/MIME).
+This is a deprecated fall-back variable for <link linkend="postpone-encrypt">$postpone_encrypt</link>.
+Please use <link linkend="pgp-self-encrypt-as">$pgp_self_encrypt_as</link> or <link linkend="smime-self-encrypt-as">$smime_self_encrypt_as</link>.
 (Crypto only)
 </para>
 </sect2>
@@ -21415,6 +21558,8 @@ similar to PGP's:
 </entry></row>
 <row><entry>%k </entry><entry>The key-pair specified with <link linkend="smime-default-key">$smime_default_key</link>
 </entry></row>
+<row><entry>%i </entry><entry>Intermediate certificates
+</entry></row>
 <row><entry>%c </entry><entry>One or more certificate IDs.
 </entry></row>
 <row><entry>%a </entry><entry>The algorithm used for encryption.
@@ -21608,6 +21753,32 @@ possible <literal>printf(3)</literal>-like sequences.
 </para>
 </sect2>
 
+<sect2 id="smime-self-encrypt">
+<title>smime_self_encrypt</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, S/MIME encrypted messages will also be encrypted
+using the certificate in <link linkend="smime-self-encrypt-as">$smime_self_encrypt_as</link>.
+(S/MIME only)
+</para>
+</sect2>
+
+<sect2 id="smime-self-encrypt-as">
+<title>smime_self_encrypt_as</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+This is an additional certificate used to encrypt messages when
+<link linkend="smime-self-encrypt">$smime_self_encrypt</link> is <emphasis>set</emphasis>.  It is also used to specify the
+certficate for <link linkend="postpone-encrypt">$postpone_encrypt</link>.  It should be the hash-value that
+OpenSSL generates.
+(S/MIME only)
+</para>
+</sect2>
+
 <sect2 id="smime-sign-command">
 <title>smime_sign_command</title>
 <literallayout>Type: string
@@ -21632,23 +21803,6 @@ Default: <quote><literal>sha256</literal></quote></literallayout>
 <para>
 This sets the algorithm that should be used for the signature message digest.
 Valid choices are <quote>md5</quote>, <quote>sha1</quote>, <quote>sha224</quote>, <quote>sha256</quote>, <quote>sha384</quote>, <quote>sha512</quote>.
-(S/MIME only)
-</para>
-</sect2>
-
-<sect2 id="smime-sign-opaque-command">
-<title>smime_sign_opaque_command</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-This command is used to created S/MIME signatures of type
-<literal>application/x-pkcs7-signature</literal>, which can only be handled by mail
-clients supporting the S/MIME extension.
-</para>
-<para>
-This is a format string, see the <link linkend="smime-decrypt-command">$smime_decrypt_command</link> command for
-possible <literal>printf(3)</literal>-like sequences.
 (S/MIME only)
 </para>
 </sect2>
@@ -22383,7 +22537,7 @@ Also see the <quote><link linkend="guide/tuning">tuning</link></quote> section o
 </para>
 </sect2>
 
-<sect2 id="timeout">
+<sect2 id="feature/timeout">
 <title>timeout</title>
 <literallayout>Type: number
 Default: 600</literallayout>
