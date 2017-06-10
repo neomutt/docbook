@@ -12,7 +12,8 @@ for FILE in feature/*.html guide/*.html; do
 	sed -i 's/.*<html [^>]\+>/<html>/' $FILE
 	xmlstarlet sel -t -c "//div[@class='$SECTION']" $FILE \
 		| tidy -q -xml \
-    | sed 's/\([a-zA-Z0-9_]<[^>]\+>\)\([a-zA-Z0-9_]\)/\1 \2/g' \
+    | sed 'N;s/“ *\n \+/“/g' \
+    | sed 's/\([a-zA-Z0-9_”]<[^>]\+>\)\([a-zA-Z0-9_]\)/\1 \2/g' \
     | sed 's/\([a-zA-Z0-9_]<[^>]\+>\) \([sd]\)\>/\1\2/g' \
 		| sed 's/<a id=\([^ ]\+\) \/>/<a class="offset" id=\1><\/a>/g' \
 		| sed 's/Chapter&#160;[0-9]\+\.&#160;//' \
