@@ -9,7 +9,7 @@
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 20170609 (1.8.3)</releaseinfo>
+    <releaseinfo>version 20170707 (1.8.3)</releaseinfo>
     <abstract>
       <para>
       <quote>All mail clients suck. This one just sucks less.</quote>— me,
@@ -2898,7 +2898,7 @@ color sidebar_divider   color8  default
         <tgroup cols="1">
           <tbody>
             <row>
-              <entry>neomuttrc-20170609</entry>
+              <entry>neomuttrc-20170707</entry>
             </row>
             <row>
               <entry>neomuttrc</entry>
@@ -2942,7 +2942,7 @@ color sidebar_divider   color8  default
             </thead>
             <tbody>
               <row>
-                <entry>/etc/xdg/mutt/neomuttrc-20170609</entry>
+                <entry>/etc/xdg/mutt/neomuttrc-20170707</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -2958,7 +2958,7 @@ color sidebar_divider   color8  default
                 <entry>Note the case of the filename</entry>
               </row>
               <row>
-                <entry>/etc/mutt/neomuttrc-20170609</entry>
+                <entry>/etc/mutt/neomuttrc-20170707</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -2974,7 +2974,7 @@ color sidebar_divider   color8  default
                 <entry>Note the case of the filename</entry>
               </row>
               <row>
-                <entry>/usr/share/mutt/neomuttrc-20170609</entry>
+                <entry>/usr/share/mutt/neomuttrc-20170707</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3021,7 +3021,7 @@ color sidebar_divider   color8  default
             </thead>
             <tbody>
               <row>
-                <entry>~/.config/mutt/neomuttrc-20170609</entry>
+                <entry>~/.config/mutt/neomuttrc-20170707</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3035,7 +3035,7 @@ color sidebar_divider   color8  default
                 <entry>~/.config/mutt/muttrc</entry>
               </row>
               <row>
-                <entry>~/.neomuttrc-20170609</entry>
+                <entry>~/.neomuttrc-20170707</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3049,7 +3049,7 @@ color sidebar_divider   color8  default
                 <entry>~/.muttrc</entry>
               </row>
               <row>
-                <entry>~/.mutt/neomuttrc-20170609</entry>
+                <entry>~/.mutt/neomuttrc-20170707</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3897,19 +3897,19 @@ folder-hook mutt "set sort=threads"
         <arg choice="plain">
           <replaceable class="parameter">pattern</replaceable>
         </arg>
-	<command>color</command>
-	<arg choice="plain">
-	  <option>compose</option>
-	</arg>
-	<arg choice="plain">
-	  <replaceable class="parameter">composeobject</replaceable>
-	</arg>
-	<arg choice="plain">
-	  <replaceable class="parameter">foreground</replaceable>
-	</arg>
-	<arg choice="plain">
-	  <replaceable class="parameter">background</replaceable>
-	</arg>
+        <command>color</command>
+        <arg choice="plain">
+          <option>compose</option>
+        </arg>
+        <arg choice="plain">
+          <replaceable class="parameter">composeobject</replaceable>
+        </arg>
+        <arg choice="plain">
+          <replaceable class="parameter">foreground</replaceable>
+        </arg>
+        <arg choice="plain">
+          <replaceable class="parameter">background</replaceable>
+        </arg>
         <command>uncolor</command>
         <group choice="req">
           <arg choice="plain">
@@ -4054,21 +4054,21 @@ folder-hook mutt "set sort=threads"
       <para>
       <emphasis>composeobject</emphasis> can be one of:</para>
       <itemizedlist>
-	<listitem>
-	  <para>header</para>
-	</listitem>
-	<listitem>
-	  <para>security_encrypt</para>
-	</listitem>
-	<listitem>
-	  <para>security_sign</para>
-	</listitem>
-	<listitem>
-	  <para>security_both</para>
-	</listitem>
-	<listitem>
-	  <para>security_none</para>
-	</listitem>
+        <listitem>
+          <para>header</para>
+        </listitem>
+        <listitem>
+          <para>security_encrypt</para>
+        </listitem>
+        <listitem>
+          <para>security_sign</para>
+        </listitem>
+        <listitem>
+          <para>security_both</para>
+        </listitem>
+        <listitem>
+          <para>security_none</para>
+        </listitem>
       </itemizedlist>
       <para>
       <emphasis>index-object</emphasis> can be one of the following:</para>
@@ -5485,8 +5485,7 @@ set spam_separator=", "
             readability</title>
             <screen>
 set my_cfgdir = $HOME/mutt/config
-source $my_cfgdir/hooks
-source $my_cfgdir/macros
+source $my_cfgdir/hooks $my_cfgdir/macros
 <emphasis role="comment"># more source commands...</emphasis>
 </screen>
           </example>
@@ -5593,8 +5592,8 @@ mailboxes $my_mx +mailbox3</screen>
       <para>Usage:</para>
       <cmdsynopsis>
         <command>source</command>
-        <arg choice="plain">
-          <replaceable class="parameter">filename</replaceable>
+        <arg choice="plain" rep="repeat">
+          <replaceable class="parameter">file</replaceable>
         </arg>
       </cmdsynopsis>
       <para>This command allows the inclusion of initialization commands from
@@ -5870,7 +5869,10 @@ mailboxes $my_mx +mailbox3</screen>
       <literal>Subject</literal> and
       <literal>Body</literal> header fields, which are the only requirement
       specified by the
-      <literal>mailto:</literal>specification in RFC2368.</para>
+      <literal>mailto:</literal>specification in RFC2368, and
+      the <literal>Cc</literal>, <literal>In-Reply-To</literal>,
+      <literal>References</literal> headers to aid with replies to
+      mailing lists.</para>
     </sect1>
   </chapter>
 
@@ -6569,10 +6571,24 @@ mailboxes $my_mx +mailbox3</screen>
                 <emphasis>MAX</emphasis>*) **)</entry>
               </row>
               <row>
+                <entry>=/
+                <emphasis>STRING</emphasis></entry>
+                <entry>IMAP custom server-side search for
+                <emphasis>STRING</emphasis>. Currently only defined for Gmail.
+                See: <link linkend="gmail-patterns">GMail Patterns</link>
+                </entry>
+              </row>
+              <row>
                 <entry>~=</entry>
                 <entry>duplicated messages (see
                 <link linkend="duplicate-threads">
                 $duplicate_threads</link>)</entry>
+              </row>
+              <row>
+                <entry>~#</entry>
+                <entry>broken threads (see
+                  <link linkend="strict-threads">
+                    $strict_threads</link>)</entry>
               </row>
               <row>
                 <entry>~$</entry>
@@ -6584,6 +6600,20 @@ mailboxes $my_mx +mailbox3</screen>
                 <entry>messages in threads containing messages matching
                 <emphasis>PATTERN</emphasis>, e.g. all threads containing
                 messages from you: ~(~P)</entry>
+              </row>
+              <row>
+                <entry>~&lt;(
+                <emphasis>PATTERN</emphasis>)</entry>
+                <entry>messages whose immediate parent matches
+                <emphasis>PATTERN</emphasis>, e.g. replies to your messages:
+                ~&lt;(~P)</entry>
+              </row>
+              <row>
+                <entry>~&gt;(
+                <emphasis>PATTERN</emphasis>)</entry>
+                <entry>messages having an immediate child matching
+                <emphasis>PATTERN</emphasis>, e.g. messages you replied to:
+                ~&gt;(~P)</entry>
               </row>
             </tbody>
           </tgroup>
@@ -7058,6 +7088,52 @@ mailboxes $my_mx +mailbox3</screen>
             <emphasis>not</emphasis> the dates shown in the main index.</para>
           </note>
         </sect3>
+      </sect2>
+      <sect2 id="gmail-patterns">
+        <title>GMail Patterns</title>
+        <para>
+          <literal>=/ "search terms"</literal> invokes server-side search,
+          passing along the search terms provided. Search results are
+          constrained by IMAP to be within the current folder. At present this
+          only supports Gmail's search API IMAP extension. The search language
+          is entirely up to the mail provider and changes at their discretion.
+          Using <literal>~/</literal> will silently fail.
+        </para>
+        <para>
+          For up-to-date information about searching, see:
+          <ulink url="https://support.google.com/mail/answer/7190?hl=en">GMail's Support Page</ulink>.
+          You will need to (once) use a web-browser to visit Settings/Labels
+          and enable "Show in IMAP" for "All Mail". When searching, visit that
+          folder in mutt to most closely match Gmail search semantics.
+        </para>
+        <table id="gmail-example-patterns">
+          <title>GMail Example Patterns</title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>Pattern</entry>
+                <entry>Matches</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+                  <literal>=/ "list:foo.example.org has:attachment is:important"</literal>
+                </entry>
+                <entry>the foo.example.org mailing-list per Gmail's
+                  definitions, and has an attachment, and has been marked as
+                  important</entry>
+              </row>
+              <row>
+                <entry>
+                  <literal>=/ "{has:purple-star has:yellow-star} older_than:2m"</literal>
+                </entry>
+                <entry>is older than two months and has either a purple-star or
+                  a yellow-star</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
       </sect2>
     </sect1>
 
@@ -9131,10 +9207,8 @@ smtp://user@host:587/
 
     <sect1 id="pop">
       <title>POP3 Support</title>
-      <para>If Mutt is compiled with POP3 support (by running the
-      <emphasis>configure</emphasis> script with the
-      <emphasis>--enable-pop</emphasis> flag), it has the ability to work with
-      mailboxes located on a remote POP3 server and fetch mail for local
+      <para>Mutt has POP3 support and has the ability to work with mailboxes
+      located on a remote POP3 server and fetch mail for local
       browsing.</para>
       <para>Remote POP3 servers can be accessed using URLs with the
       <literal>pop</literal> protocol for unencrypted and
@@ -9171,10 +9245,8 @@ smtp://user@host:587/
 
     <sect1 id="imap">
       <title>IMAP Support</title>
-      <para>If Mutt was compiled with IMAP support (by running the
-      <emphasis>configure</emphasis> script with the
-      <emphasis>--enable-imap</emphasis> flag), it has the ability to work with
-      folders located on a remote IMAP server.</para>
+      <para>Mutt has IMAP support and has the ability to work with folders
+      located on a remote IMAP server.</para>
       <para>You can access the remote inbox by selecting the folder by its URL
       (see
       <xref linkend="url-syntax" />for details) using the
@@ -9298,9 +9370,7 @@ set timeout=15
     <sect1 id="smtp">
       <title>SMTP Support</title>
       <para>Besides supporting traditional mail delivery through a
-      sendmail-compatible program, Mutt supports delivery through SMTP if it
-      was configured and built with
-      <literal>--enable-smtp</literal>.</para>
+      sendmail-compatible program, Mutt supports delivery through SMTP.</para>
       <para>If the configuration variable
       <link linkend="smtp-url">$smtp_url</link> is set, Mutt will contact the
       given SMTP server to deliver messages; if it is unset, Mutt will use the
@@ -9419,11 +9489,9 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
         and MH, reading the headers from a single file is much faster than
         looking at possibly thousands of single files (since Maildir and MH use
         one file per message.)</para>
-        <para>Header caching can be enabled via the configure script and the
-        <emphasis>--enable-hcache</emphasis> option. It's not turned on by
-        default because external database libraries are required: one of
-        tokyocabinet, kyotocabinet, qdbm, gdbm, lmdb or bdb must be
-        present.</para>
+        <para>Header caching can be enabled by configuring one of the database
+        backends.  One of tokyocabinet, kyotocabinet, qdbm, gdbm, lmdb or
+        bdb.</para>
         <para>If enabled,
         <link linkend="header-cache">$header_cache</link> can be used to either
         point to a file or a directory. If set to point to a file, one database
@@ -9490,19 +9558,6 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
         when syncing a mailbox). As cleaning can take a noticeable amount of
         time, it should not be set in general but only occasionally.</para>
       </sect2>
-    </sect1>
-
-    <sect1 id="exact-address">
-      <title>Exact Address Generation</title>
-      <para>Mutt supports the
-      <quote>Name &lt;user@host&gt;</quote>address syntax for reading and
-      writing messages, the older
-      <quote>user@host (Name)</quote>syntax is only supported when reading
-      messages. The
-      <emphasis>--enable-exact-address</emphasis> switch can be given to
-      configure to build it with write-support for the latter syntax.
-      <literal>+exact_address</literal> in the output of
-      <literal>mutt -v</literal> indicates whether it's supported.</para>
     </sect1>
 
     <sect1 id="sending-mixmaster">
@@ -10523,20 +10578,20 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
       copy of an encrypted email you could set
       <link linkend="fcc-clear">$fcc_clear</link>.</para>
       <para>A better option is to enable
-      <link linkend="smime-encrypt-self">$smime_encrypt_self</link>, then set
-      <link linkend="smime-default-key">$smime_default_key</link> to your
+      <link linkend="smime-self-encrypt">$smime_self_encrypt</link>, then set
+      <link linkend="smime-self-encrypt-as">$smime_self_encrypt_as</link> to your
       personal S/MIME key id.</para>
       <screen>
-set smime_encrypt_self = yes
-set smime_default_key  = bb345e23.0
+set smime_self_encrypt     = yes
+set smime_self_encrypt_as  = bb345e23.0
 </screen>
       <para>Or, if you use PGP,
-      <link linkend="pgp-encrypt-self">$pgp_encrypt_self</link>, then set
-      <link linkend="pgp-sign-as">$pgp_sign_as</link> to your personal PGP key
+      <link linkend="pgp-self-encrypt">$pgp_self_encrypt</link>, then set
+      <link linkend="pgp-self-encrypt-as">$pgp_self_encrypt_as</link> to your personal PGP key
       id.</para>
       <screen>
-set pgp_encrypt_self = yes
-set pgp_sign_as      = A4AF18C5582473BD35A1E9CE78BB3D480042198E
+set pgp_self_encrypt    = yes
+set pgp_self_encrypt_as = A4AF18C5582473BD35A1E9CE78BB3D480042198E
 </screen>
     </sect1>
 
@@ -10556,17 +10611,31 @@ set pgp_sign_as      = A4AF18C5582473BD35A1E9CE78BB3D480042198E
           <tbody>
             <row>
               <entry>
-                <literal>smime_encrypt_self</literal>
+                <literal>smime_self_encrypt</literal>
               </entry>
-              <entry>quad</entry>
-              <entry>No</entry>
+              <entry>boolean</entry>
+              <entry><literal>no</literal></entry>
             </row>
             <row>
               <entry>
-                <literal>pgp_encrypt_self</literal>
+                <literal>smime_self_encrypt_as</literal>
               </entry>
-              <entry>quad</entry>
-              <entry>No</entry>
+              <entry>string</entry>
+              <entry>(empty)</entry>
+            </row>
+            <row>
+              <entry>
+                <literal>pgp_self_encrypt</literal>
+              </entry>
+              <entry>boolean</entry>
+              <entry><literal>no</literal></entry>
+            </row>
+            <row>
+              <entry>
+                <literal>pgp_self_encrypt_as</literal>
+              </entry>
+              <entry>string</entry>
+              <entry>(empty)</entry>
             </row>
           </tbody>
         </tgroup>
@@ -10582,11 +10651,14 @@ set pgp_sign_as      = A4AF18C5582473BD35A1E9CE78BB3D480042198E
 # VARIABLES - shown with their default values
 # --------------------------------------------------------------------------
 # Save a copy of outgoing email, encrypted to yourself</emphasis>
-set smime_encrypt_self = "no"
-<emphasis role="comment"># Save a copy of outgoing email, encrypted to yourself</emphasis>
-set pgp_encrypt_self = "no"
+set smime_self_encrypt = "no"
+<emphasis role="comment"># set smime_self_encrypt_as = "SMIME-KEY"
 
-      <emphasis role="comment"># vim: syntax=muttrc</emphasis>
+# Save a copy of outgoing email, encrypted to yourself</emphasis>
+set pgp_self_encrypt = "no"
+<emphasis role="comment">set pgp_self_encrypt_as = "PGP-KEY"
+
+# vim: syntax=muttrc</emphasis>
 </screen>
     </sect1>
 
@@ -11950,8 +12022,7 @@ bind index &lt;esc&gt;L limit-current-thread
       <para>e.g.
       <literal>%?S?Size: %S&amp;Empty?</literal></para>
       <para>Which can be read as:</para>
-      <literallayout>if (%S &gt; 0) { print "Size: %S" } else { print "Empty"
-      }</literallayout>
+      <literallayout>if (%S &gt; 0) { print "Size: %S" } else { print "Empty" }</literallayout>
       <para>These conditions are useful, but in Mutt they cannot be nested
       within one another. This feature uses the notation
       <literal>%&lt;VAR?TRUE&amp;FALSE&gt;</literal>and allows them to be
@@ -11975,20 +12046,35 @@ bind index &lt;esc&gt;L limit-current-thread
                             NONE      x=0,y=0
 </screen>
       <para>Equivalent to:</para>
-      <literallayout>if (x &gt; 0) { if (y &gt; 0) { print 'XY' } else {
-      print 'X' } } else { if (y &gt; 0) { print 'Y' } else { print 'NONE' }
-      }</literallayout>
+      <literallayout>if (x &gt; 0) {
+if (y &gt; 0) {
+  print 'XY'
+} else {
+  print 'X'
+}
+} else {
+if (y &gt; 0) {
+  print 'Y'
+} else {
+  print 'NONE'
+}
+}</literallayout>
       <para>Examples:</para>
       <screen>set index_format='%4C %Z %{%b %d} %-25.25n %s%&gt; %&lt;M?%M Msgs &amp;%&lt;l?%l Lines&amp;%c Bytes&gt;&gt;'</screen>
-      <literallayout>if a thread is folded display the number of messages
-      (%M) else if we know how many lines in the message display lines in
-      message (%l) else display the size of the message in bytes
-      (%c)</literallayout>
+      <literallayout>if a thread is folded display the number of messages (%M)
+else if we know how many lines in the message display lines in message (%l)
+else display the size of the message in bytes (%c)</literallayout>
       <screen>set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp;%c&gt;&gt;'</screen>
-      <literallayout>if a thread is folded display the number of messages
-      (%M) display the subject (%s) else if we know how many lines in the
-      message display lines in message (%l) else display the size of the
-      message in bytes (%c)</literallayout>
+      <literallayout>if a thread is folded display the number of messages (%M) and the subject (%s)
+else if we know how many lines are in the message display subject (%s) and the lines in message (%l)
+else display the subject (%s) and the size of the message in bytes (%c)</literallayout>
+
+      <note>
+        <para>If you wish to use angle brackets <literal>&lt; &gt;</literal>
+        in a nested condition, then it's necessary to escape them, e.g.</para>
+        <screen>set index_format='%&lt;M?\&lt;%M\&gt;&amp;%s&gt;'</screen>
+      </note>
+
     </sect1>
 
     <sect1 id="nested-if-variables">
@@ -12050,8 +12136,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
 
     <sect1 id="nested-if-known-bugs">
       <title>Known Bugs</title>
-      <para>Feature overwrites $&lt;fmt&gt; handler in
-      <literal>$index_format</literal></para>
+      <para>This feature is hard to understand</para>
     </sect1>
 
     <sect1 id="nested-if-credits">
@@ -12087,16 +12172,20 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
       used to execute a custom script (e.g., a notification handler) upon
       receiving a new mail.</para>
       <para>The command string can contain expandos, such as
-      <literal>%f</literal> for the folder name. For a complete list, see:
+      <literal>%n</literal> for the number of new messages. For a complete list, see:
       <link linkend="status-format">$status_format</link>.</para>
+      <note>
+      <para>When the notification is sent, the folder of the new mail is no longer known.
+        This is a limitation of Mutt.  The `%f` expando will show the open folder.</para>
+      </note>
       <para>For example in Linux you can use (most distributions already
       provide notify-send):</para>
-      <screen>set new_mail_command="notify-send --icon='/home/santiago/Pictures/mutt.png' 'New Email in %f' '%n new messages, %u unread.' &amp;"</screen>
+      <screen>set new_mail_command="notify-send --icon='/home/santiago/Pictures/mutt.png' 'New Email' '%n new messages, %u unread.' &amp;"</screen>
       <para>And in OS X you will need to install a command line interface for
       Notification Center, for example
       <ulink url="https://github.com/julienXX/terminal-notifier">
       terminal-notifier</ulink>:</para>
-      <screen>set new_mail_command="terminal-notifier -title '%v' -subtitle 'New Mail in %f' -message '%n new messages, %u unread.' -activate 'com.apple.Terminal'"</screen>
+      <screen>set new_mail_command="terminal-notifier -title '%v' -subtitle 'New Mail' -message '%n new messages, %u unread.' -activate 'com.apple.Terminal'"</screen>
     </sect1>
 
     <sect1 id="new-mail-variables">
@@ -12194,9 +12283,7 @@ set new_mail_command = ""
     <sect1 id="nntp-intro">
       <title>Introduction</title>
       <para>Reading news via NNTP</para>
-      <para>If Mutt is compiled with the
-      <emphasis>--enable-nntp</emphasis> option, it can read from a news
-      server using NNTP.</para>
+      <para>Mutt can read from a news server using NNTP.</para>
       <para>The default news server can be obtained from the
       <literal>$NNTPSERVER</literal> environment variable or from the
       <literal>/etc/nntpserver</literal> file. Like in other news readers,
@@ -13023,7 +13110,8 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               </entry>
               <entry>add, remove, or toggle notmuch tags; [+]&lt;tag&gt; to
                 add, -&lt;tag&gt; to remove, !&lt;tag&gt; to togglelabels and
-                then hide message by applying the "quasi-deleted" state.
+                then hide or unhide the message by changing the "quasi-deleted"
+                to match if it would be shown when requerying.
                 Normal redisplay rules apply here, so the user must call
                 &lt;sync-mailbox&gt; for the changes to be displayed. Note:
                 Tab completion of tag names is available.</entry>
@@ -16834,6 +16922,17 @@ unread messages.
 </para>
 </sect2>
 
+<sect2 id="collapse-flagged">
+<title>collapse_flagged</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+When <emphasis>unset</emphasis>, Mutt will not collapse a thread if it contains any
+flagged messages.
+</para>
+</sect2>
+
 <sect2 id="compose-format">
 <title>compose_format</title>
 <literallayout>Type: string
@@ -17086,17 +17185,6 @@ to find out whether an encrypted message is also signed.
 </para>
 </sect2>
 
-<sect2 id="pgp-encrypt-self">
-<title>pgp_encrypt_self</title>
-<literallayout>Type: quadoption
-Default: no</literallayout>
-
-<para>
-Encrypt the message to <link linkend="pgp-sign-as">$pgp_sign_as</link> too.
-(PGP only)
-</para>
-</sect2>
-
 <sect2 id="crypt-timestamp">
 <title>crypt_timestamp</title>
 <literallayout>Type: boolean
@@ -17269,17 +17357,6 @@ filtered message is read from the standard output.
 </para>
 </sect2>
 
-<sect2 id="dotlock-program">
-<title>dotlock_program</title>
-<literallayout>Type: path
-Default: <quote><literal>/home/mutt/install/bin/mutt_dotlock</literal></quote></literallayout>
-
-<para>
-Contains the path of the <literal>mutt_dotlock(8)</literal> binary to be used by
-mutt.
-</para>
-</sect2>
-
 <sect2 id="dsn-notify">
 <title>dsn_notify</title>
 <literallayout>Type: string
@@ -17356,6 +17433,14 @@ Default: no</literallayout>
 <para>
 This option allows you to edit the header of your outgoing messages
 along with the body of your message.
+</para>
+<para>
+Although the compose menu may have localized header labels, the
+labels passed to your editor will be standard RFC 2822 headers,
+(e.g. To:, Cc:, Subject:).  Headers added in your editor must
+also be RFC 2822 headers, or one of the pseudo headers listed in
+<quote><link linkend="edit-header">edit-header</link></quote>.  Mutt will not understand localized header
+labels, just as it would not when parsing an actual email.
 </para>
 <para>
 <emphasis role="bold">Note</emphasis> that changes made to the References: and Date: headers are
@@ -17628,6 +17713,32 @@ you are sending to even if that mailbox does not exist.
 </para>
 <para>
 Also see the <link linkend="record">$record</link> variable.
+</para>
+</sect2>
+
+<sect2 id="forward-attribution-intro">
+<title>forward_attribution_intro</title>
+<literallayout>Type: string
+Default: <quote><literal>----- Forwarded message from %f -----</literal></quote></literallayout>
+
+<para>
+This is the string that will precede a message which has been forwarded
+in the main body of a message (when <link linkend="mime-forward">$mime_forward</link> is unset).
+For a full listing of defined <literal>printf(3)</literal>-like sequences see
+the section on <link linkend="index-format">$index_format</link>.  See also <link linkend="attribution-locale">$attribution_locale</link>.
+</para>
+</sect2>
+
+<sect2 id="forward-attribution-trailer">
+<title>forward_attribution_trailer</title>
+<literallayout>Type: string
+Default: <quote><literal>----- End forwarded message -----</literal></quote></literallayout>
+
+<para>
+This is the string that will follow a message which has been forwarded
+in the main body of a message (when <link linkend="mime-forward">$mime_forward</link> is unset).
+For a full listing of defined <literal>printf(3)</literal>-like sequences see
+the section on <link linkend="index-format">$index_format</link>.  See also <link linkend="attribution-locale">$attribution_locale</link>.
 </para>
 </sect2>
 
@@ -18428,7 +18539,7 @@ message to which you are replying.  You are strongly encouraged not to
 change this value, as it tends to agitate the more fanatical netizens.
 </para>
 <para>
-The value of this option is ignored if <link linkend="text-flowed">$text_flowed</link> is set, too because
+The value of this option is ignored if <link linkend="text-flowed">$text_flowed</link> is set, because
 the quoting mechanism is strictly defined for format=flowed.
 </para>
 <para>
@@ -18449,6 +18560,7 @@ your personal taste.
 <para>
 <quote>Format strings</quote> are similar to the strings used in the C
 function <literal>printf(3)</literal> to format output (see the man page for more details).
+For an explanation of the %? construct, see the <link linkend="status-format">status_format</link> description.
 The following sequences are defined in Mutt:
 
 </para>
@@ -18523,7 +18635,7 @@ if not sent to a list
 </entry></row>
 <row><entry>%s </entry><entry>subject of the message
 </entry></row>
-<row><entry>%S </entry><entry>status of the message (<quote>N</quote>/<quote>D</quote>/<quote>d</quote>/<quote>!</quote>/<quote>r</quote>/*)
+<row><entry>%S </entry><entry>single character status of the message (<quote>N</quote>/<quote>O</quote>/<quote>D</quote>/<quote>d</quote>/<quote>!</quote>/<quote>r</quote>/<quote>*</quote>)
 </entry></row>
 <row><entry>%t </entry><entry><quote>To:</quote> field (recipients)
 </entry></row>
@@ -18546,7 +18658,11 @@ if not sent to a list
 <emphasis>(2)</emphasis> at the top of a thread, or <emphasis>(3)</emphasis> <quote>X-Label:</quote> is different from
 preceding message's <quote>X-Label:</quote>.
 </entry></row>
-<row><entry>%Z </entry><entry>Combined message flags
+<row><entry>%Z </entry><entry>a three character set of message status flags.
+the first character is new/read/replied flags (<quote>n</quote>/<quote>o</quote>/<quote>r</quote>/<quote>O</quote>/<quote>N</quote>).
+the second is deleted or encryption flags (<quote>D</quote>/<quote>d</quote>/<quote>S</quote>/<quote>P</quote>/<quote>s</quote>/<quote>K</quote>).
+the third is either tagged/flagged (<quote>*</quote>/<quote>!</quote>), or one of the characters
+listed in <link linkend="to-chars">$to_chars</link>.
 </entry></row>
 <row><entry>%zs </entry><entry>message status flags
 </entry></row>
@@ -19348,145 +19464,6 @@ The time in seconds until any operations on newsgroup except post new
 article will cause recheck for new news.  If set to 0, Mutt will
 recheck newsgroup on each operation in index (stepping, read article,
 etc.).
-</para>
-</sect2>
-
-<sect2 id="nm-open-timeout">
-<title>nm_open_timeout</title>
-<literallayout>Type: number
-Default: 5</literallayout>
-
-<para>
-This variable specifies the timeout for database open in seconds.
-</para>
-</sect2>
-
-<sect2 id="nm-default-uri">
-<title>nm_default_uri</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-This variable specifies the default Notmuch database in format
-notmuch://&lt;absolute path&gt;.
-</para>
-</sect2>
-
-<sect2 id="nm-hidden-tags">
-<title>nm_hidden_tags</title>
-<literallayout>Type: string
-Default: <quote><literal>unread,draft,flagged,passed,replied,attachment,signed,encrypted</literal></quote></literallayout>
-
-<para>
-This variable specifies private notmuch tags which should not be printed
-on screen.
-</para>
-</sect2>
-
-<sect2 id="nm-exclude-tags">
-<title>nm_exclude_tags</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-The messages tagged with these tags are excluded and not loaded
-from notmuch DB to mutt unless specified explicitly.
-</para>
-</sect2>
-
-<sect2 id="nm-unread-tag">
-<title>nm_unread_tag</title>
-<literallayout>Type: string
-Default: <quote><literal>unread</literal></quote></literallayout>
-
-<para>
-This variable specifies notmuch tag which is used for unread messages. The
-variable is used to count unread messages in DB only. All other mutt commands
-use standard (e.g. maildir) flags.
-</para>
-</sect2>
-
-<sect2 id="nm-db-limit">
-<title>nm_db_limit</title>
-<literallayout>Type: number
-Default: 0</literallayout>
-
-<para>
-This variable specifies the default limit used in notmuch queries.
-</para>
-</sect2>
-
-<sect2 id="nm-query-type">
-<title>nm_query_type</title>
-<literallayout>Type: string
-Default: <quote><literal>messages</literal></quote></literallayout>
-
-<para>
-This variable specifies the default query type (threads or messages) used in notmuch queries.
-</para>
-</sect2>
-
-<sect2 id="nm-record">
-<title>nm_record</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-This variable specifies if the mutt record should indexed by notmuch.
-</para>
-</sect2>
-
-<sect2 id="nm-record-tags">
-<title>nm_record_tags</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-This variable specifies the default tags applied to messages stored to the mutt record.
-When set to 0 this variable disable the window feature.
-</para>
-</sect2>
-
-<sect2 id="nm-query-window-duration">
-<title>nm_query_window_duration</title>
-<literallayout>Type: number
-Default: 0</literallayout>
-
-<para>
-This variable sets the time base of a windowed notmuch query.
-Accepted values are 'minute', 'hour', 'day', 'week', 'month', 'year'
-</para>
-</sect2>
-
-<sect2 id="nm-query-window-timebase">
-<title>nm_query_window_timebase</title>
-<literallayout>Type: string
-Default: <quote><literal>week</literal></quote></literallayout>
-
-<para>
-This variable sets the time duration of a windowed notmuch query.
-Accepted values all non negative integers. A value of 0 disables the feature.
-</para>
-</sect2>
-
-<sect2 id="nm-query-window-current-search">
-<title>nm_query_window_current_search</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-This variable sets the time duration of a windowed notmuch query.
-Accepted values all non negative integers. A value of 0 disables the feature.
-</para>
-</sect2>
-
-<sect2 id="nm-query-window-current-position">
-<title>nm_query_window_current_position</title>
-<literallayout>Type: number
-Default: 0</literallayout>
-
-<para>
-This variable contains the currently setup notmuch search for window based vfolder.
 </para>
 </sect2>
 
@@ -21637,13 +21614,6 @@ This is a format string, see the <link linkend="smime-decrypt-command">$smime_de
 possible <literal>printf(3)</literal>-like sequences.
 (S/MIME only)
 </para>
-</sect2>
-
-<sect2 id="smime-encrypt-self">
-<title>smime_encrypt_self</title>
-<literallayout>Type: quadoption
-Default: no</literallayout>
-
 <para>
 Encrypt the message to <link linkend="smime-default-key">$smime_default_key</link> too.
 (S/MIME only)
@@ -22855,29 +22825,6 @@ given in the built-in editor.
 </para>
 </sect2>
 
-<sect2 id="vfolder-format">
-<title>vfolder_format</title>
-<literallayout>Type: string
-Default: <quote><literal>%2C %?n?%4n/&amp;     ?%4m %f</literal></quote></literallayout>
-
-<para>
-This variable allows you to customize the file browser display for virtual
-folders to your personal taste.  This string uses many of the same
-expandos as <link linkend="folder-format">$folder_format</link>.
-</para>
-</sect2>
-
-<sect2 id="virtual-spoolfile">
-<title>virtual_spoolfile</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-When <emphasis>set</emphasis>, mutt will use the first defined virtual mailbox (see
-virtual-mailboxes) as a spool file.
-</para>
-</sect2>
-
 <sect2 id="wait-key">
 <title>wait_key</title>
 <literallayout>Type: boolean
@@ -23224,13 +23171,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;sidebar-prev-new&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox with new mail</entry></row>
 <row><entry><literal>&lt;sidebar-toggle-virtual&gt;</literal></entry><entry></entry><entry>toggle between mailboxes and virtual mailboxes</entry></row>
 <row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
-<row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>open a different virtual folder</entry></row>
-<row><entry><literal>&lt;vfolder-from-query&gt;</literal></entry><entry></entry><entry>generate virtual folder from query</entry></row>
-<row><entry><literal>&lt;vfolder-window-backward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window backwards</entry></row>
-<row><entry><literal>&lt;vfolder-window-forward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window forwards</entry></row>
-<row><entry><literal>&lt;modify-labels&gt;</literal></entry><entry></entry><entry>modify (notmuch) tags</entry></row>
-<row><entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry><entry></entry><entry>modify labels and then hide message</entry></row>
-<row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
 
 </tbody>
 </tgroup>
@@ -23360,11 +23300,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;sidebar-prev-new&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox with new mail</entry></row>
 <row><entry><literal>&lt;sidebar-toggle-virtual&gt;</literal></entry><entry></entry><entry>toggle between mailboxes and virtual mailboxes</entry></row>
 <row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
-<row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>open a different virtual folder</entry></row>
-<row><entry><literal>&lt;vfolder-from-query&gt;</literal></entry><entry></entry><entry>generate virtual folder from query</entry></row>
-<row><entry><literal>&lt;modify-labels&gt;</literal></entry><entry></entry><entry>modify (notmuch) tags</entry></row>
-<row><entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry><entry></entry><entry>modify labels and then hide message</entry></row>
-<row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
 
 </tbody>
 </tgroup>
