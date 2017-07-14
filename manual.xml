@@ -9,7 +9,7 @@
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 20170707 (1.8.3)</releaseinfo>
+    <releaseinfo>version 20170714 (1.8.3)</releaseinfo>
     <abstract>
       <para>
       <quote>All mail clients suck. This one just sucks less.</quote>— me,
@@ -2898,7 +2898,7 @@ color sidebar_divider   color8  default
         <tgroup cols="1">
           <tbody>
             <row>
-              <entry>neomuttrc-20170707</entry>
+              <entry>neomuttrc-20170714</entry>
             </row>
             <row>
               <entry>neomuttrc</entry>
@@ -2942,7 +2942,7 @@ color sidebar_divider   color8  default
             </thead>
             <tbody>
               <row>
-                <entry>/etc/xdg/mutt/neomuttrc-20170707</entry>
+                <entry>/etc/xdg/mutt/neomuttrc-20170714</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -2958,7 +2958,7 @@ color sidebar_divider   color8  default
                 <entry>Note the case of the filename</entry>
               </row>
               <row>
-                <entry>/etc/mutt/neomuttrc-20170707</entry>
+                <entry>/etc/mutt/neomuttrc-20170714</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -2974,7 +2974,7 @@ color sidebar_divider   color8  default
                 <entry>Note the case of the filename</entry>
               </row>
               <row>
-                <entry>/usr/share/mutt/neomuttrc-20170707</entry>
+                <entry>/usr/share/mutt/neomuttrc-20170714</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3021,7 +3021,7 @@ color sidebar_divider   color8  default
             </thead>
             <tbody>
               <row>
-                <entry>~/.config/mutt/neomuttrc-20170707</entry>
+                <entry>~/.config/mutt/neomuttrc-20170714</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3035,7 +3035,7 @@ color sidebar_divider   color8  default
                 <entry>~/.config/mutt/muttrc</entry>
               </row>
               <row>
-                <entry>~/.neomuttrc-20170707</entry>
+                <entry>~/.neomuttrc-20170714</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3049,7 +3049,7 @@ color sidebar_divider   color8  default
                 <entry>~/.muttrc</entry>
               </row>
               <row>
-                <entry>~/.mutt/neomuttrc-20170707</entry>
+                <entry>~/.mutt/neomuttrc-20170714</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -6647,7 +6647,7 @@ mailboxes $my_mx +mailbox3</screen>
         intention to use a backslash in the regular expression, you will need
         to use two backslashes instead (
         <quote>\\</quote>). You can force Mutt to treat
-        <emphasis>EXPR</emphasis> as a simple string instead of a regular
+        <emphasis>EXPR</emphasis> as a simple substring instead of a regular
         expression by using = instead of ~ in the pattern name. For example,
         <literal>=b *.*</literal>will find all messages that contain the
         literal string
