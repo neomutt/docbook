@@ -9,7 +9,7 @@
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 20170907</releaseinfo>
+    <releaseinfo>version 20170912</releaseinfo>
     <abstract>
       <para>
       <quote>All mail clients suck. This one just sucks less.</quote>— me,
@@ -2898,7 +2898,7 @@ color sidebar_divider   color8  default
         <tgroup cols="1">
           <tbody>
             <row>
-              <entry>neomuttrc-20170907</entry>
+              <entry>neomuttrc-20170912</entry>
             </row>
             <row>
               <entry>neomuttrc</entry>
@@ -2939,7 +2939,7 @@ color sidebar_divider   color8  default
             </thead>
             <tbody>
               <row>
-                <entry>/etc/xdg/neomutt/neomuttrc-20170907</entry>
+                <entry>/etc/xdg/neomutt/neomuttrc-20170912</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -2950,7 +2950,7 @@ color sidebar_divider   color8  default
                 <entry>Note the case of the filename</entry>
               </row>
               <row>
-                <entry>/etc/neomuttrc-20170907</entry>
+                <entry>/etc/neomuttrc-20170912</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -2961,7 +2961,7 @@ color sidebar_divider   color8  default
                 <entry>Note the case of the filename</entry>
               </row>
               <row>
-                <entry>/usr/share/neomutt/neomuttrc-20170907</entry>
+                <entry>/usr/share/neomutt/neomuttrc-20170912</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3003,7 +3003,7 @@ color sidebar_divider   color8  default
             </thead>
             <tbody>
               <row>
-                <entry>~/.config/neomutt/neomuttrc-20170907</entry>
+                <entry>~/.config/neomutt/neomuttrc-20170912</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3013,7 +3013,7 @@ color sidebar_divider   color8  default
                 <entry>~/.config/neomutt/muttrc</entry>
               </row>
               <row>
-                <entry>~/.neomutt/neomuttrc-20170907</entry>
+                <entry>~/.neomutt/neomuttrc-20170912</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3023,7 +3023,7 @@ color sidebar_divider   color8  default
                 <entry>~/.neomutt/muttrc</entry>
               </row>
               <row>
-                <entry>~/.mutt/neomuttrc-20170907</entry>
+                <entry>~/.mutt/neomuttrc-20170912</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
@@ -3033,7 +3033,7 @@ color sidebar_divider   color8  default
                 <entry>~/.mutt/muttrc</entry>
               </row>
               <row>
-                <entry>~/.neomuttrc-20170907</entry>
+                <entry>~/.neomuttrc-20170912</entry>
                 <entry>NeoMutt release version</entry>
               </row>
               <row>
