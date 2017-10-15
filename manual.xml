@@ -9,7 +9,7 @@
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 20171006</releaseinfo>
+    <releaseinfo>version 20171013</releaseinfo>
     <abstract>
       <para>
       <quote>All mail clients suck. This one just sucks less.</quote>— me,
@@ -500,7 +500,7 @@ Cars            4|  3    + Feb 28  Imogen Baker     (193)  Pechora Sea
               </para>
             </listitem>
             <listitem>
-              <para>Support for Unicode mailbox names (utf-8)</para>
+              <para>Support for Unicode mailbox names (UTF-8)</para>
             </listitem>
           </itemizedlist>
         </sect3>
@@ -11219,11 +11219,6 @@ color index_size cyan default
             <link linkend="feature/status-color">Status-Color feature</link>
           </para>
         </listitem>
-        <listitem>
-          <para>
-            <link linkend="feature/keywords">Keywords feature</link>
-          </para>
-        </listitem>
       </itemizedlist>
     </sect1>
 
@@ -11826,7 +11821,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
     <sect1 id="new-mail-intro">
       <title>Introduction</title>
       <para>This feature enables the new_mail_command setting, which can be
-      used to execute a custom script (e.g., a notification handler) upon
+      used to execute a custom script (e.g. a notification handler) upon
       receiving a new mail.</para>
       <para>The command string can contain expandos, such as
       <literal>%n</literal> for the number of new messages. For a complete list, see:
@@ -12486,7 +12481,7 @@ bind index \CG get-message
     </sect1>
 
     <sect1 id="notmuch-using">
-      <title>Using NotMuch</title>
+      <title>Using Notmuch</title>
 
       <sect2 id="notmuch-folder-uri">
         <title>Folders URI</title>
@@ -12545,7 +12540,7 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
       </sect2>
 
       <sect2 id="notmuch-vfolder-format">
-        <title>Format String for the NotMuch Browser</title>
+        <title>Format String for the Notmuch Browser</title>
         <para>Default:
         <literallayout>
           <literal>%2C %?n?%4n/&amp; ?%4m %f</literal>
@@ -13843,7 +13838,7 @@ set sort_browser="reverse-size"
                 <literal>sidebar_ordinary</literal>
               </entry>
               <entry>default</entry>
-              <entry>Mailboxes that have no new/flagged mails, etc</entry>
+              <entry>Mailboxes that have no new/flagged mails, etc.</entry>
             </row>
             <row>
               <entry>
@@ -14018,7 +14013,7 @@ color sidebar_divider color8 black
 color sidebar_flagged red black
 <emphasis role="comment"># Color to give mailboxes containing new mail</emphasis>
 color sidebar_new green black
-<emphasis role="comment"># Color to give mailboxes containing no new/flagged mail, etc</emphasis>
+<emphasis role="comment"># Color to give mailboxes containing no new/flagged mail, etc.</emphasis>
 color sidebar_ordinary color245 default
 <emphasis role="comment"># --------------------------------------------------------------------------
 # vim: syntax=neomuttrc</emphasis>
@@ -14810,7 +14805,7 @@ folder-hook ^pop 'set read_inc=1'</screen>
             </row>
             <row>
               <entry>-d</entry>
-              <entry>log debugging output to ~/.muttdebug0 if NeoMutt was compiled
+              <entry>log debugging output to ~/.neomuttdebug0 if NeoMutt was compiled
               with <literal>+debug</literal>; it can range from 1-5 and affects
               verbosity (a value of 2 is recommended)</entry>
             </row>
@@ -16935,7 +16930,7 @@ file.
 <sect2 id="debug-file">
 <title>debug_file</title>
 <literallayout>Type: path
-Default: <quote><literal>~/.muttdebug</literal></quote></literallayout>
+Default: <quote><literal>~/.neomuttdebug</literal></quote></literallayout>
 
 <para>
 The location prefix of the debug file, 0 is append to the debug file
