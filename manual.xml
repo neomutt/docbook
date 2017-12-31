@@ -9,7 +9,7 @@
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 20171013</releaseinfo>
+    <releaseinfo>version 20171215</releaseinfo>
     <abstract>
       <para>
       <quote>All mail clients suck. This one just sucks less.</quote>— me,
@@ -748,11 +748,12 @@ mailboxes =water/ocean/atlantic =water/ocean/pacific   =water/ocean/arctic
 </screen>
               <para>Shorten the names:</para>
               <screen>
-set sidebar_short_path                  <emphasis role="comment"># Shorten mailbox names</emphasis>
-set sidebar_delim_chars="/"             <emphasis role="comment"># Delete everything up to the last / character</emphasis>
+set sidebar_short_path                  <emphasis role="comment"># Shorten mailbox names (truncate all subdirs)</emphasis>
+set sidebar_component_depth=1           <emphasis role="comment"># Shorten mailbox names (truncate 1 subdirs)</emphasis>
+set sidebar_delim_chars="/"             <emphasis role="comment"># Delete everything up to the last or Nth / character</emphasis>
 </screen>
               <para>The screenshot below shows what the Sidebar would look like
-              before and after shortening.</para>
+              before and after shortening using <literal>sidebar_short_path</literal>.</para>
               <screen>
 |fruit/apple                            |apple
 |fruit/banana                           |banana
@@ -763,6 +764,19 @@ set sidebar_delim_chars="/"             <emphasis role="comment"># Delete everyt
 |water/ocean/atlantic                   |atlantic
 |water/ocean/pacific                    |pacific
 |water/ocean/arctic                     |arctic
+</screen>
+              <para>The screenshot below shows what the Sidebar would look like
+              before and after shortening using <literal>sidebar_component_depth=1</literal>.</para>
+              <screen>
+|fruit/apple                            |apple
+|fruit/banana                           |banana
+|fruit/cherry                           |cherry
+|water/sea/sicily                       |sea/sicily
+|water/sea/archipelago                  |sea/archipelago
+|water/sea/sibuyan                      |sea/sibuyan
+|water/ocean/atlantic                   |ocean/atlantic
+|water/ocean/pacific                    |ocean/pacific
+|water/ocean/arctic                     |ocean/arctic
 </screen>
             </sect5>
 
@@ -2069,8 +2083,8 @@ color sidebar_divider   color8  default
           </varlistentry>
           <varlistentry>
             <term>
-            <literal>&lt;edit&gt;</literal>
-            <anchor id="edit" />(default: e)</term>
+            <literal>&lt;edit-raw-message&gt;</literal>
+            <anchor id="edit-raw-message" /></term>
             <listitem>
               <para>This command (available in the index and pager) allows you
               to edit the raw current message as it's present in the mail
@@ -2078,6 +2092,43 @@ color sidebar_divider   color8  default
               be appended to the current folder, and the original message will
               be marked for deletion; if the message is unchanged it won't be
               replaced.</para>
+              <para>
+              <link linkend="edit"><literal>&lt;edit&gt;</literal></link> is a
+              synonym of this for backwards compatibility.</para>
+              <para>See also
+              <link linkend="edit-or-view-raw-message">
+                <literal>&lt;edit-or-view-raw-message&gt;</literal>
+              </link>,
+              <link linkend="view-raw-message">
+                <literal>&lt;view-raw-message&gt;</literal>
+              </link>.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+            <literal>&lt;edit&gt;</literal>
+            <anchor id="edit" /></term>
+            <listitem>
+              <para>Alias of
+              <link linkend="edit-raw-message">
+                <literal>&lt;edit-raw-message&gt;</literal>
+              </link> for backwards compatibility.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+            <literal>&lt;edit-or-view-raw-message&gt;</literal>
+            <anchor id="edit-or-view-raw-message" />(default: e)</term>
+            <listitem>
+              <para>This command (available in the index and pager) is the same
+              as
+              <link linkend="edit-raw-message">
+                <literal>&lt;edit-raw-message&gt;</literal>
+              </link>
+              if the mailbox is writable, otherwise it the same as
+              <link linkend="view-raw-message">
+                <literal>&lt;view-raw-message&gt;</literal>
+              </link>.</para>
             </listitem>
           </varlistentry>
           <varlistentry>
@@ -2209,6 +2260,26 @@ color sidebar_divider   color8  default
               message. It is particularly useful when being interested in just
               the response and there is a large amount of quoted text in the
               way.</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+            <literal>&lt;view-raw-message&gt;</literal>
+            <anchor id="view-raw-message" /></term>
+            <listitem>
+              <para>This command (available in the index and pager) opens the
+              raw message read-only in an editor. This command does not allow
+              editing the message, use
+              <link linkend="edit-raw-message">
+                <literal>&lt;edit-raw-message&gt;</literal>
+              </link> for this.</para>
+              <para>See also
+              <link linkend="edit-raw-message">
+                <literal>&lt;edit-raw-message&gt;</literal>
+              </link>,
+              <link linkend="edit-or-view-raw-message">
+                <literal>&lt;edit-or-view-raw-message&gt;</literal>
+              </link>.</para>
             </listitem>
           </varlistentry>
           <varlistentry>
@@ -2728,7 +2799,7 @@ color sidebar_divider   color8  default
           specifically it does not add the trailing spaces.</para>
           <para>After editing the initial message text and before entering the
           compose menu, NeoMutt properly space-stuffs the message.
-          <emphasis>Space-stuffing</emphasis> is required by RfC3676 defining
+          <emphasis>Space-stuffing</emphasis> is required by RFC3676 defining
           <literal>format=flowed</literal> and means to prepend a space
           to:</para>
           <itemizedlist>
@@ -9974,12 +10045,6 @@ close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="compile-time-features">Compile-Time
-            Features</link>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
             <link linkend="regex">Regular Expressions</link>
           </para>
         </listitem>
@@ -11802,6 +11867,10 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
           <para>Richard Russon
           <email>rich@flatcap.org</email></para>
         </listitem>
+        <listitem>
+          <para>Aleksa Sarai
+          <email>cyphar@cyphar.com</email></para>
+        </listitem>
       </itemizedlist>
     </sect1>
   </chapter>
@@ -12397,18 +12466,6 @@ bind index \CG get-message
 <emphasis role="comment"># --------------------------------------------------------------------------
 # vim: syntax=neomuttrc</emphasis>
 </screen>
-    </sect1>
-
-    <sect1 id="nntp-see-also">
-      <title>See Also</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            <link linkend="compile-time-features">Compile-Time
-            Features</link>
-          </para>
-        </listitem>
-      </itemizedlist>
     </sect1>
 
     <sect1 id="nntp-known-bugs">
@@ -13410,7 +13467,9 @@ color progress white red
       <title>Introduction</title>
       <para>The
       <quote>quasi-delete</quote> function marks an email that should be
-      hidden from the index, but NOT deleted.</para>
+      hidden from the index, but NOT deleted.  The email will disappear from
+      the index when <link linkend="index-map">&lt;sync-mailbox&gt;</link> is
+      called.</para>
       <para>On its own, this feature isn't very useful. It forms a useful
       part of the notmuch plugin.</para>
     </sect1>
@@ -13779,6 +13838,15 @@ set sort_browser="reverse-size"
             </row>
             <row>
               <entry>
+                <literal>sidebar_component_depth</literal>
+              </entry>
+              <entry>number</entry>
+              <entry>
+                <literal>0</literal>
+              </entry>
+            </row>
+            <row>
+              <entry>
                 <literal>sidebar_sort_method</literal>
               </entry>
               <entry>enum</entry>
@@ -14079,9 +14147,10 @@ set sidebar_visible = no
 set sidebar_width = 20
 <emphasis role="comment"># Should the mailbox paths be abbreviated?</emphasis>
 set sidebar_short_path = no
+<emphasis role="comment"># Number of top-level mailbox path subdirectories to truncate for display</emphasis>
+set sidebar_component_depth = 0
 <emphasis role="comment"># When abbreviating mailbox path names, use any of these characters as path
 # separators.  Only the part after the last separators will be shown.
-
 # For file folders '/' is good.  For IMAP folders, often '.' is useful.</emphasis>
 set sidebar_delim_chars = '/.'
 <emphasis role="comment"># If the mailbox path is abbreviated, should it be indented?</emphasis>
@@ -14814,7 +14883,7 @@ bind index D purge-message
       <para>NeoMutt in many places has to rely on external applications or for
       convenience supports mechanisms involving external applications.</para>
       <para>One of these is the
-      <literal>mailcap</literal> mechanism as defined by RfC1524. Details about
+      <literal>mailcap</literal> mechanism as defined by RFC1524. Details about
       a secure use of the mailcap mechanisms is given in
       <xref linkend="secure-mailcap" />.</para>
       <para>Besides the mailcap mechanism, NeoMutt uses a number of other external
@@ -16217,15 +16286,15 @@ following <literal>printf(3)</literal>-style sequences are available:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a </entry><entry>alias name
+<row><entry>%a </entry><entry>Alias name
 </entry></row>
-<row><entry>%f </entry><entry>flags - currently, a <quote>d</quote> for an alias marked for deletion
+<row><entry>%f </entry><entry>Flags - currently, a <quote>d</quote> for an alias marked for deletion
 </entry></row>
-<row><entry>%n </entry><entry>index number
+<row><entry>%n </entry><entry>Index number
 </entry></row>
-<row><entry>%r </entry><entry>address which alias expands to
+<row><entry>%r </entry><entry>Address which alias expands to
 </entry></row>
-<row><entry>%t </entry><entry>character which indicates if the alias is tagged for inclusion
+<row><entry>%t </entry><entry>Character which indicates if the alias is tagged for inclusion
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -16397,46 +16466,46 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%C  </entry><entry>charset
+<row><entry>%C  </entry><entry>Charset
 </entry></row>
-<row><entry>%c  </entry><entry>requires charset conversion (<quote>n</quote> or <quote>c</quote>)
+<row><entry>%c  </entry><entry>Requires charset conversion (<quote>n</quote> or <quote>c</quote>)
 </entry></row>
-<row><entry>%D  </entry><entry>deleted flag
+<row><entry>%D  </entry><entry>Deleted flag
 </entry></row>
-<row><entry>%d  </entry><entry>description (if none, falls back to %F)
+<row><entry>%d  </entry><entry>Description (if none, falls back to %F)
 </entry></row>
 <row><entry>%e  </entry><entry>MIME content-transfer-encoding
 </entry></row>
-<row><entry>%F  </entry><entry>filename in content-disposition header (if none, falls back to %f)
+<row><entry>%f  </entry><entry>Filename
 </entry></row>
-<row><entry>%f  </entry><entry>filename
+<row><entry>%F  </entry><entry>Filename in content-disposition header (if none, falls back to %f)
 </entry></row>
-<row><entry>%I  </entry><entry>disposition (<quote>I</quote> for inline, <quote>A</quote> for attachment)
+<row><entry>%I  </entry><entry>Disposition (<quote>I</quote> for inline, <quote>A</quote> for attachment)
 </entry></row>
-<row><entry>%m  </entry><entry>major MIME type
+<row><entry>%m  </entry><entry>Major MIME type
 </entry></row>
 <row><entry>%M  </entry><entry>MIME subtype
 </entry></row>
-<row><entry>%n  </entry><entry>attachment number
+<row><entry>%n  </entry><entry>Attachment number
 </entry></row>
 <row><entry>%Q  </entry><entry><quote>Q</quote>, if MIME part qualifies for attachment counting
 </entry></row>
-<row><entry>%s  </entry><entry>size
+<row><entry>%s  </entry><entry>Size
 </entry></row>
-<row><entry>%t  </entry><entry>tagged flag
+<row><entry>%T  </entry><entry>Graphic tree characters
 </entry></row>
-<row><entry>%T  </entry><entry>graphic tree characters
+<row><entry>%t  </entry><entry>Tagged flag
 </entry></row>
-<row><entry>%u  </entry><entry>unlink (=to delete) flag
+<row><entry>%u  </entry><entry>Unlink (=to delete) flag
 </entry></row>
-<row><entry>%X  </entry><entry>number of qualifying MIME parts in this part and its children
+<row><entry>%X  </entry><entry>Number of qualifying MIME parts in this part and its children
 (please see the <quote><link linkend="attachments">attachments</link></quote> section for possible speed effects)
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character <quote>X</quote>
+<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with character <quote>X</quote>
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with character <quote>X</quote>
+<row><entry>%|X </entry><entry>Pad to the end of the line with character <quote>X</quote>
 </entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character <quote>X</quote> as pad
+<row><entry>%*X </entry><entry>Soft-fill with character <quote>X</quote> as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -16643,6 +16712,18 @@ Example:
 set certificate_file=~/.neomutt/certificates
 </screen></sect2>
 
+<sect2 id="change-folder-next">
+<title>change_folder_next</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When this variable is <emphasis>set</emphasis>, the <literal>&lt;change-folder&gt;</literal> function
+mailbox suggestion will start at the next folder in your <quote><link linkend="mailboxes">mailboxes</link></quote>
+list, instead of starting at the first folder in the list.
+</para>
+</sect2>
+
 <sect2 id="charset">
 <title>charset</title>
 <literallayout>Type: string
@@ -16740,11 +16821,11 @@ set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a </entry><entry>total number of attachments
+<row><entry>%a </entry><entry>Total number of attachments
 </entry></row>
-<row><entry>%h </entry><entry>local hostname
+<row><entry>%h </entry><entry>Local hostname
 </entry></row>
-<row><entry>%l </entry><entry>approximate size (in bytes) of the current message
+<row><entry>%l </entry><entry>Approximate size (in bytes) of the current message
 </entry></row>
 <row><entry>%v </entry><entry>NeoMutt version string
 </entry></row></tbody></tgroup></informaltable>
@@ -17147,6 +17228,20 @@ When set, specifies a command used to filter messages.  When a message
 is viewed it is passed as standard input to <link linkend="display-filter">$display_filter</link>, and the
 filtered message is read from the standard output.
 </para>
+<para>
+When preparing the message, NeoMutt inserts some escape sequences into the
+text.  They are of the form: <literal>&lt;esc&gt;]9;XXX&lt;bel&gt;</literal> where "XXX" is a random
+64-bit number.
+</para>
+<para>
+If these escape sequences interfere with your filter, they can be removed
+using a tool like <literal>ansifilter</literal> or <literal>sed 's/^\x1b]9;[0-9]\+\x7//'</literal>
+</para>
+<para>
+If they are removed, then PGP and MIME headers will no longer be coloured.
+This can be fixed by adding this to your config:
+<literal>color body magenta default '^\[-- .* --\]<link linkend="">$</link>'</literal>.
+</para>
 </sect2>
 
 <sect2 id="dsn-notify">
@@ -17404,39 +17499,38 @@ its own set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%C  </entry><entry>current file number
+<row><entry>%C  </entry><entry>Current file number
 </entry></row>
-<row><entry>%d  </entry><entry>date/time folder was last modified
+<row><entry>%d  </entry><entry>Date/time folder was last modified
 </entry></row>
-<row><entry>%D  </entry><entry>date/time folder was last modified using <link linkend="date-format">$date_format</link>.
+<row><entry>%D  </entry><entry>Date/time folder was last modified using <link linkend="date-format">$date_format</link>.
 </entry></row>
-<row><entry>%f  </entry><entry>filename (<quote>/</quote> is appended to directory names,
-<quote>@</quote> to symbolic links and <quote>*</quote> to executable
-files)
+<row><entry>%f  </entry><entry>Filename (<quote>/</quote> is appended to directory names,
+<quote>@</quote> to symbolic links and <quote>*</quote> to executable files)
 </entry></row>
-<row><entry>%F  </entry><entry>file permissions
+<row><entry>%F  </entry><entry>File permissions
 </entry></row>
-<row><entry>%g  </entry><entry>group name (or numeric gid, if missing)
+<row><entry>%g  </entry><entry>Group name (or numeric gid, if missing)
 </entry></row>
-<row><entry>%l  </entry><entry>number of hard links
+<row><entry>%l  </entry><entry>Number of hard links
 </entry></row>
-<row><entry>%m  </entry><entry>number of messages in the mailbox *
+<row><entry>%m  </entry><entry>Number of messages in the mailbox *
 </entry></row>
-<row><entry>%n  </entry><entry>number of unread messages in the mailbox *
+<row><entry>%n  </entry><entry>Number of unread messages in the mailbox *
 </entry></row>
-<row><entry>%N  </entry><entry>N if mailbox has new mail, blank otherwise
+<row><entry>%N  </entry><entry><quote>N</quote> if mailbox has new mail, blank otherwise
 </entry></row>
-<row><entry>%s  </entry><entry>size in bytes
+<row><entry>%s  </entry><entry>Size in bytes
 </entry></row>
 <row><entry>%t  </entry><entry><quote>*</quote> if the file is tagged, blank otherwise
 </entry></row>
-<row><entry>%u  </entry><entry>owner name (or numeric uid, if missing)
+<row><entry>%u  </entry><entry>Owner name (or numeric uid, if missing)
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character <quote>X</quote>
+<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with character <quote>X</quote>
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with character <quote>X</quote>
+<row><entry>%|X </entry><entry>Pad to the end of the line with character <quote>X</quote>
 </entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character <quote>X</quote> as pad
+<row><entry>%*X </entry><entry>Soft-fill with character <quote>X</quote> as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -17700,23 +17794,23 @@ has its own set of printf()-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%C  </entry><entry>current newsgroup number
+<row><entry>%C  </entry><entry>Current newsgroup number
 </entry></row>
-<row><entry>%d  </entry><entry>description of newsgroup (becomes from server)
+<row><entry>%d  </entry><entry>Description of newsgroup (becomes from server)
 </entry></row>
-<row><entry>%f  </entry><entry>newsgroup name
+<row><entry>%f  </entry><entry>Newsgroup name
 </entry></row>
 <row><entry>%M  </entry><entry>- if newsgroup not allowed for direct post (moderated for example)
 </entry></row>
 <row><entry>%N  </entry><entry>N if newsgroup is new, u if unsubscribed, blank otherwise
 </entry></row>
-<row><entry>%n  </entry><entry>number of new articles in newsgroup
+<row><entry>%n  </entry><entry>Number of new articles in newsgroup
 </entry></row>
-<row><entry>%s  </entry><entry>number of unread articles in newsgroup
+<row><entry>%s  </entry><entry>Number of unread articles in newsgroup
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
+<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with character "X"
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with character "X"
+<row><entry>%|X </entry><entry>Pad to the end of the line with character "X"
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -18373,107 +18467,107 @@ The following sequences are defined in NeoMutt:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a </entry><entry>address of the author
+<row><entry>%a </entry><entry>Address of the author
 </entry></row>
-<row><entry>%A </entry><entry>reply-to address (if present; otherwise: address of author)
+<row><entry>%A </entry><entry>Reply-to address (if present; otherwise: address of author)
 </entry></row>
-<row><entry>%b </entry><entry>filename of the original message folder (think mailbox)
+<row><entry>%b </entry><entry>Filename of the original message folder (think mailbox)
 </entry></row>
-<row><entry>%B </entry><entry>the list to which the letter was sent, or else the folder name (%b).
+<row><entry>%B </entry><entry>The list to which the letter was sent, or else the folder name (%b).
 </entry></row>
-<row><entry>%c </entry><entry>number of characters (bytes) in the message
+<row><entry>%c </entry><entry>Number of characters (bytes) in the message
 </entry></row>
-<row><entry>%C </entry><entry>current message number
+<row><entry>%C </entry><entry>Current message number
 </entry></row>
-<row><entry>%d </entry><entry>date and time of the message in the format specified by
+<row><entry>%d </entry><entry>Date and time of the message in the format specified by
 <link linkend="date-format">$date_format</link> converted to sender's time zone
 </entry></row>
-<row><entry>%D </entry><entry>date and time of the message in the format specified by
+<row><entry>%D </entry><entry>Date and time of the message in the format specified by
 <link linkend="date-format">$date_format</link> converted to the local time zone
 </entry></row>
-<row><entry>%e </entry><entry>current message number in thread
+<row><entry>%e </entry><entry>Current message number in thread
 </entry></row>
-<row><entry>%E </entry><entry>number of messages in current thread
+<row><entry>%E </entry><entry>Number of messages in current thread
 </entry></row>
-<row><entry>%f </entry><entry>sender (address + real name), either From: or Return-Path:
+<row><entry>%f </entry><entry>Sender (address + real name), either From: or Return-Path:
 </entry></row>
-<row><entry>%F </entry><entry>author name, or recipient name if the message is from you
+<row><entry>%F </entry><entry>Author name, or recipient name if the message is from you
 </entry></row>
-<row><entry>%g </entry><entry>newsgroup name (if compiled with NNTP support)
+<row><entry>%g </entry><entry>Newsgroup name (if compiled with NNTP support)
 </entry></row>
-<row><entry>%g </entry><entry>message labels (e.g. notmuch tags)
+<row><entry>%g </entry><entry>Message labels (e.g. notmuch tags)
 </entry></row>
-<row><entry>%H </entry><entry>spam attribute(s) of this message
+<row><entry>%H </entry><entry>Spam attribute(s) of this message
 </entry></row>
-<row><entry>%I </entry><entry>initials of author
+<row><entry>%I </entry><entry>Initials of author
 </entry></row>
-<row><entry>%i </entry><entry>message-id of the current message
+<row><entry>%i </entry><entry>Message-id of the current message
 </entry></row>
-<row><entry>%K </entry><entry>the list to which the letter was sent (if any; otherwise: empty).
+<row><entry>%K </entry><entry>The list to which the letter was sent (if any; otherwise: empty)
 </entry></row>
-<row><entry>%l </entry><entry>number of lines in the message (does not work with maildir,
-mh, and possibly IMAP folders)
+<row><entry>%l </entry><entry>Number of lines in the message (does not work with maildir,
+Mh, and possibly IMAP folders)
 </entry></row>
 <row><entry>%L </entry><entry>If an address in the <quote>To:</quote> or <quote>Cc:</quote> header field matches an address
-defined by the users <quote><link linkend="subscribe">subscribe</link></quote> command, this displays
-"To &lt;list-name&gt;", otherwise the same as %F.
+Defined by the users <quote><link linkend="subscribe">subscribe</link></quote> command, this displays
+"To &lt;list-name&gt;", otherwise the same as %F
 </entry></row>
-<row><entry>%m </entry><entry>total number of message in the mailbox
+<row><entry>%m </entry><entry>Total number of message in the mailbox
 </entry></row>
-<row><entry>%M </entry><entry>number of hidden messages if the thread is collapsed.
+<row><entry>%M </entry><entry>Number of hidden messages if the thread is collapsed
 </entry></row>
-<row><entry>%N </entry><entry>message score
+<row><entry>%N </entry><entry>Message score
 </entry></row>
-<row><entry>%n </entry><entry>author's real name (or address if missing)
+<row><entry>%n </entry><entry>Author's real name (or address if missing)
 </entry></row>
-<row><entry>%O </entry><entry>original save folder where NeoMutt would formerly have
-stashed the message: list name or recipient name
-if not sent to a list
+<row><entry>%O </entry><entry>Original save folder where NeoMutt would formerly have
+Stashed the message: list name or recipient name
+If not sent to a list
 </entry></row>
-<row><entry>%P </entry><entry>progress indicator for the built-in pager (how much of the file has been displayed)
+<row><entry>%P </entry><entry>Progress indicator for the built-in pager (how much of the file has been displayed)
 </entry></row>
-<row><entry>%q </entry><entry>newsgroup name (if compiled with NNTP support)
+<row><entry>%q </entry><entry>Newsgroup name (if compiled with NNTP support)
 </entry></row>
-<row><entry>%r </entry><entry>comma separated list of <quote>To:</quote> recipients
+<row><entry>%r </entry><entry>Comma separated list of <quote>To:</quote> recipients
 </entry></row>
-<row><entry>%R </entry><entry>comma separated list of <quote>Cc:</quote> recipients
+<row><entry>%R </entry><entry>Comma separated list of <quote>Cc:</quote> recipients
 </entry></row>
-<row><entry>%s </entry><entry>subject of the message
+<row><entry>%s </entry><entry>Subject of the message
 </entry></row>
-<row><entry>%S </entry><entry>single character status of the message (<quote>N</quote>/<quote>O</quote>/<quote>D</quote>/<quote>d</quote>/<quote>!</quote>/<quote>r</quote>/<quote>*</quote>)
+<row><entry>%S </entry><entry>Single character status of the message (<quote>N</quote>/<quote>O</quote>/<quote>D</quote>/<quote>d</quote>/<quote>!</quote>/<quote>r</quote>/<quote>*</quote>)
 </entry></row>
 <row><entry>%t </entry><entry><quote>To:</quote> field (recipients)
 </entry></row>
-<row><entry>%T </entry><entry>the appropriate character from the <link linkend="to-chars">$to_chars</link> string
+<row><entry>%T </entry><entry>The appropriate character from the <link linkend="to-chars">$to_chars</link> string
 </entry></row>
-<row><entry>%u </entry><entry>user (login) name of the author
+<row><entry>%u </entry><entry>User (login) name of the author
 </entry></row>
-<row><entry>%v </entry><entry>first name of the author, or the recipient if the message is from you
+<row><entry>%v </entry><entry>First name of the author, or the recipient if the message is from you
 </entry></row>
-<row><entry>%W </entry><entry>name of organization of author (<quote>Organization:</quote> field)
+<row><entry>%W </entry><entry>Name of organization of author (<quote>Organization:</quote> field)
 </entry></row>
 <row><entry>%x </entry><entry><quote>X-Comment-To:</quote> field (if present and compiled with NNTP support)
 </entry></row>
-<row><entry>%X </entry><entry>number of attachments
+<row><entry>%X </entry><entry>Number of attachments
 (please see the <quote><link linkend="attachments">attachments</link></quote> section for possible speed effects)
 </entry></row>
 <row><entry>%y </entry><entry><quote>X-Label:</quote> field, if present
 </entry></row>
 <row><entry>%Y </entry><entry><quote>X-Label:</quote> field, if present, and <emphasis>(1)</emphasis> not at part of a thread tree,
 <emphasis>(2)</emphasis> at the top of a thread, or <emphasis>(3)</emphasis> <quote>X-Label:</quote> is different from
-preceding message's <quote>X-Label:</quote>.
+Preceding message's <quote>X-Label:</quote>
 </entry></row>
-<row><entry>%Z </entry><entry>a three character set of message status flags.
-the first character is new/read/replied flags (<quote>n</quote>/<quote>o</quote>/<quote>r</quote>/<quote>O</quote>/<quote>N</quote>).
-the second is deleted or encryption flags (<quote>D</quote>/<quote>d</quote>/<quote>S</quote>/<quote>P</quote>/<quote>s</quote>/<quote>K</quote>).
-the third is either tagged/flagged (<quote>*</quote>/<quote>!</quote>), or one of the characters
-listed in <link linkend="to-chars">$to_chars</link>.
+<row><entry>%Z </entry><entry>A three character set of message status flags.
+The first character is new/read/replied flags (<quote>n</quote>/<quote>o</quote>/<quote>r</quote>/<quote>O</quote>/<quote>N</quote>).
+The second is deleted or encryption flags (<quote>D</quote>/<quote>d</quote>/<quote>S</quote>/<quote>P</quote>/<quote>s</quote>/<quote>K</quote>).
+The third is either tagged/flagged (<quote>*</quote>/<quote>!</quote>), or one of the characters
+Listed in <link linkend="to-chars">$to_chars</link>.
 </entry></row>
-<row><entry>%zs </entry><entry>message status flags
+<row><entry>%zs </entry><entry>Message status flags
 </entry></row>
-<row><entry>%zc </entry><entry>message crypto flags
+<row><entry>%zc </entry><entry>Message crypto flags
 </entry></row>
-<row><entry>%zt </entry><entry>message tag flags
+<row><entry>%zt </entry><entry>Message tag flags
 </entry></row>
 <row><entry>%{fmt} </entry><entry>the date and time of the message is converted to sender's
 time zone, and <quote>fmt</quote> is expanded by the library function
@@ -18737,7 +18831,7 @@ Also see the <link linkend="smart-wrap">$smart_wrap</link> variable.
 <sect2 id="mask">
 <title>mask</title>
 <literallayout>Type: regular expression
-Default: <quote><literal>!^\.[^.]</literal></quote></literallayout>
+Default: <quote><literal>&amp;Mask,UL!^\.[^.]</literal></quote></literallayout>
 
 <para>
 A regular expression used in the file browser, optionally preceded by
@@ -19035,13 +19129,13 @@ supported:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%n </entry><entry>The running number on the menu.
+<row><entry>%a </entry><entry>The remailer's e-mail address
 </entry></row>
-<row><entry>%c </entry><entry>Remailer capabilities.
+<row><entry>%c </entry><entry>Remailer capabilities
 </entry></row>
-<row><entry>%s </entry><entry>The remailer's short name.
+<row><entry>%n </entry><entry>The running number on the menu
 </entry></row>
-<row><entry>%a </entry><entry>The remailer's e-mail address.
+<row><entry>%s </entry><entry>The remailer's short name
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -19161,17 +19255,17 @@ is understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a </entry><entry>account url
+<row><entry>%a </entry><entry>Account url
 </entry></row>
-<row><entry>%p </entry><entry>port
+<row><entry>%p </entry><entry>Port
 </entry></row>
-<row><entry>%P </entry><entry>port if specified
+<row><entry>%P </entry><entry>Port if specified
 </entry></row>
-<row><entry>%s </entry><entry>news server name
+<row><entry>%s </entry><entry>News server name
 </entry></row>
-<row><entry>%S </entry><entry>url schema
+<row><entry>%S </entry><entry>Url schema
 </entry></row>
-<row><entry>%u </entry><entry>username
+<row><entry>%u </entry><entry>Username
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -19683,25 +19777,25 @@ has its own set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%n     </entry><entry>number
+<row><entry>%a     </entry><entry>Algorithm
 </entry></row>
-<row><entry>%k     </entry><entry>key id
+<row><entry>%c     </entry><entry>Capabilities
 </entry></row>
-<row><entry>%u     </entry><entry>user id
+<row><entry>%f     </entry><entry>Flags
 </entry></row>
-<row><entry>%a     </entry><entry>algorithm
+<row><entry>%k     </entry><entry>Key id
 </entry></row>
-<row><entry>%l     </entry><entry>key length
+<row><entry>%l     </entry><entry>Key length
 </entry></row>
-<row><entry>%p     </entry><entry>protocol
+<row><entry>%n     </entry><entry>Number
 </entry></row>
-<row><entry>%f     </entry><entry>flags
+<row><entry>%p     </entry><entry>Protocol
 </entry></row>
-<row><entry>%c     </entry><entry>capabilities
+<row><entry>%t     </entry><entry>Trust/validity of the key-uid association
 </entry></row>
-<row><entry>%t     </entry><entry>trust/validity of the key-uid association
+<row><entry>%u     </entry><entry>User id
 </entry></row>
-<row><entry>%[&lt;s&gt;] </entry><entry>date of the key where &lt;s&gt; is an <literal>strftime(3)</literal> expression
+<row><entry>%[&lt;s&gt;] </entry><entry>Date of the key where &lt;s&gt; is an <literal>strftime(3)</literal> expression
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -20459,21 +20553,21 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a  </entry><entry>destination address
+<row><entry>%a  </entry><entry>Destination address
 </entry></row>
-<row><entry>%c  </entry><entry>current entry number
+<row><entry>%c  </entry><entry>Current entry number
 </entry></row>
-<row><entry>%e  </entry><entry>extra information *
+<row><entry>%e  </entry><entry>Extra information *
 </entry></row>
-<row><entry>%n  </entry><entry>destination name
+<row><entry>%n  </entry><entry>Destination name
 </entry></row>
 <row><entry>%t  </entry><entry><quote>*</quote> if current entry is tagged, a space otherwise
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with <quote>X</quote>
+<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with <quote>X</quote>
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with <quote>X</quote>
+<row><entry>%|X </entry><entry>Pad to the end of the line with <quote>X</quote>
 </entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character <quote>X</quote> as pad
+<row><entry>%*X </entry><entry>Soft-fill with character <quote>X</quote> as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -21267,7 +21361,8 @@ names relative to the previous name. Here's an example:
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-delim-chars">$sidebar_delim_chars</link>, <link linkend="sidebar-folder-indent">$sidebar_folder_indent</link>, <link linkend="sidebar-indent-string">$sidebar_indent_string</link>.
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-delim-chars">$sidebar_delim_chars</link>, <link linkend="sidebar-folder-indent">$sidebar_folder_indent</link>,
+<link linkend="sidebar-indent-string">$sidebar_indent_string</link>, <link linkend="sidebar-component-depth">$sidebar_component_depth</link>.
 </para>
 </sect2>
 
@@ -21296,6 +21391,24 @@ entries are sorted alphabetically.  Valid values:
 <para>
 You may optionally use the <quote>reverse-</quote> prefix to specify reverse sorting
 order (example: <quote><literal>set sort_browser=reverse-date</literal></quote>).
+</para>
+</sect2>
+
+<sect2 id="sidebar-component-depth">
+<title>sidebar_component_depth</title>
+<literallayout>Type: number
+Default: 0</literallayout>
+
+<para>
+By default the sidebar will show the mailbox's path, relative to the
+<link linkend="folder">$folder</link> variable. This specifies the number of parent directories to hide
+from display in the sidebar. For example: If a maildir is normally
+displayed in the sidebar as dir1/dir2/dir3/maildir, setting
+<literal>sidebar_component_depth=2</literal> will display it as dir3/maildir, having
+truncated the 2 highest directories.
+</para>
+<para>
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-short-path">$sidebar_short_path</link>
 </para>
 </sect2>
 
@@ -22008,25 +22121,6 @@ variable <literal>$MAIL</literal> or <literal>$MAILDIR</literal> if either is de
 </para>
 </sect2>
 
-<sect2 id="ssl-ca-certificates-file">
-<title>ssl_ca_certificates_file</title>
-<literallayout>Type: path
-Default: (empty)</literallayout>
-
-<para>
-This variable specifies a file containing trusted CA certificates.
-Any server certificate that is signed with one of these CA
-certificates is also automatically accepted.
-</para>
-<para>
-Example:
-
-</para>
-
-<screen>
-set ssl_ca_certificates_file=/etc/ssl/certs/ca-certificates.crt
-</screen></sect2>
-
 <sect2 id="ssl-client-cert">
 <title>ssl_client_cert</title>
 <literallayout>Type: path
@@ -22052,18 +22146,6 @@ option supersedes <link linkend="ssl-starttls">$ssl_starttls</link>.
 </para>
 </sect2>
 
-<sect2 id="ssl-min-dh-prime-bits">
-<title>ssl_min_dh_prime_bits</title>
-<literallayout>Type: number
-Default: 0</literallayout>
-
-<para>
-This variable specifies the minimum acceptable prime size (in bits)
-for use in any Diffie-Hellman key exchange. A value of 0 will use
-the default from the GNUTLS library.
-</para>
-</sect2>
-
 <sect2 id="ssl-starttls">
 <title>ssl_starttls</title>
 <literallayout>Type: quadoption
@@ -22085,6 +22167,7 @@ Default: no</literallayout>
 This variable specifies whether to attempt to use SSLv2 in the
 SSL authentication process. Note that SSLv2 and SSLv3 are now
 considered fundamentally insecure and are no longer recommended.
+(OpenSSL only)
 </para>
 </sect2>
 
@@ -22141,7 +22224,7 @@ Default: yes</literallayout>
 <para>
 If set to <emphasis>yes</emphasis>, NeoMutt will use CA certificates in the
 system-wide certificate store when checking if a server certificate
-is signed by a trusted CA.
+is signed by a trusted CA. (OpenSSL only)
 </para>
 </sect2>
 
@@ -22198,7 +22281,7 @@ signing CA as trusted.
 Default: (empty)</literallayout>
 
 <para>
-Contains a colon-seperated list of ciphers to use when using SSL.
+Contains a colon-separated list of ciphers to use when using SSL.
 For OpenSSL, see ciphers(1) for the syntax of the string.
 </para>
 <para>
@@ -22254,53 +22337,55 @@ set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%b  </entry><entry>number of mailboxes with new mail *
+<row><entry>%b  </entry><entry>Number of mailboxes with new mail *
 </entry></row>
-<row><entry>%d  </entry><entry>number of deleted messages *
+<row><entry>%d  </entry><entry>Number of deleted messages *
 </entry></row>
-<row><entry>%f  </entry><entry>the full pathname of the current mailbox
+<row><entry>%f  </entry><entry>The full pathname of the current mailbox
 </entry></row>
-<row><entry>%F  </entry><entry>number of flagged messages *
+<row><entry>%F  </entry><entry>Number of flagged messages *
 </entry></row>
-<row><entry>%h  </entry><entry>local hostname
+<row><entry>%h  </entry><entry>Local hostname
 </entry></row>
-<row><entry>%l  </entry><entry>size (in bytes) of the current mailbox *
+<row><entry>%l  </entry><entry>Size (in bytes) of the current mailbox *
 </entry></row>
-<row><entry>%L  </entry><entry>size (in bytes) of the messages shown
+<row><entry>%L  </entry><entry>Size (in bytes) of the messages shown
 (i.e., which match the current limit) *
 </entry></row>
-<row><entry>%m  </entry><entry>the number of messages in the mailbox *
+<row><entry>%m  </entry><entry>The number of messages in the mailbox *
 </entry></row>
-<row><entry>%M  </entry><entry>the number of messages shown (i.e., which match the current limit) *
+<row><entry>%M  </entry><entry>The number of messages shown (i.e., which match the current limit) *
 </entry></row>
-<row><entry>%n  </entry><entry>number of new messages in the mailbox *
+<row><entry>%n  </entry><entry>Number of new messages in the mailbox *
 </entry></row>
-<row><entry>%o  </entry><entry>number of old unread messages *
+<row><entry>%o  </entry><entry>Number of old unread messages *
 </entry></row>
-<row><entry>%p  </entry><entry>number of postponed messages *
+<row><entry>%p  </entry><entry>Number of postponed messages *
 </entry></row>
-<row><entry>%P  </entry><entry>percentage of the way through the index
+<row><entry>%P  </entry><entry>Percentage of the way through the index
 </entry></row>
-<row><entry>%r  </entry><entry>modified/read-only/won't-write/attach-message indicator,
-according to <link linkend="status-chars">$status_chars</link>
+<row><entry>%r  </entry><entry>Modified/read-only/won't-write/attach-message indicator,
+According to <link linkend="status-chars">$status_chars</link>
 </entry></row>
-<row><entry>%s  </entry><entry>current sorting mode (<link linkend="sort">$sort</link>)
+<row><entry>%R  </entry><entry>Number of read messages *
 </entry></row>
-<row><entry>%S  </entry><entry>current aux sorting method (<link linkend="sort-aux">$sort_aux</link>)
+<row><entry>%s  </entry><entry>Current sorting mode (<link linkend="sort">$sort</link>)
 </entry></row>
-<row><entry>%t  </entry><entry>number of tagged messages *
+<row><entry>%S  </entry><entry>Current aux sorting method (<link linkend="sort-aux">$sort_aux</link>)
 </entry></row>
-<row><entry>%u  </entry><entry>number of unread messages *
+<row><entry>%t  </entry><entry>Number of tagged messages *
+</entry></row>
+<row><entry>%u  </entry><entry>Number of unread messages *
 </entry></row>
 <row><entry>%v  </entry><entry>NeoMutt version string
 </entry></row>
-<row><entry>%V  </entry><entry>currently active limit pattern, if any *
+<row><entry>%V  </entry><entry>Currently active limit pattern, if any *
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with <quote>X</quote>
+<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with <quote>X</quote>
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with <quote>X</quote>
+<row><entry>%|X </entry><entry>Pad to the end of the line with <quote>X</quote>
 </entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character <quote>X</quote> as pad
+<row><entry>%*X </entry><entry>Soft-fill with character <quote>X</quote> as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -22874,16 +22959,6 @@ When <emphasis>set</emphasis>, searches will wrap around the first (or last) ite
 </para>
 </sect2>
 
-<sect2 id="wrapmargin">
-<title>wrapmargin</title>
-<literallayout>Type: number
-Default: 0</literallayout>
-
-<para>
-(DEPRECATED) Equivalent to setting <link linkend="wrap">$wrap</link> with a negative value.
-</para>
-</sect2>
-
 <sect2 id="write-bcc">
 <title>write_bcc</title>
 <literallayout>Type: boolean
@@ -23030,8 +23105,10 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;delete-pattern&gt;</literal></entry><entry>D</entry><entry>delete messages matching a pattern</entry></row>
 <row><entry><literal>&lt;delete-thread&gt;</literal></entry><entry>^D</entry><entry>delete all messages in thread</entry></row>
 <row><entry><literal>&lt;delete-subthread&gt;</literal></entry><entry>Esc d</entry><entry>delete all messages in subthread</entry></row>
-<row><entry><literal>&lt;edit&gt;</literal></entry><entry>e</entry><entry>edit the raw message</entry></row>
+<row><entry><literal>&lt;edit&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
+<row><entry><literal>&lt;edit-raw-message&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
 <row><entry><literal>&lt;edit-label&gt;</literal></entry><entry>Y</entry><entry>add, change, or delete a message's label</entry></row>
+<row><entry><literal>&lt;edit-or-view-raw-message&gt;</literal></entry><entry>e</entry><entry>edit the raw message if the mailbox is not read-only, otherwise view it</entry></row>
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
 <row><entry><literal>&lt;forward-message&gt;</literal></entry><entry>f</entry><entry>forward a message with comments</entry></row>
 <row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>forward to newsgroup</entry></row>
@@ -23084,6 +23161,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;undelete-subthread&gt;</literal></entry><entry>Esc u</entry><entry>undelete all messages in subthread</entry></row>
 <row><entry><literal>&lt;undelete-thread&gt;</literal></entry><entry>^U</entry><entry>undelete all messages in thread</entry></row>
 <row><entry><literal>&lt;view-attachments&gt;</literal></entry><entry>v</entry><entry>show MIME attachments</entry></row>
+<row><entry><literal>&lt;view-raw-message&gt;</literal></entry><entry></entry><entry>show the raw message</entry></row>
 <row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>show the NeoMutt version number and date</entry></row>
 <row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>set a status flag on a message</entry></row>
 <row><entry><literal>&lt;clear-flag&gt;</literal></entry><entry>W</entry><entry>clear a status flag from a message</entry></row>
@@ -23162,8 +23240,10 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;delete-subthread&gt;</literal></entry><entry>Esc d</entry><entry>delete all messages in subthread</entry></row>
 <row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>set a status flag on a message</entry></row>
 <row><entry><literal>&lt;clear-flag&gt;</literal></entry><entry>W</entry><entry>clear a status flag from a message</entry></row>
-<row><entry><literal>&lt;edit&gt;</literal></entry><entry>e</entry><entry>edit the raw message</entry></row>
+<row><entry><literal>&lt;edit&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
+<row><entry><literal>&lt;edit-raw-message&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
 <row><entry><literal>&lt;edit-label&gt;</literal></entry><entry>Y</entry><entry>add, change, or delete a message's label</entry></row>
+<row><entry><literal>&lt;edit-or-view-raw-message&gt;</literal></entry><entry>e</entry><entry>edit the raw message if the mailbox is not read-only, otherwise view it</entry></row>
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
 <row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>followup to newsgroup</entry></row>
 <row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>forward to newsgroup</entry></row>
@@ -23211,6 +23291,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;undelete-subthread&gt;</literal></entry><entry>Esc u</entry><entry>undelete all messages in subthread</entry></row>
 <row><entry><literal>&lt;undelete-thread&gt;</literal></entry><entry>^U</entry><entry>undelete all messages in thread</entry></row>
 <row><entry><literal>&lt;view-attachments&gt;</literal></entry><entry>v</entry><entry>show MIME attachments</entry></row>
+<row><entry><literal>&lt;view-raw-message&gt;</literal></entry><entry></entry><entry>show the raw message</entry></row>
 <row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>show the NeoMutt version number and date</entry></row>
 <row><entry><literal>&lt;search-toggle&gt;</literal></entry><entry>\\</entry><entry>toggle search pattern coloring</entry></row>
 <row><entry><literal>&lt;display-address&gt;</literal></entry><entry>@</entry><entry>display full address of sender</entry></row>
