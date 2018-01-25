@@ -2706,6 +2706,13 @@ color sidebar_divider   color8  default
         <para>Once you have successfully finished the key selection, the
         message will be encrypted using the selected public keys when sent
         out.</para>
+	<para>
+	To ensure you can view encrypted messages you have sent, you
+	may wish to set <link linkend="pgp-self-encrypt">$pgp_self_encrypt</link>
+	and <link linkend="pgp-default-key">$pgp_default_key</link> for PGP, or
+	<link linkend="smime-self-encrypt">$smime_self_encrypt</link>
+	and <link linkend="smime-default-key">$smime_default_key</link> for S/MIME.
+	</para>
         <para>Most fields of the entries in the key selection menu (see also
         <link linkend="pgp-entry-format">$pgp_entry_format</link>) have obvious
         meanings. But some explanations on the capabilities, flags, and
@@ -4659,7 +4666,9 @@ unignore posted-to:
       <para>NeoMutt provides a number of advanced features for handling (possibly
       many) folders and new mail within them, please refer to
       <xref linkend="feature/new-mail" />for details (including in what situations and
-      how often NeoMutt checks for new mail).</para>
+      how often NeoMutt checks for new mail).  Additionally,
+      <link linkend="new-mail-command">$new_mail_command</link> can be used
+      to run a command when new mail is detected.</para>
       <para>The
       <quote>unmailboxes</quote> command is used to remove a token from the list
       of folders which receive mail. Use
@@ -7864,7 +7873,7 @@ subjectrx '\[[^\]]*\]:? *' '%L%R'
       <sect2 id="new-mail-polling">
         <title>Polling For New Mail</title>
         <para>When in the index menu and being idle (also see
-        <link linkend="feature/timeout">$timeout</link>), NeoMutt periodically checks for
+        <link linkend="timeout">$timeout</link>), NeoMutt periodically checks for
         new mail in all folders which have been configured via the
         <command>mailboxes</command> command. The interval depends on the folder
         type: for local/IMAP folders it consults
@@ -9208,7 +9217,7 @@ smtp://user@host:587/
       <para>Polling for new mail on an IMAP server can cause noticeable delays.
       So, you'll want to carefully tune the
       <link linkend="mail-check">$mail_check</link> and
-      <link linkend="feature/timeout">$timeout</link> variables. Reasonable values
+      <link linkend="timeout">$timeout</link> variables. Reasonable values
       are:</para>
       <screen>
 set mail_check=90
@@ -10514,20 +10523,23 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
       <link linkend="fcc-clear">$fcc_clear</link>.</para>
       <para>A better option is to enable
       <link linkend="smime-self-encrypt">$smime_self_encrypt</link>, then set
-      <link linkend="smime-self-encrypt-as">$smime_self_encrypt_as</link> to your
+      <link linkend="smime-default-key">$smime_default_key</link> to your
       personal S/MIME key id.</para>
       <screen>
-set smime_self_encrypt     = yes
-set smime_self_encrypt_as  = bb345e23.0
+set smime_self_encrypt = yes
+set smime_default_key  = bb345e23.0
 </screen>
       <para>Or, if you use PGP,
       <link linkend="pgp-self-encrypt">$pgp_self_encrypt</link>, then set
-      <link linkend="pgp-self-encrypt-as">$pgp_self_encrypt_as</link> to your personal PGP key
-      id.</para>
+      <link linkend="pgp-default-key">$pgp_default_key</link> to your personal
+      PGP key id.</para>
       <screen>
-set pgp_self_encrypt    = yes
-set pgp_self_encrypt_as = A4AF18C5582473BD35A1E9CE78BB3D480042198E
+set pgp_self_encrypt = yes
+set pgp_default_key  = A4AF18C5582473BD35A1E9CE78BB3D480042198E
 </screen>
+      <para>If you have different key for signing, then you can set
+      <link linkend="pgp-sign-as">$pgp_sign_as</link> or
+      <link linkend="smime-sign-as">$smime_sign_as</link> respectively.</para>
     </sect1>
 
     <sect1 id="encrypt-to-self-variables">
@@ -10546,14 +10558,7 @@ set pgp_self_encrypt_as = A4AF18C5582473BD35A1E9CE78BB3D480042198E
           <tbody>
             <row>
               <entry>
-                <literal>smime_self_encrypt</literal>
-              </entry>
-              <entry>boolean</entry>
-              <entry><literal>no</literal></entry>
-            </row>
-            <row>
-              <entry>
-                <literal>smime_self_encrypt_as</literal>
+                <literal>pgp_default_key</literal>
               </entry>
               <entry>string</entry>
               <entry>(empty)</entry>
@@ -10563,11 +10568,32 @@ set pgp_self_encrypt_as = A4AF18C5582473BD35A1E9CE78BB3D480042198E
                 <literal>pgp_self_encrypt</literal>
               </entry>
               <entry>boolean</entry>
-              <entry><literal>no</literal></entry>
+              <entry><literal>yes</literal></entry>
             </row>
             <row>
               <entry>
-                <literal>pgp_self_encrypt_as</literal>
+                <literal>pgp_sign_as</literal>
+              </entry>
+              <entry>string</entry>
+              <entry>(empty)</entry>
+            </row>
+            <row>
+              <entry>
+                <literal>smime_default_key</literal>
+              </entry>
+              <entry>string</entry>
+              <entry>(empty)</entry>
+            </row>
+            <row>
+              <entry>
+                <literal>smime_self_encrypt</literal>
+              </entry>
+              <entry>boolean</entry>
+              <entry><literal>yes</literal></entry>
+            </row>
+            <row>
+              <entry>
+                <literal>smime_sign_as</literal>
               </entry>
               <entry>string</entry>
               <entry>(empty)</entry>
@@ -10586,12 +10612,14 @@ set pgp_self_encrypt_as = A4AF18C5582473BD35A1E9CE78BB3D480042198E
 # VARIABLES - shown with their default values
 # --------------------------------------------------------------------------
 # Save a copy of outgoing email, encrypted to yourself</emphasis>
-set smime_self_encrypt = "no"
-<emphasis role="comment"># set smime_self_encrypt_as = "SMIME-KEY"
+set pgp_self_encrypt = "yes"
+set pgp_default_key = "PGP-KEY"
+<emphasis role="comment"># set pgp_sign_as = "PGP-SIGNING-KEY"
 
 # Save a copy of outgoing email, encrypted to yourself</emphasis>
-set pgp_self_encrypt = "no"
-<emphasis role="comment">set pgp_self_encrypt_as = "PGP-KEY"
+set smime_self_encrypt = "yes"
+set smime_default_key = "SMIME-KEY"
+<emphasis role="comment"># set smime_sign_as = "SMIME-SIGNING-KEY"
 
 # vim: syntax=neomuttrc</emphasis>
 </screen>
@@ -10944,7 +10972,7 @@ shutdown-hook 'exec sync-mailbox'
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="feature/timeout">$timeout</link>
+            <link linkend="timeout">$timeout</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -18117,18 +18145,6 @@ UTF-8 encoded domains. (IDN only)
 </para>
 </sect2>
 
-<sect2 id="ignore-linear-white-space">
-<title>ignore_linear_white_space</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-This option replaces linear-white-space between encoded-word
-and text to a single space to prevent the display of MIME-encoded
-<quote>Subject:</quote> field from being divided into multiple lines.
-</para>
-</sect2>
-
 <sect2 id="ignore-list-reply-to">
 <title>ignore_list_reply_to</title>
 <literallayout>Type: boolean
@@ -18673,7 +18689,7 @@ Default: 5</literallayout>
 
 <para>
 This variable configures how often (in seconds) NeoMutt should look for
-new mail. Also see the <link linkend="feature/timeout">$timeout</link> variable.
+new mail. Also see the <link linkend="timeout">$timeout</link> variable.
 </para>
 </sect2>
 
@@ -19687,7 +19703,8 @@ string otherwise. Note: This may be used with a %? construct.
 <row><entry>%s </entry><entry>Expands to the name of a file containing the signature part
            of a <literal>multipart/signed</literal> attachment when verifying it.
 </entry></row>
-<row><entry>%a </entry><entry>The value of <link linkend="pgp-sign-as">$pgp_sign_as</link>.
+<row><entry>%a </entry><entry>The value of <link linkend="pgp-sign-as">$pgp_sign_as</link> if set, otherwise the value
+of <link linkend="pgp-default-key">$pgp_default_key</link>.
 </entry></row>
 <row><entry>%r </entry><entry>One or more key IDs (or fingerprints if available).
 </entry></row></tbody></tgroup></informaltable>
@@ -19728,6 +19745,25 @@ from <link linkend="pgp-decrypt-command">$pgp_decrypt_command</link> contains th
 protect against a spoofed encrypted message, with multipart/encrypted
 headers but containing a block that is not actually encrypted.
 (e.g. simply signed and ascii armored text).
+(PGP only)
+</para>
+</sect2>
+
+<sect2 id="pgp-default-key">
+<title>pgp_default_key</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+This is the default key-pair to use for PGP operations.  It will be
+used for encryption (see <link linkend="postpone-encrypt">$postpone_encrypt</link> and <link linkend="pgp-self-encrypt">$pgp_self_encrypt</link>).
+</para>
+<para>
+It will also be used for signing unless <link linkend="pgp-sign-as">$pgp_sign_as</link> is set.
+</para>
+<para>
+The (now deprecated) <emphasis>pgp_self_encrypt_as</emphasis> is an alias for this
+variable, and should no longer be used.
 (PGP only)
 </para>
 </sect2>
@@ -20016,24 +20052,11 @@ removed, while the inner <literal>multipart/signed</literal> part is retained.
 <sect2 id="pgp-self-encrypt">
 <title>pgp_self_encrypt</title>
 <literallayout>Type: boolean
-Default: no</literallayout>
+Default: yes</literallayout>
 
 <para>
 When <emphasis>set</emphasis>, PGP encrypted messages will also be encrypted
-using the key in <link linkend="pgp-self-encrypt-as">$pgp_self_encrypt_as</link>.
-(PGP only)
-</para>
-</sect2>
-
-<sect2 id="pgp-self-encrypt-as">
-<title>pgp_self_encrypt_as</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-This is an additional key used to encrypt messages when <link linkend="pgp-self-encrypt">$pgp_self_encrypt</link>
-is <emphasis>set</emphasis>.  It is also used to specify the key for <link linkend="postpone-encrypt">$postpone_encrypt</link>.
-It should be in keyid or fingerprint form (e.g. 0x00112233).
+using the key in <link linkend="pgp-default-key">$pgp_default_key</link>.
 (PGP only)
 </para>
 </sect2>
@@ -20057,9 +20080,10 @@ have been marked as <quote>disabled</quote> by the user.
 Default: (empty)</literallayout>
 
 <para>
-If you have more than one key pair, this option allows you to specify
-which of your private keys to use.  It is recommended that you use the
-keyid form to specify your key (e.g. <literal>0x00112233</literal>).
+If you have a different key pair to use for signing, you should
+set this to the signing key.  Most people will only need to set
+<link linkend="pgp-default-key">$pgp_default_key</link>.  It is recommended that you use the keyid form
+to specify your key (e.g. <literal>0x00112233</literal>).
 (PGP only)
 </para>
 </sect2>
@@ -20409,7 +20433,7 @@ Default: no</literallayout>
 <para>
 When <emphasis>set</emphasis>, postponed messages that are marked for encryption will be
 self-encrypted.  NeoMutt will first try to encrypt using the value specified
-in <link linkend="pgp-self-encrypt-as">$pgp_self_encrypt_as</link> or <link linkend="smime-self-encrypt-as">$smime_self_encrypt_as</link>.  If those are not
+in <link linkend="pgp-default-key">$pgp_default_key</link> or <link linkend="smime-default-key">$smime_default_key</link>.  If those are not
 set, it will try the deprecated <link linkend="postpone-encrypt-as">$postpone_encrypt_as</link>.
 (Crypto only)
 </para>
@@ -20422,7 +20446,7 @@ Default: (empty)</literallayout>
 
 <para>
 This is a deprecated fall-back variable for <link linkend="postpone-encrypt">$postpone_encrypt</link>.
-Please use <link linkend="pgp-self-encrypt-as">$pgp_self_encrypt_as</link> or <link linkend="smime-self-encrypt-as">$smime_self_encrypt_as</link>.
+Please use <link linkend="pgp-default-key">$pgp_default_key</link> or <link linkend="smime-default-key">$smime_default_key</link>.
 (Crypto only)
 </para>
 </sect2>
@@ -20750,12 +20774,12 @@ Also see <link linkend="wrap">$wrap</link>.
 <sect2 id="reply-regexp">
 <title>reply_regexp</title>
 <literallayout>Type: regular expression
-Default: <quote><literal>^(re([\[0-9\]+])*|aw):[ \t]*</literal></quote></literallayout>
+Default: <quote><literal>^((re|aw|sv)(\[[0-9]+\])*:[ \t]*)*</literal></quote></literallayout>
 
 <para>
 A regular expression used to recognize reply messages when threading
-and replying. The default value corresponds to the English "Re:" and
-the German "Aw:".
+and replying. The default value corresponds to the English "Re:", the
+German "Aw:" and the Swedish "Sv:".
 </para>
 </sect2>
 
@@ -21654,8 +21678,23 @@ to determine the key to use. It will ask you to supply a key, if it can't find o
 Default: (empty)</literallayout>
 
 <para>
-This is the default key-pair to use for signing. This must be set to the
-keyid (the hash-value that OpenSSL generates) to work properly
+This is the default key-pair to use for S/MIME operations, and must be
+set to the keyid (the hash-value that OpenSSL generates) to work properly.
+</para>
+<para>
+It will be used for encryption (see <link linkend="postpone-encrypt">$postpone_encrypt</link> and
+<link linkend="smime-self-encrypt">$smime_self_encrypt</link>).
+</para>
+<para>
+It will be used for decryption unless <link linkend="smime-decrypt-use-default-key">$smime_decrypt_use_default_key</link>
+is <emphasis>unset</emphasis>.
+</para>
+<para>
+It will also be used for signing unless <link linkend="smime-sign-as">$smime_sign_as</link> is set.
+</para>
+<para>
+The (now deprecated) <emphasis>smime_self_encrypt_as</emphasis> is an alias for this
+variable, and should no longer be used.
 (S/MIME only)
 </para>
 </sect2>
@@ -21750,7 +21789,8 @@ This command is used to import a certificate via smime_keys.
 </para>
 <para>
 This is a format string, see the <link linkend="smime-decrypt-command">$smime_decrypt_command</link> command for
-possible <literal>printf(3)</literal>-like sequences.
+possible <literal>printf(3)</literal>-like sequences.  NOTE: %c and %k will default
+to <link linkend="smime-sign-as">$smime_sign_as</link> if set, otherwise <link linkend="smime-default-key">$smime_default_key</link>.
 (S/MIME only)
 </para>
 </sect2>
@@ -21805,25 +21845,23 @@ possible <literal>printf(3)</literal>-like sequences.
 <sect2 id="smime-self-encrypt">
 <title>smime_self_encrypt</title>
 <literallayout>Type: boolean
-Default: no</literallayout>
+Default: yes</literallayout>
 
 <para>
 When <emphasis>set</emphasis>, S/MIME encrypted messages will also be encrypted
-using the certificate in <link linkend="smime-self-encrypt-as">$smime_self_encrypt_as</link>.
+using the certificate in <link linkend="smime-default-key">$smime_default_key</link>.
 (S/MIME only)
 </para>
 </sect2>
 
-<sect2 id="smime-self-encrypt-as">
-<title>smime_self_encrypt_as</title>
+<sect2 id="smime-sign-as">
+<title>smime_sign_as</title>
 <literallayout>Type: string
 Default: (empty)</literallayout>
 
 <para>
-This is an additional certificate used to encrypt messages when
-<link linkend="smime-self-encrypt">$smime_self_encrypt</link> is <emphasis>set</emphasis>.  It is also used to specify the
-certificate for <link linkend="postpone-encrypt">$postpone_encrypt</link>.  It should be the hash-value that
-OpenSSL generates.
+If you have a separate key to use for signing, you should set this
+to the signing key. Most people will only need to set <link linkend="smime-default-key">$smime_default_key</link>.
 (S/MIME only)
 </para>
 </sect2>
@@ -22558,7 +22596,7 @@ Also see the <quote><link linkend="guide/tuning">tuning</link></quote> section o
 </para>
 </sect2>
 
-<sect2 id="feature/timeout">
+<sect2 id="timeout">
 <title>timeout</title>
 <literallayout>Type: number
 Default: 600</literallayout>
