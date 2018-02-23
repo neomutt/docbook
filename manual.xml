@@ -9,7 +9,7 @@
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 20171215</releaseinfo>
+    <releaseinfo>version 20180223</releaseinfo>
     <abstract>
       <para>
       <quote>All mail clients suck. This one just sucks less.</quote>— me,
@@ -1319,6 +1319,13 @@ color sidebar_divider   color8  default
                 <entry>recall next string from history</entry>
               </row>
               <row>
+                <entry>^R</entry>
+                <entry>
+                  <literal>&lt;history-search&gt;</literal>
+                </entry>
+                <entry>use current input to search history</entry>
+              </row>
+              <row>
                 <entry>&lt;BackSpace&gt;</entry>
                 <entry>
                   <literal>&lt;backspace&gt;</literal>
@@ -2254,7 +2261,7 @@ color sidebar_divider   color8  default
             <anchor id="toggle-quoted" />(default: T)</term>
             <listitem>
               <para>The pager uses the
-              <link linkend="quote-regexp">$quote_regexp</link> variable to
+              <link linkend="quote-regex">$quote_regex</link> variable to
               detect quoted text when displaying the body of the message. This
               function toggles the display of the quoted material in the
               message. It is particularly useful when being interested in just
@@ -4053,7 +4060,7 @@ folder-hook work "set sort=threads"
         </listitem>
         <listitem>
           <para>quoted (text matching
-          <link linkend="quote-regexp">$quote_regexp</link> in the body of a
+          <link linkend="quote-regex">$quote_regex</link> in the body of a
           message)</para>
         </listitem>
         <listitem>
@@ -10411,9 +10418,9 @@ close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &
         and the four format strings.</para>
         <screen>
 %&lt;[y?                                       &amp;%[%m/%y ]&gt;  Older
-    %&lt;[m?                        &amp;%[%b %d]&gt;             This year
+   %&lt;[m?                        &amp;%[%b %d]&gt;             This year
         %&lt;[d?         &amp;%[%a %d]&gt;                       This month
-              %[%H:%M ]                                 Today
+             %[%H:%M ]                                 Today
 </screen>
         <para>This a another view of the same example, with some whitespace
         for clarity.</para>
@@ -10749,7 +10756,7 @@ set smime_default_key = "SMIME-KEY"
       certain keyword but there are no attachments added. This is meant to
       ensure that the user does not forget to attach a file after promising
       to do so in the mail.  The attachment keyword will not be scanned in
-      text matched by <link linkend="quote-regexp">$quote_regexp</link>.
+      text matched by <link linkend="quote-regex">$quote_regex</link>.
       </para>
     </sect1>
 
@@ -20615,8 +20622,8 @@ prompted for confirmation when you try to quit.
 </para>
 </sect2>
 
-<sect2 id="quote-regexp">
-<title>quote_regexp</title>
+<sect2 id="quote-regex">
+<title>quote_regex</title>
 <literallayout>Type: regular expression
 Default: <quote><literal>^([ \t]*[|&gt;:}#])+</literal></quote></literallayout>
 
@@ -20771,8 +20778,8 @@ Also see <link linkend="wrap">$wrap</link>.
 </para>
 </sect2>
 
-<sect2 id="reply-regexp">
-<title>reply_regexp</title>
+<sect2 id="reply-regex">
+<title>reply_regex</title>
 <literallayout>Type: regular expression
 Default: <quote><literal>^((re|aw|sv)(\[[0-9]+\])*:[ \t]*)*</literal></quote></literallayout>
 
@@ -21565,7 +21572,7 @@ Default: <quote><literal>(&gt;From )|(:[-^]?[][)(&gt;&lt;}{|/DP])</literal></quo
 
 <para>
 The <emphasis>pager</emphasis> uses this variable to catch some common false
-positives of <link linkend="quote-regexp">$quote_regexp</link>, most notably smileys and not consider
+positives of <link linkend="quote-regex">$quote_regex</link>, most notably smileys and not consider
 a line quoted text if it also matches <link linkend="smileys">$smileys</link>. This mostly
 happens at the beginning of a line.
 </para>
@@ -22159,6 +22166,25 @@ variable <literal>$MAIL</literal> or <literal>$MAILDIR</literal> if either is de
 </para>
 </sect2>
 
+<sect2 id="ssl-ca-certificates-file">
+<title>ssl_ca_certificates_file</title>
+<literallayout>Type: path
+Default: (empty)</literallayout>
+
+<para>
+This variable specifies a file containing trusted CA certificates.
+Any server certificate that is signed with one of these CA
+certificates is also automatically accepted. (GnuTLS only)
+</para>
+<para>
+Example:
+
+</para>
+
+<screen>
+set ssl_ca_certificates_file=/etc/ssl/certs/ca-certificates.crt
+</screen></sect2>
+
 <sect2 id="ssl-client-cert">
 <title>ssl_client_cert</title>
 <literallayout>Type: path
@@ -22181,6 +22207,18 @@ to remote servers be encrypted. Furthermore it will attempt to
 negotiate TLS even if the server does not advertise the capability,
 since it would otherwise have to abort the connection anyway. This
 option supersedes <link linkend="ssl-starttls">$ssl_starttls</link>.
+</para>
+</sect2>
+
+<sect2 id="ssl-min-dh-prime-bits">
+<title>ssl_min_dh_prime_bits</title>
+<literallayout>Type: number
+Default: 0</literallayout>
+
+<para>
+This variable specifies the minimum acceptable prime size (in bits)
+for use in any Diffie-Hellman key exchange. A value of 0 will use
+the default from the GNUTLS library. (GnuTLS only)
 </para>
 </sect2>
 
@@ -23569,6 +23607,7 @@ bindings for all menus (except as noted).
 </thead>
 <tbody>
 <row><entry><literal>&lt;change-dir&gt;</literal></entry><entry>c</entry><entry>change directories</entry></row>
+<row><entry><literal>&lt;goto-parent&gt;</literal></entry><entry>p</entry><entry>go to parent directory</entry></row>
 <row><entry><literal>&lt;display-filename&gt;</literal></entry><entry>@</entry><entry>display the currently selected file's name</entry></row>
 <row><entry><literal>&lt;enter-mask&gt;</literal></entry><entry>m</entry><entry>enter a file mask</entry></row>
 <row><entry><literal>&lt;sort&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
@@ -23694,6 +23733,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;buffy-cycle&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>cycle among incoming mailboxes</entry></row>
 <row><entry><literal>&lt;history-up&gt;</literal></entry><entry></entry><entry>scroll up through the history list</entry></row>
 <row><entry><literal>&lt;history-down&gt;</literal></entry><entry></entry><entry>scroll down through the history list</entry></row>
+<row><entry><literal>&lt;history-search&gt;</literal></entry><entry>^R</entry><entry>search through the history list</entry></row>
 <row><entry><literal>&lt;transpose-chars&gt;</literal></entry><entry></entry><entry>transpose character under cursor with previous</entry></row>
 
 </tbody>
