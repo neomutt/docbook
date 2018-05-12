@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 20180323</releaseinfo>
+    <releaseinfo>version 20180512</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -35,7 +35,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <title>NeoMutt Home Page</title>
       <para>
         The homepage can be found at
-        <ulink url="https://www.neomutt.org">https://www.neomutt.org</ulink>.
+        <ulink url="https://neomutt.org">https://neomutt.org</ulink>.
       </para>
     </sect1>
 
@@ -104,7 +104,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <para>
         For contributing code patches for new features and bug fixes,
         please refer to the developer pages at
-        <ulink url="https://www.neomutt.org/dev.html">https://www.neomutt.org/dev.html</ulink>
+        <ulink url="https://neomutt.org/dev.html">https://neomutt.org/dev.html</ulink>
         for more details.
       </para>
     </sect1>
@@ -181,7 +181,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
     <sect1 id="copyright">
       <title>Copyright</title>
       <para>
-        NeoMutt is Copyright © 1996-2016 Michael R. Elkins
+        NeoMutt is Copyright © 1996-2018 Michael R. Elkins
         <email>me@neomutt.org</email> and others.
       </para>
       <para>
@@ -211,7 +211,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       There are many other features which are described elsewhere in the
       manual. There is even more information available in the NeoMutt FAQ and
       various web pages. See the
-      <ulink url="https://www.neomutt.org">NeoMutt homepage</ulink> for more
+      <ulink url="https://neomutt.org">NeoMutt homepage</ulink> for more
       details.
     </para>
     <para>
@@ -5105,10 +5105,13 @@ unignore posted-to:
         specifying the list address via the <command>lists</command> command
         (except the group feature). Once you have done this, the
         <link linkend="list-reply"><literal>&lt;list-reply&gt;</literal></link>
-        function will work for all known lists. Additionally, when you send
-        a message to a subscribed list, NeoMutt will add a Mail-Followup-To
-        header to tell other users' mail user agents not to send copies of
-        replies to your personal address.
+        function will work for all known lists. Additionally, when you send a
+        message to a known list and <link linkend="followup-to">$followup_to</link>
+        is set, Mutt will add a Mail-Followup-To header.  For unsubscribed
+        lists, this will include your personal address, ensuring you receive a
+        copy of replies.  For subscribed mailing lists, the header will not,
+        telling other users' mail user agents not to send copies of replies to
+        your personal address.
       </para>
       <note>
         <para>
@@ -5697,9 +5700,9 @@ message-hook '~f freshmeat-news' 'set pager="less \"+/^  subject: .*\""'
         <link linkend="patterns">patterns</link> section (note: For efficiency
         reasons, patterns which scan information not available in the index,
         such as <literal>~b</literal>, <literal>~B</literal>,
-        <literal>~h</literal>, or <literal>~X</literal> may not be used).
-        <emphasis>value</emphasis> is a positive or negative integer.
-        A message's final score is the sum total of all matching
+        <literal>~h</literal>, <literal>~M</literal>, or <literal>~X</literal>
+        may not be used).  <emphasis>value</emphasis> is a positive or negative
+        integer. A message's final score is the sum total of all matching
         <command>score</command> entries. However, you may optionally prefix
         <emphasis>value</emphasis> with an equal sign (<quote>=</quote>) to
         cause evaluation to stop at a particular entry if there is a match.
@@ -7096,14 +7099,13 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 <entry>~b <emphasis>EXPR</emphasis></entry>
                 <entry>
                   messages which contain <emphasis>EXPR</emphasis> in the
-                  message body
+                  message body ***)
                 </entry>
               </row>
               <row>
                 <entry>=b <emphasis>STRING</emphasis></entry>
                 <entry>
-                  messages which contain <emphasis>STRING</emphasis> in the
-                  message body. If IMAP is enabled, searches for
+                  If IMAP is enabled, like ~b but searches for
                   <emphasis>STRING</emphasis> on the server, rather than
                   downloading each message and searching it locally.
                 </entry>
@@ -7111,16 +7113,15 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               <row>
                 <entry>~B <emphasis>EXPR</emphasis></entry>
                 <entry>
-                  messages which contain <emphasis>EXPR</emphasis> in the whole
-                  message
+                  messages which contain <emphasis>EXPR</emphasis>in the whole
+                  message ***)
                 </entry>
               </row>
               <row>
                 <entry>=B <emphasis>STRING</emphasis></entry>
                 <entry>
-                  messages which contain <emphasis>STRING</emphasis> in the
-                  whole message. If IMAP is enabled, searches for
-                  <emphasis>STRING</emphasis> on the server, rather than
+                  If IMAP is enabled, like ~B but searches for
+                  <emphasis>STRING</emphasis>on the server, rather than
                   downloading each message and searching it locally.
                 </entry>
               </row>
@@ -7216,19 +7217,18 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               <row>
                 <entry>~h <emphasis>EXPR</emphasis></entry>
                 <entry>
-                  messages which contain <emphasis>EXPR</emphasis> in the
-                  message header
+                  messages which contain <emphasis>EXPR</emphasis>in the
+                  message header ***)
                 </entry>
               </row>
               <row>
                 <entry>=h <emphasis>STRING</emphasis></entry>
                 <entry>
-                  messages which contain <emphasis>STRING</emphasis> in the
-                  message header. If IMAP is enabled, searches for
-                  <emphasis>STRING</emphasis> on the server, rather than
+                  If IMAP is enabled, like ~h but searches for
+                  <emphasis>STRING</emphasis>on the server, rather than
                   downloading each message and searching it locally;
-                  <emphasis>STRING</emphasis> must be of the form
-                  <quote>header: substring</quote> (see below).
+                  <emphasis>STRING</emphasis>must be of the form
+                  <quote>header: substring</quote>(see below).
                 </entry>
               </row>
               <row>
@@ -7302,6 +7302,13 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 <entry>
                   messages with offsets (from selected message) in the range
                   <emphasis>MIN</emphasis> to <emphasis>MAX</emphasis>&#160;***)
+                </entry>
+              </row>
+              <row>
+                <entry>~M <emphasis>EXPR</emphasis></entry>
+                <entry>
+                   messages which contain a mime Content-Type matching
+                   <emphasis>EXPR</emphasis>****)
                 </entry>
               </row>
               <row>
@@ -7411,10 +7418,10 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 </entry>
               </row>
               <row>
-                <entry>~X [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
+                <entry>~X [ <emphasis>MIN</emphasis>]-[ <emphasis>MAX</emphasis>]</entry>
                 <entry>
-                  messages with <emphasis>MIN</emphasis> to
-                  <emphasis>MAX</emphasis> attachments&#160;*)
+                  messages with <emphasis>MIN</emphasis>to
+                  <emphasis>MAX</emphasis>attachments *) ****)
                 </entry>
               </row>
               <row>
@@ -7509,20 +7516,32 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
           Read on and see <xref linkend="message-ranges" /> below.
         </para>
         <para>
+          ****) These patterns read each message in, and can therefore be much
+          slower.  Over IMAP this will entail downloading each message.  They
+          can not be used for <link linkend="score-command">message scoring</link>,
+          and it is recommended to avoid using them for index coloring.
+        </para>
+        <para>
           Special attention has to be paid when using regular expressions
           inside of patterns. Specifically, NeoMutt's parser for these patterns
           will strip one level of backslash (<quote>\</quote>), which is
           normally used for quoting. If it is your intention to use a backslash
           in the regular expression, you will need to use two backslashes
-          instead (<quote>\\</quote>). You can force NeoMutt to treat
+          instead (<quote>\\</quote>).
+        </para>
+        <para>
+          You can force NeoMutt to treat
           <emphasis>EXPR</emphasis> as a simple substring instead of a regular
           expression by using = instead of ~ in the pattern name. For example,
           <literal>=b *.*</literal> will find all messages that contain the
           literal string <quote>*.*</quote>. Simple string matches are less
           powerful than regular expressions but can be considerably faster.
-          This is especially true for IMAP folders, because string matches can
-          be performed on the server instead of by fetching every message. IMAP
-          treats <literal>=h</literal> specially: it must be of the form
+        </para>
+        <para>
+          For IMAP folders, string matches <literal>=b</literal>,
+          <literal>=B</literal>, and <literal>=h</literal> will be performed on
+          the server instead of by fetching every message. IMAP treats
+          <literal>=h</literal> specially: it must be of the form
           <quote>header: substring</quote> and will not partially match header
           names. The substring part may be omitted if you simply wish to find
           messages containing a particular header without regard to its value.
@@ -8539,15 +8558,17 @@ roessler@does-not-exist.org        Thomas Roessler mutt pgp
       <para>
         NeoMutt also supports the <literal>Mail-Followup-To</literal> header.
         When you send a message to a list of recipients which includes one or
-        several subscribed mailing lists, and if the
+        several known mailing lists, and if the
         <link linkend="followup-to">$followup_to</link> option is set, NeoMutt
-        will generate a Mail-Followup-To header which contains all the
-        recipients to whom you send this message, but not your address. This
-        indicates that group-replies or list-replies (also known as
+        will generate a Mail-Followup-To header.  If any of the recipients are
+        subscribed mailing lists, this header will contain all the recipients
+        to whom you send this message, but not your address. This indicates
+        that group-replies or list-replies (also known as
         <quote>followups</quote>) to this message should only be sent to the
-        original recipients of the message, and not separately to you – you'll
+        original recipients of the message, and not separately to you - you'll
         receive your copy through one of the mailing lists you are subscribed
-        to.
+        to.  If none of the recipients are subscribed mailing lists, the header
+        will also contain your address, ensuring you receive a copy of replies.
       </para>
       <para>
         Conversely, when group-replying or list-replying to a message which has
@@ -8881,6 +8902,28 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
 <screen>
 macro index \cb |urlview\n
 macro pager \cb |urlview\n
+</screen>
+
+    </sect1>
+
+    <sect1 id="echo">
+      <title>Echoing Text</title>
+      <para>Usage:</para>
+      <cmdsynopsis>
+        <command>echo</command>
+        <arg choice="plain">
+          <replaceable class="parameter">message</replaceable>
+        </arg>
+      </cmdsynopsis>
+      <para>
+        You can print messages to the message window using the "echo" command.
+        This might be useful after a macro finishes executing. After printing
+        the message, echo will pause for the number of seconds specified by 
+        <link linkend="sleep-time">$sleep_time</link>.
+      </para>
+
+<screen>
+echo "Sourcing muttrc file" unset confirmappend macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;echo 'Saved to archive'&lt;enter&gt;"
 </screen>
 
     </sect1>
@@ -9857,54 +9900,225 @@ application/postscript; ps2ascii %s; copiousoutput
 
     <sect1 id="alternative-order">
       <title>MIME Multipart/Alternative</title>
+
       <para>
-        The <literal>multipart/alternative</literal> container type only has
-        child MIME parts which represent the same content in an alternative
-        way. This is often used to send HTML messages which contain an
-        alternative plain text representation.
+        A <literal>multipart/alternative</literal> email has several
+        parts that represent the same content in different formats, such as
+        <literal>text/plain</literal> and <literal>text/html</literal>. This
+        kind of email is heavily used by many modern mail user agents to send
+        HTML messages which contain an alternative plain text representation.
+        You can read and write <literal>multipart/alternative</literal> emails
+        in NeoMutt. 
       </para>
-      <para>
-        NeoMutt has some heuristics for determining which attachment of
-        a <literal>multipart/alternative</literal> type to display:
-      </para>
-      <orderedlist>
-        <listitem>
-          <para>
-            First, NeoMutt will check the <command>alternative_order</command>
-            list to determine if one of the available types is preferred. It
-            consists of a number of MIME types in order, including support for
-            implicit and explicit wildcards. For example:
-          </para>
+
+      <sect2 id="read-alternative-order">
+        <title>Reading Multipart/Alternative Emails</title>
+        <para>
+          NeoMutt has some heuristics for determining which attachment of
+          a <literal>multipart/alternative</literal> type to display:
+        </para>
+        <orderedlist>
+          <listitem>
+            <para>
+              First, NeoMutt will check the <command>alternative_order</command>
+              list to determine if one of the available types is preferred. It
+              consists of a number of MIME types in order, including support for
+              implicit and explicit wildcards. For example:
+            </para>
 
 <screen>
-alternative_order text/enriched text/plain text \
-  application/postscript image/*
+alternative_order text/enriched text/plain text application/postscript image/*
 </screen>
 
-        </listitem>
-        <listitem>
-          <para>
-            Next, NeoMutt will check if any of the types have a defined
-            <link linkend="auto-view"><command>auto_view</command></link>, and
-            use that.
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Failing that, NeoMutt will look for any text type.
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            As a last attempt, NeoMutt will look for any type it knows how to
-            handle.
-          </para>
-        </listitem>
-      </orderedlist>
+          </listitem>
+          <listitem>
+            <para>
+              Next, NeoMutt will check if any of the types have a defined
+              <link linkend="auto-view"><command>auto_view</command></link>, and
+              use that.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Failing that, NeoMutt will look for any text type.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              As a last attempt, NeoMutt will look for any type it knows how to
+              handle.
+            </para>
+          </listitem>
+        </orderedlist>
+        <para>
+          To remove a MIME type from the <command>alternative_order</command>
+          list, use the <command>unalternative_order</command> command.
+        </para>
+      </sect2>
+
+      <sect2 id="compose-alternative-order">
+        <title>Composing Multipart/Alternative Emails</title>
+
+        <para>
+          Noemutt includes some primitive ability to compose multipart/alternative
+          emails:
+        </para>
+        <orderedlist>
+          <listitem>
+            <para>
+              In the Compose menu, attach the two (or more) alternatives as
+              usual. For example, attach "invitation.html" and then "invitation.txt".
+              (You can reorder them using the <literal>&lt;move-up&gt;</literal> (-)
+              and <literal>&lt;move-down&gt;</literal> (+) bindings, and edit the
+              descriptions).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Tag the attachments that are alternatives, and press the
+              <command>&lt;group-alternatives&gt;</command> (&amp;) binding to group
+              them together. After this, the separate parts will be replaced by a single
+              new part with the <literal>multipart/alternative</literal> type and the
+              alternatives must be manipulated or deleted as a group.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Send the email as usual.
+            </para>
+          </listitem>
+        </orderedlist>
+        <para>
+          If all the attachments have been grouped and form a single
+          <literal>multipart/alternative</literal>, part then this message will be sent
+          as a <literal>multipart/alternative</literal> email, otherwise it will be sent
+          as a <literal>multipart/mixed</literal> email.
+        </para>
+        <para>
+          Note that after grouping, you can't view, edit or break the
+          <literal>multipart/alternative</literal> bundle, because it is in a temporary
+          form. But you can view and edit its primitive part using the
+          <command>&lt;edit&gt;</command> command. When postponing emails or on error
+          (e.g., no recipients address when sending emails) this
+          <literal>multipart/alternative</literal> will be broken apart and need to
+          be tagged and group together again as described above.
+        </para>
+
+        <para>
+          Be aware that when sending a <literal>multipart/alternative</literal> email,
+          you have to manually prepare the alternative parts and attach them. However,
+          you can use Neomutt's macro to perform all the operations needed, such that
+          you can compose a plain text email as usual and turn that into a
+          <literal>multipart/alternative</literal> email in one single command, with
+          one part being <literal>text/plain</literal> and the other
+          <literal>text/html</literal>. An example macro will be the following:
+
+<screen>
+macro compose K "| pandoc -o /tmp/neomutt-alternative.html&lt;enter&gt; \
+    &lt;attach-file&gt;/tmp/neomutt-alternative.html&lt;enter&gt; \
+    &lt;tag-entry&gt;&lt;previous-entry&gt;&lt;tag-entry&gt;&lt;group-alternatives&gt;"
+</screen>
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="multipart-multilingual">
+      <title>MIME Multipart/Multilingual</title>
+
       <para>
-        To remove a MIME type from the <command>alternative_order</command>
-        list, use the <command>unalternative_order</command> command.
+        Neomutt includes supports for reading and writing <literal>multipart/multilingual</literal>
+        emails. A <literal>multipart/multilingual</literal> email is like a
+        <literal>multipart/alternative</literal> email, except that it comes with parts of
+        different versions of languages instead of appearances. Its format is described by
+        <ulink url="https://tools.ietf.org/html/rfc8255">RFC8255</ulink>.
       </para>
+
+      <sect2 id="read-multipart-multilingual">
+        <title>Reading Multipart/Multilingual Emails</title>
+        <para>
+          Neomutt uses the <literal>$preferred_languages</literal> variable to determine which
+          languages to display when displaying a <literal>multipart/multilingual</literal> email.
+          You can have several preferred languages, separated by <literal>,</literal>
+<screen>
+set preferred_languages="fr,en,de"
+</screen>
+          Neomutt will try to match these strings again the multilingual header in the received
+          emails "by prefix", e.g., <literal>en</literal> will match both <literal>en</literal>
+          and <literal>en_US</literal>.
+        </para>
+
+        <para>
+          If <literal>$preferred_languages</literal> is not set, it default to None, and the
+          first part of the received <literal>multipart/multilingual</literal> email will be
+          displayed.
+        </para>
+      </sect2>
+
+      <sect2 id="compose-multipart-alternative">
+        <title>Composing Multipart/Multilingual Emails</title>
+        <para>
+          The procedures of composing a <literal>multipart/multilingual</literal> email is similar
+          to those in <link linkend="compose-alternative-order">Composing Multipart/Alternative</link>.
+          You have to prepare every part manually or using some scripts, and then tag and group them
+          together into a <literal>multipart/multilingual</literal> bundle before sending it:
+        </para>
+
+        <orderedlist>
+          <listitem>
+            <para>
+              Prepare parts of the multilingual emails.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Attach them as attachments.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Tag them with <command>&lt;tag-entry&gt;</command>
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Edit the <literal>Content-Language</literal> header of every attachment with command
+              <command>&lt;edit-language&gt;</command> (default to <literal>Ctrl-L</literal>). This
+              is important, otherwise the recipient of this email will not know the corresponding
+              languages. You can set arbitrary string as <literal>Content-Language</literal>, but it
+              is recommended to set it as some common prefixes such as "en", "zh" and "fr".
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Group all the tag messages together by <command>&lt;group-multilingual&gt;</command>
+              (default to <literal>^</literal>).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Send the email as usual.
+            </para>
+          </listitem>
+
+        </orderedlist>
+
+        <para>
+          As in <link linkend="compose-alternative-order">Composing Multipart/Alternative</link>, you can
+          also use Neomutt's macro and some external scripts to combine these procedure into one.
+        </para>
+
+        <para>
+          Note that after grouping, you can't view, edit or break the
+          <literal>multipart/multilingual</literal> email bundle, because it is in a temporary form.
+          But you can view and edit its primitive part using the <command>&lt;edit&gt;</command>
+          command. When postponing emails or on error (e.g., no recipients address when sending
+          emails) this <literal>multipart/multilingual</literal> will be broken apart and need to
+          be tagged and group together again as described above.
+        </para>
+      </sect2>
     </sect1>
 
     <sect1 id="attachments">
@@ -22316,6 +22530,17 @@ remote machine without having to enter a password.
 </para>
 </sect2>
 
+<sect2 id="preferred-languages">
+<title>preferred_languages</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+RFC8255 : user preferred languages to be search in parts and display
+Ex. : set preferred_languages="en,fr,de"
+</para>
+</sect2>
+
 <sect2 id="print">
 <title>print</title>
 <literallayout>Type: quadoption
@@ -25343,6 +25568,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;edit-followup-to&gt;</literal></entry><entry></entry><entry>edit the Followup-To field</entry></row>
 <row><entry><literal>&lt;edit-from&gt;</literal></entry><entry>Esc f</entry><entry>edit the from field</entry></row>
 <row><entry><literal>&lt;edit-headers&gt;</literal></entry><entry>E</entry><entry>edit the message with headers</entry></row>
+<row><entry><literal>&lt;edit-language&gt;</literal></entry><entry>^L</entry><entry>edit the Content-Language of the attachment</entry></row>
 <row><entry><literal>&lt;edit-message&gt;</literal></entry><entry>e</entry><entry>edit the message</entry></row>
 <row><entry><literal>&lt;edit-mime&gt;</literal></entry><entry>m</entry><entry>edit attachment using mailcap entry</entry></row>
 <row><entry><literal>&lt;edit-newsgroups&gt;</literal></entry><entry></entry><entry>edit the newsgroups list</entry></row>
@@ -25354,8 +25580,12 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;filter-entry&gt;</literal></entry><entry>F</entry><entry>filter attachment through a shell command</entry></row>
 <row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>wipe passphrase(s) from memory</entry></row>
 <row><entry><literal>&lt;get-attachment&gt;</literal></entry><entry>G</entry><entry>get a temporary copy of an attachment</entry></row>
+<row><entry><literal>&lt;group-alternatives&gt;</literal></entry><entry>&amp;</entry><entry>group tagged attachments as multipart/alternative</entry></row>
+<row><entry><literal>&lt;group-multilingual&gt;</literal></entry><entry>^</entry><entry>group tagged attachments as multipart/multilingual</entry></row>
 <row><entry><literal>&lt;ispell&gt;</literal></entry><entry>i</entry><entry>run ispell on the message</entry></row>
 <row><entry><literal>&lt;mix&gt;</literal></entry><entry>M</entry><entry>send the message through a mixmaster remailer chain</entry></row>
+<row><entry><literal>&lt;move-down&gt;</literal></entry><entry>+</entry><entry>move an attachment down in the attachment list</entry></row>
+<row><entry><literal>&lt;move-up&gt;</literal></entry><entry>-</entry><entry>move an attachment up in the attachment list</entry></row>
 <row><entry><literal>&lt;new-mime&gt;</literal></entry><entry>n</entry><entry>compose new attachment using mailcap entry</entry></row>
 <row><entry><literal>&lt;pgp-menu&gt;</literal></entry><entry>p</entry><entry>show PGP options</entry></row>
 <row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
