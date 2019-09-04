@@ -1029,6 +1029,12 @@ set sidebar_indent_string="  "          <emphasis role="comment"># Indent with t
               show mailboxes that contain new, or flagged, email.
             </para>
             <para>
+              Sometimes it is useful to only show mailboxes that have mails in
+              them, while hiding the rest.
+              <literal>$sidebar_non_empty_mailbox_only</literal> tells the
+              Sidebar to only show mailboxes with a non-zero number of mails.
+            </para>
+            <para>
               If you want some mailboxes to be always visible, then use the
               <literal>sidebar_whitelist</literal> command. It takes a list of
               mailboxes as parameters.
@@ -2152,6 +2158,59 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
             </tbody>
           </tgroup>
         </table>
+
+        <para>
+          In the <emphasis>index</emphasis>, the subject of threaded children
+          messages will be prepended with thread tree characters. By default,
+          the subject itself will not be duplicated unless
+          <link linkend="hide-thread-subject">$hide_thread_subject</link>is
+          unset.  Special characters will be added to the thread tree as
+          detailed in <xref linkend="tab-thread-chars" />.
+        </para>
+        <table id="tab-thread-chars">
+          <title>Special Thread Characters</title>
+          <tgroup cols="3">
+            <thead>
+              <row>
+                <entry>Character</entry>
+                <entry>Description</entry>
+                <entry>Notes</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>&amp;</entry>
+                <entry>hidden message</entry>
+                <entry>see
+                <link linkend="hide-limited">$hide_limited</link>and
+                <link linkend="hide-top-limited">$hide_top_limited</link></entry>
+              </row>
+              <row>
+                <entry>?</entry>
+                <entry>missing message</entry>
+                <entry>see
+                <link linkend="hide-missing">$hide_missing</link>and
+                <link linkend="hide-top-missing">$hide_top_missing</link></entry>
+              </row>
+              <row>
+                <entry>*</entry>
+                <entry>pseudo thread</entry>
+                <entry>see
+                <link linkend="strict-threads">$strict_threads</link>; not displayed
+                when <link linkend="narrow-tree">$narrow_tree</link>is set</entry>
+              </row>
+              <row>
+                <entry>=</entry>
+                <entry>duplicate thread</entry>
+                <entry>see
+                <link linkend="duplicate-threads">$duplicate_threads</link>; not
+                displayed when
+                <link linkend="narrow-tree">$narrow_tree</link>is set</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
         <para>
           Collapsing a thread displays only the first message in the thread and
           hides the others. This is useful when threads contain so many
@@ -3119,6 +3178,14 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         which, for example, can be set to <quote>ask-no</quote>.
       </para>
       <para>
+        Mutt's default (<link linkend="mime-forward">$mime_forward</link>=<quote>no</quote> and
+        <link linkend="forward-decode">$forward_decode</link>=<quote>yes</quote>) is
+        to use standard inline forwarding.  In that mode all text-decodable
+        parts are included in the new message body.  Other attachments from
+        the original email can also be attached to the new message, based on the
+        quadoption <link linkend="forward-attachments">$forward_attachments</link>.
+      </para>
+      <para>
         The inclusion of headers is controlled by the current setting of the
         <link linkend="weed">$weed</link> variable, unless
         <link linkend="mime-forward">$mime_forward</link> is set.
@@ -3134,7 +3201,8 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
       </para>
       <para>
         Editing the message to forward follows the same procedure as sending or
-        replying to a message does.
+        replying to a message does, but can be disabled via the quadoption
+        <link linkend="forward-edit">$forward_edit</link>.
       </para>
     </sect1>
 
@@ -3234,6 +3302,102 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         additionally written to the file <literal>~/.neomuttdebug0</literal>.
       </para>
     </sect1>
+
+    <sect1 id="encryption">
+      <title>Encryption and Signing</title>
+
+      <para>
+        OpenPGP and S/MIME are enabled in one of two ways: <quote>classic
+        mode</quote> or GPGME.  The former invokes external programs to perform
+        the various operations; it is better tested and more flexible, but
+        requires some configuration.  The latter uses the GnuPG project's GPGME
+        library.
+      </para>
+
+      <para>
+        To enable <quote>classic mode</quote>, ensure GPGME is disabled and use
+        the <literal>gpg.rc</literal> or <literal>smime.rc</literal> files that
+        come with mutt.  These are typically installed under
+        <literal>/usr/local/share/doc/mutt/samples/</literal>.  Source them, either
+        directly or by copying them to your .mutt directory and sourcing them.
+        Sourcing them directly from
+        <literal>/usr/local/share/doc/mutt/samples/</literal> has the benefit of
+        automatically using fixes and security improvements to the command
+        invocations, and is recommended.
+      </para>
+
+<screen>
+unset crypt_use_gpgme
+source /usr/local/share/doc/mutt/samples/gpg.rc
+source /usr/local/share/doc/mutt/samples/smime.rc
+</screen>
+
+      <para>
+        To use GPGME instead, simply ensure the option is enabled in your .muttrc:
+      </para>
+
+<screen>
+set crypt_use_gpgme
+</screen>
+
+      <sect2 id="enc-pgp">
+        <title>OpenPGP Configuration</title>
+
+        <para>
+          The two most important settings are
+          <link linkend="pgp-default-key">$pgp_default_key</link> and
+          <link linkend="pgp-sign-as">$pgp_sign_as</link>.  To perform
+          encryption, you must set the first variable.  If you have a separate
+          signing key, or only have a signing key, then set the second.  Most
+          people will only need to set
+          <link linkend="pgp-default-key">$pgp_default_key</link>.
+        </para>
+
+        <para>
+          Starting with version 2.1.0, GnuPG automatically uses an
+          <literal>agent</literal> to prompt for your passphrase.  If you are
+          using a version older than that, you'll need to ensure an agent is
+          running (alternatively, you can unset
+          <link linkend="pgp-use-gpg-agent">$pgp_use_gpg_agent</link> and Mutt
+          will prompt you for your passphrase).  The agent in turn uses a
+          <literal>pinentry</literal> program to display the prompt.  There are
+          many different kinds of pinentry programs that can be used: qt, gtk2,
+          gnome3, fltk, and curses.  However, Mutt does
+          <emphasis>not</emphasis> work properly with the tty pinentry program.
+          Please ensure you have one of the GUI or curses pinentry programs
+          installed and configured to be the default for your system.
+        </para>
+      </sect2>
+
+      <sect2 id="enc-smime">
+        <title>S/MIME Configuration</title>
+
+        <para>
+          As with OpenPGP, the two most important settings are
+          <link linkend="smime-default-key">$smime_default_key</link> and
+          <link linkend="smime-sign-as">$smime_sign_as</link>.  To perform
+          encryption and decryption, you must set the first variable.  If you
+          have a separate signing key, or only have a signing key, then set the
+          second.  Most people will only need to set
+          <link linkend="smime-default-key">$smime_default_key</link>.
+        </para>
+
+        <para>
+          In <quote>classic mode</quote>, keys and certificates are managed by
+          the <literal>smime_keys</literal> program that comes with Mutt.  By
+          default they are stored under <literal>~/.smime/</literal>. (This is
+          set by the <literal>smime.rc</literal> file with
+          <link linkend="smime-certificates">$smime_certificates</link> and
+          <link linkend="smime-keys">$smime_keys</link>.)  To initialize this
+          directory, use the command <quote><literal>smime_keys
+          init</literal></quote> from a shell prompt.  The program can be then
+          be used to import and list certificates.  You may also want to
+          periodically run <quote><literal>smime_keys refresh</literal></quote>
+          to update status flags for your certificates.
+        </para>
+      </sect2>
+    </sect1>
+
   </chapter>
 
   <chapter id="guide/configuration">
@@ -3473,6 +3637,21 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
       </sect2>
     </sect1>
 
+    <sect1 id="quickconfig">
+      <title>Starter NeoMuttrc</title>
+
+      <para>
+        NeoMutt is highly configurable because it's <emphasis>meant</emphasis>
+        to be customized to your needs and preferences.  However, this
+        configurability can make it difficult when just getting started.  A few
+        sample neomuttrc files come with NeoMutt, under
+        <literal>doc/neomutt/samples/</literal>.  Among them,
+        <ulink url="https://github.com/neomutt/neomutt/blob/master/contrib/sample.neomuttrc-starter">sample.neomuttrc-starter</ulink>
+        is a basic example config with a few suggested settings and pointers to
+        useful programs.
+      </para>
+    </sect1>
+
     <sect1 id="neomuttrc-syntax" xreflabel="Syntax of Initialization Files">
       <title>Syntax of Initialization Files</title>
       <para>
@@ -3542,6 +3721,15 @@ over several lines"
 </screen>
 
       </example>
+      <note>
+        <para>
+          Using <quote>\</quote> at the end of a line <emphasis>only</emphasis>
+          removes the newline character.
+        </para>
+        <para>
+          Any leading whitespace on the following lines will be part of the configuration.
+        </para>
+      </note>
       <para>
         It is also possible to substitute the output of a Unix command in an
         initialization file. This is accomplished by enclosing the command in
@@ -3553,6 +3741,19 @@ over several lines"
       <example id="ex-rc-backtick">
         <title>Using external command's output in configuration files</title>
         <screen>my_hdr X-Operating-System: `uname -a`</screen>
+      </example>
+      <para>
+        To avoid the output of backticks being parsed, place them inside double
+        quotes.  In <xref linkend="ex-backtick-dblquotes"/>, the output of the
+        gpg decryption is assigned directly to $imap_pass, so that special
+        characters in the password (e.g.<quote>'</quote>, <quote>#</quote>,
+        <quote>$</quote>) are not parsed and interpreted specially by neomutt.
+      </para>
+      <example id="ex-backtick-dblquotes">
+        <title>Preventing the output of backticks from being parsed</title>
+<screen>
+set imap_pass="`gpg --batch -q --decrypt ~/.neomutt/account.gpg`"
+</screen>
       </example>
       <para>
         Both environment variables and NeoMutt variables can be accessed by
@@ -3865,6 +4066,23 @@ set alias_file=~/.mail_aliases
         <arg choice="plain">
           <replaceable class="parameter">function</replaceable>
         </arg>
+        <command>unbind</command>
+        <group choice="req">
+          <arg choice="plain">
+            <replaceable class="parameter">*</replaceable>
+          </arg>
+          <arg choice="plain">
+            <replaceable class="parameter">map</replaceable>
+          </arg>
+          <arg choice="opt" rep="repeat">
+            <replaceable class="parameter">,map</replaceable>
+          </arg>
+        </group>
+        <group choice="opt">
+          <arg choice="plain">
+            <replaceable class="parameter">key</replaceable>
+          </arg>
+        </group>
       </cmdsynopsis>
       <para>
         This command allows you to change the default key bindings (operation
@@ -3875,6 +4093,12 @@ set alias_file=~/.mail_aliases
         Multiple maps may be specified by separating them with commas (no
         additional whitespace is allowed). The currently defined maps are:
       </para>
+      <note>
+        <para>
+          Missing key sequence in unmacro command means unmacro all macros in menus
+          given in <emphasis>menu</emphasis>.
+        </para>
+      </note>
       <anchor id="maps" />
       <variablelist>
         <varlistentry>
@@ -4174,6 +4398,15 @@ bind index g  noop
 bind index gg first-entry
 </screen>
 
+        <para>
+          The same is also possible using <literal>unbind</literal>.
+        </para>
+
+<screen>
+unbind index g
+bind index gg first-entry
+</screen>
+
       </sect2>
     </sect1>
 
@@ -4314,6 +4547,24 @@ folder-hook work "set sort=threads"
         <arg choice="opt">
           <replaceable class="parameter">description</replaceable>
         </arg>
+        <command>unmacro</command>
+        <group choice="req">
+          <arg choice="plain">
+            <replaceable class="parameter">*</replaceable>
+          </arg>
+          <arg choice="plain">
+            <replaceable class="parameter">map</replaceable>
+          </arg>
+          <arg choice="opt" rep="repeat">
+            <replaceable class="parameter">,map</replaceable>
+          </arg>
+        </group>
+        <group choice="opt">
+          <arg choice="plain">
+            <replaceable class="parameter">key</replaceable>
+          </arg>
+        </group>
+
       </cmdsynopsis>
       <para>
         Macros are useful when you would like a single key to perform a series
@@ -4358,6 +4609,12 @@ folder-hook work "set sort=threads"
         <para>
           Macro definitions (if any) listed in the help screen(s), are silently
           truncated at the screen width, and are not wrapped.
+        </para>
+      </note>
+      <note>
+        <para>
+          Missing key sequence in unmacro command means unmacro all macros in menus
+          given in <emphasis>menu</emphasis>.
         </para>
       </note>
     </sect1>
@@ -4564,6 +4821,11 @@ folder-hook work "set sort=threads"
         <listitem>
           <para>
             normal
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            options (the key letters in multi-choice questions)
           </para>
         </listitem>
         <listitem>
@@ -5217,9 +5479,9 @@ unignore posted-to:
         initialization file instead. If you also happen to get mail from
         someone whose address is <literal>neomutt-users@example.com</literal>,
         you could use
-        <literal><command>lists</command>^neomutt-users@neomutt\\.org$</literal>
+        <literal><command>lists</command> ^neomutt-users@neomutt\\.org$</literal>
         or
-        <literal><command>subscribe</command>^neomutt-users@neomutt\\.org$</literal>
+        <literal><command>subscribe</command> ^neomutt-users@neomutt\\.org$</literal>
         to match only mail from the actual list.
       </para>
       <para>
@@ -5684,6 +5946,62 @@ message-hook '~f freshmeat-news' 'set pager="less \"+/^  subject: .*\""'
       </para>
     </sect1>
 
+    <sect1 id="index-format-hook">
+      <title>Dynamically Changing $index_format using Patterns</title>
+      <para>Usage:</para>
+      <cmdsynopsis>
+        <command>index-format-hook</command>
+        <arg choice="plain">
+          <replaceable class="parameter">name</replaceable>
+        </arg>
+        <arg choice="plain">
+          <replaceable class="parameter">[!]pattern</replaceable>
+        </arg>
+        <arg choice="plain">
+          <replaceable class="parameter">format-string</replaceable>
+        </arg>
+      </cmdsynopsis>
+      <para>
+        This command is used to inject format strings dynamically into <link
+        linkend="index-format">$index_format</link>based on pattern matching
+        against the current message.
+      </para>
+      <para>
+        The <link linkend="index-format">$index_format</link>expando
+        <emphasis>%@name@</emphasis>specifies a placeholder for the injection.
+        Index-format-hooks with the same <emphasis>name</emphasis>are matched using
+        <link linkend="patterns"> <emphasis>pattern</emphasis> </link>against the
+        current message. Matching is done in the order specified in the .muttrc,
+        with the first match being used. The hook's
+        <emphasis>format-string</emphasis>is then substituted and evaluated.
+      </para>
+      <para>
+        Because the first match is used, best practice is to put a catch-all
+        <emphasis>~A</emphasis>pattern as the last hook. Here is an example showing
+        how to implement dynamic date formatting:
+      </para>
+<screen>
+set index_format="%4C %-6@date@ %-15.15F %Z (%4c) %s"
+
+index-format-hook  date  "~d&lt;1d"    "%[%H:%M]"
+index-format-hook  date  "~d&lt;1m"    "%[%a %d]"
+index-format-hook  date  "~d&lt;1y"    "%[%b %d]"
+index-format-hook  date  "~A"       "%[%m/%y]"
+</screen>
+      <para>
+        Another example, showing a way to prepend to
+        the subject. Note that without a catch-all ~A
+        pattern, no match results in the expando being
+        replaced with an empty string.
+      </para>
+<screen>
+set index_format="%4C %@subj_flags@%s"
+
+index-format-hook  subj_flags  "~f boss@example.com"    "** BOSS ** "
+index-format-hook  subj_flags  "~f spouse@example.com"  ":-) "
+</screen>
+    </sect1>
+
     <sect1 id="push">
       <title>Adding Key Sequences to the Keyboard Buffer</title>
       <para>
@@ -5848,6 +6166,16 @@ folder-hook . 'push "&lt;enter-command&gt;score ~= 10&lt;enter&gt;"'
         <link linkend="index-format">$index_format</link> variable. (Tip: try
         <literal>%?H?[%H] ?</literal> to display spam tags only when they are
         defined for a given message.)
+      </para>
+      <para>
+        Note: the value displayed by <literal>%H</literal>and searched by
+        <literal>~H</literal>is stored in the
+        <link linkend="caching">header cache</link>. Mutt isn't smart enough to
+        invalidate a header cache entry based on changing <literal>spam</literal>
+        rules, so if you aren't seeing correct <literal>%H</literal>values, try
+        temporarily turning off the header cache. If that fixes the problem,
+        then once your spam rules are set to your liking, remove your stale
+        header cache files and turn the header cache back on.
       </para>
       <para>
         Your first step is to define your external filter's spam patterns using
@@ -6395,7 +6723,7 @@ mailboxes $my_mx +mailbox3
         If the filename ends with a vertical bar (<quote>|</quote>), then
         <emphasis>filename</emphasis> is considered to be an executable program
         from which to read input (e.g.
-        <literal><command>source</command>~/bin/myscript|</literal>).
+        <literal><command>source</command> ~/bin/myscript|</literal>).
       </para>
     </sect1>
 
@@ -7100,51 +7428,51 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
           </thead>
           <tbody>
             <row>
-              <entry>\\y</entry>
+              <entry>\y</entry>
               <entry>
                 Matches the empty string at either the beginning or the end of
                 a word
               </entry>
             </row>
             <row>
-              <entry>\\B</entry>
+              <entry>\B</entry>
               <entry>
                 Matches the empty string within a word
               </entry>
             </row>
             <row>
-              <entry>\\&lt;</entry>
+              <entry>\&lt;</entry>
               <entry>
                 Matches the empty string at the beginning of a word
               </entry>
             </row>
             <row>
-              <entry>\\&gt;</entry>
+              <entry>\&gt;</entry>
               <entry>
                 Matches the empty string at the end of a word
               </entry>
             </row>
             <row>
-              <entry>\\w</entry>
+              <entry>\w</entry>
               <entry>
                 Matches any word-constituent character (letter, digit, or
                 underscore)
               </entry>
             </row>
             <row>
-              <entry>\\W</entry>
+              <entry>\W</entry>
               <entry>
                 Matches any character that is not word-constituent
               </entry>
             </row>
             <row>
-              <entry>\\`</entry>
+              <entry>\`</entry>
               <entry>
                 Matches the empty string at the beginning of a buffer (string)
               </entry>
             </row>
             <row>
-              <entry>\\'</entry>
+              <entry>\'</entry>
               <entry>
                 Matches the empty string at the end of a buffer
               </entry>
@@ -7434,14 +7762,15 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               <row>
                 <entry>~p</entry>
                 <entry>
-                  messages addressed to you (consults
-                  <command>alternates</command>)
+                  messages addressed to you (consults <link linkend="from">$from</link>,
+                  <command>alternates</command>, and local account/hostname information)
                 </entry>
               </row>
               <row>
                 <entry>~P</entry>
                 <entry>
-                  messages from you (consults <command>alternates</command>)
+                  messages from you (consults <link linkend="from">$from</link>,
+                  <command>alternates</command>, and local account/hostname information)
                 </entry>
               </row>
               <row>
@@ -8261,6 +8590,11 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
         </listitem>
         <listitem>
           <para>
+            <link linkend="index-format-hook"><command>index-format-hook</command></link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
             <link linkend="crypt-hook"><command>crypt-hook</command></link>
           </para>
         </listitem>
@@ -8331,7 +8665,8 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
       </itemizedlist>
       <para>
         for specific details on each type of <emphasis>hook</emphasis>
-        available.
+        available.  Also see <link linkend="compose-flow">Message Composition
+        Flow</link> for an overview of the composition process.
       </para>
       <note>
         <para>
@@ -8365,7 +8700,8 @@ send-hook ~C'^b@b\.b$' my_hdr from: c@c.c
           Hooks that act upon messages (<command>message-hook</command>,
           <command>reply-hook</command>, <command>send-hook</command>,
           <command>send2-hook</command>, <command>save-hook</command>,
-          <command>fcc-hook</command>) are evaluated in a slightly different
+          <command>fcc-hook</command>, <command>index-format-hook</command>)
+          are evaluated in a slightly different
           manner. For the other types of hooks, a
           <link linkend="regex">regular expression</link> is sufficient. But in
           dealing with messages a finer grain of control is needed for matching
@@ -8971,6 +9307,14 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
             don't completely rely on this feature.
           </para>
         </note>
+        <note>
+          <para>
+            When using Maildir, you don't have to manually specify all your mailboxes. You can use this command instead:
+            <screen>
+              mailboxes `find ~/.mail/ -type d -name cur | sed 's:/cur/*$::' | tr '\n' ' '`
+            </screen>
+          </para>
+        </note>
       </sect2>
 
       <sect2 id="calc-mailbox-counts">
@@ -9102,6 +9446,119 @@ unset confirmappend
 macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;echo 'Saved to archive'&lt;enter&gt;"
 </screen>
 
+    </sect1>
+
+    <sect1 id="compose-flow">
+      <title>Message Composition Flow</title>
+        <para>
+          This is a brief overview of the steps Mutt takes during message
+          composition. It also shows the order and timing of hook execution.
+        </para>
+      <itemizedlist>
+        <listitem>
+          <para>Reply envelope settings.
+            <link linkend="reverse-name">$reverse_name</link>processing. To, Cc,
+            Subject, References header defaults.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="my-hdr">my_hdr</link>processing for To, Cc, Bcc,
+            Subject headers.
+          </para>
+        </listitem>
+        <listitem>
+          <para>Prompts for To, Cc, Bcc, Subject headers. See
+          <link linkend="askcc">$askcc</link>,
+          <link linkend="askbcc">$askbcc</link>,
+          <link linkend="fast-reply">$fast_reply</link>.</para>
+        </listitem>
+        <listitem>
+          <para>
+            From header setting. Note: this is so
+            <link linkend="send-hook">send-hook</link>s below can match ~P, but
+            From is re-set further below in case a send-hook changes the value.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="reply-hook">reply-hook</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="send-hook">send-hook</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>From header setting.</para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="my-hdr">my_hdr</link> processing for From, Reply-To,
+            Message-ID and user-defined headers. The To, Cc, Bcc, Subject, and
+            Return-Path headers are ignored at this stage.
+          </para>
+        </listitem>
+        <listitem>
+          <para>Message body and signature generation.</para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="send2-hook">send2-hook</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="realname">$realname</link>part of From header setting.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="editor">$editor</link>invocation for the message.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="send2-hook">send2-hook</link>
+          </para>
+        </listitem>
+        <listitem>
+          <para>Cryptographic settings.</para>
+        </listitem>
+        <listitem>
+          <para>
+          <link linkend="fcc-hook">fcc-hook</link>. Fcc setting.</para>
+        </listitem>
+        <listitem>
+          <para>
+            <link linkend="compose-menu">Compose menu</link>. Note:
+            <link linkend="send2-hook">send2-hook</link>
+            is evaluated each time the headers are changed.
+          </para>
+        </listitem>
+        <listitem>
+          <para>Message encryption and signing. Key selection.</para>
+        </listitem>
+        <listitem>
+          <para>
+            Fcc saving if <link
+            linkend="fcc-before-send">$fcc_before_send</link> is set.  (Note the
+            variable documentation for caveats of Fcc'ing before sending.)
+          </para>
+        </listitem>
+        <listitem>
+          <para>Message sending.</para>
+        </listitem>
+        <listitem>
+          <para>
+            Fcc saving if <link linkend="fcc-before-send">$fcc_before_send</link>
+            is unset (the default).  The Fcc used to be saved before sending the
+            message.  It is now by default saved afterwards, but if the saving
+            fails, the user is prompted.
+          </para>
+        </listitem>
+      </itemizedlist>
     </sect1>
 
     <sect1 id="misc-topics">
@@ -10755,7 +11212,9 @@ set timeout=15
               <quote>IMAP</quote>, possibly followed by the symbol
               <quote>+</quote>, indicating that the entry contains both
               messages and subfolders. On Cyrus-like servers folders will often
-              contain both messages and subfolders.
+              contain both messages and subfolders.  A mailbox name with a
+              trailing delimiter (usually <quote>/</quote> or <quote>.</quote>)
+              indicates subfolders.
             </para>
           </listitem>
           <listitem>
@@ -14844,12 +15303,13 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
 
       <table id="table-notmuch-variables">
         <title>Notmuch Variables</title>
-        <tgroup cols="3">
+        <tgroup cols="4">
           <thead>
             <row>
               <entry>Name</entry>
               <entry>Type</entry>
               <entry>Default</entry>
+              <entry>Note</entry>
             </row>
           </thead>
           <tbody>
@@ -14857,51 +15317,64 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <entry><literal>nm_db_limit</literal></entry>
               <entry>number</entry>
               <entry><literal>0</literal></entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>nm_default_uri</literal></entry>
               <entry>string</entry>
               <entry>(empty)</entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>nm_exclude_tags</literal></entry>
               <entry>string</entry>
               <entry>(empty)</entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>nm_open_timeout</literal></entry>
               <entry>number</entry>
               <entry><literal>5</literal></entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>nm_query_type</literal></entry>
               <entry>string</entry>
               <entry><literal>messages</literal></entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>nm_record</literal></entry>
               <entry>boolean</entry>
               <entry><literal>no</literal></entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>nm_record_tags</literal></entry>
               <entry>string</entry>
               <entry>(empty)</entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>nm_unread_tag</literal></entry>
               <entry>string</entry>
               <entry><literal>unread</literal></entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>vfolder_format</literal></entry>
               <entry>string</entry>
               <entry><literal>%6n(%6N) %f</literal></entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>virtual_spoolfile</literal></entry>
               <entry>boolean</entry>
               <entry><literal>no</literal></entry>
+              <entry>
+                Unnecessary since <link linkend="spoolfile">$spoolfile</link>
+                supports mailbox descriptions.
+              </entry>
             </row>
           </tbody>
         </tgroup>
@@ -16886,8 +17359,10 @@ bind index D purge-message
           a unique fashion. In order to do so, NeoMutt will <quote>leak</quote>
           some information to the outside world when sending messages: the
           generation of this header includes a step counter which is increased
-          (and rotated) with every message sent. In a longer running NeoMutt
-          session, others can make assumptions about your mailing habits
+          (and rotated) with every message sent. Other parts include the date,
+          time, PID of NeoMutt, and <link linkend="hostname">$hostname</link>.
+          In a longer running NeoMutt session, others can
+          make assumptions about your mailing habits
           depending on the number of messages sent. If this is not desired, the
           header can be manually provided using
           <link linkend="edit-headers">$edit_headers</link> (though not
@@ -17937,6 +18412,22 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
+              <link linkend="index-format-hook">index-format-hook</link>
+            </command>
+            <arg choice="plain">
+              <replaceable class="parameter">name</replaceable>
+            </arg>
+            <arg choice="plain">
+              <replaceable class="parameter">[!]pattern</replaceable>
+            </arg>
+            <arg choice="plain">
+              <replaceable class="parameter">format-string</replaceable>
+            </arg>
+          </cmdsynopsis>
+        </listitem>
+        <listitem>
+          <cmdsynopsis>
+            <command>
               <link linkend="lists">lists</link>
             </command>
             <arg>
@@ -18862,6 +19353,19 @@ The directory where attachments are saved.
 </para>
 </sect2>
 
+<sect2 id="attach-save-without-prompting">
+<title>attach_save_without_prompting</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+This variable, when set to true, will cause attachments to be saved to the
+'attach_save_dir' location without prompting the user for the filename.
+</para>
+<para>
+</para>
+</sect2>
+
 <sect2 id="attach-sep">
 <title>attach_sep</title>
 <literallayout>Type: string
@@ -18957,7 +19461,7 @@ message.  The send-menu may still be accessed once you have finished
 editing the body of your message.
 </para>
 <para>
-<emphasis role="bold">Note:</emphasis> when this option is <emphasis>set</emphasis>, you cannot use send-hooks that depend
+<emphasis role="bold">Note:</emphasis> when this option is <emphasis>set</emphasis>, you can't use send-hooks that depend
 on the recipients when composing a new (non-reply) message, as the initial
 list of recipients is empty.
 </para>
@@ -19354,7 +19858,7 @@ S/MIME encryption/signing for messages. See also <link linkend="crypt-autoencryp
 
 <sect2 id="crypt-chars">
 <title>crypt_chars</title>
-<literallayout>Type: string
+<literallayout>Type: character string
 Default: <quote><literal>SPsK </literal></quote></literallayout>
 
 <para>
@@ -19813,7 +20317,7 @@ depends on the server whether DSN will be used or not.
 <sect2 id="duplicate-threads">
 <title>duplicate_threads</title>
 <literallayout>Type: boolean
-Default: no</literallayout>
+Default: yes</literallayout>
 
 <para>
 This variable controls whether NeoMutt, when <link linkend="sort">$sort</link> is set to <emphasis>threads</emphasis>, threads
@@ -19999,6 +20503,26 @@ are saved along with the main body of your message.
 </para>
 </sect2>
 
+<sect2 id="fcc-before-send">
+<title>fcc_before_send</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When this variable is <emphasis>set</emphasis>, FCCs will occur before sending
+the message.  Before sending, the message cannot be manipulated,
+so it will be stored the exact same as sent:
+<link linkend="fcc-attach">$fcc_attach</link> and <link linkend="fcc-clear">$fcc_clear</link> will be ignored (using their default
+values).
+</para>
+<para>
+When <emphasis>unset</emphasis>, the default, FCCs will occur after sending.
+Variables <link linkend="fcc-attach">$fcc_attach</link> and <link linkend="fcc-clear">$fcc_clear</link> will be respected, allowing
+it to be stored without attachments or encryption/signing if
+desired.
+</para>
+</sect2>
+
 <sect2 id="fcc-clear">
 <title>fcc_clear</title>
 <literallayout>Type: boolean
@@ -20014,7 +20538,7 @@ signed.
 
 <sect2 id="flag-chars">
 <title>flag_chars</title>
-<literallayout>Type: string
+<literallayout>Type: character string
 Default: <quote><literal>*!DdrONon- </literal></quote></literallayout>
 
 <para>
@@ -20057,7 +20581,7 @@ Controls the characters used in several flags.
 Default: no</literallayout>
 
 <para>
-If set, flagged messages cannot be deleted.
+If set, flagged messages can't be deleted.
 </para>
 </sect2>
 
@@ -20196,6 +20720,20 @@ Also see the <link linkend="record">$record</link> variable.
 </para>
 </sect2>
 
+<sect2 id="forward-attachments">
+<title>forward_attachments</title>
+<literallayout>Type: quadoption
+Default: ask-yes</literallayout>
+
+<para>
+When forwarding inline (i.e. <link linkend="mime-forward">$mime_forward</link> <emphasis>unset</emphasis> or
+answered with <quote>no</quote> and <link linkend="forward-decode">$forward_decode</link> <emphasis>set</emphasis>), attachments
+which cannot be decoded in a reasonable manner will be attached
+to the newly composed message if this quadoption is <emphasis>set</emphasis> or
+answered with <quote>yes</quote>.
+</para>
+</sect2>
+
 <sect2 id="forward-attribution-intro">
 <title>forward_attribution_intro</title>
 <literallayout>Type: string
@@ -20314,7 +20852,7 @@ If not specified, then it may be read from the environment variable <literal>$EM
 
 <sect2 id="from-chars">
 <title>from_chars</title>
-<literallayout>Type: string
+<literallayout>Type: character string
 Default: (empty)</literallayout>
 
 <para>
@@ -20347,7 +20885,7 @@ for the corresponding character.
 </para>
 <para>
 This slightly odd interface is necessitated by NeoMutt's handling of
-string variables; one cannot tell a variable that is unset from one
+string variables; one can't tell a variable that is unset from one
 that is set to the empty string.
 </para>
 </sect2>
@@ -20454,7 +20992,7 @@ MH or Maildir folders, see "<link linkend="caching">caching</link>" for details.
 <sect2 id="header-cache-backend">
 <title>header_cache_backend</title>
 <literallayout>Type: string
-Default: 0</literallayout>
+Default: (empty)</literallayout>
 
 <para>
 This variable specifies the header cache backend.
@@ -20541,7 +21079,7 @@ cut-off of first-level domains.
 
 <sect2 id="hidden-tags">
 <title>hidden_tags</title>
-<literallayout>Type: string
+<literallayout>Type: string list
 Default: <quote><literal>unread,draft,flagged,passed,replied,attachment,signed,encrypted</literal></quote></literallayout>
 
 <para>
@@ -20739,7 +21277,7 @@ list.
 
 <sect2 id="imap-authenticators">
 <title>imap_authenticators</title>
-<literallayout>Type: string
+<literallayout>Type: string list
 Default: (empty)</literallayout>
 
 <para>
@@ -20805,6 +21343,20 @@ Default: <quote><literal>/.</literal></quote></literallayout>
 This contains the list of characters which you would like to treat
 as folder separators for displaying IMAP paths. In particular it
 helps in using the "=" shortcut for your <emphasis>folder</emphasis> variable.
+</para>
+</sect2>
+
+<sect2 id="imap-fetch-chunk-size">
+<title>imap_fetch_chunk_size</title>
+<literallayout>Type: number (long)
+Default: 0</literallayout>
+
+<para>
+When set to a value greater than 0, new headers will be downloaded
+in sets of this size.  If you have a very large mailbox, this might
+prevent a timeout and disconnect when opening the mailbox, by sending
+a FETCH per set of this size instead of a single FETCH for all new
+headers.
 </para>
 </sect2>
 
@@ -20987,6 +21539,20 @@ file a bug report to let us know.
 </para>
 </sect2>
 
+<sect2 id="imap-rfc5161">
+<title>imap_rfc5161</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, NeoMutt will use the IMAP ENABLE extension (RFC 5161) to
+select CAPABILITIES. Some servers (notably Coremail System IMap Server) do
+not properly respond to ENABLE commands, which might cause NeoMutt to hang.
+If your connection seems to freeze at login, try unsetting this. See also
+https://github.com/neomutt/neomutt/issues/1689
+</para>
+</sect2>
+
 <sect2 id="imap-servernoise">
 <title>imap_servernoise</title>
 <literallayout>Type: boolean
@@ -21037,6 +21603,23 @@ Default: ask-yes</literallayout>
 <para>
 Controls whether or not a copy of the message(s) you are replying to
 is included in your reply.
+</para>
+</sect2>
+
+<sect2 id="include-encrypted">
+<title>include_encrypted</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+Controls whether or not Mutt includes separately encrypted attachment
+contents when replying.
+</para>
+<para>
+This variable was added to prevent accidental exposure of encrypted
+contents when replying to an attacker.  If a previously encrypted message
+were attached by the attacker, they could trick an unwary recipient into
+decrypting and including the message in their reply.
 </para>
 </sect2>
 
@@ -21197,6 +21780,9 @@ Listed in <link linkend="to-chars">$to_chars</link>.
 </entry></row>
 <row><entry>%zt </entry><entry>Message tag flags
 </entry></row>
+<row><entry>%@name@ </entry><entry>insert and evaluate format-string from the matching
+<quote><link linkend="index-format-hook">index-format-hook</link></quote> command
+</entry></row>
 <row><entry>%{fmt} </entry><entry>the date and time of the message is converted to sender's
 time zone, and "fmt" is expanded by the library function
 <literal>strftime(3)</literal>; a leading bang disables locales
@@ -21354,12 +21940,13 @@ how often (in seconds) NeoMutt will update message counts.
 
 <sect2 id="mailcap-path">
 <title>mailcap_path</title>
-<literallayout>Type: string
+<literallayout>Type: string list
 Default: <quote><literal>~/.mailcap:/usr/share/neomutt/mailcap:/etc/mailcap:/etc/mailcap:/usr/etc/mailcap:/usr/local/etc/mailcap</literal></quote></literallayout>
 
 <para>
 This variable specifies which files to consult when attempting to
-display MIME bodies not directly supported by NeoMutt.
+display MIME bodies not directly supported by NeoMutt.  The default value
+is generated during startup: see the <quote><link linkend="mailcap">mailcap</link></quote> section of the manual.
 </para>
 <para>
 <link linkend="mailcap-path">$mailcap_path</link> is overridden by the environment variable <literal>$MAILCAPS</literal>.
@@ -21494,7 +22081,7 @@ Also see the <link linkend="move">$move</link> variable.
 
 <sect2 id="mbox-type">
 <title>mbox_type</title>
-<literallayout>Type: folder magic
+<literallayout>Type: enumeration
 Default: mbox</literallayout>
 
 <para>
@@ -21698,7 +22285,7 @@ Default: yes</literallayout>
 
 <para>
 When forwarding multiple attachments of a MIME message from the attachment
-menu, attachments which cannot be decoded in a reasonable manner will
+menu, attachments which can't be decoded in a reasonable manner will
 be attached to the newly composed message if this option is <emphasis>set</emphasis>.
 </para>
 </sect2>
@@ -22335,6 +22922,8 @@ message.  Note that the use of this format is <emphasis role="bold">strongly</em
 <para>
 This is a format string, see the <link linkend="pgp-decode-command">$pgp_decode_command</link> command for
 possible <literal>printf(3)</literal>-like sequences.
+Note that in this case, %r expands to the search string, which is a list of
+one or more quoted values such as email address, name, or keyid.
 (PGP only)
 </para>
 </sect2>
@@ -22455,6 +23044,8 @@ This command is used to encrypt a body part without signing it.
 <para>
 This is a format string, see the <link linkend="pgp-decode-command">$pgp_decode_command</link> command for
 possible <literal>printf(3)</literal>-like sequences.
+Note that in this case, %r expands to the search string, which is a list of
+one or more quoted values such as email address, name, or keyid.
 (PGP only)
 </para>
 </sect2>
@@ -22941,7 +23532,7 @@ available but authentication fails, NeoMutt will not connect to the POP server.
 
 <sect2 id="pop-authenticators">
 <title>pop_authenticators</title>
-<literallayout>Type: string
+<literallayout>Type: string list
 Default: (empty)</literallayout>
 
 <para>
@@ -23178,7 +23769,7 @@ remote machine without having to enter a password.
 
 <sect2 id="preferred-languages">
 <title>preferred_languages</title>
-<literallayout>Type: string
+<literallayout>Type: string list
 Default: (empty)</literallayout>
 
 <para>
@@ -23632,7 +24223,7 @@ used doesn't match your "<link linkend="alternates">alternates</link>", the <emp
 your address on the current machine.
 </para>
 <para>
-Also see the "<link linkend="alternates">alternates</link>" command.
+Also see the "<link linkend="alternates">alternates</link>" command and <link linkend="reverse-realname">$reverse_realname</link>.
 </para>
 </sect2>
 
@@ -23643,9 +24234,19 @@ Default: yes</literallayout>
 
 <para>
 This variable fine-tunes the behavior of the <link linkend="reverse-name">$reverse_name</link> feature.
-When it is <emphasis>set</emphasis>, NeoMutt will use the address from incoming messages as-is,
-possibly including eventual real names.  When it is <emphasis>unset</emphasis>, NeoMutt will
-override any such real names with the setting of the <link linkend="realname">$realname</link> variable.
+</para>
+<para>
+When it is <emphasis>unset</emphasis>, Mutt will remove the real name part of a
+matching address.  This allows the use of the email address
+without having to also use what the sender put in the real name
+field.
+</para>
+<para>
+When it is <emphasis>set</emphasis>, Mutt will use the matching address as-is.
+</para>
+<para>
+In either case, a missing real name will be filled in afterwards
+using the value of <link linkend="realname">$realname</link>.
 </para>
 </sect2>
 
@@ -23823,7 +24424,7 @@ appropriate widely used standard character set (such as
 "iso-8859-1".
 </para>
 <para>
-In case the text cannot be converted into one of these exactly,
+In case the text can't be converted into one of these exactly,
 NeoMutt uses <link linkend="charset">$charset</link> as a fallback.
 </para>
 </sect2>
@@ -24072,7 +24673,20 @@ When set, the sidebar will only display mailboxes containing new, or
 flagged, mail.
 </para>
 <para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-whitelist">sidebar_whitelist</link>.
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-whitelist">$sidebar_whitelist</link>, <link linkend="sidebar-non-empty-mailbox-only">$sidebar_non_empty_mailbox_only</link>.
+</para>
+</sect2>
+
+<sect2 id="sidebar-non-empty-mailbox-only">
+<title>sidebar_non_empty_mailbox_only</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When set, the sidebar will only display mailboxes that contain one or more mails.
+</para>
+<para>
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-new-mail-only">$sidebar_new_mail_only</link>, <link linkend="sidebar-whitelist">$sidebar_whitelist</link>.
 </para>
 </sect2>
 
@@ -24662,7 +25276,7 @@ possible <literal>printf(3)</literal>-like sequences.
 
 <sect2 id="smtp-authenticators">
 <title>smtp_authenticators</title>
-<literallayout>Type: string
+<literallayout>Type: string list
 Default: (empty)</literallayout>
 
 <para>
@@ -24855,7 +25469,7 @@ order (example: "<literal>set sort_browser=reverse-date</literal>").
 <sect2 id="sort-re">
 <title>sort_re</title>
 <literallayout>Type: boolean
-Default: no</literallayout>
+Default: yes</literallayout>
 
 <para>
 This variable is only useful when sorting by mailboxes in sidebar. By default,
@@ -24892,8 +25506,9 @@ separator.
 Default: (empty)</literallayout>
 
 <para>
-If your spool mailbox is in a non-default place where NeoMutt cannot find
-it, you can specify its location with this variable.
+If your spool mailbox is in a non-default place where NeoMutt can't find
+it, you can specify its location with this variable. The description from
+"named-mailboxes" or "virtual-mailboxes" may be used for the spoolfile.
 </para>
 <para>
 If not specified, then the environment variables <literal>$MAIL</literal> and
@@ -24951,7 +25566,7 @@ key.
 <sect2 id="ssl-force-tls">
 <title>ssl_force_tls</title>
 <literallayout>Type: boolean
-Default: no</literallayout>
+Default: yes</literallayout>
 
 <para>
 If this variable is <emphasis>set</emphasis>, NeoMutt will require that all connections
@@ -25107,7 +25722,7 @@ signing CA as trusted.
 
 <sect2 id="status-chars">
 <title>status_chars</title>
-<literallayout>Type: string
+<literallayout>Type: character string
 Default: <quote><literal>-*%A</literal></quote></literallayout>
 
 <para>
@@ -25412,7 +26027,7 @@ used.  Failing that, then "<literal>/tmp</literal>" is used.
 
 <sect2 id="to-chars">
 <title>to_chars</title>
-<literallayout>Type: string
+<literallayout>Type: character string
 Default: <quote><literal> +TCFLR</literal></quote></literallayout>
 
 <para>
@@ -25645,6 +26260,8 @@ Default: no</literallayout>
 <para>
 When <emphasis>set</emphasis>, NeoMutt will use the first defined virtual mailbox (see
 virtual-mailboxes) as a spool file.
+This command is now unnecessary. <link linkend="spoolfile">$spoolfile</link> has been extended to support
+mailbox descriptions as a value.
 </para>
 </sect2>
 
@@ -25869,8 +26486,8 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;catchup&gt;</literal></entry><entry></entry><entry>mark all articles in newsgroup as read</entry></row>
 <row><entry><literal>&lt;change-folder&gt;</literal></entry><entry>c</entry><entry>open a different folder</entry></row>
 <row><entry><literal>&lt;change-folder-readonly&gt;</literal></entry><entry>Esc c</entry><entry>open a different folder in read only mode</entry></row>
-<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry></entry><entry>open a different newsgroup</entry></row>
-<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry></entry><entry>open a different newsgroup in read only mode</entry></row>
+<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry>i</entry><entry>open a different newsgroup</entry></row>
+<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry>Esc i</entry><entry>open a different newsgroup in read only mode</entry></row>
 <row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>open a different virtual folder</entry></row>
 <row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>check for classic PGP</entry></row>
 <row><entry><literal>&lt;clear-flag&gt;</literal></entry><entry>W</entry><entry>clear a status flag from a message</entry></row>
@@ -26010,8 +26627,8 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;break-thread&gt;</literal></entry><entry>#</entry><entry>break the thread in two</entry></row>
 <row><entry><literal>&lt;change-folder&gt;</literal></entry><entry>c</entry><entry>open a different folder</entry></row>
 <row><entry><literal>&lt;change-folder-readonly&gt;</literal></entry><entry>Esc c</entry><entry>open a different folder in read only mode</entry></row>
-<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry></entry><entry>open a different newsgroup</entry></row>
-<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry></entry><entry>open a different newsgroup in read only mode</entry></row>
+<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry>i</entry><entry>open a different newsgroup</entry></row>
+<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry>Esc i</entry><entry>open a different newsgroup in read only mode</entry></row>
 <row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>open a different virtual folder</entry></row>
 <row><entry><literal>&lt;check-stats&gt;</literal></entry><entry></entry><entry>calculate message statistics for all mailboxes</entry></row>
 <row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>check for classic PGP</entry></row>
@@ -26120,6 +26737,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;sync-mailbox&gt;</literal></entry><entry>$</entry><entry>save changes to mailbox</entry></row>
 <row><entry><literal>&lt;tag-message&gt;</literal></entry><entry>t</entry><entry>tag the current entry</entry></row>
 <row><entry><literal>&lt;toggle-quoted&gt;</literal></entry><entry>T</entry><entry>toggle display of quoted text</entry></row>
+<row><entry><literal>&lt;toggle-write&gt;</literal></entry><entry>%</entry><entry>toggle whether the mailbox will be rewritten</entry></row>
 <row><entry><literal>&lt;top&gt;</literal></entry><entry>^</entry><entry>jump to the top of the message</entry></row>
 <row><entry><literal>&lt;undelete-message&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
 <row><entry><literal>&lt;undelete-subthread&gt;</literal></entry><entry>Esc u</entry><entry>undelete all messages in subthread</entry></row>
@@ -26249,7 +26867,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;edit-followup-to&gt;</literal></entry><entry></entry><entry>edit the Followup-To field</entry></row>
 <row><entry><literal>&lt;edit-from&gt;</literal></entry><entry>Esc f</entry><entry>edit the from field</entry></row>
 <row><entry><literal>&lt;edit-headers&gt;</literal></entry><entry>E</entry><entry>edit the message with headers</entry></row>
-<row><entry><literal>&lt;edit-language&gt;</literal></entry><entry>^L</entry><entry>edit the Content-Language of the attachment</entry></row>
+<row><entry><literal>&lt;edit-language&gt;</literal></entry><entry>^L</entry><entry>edit the 'Content-Language' of the attachment</entry></row>
 <row><entry><literal>&lt;edit-message&gt;</literal></entry><entry>e</entry><entry>edit the message</entry></row>
 <row><entry><literal>&lt;edit-mime&gt;</literal></entry><entry>m</entry><entry>edit attachment using mailcap entry</entry></row>
 <row><entry><literal>&lt;edit-newsgroups&gt;</literal></entry><entry></entry><entry>edit the newsgroups list</entry></row>
@@ -26261,8 +26879,8 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;filter-entry&gt;</literal></entry><entry>F</entry><entry>filter attachment through a shell command</entry></row>
 <row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>wipe passphrases from memory</entry></row>
 <row><entry><literal>&lt;get-attachment&gt;</literal></entry><entry>G</entry><entry>get a temporary copy of an attachment</entry></row>
-<row><entry><literal>&lt;group-alternatives&gt;</literal></entry><entry>&amp;</entry><entry>group tagged attachments as multipart/alternative</entry></row>
-<row><entry><literal>&lt;group-multilingual&gt;</literal></entry><entry>^</entry><entry>group tagged attachments as multipart/multilingual</entry></row>
+<row><entry><literal>&lt;group-alternatives&gt;</literal></entry><entry>&amp;</entry><entry>group tagged attachments as 'multipart/alternative'</entry></row>
+<row><entry><literal>&lt;group-multilingual&gt;</literal></entry><entry>^</entry><entry>group tagged attachments as 'multipart/multilingual'</entry></row>
 <row><entry><literal>&lt;ispell&gt;</literal></entry><entry>i</entry><entry>run ispell on the message</entry></row>
 <row><entry><literal>&lt;mix&gt;</literal></entry><entry>M</entry><entry>send the message through a mixmaster remailer chain</entry></row>
 <row><entry><literal>&lt;move-down&gt;</literal></entry><entry>+</entry><entry>move an attachment down in the attachment list</entry></row>
@@ -26386,6 +27004,26 @@ bindings for all menus (except as noted).
 <tbody>
 <row><entry><literal>&lt;verify-key&gt;</literal></entry><entry>c</entry><entry>verify a PGP public key</entry></row>
 <row><entry><literal>&lt;view-name&gt;</literal></entry><entry>%</entry><entry>view the key's user id</entry></row>
+
+</tbody>
+</tgroup>
+</table>
+
+</sect2>
+
+<sect2 id="summary-map">
+<title>Summary Menu</title>
+
+
+<table id="tab-summary-bindings">
+<title>Default Summary Menu Bindings</title>
+<tgroup cols="3">
+<thead>
+<row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
+</thead>
+<tbody>
+<row><entry><literal>&lt;quit&gt;</literal></entry><entry>q</entry><entry>save changes to mailbox and quit</entry></row>
+<row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>this screen</entry></row>
 
 </tbody>
 </tgroup>
