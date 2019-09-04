@@ -2531,7 +2531,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           <varlistentry>
             <term>
               <literal>&lt;skip-quoted&gt;</literal> (default: S)
-              <anchor id="feature/skip-quoted" />
+              <anchor id="skip-quoted" />
             </term>
             <listitem>
               <para>
@@ -9170,7 +9170,7 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
       </example>
     </sect1>
 
-    <sect1 id="feature/new-mail">
+    <sect1 id="new-mail">
       <title>New Mail Detection</title>
       <para>
         NeoMutt supports setups with multiple folders, allowing all of them to
@@ -14261,7 +14261,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
     </sect1>
   </chapter>
 
-  <chapter id="feature/new-mail-hook">
+  <chapter id="feature/new-mail">
     <title>New Mail Feature</title>
     <subtitle>Execute a command upon the receipt of new mail.</subtitle>
 
@@ -14816,7 +14816,7 @@ bind index \CG get-message
         </listitem>
       </itemizedlist>
     </sect1>
-</chapter>
+  </chapter>
 
   <chapter id="feature/custom-tags">
     <title>Custom backend based Tags Feature</title>
@@ -16000,7 +16000,7 @@ bind index,pager Q quasi-delete
     </sect1>
   </chapter>
 
-  <chapter id="feature/reply-with-xorig-patch">
+  <chapter id="feature/reply-with-xorig">
     <title>Reply With X-Original-To Feature</title>
     <subtitle>Direct reply to email using X-Original-To header</subtitle>
 
@@ -16752,7 +16752,7 @@ color sidebar_ordinary color245 default
     </sect1>
   </chapter>
 
-  <chapter id="feature/skip-quoted-patch">
+  <chapter id="feature/skip-quoted">
     <title>Skip Quoted Feature</title>
     <subtitle>Leave some context visible</subtitle>
 
@@ -17133,7 +17133,7 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
     </sect1>
   </chapter>
 
-  <chapter id="feature/trash-folder">
+  <chapter id="feature/trash">
     <title>Trash Folder Feature</title>
     <subtitle>Automatically move deleted emails to a trash bin</subtitle>
 
@@ -24113,7 +24113,7 @@ message to the author of a message.
 </para>
 </sect2>
 
-<sect2 id="feature/reply-with-xorig">
+<sect2 id="reply-with-xorig">
 <title>reply_with_xorig</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
@@ -26056,7 +26056,7 @@ Controls the character used to indicate mail addressed to you.
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
-<sect2 id="feature/trash">
+<sect2 id="trash">
 <title>trash</title>
 <literallayout>Type: path
 Default: (empty)</literallayout>
