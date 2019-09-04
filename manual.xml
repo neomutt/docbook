@@ -21,7 +21,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
     </abstract>
   </bookinfo>
 
-  <chapter id="intro">
+  <chapter id="guide/intro">
     <title>Introduction</title>
     <para>
       <emphasis role="bold">NeoMutt</emphasis> is a small but very powerful
@@ -204,7 +204,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
     </sect1>
   </chapter>
 
-  <chapter id="gettingstarted">
+  <chapter id="guide/gettingstarted">
     <title>Getting Started</title>
     <para>
       This section is intended as a brief overview of how to use NeoMutt.
@@ -362,7 +362,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
         <para>
           This part of the manual is suitable for beginners. If you already
           know NeoMutt you could skip ahead to the main
-          <link linkend="sidebar">Sidebar guide</link>. If you just want to get
+          <link linkend="feature/sidebar">Sidebar guide</link>. If you just want to get
           started, you could use the sample
           <link linkend="sidebar-neomuttrc">Sidebar neomuttrc</link>.
         </para>
@@ -2531,7 +2531,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           <varlistentry>
             <term>
               <literal>&lt;skip-quoted&gt;</literal> (default: S)
-              <anchor id="skip-quoted" />
+              <anchor id="feature/skip-quoted" />
             </term>
             <listitem>
               <para>
@@ -3400,7 +3400,7 @@ set crypt_use_gpgme
 
   </chapter>
 
-  <chapter id="configuration">
+  <chapter id="guide/configuration">
     <title>Configuration</title>
 
     <sect1 id="configuration-files">
@@ -4830,7 +4830,7 @@ folder-hook work "set sort=threads"
         </listitem>
         <listitem>
           <para>
-            <link linkend="progress">progress</link> (visual progress bar)
+            <link linkend="feature/progress">progress</link> (visual progress bar)
           </para>
         </listitem>
         <listitem>
@@ -5594,7 +5594,7 @@ unignore posted-to:
       <para>
         NeoMutt provides a number of advanced features for handling (possibly
         many) folders and new mail within them, please refer to
-        <xref linkend="new-mail" /> for details (including in what situations
+        <xref linkend="feature/new-mail" /> for details (including in what situations
         and how often NeoMutt checks for new mail). Additionally,
         <link linkend="new-mail-command">$new_mail_command</link> can be used
         to run a command when new mail is detected.
@@ -6865,7 +6865,7 @@ mailboxes $my_mx +mailbox3
 </screen>
 
         <para>
-          For more examples, see <xref linkend="nested-if" />
+          For more examples, see <xref linkend="feature/nested-if" />
         </para>
       </sect2>
 
@@ -6981,7 +6981,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
         <para>
           This feature allows the format of dates in the index to vary based on
           how recent the message is. This is especially useful in combination
-          with the <link linkend="nested-if">nested-if feature</link>.
+          with the <link linkend="feature/nested-if">nested-if feature</link>.
         </para>
         <para>
           For example, using
@@ -7044,7 +7044,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
     </sect1>
   </chapter>
 
-  <chapter id="advancedusage">
+  <chapter id="guide/advancedusage">
     <title>Advanced Usage</title>
 
     <sect1 id="charset-handling">
@@ -8648,13 +8648,13 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
         </listitem>
         <listitem>
           <para>
-            <link linkend="global-hooks"><command>timeout-hook</command></link>
+            <link linkend="feature/global-hooks"><command>timeout-hook</command></link>
           </para>
           <para>
-            <link linkend="global-hooks"><command>startup-hook</command></link>
+            <link linkend="feature/global-hooks"><command>startup-hook</command></link>
           </para>
           <para>
-            <link linkend="global-hooks"><command>shutdown-hook</command></link>
+            <link linkend="feature/global-hooks"><command>shutdown-hook</command></link>
           </para>
         </listitem>
         <listitem>
@@ -9170,7 +9170,7 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
       </example>
     </sect1>
 
-    <sect1 id="new-mail">
+    <sect1 id="feature/new-mail">
       <title>New Mail Detection</title>
       <para>
         NeoMutt supports setups with multiple folders, allowing all of them to
@@ -9603,7 +9603,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
     </sect1>
   </chapter>
 
-  <chapter id="mimesupport">
+  <chapter id="guide/mimesupport">
     <title>NeoMutt's MIME Support</title>
     <para>
       Quite a bit of effort has been made to make NeoMutt the premier text-mode
@@ -11008,7 +11008,7 @@ mime_lookup application/octet-stream application/X-Lotus-Manuscript
     </sect1>
   </chapter>
 
-  <chapter id="optionalfeatures">
+  <chapter id="guide/optionalfeatures">
     <title>Optional Features</title>
 
     <sect1 id="optionalfeatures-notes">
@@ -11606,7 +11606,7 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
     </sect1>
   </chapter>
 
-  <chapter id="attach-headers-color">
+  <chapter id="feature/attach-headers-color">
     <title>Attach Headers Color Feature</title>
     <subtitle>Color attachment headers using regex, just like mail
     bodies</subtitle>
@@ -11709,7 +11709,7 @@ color   attach_headers     brightmagenta   default    "invalid node with packet 
     </sect1>
   </chapter>
 
-  <chapter id="compose-to-sender">
+  <chapter id="feature/compose-to-sender">
     <title>Compose to Sender Feature</title>
     <subtitle>Send new mail to the sender of the current mail</subtitle>
 
@@ -11806,7 +11806,7 @@ bind index,pager @ compose-to-sender
     </sect1>
   </chapter>
 
-  <chapter id="compress">
+  <chapter id="feature/compress">
     <title>Compressed Folders Feature</title>
     <subtitle>Read from/write to compressed mailboxes</subtitle>
 
@@ -12255,7 +12255,7 @@ close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &
     </sect1>
   </chapter>
 
-  <chapter id="cond-date">
+  <chapter id="feature/cond-date">
     <title>Conditional Dates Feature</title>
     <subtitle>Use rules to choose date format</subtitle>
 
@@ -12271,7 +12271,7 @@ close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &
           </term>
           <listitem>
             <para>
-              <link linkend="nested-if">nested-if feature</link>
+              <link linkend="feature/nested-if">nested-if feature</link>
             </para>
           </listitem>
         </varlistentry>
@@ -12611,7 +12611,7 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
         </listitem>
         <listitem>
           <para>
-            <link linkend="nested-if">nested-if feature</link>
+            <link linkend="feature/nested-if">nested-if feature</link>
           </para>
         </listitem>
         <listitem>
@@ -12658,7 +12658,7 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
     </sect1>
   </chapter>
 
-  <chapter id="encrypt-to-self">
+  <chapter id="feature/encrypt-to-self">
     <title>Encrypt-to-Self Feature</title>
     <subtitle>Save a self-encrypted copy of emails</subtitle>
 
@@ -12816,7 +12816,7 @@ set smime_default_key = "SMIME-KEY"
     </sect1>
   </chapter>
 
-  <chapter id="fmemopen">
+  <chapter id="feature/fmemopen">
     <title>Fmemopen Feature</title>
     <subtitle>Replace some temporary files with memory buffers</subtitle>
 
@@ -12907,7 +12907,7 @@ set smime_default_key = "SMIME-KEY"
     </sect1>
   </chapter>
 
-  <chapter id="forgotten-attachment">
+  <chapter id="feature/forgotten-attachment">
     <title>Forgotten Attachment Feature</title>
     <subtitle>Alert user when (s)he forgets to attach a file to an outgoing
     email.</subtitle>
@@ -13053,7 +13053,7 @@ set abort_noattach_regex = "\\&lt;attach(|ed|ments?)\\&gt;"
     </sect1>
   </chapter>
 
-  <chapter id="global-hooks">
+  <chapter id="feature/global-hooks">
     <title>Global Hooks</title>
     <subtitle>Define actions to run globally within NeoMutt</subtitle>
 
@@ -13119,7 +13119,7 @@ startup-hook 'echo `action.sh ARGS`'
           This feature implements a new hook that is called when NeoMutt
           first starts up, but before opening the first mailbox. This is most
           likely to be useful to users of
-          <link linkend="notmuch">notmuch</link>.
+          <link linkend="feature/notmuch">notmuch</link>.
         </para>
       </sect2>
 
@@ -13133,7 +13133,7 @@ startup-hook 'echo `action.sh ARGS`'
         <para>
           This feature implements a hook that is called when NeoMutt shuts
           down, but before closing the first mailbox. This is most likely to
-          be useful to users of <link linkend="notmuch">notmuch</link>.
+          be useful to users of <link linkend="feature/notmuch">notmuch</link>.
         </para>
       </sect2>
     </sect1>
@@ -13224,7 +13224,7 @@ shutdown-hook 'exec sync-mailbox'
     </sect1>
   </chapter>
 
-  <chapter id="ifdef">
+  <chapter id="feature/ifdef">
     <title>Ifdef Feature</title>
     <subtitle>Conditional config options</subtitle>
 
@@ -13368,7 +13368,7 @@ ifndef sidebar finish
     </sect1>
   </chapter>
 
-  <chapter id="index-color">
+  <chapter id="feature/index-color">
     <title>Index Color Feature</title>
     <subtitle>Custom rules for theming the email index</subtitle>
 
@@ -13384,7 +13384,7 @@ ifndef sidebar finish
           </term>
           <listitem>
             <para>
-              <link linkend="status-color">status-color feature</link>
+              <link linkend="feature/status-color">status-color feature</link>
             </para>
           </listitem>
         </varlistentry>
@@ -13548,7 +13548,7 @@ color index_size cyan default
         </listitem>
         <listitem>
           <para>
-            <link linkend="status-color">Status-Color feature</link>
+            <link linkend="feature/status-color">Status-Color feature</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -13604,7 +13604,7 @@ color index_size cyan default
     </sect1>
   </chapter>
 
-  <chapter id="initials">
+  <chapter id="feature/initials">
     <title>Initials Expando Feature</title>
     <subtitle>Expando for author's initials</subtitle>
 
@@ -13683,7 +13683,7 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
         </listitem>
         <listitem>
           <para>
-            <link linkend="index-color">index-color feature</link>
+            <link linkend="feature/index-color">index-color feature</link>
           </para>
         </listitem>
         <listitem>
@@ -13720,7 +13720,7 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
     </sect1>
   </chapter>
 
-  <chapter id="kyoto-cabinet">
+  <chapter id="feature/kyoto-cabinet">
     <title>Kyoto Cabinet Feature</title>
     <subtitle>Kyoto Cabinet backend for the header cache</subtitle>
 
@@ -13810,7 +13810,7 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
     </sect1>
   </chapter>
 
-  <chapter id="limit-current-thread">
+  <chapter id="feature/limit-current-thread">
     <title>Limit Current Thread Feature</title>
     <subtitle>Focus on one Email Thread</subtitle>
 
@@ -13904,7 +13904,7 @@ bind index &lt;esc&gt;L limit-current-thread
     </sect1>
   </chapter>
 
-  <chapter id="lmdb">
+  <chapter id="feature/lmdb">
     <title>LMDB Feature</title>
     <subtitle>LMDB backend for the header cache</subtitle>
 
@@ -13975,7 +13975,7 @@ bind index &lt;esc&gt;L limit-current-thread
     </sect1>
   </chapter>
 
-  <chapter id="multiple-fcc">
+  <chapter id="feature/multiple-fcc">
     <title>Multiple FCC Feature</title>
     <subtitle>Save multiple copies of outgoing mail</subtitle>
 
@@ -14060,7 +14060,7 @@ bind index &lt;esc&gt;L limit-current-thread
     </sect1>
   </chapter>
 
-  <chapter id="nested-if">
+  <chapter id="feature/nested-if">
     <title>Nested If Feature</title>
     <subtitle>Allow complex nested conditions in format strings</subtitle>
 
@@ -14213,7 +14213,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="cond-date">cond-date feature</link>
+            <link linkend="feature/cond-date">cond-date feature</link>
           </para>
         </listitem>
         <listitem>
@@ -14261,7 +14261,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
     </sect1>
   </chapter>
 
-  <chapter id="new-mail-hook">
+  <chapter id="feature/new-mail-hook">
     <title>New Mail Feature</title>
     <subtitle>Execute a command upon the receipt of new mail.</subtitle>
 
@@ -14413,7 +14413,7 @@ set new_mail_command = ""
     </sect1>
   </chapter>
 
-  <chapter id="nntp">
+  <chapter id="feature/nntp">
     <title>NNTP Feature</title>
     <subtitle>Talk to a Usenet news server</subtitle>
 
@@ -14818,7 +14818,7 @@ bind index \CG get-message
     </sect1>
 </chapter>
 
-  <chapter id="custom-tags">
+  <chapter id="feature/custom-tags">
     <title>Custom backend based Tags Feature</title>
     <subtitle>Implements Notmuch tags and Imap keywords</subtitle>
 
@@ -14833,12 +14833,12 @@ bind index \CG get-message
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="quasi-delete">quasi-delete feature</link>
+            <link linkend="feature/quasi-delete">quasi-delete feature</link>
           </para>
         </listitem>
         <listitem>
           <para>
-            <link linkend="index-color">index-color feature</link>
+            <link linkend="feature/index-color">index-color feature</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -15086,7 +15086,7 @@ color index_tags green default
     </sect1>
   </chapter>
 
-  <chapter id="notmuch">
+  <chapter id="feature/notmuch">
     <title>Notmuch Feature</title>
     <subtitle>Email search engine</subtitle>
 
@@ -15101,12 +15101,12 @@ color index_tags green default
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="quasi-delete">quasi-delete feature</link>
+            <link linkend="feature/quasi-delete">quasi-delete feature</link>
           </para>
         </listitem>
         <listitem>
           <para>
-            <link linkend="index-color">index-color feature</link>
+            <link linkend="feature/index-color">index-color feature</link>
           </para>
         </listitem>
         <listitem>
@@ -15775,7 +15775,7 @@ bind index &gt; vfolder-window-forward
     </sect1>
   </chapter>
 
-  <chapter id="progress">
+  <chapter id="feature/progress">
     <title>Progress Bar Feature</title>
     <subtitle>Show a visual progress bar on slow operations</subtitle>
 
@@ -15894,7 +15894,7 @@ color progress white red
     </sect1>
   </chapter>
 
-  <chapter id="quasi-delete">
+  <chapter id="feature/quasi-delete">
     <title>Quasi-Delete Feature</title>
     <subtitle>Mark emails that should be hidden, but not deleted</subtitle>
 
@@ -15968,7 +15968,7 @@ bind index,pager Q quasi-delete
       <itemizedlist>
         <listitem>
           <para>
-            <link linkend="notmuch">notmuch feature</link>
+            <link linkend="feature/notmuch">notmuch feature</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -16000,7 +16000,7 @@ bind index,pager Q quasi-delete
     </sect1>
   </chapter>
 
-  <chapter id="reply-with-xorig-patch">
+  <chapter id="feature/reply-with-xorig-patch">
     <title>Reply With X-Original-To Feature</title>
     <subtitle>Direct reply to email using X-Original-To header</subtitle>
 
@@ -16078,7 +16078,7 @@ set reply_with_xorig = "yes"
     </sect1>
   </chapter>
 
-  <chapter id="sensible-browser">
+  <chapter id="feature/sensible-browser">
     <title>Sensible Browser Feature</title>
     <subtitle>Make the file browser behave</subtitle>
 
@@ -16204,7 +16204,7 @@ set sort_browser="reverse-size"
     </sect1>
   </chapter>
 
-  <chapter id="sidebar">
+  <chapter id="feature/sidebar">
     <title>Sidebar Feature</title>
     <subtitle>Overview of mailboxes</subtitle>
 
@@ -16666,7 +16666,7 @@ color sidebar_ordinary color245 default
         </listitem>
         <listitem>
           <para>
-            <link linkend="notmuch">notmuch feature</link>
+            <link linkend="feature/notmuch">notmuch feature</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -16752,7 +16752,7 @@ color sidebar_ordinary color245 default
     </sect1>
   </chapter>
 
-  <chapter id="skip-quoted-patch">
+  <chapter id="feature/skip-quoted-patch">
     <title>Skip Quoted Feature</title>
     <subtitle>Leave some context visible</subtitle>
 
@@ -16848,7 +16848,7 @@ set skip_quoted_offset = 3
     </sect1>
   </chapter>
 
-  <chapter id="status-color">
+  <chapter id="feature/status-color">
     <title>Status Color Feature</title>
     <subtitle>Custom rules for theming the status bar</subtitle>
 
@@ -17002,7 +17002,7 @@ color status brightwhite default 'NeoMutt: ([^ ]+)' 1
         </listitem>
         <listitem>
           <para>
-            <link linkend="index-color">index-color feature</link>
+            <link linkend="feature/index-color">index-color feature</link>
           </para>
         </listitem>
         <listitem>
@@ -17051,7 +17051,7 @@ color status brightwhite default 'NeoMutt: ([^ ]+)' 1
     </sect1>
   </chapter>
 
-  <chapter id="tls-sni">
+  <chapter id="feature/tls-sni">
     <title>TLS-SNI Feature</title>
     <subtitle>Negotiate with a server for a TLS/SSL certificate</subtitle>
 
@@ -17133,7 +17133,7 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
     </sect1>
   </chapter>
 
-  <chapter id="trash-folder">
+  <chapter id="feature/trash-folder">
     <title>Trash Folder Feature</title>
     <subtitle>Automatically move deleted emails to a trash bin</subtitle>
 
@@ -17171,7 +17171,7 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
         email is gone forever.
       </para>
       <para>
-        The <link linkend="trash">$trash</link> variable defines a folder in
+        The <link linkend="feature/trash">$trash</link> variable defines a folder in
         which to keep old emails. As before, first you mark emails for
         deletion. When &lt;sync-mailbox&gt; is called the emails are moved to
         the trash folder.
@@ -17312,7 +17312,7 @@ bind index D purge-message
     </sect1>
   </chapter>
 
-  <chapter id="security">
+  <chapter id="guide/security">
     <title>Security Considerations</title>
     <para>
       First of all, NeoMutt contains no security holes included by intention
@@ -17427,7 +17427,7 @@ bind index D purge-message
     </sect1>
   </chapter>
 
-  <chapter id="tuning">
+  <chapter id="guide/tuning">
     <title>Performance Tuning</title>
 
     <sect1 id="tuning-mailboxes">
@@ -17530,7 +17530,7 @@ folder-hook ^pop 'set read_inc=1'
     </sect1>
   </chapter>
 
-  <chapter id="reference">
+  <chapter id="guide/reference">
     <title>Reference</title>
 
     <sect1 id="commandline">
@@ -18363,7 +18363,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="ifdef">ifdef</link>
+              <link linkend="feature/ifdef">ifdef</link>
             </command>
             <arg choice="plain">
               <replaceable class="parameter">symbol</replaceable>
@@ -18372,7 +18372,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
               <replaceable class="parameter">&quot;config-command [args...]&quot;</replaceable>
             </arg>
             <command>
-              <link linkend="ifdef">ifndef</link>
+              <link linkend="feature/ifdef">ifndef</link>
             </command>
             <arg choice="plain">
               <replaceable class="parameter">symbol</replaceable>
@@ -18381,7 +18381,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
               <replaceable class="parameter">&quot;config-command [args...]&quot;</replaceable>
             </arg>
             <command>
-              <link linkend="ifdef">finish</link>
+              <link linkend="feature/ifdef">finish</link>
             </command>
           </cmdsynopsis>
         </listitem>
@@ -18976,19 +18976,19 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="global-hooks">timeout-hook</link>
+              <link linkend="feature/global-hooks">timeout-hook</link>
             </command>
             <arg choice="plain">
               <replaceable class="parameter">command</replaceable>
             </arg>
             <command>
-              <link linkend="global-hooks">startup-hook</link>
+              <link linkend="feature/global-hooks">startup-hook</link>
             </command>
             <arg choice="plain">
               <replaceable class="parameter">command</replaceable>
             </arg>
             <command>
-              <link linkend="global-hooks">shutdown-hook</link>
+              <link linkend="feature/global-hooks">shutdown-hook</link>
             </command>
             <arg choice="plain">
               <replaceable class="parameter">command</replaceable>
@@ -23956,7 +23956,7 @@ the mailbox.
 </para>
 <para>
 Also see the <link linkend="write-inc">$write_inc</link>, <link linkend="net-inc">$net_inc</link> and <link linkend="time-inc">$time_inc</link> variables and the
-"<link linkend="tuning">tuning</link>" section of the manual for performance considerations.
+"<link linkend="guide/tuning">tuning</link>" section of the manual for performance considerations.
 </para>
 </sect2>
 
@@ -24113,7 +24113,7 @@ message to the author of a message.
 </para>
 </sect2>
 
-<sect2 id="reply-with-xorig">
+<sect2 id="feature/reply-with-xorig">
 <title>reply_with_xorig</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
@@ -25984,7 +25984,7 @@ apart. This can improve throughput on systems with slow terminals,
 or when running NeoMutt on a remote system.
 </para>
 <para>
-Also see the "<link linkend="tuning">tuning</link>" section of the manual for performance considerations.
+Also see the "<link linkend="guide/tuning">tuning</link>" section of the manual for performance considerations.
 </para>
 </sect2>
 
@@ -26056,7 +26056,7 @@ Controls the character used to indicate mail addressed to you.
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
-<sect2 id="trash">
+<sect2 id="feature/trash">
 <title>trash</title>
 <literallayout>Type: path
 Default: (empty)</literallayout>
@@ -26385,7 +26385,7 @@ single message will be displayed before writing a mailbox.
 </para>
 <para>
 Also see the <link linkend="read-inc">$read_inc</link>, <link linkend="net-inc">$net_inc</link> and <link linkend="time-inc">$time_inc</link> variables and the
-"<link linkend="tuning">tuning</link>" section of the manual for performance considerations.
+"<link linkend="guide/tuning">tuning</link>" section of the manual for performance considerations.
 </para>
 </sect2>
 
@@ -27102,7 +27102,7 @@ bindings for all menus (except as noted).
     </sect1>
   </chapter>
 
-  <chapter id="miscellany">
+  <chapter id="guide/miscellany">
     <title>Miscellany</title>
 
     <sect1 id="acknowledgements">
