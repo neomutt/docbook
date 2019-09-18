@@ -345,7 +345,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
         </para>
         <para>
           Some mail systems can nest mail folders inside other mail folders.
-          The normal open entry commands in mutt will open the mail folder and
+          The normal open entry commands in NeoMutt will open the mail folder and
           you can't see the sub-folders.  If you instead use the
           <literal>&lt;descend-directory&gt;</literal> function it will go into
           the directory and not open it as a mail directory.
@@ -760,7 +760,7 @@ set sidebar_divider_char = '│'          <emphasis role="comment"># Pretty line
                     <entry>%D</entry>
                     <entry></entry>
                     <entry>
-                      Description of the mailbox
+                      Descriptive name of the mailbox
                     </entry>
                   </row>
                   <row>
@@ -1919,10 +1919,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         </para>
 
 <screen>
-\e[
-<emphasis>Ps</emphasis>;
-<emphasis>Ps</emphasis>;..
-<emphasis>Ps</emphasis>;m
+\e[ Ps; Ps; ...  Ps;m
 </screen>
 
         <para>
@@ -3178,7 +3175,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         which, for example, can be set to <quote>ask-no</quote>.
       </para>
       <para>
-        Mutt's default (<link linkend="mime-forward">$mime_forward</link>=<quote>no</quote> and
+        NeoMutt's default (<link linkend="mime-forward">$mime_forward</link>=<quote>no</quote> and
         <link linkend="forward-decode">$forward_decode</link>=<quote>yes</quote>) is
         to use standard inline forwarding.  In that mode all text-decodable
         parts are included in the new message body.  Other attachments from
@@ -3317,19 +3314,19 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
       <para>
         To enable <quote>classic mode</quote>, ensure GPGME is disabled and use
         the <literal>gpg.rc</literal> or <literal>smime.rc</literal> files that
-        come with mutt.  These are typically installed under
-        <literal>/usr/local/share/doc/mutt/samples/</literal>.  Source them, either
+        come with NeoMutt.  These are typically installed under
+        <literal>/usr/local/share/doc/neomutt/samples/</literal>.  Source them, either
         directly or by copying them to your .mutt directory and sourcing them.
         Sourcing them directly from
-        <literal>/usr/local/share/doc/mutt/samples/</literal> has the benefit of
+        <literal>/usr/local/share/doc/neomutt/samples/</literal> has the benefit of
         automatically using fixes and security improvements to the command
         invocations, and is recommended.
       </para>
 
 <screen>
 unset crypt_use_gpgme
-source /usr/local/share/doc/mutt/samples/gpg.rc
-source /usr/local/share/doc/mutt/samples/smime.rc
+source /usr/local/share/doc/neomutt/samples/gpg.rc
+source /usr/local/share/doc/neomutt/samples/smime.rc
 </screen>
 
       <para>
@@ -3358,11 +3355,11 @@ set crypt_use_gpgme
           <literal>agent</literal> to prompt for your passphrase.  If you are
           using a version older than that, you'll need to ensure an agent is
           running (alternatively, you can unset
-          <link linkend="pgp-use-gpg-agent">$pgp_use_gpg_agent</link> and Mutt
+          <link linkend="pgp-use-gpg-agent">$pgp_use_gpg_agent</link> and NeoMutt
           will prompt you for your passphrase).  The agent in turn uses a
           <literal>pinentry</literal> program to display the prompt.  There are
           many different kinds of pinentry programs that can be used: qt, gtk2,
-          gnome3, fltk, and curses.  However, Mutt does
+          gnome3, fltk, and curses.  However, NeoMutt does
           <emphasis>not</emphasis> work properly with the tty pinentry program.
           Please ensure you have one of the GUI or curses pinentry programs
           installed and configured to be the default for your system.
@@ -3384,7 +3381,7 @@ set crypt_use_gpgme
 
         <para>
           In <quote>classic mode</quote>, keys and certificates are managed by
-          the <literal>smime_keys</literal> program that comes with Mutt.  By
+          the <literal>smime_keys</literal> program that comes with NeoMutt.  By
           default they are stored under <literal>~/.smime/</literal>. (This is
           set by the <literal>smime.rc</literal> file with
           <link linkend="smime-certificates">$smime_certificates</link> and
@@ -3418,7 +3415,7 @@ set crypt_use_gpgme
       </para>
       <para>
         NeoMutt searches for several different file names when looking for
-        config. It looks for NeoMutt config files before Mutt config files and
+        config. It looks for NeoMutt config files before NeoMutt config files and
         versioned config before plain config. For example:
       </para>
 
@@ -3436,7 +3433,7 @@ set crypt_use_gpgme
         </tgroup>
       </table>
       <para>
-        This allows the user to create separate NeoMutt and Mutt config files
+        This allows the user to create separate NeoMutt and NeoMutt config files
         on the same system.
       </para>
 
@@ -5435,7 +5432,7 @@ unignore posted-to:
         <link linkend="list-reply"><literal>&lt;list-reply&gt;</literal></link>
         function will work for all known lists. Additionally, when you send a
         message to a known list and <link linkend="followup-to">$followup_to</link>
-        is set, Mutt will add a Mail-Followup-To header.  For unsubscribed
+        is set, NeoMutt will add a Mail-Followup-To header.  For unsubscribed
         lists, this will include your personal address, ensuring you receive a
         copy of replies.  For subscribed mailing lists, the header will not,
         telling other users' mail user agents not to send copies of replies to
@@ -6170,7 +6167,7 @@ folder-hook . 'push "&lt;enter-command&gt;score ~= 10&lt;enter&gt;"'
       <para>
         Note: the value displayed by <literal>%H</literal>and searched by
         <literal>~H</literal>is stored in the
-        <link linkend="caching">header cache</link>. Mutt isn't smart enough to
+        <link linkend="caching">header cache</link>. NeoMutt isn't smart enough to
         invalidate a header cache entry based on changing <literal>spam</literal>
         rules, so if you aren't seeing correct <literal>%H</literal>values, try
         temporarily turning off the header cache. If that fixes the problem,
@@ -6996,6 +6993,52 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
    3     12:17 Rhys Lee        (   42) The Lord Of The Rings
 </screen>
 
+      </sect2>
+
+      <sect2 id="formatstrings-size">
+        <title>Bytes size display</title>
+
+        <para>
+          Various format strings contain expandos that display the size of
+          messages in bytes.  This includes
+          <literal>%s</literal> in <link linkend="attach-format">$attach_format</link>,
+          <literal>%l</literal> in <link linkend="compose-format">$compose_format</link>,
+          <literal>%s</literal> in <link linkend="folder-format">$folder_format</link>,
+          <literal>%c</literal> in <link linkend="index-format">$index_format</link>,
+          and %l and %L in <link linkend="status-format">$status_format</link>.
+          There are four configuration variables that can be used to customize
+          how the numbers are displayed.
+        </para>
+
+        <para>
+          <link linkend="size-show-bytes">$size_show_bytes</link>
+          will display the number of bytes when the size is &lt; 1
+          kilobyte.  When unset, kilobytes will be displayed instead.
+        </para>
+
+        <para>
+          <link linkend="size-show-mb">$size_show_mb</link> will display the
+          number of megabytes when the size is &gt;= 1 megabyte.  When
+          unset, kilobytes will be displayed instead (which could be a large
+          number).
+        </para>
+
+        <para>
+          <link linkend="size-show-fractions">$size_show_fractions</link>,
+          will display numbers with a single decimal place for values from
+          0 to 10 kilobytes, and 1 to 10 megabytes.
+        </para>
+
+        <para>
+          <link linkend="size-units-on-left">$size_units_on_left</link> will
+          display the unit (<quote>K</quote> or <quote>M</quote> to the left
+          of the number, instead of the right if unset.
+        </para>
+
+        <para>
+          These variables also affect size display in a few other places, such
+          as progress indicators and attachment delimiters in the pager.
+        </para>
       </sect2>
     </sect1>
 
@@ -9285,7 +9328,7 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
         <para>
           When the <emphasis>Inotify</emphasis>mechanism for monitoring of
           files is supported (Linux only) and not disabled at compilation time,
-          Mutt immediately notifies about new mail for all folders configured
+          NeoMutt immediately notifies about new mail for all folders configured
           via the <link linkend="mailboxes"><command>mailboxes</command></link>
           command.  Dependent on <link linkend="mailbox-formats">mailbox format</link>
           also added <emphasis>old</emphasis>mails are tracked (not for Maildir).
@@ -9301,7 +9344,7 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
             Getting events about new mail is limited to the capabilities of the
             underlying mechanism.  <emphasis>inotify</emphasis>only reports
             local changes, i. e. new mail notification works for mails
-            delivered by an agent on the same machine as mutt, but not when
+            delivered by an agent on the same machine as NeoMutt, but not when
             delivered remotely on a network file system as nfs. also the
             monitoring handles might fail in rare conditions, so you better
             don't completely rely on this feature.
@@ -9451,7 +9494,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
     <sect1 id="compose-flow">
       <title>Message Composition Flow</title>
         <para>
-          This is a brief overview of the steps Mutt takes during message
+          This is a brief overview of the steps NeoMutt takes during message
           composition. It also shows the order and timing of hook execution.
         </para>
       <itemizedlist>
@@ -10854,7 +10897,13 @@ set preferred_languages="fr,en,de"
           <replaceable>mime-type</replaceable>
         </arg>
         <command>attachments</command>
-        <arg choice="plain">?</arg>
+        <arg choice="plain">
+          <option>?</option>
+        </arg>
+        <command>unattachments</command>
+        <arg choice="plain">
+          <option>*</option>
+        </arg>
       </cmdsynopsis>
       <para>
         <emphasis>disposition</emphasis> is the attachment's
@@ -10945,6 +10994,11 @@ attachments  -I message/external-body
         Entering the command <quote><command>attachments</command> ?</quote> as
         a command will list your current settings in neomuttrc format, so that
         it can be pasted elsewhere.
+      </para>
+
+      <para>
+        Entering the command <quote><command>unattachments</command> *</quote>
+        as a command will Clear all attachment settings.
       </para>
     </sect1>
 
@@ -11345,7 +11399,7 @@ set timeout=15
       <para>
         Then, you'd use <literal>oauth2.py</literal> with
         <literal>--generate_oauth2_token</literal> to get a refresh token, and
-        configure mutt with:
+        configure NeoMutt with:
       </para>
 
 <screen>
@@ -17312,6 +17366,353 @@ bind index D purge-message
     </sect1>
   </chapter>
 
+  <chapter id="guide/autocryptdoc">
+    <title>Autocrypt</title>
+
+    <para>
+      NeoMutt can be compiled with Autocrypt support by running
+      <literal>configure</literal> with the
+      <literal>--enable-autocrypt</literal> flag.  Autocrypt provides
+      easy to use, passive protection against data collection.  Keys are
+      distributed via an <literal>Autocrypt:</literal> header added to
+      emails.  It does <emphasis>not</emphasis> protect against active
+      adversaries, and so should not be considered a substitute for
+      normal encryption via your keyring, using key signing and the web
+      of trust to verify identities.  With an understanding of these
+      limitations, Autocrypt still provides an easy way to minimize
+      cleartext emails sent between common correspondents, without
+      having to explicitly exchange keys.  More information can be found
+      at <ulink url="https://autocrypt.org/">https://autocrypt.org/</ulink>.
+    </para>
+
+    <sect1 id="autocryptdoc-requirements">
+      <title>Requirements</title>
+      <para>
+        Autocrypt requires support for ECC cryptography, and NeoMutt by
+        default will generate ECC keys.  Therefore GnuPG 2.1 or greater
+        is required.  Additionally, NeoMutt's Autocrypt implementation uses
+        GPGME and requires at least version 1.8.0.
+      </para>
+      <para>
+        Account and peer information is stored in a sqlite3 database, and
+        so NeoMutt must be configured with the <literal>--with-sqlite3</literal>
+        flag when autocrypt is enabled.
+      </para>
+      <para>
+        It is highly recommended that NeoMutt be configured
+        <literal>--with-idn</literal> or
+        <literal>--with-idn2</literal> so that Autocrypt can properly
+        deal with international domain names.
+      </para>
+      <para>
+        While NeoMutt uses GPGME for Autocrypt, normal keyring operations
+        can still be performed via classic mode (i.e. with
+        <link linkend="crypt-use-gpgme">$crypt_use_gpgme</link> unset).
+        However, to avoid unnecessary prompts, it is recommended gpg not
+        be configured in <literal>loopback pinentry</literal> mode, and
+        that <link linkend="pgp-use-gpg-agent">$pgp_use_gpg_agent</link>
+        remain set (the default).
+      </para>
+    </sect1>
+
+    <sect1 id="autocryptdoc-init">
+      <title>First Run</title>
+      <para>
+        To enable Autocrypt, set <link
+        linkend="autocrypt">$autocrypt</link>, and if desired change the
+        value of <link linkend="autocrypt-dir">$autocrypt_dir</link> in
+        your muttrc.  The first time NeoMutt is run after that, you will be
+        prompted to create
+        <link linkend="autocrypt-dir">$autocrypt_dir</link>.  NeoMutt will then
+        automatically create an sqlite3 database and gpg keyring in that
+        directory.  Note since these files should be considered private,
+        NeoMutt will create this directory with mode
+        <literal>700</literal>.  If you create the directory manually,
+        you should do the same.
+      </para>
+      <para>
+        NeoMutt recommends keeping the <link
+        linkend="autocrypt-dir">$autocrypt_dir</link> directory set
+        differently from your GnuPG keyring directory
+        (e.g. <literal>~/.gnupg</literal>).  Keys are automatically
+        imported into the keyring from <literal>Autocrypt:</literal>
+        headers.  Compared to standard <quote>web of trust</quote> keys,
+        Autocrypt keys are somewhat ephemeral, and the autocrypt
+        database is used to track when keys change or fall out of use.
+        Having these keys mixed in with your normal keyring will make it
+        more difficult to use features such as
+        <link linkend="crypt-opportunistic-encrypt">$crypt_opportunistic_encrypt</link>
+        and Autocrypt at the same time.
+      </para>
+      <para>
+        The <link linkend="autocrypt-dir">$autocrypt_dir</link> variable
+        is not designed to be changed while NeoMutt is running.  The
+        database is created (if necessary) and connected to during
+        startup.  Changing the variable can result in a situation where
+        NeoMutt is looking in one place for the database and a different
+        place for the GPG keyring, resulting in strange behavior.
+      </para>
+      <para>
+        Once the directory, keyring, and database are created, NeoMutt will
+        ask whether you would like to create an account.  In order to
+        use Autocrypt, each sending address needs an account.  As a
+        convenience you can create an account during the first run.  If
+        you would like to add additional accounts later, this can be
+        done via the <literal>&lt;autocrypt-acct-menu&gt;</literal>
+        function in the index, by default bound to <literal>A</literal>.
+      </para>
+      <para>
+        Account creation will first ask you for an email address.  Next,
+        it will ask whether you want to create a new key or select an
+        existing key.  (Note key selection takes place from the <link
+        linkend="autocrypt-dir">$autocrypt_dir</link> keyring, which
+        will normally be empty during first run).  Finally, it will ask
+        whether this address should prefer encryption or not.  Autocrypt
+        1.1 allows automatically enabling encryption if
+        <emphasis>both</emphasis> sender and receiver have set
+        <quote>prefer encryption</quote>.  Otherwise, you will need to
+        manually enable autocrypt encryption in the compose menu.  For
+        more details, see the compose menu section below.
+      </para>
+      <para>
+        After optionally creating an account, NeoMutt will prompt you to
+        scan mailboxes for Autocrypt headers.  This step occurs because
+        header cached messages are not re-scanned for Autocrypt headers.
+        Scanning during this step will temporarily disable the header
+        cache while opening each mailbox.  If you wish to do this
+        manually later, you can simulate the same thing by unsetting
+        <link linkend="header-cache">$header_cache</link> and opening a
+        mailbox.
+      </para>
+      <para>
+        A final technical note: the first run process takes place
+        between reading the muttrc and opening the initial mailbox.
+        Some muttrc files will <link linkend="push">push</link> macros
+        to be run after opening the mailbox.  To prevent this from
+        interfering with the first run prompts, NeoMutt disables all macros
+        during the first run.
+      </para>
+    </sect1>
+
+    <sect1 id="autocryptdoc-compose">
+      <title>Compose Menu</title>
+      <para>
+        When enabled, Autocrypt will add a line to the compose menu with
+        two fields: <literal>Autocrypt:</literal> and
+        <literal>Recommendation:</literal>.
+      </para>
+      <para>
+        The <literal>Autocrypt:</literal> field shows whether the
+        message will be encrypted by Autocrypt when sent.  It has two
+        values: <literal>Encrypt</literal> and <literal>Off</literal>.
+        <literal>Encrypt</literal> can be enabled using the
+        <literal>&lt;autocrypt-menu&gt;</literal> function, by default
+        bound to <literal>o</literal>.
+      </para>
+      <para>
+        The <literal>Recommendation:</literal> field shows the output of
+        the Autocrypt recommendation engine.  This can have one of five
+        values:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            <literal>Off</literal> means the engine is disabled.  This
+            can happen if the From address doesn't have an autocrypt
+            account, or if the account has been manually disabled.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>No</literal> means one or more recipients are
+            missing an autocrypt key, or the key found is unusable
+            (i.e. expired, revoked, disabled, invalid, or not usable for
+            encryption.)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>Discouraged</literal> means a key was found for
+            every recipient, but the engine is not confident the message
+            will be decryptable by the recipient.  This can happen if
+            the key hasn't been used recently (compared to their last
+            seen email).
+          </para>
+          <para>
+            It can also happen if the key wasn't seen first-hand from
+            the sender.  Autocrypt has a feature where recipient keys
+            can be included in group-encrypted emails.  This allows you
+            to reply to a conversation where you don't have a key
+            first-hand from one of the other recipients.  However, those
+            keys are not trusted as much as from first-hand emails, so
+            the engine warns you with a <literal>Discouraged</literal>
+            status.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>Available</literal> means a key was found for every
+            recipient, and the engine believes all keys are recent and
+            seen from the recipient first hand.  However, either you or
+            one of the recipients chose not to specify <quote>prefer
+            encryption</quote>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>Yes</literal> is the same as
+            <literal>Available</literal>, with the addition that you and
+            all recipients have specified <quote>prefer encryption</quote>.
+            This value will automatically enable
+            encryption, unless you have manually switched it off or
+            enabled regular encryption or signing via the
+            <literal>&lt;pgp-menu&gt;</literal>.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        As mentioned above the <literal>&lt;autocrypt-menu&gt;</literal>
+        function, by default bound to <literal>o</literal>, can be used
+        to change the <literal>Encrypt:</literal> field value.
+        <literal>(e)ncrypt</literal> will toggle encryption on.
+        <literal>(c)lear</literal> will toggle encryption off.  If
+        either of these are chosen, the field will remain in that state
+        despite what the <literal>Recommendation:</literal> field shows.
+        Lastly, <literal>(a)utomatic</literal> will set the value based
+        on the recommendation engine's output.
+      </para>
+      <para>
+        Autocrypt encryption defers to normal encryption or signing.
+        <emphasis>Anything</emphasis> that enables normal encryption or
+        signing will cause autocrypt encryption to turn off.  The only
+        exception is when replying to an autocrypt-encrypted email
+        (i.e. an email decrypted from the <link
+        linkend="autocrypt-dir">$autocrypt_dir</link> keyring).  Then,
+        if <link linkend="autocrypt-reply">$autocrypt_reply</link> is
+        <emphasis>set</emphasis>, autocrypt mode will be forced on,
+        overriding the settings
+        <link linkend="crypt-autosign">$crypt_autosign</link>,
+        <link linkend="crypt-autoencrypt">$crypt_autoencrypt</link>,
+        <link linkend="crypt-replyencrypt">$crypt_replyencrypt</link>,
+        <link linkend="crypt-replysign">$crypt_replysign</link>,
+        <link linkend="crypt-replysignencrypted">$crypt_replysignencrypted</link>, and
+        <link linkend="crypt-opportunistic-encrypt">$crypt_opportunistic_encrypt</link>.
+      </para>
+      <para>
+        When postponing a message, autocrypt will respect
+        <link linkend="postpone-encrypt">$postpone_encrypt</link>, but will
+        use the autocrypt account key to encrypt the message.  Be sure
+        to set <link linkend="postpone-encrypt">$postpone_encrypt</link>
+        to ensure postponed messages marked for autocrypt encryption are
+        encrypted.
+      </para>
+    </sect1>
+
+    <sect1 id="autocryptdoc-acctmgmt">
+      <title>Account Management</title>
+      <para>
+        The Autocrypt Account Menu is available from the index via
+        <literal>&lt;autocrypt-acct-menu&gt;</literal>, by default bound
+        to <literal>A</literal>.  See <link
+        linkend="autocrypt-account-map">Autocrypt Account Menu</link> for the
+        list of functions and their default keybindings.
+      </para>
+      <para>
+        In this menu, you can create new accounts, delete accounts,
+        toggle an account active/inactive, and toggle the <quote>prefer
+        encryption</quote> flag for an account.
+      </para>
+      <para>
+        Deleting an account only removes the account from the database.
+        The GPG key is kept, to ensure you still have the ability to
+        read past encrypted emails.
+      </para>
+      <para>
+        The Autocrypt 1.1 <quote>Setup Message</quote> feature is not
+        available yet, but will be added in the future.
+      </para>
+    </sect1>
+
+    <sect1 id="autocryptdoc-keyrings">
+      <title>Alternative Key and Keyring Strategies</title>
+      <para>
+        NeoMutt by default partitions Autocrypt from normal keyring
+        encryption/signing.  It does this by using a separate GPG
+        keyring (in <link linkend="autocrypt-dir">$autocrypt_dir</link>)
+        and creating a new ECC key in that keyring for accounts.  There
+        are good reasons for doing this by default.  It keeps random
+        keys found inside email headers out of your normal keyring.  ECC
+        keys are compact and better suited for email headers.  Autocrypt
+        key selection is completely different from <quote>web of
+        trust</quote> key selection, based on last-seen rules as opposed
+        to trust and validity.  It also allows NeoMutt to distinguish
+        Autocrypt encrypted emails from regular encrypted emails, and
+        set the mode appropriately when replying to each type of email.
+      </para>
+      <para>
+        Still, some users may want to use an existing key from their
+        normal keyring for Autocrypt too.  There are two ways this can
+        be accomplished.  The <emphasis>recommended</emphasis> way is to
+        set <link linkend="autocrypt-dir">$autocrypt_dir</link> to your
+        normal keyring directory (e.g. <literal>~/.gnupg</literal>).
+        During account creation, choosing <quote>(s)elect existing GPG
+        key</quote> will then list and allow selecting your existing key
+        for the new account.
+      </para>
+      <para>
+        An alternative is to copy your key over to the Autocrypt keyring,
+        but there is a severe downside.  NeoMutt <emphasis>first</emphasis>
+        tries to decrypt messages using the Autocrypt keyring, and if
+        that fails tries the normal keyring second.  This means all
+        encrypted emails to that key will be decrypted, and have
+        signatures verified from, the Autocrypt keyring.  Keys signatures
+        and web of trust from your normal keyring will no longer show up
+        in signatures when decrypting.
+      </para>
+      <para>
+        For that reason, if you want to use an existing key from your
+        normal keyring, it is recommended to just set <link
+        linkend="autocrypt-dir">$autocrypt_dir</link> to
+        <literal>~/.gnupg</literal>.  This allows <quote>web of
+        trust</quote> to show an appropriate signature message for
+        verified messages.  Autocrypt header keys will be imported into
+        your keyring, but if you don't want them mixed you should
+        strongly consider using a separate autocrypt key and keyring
+        instead.
+      </para>
+      <para>
+        Both methods have a couple additional caveats:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Replying to an Autocrypt decrypted message by default forces
+            Autocrypt mode on.  By sharing the same key, all replies
+            will then start in Autocrypt mode, even if a message wasn't
+            sent by one of your Autocrypt peers.  <link
+            linkend="autocrypt-reply">$autocrypt_reply</link> can be
+            <emphasis>unset</emphasis> to allow manual control of the
+            mode when replying.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            When NeoMutt creates an account from a gpg key, it exports the
+            public key, base64 encodes it, and stores that value in the
+            sqlite3 database.  The value is then used in the Autocrypt
+            header added to outgoing emails.  The ECC keys NeoMutt creates
+            don't change, but if you use external keys that expire, when
+            you resign to extend the expiration you will need to
+            recreate the Autocrypt account using the <link
+            linkend="autocryptdoc-acctmgmt">account menu</link>.
+            Otherwise the Autocrypt header will contain the old expired
+            exported keydata.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+  </chapter>
+
   <chapter id="guide/security">
     <title>Security Considerations</title>
     <para>
@@ -18064,6 +18465,18 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
             </arg>
             <arg choice="plain">
               <replaceable>mime-type</replaceable>
+            </arg>
+            <command>
+              <link linkend="attachments">attachments</link>
+            </command>
+            <arg choice="plain">
+              <option>?</option>
+            </arg>
+            <command>
+              <link linkend="attachments">unattachments</link>
+            </command>
+            <arg choice="plain">
+              <option>*</option>
             </arg>
           </cmdsynopsis>
         </listitem>
@@ -19320,7 +19733,7 @@ following <literal>printf(3)</literal>-style sequences are understood:
 </entry></row>
 <row><entry>%Q  </entry><entry>"Q", if MIME part qualifies for attachment counting
 </entry></row>
-<row><entry>%s  </entry><entry>Size
+<row><entry>%s  </entry><entry>Size (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
 <row><entry>%T  </entry><entry>Graphic tree characters
 </entry></row>
@@ -19359,8 +19772,8 @@ The directory where attachments are saved.
 Default: no</literallayout>
 
 <para>
-This variable, when set to true, will cause attachments to be saved to the
-'attach_save_dir' location without prompting the user for the filename.
+This variable, when set to true, will cause attachments to be saved to
+the 'attach_save_dir' location without prompting the user for the filename.
 </para>
 <para>
 </para>
@@ -19427,7 +19840,7 @@ this except to override that default.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, Mutt assumes the presence of a List-Post header
+When <emphasis>set</emphasis>, NeoMutt assumes the presence of a List-Post header
 means the recipient is subscribed to the list.  Unless the mailing list
 is in the "unsubscribe" or "unlist" lists, it will be added
 to the "<link linkend="subscribe">subscribe</link>" list.  Parsing and checking these things slows
@@ -19445,6 +19858,75 @@ When <emphasis>set</emphasis>, functions in the <emphasis>index</emphasis> menu 
 will be applied to all tagged messages (if there are any).  When
 unset, you must first use the <literal>&lt;tag-prefix&gt;</literal> function (bound to ";"
 by default) to make the next function apply to all tagged messages.
+</para>
+</sect2>
+
+<sect2 id="autocrypt">
+<title>autocrypt</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, enables autocrypt, which provides
+passive encryption protection with keys exchanged via headers.
+See <quote><link linkend="guide/autocryptdoc">autocryptdoc</link></quote> for more details.
+(Autocrypt only)
+</para>
+</sect2>
+
+<sect2 id="autocrypt-acct-format">
+<title>autocrypt_acct_format</title>
+<literallayout>Type: string
+Default: <quote><literal>%4n %-30a %20p %10s</literal></quote></literallayout>
+
+<para>
+This variable describes the format of the <quote>autocrypt account</quote> menu.
+The following <literal>printf(3)</literal>-style sequences are understood
+
+</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry>%a  </entry><entry>email address
+</entry></row>
+<row><entry>%k  </entry><entry>gpg keyid
+</entry></row>
+<row><entry>%n  </entry><entry>current entry number
+</entry></row>
+<row><entry>%p  </entry><entry>prefer-encrypt flag
+</entry></row>
+<row><entry>%s  </entry><entry>status flag (active/inactive)
+</entry></row></tbody></tgroup></informaltable>
+
+<para>
+(Autocrypt only)
+</para>
+</sect2>
+
+<sect2 id="autocrypt-dir">
+<title>autocrypt_dir</title>
+<literallayout>Type: path
+Default: <quote><literal>~/.mutt/autocrypt</literal></quote></literallayout>
+
+<para>
+This variable sets where autocrypt files are stored, including the GPG
+keyring and sqlite database.  See <quote><link linkend="guide/autocryptdoc">autocryptdoc</link></quote> for more details.
+(Autocrypt only)
+</para>
+</sect2>
+
+<sect2 id="autocrypt-reply">
+<title>autocrypt_reply</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, replying to an autocrypt email automatically
+enables autocrypt in the reply.  You may want to unset this if you're using
+the same key for autocrypt as normal web-of-trust, so that autocrypt
+isn't forced on for all encrypted replies.
+(Autocrypt only)
 </para>
 </sect2>
 
@@ -19536,7 +20018,7 @@ visual terminals don't permit making the cursor invisible.
 Default: yes</literallayout>
 
 <para>
-When this variable is <emphasis>set</emphasis>, mutt will abbreviate mailbox
+When this variable is <emphasis>set</emphasis>, NeoMutt will abbreviate mailbox
 names in the browser mailbox list, using '~' and '='
 shortcuts.
 </para>
@@ -19709,7 +20191,7 @@ set of <literal>printf(3)</literal>-like sequences:
 </entry></row>
 <row><entry>%h </entry><entry>Local hostname
 </entry></row>
-<row><entry>%l </entry><entry>Approximate size (in bytes) of the current message
+<row><entry>%l </entry><entry>Approximate size (in bytes) of the current message (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
 <row><entry>%v </entry><entry>NeoMutt version string
 </entry></row></tbody></tgroup></informaltable>
@@ -19931,19 +20413,19 @@ be manually re-enabled in the pgp or smime menus.
 Default: yes</literallayout>
 
 <para>
-When set, Mutt will display protected headers ("Memory Hole") in the pager,
+When set, NeoMutt will display protected headers ("Memory Hole") in the pager,
 and will update the index and header cache with revised headers.
 Protected headers are stored inside the encrypted or signed part of an
 an email, to prevent disclosure or tampering.
 For more information see https://github.com/autocrypt/memoryhole.
-Currently Mutt only supports the Subject header.
+Currently NeoMutt only supports the Subject header.
 </para>
 <para>
 Encrypted messages using protected headers often substitute the exposed
 Subject header with a dummy value (see <link linkend="crypt-protected-headers-subject">$crypt_protected_headers_subject</link>).
-Mutt will update its concept of the correct subject <emphasis role="bold">after</emphasis> the
+NeoMutt will update its concept of the correct subject <emphasis role="bold">after</emphasis> the
 message is opened, i.e. via the <literal>&lt;display-message&gt;</literal> function.
-If you reply to a message before opening it, Mutt will end up using
+If you reply to a message before opening it, NeoMutt will end up using
 the dummy Subject header, so be sure to open such a message first.
 (Crypto only)
 </para>
@@ -19956,7 +20438,7 @@ Default: no</literallayout>
 
 <para>
 When <link linkend="crypt-protected-headers-read">$crypt_protected_headers_read</link> is set, and a message with a
-protected Subject is opened, Mutt will save the updated Subject
+protected Subject is opened, NeoMutt will save the updated Subject
 into the header cache by default.  This allows searching/limiting
 based on the protected Subject header if the mailbox is
 re-opened, without having to re-open the message each time.
@@ -19966,12 +20448,12 @@ mailbox was reopened before you could see or search/limit on the
 protected subject again.
 </para>
 <para>
-When this variable is set, Mutt additionally saves the protected
+When this variable is set, NeoMutt additionally saves the protected
 Subject back <emphasis role="bold">in the clear-text message headers</emphasis>.  This
 provides better usability, but with the tradeoff of reduced
 security.  The protected Subject header, which may have
 previously been encrypted, is now stored in clear-text in the
-message headers.  Copying the message elsewhere, via Mutt or
+message headers.  Copying the message elsewhere, via NeoMutt or
 external tools, could expose this previously encrypted data.
 Please make sure you understand the consequences of this before
 you enable this variable.
@@ -20000,12 +20482,12 @@ to the empty string.
 Default: no</literallayout>
 
 <para>
-When set, Mutt will generate protected headers ("Memory Hole") for
+When set, NeoMutt will generate protected headers ("Memory Hole") for
 signed and encrypted emails.
 Protected headers are stored inside the encrypted or signed part of an
 an email, to prevent disclosure or tampering.
 For more information see https://github.com/autocrypt/memoryhole.
-Currently Mutt only supports the Subject header.
+Currently NeoMutt only supports the Subject header.
 (Crypto only)
 </para>
 </sect2>
@@ -20638,7 +21120,7 @@ its own set of <literal>printf(3)</literal>-like sequences:
 </entry></row>
 <row><entry>%N  </entry><entry>"N" if mailbox has new mail, blank otherwise
 </entry></row>
-<row><entry>%s  </entry><entry>Size in bytes
+<row><entry>%s  </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
 <row><entry>%t  </entry><entry>"*" if the file is tagged, blank otherwise
 </entry></row>
@@ -20977,11 +21459,12 @@ The <link linkend="weed">$weed</link> setting applies.
 Default: (empty)</literallayout>
 
 <para>
-This variable points to the header cache database.
-If pointing to a directory NeoMutt will contain a header cache
-database file per folder, if pointing to a file that file will
-be a single global header cache. By default it is <emphasis>unset</emphasis> so no header
-caching will be used.
+This variable points to the header cache database. If the path points to
+an existing directory, NeoMutt will create a dedicated header cache
+database per folder. Otherwise, the path points to a regular file, which
+will be created as needed and used as a shared global header cache for
+all folders.
+By default it is <emphasis>unset</emphasis> so no header caching will be used.
 </para>
 <para>
 Header caching can greatly improve speed when opening POP, IMAP
@@ -21017,8 +21500,8 @@ cached folders.
 
 <sect2 id="header-cache-pagesize">
 <title>header_cache_pagesize</title>
-<literallayout>Type: string
-Default: <quote><literal>16384</literal></quote></literallayout>
+<literallayout>Type: number (long)
+Default: 16384</literallayout>
 
 <para>
 When NeoMutt is compiled with either gdbm or bdb4 as the header cache backend,
@@ -21322,8 +21805,8 @@ of mailboxes it polls for new mail just as if you had issued individual
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, mutt will use the CONDSTORE extension (RFC 7162)
-if advertised by the server.  Mutt's current implementation is basic,
+When <emphasis>set</emphasis>, NeoMutt will use the CONDSTORE extension (RFC 7162)
+if advertised by the server.  NeoMutt's current implementation is basic,
 used only for initial message fetching and flag updates.
 </para>
 <para>
@@ -21437,7 +21920,7 @@ This variable defaults to the value of <link linkend="imap-user">$imap_user</lin
 
 <sect2 id="imap-oauth-refresh-command">
 <title>imap_oauth_refresh_command</title>
-<literallayout>Type: string
+<literallayout>Type: command
 Default: (empty)</literallayout>
 
 <para>
@@ -21528,8 +22011,8 @@ to 0 to disable timing out.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, mutt will use the QRESYNC extension (RFC 7162)
-if advertised by the server.  Mutt's current implementation is basic,
+When <emphasis>set</emphasis>, NeoMutt will use the QRESYNC extension (RFC 7162)
+if advertised by the server.  NeoMutt's current implementation is basic,
 used only for initial message fetching and flag updates.
 </para>
 <para>
@@ -21612,7 +22095,7 @@ is included in your reply.
 Default: no</literallayout>
 
 <para>
-Controls whether or not Mutt includes separately encrypted attachment
+Controls whether or not NeoMutt includes separately encrypted attachment
 contents when replying.
 </para>
 <para>
@@ -21684,7 +22167,7 @@ The following sequences are defined in NeoMutt:
 </entry></row>
 <row><entry>%C </entry><entry>Current message number
 </entry></row>
-<row><entry>%c </entry><entry>Number of characters (bytes) in the message
+<row><entry>%c </entry><entry>Number of characters (bytes) in the message (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
 <row><entry>%D </entry><entry>Date and time of message using <link linkend="date-format">date_format</link> and local timezone
 </entry></row>
@@ -21720,8 +22203,8 @@ The following sequences are defined in NeoMutt:
 Defined by the users "<link linkend="subscribe">subscribe</link>" command, this displays
 "To &lt;list-name&gt;", otherwise the same as %F
 </entry></row>
-<row><entry>%l </entry><entry>Number of lines in the message (does not work with maildir,
-Mh, and possibly IMAP folders)
+<row><entry>%l </entry><entry>number of lines in the unprocessed message (may not work with
+maildir, mh, and IMAP folders)
 </entry></row>
 <row><entry>%M </entry><entry>Number of hidden messages if the thread is collapsed
 </entry></row>
@@ -21807,6 +22290,15 @@ Date format expressions can be constructed based on relative dates. Using
 the date formatting operators along with nested conditionals, the date
 format can be modified based on how old a message is.  See the section on
 "Conditional Dates" for an explanation and examples
+</para>
+<para>
+Note that for mbox/mmdf, <quote>%l</quote> applies to the unprocessed message, and
+for maildir/mh, the value comes from the <quote>Lines:</quote> header field when
+present (the meaning is normally the same). Thus the value depends on
+the encodings used in the different parts of the message and has little
+meaning in practice.
+</para>
+<para>
 "Soft-fill" deserves some explanation: Normal right-justification
 will print everything to the left of the "%&gt;", displaying padding and
 whatever lies to the right only if there's room. By contrast,
@@ -22895,7 +23387,7 @@ subprocess failed.
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, mutt will check the status file descriptor output
+If <emphasis>set</emphasis>, NeoMutt will check the status file descriptor output
 of <link linkend="pgp-decrypt-command">$pgp_decrypt_command</link> and <link linkend="pgp-decode-command">$pgp_decode_command</link> for GnuPG status codes
 indicating successful decryption.  This will check for the presence of
 DECRYPTION_OKAY, absence of DECRYPTION_FAILED, and that all
@@ -22903,7 +23395,7 @@ PLAINTEXT occurs between the BEGIN_DECRYPTION and END_DECRYPTION
 status codes.
 </para>
 <para>
-If <emphasis>unset</emphasis>, mutt will instead match the status fd output
+If <emphasis>unset</emphasis>, NeoMutt will instead match the status fd output
 against <link linkend="pgp-decryption-okay">$pgp_decryption_okay</link>.
 (PGP only)
 </para>
@@ -23608,7 +24100,7 @@ the <literal><link linkend="fetch-mail">&lt;fetch-mail&gt;</link></literal> func
 
 <sect2 id="pop-oauth-refresh-command">
 <title>pop_oauth_refresh_command</title>
-<literallayout>Type: string
+<literallayout>Type: command
 Default: (empty)</literallayout>
 
 <para>
@@ -24236,13 +24728,13 @@ Default: yes</literallayout>
 This variable fine-tunes the behavior of the <link linkend="reverse-name">$reverse_name</link> feature.
 </para>
 <para>
-When it is <emphasis>unset</emphasis>, Mutt will remove the real name part of a
+When it is <emphasis>unset</emphasis>, NeoMutt will remove the real name part of a
 matching address.  This allows the use of the email address
 without having to also use what the sender put in the real name
 field.
 </para>
 <para>
-When it is <emphasis>set</emphasis>, Mutt will use the matching address as-is.
+When it is <emphasis>set</emphasis>, NeoMutt will use the matching address as-is.
 </para>
 <para>
 In either case, a missing real name will be filled in afterwards
@@ -24858,6 +25350,51 @@ For the default value, "joe" would be expanded to: "~f joe | ~s joe".
 </para>
 </sect2>
 
+<sect2 id="size-show-bytes">
+<title>size_show_bytes</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+If <emphasis>set</emphasis>, message sizes will display bytes for values less than
+1 kilobyte.  See <link linkend="formatstrings-size">formatstrings-size</link>.
+</para>
+</sect2>
+
+<sect2 id="size-show-fractions">
+<title>size_show_fractions</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+If <emphasis>set</emphasis>, message sizes will be displayed with a single decimal value
+for sizes from 0 to 10 kilobytes and 1 to 10 megabytes.
+See <link linkend="formatstrings-size">formatstrings-size</link>.
+</para>
+</sect2>
+
+<sect2 id="size-show-mb">
+<title>size_show_mb</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+If <emphasis>set</emphasis>, message sizes will display megabytes for values greater than
+or equal to 1 megabyte.  See <link linkend="formatstrings-size">formatstrings-size</link>.
+</para>
+</sect2>
+
+<sect2 id="size-units-on-left">
+<title>size_units_on_left</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+If <emphasis>set</emphasis>, message sizes units will be displayed to the left of the number.
+See <link linkend="formatstrings-size">formatstrings-size</link>.
+</para>
+</sect2>
+
 <sect2 id="skip-quoted-offset">
 <title>skip_quoted_offset</title>
 <literallayout>Type: number
@@ -25301,7 +25838,7 @@ set smtp_authenticators="digest-md5:cram-md5"
 
 <sect2 id="smtp-oauth-refresh-command">
 <title>smtp_oauth_refresh_command</title>
-<literallayout>Type: string
+<literallayout>Type: command
 Default: (empty)</literallayout>
 
 <para>
@@ -25607,7 +26144,7 @@ use <literal>STARTTLS</literal> regardless of the server's capabilities.
 Default: no</literallayout>
 
 <para>
-If <emphasis>set</emphasis> , Mutt will use SSLv2 when communicating with servers that
+If <emphasis>set</emphasis> , NeoMutt will use SSLv2 when communicating with servers that
 request it. <emphasis role="bold">N.B. As of 2011, SSLv2 is considered insecure, and using
 is inadvisable. See https://tools.ietf.org/html/rfc6176 .</emphasis>
 (OpenSSL only)
@@ -25620,7 +26157,7 @@ is inadvisable. See https://tools.ietf.org/html/rfc6176 .</emphasis>
 Default: no</literallayout>
 
 <para>
-If <emphasis>set</emphasis> , Mutt will use SSLv3 when communicating with servers that
+If <emphasis>set</emphasis> , NeoMutt will use SSLv3 when communicating with servers that
 request it. <emphasis role="bold">N.B. As of 2015, SSLv3 is considered insecure, and using
 it is inadvisable. See https://tools.ietf.org/html/rfc7525 .</emphasis>
 </para>
@@ -25632,7 +26169,7 @@ it is inadvisable. See https://tools.ietf.org/html/rfc7525 .</emphasis>
 Default: no</literallayout>
 
 <para>
-If <emphasis>set</emphasis> , Mutt will use TLSv1.0 when communicating with servers that
+If <emphasis>set</emphasis> , NeoMutt will use TLSv1.0 when communicating with servers that
 request it. <emphasis role="bold">N.B. As of 2015, TLSv1.0 is considered insecure, and using
 it is inadvisable. See https://tools.ietf.org/html/rfc7525 .</emphasis>
 </para>
@@ -25644,7 +26181,7 @@ it is inadvisable. See https://tools.ietf.org/html/rfc7525 .</emphasis>
 Default: no</literallayout>
 
 <para>
-If <emphasis>set</emphasis> , Mutt will use TLSv1.1 when communicating with servers that
+If <emphasis>set</emphasis> , NeoMutt will use TLSv1.1 when communicating with servers that
 request it. <emphasis role="bold">N.B. As of 2015, TLSv1.1 is considered insecure, and using
 it is inadvisable. See https://tools.ietf.org/html/rfc7525 .</emphasis>
 </para>
@@ -25656,7 +26193,18 @@ it is inadvisable. See https://tools.ietf.org/html/rfc7525 .</emphasis>
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis> , Mutt will use TLSv1.2 when communicating with servers that
+If <emphasis>set</emphasis> , NeoMutt will use TLSv1.2 when communicating with servers that
+request it.
+</para>
+</sect2>
+
+<sect2 id="ssl-use-tlsv1-3">
+<title>ssl_use_tlsv1_3</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+If <emphasis>set</emphasis> , NeoMutt will use TLSv1.3 when communicating with servers that
 request it.
 </para>
 </sect2>
@@ -25777,10 +26325,10 @@ set of <literal>printf(3)</literal>-like sequences:
 </entry></row>
 <row><entry>%h  </entry><entry>Local hostname
 </entry></row>
-<row><entry>%l  </entry><entry>Size (in bytes) of the current mailbox *
+<row><entry>%l  </entry><entry>Size (in bytes) of the current mailbox (see <link linkend="formatstrings-size">formatstrings-size</link>) *
 </entry></row>
 <row><entry>%L  </entry><entry>Size (in bytes) of the messages shown
-(i.e., which match the current limit) *
+(i.e., which match the current limit) (see <link linkend="formatstrings-size">formatstrings-size</link>) *
 </entry></row>
 <row><entry>%m  </entry><entry>The number of messages in the mailbox *
 </entry></row>
@@ -26109,7 +26657,7 @@ formatting to the one used by "<link linkend="status-format">$status_format</lin
 
 <sect2 id="tunnel">
 <title>tunnel</title>
-<literallayout>Type: string
+<literallayout>Type: command
 Default: (empty)</literallayout>
 
 <para>
@@ -26231,7 +26779,7 @@ Normally, the default should work.
 <sect2 id="user-agent">
 <title>user_agent</title>
 <literallayout>Type: boolean
-Default: yes</literallayout>
+Default: no</literallayout>
 
 <para>
 When <emphasis>set</emphasis>, NeoMutt will add a "User-Agent:" header to outgoing
@@ -26481,6 +27029,7 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
+<row><entry><literal>&lt;autocrypt-acct-menu&gt;</literal></entry><entry>A</entry><entry>manage autocrypt accounts</entry></row>
 <row><entry><literal>&lt;bounce-message&gt;</literal></entry><entry>b</entry><entry>remail a message to another user</entry></row>
 <row><entry><literal>&lt;break-thread&gt;</literal></entry><entry>#</entry><entry>break the thread in two</entry></row>
 <row><entry><literal>&lt;catchup&gt;</literal></entry><entry></entry><entry>mark all articles in newsgroup as read</entry></row>
@@ -26855,6 +27404,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;attach-key&gt;</literal></entry><entry>Esc k</entry><entry>attach a PGP public key</entry></row>
 <row><entry><literal>&lt;attach-message&gt;</literal></entry><entry>A</entry><entry>attach messages to this message</entry></row>
 <row><entry><literal>&lt;attach-news-message&gt;</literal></entry><entry></entry><entry>attach news articles to this message</entry></row>
+<row><entry><literal>&lt;autocrypt-menu&gt;</literal></entry><entry>o</entry><entry>show autocrypt compose menu options</entry></row>
 <row><entry><literal>&lt;copy-file&gt;</literal></entry><entry>C</entry><entry>save message/attachment to a mailbox/file</entry></row>
 <row><entry><literal>&lt;detach-file&gt;</literal></entry><entry>D</entry><entry>delete the current entry</entry></row>
 <row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>display message and toggle header weeding</entry></row>
@@ -27011,26 +27561,6 @@ bindings for all menus (except as noted).
 
 </sect2>
 
-<sect2 id="summary-map">
-<title>Summary Menu</title>
-
-
-<table id="tab-summary-bindings">
-<title>Default Summary Menu Bindings</title>
-<tgroup cols="3">
-<thead>
-<row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
-</thead>
-<tbody>
-<row><entry><literal>&lt;quit&gt;</literal></entry><entry>q</entry><entry>save changes to mailbox and quit</entry></row>
-<row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>this screen</entry></row>
-
-</tbody>
-</tgroup>
-</table>
-
-</sect2>
-
 <sect2 id="mixmaster-map">
 <title>Mixmaster Menu</title>
 
@@ -27091,6 +27621,28 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;transpose-chars&gt;</literal></entry><entry></entry><entry>transpose character under cursor with previous</entry></row>
 <row><entry><literal>&lt;upcase-word&gt;</literal></entry><entry>Esc u</entry><entry>convert the word to upper case</entry></row>
 <row><entry><literal>&lt;buffy-cycle&gt;</literal></entry><entry></entry><entry>cycle among incoming mailboxes</entry></row>
+
+</tbody>
+</tgroup>
+</table>
+
+</sect2>
+
+<sect2 id="autocrypt-account-map">
+<title>Autocrypt Account Menu</title>
+
+
+<table id="tab-autocrypt-account-bindings">
+<title>Default Autocrypt Account Menu Bindings</title>
+<tgroup cols="3">
+<thead>
+<row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
+</thead>
+<tbody>
+<row><entry><literal>&lt;create-account&gt;</literal></entry><entry>c</entry><entry>create a new autocrypt account</entry></row>
+<row><entry><literal>&lt;delete-account&gt;</literal></entry><entry>D</entry><entry>delete the current account</entry></row>
+<row><entry><literal>&lt;toggle-active&gt;</literal></entry><entry>a</entry><entry>toggle the current account active/inactive</entry></row>
+<row><entry><literal>&lt;toggle-prefer-encrypt&gt;</literal></entry><entry>p</entry><entry>toggle the current account prefer-encrypt flag</entry></row>
 
 </tbody>
 </tgroup>
