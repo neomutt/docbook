@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2019-10-25</releaseinfo>
+    <releaseinfo>version 2019-11-02</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -3414,7 +3414,7 @@ set crypt_use_gpgme
       </para>
       <para>
         NeoMutt searches for several different file names when looking for
-        config. It looks for NeoMutt config files before NeoMutt config files and
+        config. It looks for NeoMutt config files before Mutt config files and
         versioned config before plain config. For example:
       </para>
 
@@ -3432,7 +3432,7 @@ set crypt_use_gpgme
         </tgroup>
       </table>
       <para>
-        This allows the user to create separate NeoMutt and NeoMutt config files
+        This allows the user to create separate NeoMutt and Mutt config files
         on the same system.
       </para>
 
@@ -7934,7 +7934,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 <entry>~I <emphasis>QUERY</emphasis></entry>
                 <entry>
                   messages whose <quote>Message-ID</quote> field is included in
-                  the results returned from en external search program, when the program
+                  the results returned from an external search program, when the program
                   is run with <emphasis>QUERY</emphasis> as its argument.
                   This is explained in greater detail in the variable reference entry
                   <xref linkend="external-search-command"/>,
