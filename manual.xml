@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2019-11-02</releaseinfo>
+    <releaseinfo>version 2019-11-11</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -1101,6 +1101,11 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                   <entry></entry>
                   <entry><literal>sidebar_new</literal></entry>
                   <entry>Mailbox contains new mail</entry>
+                </row>
+                <row>
+                  <entry></entry>
+                  <entry><literal>sidebar_unread</literal></entry>
+                  <entry>Mailbox contains unread mail</entry>
                 </row>
                 <row>
                   <entry></entry>
@@ -5069,6 +5074,10 @@ uncolor index_date
               <row>
                 <entry>sidebar_spoolfile</entry>
                 <entry>Mailbox that receives incoming mail</entry>
+              </row>
+              <row>
+                <entry>sidebar_unread</entry>
+                <entry>Mailboxes containing unread mail</entry>
               </row>
             </tbody>
           </tgroup>
@@ -9575,10 +9584,10 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
         <note>
           <para>
             When using Maildir, you don't have to manually specify all your mailboxes. You can use this command instead:
-            <screen>
-              mailboxes `find ~/.mail/ -type d -name cur | sed 's:/cur/*$::' | tr '\n' ' '`
-            </screen>
           </para>
+<screen>
+mailboxes `find ~/.mail/ -type d -name cur | sort | sed -e 's:/cur/*$::' -e 's/ /\\ /g' | tr '\n' ' '`
+</screen>
         </note>
       </sect2>
 
@@ -16759,6 +16768,13 @@ set sort_browser="reverse-size"
               <entry>default</entry>
               <entry>
                 Mailbox that receives incoming mail
+              </entry>
+            </row>
+            <row>
+              <entry><literal>sidebar_unread</literal></entry>
+              <entry>default</entry>
+              <entry>
+                Mailboxes containing unread mail
               </entry>
             </row>
           </tbody>
