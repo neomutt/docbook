@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2019-11-11</releaseinfo>
+    <releaseinfo>version 2019-11-29</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -2843,16 +2843,27 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
             attach-message mode.
           </para>
         </note>
+        <para>
+          After exiting the compose menu via <literal>&lt;send-message&gt;</literal>,
+          the message will be sent.  If configured and enabled, this can happen via
+          <link linkend="sending-mixmaster">mixmaster</link> or
+          <link linkend="smtp">$smtp_url</link>.  Otherwise
+          <link linkend="sendmail">$sendmail</link> will be invoked.  Prior to
+          version 1.13, Mutt enabled <link linkend="write-bcc">$write_bcc</link> by
+          default, assuming the MTA would automatically remove a
+          <literal>Bcc:</literal> header as part of delivery.  Starting with 1.13, the
+          option is unset by default, but no longer affects the fcc copy of the message.
+        </para>
       </sect2>
 
-      <sect2 id="edit-header">
-        <title>Editing the Message Header</title>
-        <para>
-          When editing the header because of
-          <link linkend="edit-headers">$edit_headers</link> being set, there are
-          a several pseudo headers available which will not be included in sent
-          messages but trigger special NeoMutt behavior.
-        </para>
+     <sect2 id="edit-header">
+       <title>Editing the Message Header</title>
+       <para>
+         When editing the header because of
+         <link linkend="edit-headers">$edit_headers</link> being set, there are
+         a several pseudo headers available which will not be included in sent
+         messages but trigger special NeoMutt behavior.
+       </para>
 
         <sect3 id="fcc-header">
           <title>Fcc: Pseudo Header</title>
@@ -5018,7 +5029,7 @@ uncolor prompt
               </row>
               <row>
                 <entry>index_size</entry>
-                <entry>Message size, <literal>%c</literal> <literal>%l</literal></entry>
+                <entry>Message size, <literal>%c</literal> <literal>%cr</literal> <literal>%l</literal></entry>
               </row>
               <row>
                 <entry>index_tags</entry>
@@ -5147,7 +5158,8 @@ uncolor compose header
           The first colour, <literal>quoted</literal> provides a default colour
           for all quoted text.  Also, each diffent level of quoting can be given
           a different colour using, <literal>quoted1</literal>,
-          <literal>quoted2</literal>, <literal>quoted3</literal> etc.
+          <literal>quoted2</literal>, <literal>quoted3</literal> up to
+          <literal>quoted9</literal>.
         </para>
         <table id="color-quoted">
           <title>Quoted Email Colours</title>
@@ -5172,8 +5184,12 @@ uncolor compose header
                 <entry>2 level deeper quoted text, e.g. <literal>&gt; &gt; &gt; text</literal></entry>
               </row>
               <row>
-                <entry>quotedN</entry>
-                <entry>n level deeper quoted text</entry>
+                <entry>...</entry>
+                <entry>...</entry>
+              </row>
+              <row>
+                <entry>quoted9</entry>
+                <entry>9 level deeper quoted text</entry>
               </row>
             </tbody>
           </tgroup>
@@ -7235,7 +7251,8 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
           <literal>%s</literal> in <link linkend="attach-format">$attach_format</link>,
           <literal>%l</literal> in <link linkend="compose-format">$compose_format</link>,
           <literal>%s</literal> in <link linkend="folder-format">$folder_format</link>,
-          <literal>%c</literal> in <link linkend="index-format">$index_format</link>,
+          <literal>%c</literal> and <literal>%cr</literal>
+            in <link linkend="index-format">$index_format</link>,
           and %l and %L in <link linkend="status-format">$status_format</link>.
           There are four configuration variables that can be used to customize
           how the numbers are displayed.
@@ -11983,14 +12000,9 @@ color   attach_headers     brightmagenta   default    "invalid node with packet 
 
     <sect1 id="attach-headers-color-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Guillaume Brogi
-            <email>gui-gui@netcourrier.com</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Guillaume Brogi
+      </para>
     </sect1>
   </chapter>
 
@@ -12075,19 +12087,9 @@ bind index,pager @ compose-to-sender
 
     <sect1 id="compose-to-sender-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Brian Medley
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Guillaume Brogi
-            <email>gui-gui@netcourrier.com</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Brian Medley, Guillaume Brogi
+      </para>
     </sect1>
   </chapter>
 
@@ -12505,38 +12507,10 @@ close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &
 
     <sect1 id="compress-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Roland Rosenfeld
-            <email>roland@spinnaker.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Alain Penders
-            <email>Alain@Finale-Dev.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Christoph <quote>Myon</quote> Berg
-            <email>myon@debian.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Evgeni Golov
-            <email>evgeni@debian.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Roland Rosenfeld, Alain Penders, Christoph <quote>Myon</quote> Berg,
+        Evgeni Golov, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -12920,26 +12894,9 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
 
     <sect1 id="cond-date-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Aaron Schrab
-            <email>aaron@schrab.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Eric Davis
-            <email>edavis@insanum.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Aaron Schrab, Eric Davis, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -13078,26 +13035,9 @@ set smime_default_key = "SMIME-KEY"
 
     <sect1 id="encrypt-to-self-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Omen Wild
-            <email>omen@mandarb.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Guillaume Brogi
-            <email>gui-gui@netcourrier.com</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Omen Wild, Richard Russon, Guillaume Brogi
+      </para>
     </sect1>
   </chapter>
 
@@ -13175,20 +13115,9 @@ set smime_default_key = "SMIME-KEY"
 
     <sect1 id="fmemopen-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Julius Plenz
-            <email>plenz@cis.fu-berlin.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Julius Plenz, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -13309,32 +13238,9 @@ set abort_noattach_regex = "\\&lt;attach(|ed|ments?)\\&gt;"
 
     <sect1 id="forgotten-attachment-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Darshit Shah
-            <email>darnir@gmail.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Johannes Weißl
-            <email>jargon@molb.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Steven! Ragnarök
-            <email>steven@nuclearsandwich.com</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Darshit Shah, Richard Russon, Johannes Weißl, Steven Ragnarök
+      </para>
     </sect1>
   </chapter>
 
@@ -13486,26 +13392,9 @@ shutdown-hook 'exec sync-mailbox'
 
     <sect1 id="global-hooks-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Armin Wolfermann
-            <email>armin@wolfermann.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Thomas Adam
-            <email>thomas@xteddy.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Armin Wolfermann, Richard Russon, Thomas Adam
+      </para>
     </sect1>
   </chapter>
 
@@ -13630,26 +13519,9 @@ ifndef sidebar finish
 
     <sect1 id="ifdef-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Cedric Duval
-            <email>cedricduval@free.fr</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Matteo F. Vescovi
-            <email>mfvescovi@gmail.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Cedric Duval, Matteo F. Vescovi, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -13761,7 +13633,7 @@ color index-object foreground background pattern
             <row>
               <entry><literal>index_size</literal></entry>
               <entry>no</entry>
-              <entry>Message size, %c %l</entry>
+              <entry>Message size, %c %cr %l</entry>
             </row>
             <row>
               <entry><literal>index_subject</literal></entry>
@@ -13800,7 +13672,7 @@ color index_date green default
 color index_label default brightgreen
 <emphasis role="comment"># Message number, %C</emphasis>
 color index_number red default
-<emphasis role="comment"># Message size, %c %l</emphasis>
+<emphasis role="comment"># Message size, %c %cr %l</emphasis>
 color index_size cyan default
 
 <emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
@@ -13848,44 +13720,10 @@ color index_size cyan default
 
     <sect1 id="index-color-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Christian Aichinger
-            <email>Greek0@gmx.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Christoph <quote>Myon</quote> Berg
-            <email>myon@debian.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Elimar Riesebieter
-            <email>riesebie@lxtec.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Eric Davis
-            <email>edavis@insanum.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Vladimir Marek
-            <email>Vladimir.Marek@oracle.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Christian Aichinger, Christoph <quote>Myon</quote> Berg,
+        Elimar Riesebieter, Eric Davis, Vladimir Marek, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -13988,20 +13826,9 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
 
     <sect1 id="initials-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Vsevolod Volkov
-            <email>vvv@mutt.org.ua</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Vsevolod Volkov, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -14084,14 +13911,9 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
 
     <sect1 id="kyoto-cabinet-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Clemens Lang
-            <email>neverpanic@gmail.com</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Clemens Lang
+      </para>
     </sect1>
   </chapter>
 
@@ -14172,20 +13994,9 @@ bind index &lt;esc&gt;L limit-current-thread
 
     <sect1 id="limit-current-thread-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            David Sterba
-            <email>dsterba@suse.cz</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        David Sterba, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -14237,26 +14048,9 @@ bind index &lt;esc&gt;L limit-current-thread
 
     <sect1 id="lmdb-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Pietro Cerutti
-            <email>gahr@gahr.ch</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Jan-Piet Mens
-            <email>jp@mens.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Clemens Lang
-            <email>neverpanic@gmail.com</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Pietro Cerutti, Jan-Piet Mens, Clemens Lang
+      </para>
     </sect1>
   </chapter>
 
@@ -14328,20 +14122,9 @@ bind index &lt;esc&gt;L limit-current-thread
 
     <sect1 id="multiple-fcc-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Omen Wild
-            <email>omen@mandarb.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Omen Wild, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -14523,26 +14306,9 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
 
     <sect1 id="nested-if-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            David Champion
-            <email>dgc@uchicago.edu</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Aleksa Sarai
-            <email>cyphar@cyphar.com</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        David Champion, Richard Russon, Aleksa Sarai
+      </para>
     </sect1>
   </chapter>
 
@@ -14675,26 +14441,9 @@ set new_mail_command = ""
 
     <sect1 id="new-mail-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Yoshiki Vazquez-Baeza
-            <email>yoshiki@ucsd.edu</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Santiago Torres-Arias
-            <email>santiago@nyu.edu</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Yoshiki Vazquez-Baeza, Santiago Torres-Arias, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -15080,28 +14829,11 @@ bind index \CG get-message
 
     <sect1 id="nntp-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Vsevolod Volkov
-            <email>vvv@mutt.org.ua</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Felix von Leitner
-            <email>leitner@fefe.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Vsevolod Volkov, Felix von Leitner, Richard Russon
+      </para>
     </sect1>
-  </chapter>
+</chapter>
 
   <chapter id="feature/custom-tags">
     <title>Custom backend based Tags Feature</title>
@@ -15348,26 +15080,9 @@ color index_tags green default
     </sect1>
     <sect1 id="custom-tags-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Mehdi Abaakouk
-            <email>sileht@sileht.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Bernard 'Guyzmo' Pratz
-            <email>guyzmo+github+pub@m0g.net</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Mehdi Abaakouk, Richard Russon, Bernard 'Guyzmo' Pratz
+      </para>
     </sect1>
   </chapter>
 
@@ -15905,158 +15620,15 @@ bind index &gt; vfolder-window-forward
 
     <sect1 id="notmuch-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Karel Zak
-            <email>kzak@redhat.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Chris Mason
-            <email>clm@fb.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Christoph Rissner
-            <email>cri@visotech.at</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            David Riebenbauer
-            <email>davrieb@liegesta.at</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            David Sterba
-            <email>dsterba@suse.cz</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            David Wilson
-            <email>dw@botanicus.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Don Zickus
-            <email>dzickus@redhat.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Eric Davis
-            <email>edavis@insanum.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Jan Synacek
-            <email>jsynacek@redhat.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Jeremiah C. Foster
-            <email>jeremiah@jeremiahfoster.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Josh Poimboeuf
-            <email>jpoimboe@redhat.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Kirill A. Shutemov
-            <email>kirill@shutemov.name</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Luke Macken
-            <email>lmacken@redhat.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Mantas Mikulėnas
-            <email>grawity@gmail.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Patrick Brisbin
-            <email>pbrisbin@gmail.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Philippe Le Brouster
-            <email>plb@nebkha.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Raghavendra D Prabhu
-            <email>rprabhu@wnohang.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Sami Farin
-            <email>hvtaifwkbgefbaei@gmail.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Stefan Assmann
-            <email>sassmann@kpanic.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Stefan Kuhn
-            <email>p_regius@gmx.ch</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Tim Stoakes
-            <email>tim@stoakes.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Vladimir Marek
-            <email>Vladimir.Marek@oracle.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Víctor Manuel Jáquez Leal
-            <email>vjaquez@igalia.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Bernard 'Guyzmo' Pratz
-            <email>guyzmo+github+pub@m0g.net</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Karel Zak, Chris Mason, Christoph Rissner, David Riebenbauer,
+        David Sterba, David Wilson, Don Zickus, Eric Davis, Jan Synacek,
+        Jeremiah C. Foster, Josh Poimboeuf, Kirill A. Shutemov, Luke Macken,
+        Mantas Mikulėnas, Patrick Brisbin, Philippe Le Brouster,
+        Raghavendra D Prabhu, Sami Farin, Stefan Assmann, Stefan Kuhn,
+        Tim Stoakes, Vladimir Marek, Víctor Manuel Jáquez Leal,
+        Richard Russon, Bernard 'Guyzmo' Pratz
+      </para>
     </sect1>
   </chapter>
 
@@ -16144,38 +15716,9 @@ color progress white red
 
     <sect1 id="progress-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Rocco Rutte
-            <email>pdmef@gmx.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Vincent Lefevre
-            <email>vincent@vinc17.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Stefan Kuhn
-            <email>wuodan@hispeed.ch</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Karel Zak
-            <email>kzak@redhat.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Rocco Rutte, Vincent Lefevre, Stefan Kuhn, Karel Zak, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -16268,20 +15811,9 @@ bind index,pager Q quasi-delete
 
     <sect1 id="quasi-delete-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Karel Zak
-            <email>kzak@redhat.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Karel Zak, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -16352,14 +15884,9 @@ set reply_with_xorig = "yes"
 
     <sect1 id="reply-with-xorig-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Pierre-Elliott Bécue
-            <email>becue@crans.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Pierre-Elliott Bécue
+      </para>
     </sect1>
   </chapter>
 
@@ -16466,26 +15993,9 @@ set sort_browser="reverse-size"
 
     <sect1 id="sensible-browser-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Pierre-Elliott Bécue
-            <email>becue@crans.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Haakon Riiser
-            <email>haakon.riiser@fys.uio.no</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Pierre-Elliott Bécue, Haakon Riiser, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -16973,74 +16483,11 @@ color sidebar_ordinary color245 default
 
     <sect1 id="sidebar-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
           <para>
-            Justin Hibbits
-            <email>jrh29@po.cwru.edu</email>
+            Justin Hibbits, Thomer M. Gil, David Sterba, Evgeni Golov,
+            Fabian Groffen, Jason DeTiberus, Stefan Assmann, Steve Kemp,
+            Terry Chan, Tyler Earnest, Richard Russon
           </para>
-        </listitem>
-        <listitem>
-          <para>
-            Thomer M. Gil
-            <email>mutt@thomer.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            David Sterba
-            <email>dsterba@suse.cz</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Evgeni Golov
-            <email>evgeni@debian.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Fabian Groffen
-            <email>grobian@gentoo.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Jason DeTiberus
-            <email>jdetiber@redhat.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Stefan Assmann
-            <email>sassmann@kpanic.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Steve Kemp
-            <email>steve@steve.org.uk</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Terry Chan
-            <email>tchan@lunar-linux.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Tyler Earnest
-            <email>tylere@rne.st</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
     </sect1>
   </chapter>
 
@@ -17123,20 +16570,9 @@ set skip_quoted_offset = 3
 
     <sect1 id="skip-quoted-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            David Sterba
-            <email>dsterba@suse.cz</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        David Sterba, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -17314,32 +16750,9 @@ color status brightwhite default 'NeoMutt: ([^ ]+)' 1
 
     <sect1 id="status-color-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            David Sterba
-            <email>dsterba@suse.cz</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Thomas Glanzmann
-            <email>thomas@glanzmann.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Kirill A. Shutemov
-            <email>kirill@shutemov.name</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        David Sterba, Thomas Glanzmann, Kirill A. Shutemov, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -17402,26 +16815,9 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
 
     <sect1 id="tls-sni-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Jeremy Katz
-            <email>katzj@linuxpower.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Phil Pennock
-            <email>mutt-dev@spodhuis.demon.nl</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Jeremy Katz, Phil Pennock, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -17575,32 +16971,9 @@ bind index D purge-message
 
     <sect1 id="trash-folder-credits">
       <title>Credits</title>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Cedric Duval
-            <email>cedricduval@free.fr</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Benjamin Kuperman
-            <email>kuperman@acm.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Paul Miller
-            <email>paul@voltar.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Richard Russon
-            <email>rich@flatcap.org</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Cedric Duval, Benjamin Kuperman, Paul Miller, Richard Russon
+      </para>
     </sect1>
   </chapter>
 
@@ -22405,7 +21778,9 @@ The following sequences are defined in NeoMutt:
 </entry></row>
 <row><entry>%C </entry><entry>Current message number
 </entry></row>
-<row><entry>%c </entry><entry>Number of characters (bytes) in the message (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry>%c </entry><entry>Number of characters (bytes) in the body of the message (see <link linkend="formatstrings-size">formatstrings-size</link>)
+</entry></row>
+<row><entry>%cr </entry><entry>Number of characters (bytes) in the raw message, including the header (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
 <row><entry>%D </entry><entry>Date and time of message using <link linkend="date-format">date_format</link> and local timezone
 </entry></row>
@@ -24759,7 +24134,8 @@ command to create a "Bcc:" field with your email address in it.)
 </para>
 <para>
 The value of <emphasis><link linkend="record">$record</link></emphasis> is overridden by the <link linkend="force-name">$force_name</link> and
-<link linkend="save-name">$save_name</link> variables, and the "<link linkend="fcc-hook">fcc-hook</link>" command.  Also see <link linkend="copy">$copy</link>.
+<link linkend="save-name">$save_name</link> variables, and the "<link linkend="fcc-hook">fcc-hook</link>" command.  Also see <link linkend="copy">$copy</link>
+and <link linkend="write-bcc">$write_bcc</link>.
 </para>
 </sect2>
 
@@ -25183,6 +24559,9 @@ arguments as recipient addresses.  NeoMutt appends all recipients after
 adding a <literal>--</literal> delimiter (if not already present).  Additional
 flags, such as for <link linkend="use-8bitmime">$use_8bitmime</link>, <link linkend="use-envelope-from">$use_envelope_from</link>,
 <link linkend="dsn-notify">$dsn_notify</link>, or <link linkend="dsn-return">$dsn_return</link> will be added before the delimiter.
+</para>
+<para>
+<emphasis role="bold">See also:</emphasis> <link linkend="write-bcc">$write_bcc</link>.
 </para>
 </sect2>
 
@@ -26133,6 +25512,9 @@ smtp[s]://[user[:pass]@]host[:port]
 where "[...]" denotes an optional part.
 Setting this variable overrides the value of the <link linkend="sendmail">$sendmail</link>
 variable.
+</para>
+<para>
+Also see <link linkend="write-bcc">$write_bcc</link>.
 </para>
 </sect2>
 
@@ -27165,14 +26547,24 @@ When <emphasis>set</emphasis>, searches will wrap around the first (or last) ite
 <sect2 id="write-bcc">
 <title>write_bcc</title>
 <literallayout>Type: boolean
-Default: yes</literallayout>
+Default: no</literallayout>
 
 <para>
-Controls whether NeoMutt writes out the "Bcc:" header when preparing
-messages to be sent.  Exim users may wish to unset this. If NeoMutt
-is set to deliver directly via SMTP (see <link linkend="smtp-url">$smtp_url</link>), this
-option does nothing: NeoMutt will never write out the "Bcc:" header
-in this case.
+Controls whether mutt writes out the <quote>Bcc:</quote> header when
+preparing messages to be sent.  Some MTAs, such as Exim and
+Courier, do not strip the <quote>Bcc:</quote> header; so it is advisable to
+leave this unset unless you have a particular need for the header
+to be in the sent message.
+</para>
+<para>
+If mutt is set to deliver directly via SMTP(see <link linkend="smtp-url">$smtp_url</link>),
+this option does nothing: mutt will never write out the <quote>Bcc:</quote>
+header in this case.
+</para>
+<para>
+Note this option only affects the sending of messages.  Fcc'ed
+copies of a message will always contain the <quote>Bcc:</quote> header if
+one exists.
 </para>
 </sect2>
 
@@ -27915,266 +27307,22 @@ bindings for all menus (except as noted).
     <sect1 id="acknowledgements">
       <title>Acknowledgements</title>
       <para>
-        Kari Hurtta <email>kari.hurtta@fmi.fi</email> co-developed the original
-        MIME parsing code back in the ELM-ME days.
-      </para>
-      <para>
         The following people have been very helpful to the development of Mutt:
       </para>
-      <itemizedlist>
-        <listitem>
-          <para>
-            Vikas Agnihotri
-            <email>vikasa@writeme.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Francois Berjon
-            <email>Francois.Berjon@aar.alcatel-alsthom.fr</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Aric Blumer
-            <email>aric@fore.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            John Capo
-            <email>jc@irbs.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            David Champion
-            <email>dgc@uchicago.edu</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Brendan Cully
-            <email>brendan@kublai.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Liviu Daia
-            <email>daia@stoilow.imar.ro</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Thomas E. Dickey
-            <email>dickey@herndon4.his.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            David DeSimone
-            <email>fox@convex.hp.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Nickolay N. Dudorov
-            <email>nnd@wint.itfs.nsk.su</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Ruslan Ermilov
-            <email>ru@freebsd.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Edmund Grimley Evans
-            <email>edmundo@rano.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Michael Finken
-            <email>finken@conware.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Sven Guckes
-            <email>guckes@math.fu-berlin.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Lars Hecking
-            <email>lhecking@nmrc.ie</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Mark Holloman
-            <email>holloman@nando.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Andreas Holzmann
-            <email>holzmann@fmi.uni-passau.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Marco d'Itri
-            <email>md@linux.it</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Björn Jacke
-            <email>bjacke@suse.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Byrial Jensen
-            <email>byrial@image.dk</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            David Jeske
-            <email>jeske@igcom.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Christophe Kalt
-            <email>kalt@hugo.int-evry.fr</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Tommi Komulainen
-            <email>Tommi.Komulainen@iki.fi</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Felix von Leitner (a.k.a <quote>Fefe</quote>)
-            <email>leitner@math.fu-berlin.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Brandon Long
-            <email>blong@fiction.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Jimmy Mäkelä
-            <email>jmy@flashback.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Lars Marowsky-Bree
-            <email>lmb@pointer.in-minden.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Thomas <quote>Mike</quote> Michlmayr
-            <email>mike@cosy.sbg.ac.at</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Andrew W. Nosenko
-            <email>awn@bcs.zp.ua</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            David O'Brien
-            <email>obrien@Nuxi.cs.ucdavis.edu</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Clint Olsen
-            <email>olsenc@ichips.intel.com</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Park Myeong Seok
-            <email>pms@romance.kaist.ac.kr</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Thomas Parmelan
-            <email>tom@ankh.fr.eu.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Ollivier Robert
-            <email>roberto@keltia.freenix.fr</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Thomas Roessler
-            <email>roessler@does-not-exist.org</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Roland Rosenfeld
-            <email>roland@spinnaker.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Rocco Rutte
-            <email>pdmef@gmx.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            TAKIZAWA Takashi
-            <email>taki@luna.email.ne.jp</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Allain Thivillon
-            <email>Allain.Thivillon@alma.fr</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Gero Treuner
-            <email>gero@70t.de</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Vsevolod Volkov
-            <email>vvv@lucky.net</email>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Ken Weinert
-            <email>kenw@ihs.com</email>
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        Kari Hurtta, Vikas Agnihotri, Francois Berjon, Aric Blumer, John Capo,
+        David Champion, Brendan Cully, Liviu Daia, Thomas E. Dickey,
+        David DeSimone, Nickolay N. Dudorov, Ruslan Ermilov,
+        Edmund Grimley Evans, Michael Finken, Sven Guckes, Lars Hecking,
+        Mark Holloman, Andreas Holzmann, Marco d'Itri, Björn Jacke,
+        Byrial Jensen, David Jeske, Christophe Kalt, Tommi Komulainen,
+        Felix von Leitner (a.k.a <quote>Fefe</quote>), Brandon Long,
+        Jimmy Mäkelä, Lars Marowsky-Bree, Thomas <quote>Mike</quote> Michlmayr,
+        Andrew W. Nosenko, David O'Brien, Clint Olsen, Park Myeong Seok,
+        Thomas Parmelan, Ollivier Robert, Thomas Roessler, Roland Rosenfeld,
+        Rocco Rutte, TAKIZAWA Takashi, Allain Thivillon, Gero Treuner,
+        Vsevolod Volkov, Ken Weinert
+      </para>
     </sect1>
 
     <sect1 id="about">
