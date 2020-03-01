@@ -767,7 +767,7 @@ set sidebar_divider_char = '│'          <emphasis role="comment"># Pretty line
                     <entry>%F</entry>
                     <entry>* †</entry>
                     <entry>
-                      Number of Flagged messages in the mailbox
+                      Number of flagged messages in the mailbox
                     </entry>
                   </row>
                   <row>
@@ -782,14 +782,28 @@ set sidebar_divider_char = '│'          <emphasis role="comment"># Pretty line
                     <entry>*</entry>
                     <entry>
                       If there's new mail, display <quote>N</quote>, otherwise
-                      nothing
+                      <quote> </quote> (space).
                     </entry>
                   </row>
                   <row>
                     <entry>%N</entry>
                     <entry>* †</entry>
                     <entry>
-                      Number of New messages in the mailbox
+                      Number of unread messages in the mailbox (seen or unseen)
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>%o</entry>
+                    <entry>* †</entry>
+                    <entry>
+                      Number of old messages in the mailbox (unread, but seen)
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>%r</entry>
+                    <entry>* †</entry>
+                    <entry>
+                      Number of read messages in the mailbox
                     </entry>
                   </row>
                   <row>
@@ -803,7 +817,21 @@ set sidebar_divider_char = '│'          <emphasis role="comment"># Pretty line
                     <entry>%t</entry>
                     <entry>* ‡</entry>
                     <entry>
-                      Number of tagged messages
+                      Number of tagged messages in the mailbox
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>%Z</entry>
+                    <entry>* †</entry>
+                    <entry>
+                      Number of new messages in the mailbox (unread, unseen)
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>%Z</entry>
+                    <entry>* †</entry>
+                    <entry>
+                      Number of new messages in the mailbox (unread, unseen)
                     </entry>
                   </row>
                   <row>
@@ -1058,6 +1086,7 @@ sidebar_whitelist fruit fruit/apple     <emphasis role="comment"># Always displa
 color sidebar_indicator default color17     <emphasis role="comment"># Dark blue background</emphasis>
 color sidebar_highlight white   color238    <emphasis role="comment"># Grey background</emphasis>
 color sidebar_spoolfile yellow  default     <emphasis role="comment"># Yellow</emphasis>
+color sidebar_unread    cyan    default     <emphasis role="comment"># Light blue</emphasis>
 color sidebar_new       green   default     <emphasis role="comment"># Green</emphasis>
 color sidebar_ordinary  default default     <emphasis role="comment"># Default colors</emphasis>
 color sidebar_flagged   red     default     <emphasis role="comment"># Red</emphasis>
@@ -1094,11 +1123,6 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                 </row>
                 <row>
                   <entry></entry>
-                  <entry><literal>sidebar_spoolfile</literal></entry>
-                  <entry>Mailbox is the spoolfile (receives incoming mail)</entry>
-                </row>
-                <row>
-                  <entry></entry>
                   <entry><literal>sidebar_new</literal></entry>
                   <entry>Mailbox contains new mail</entry>
                 </row>
@@ -1111,6 +1135,11 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                   <entry></entry>
                   <entry><literal>sidebar_flagged</literal></entry>
                   <entry>Mailbox contains flagged mail</entry>
+                </row>
+                <row>
+                  <entry></entry>
+                  <entry><literal>sidebar_spoolfile</literal></entry>
+                  <entry>Mailbox is the spoolfile (receives incoming mail)</entry>
                 </row>
                 <row>
                   <entry>Lowest</entry>
@@ -2849,9 +2878,9 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           <link linkend="sending-mixmaster">mixmaster</link> or
           <link linkend="smtp">$smtp_url</link>.  Otherwise
           <link linkend="sendmail">$sendmail</link> will be invoked.  Prior to
-          version 1.13, Mutt enabled <link linkend="write-bcc">$write_bcc</link> by
+          version 2019-11-29, NeoMutt enabled <link linkend="write-bcc">$write_bcc</link> by
           default, assuming the MTA would automatically remove a
-          <literal>Bcc:</literal> header as part of delivery.  Starting with 1.13, the
+          <literal>Bcc:</literal> header as part of delivery.  Starting with 2019-11-29, the
           option is unset by default, but no longer affects the fcc copy of the message.
         </para>
       </sect2>
@@ -7279,7 +7308,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
 
         <para>
           <link linkend="size-units-on-left">$size_units_on_left</link> will
-          display the unit (<quote>K</quote> or <quote>M</quote> to the left
+          display the unit (<quote>K</quote> or <quote>M</quote>) to the left
           of the number, instead of the right if unset.
         </para>
 
@@ -8153,6 +8182,12 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 </entry>
               </row>
               <row>
+                <entry>~Y <emphasis>EXPR</emphasis></entry>
+                <entry>
+                  messages whose tags match <emphasis>EXPR</emphasis>
+                </entry>
+              </row>
+              <row>
                 <entry>~z [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
                 <entry>
                   messages with a size in the range <emphasis>MIN</emphasis> to
@@ -8601,16 +8636,19 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
         <sect3 id="date-absolute">
           <title>Absolute Dates</title>
           <para>
-            Dates <emphasis>must</emphasis> be in DD/MM/YY format (month and
-            year are optional, defaulting to the current month and year). An
+            Dates <emphasis>must</emphasis> be in DD/MM/YY format (month and year
+            are optional, defaulting to the current month and year) or YYYYMMDD.  An
             example of a valid range of dates is:
           </para>
-          <screen>Limit to messages matching: ~d 20/1/95-31/10</screen>
+<screen>
+Limit to messages matching: ~d 20/1/95-31/10
+Limit to messages matching: ~d 19950120-19951031
+</screen>
           <para>
             If you omit the minimum (first) date, and just specify
-            <quote>-DD/MM/YY</quote>, all messages <emphasis>before</emphasis>
-            the given date will be selected. If you omit the maximum (second)
-            date, and specify <quote>DD/MM/YY-</quote>, all messages
+            <quote>-DD/MM/YY</quote> or <quote>-YYYYMMDD</quote>, all messages
+            <emphasis>before</emphasis> the given date will be selected.  If you omit the
+            maximum(second) date, and specify <quote>DD/MM/YY-</quote>, all messages
             <emphasis>after</emphasis> the given date will be selected. If you
             specify a single date with no dash (<quote>-</quote>), only
             messages sent on the given date will be selected.
@@ -10198,8 +10236,8 @@ audio/x-aiff                    aif aifc aiff
     <sect1 id="mailcap">
       <title>MIME Viewer Configuration with Mailcap</title>
       <para>
-        NeoMutt supports RFC 1524 MIME Configuration, in particular the Unix
-        specific format specified in Appendix A of RFC 1524. This file format
+        NeoMutt supports RFC1524 MIME Configuration, in particular the Unix
+        specific format specified in Appendix A of RFC1524. This file format
         is commonly referred to as the <quote>mailcap</quote> format. Many MIME
         compliant programs utilize the mailcap format, allowing you to specify
         handling for all MIME types in one place for all programs. Programs
@@ -10700,7 +10738,7 @@ text/html;      lynx -dump %s; nametemplate=%s.html; copiousoutput
           </variablelist>
           <para>
             NeoMutt does not currently support the <literal>%F</literal> and
-            <literal>%n</literal> keywords specified in RFC 1524. The main
+            <literal>%n</literal> keywords specified in RFC1524. The main
             purpose of these parameters is for multipart messages, which is
             handled internally by NeoMutt.
           </para>
@@ -13398,6 +13436,159 @@ shutdown-hook 'exec sync-mailbox'
     </sect1>
   </chapter>
 
+  <chapter id="feature/hccompress">
+    <title>Header Cache Compression Feature</title>
+    <subtitle>Options for compressing the header cache files</subtitle>
+
+    <sect1 id="hccompress-support">
+      <title>Support</title>
+      <para>
+        <emphasis role="bold">Since:</emphasis> NeoMutt 2020-02-22
+      </para>
+      <para>
+        <emphasis role="bold">Dependencies:</emphasis>
+        <link linkend="caching">header cache</link>
+      </para>
+    </sect1>
+
+    <sect1 id="hccompress-intro">
+      <title>Introduction</title>
+      <para>
+        The Header Cache Compression Feature can be used for speeding up the
+        loading of large mailboxes.  Also the space used on disk can be shrunk
+        by about 50% - depending on the compression method being used.
+      </para>
+      <para>
+        The implementation sits on top of the header caching functions. So the
+        header cache compression can be used together with all available
+        database backends.
+      </para>
+    </sect1>
+
+    <sect1 id="hccompress-variables">
+      <title>Variables</title>
+      <table id="table-hccompress-variables">
+        <title>Header Cache Compression Variables</title>
+        <tgroup cols="3">
+          <thead>
+            <row>
+              <entry>Name</entry>
+              <entry>Type</entry>
+              <entry>Default</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry><literal>header_cache_compress_method</literal></entry>
+              <entry>string</entry>
+              <entry>(empty)</entry>
+            </row>
+            <row>
+              <entry><literal>header_cache_compress_level</literal></entry>
+              <entry>number</entry>
+              <entry><literal>1</literal></entry>
+            </row>
+            <row>
+              <entry><literal>header_cache_compress_dictionary</literal></entry>
+              <entry>string</entry>
+              <entry><literal>~/.dictionary</literal></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para>
+        The <literal>header_cache_compress_method</literal> can be
+        <emphasis>(empty)</emphasis> - which means, that no header cache
+        compression should be used. But when set to <emphasis>lz4</emphasis>,
+        <emphasis>zlib</emphasis> or <emphasis>zstd</emphasis> - then the
+        compression is turned on.
+      </para>
+      <para>
+        The <literal>header_cache_compress_level</literal> defines the
+        compression level, which should be used together with the selected
+        <literal>header_cache_compress_method</literal>. Here is an overview
+        of the possible settings:
+        <table id="table-hccompress-variables-leveldefines">
+          <title>Header Cache Compression Methods and it's Levels</title>
+          <tgroup cols="3">
+            <thead>
+              <row>
+                <entry>Method Name</entry>
+                <entry>Min</entry>
+                <entry>Max</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry><literal>lz4</literal></entry>
+                <entry>1</entry>
+                <entry>12</entry>
+              </row>
+              <row>
+                <entry><literal>zlib</literal></entry>
+                <entry>1</entry>
+                <entry>9</entry>
+              </row>
+              <row>
+                <entry><literal>zstd</literal></entry>
+                <entry>1</entry>
+                <entry>22</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </para>
+      <para>
+        The <literal>header_cache_compress_dictionary</literal> is a special
+        option for the <literal>zstd</literal> compression method. On a lot
+        small files, this compression method can be trained for some level by
+        using a command like this for e.g. level 3:
+      </para>
+<screen>
+zstd --train -3 -r cur new tmp -o dict-level-3
+</screen>
+      <para>
+        This command will create an file called <literal>dict-level-3</literal>,
+        which should be put to the path given in the
+        <literal>header_cache_compress_dictionary</literal> variable. The
+        speed and space gain can be huge, when using zstd dictionaries.  See
+        <ulink url="https://github.com/facebook/zstd">https://github.com/facebook/zstd</ulink>
+        for more information about this.
+      </para>
+    </sect1>
+    <sect1 id="hccompress-neomuttrc">
+      <title>neomuttrc</title>
+
+<screen>
+<emphasis role="comment"># Example NeoMutt config file for the header cache compression feature.</emphasis>
+
+<emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
+<emphasis role="comment"># VARIABLES – shown with their default values</emphasis>
+<emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
+set header_cache_compress_dictionary = "~/.dictionary"
+set header_cache_compress_level = 1
+set header_cache_compress_method = ""
+
+<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+</screen>
+
+    </sect1>
+
+    <sect1 id="hccompress-known-bugs">
+      <title>Known Bugs</title>
+      <para>
+        None
+      </para>
+    </sect1>
+
+    <sect1 id="hccompress-credits">
+      <title>Credits</title>
+      <para>
+        Tino Reichardt
+      </para>
+    </sect1>
+</chapter>
+
   <chapter id="feature/ifdef">
     <title>Ifdef Feature</title>
     <subtitle>Conditional config options</subtitle>
@@ -15141,8 +15332,8 @@ color index_tags green default
     <sect1 id="notmuch-using">
       <title>Using Notmuch</title>
 
-      <sect2 id="notmuch-folder-uri">
-        <title>Folders URI</title>
+      <sect2 id="notmuch-folder-url">
+        <title>Folders URL</title>
         <para>
           <emphasis role="bold">notmuch://[&lt;path&gt;][?&lt;item&gt;=&lt;name&gt;[&amp; ...]]</emphasis>
         </para>
@@ -15155,12 +15346,12 @@ color index_tags green default
         </para>
         <para>
           If the "&lt;path&gt;" is not defined then
-          <literal>$nm_default_uri</literal> or <literal>$folder</literal> is
+          <literal>$nm_default_url</literal> or <literal>$folder</literal> is
           used, for example:
         </para>
 
 <screen>
-set nm_default_uri = "notmuch:///home/foo/maildir"
+set nm_default_url = "notmuch:///home/foo/maildir"
 virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
 </screen>
 
@@ -15176,7 +15367,7 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
           operators (<quote>and</quote>/<quote>or</quote>) in your queries.
         </para>
         <para>
-          Note that proper URI should not contain blank space and all
+          Note that proper URL should not contain blank space and all
           <quote>bad</quote> chars should be encoded, for example
         </para>
         <para>
@@ -15320,7 +15511,7 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <entry></entry>
             </row>
             <row>
-              <entry><literal>nm_default_uri</literal></entry>
+              <entry><literal>nm_default_url</literal></entry>
               <entry>string</entry>
               <entry>(empty)</entry>
               <entry></entry>
@@ -15409,7 +15600,7 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <entry>
                 switch to another virtual folder, a new folder maybe be
                 specified by vfolder description (see virtual-mailboxes) or
-                URI. the default is next vfolder with unread messages
+                URL. the default is next vfolder with unread messages
               </entry>
             </row>
             <row>
@@ -15474,14 +15665,14 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
         <arg choice="plain">
           <replaceable class="parameter">description</replaceable>
           <arg choice="plain">
-            <replaceable class="parameter">notmuch-URI</replaceable>
+            <replaceable class="parameter">notmuch-URL</replaceable>
           </arg>
         </arg>
         <group choice="req" rep="repeat">
           <arg choice="plain">
             <replaceable class="parameter">description</replaceable>
             <arg choice="plain">
-              <replaceable class="parameter">notmuch-URI</replaceable>
+              <replaceable class="parameter">notmuch-URL</replaceable>
             </arg>
           </arg>
         </group>
@@ -15532,7 +15723,7 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
 set nm_db_limit = 0
 <emphasis role="comment"># This variable specifies the default Notmuch database in format:</emphasis>
 <emphasis role="comment"># notmuch://&lt;absolute path&gt;</emphasis>
-set nm_default_uri = ""
+set nm_default_url = ""
 <emphasis role="comment"># The messages tagged with these tags are excluded and not loaded</emphasis>
 <emphasis role="comment"># from notmuch DB to NeoMutt unless specified explicitly.</emphasis>
 set nm_exclude_tags = ""
@@ -15589,7 +15780,7 @@ bind index &gt; vfolder-window-forward
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 <emphasis role="comment"># COMMANDS – shown with an example</emphasis>
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
-<emphasis role="comment"># virtual-mailboxes description notmuch-URI { description notmuch-URI ...}</emphasis>
+<emphasis role="comment"># virtual-mailboxes description notmuch-URL { description notmuch-URL ...}</emphasis>
 <emphasis role="comment"># virtual-mailboxes "Climbing" "notmuch://?query=climbing"</emphasis>
 <emphasis role="comment"># unvirtual-mailboxes { * | mailbox ...}</emphasis>
 <emphasis role="comment">#</emphasis>
@@ -16045,6 +16236,11 @@ set sort_browser="reverse-size"
           </thead>
           <tbody>
             <row>
+              <entry><literal>sidebar_component_depth</literal></entry>
+              <entry>number</entry>
+              <entry><literal>0</literal></entry>
+            </row>
+            <row>
               <entry><literal>sidebar_delim_chars</literal></entry>
               <entry>string</entry>
               <entry><literal>/.</literal></entry>
@@ -16079,6 +16275,11 @@ set sort_browser="reverse-size"
               <entry><literal>no</literal></entry>
             </row>
             <row>
+              <entry><literal>sidebar_non_empty_mailbox_only</literal></entry>
+              <entry>boolean</entry>
+              <entry><literal>no</literal></entry>
+            </row>
+            <row>
               <entry><literal>sidebar_on_right</literal></entry>
               <entry>boolean</entry>
               <entry><literal>no</literal></entry>
@@ -16087,11 +16288,6 @@ set sort_browser="reverse-size"
               <entry><literal>sidebar_short_path</literal></entry>
               <entry>boolean</entry>
               <entry><literal>no</literal></entry>
-            </row>
-            <row>
-              <entry><literal>sidebar_component_depth</literal></entry>
-              <entry>number</entry>
-              <entry><literal>0</literal></entry>
             </row>
             <row>
               <entry><literal>sidebar_sort_method</literal></entry>
@@ -16319,6 +16515,10 @@ set sort_browser="reverse-size"
               <entry>Total number of messages</entry>
             </row>
             <row>
+              <entry><literal>desc</literal></entry>
+              <entry>Descriptive name of the mailbox</entry>
+            </row>
+            <row>
               <entry><literal>flagged</literal></entry>
               <entry>Number of flagged messages</entry>
             </row>
@@ -16379,6 +16579,8 @@ set sidebar_indent_string = '  '
 set sidebar_new_mail_only = no
 <emphasis role="comment"># Any mailboxes that are whitelisted will always be visible, even if the</emphasis>
 <emphasis role="comment"># sidebar_new_mail_only option is enabled.</emphasis>
+set sidebar_non_empty_mailbox_only = no
+<emphasis role="comment"># Only show mailboxes that contain some mail</emphasis>
 sidebar_whitelist '/home/user/mailbox1'
 sidebar_whitelist '/home/user/mailbox2'
 <emphasis role="comment"># When searching for mailboxes containing new mail, should the search wrap</emphasis>
@@ -16431,6 +16633,8 @@ bind index,pager B sidebar-toggle-visible
 <emphasis role="comment"># Color of the current, open, mailbox</emphasis>
 <emphasis role="comment"># Note: This is a general NeoMutt option which colors all selected items.</emphasis>
 color indicator cyan black
+<emphasis role="comment"># Sidebar-specific color of the selected item</emphasis>
+color sidebar_indicator cyan black
 <emphasis role="comment"># Color of the highlighted, but not open, mailbox.</emphasis>
 color sidebar_highlight black color8
 <emphasis role="comment"># Color of the divider separating the Sidebar from NeoMutt panels</emphasis>
@@ -16441,6 +16645,10 @@ color sidebar_flagged red black
 color sidebar_new green black
 <emphasis role="comment"># Color to give mailboxes containing no new/flagged mail, etc.</emphasis>
 color sidebar_ordinary color245 default
+<emphasis role="comment"># Color to give the spoolfile mailbox</emphasis>
+color sidebar_spoolfile color207 default
+<emphasis role="comment"># Color to give mailboxes containing no unread mail</emphasis>
+color sidebar_unread color136 default
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 
 <emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
@@ -17505,9 +17713,18 @@ folder-hook ^pop 'set read_inc=1'
         will be gone for the next session.)
       </para>
       <para>
-        To improve performance and permanently cache whole messages, please
-        refer to NeoMutt's so-called
-        <link linkend="body-caching">body caching</link> for details.
+        To improve performance and permanently cache whole messages and
+        headers, please refer to <link linkend="body-caching">body caching</link>
+        and <link linkend="header-caching">header caching</link> for details.
+      </para>
+      <para>
+        Additionally, it may be worth trying some of NeoMutt's experimental
+        features.  <link linkend="imap-qresync">$imap_qresync</link> (which
+        requires header caching) can provide a huge speed boost opening
+        mailboxes if your IMAP server supports it.
+        <link linkend="imap-deflate">$imap_deflate</link> enables compression,
+        which can also noticeably reduce download time for large mailboxes and
+        messages.
       </para>
     </sect1>
 
@@ -19040,6 +19257,34 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
     <sect1 id="variables">
       <title>Configuration Variables</title>
 
+<sect2 id="abort-key">
+<title>abort_key</title>
+<literallayout>Type: string
+Default: <quote><literal>007</literal></quote></literallayout>
+
+<para>
+Specifies the key that can be used to abort prompts.  The format is the
+same as used in "bind" commands.  The default is equivalent to "\G".
+Note that the specified key should not be used in other bindings, as the
+abort operation has higher precedence and the binding will not have the
+desired effect.
+</para>
+<para>
+Example:
+
+</para>
+
+<screen>
+set abort_key = "&lt;Esc&gt;"
+</screen><para>
+Please note that when using &lt;Esc&gt; as the abort key, you may also want to
+set the environment variable ESCDELAY to a low value or even 0 which will
+reduce the time that ncurses waits to distinguish singular &lt;Esc&gt; key
+presses from the start of a terminal escape sequence. The default time is
+1000 milliseconds and thus quite noticeable.
+</para>
+</sect2>
+
 <sect2 id="abort-noattach">
 <title>abort_noattach</title>
 <literallayout>Type: quadoption
@@ -19197,6 +19442,16 @@ in menus instead of highlighting the whole line.  On slow network or modem
 links this will make response faster because there is less that has to
 be redrawn on the screen when moving to the next or previous entries
 in the menu.
+</para>
+</sect2>
+
+<sect2 id="arrow-string">
+<title>arrow_string</title>
+<literallayout>Type: string
+Default: <quote><literal>-&gt;</literal></quote></literallayout>
+
+<para>
+Specifies the string of arrow_cursor when arrow_cursor enabled.
 </para>
 </sect2>
 
@@ -20018,6 +20273,26 @@ be manually re-enabled in the pgp or smime menus.
 </para>
 </sect2>
 
+<sect2 id="crypt-opportunistic-encrypt-strong-keys">
+<title>crypt_opportunistic_encrypt_strong_keys</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When set, this modifies the behavior of <link linkend="crypt-opportunistic-encrypt">$crypt_opportunistic_encrypt</link>
+to only search for "strong keys", that is, keys with full validity
+according to the web-of-trust algorithm.  A key with marginal or no
+validity will not enable opportunistic encryption.
+</para>
+<para>
+For S/MIME, the behavior depends on the backend.  Classic S/MIME will
+filter for certificates with the 't'(trusted) flag in the .index file.
+The GPGME backend will use the same filters as with OpenPGP, and depends
+on GPGME's logic for assigning the GPGME_VALIDITY_FULL and
+GPGME_VALIDITY_ULTIMATE validity flag.
+</para>
+</sect2>
+
 <sect2 id="crypt-protected-headers-read">
 <title>crypt_protected_headers_read</title>
 <literallayout>Type: boolean
@@ -20164,7 +20439,7 @@ you may <emphasis>unset</emphasis> this setting.
 <sect2 id="crypt-use-gpgme">
 <title>crypt_use_gpgme</title>
 <literallayout>Type: boolean
-Default: no</literallayout>
+Default: yes</literallayout>
 
 <para>
 This variable controls the use of the GPGME-enabled crypto backends.
@@ -20680,7 +20955,7 @@ If set, flagged messages can't be deleted.
 
 <sect2 id="folder">
 <title>folder</title>
-<literallayout>Type: path
+<literallayout>Type: string
 Default: <quote><literal>~/Mail</literal></quote></literallayout>
 
 <para>
@@ -20708,40 +20983,40 @@ its own set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%C  </entry><entry>Current file number
+<row><entry>%C  </entry><entry>  </entry><entry>Current file number
 </entry></row>
-<row><entry>%d  </entry><entry>Date/time folder was last modified
+<row><entry>%d  </entry><entry>  </entry><entry>Date/time folder was last modified
 </entry></row>
-<row><entry>%D  </entry><entry>Date/time folder was last modified using <link linkend="date-format">$date_format</link>.
+<row><entry>%D  </entry><entry>  </entry><entry>Date/time folder was last modified using <link linkend="date-format">$date_format</link>.
 </entry></row>
-<row><entry>%f  </entry><entry>Filename ("/" is appended to directory names,
+<row><entry>%f  </entry><entry>  </entry><entry>Filename ("/" is appended to directory names,
 "@" to symbolic links and "*" to executable files)
 </entry></row>
-<row><entry>%F  </entry><entry>File permissions
+<row><entry>%F  </entry><entry>  </entry><entry>File permissions
 </entry></row>
-<row><entry>%g  </entry><entry>Group name (or numeric gid, if missing)
+<row><entry>%g  </entry><entry>  </entry><entry>Group name (or numeric gid, if missing)
 </entry></row>
-<row><entry>%i  </entry><entry>Description of the folder
+<row><entry>%i  </entry><entry>  </entry><entry>Description of the folder
 </entry></row>
-<row><entry>%l  </entry><entry>Number of hard links
+<row><entry>%l  </entry><entry>  </entry><entry>Number of hard links
 </entry></row>
-<row><entry>%m  </entry><entry>Number of messages in the mailbox *
+<row><entry>%m  </entry><entry>* </entry><entry>Number of messages in the mailbox
 </entry></row>
-<row><entry>%n  </entry><entry>Number of unread messages in the mailbox *
+<row><entry>%n  </entry><entry>* </entry><entry>Number of unread messages in the mailbox
 </entry></row>
-<row><entry>%N  </entry><entry>"N" if mailbox has new mail, blank otherwise
+<row><entry>%N  </entry><entry>  </entry><entry>"N" if mailbox has new mail, blank otherwise
 </entry></row>
-<row><entry>%s  </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry>%s  </entry><entry>  </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%t  </entry><entry>"*" if the file is tagged, blank otherwise
+<row><entry>%t  </entry><entry>  </entry><entry>"*" if the file is tagged, blank otherwise
 </entry></row>
-<row><entry>%u  </entry><entry>Owner name (or numeric uid, if missing)
+<row><entry>%u  </entry><entry>  </entry><entry>Owner name (or numeric uid, if missing)
 </entry></row>
-<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with character "X"
+<row><entry>%&gt;X </entry><entry>  </entry><entry>Right justify the rest of the string and pad with character "X"
 </entry></row>
-<row><entry>%|X </entry><entry>Pad to the end of the line with character "X"
+<row><entry>%|X </entry><entry>  </entry><entry>Pad to the end of the line with character "X"
 </entry></row>
-<row><entry>%*X </entry><entry>Soft-fill with character "X" as pad
+<row><entry>%*X </entry><entry>  </entry><entry>Soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -21416,7 +21691,7 @@ of mailboxes it polls for new mail just as if you had issued individual
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will use the CONDSTORE extension (RFC 7162)
+When <emphasis>set</emphasis>, NeoMutt will use the CONDSTORE extension (RFC7162)
 if advertised by the server.  NeoMutt's current implementation is basic,
 used only for initial message fetching and flag updates.
 </para>
@@ -21425,6 +21700,21 @@ For some IMAP servers, enabling this will slightly speed up
 downloading initial messages.  Unfortunately, Gmail is not one
 those, and displays worse performance when enabled.  Your
 mileage may vary.
+</para>
+</sect2>
+
+<sect2 id="imap-deflate">
+<title>imap_deflate</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, mutt will use the COMPRESS=DEFLATE extension (RFC4978)
+if advertised by the server.
+</para>
+<para>
+In general a good compression efficiency can be achieved, which
+speeds up reading large mailboxes also on fairly good connections.
 </para>
 </sect2>
 
@@ -21622,7 +21912,7 @@ to 0 to disable timing out.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will use the QRESYNC extension (RFC 7162)
+When <emphasis>set</emphasis>, NeoMutt will use the QRESYNC extension (RFC7162)
 if advertised by the server.  NeoMutt's current implementation is basic,
 used only for initial message fetching and flag updates.
 </para>
@@ -21639,7 +21929,7 @@ file a bug report to let us know.
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will use the IMAP ENABLE extension (RFC 5161) to
+When <emphasis>set</emphasis>, NeoMutt will use the IMAP ENABLE extension (RFC5161) to
 select CAPABILITIES. Some servers (notably Coremail System IMap Server) do
 not properly respond to ENABLE commands, which might cause NeoMutt to hang.
 If your connection seems to freeze at login, try unsetting this. See also
@@ -22172,7 +22462,7 @@ will be shown. The match is always case-sensitive.
 
 <sect2 id="mbox">
 <title>mbox</title>
-<literallayout>Type: path
+<literallayout>Type: string
 Default: <quote><literal>~/mbox</literal></quote></literallayout>
 
 <para>
@@ -22616,8 +22906,8 @@ This variable specifies the default limit used in notmuch queries.
 </para>
 </sect2>
 
-<sect2 id="nm-default-uri">
-<title>nm_default_uri</title>
+<sect2 id="nm-default-url">
+<title>nm_default_url</title>
 <literallayout>Type: string
 Default: (empty)</literallayout>
 
@@ -23833,7 +24123,7 @@ Please use <link linkend="pgp-default-key">$pgp_default_key</link> or <link link
 
 <sect2 id="postponed">
 <title>postponed</title>
-<literallayout>Type: path
+<literallayout>Type: string
 Default: <quote><literal>~/postponed</literal></quote></literallayout>
 
 <para>
@@ -23983,21 +24273,21 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a  </entry><entry>Destination address
+<row><entry>%a  </entry><entry>  </entry><entry>Destination address
 </entry></row>
-<row><entry>%c  </entry><entry>Current entry number
+<row><entry>%c  </entry><entry>  </entry><entry>Current entry number
 </entry></row>
-<row><entry>%e  </entry><entry>Extra information *
+<row><entry>%e  </entry><entry>* </entry><entry>Extra information
 </entry></row>
-<row><entry>%n  </entry><entry>Destination name
+<row><entry>%n  </entry><entry>  </entry><entry>Destination name
 </entry></row>
-<row><entry>%t  </entry><entry>"*" if current entry is tagged, a space otherwise
+<row><entry>%t  </entry><entry>  </entry><entry>"*" if current entry is tagged, a space otherwise
 </entry></row>
-<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with "X"
+<row><entry>%&gt;X </entry><entry>  </entry><entry>Right justify the rest of the string and pad with "X"
 </entry></row>
-<row><entry>%|X </entry><entry>Pad to the end of the line with "X"
+<row><entry>%|X </entry><entry>  </entry><entry>Pad to the end of the line with "X"
 </entry></row>
-<row><entry>%*X </entry><entry>Soft-fill with character "X" as pad
+<row><entry>%*X </entry><entry>  </entry><entry>Soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -24123,7 +24413,7 @@ Also see <link linkend="postponed">$postponed</link> variable.
 
 <sect2 id="record">
 <title>record</title>
-<literallayout>Type: path
+<literallayout>Type: string
 Default: <quote><literal>~/sent</literal></quote></literallayout>
 
 <para>
@@ -24729,38 +25019,46 @@ sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%B  </entry><entry>Name of the mailbox
+<row><entry>%B </entry><entry>    </entry><entry>Name of the mailbox
 </entry></row>
-<row><entry>%D  </entry><entry>Description of the mailbox
+<row><entry>%d </entry><entry>* @ </entry><entry>Number of deleted messages in the mailbox
 </entry></row>
-<row><entry>%S  </entry><entry>* Size of mailbox (total number of messages)
+<row><entry>%D </entry><entry>    </entry><entry>Descriptive name of the mailbox
 </entry></row>
-<row><entry>%N  </entry><entry>* Number of unread messages in the mailbox
+<row><entry>%F </entry><entry>*   </entry><entry>Number of flagged messages in the mailbox
 </entry></row>
-<row><entry>%n  </entry><entry>N if mailbox has new mail, blank otherwise
+<row><entry>%L </entry><entry>* @ </entry><entry>Number of messages after limiting
 </entry></row>
-<row><entry>%F  </entry><entry>* Number of Flagged messages in the mailbox
+<row><entry>%n </entry><entry>    </entry><entry>'N' if mailbox has new mail, ' ' (space) otherwise
 </entry></row>
-<row><entry>%!  </entry><entry>"!" : one flagged message;
+<row><entry>%N </entry><entry>*   </entry><entry>Number of unread messages in the mailbox (seen or unseen)
+</entry></row>
+<row><entry>%o </entry><entry>*   </entry><entry>Number of old messages in the mailbox (unread, seen)
+</entry></row>
+<row><entry>%r </entry><entry>*   </entry><entry>Number of read messages in the mailbox (read, seen)
+</entry></row>
+<row><entry>%S </entry><entry>*   </entry><entry>Size of mailbox (total number of messages)
+</entry></row>
+<row><entry>%t </entry><entry>* @ </entry><entry>Number of tagged messages in the mailbox
+</entry></row>
+<row><entry>%Z </entry><entry>*   </entry><entry>Number of new messages in the mailbox (unread, unseen)
+</entry></row>
+<row><entry>%! </entry><entry>    </entry><entry>"!" : one flagged message;
 "!!" : two flagged messages;
 "n!" : n flagged messages (for n &gt; 2).
 Otherwise prints nothing.
 </entry></row>
-<row><entry>%d  </entry><entry>* @ Number of deleted messages
+<row><entry>%&gt;X </entry><entry></entry><entry>Right justify the rest of the string and pad with "X"
 </entry></row>
-<row><entry>%L  </entry><entry>* @ Number of messages after limiting
+<row><entry>%|X </entry><entry></entry><entry>Pad to the end of the line with "X"
 </entry></row>
-<row><entry>%t  </entry><entry>* @ Number of tagged messages
-</entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with "X"
-</entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with "X"
-</entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character "X" as pad
+<row><entry>%*X </entry><entry></entry><entry>Soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
 * = Can be optionally printed if nonzero
+</para>
+<para>
 @ = Only applicable to the current folder
 </para>
 <para>
@@ -24798,19 +25096,6 @@ flagged, mail.
 </para>
 </sect2>
 
-<sect2 id="sidebar-non-empty-mailbox-only">
-<title>sidebar_non_empty_mailbox_only</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-When set, the sidebar will only display mailboxes that contain one or more mails.
-</para>
-<para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-new-mail-only">$sidebar_new_mail_only</link>, <link linkend="sidebar-whitelist">$sidebar_whitelist</link>.
-</para>
-</sect2>
-
 <sect2 id="sidebar-next-new-wrap">
 <title>sidebar_next_new_wrap</title>
 <literallayout>Type: boolean
@@ -24821,6 +25106,19 @@ When set, the <literal>&lt;sidebar-next-new&gt;</literal> command will not stop 
 the list of mailboxes, but wrap around to the beginning. The
 <literal>&lt;sidebar-prev-new&gt;</literal> command is similarly affected, wrapping around to
 the end of the list.
+</para>
+</sect2>
+
+<sect2 id="sidebar-non-empty-mailbox-only">
+<title>sidebar_non_empty_mailbox_only</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When set, the sidebar will only display mailboxes that contain one or more mails.
+</para>
+<para>
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-new-mail-only">$sidebar_new_mail_only</link>, <link linkend="sidebar-whitelist">$sidebar_whitelist</link>.
 </para>
 </sect2>
 
@@ -25495,6 +25793,19 @@ if you are the only one who can read the file.
 </para>
 </sect2>
 
+<sect2 id="smtp-user">
+<title>smtp_user</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+The username for the SMTP server.
+</para>
+<para>
+This variable defaults to your user name on the local machine.
+</para>
+</sect2>
+
 <sect2 id="smtp-url">
 <title>smtp_url</title>
 <literallayout>Type: string
@@ -25671,7 +25982,7 @@ separator.
 
 <sect2 id="spoolfile">
 <title>spoolfile</title>
-<literallayout>Type: path
+<literallayout>Type: string
 Default: (empty)</literallayout>
 
 <para>
@@ -25945,57 +26256,57 @@ set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%b  </entry><entry>Number of mailboxes with new mail *
+<row><entry>%b  </entry><entry>* </entry><entry>Number of mailboxes with new mail
 </entry></row>
-<row><entry>%d  </entry><entry>Number of deleted messages *
+<row><entry>%d  </entry><entry>* </entry><entry>Number of deleted messages
 </entry></row>
-<row><entry>%D  </entry><entry>Description of the mailbox
+<row><entry>%D  </entry><entry>  </entry><entry>Description of the mailbox
 </entry></row>
-<row><entry>%f  </entry><entry>The full pathname of the current mailbox
+<row><entry>%f  </entry><entry>  </entry><entry>The full pathname of the current mailbox
 </entry></row>
-<row><entry>%F  </entry><entry>Number of flagged messages *
+<row><entry>%F  </entry><entry>* </entry><entry>Number of flagged messages
 </entry></row>
-<row><entry>%h  </entry><entry>Local hostname
+<row><entry>%h  </entry><entry>  </entry><entry>Local hostname
 </entry></row>
-<row><entry>%l  </entry><entry>Size (in bytes) of the current mailbox (see <link linkend="formatstrings-size">formatstrings-size</link>) *
+<row><entry>%l  </entry><entry>* </entry><entry>Size (in bytes) of the current mailbox (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%L  </entry><entry>Size (in bytes) of the messages shown
-(i.e., which match the current limit) (see <link linkend="formatstrings-size">formatstrings-size</link>) *
+<row><entry>%L  </entry><entry>* </entry><entry>Size (in bytes) of the messages shown
+(i.e., which match the current limit) (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%m  </entry><entry>The number of messages in the mailbox *
+<row><entry>%m  </entry><entry>* </entry><entry>The number of messages in the mailbox
 </entry></row>
-<row><entry>%M  </entry><entry>The number of messages shown (i.e., which match the current limit) *
+<row><entry>%M  </entry><entry>* </entry><entry>The number of messages shown (i.e., which match the current limit)
 </entry></row>
-<row><entry>%n  </entry><entry>Number of new messages in the mailbox *
+<row><entry>%n  </entry><entry>* </entry><entry>Number of new messages in the mailbox (unread, unseen)
 </entry></row>
-<row><entry>%o  </entry><entry>Number of old unread messages *
+<row><entry>%o  </entry><entry>* </entry><entry>Number of old messages in the mailbox (unread, seen)
 </entry></row>
-<row><entry>%p  </entry><entry>Number of postponed messages *
+<row><entry>%p  </entry><entry>* </entry><entry>Number of postponed messages
 </entry></row>
-<row><entry>%P  </entry><entry>Percentage of the way through the index
+<row><entry>%P  </entry><entry>  </entry><entry>Percentage of the way through the index
 </entry></row>
-<row><entry>%r  </entry><entry>Modified/read-only/won't-write/attach-message indicator,
+<row><entry>%r  </entry><entry>  </entry><entry>Modified/read-only/won't-write/attach-message indicator,
 According to <link linkend="status-chars">$status_chars</link>
 </entry></row>
-<row><entry>%R  </entry><entry>Number of read messages *
+<row><entry>%R  </entry><entry>* </entry><entry>Number of read messages in the mailbox (read, seen)
 </entry></row>
-<row><entry>%s  </entry><entry>Current sorting mode (<link linkend="sort">$sort</link>)
+<row><entry>%s  </entry><entry>  </entry><entry>Current sorting mode (<link linkend="sort">$sort</link>)
 </entry></row>
-<row><entry>%S  </entry><entry>Current aux sorting method (<link linkend="sort-aux">$sort_aux</link>)
+<row><entry>%S  </entry><entry>  </entry><entry>Current aux sorting method (<link linkend="sort-aux">$sort_aux</link>)
 </entry></row>
-<row><entry>%t  </entry><entry>Number of tagged messages *
+<row><entry>%t  </entry><entry>* </entry><entry>Number of tagged messages in the mailbox
 </entry></row>
-<row><entry>%u  </entry><entry>Number of unread messages *
+<row><entry>%u  </entry><entry>* </entry><entry>Number of unread messages in the mailbox (seen or unseen)
 </entry></row>
-<row><entry>%v  </entry><entry>NeoMutt version string
+<row><entry>%v  </entry><entry>  </entry><entry>NeoMutt version string
 </entry></row>
-<row><entry>%V  </entry><entry>Currently active limit pattern, if any *
+<row><entry>%V  </entry><entry>* </entry><entry>Currently active limit pattern, if any
 </entry></row>
-<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with "X"
+<row><entry>%&gt;X </entry><entry>  </entry><entry>Right justify the rest of the string and pad with "X"
 </entry></row>
-<row><entry>%|X </entry><entry>Pad to the end of the line with "X"
+<row><entry>%|X </entry><entry>  </entry><entry>Pad to the end of the line with "X"
 </entry></row>
-<row><entry>%*X </entry><entry>Soft-fill with character "X" as pad
+<row><entry>%*X </entry><entry>  </entry><entry>Soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -26243,7 +26554,7 @@ Controls the character used to indicate mail addressed to you.
 
 <sect2 id="trash">
 <title>trash</title>
-<literallayout>Type: path
+<literallayout>Type: string
 Default: (empty)</literallayout>
 
 <para>
