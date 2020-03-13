@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2019-12-07</releaseinfo>
+    <releaseinfo>version 2020-03-13</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -19257,6 +19257,17 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
     <sect1 id="variables">
       <title>Configuration Variables</title>
 
+<sect2 id="abort-backspace">
+<title>abort_backspace</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+If <emphasis>set</emphasis>, hitting backspace against an empty prompt aborts the
+prompt.
+</para>
+</sect2>
+
 <sect2 id="abort-key">
 <title>abort_key</title>
 <literallayout>Type: string
@@ -21394,6 +21405,40 @@ When NeoMutt is compiled with either gdbm or bdb4 as the header cache backend,
 this option changes the database page size.  Too large or too small
 values can waste space, memory, or CPU time. The default should be more
 or less optimal for most use cases.
+</para>
+</sect2>
+
+<sect2 id="header-cache-compress-dictionary">
+<title>header_cache_compress_dictionary</title>
+<literallayout>Type: path
+Default: <quote><literal>~/.dictionary</literal></quote></literallayout>
+
+<para>
+When NeoMutt is compiled with zstd, the header cache backend can be used together
+with a dictionary to achieve better compression on the cache files.
+</para>
+</sect2>
+
+<sect2 id="header-cache-compress-level">
+<title>header_cache_compress_level</title>
+<literallayout>Type: number
+Default: 1</literallayout>
+
+<para>
+When NeoMutt is compiled with lz4, zstd or zlib, this option can be used
+to setup the compression level.
+</para>
+</sect2>
+
+<sect2 id="header-cache-compress-method">
+<title>header_cache_compress_method</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+When NeoMutt is compiled with lz4, zstd or zlib, the header cache backend
+can use these compression methods for compressing the cache files.
+This results in much smaller cache file sizes and may even improve speed.
 </para>
 </sect2>
 
