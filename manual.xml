@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2020-03-13</releaseinfo>
+    <releaseinfo>version 2020-03-20</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -6656,7 +6656,7 @@ set spam_separator=", "
             </listitem>
           </varlistentry>
           <varlistentry>
-            <term>folder magic</term>
+            <term>folder type</term>
             <listitem>
               <para>
                 Specifies the type of folder to use: <emphasis>mbox</emphasis>,
@@ -19788,7 +19788,7 @@ Default: <quote><literal>~/.mutt/autocrypt</literal></quote></literallayout>
 
 <para>
 This variable sets where autocrypt files are stored, including the GPG
-keyring and sqlite database.  See <quote><link linkend="guide/autocryptdoc">autocryptdoc</link></quote> for more details.
+  keyring and SQLite database.  See <quote><link linkend="guide/autocryptdoc">autocryptdoc</link></quote> for more details.
 (Autocrypt only)
 </para>
 </sect2>
@@ -20454,7 +20454,7 @@ Default: yes</literallayout>
 
 <para>
 This variable controls the use of the GPGME-enabled crypto backends.
-If it is <emphasis>set</emphasis> and NeoMutt was built with gpgme support, the gpgme code for
+If it is <emphasis>set</emphasis> and NeoMutt was built with GPGME support, the gpgme code for
 S/MIME and PGP will be used instead of the classic code.  Note that
 you need to set this option in .neomuttrc; it won't have any effect when
 used interactively.
@@ -26091,7 +26091,7 @@ key.
 <sect2 id="ssl-force-tls">
 <title>ssl_force_tls</title>
 <literallayout>Type: boolean
-Default: yes</literallayout>
+Default: no</literallayout>
 
 <para>
 If this variable is <emphasis>set</emphasis>, NeoMutt will require that all connections
