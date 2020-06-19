@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2020-04-24</releaseinfo>
+    <releaseinfo>version 2020-06-19</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -872,7 +872,7 @@ set sidebar_divider_char = '│'          <emphasis role="comment"># Pretty line
               * = Can be optionally printed if nonzero
             </para>
             <para>
-              † = To use this expandos, you must first:
+              † = To use these expandos, you must first:
             </para>
             <screen>set mail_check_stats</screen>
             <para>
@@ -3987,6 +3987,9 @@ alternates -group me -group work address3
         <arg choice="opt" rep="repeat">
           <replaceable class="parameter">, address</replaceable>
         </arg>
+        <arg choice="opt">
+          <replaceable class="parameter"># comment</replaceable>
+        </arg>
         <command>unalias</command>
         <arg choice="opt" rep="repeat">
           <option>-group</option>
@@ -4023,8 +4026,13 @@ alternates -group me -group work address3
       </para>
 
 <screen>
-alias muttdude me@cs.hmc.edu (Michael Elkins)
-alias theguys manny, moe, jack
+<emphasis role="comment"># Some aliases, one with a comment</emphasis>
+alias alan   Alan Jones &lt;alan@example.com&gt;
+alias briony Briony Williams &lt;bw@example.com&gt;
+alias jim    James Smith &lt;js@example.com&gt; <emphasis role="comment"># Pointy-haired boss</emphasis>
+
+<emphasis role="comment"># An alias that references two other aliases</emphasis>
+alias friends alan, briony
 </screen>
 
       <para>
@@ -4136,8 +4144,8 @@ set alias_file=~/.mail_aliases
       </para>
       <note>
         <para>
-          Missing key sequence in unmacro command means unmacro all macros in menus
-          given in <emphasis>menu</emphasis>.
+          Missing key sequence in unbind command means unibind all bindings in menus
+          given in <emphasis>map</emphasis>.
         </para>
       </note>
       <anchor id="maps" />
@@ -6717,8 +6725,18 @@ set spam_separator=", "
               </group>
               <replaceable class="parameter">variable</replaceable>
             </arg>
+          </group>
+          <arg choice="opt" rep="repeat"></arg>
+          <command>set</command>
+          <group choice="req">
             <arg choice="plain">
               <replaceable class="parameter">variable=value</replaceable>
+            </arg>
+            <arg choice="plain">
+              <replaceable class="parameter">variable+=increment</replaceable>
+            </arg>
+            <arg choice="plain">
+              <replaceable class="parameter">variable-=decrement</replaceable>
             </arg>
           </group>
           <arg choice="opt" rep="repeat"></arg>
@@ -6751,7 +6769,9 @@ set spam_separator=", "
           quadoption. <emphasis>boolean</emphasis> variables can be
           <emphasis>set</emphasis> (true) or <emphasis>unset</emphasis>
           (false). <emphasis>number</emphasis> variables can be assigned
-          a positive integer value. <emphasis>string</emphasis> variables
+          a positive integer value. Value of number variables can be
+          incremented <emphasis>+=</emphasis> and decremented
+          <emphasis>-=</emphasis>. <emphasis>string</emphasis> variables
           consist of any number of printable characters and must be enclosed in
           quotes if they contain spaces or tabs. You may also use the escape
           sequences <quote>\n</quote> and <quote>\t</quote> for newline and
@@ -7840,7 +7860,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               </row>
               <row>
                 <entry>~b <emphasis>EXPR</emphasis></entry>
-                <entry>****</entry>
+                <entry>d)</entry>
                 <entry>
                   messages which contain <emphasis>EXPR</emphasis> in the
                   message body
@@ -7858,7 +7878,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               </row>
               <row>
                 <entry>~B <emphasis>EXPR</emphasis></entry>
-                <entry>****</entry>
+                <entry>d)</entry>
                 <entry>
                   messages which contain <emphasis>EXPR</emphasis>in the whole
                   message
@@ -7978,7 +7998,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               </row>
               <row>
                 <entry>~h <emphasis>EXPR</emphasis></entry>
-                <entry>****</entry>
+                <entry>d)</entry>
                 <entry>
                   messages which contain <emphasis>EXPR</emphasis>in the
                   message header
@@ -8054,7 +8074,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               </row>
               <row>
                 <entry>~m [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
-                <entry>***</entry>
+                <entry>c)</entry>
                 <entry>
                   messages with numbers in the range <emphasis>MIN</emphasis>
                   to <emphasis>MAX</emphasis>
@@ -8062,28 +8082,28 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               </row>
               <row>
                 <entry>~m &lt;[<emphasis>MAX</emphasis>]</entry>
-                <entry>***</entry>
+                <entry>c)</entry>
                 <entry>
                   messages with numbers less than <emphasis>MAX</emphasis>
                 </entry>
               </row>
               <row>
                 <entry>~m &gt;[<emphasis>MIN</emphasis>]</entry>
-                <entry>***</entry>
+                <entry>c)</entry>
                 <entry>
                   messages with numbers greater than <emphasis>MIN</emphasis>
                 </entry>
               </row>
               <row>
                 <entry>~m [<emphasis>M</emphasis>]</entry>
-                <entry>***</entry>
+                <entry>c)</entry>
                 <entry>
                   just message number <emphasis>M</emphasis>
                 </entry>
               </row>
               <row>
                 <entry>~m [<emphasis>MIN</emphasis>],[<emphasis>MAX</emphasis>]</entry>
-                <entry>***</entry>
+                <entry>c)</entry>
                 <entry>
                   messages with offsets (from selected message) in the range
                   <emphasis>MIN</emphasis> to <emphasis>MAX</emphasis>
@@ -8091,7 +8111,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               </row>
               <row>
                 <entry>~M <emphasis>EXPR</emphasis></entry>
-                <entry>****</entry>
+                <entry>d)</entry>
                 <entry>
                    messages which contain a mime Content-Type matching
                    <emphasis>EXPR</emphasis>
@@ -8099,7 +8119,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               </row>
               <row>
                 <entry>~n [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
-                <entry>*</entry>
+                <entry>a)</entry>
                 <entry>
                   messages with a score in the range <emphasis>MIN</emphasis>
                   to <emphasis>MAX</emphasis>
@@ -8223,7 +8243,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               </row>
               <row>
                 <entry>~X [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
-                <entry>*,&#160;****</entry>
+                <entry>a), d)</entry>
                 <entry>
                   messages with <emphasis>MIN</emphasis> to <emphasis>MAX</emphasis> attachments
                 </entry>
@@ -8245,7 +8265,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
               </row>
               <row>
                 <entry>~z [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
-                <entry>*,&#160;**</entry>
+                <entry>a), b)</entry>
                 <entry>
                   messages with a size in the range <emphasis>MIN</emphasis> to
                   <emphasis>MAX</emphasis>
@@ -8321,22 +8341,22 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
           <link linkend="addrgroup">address group</link>.
         </para>
         <para>
-          *) The forms <quote>&lt;[<emphasis>MAX</emphasis>]</quote>,
+          a) The forms <quote>&lt;[<emphasis>MAX</emphasis>]</quote>,
           <quote>&gt;[<emphasis>MIN</emphasis>]</quote>,
           <quote>[<emphasis>MIN</emphasis>]-</quote> and
           <quote>-[<emphasis>MAX</emphasis>]</quote> are allowed, too.
         </para>
         <para>
-          **) The suffixes <quote>K</quote> and <quote>M</quote> are allowed to
+          b) The suffixes <quote>K</quote> and <quote>M</quote> are allowed to
           specify kilobyte and megabyte respectively.
         </para>
         <para>
-          ***) The message number ranges (introduced by <literal>~m</literal>)
+          c) The message number ranges (introduced by <literal>~m</literal>)
           are even more general and powerful than the other types of ranges.
           Read on and see <xref linkend="message-ranges" /> below.
         </para>
         <para>
-          ****) These patterns read each message in, and can therefore be much
+          d) These patterns read each message in, and can therefore be much
           slower.  Over IMAP this will entail downloading each message.  They
           can not be used for <link linkend="score-command">message scoring</link>,
           and it is recommended to avoid using them for index coloring.
@@ -11887,8 +11907,8 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
         </para>
         <para>
           Additionally,
-          <link linkend="header-cache-backend">$header_cache_backend</link> can
-          be used to specify which backend to use. The list of available
+          <link linkend="header-cache-backend">$header_cache_backend</link> must
+          be set to specify which backend to use. The list of available
           backends can be specified at configure time with a set of
           --with-&lt;backend&gt; options. Currently, the following backends are
           supported: bdb, gdbm, kyotocabinet, lmdb, qdbm, rocksdb, tdb,
@@ -19434,7 +19454,7 @@ The default for this option is the currently used neomuttrc file, or
 <sect2 id="alias-format">
 <title>alias_format</title>
 <literallayout>Type: string
-Default: <quote><literal>%4n %2f %t %-10a   %r</literal></quote></literallayout>
+Default: <quote><literal>%3n %f%t %-15a %-56r | %c</literal></quote></literallayout>
 
 <para>
 Specifies the format of the data displayed for the "<link linkend="alias">alias</link>" menu.  The
@@ -19446,6 +19466,8 @@ following <literal>printf(3)</literal>-style sequences are available:
 <tgroup cols="2">
 <tbody>
 <row><entry>%a  </entry><entry>Alias name
+</entry></row>
+<row><entry>%c  </entry><entry>Comment
 </entry></row>
 <row><entry>%f  </entry><entry>Flags - currently, a "d" for an alias marked for deletion
 </entry></row>
@@ -19843,7 +19865,7 @@ Default: <quote><literal>~/.mutt/autocrypt</literal></quote></literallayout>
 
 <para>
 This variable sets where autocrypt files are stored, including the GPG
-  keyring and SQLite database.  See <quote><link linkend="guide/autocryptdoc">autocryptdoc</link></quote> for more details.
+keyring and SQLite database.  See <quote><link linkend="guide/autocryptdoc">autocryptdoc</link></quote> for more details.
 (Autocrypt only)
 </para>
 </sect2>
@@ -20373,6 +20395,8 @@ Default: yes</literallayout>
 <para>
 When set, NeoMutt will display protected headers ("Memory Hole") in the pager,
 and will update the index and header cache with revised headers.
+</para>
+<para>
 Protected headers are stored inside the encrypted or signed part of an
 an email, to prevent disclosure or tampering.
 For more information see https://github.com/autocrypt/memoryhole.
@@ -20428,6 +20452,8 @@ Default: <quote><literal>Encrypted subject</literal></quote></literallayout>
 When <link linkend="crypt-protected-headers-write">$crypt_protected_headers_write</link> is set, and the message is marked
 for encryption, this will be substituted into the Subject field in the
 message headers.
+</para>
+<para>
 To prevent a subject from being substituted, unset this variable, or set it
 to the empty string.
 (Crypto only)
@@ -20442,9 +20468,13 @@ Default: no</literallayout>
 <para>
 When set, NeoMutt will generate protected headers ("Memory Hole") for
 signed and encrypted emails.
+</para>
+<para>
 Protected headers are stored inside the encrypted or signed part of an
 an email, to prevent disclosure or tampering.
 For more information see https://github.com/autocrypt/memoryhole.
+</para>
+<para>
 Currently NeoMutt only supports the Subject header.
 (Crypto only)
 </para>
@@ -21436,7 +21466,31 @@ MH or Maildir folders, see "<link linkend="caching">caching</link>" for details.
 Default: (empty)</literallayout>
 
 <para>
-This variable specifies the header cache backend.
+This variable specifies the header cache backend.  By default it is
+<emphasis>unset</emphasis> so no header caching will be used.
+</para>
+</sect2>
+
+<sect2 id="header-cache-compress-level">
+<title>header_cache_compress_level</title>
+<literallayout>Type: number
+Default: 1</literallayout>
+
+<para>
+When NeoMutt is compiled with lz4, zstd or zlib, this option can be used
+to setup the compression level.
+</para>
+</sect2>
+
+<sect2 id="header-cache-compress-method">
+<title>header_cache_compress_method</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+When NeoMutt is compiled with lz4, zstd or zlib, the header cache backend
+can use these compression methods for compressing the cache files.
+This results in much smaller cache file sizes and may even improve speed.
 </para>
 </sect2>
 
@@ -21767,9 +21821,9 @@ speeds up reading large mailboxes also on fairly good connections.
 Default: <quote><literal>/.</literal></quote></literallayout>
 
 <para>
-This contains the list of characters which you would like to treat
-as folder separators for displaying IMAP paths. In particular it
-helps in using the "=" shortcut for your <emphasis>folder</emphasis> variable.
+This contains the list of characters that NeoMutt will use as folder
+separators for IMAP paths, when no separator is provided on the IMAP
+connection.
 </para>
 </sect2>
 
@@ -23516,8 +23570,9 @@ Default: <quote><literal>%4n %t%f %4l/0x%k %-4a %2c %u</literal></quote></litera
 
 <para>
 This variable allows you to customize the PGP key selection menu to
-your personal taste. This string is similar to <link linkend="index-format">$index_format</link>, but
-has its own set of <literal>printf(3)</literal>-like sequences:
+your personal taste. If <link linkend="crypt-use-gpgme">$crypt_use_gpgme</link> is <emphasis>set</emphasis>, then it applies
+to S/MIME key selection menu also. This string is similar to <link linkend="index-format">$index_format</link>,
+but has its own set of <literal>printf(3)</literal>-like sequences:
 
 </para>
 
@@ -23546,7 +23601,7 @@ has its own set of <literal>printf(3)</literal>-like sequences:
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
-(PGP only)
+(Crypto only) or (PGP only when GPGME disabled)
 </para>
 </sect2>
 
@@ -24311,7 +24366,7 @@ See "<link linkend="query">query</link>" for more information.
 <sect2 id="query-format">
 <title>query_format</title>
 <literallayout>Type: string
-Default: <quote><literal>%4c %t %-25.25a %-25.25n %?e?(%e)?</literal></quote></literallayout>
+Default: <quote><literal>%3c %t %-25.25n %-25.25a | %e</literal></quote></literallayout>
 
 <para>
 This variable describes the format of the "query" menu. The
@@ -26805,6 +26860,8 @@ Default: no</literallayout>
 <para>
 When <emphasis>set</emphasis>, NeoMutt will use the first defined virtual mailbox (see
 virtual-mailboxes) as a spool file.
+</para>
+<para>
 This command is now unnecessary. <link linkend="spoolfile">$spoolfile</link> has been extended to support
 mailbox descriptions as a value.
 </para>
