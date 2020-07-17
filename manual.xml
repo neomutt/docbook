@@ -181,7 +181,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
     <sect1 id="copyright">
       <title>Copyright</title>
       <para>
-        NeoMutt is Copyright © 1996-2019 Michael R. Elkins
+        NeoMutt is Copyright © 1996-2020 Michael R. Elkins
         <email>me@neomutt.org</email> and others.
       </para>
       <para>
@@ -281,8 +281,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       </para>
       <para>
         Besides an interactive mode, NeoMutt can also be used as a command-line
-        tool to send messages. It also supports
-        a <literal>mailx(1)</literal>-compatible interface, see
+        tool to send messages. See
         <xref linkend="tab-commandline-options" /> for a complete list of
         command-line options.
       </para>
@@ -694,7 +693,7 @@ set sidebar_divider_char = '│'          <emphasis role="comment"># Pretty line
               <link linkend="formatstrings-conditionals">conditionals</link>.
             </para>
             <para>
-              The default value is: <literal>%B%* %n</literal>
+              The default value is: <literal>%D%* %n</literal>
             </para>
             <para>
               A more detailed value is:
@@ -2476,6 +2475,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                 Asks for an external Unix command and pipes the current or
                 tagged message(s) to it. The variables
                 <link linkend="pipe-decode">$pipe_decode</link>,
+                <link linkend="pipe-decode-weed">$pipe_decode_weed</link>,
                 <link linkend="pipe-split">$pipe_split</link>,
                 <link linkend="pipe-sep">$pipe_sep</link> and
                 <link linkend="wait-key">$wait_key</link> control the exact
@@ -2941,11 +2941,11 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
             <emphasis>&lt;id&gt;</emphasis> ]
           </para>
           <para>
-            <quote>E</quote> selects encryption, <quote>S</quote> selects
-            signing and <quote>S&lt;id&gt;</quote> selects signing with the
-            given key, setting <link linkend="pgp-sign-as">$pgp_sign_as</link>
-            for the duration of the message composition session. The selection
-            can later be changed in the compose menu.
+            <quote>E</quote> selects encryption, <quote>S</quote> selects signing
+            and <quote>S&lt;id&gt;</quote> selects signing with the given key,
+            setting <link linkend="pgp-sign-as">$pgp_sign_as</link> for the
+            duration of the message composition session. The selection can later
+            be changed in the compose menu.
           </para>
         </sect3>
 
@@ -4457,6 +4457,55 @@ bind index gg first-entry
 </screen>
 
       </sect2>
+
+      <sect2 id="stty">
+        <title>Terminal Keybindings</title>
+        <para>
+          Some key bindings are controlled by the terminal, and so by
+          default can't be bound inside NeoMutt.  These may include
+          <literal>^C</literal>, <literal>^\</literal>, <literal>^Q</literal>,
+          <literal>^S</literal>, <literal>^Z</literal>, and on BSD/Mac
+          <literal>^Y</literal>.  These terminal settings can be viewed and
+          changed using the <literal>stty</literal> program.
+        </para>
+        <para>
+          <quote><literal>stty -a</literal></quote> will list the bound
+          characters (not all of them affect NeoMutt), and what actions they
+          take when pressed.  For example,
+          you may see <quote><literal>intr = ^C</literal></quote> in its
+          output.  This means typing <literal>^C</literal> will send an
+          interrupt signal.  <quote><literal>quit = ^\</literal></quote>
+          means typing <literal>^\</literal> (commonly also
+          <literal>^4</literal>) will send a quit signal.
+        </para>
+        <para>
+          To unbind a key from an action, you invoke <quote>stty action
+          undef</quote>.  For example, <quote><literal>stty quit
+          undef</literal></quote> will unbind <literal>^\</literal> (and
+          <literal>^4</literal>) from sending the quit signal.  Once unbound
+          (e.g, by placing that line in your .bashrc, or in a NeoMutt wrapper
+          script/function) you can use the key sequence in your NeoMutt
+          bindings.
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="cd">
+      <title>Changing the current working directory</title>
+      <para>Usage:</para>
+      <cmdsynopsis>
+        <command>cd</command>
+        <arg choice="plain">
+          <replaceable class="parameter">directory</replaceable>
+        </arg>
+      </cmdsynopsis>
+      <para>
+        The <literal>cd</literal> command changes NeoMutt's current working directory.
+        This affects commands and functions like <literal>source</literal>,
+        <literal>change-folder</literal>, and <literal>save-entry</literal> that use
+        relative paths. Using <literal>cd</literal> without directory changes to your
+        home directory.
+      </para>
     </sect1>
 
     <sect1 id="charset-hook">
@@ -13503,7 +13552,7 @@ startup-hook 'echo `action.sh ARGS`'
         </para>
         <para>
           This feature implements a hook that is called when NeoMutt shuts
-          down, but before closing the first mailbox. This is most likely to
+          down, but before closing the last mailbox. This is most likely to
           be useful to users of <link linkend="feature/notmuch">notmuch</link>.
         </para>
       </sect2>
@@ -16377,7 +16426,7 @@ set sort_browser="reverse-size"
             <row>
               <entry><literal>sidebar_format</literal></entry>
               <entry>string</entry>
-              <entry><literal>%B%* %n</literal></entry>
+              <entry><literal>%D%* %n</literal></entry>
             </row>
             <row>
               <entry><literal>sidebar_indent_string</literal></entry>
@@ -17362,7 +17411,7 @@ bind index D purge-message
         your muttrc.  The first time NeoMutt is run after that, you will be
         prompted to create
         <link linkend="autocrypt-dir">$autocrypt_dir</link>.  NeoMutt will then
-        automatically create an sqlite3 database and gpg keyring in that
+        automatically create an sqlite3 database and GPG keyring in that
         directory.  Note since these files should be considered private,
         NeoMutt will create this directory with mode
         <literal>700</literal>.  If you create the directory manually,
@@ -17635,7 +17684,7 @@ bind index D purge-message
         </listitem>
         <listitem>
           <para>
-            When NeoMutt creates an account from a gpg key, it exports the
+            When NeoMutt creates an account from a GPG key, it exports the
             public key, base64 encodes it, and stores that value in the
             sqlite3 database.  The value is then used in the Autocrypt
             header added to outgoing emails.  The ECC keys NeoMutt creates
@@ -18107,13 +18156,6 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-x</entry>
-              <entry>
-                Simulate the <emphasis role="bold">mailx</emphasis>(1) send
-                mode
-              </entry>
-            </row>
-            <row>
               <entry>-y</entry>
               <entry>
                 Start NeoMutt with a listing of all defined mailboxes
@@ -18478,6 +18520,14 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
             </arg>
             <arg choice="plain">
               <replaceable class="parameter">function</replaceable>
+            </arg>
+          </cmdsynopsis>
+        </listitem>
+        <listitem>
+          <cmdsynopsis>
+            <command><link linkend="cd">cd</link></command>
+            <arg choice="plain">
+              <replaceable class="parameter">directory</replaceable>
             </arg>
           </cmdsynopsis>
         </listitem>
@@ -20289,6 +20339,17 @@ will be saved for later references.  Also see <link linkend="record">$record</li
 </para>
 </sect2>
 
+<sect2 id="copy-decode-weed">
+<title>copy_decode_weed</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+Controls whether NeoMutt will weed headers when invoking the
+<literal>&lt;decode-copy&gt;</literal> or <literal>&lt;decode-save&gt;</literal> functions.
+</para>
+</sect2>
+
 <sect2 id="crypt-autoencrypt">
 <title>crypt_autoencrypt</title>
 <literallayout>Type: boolean
@@ -20444,12 +20505,13 @@ Default: yes</literallayout>
 
 <para>
 When set, NeoMutt will display protected headers ("Memory Hole") in the pager,
+When set, NeoMutt will display protected headers in the pager,
 and will update the index and header cache with revised headers.
 </para>
 <para>
 Protected headers are stored inside the encrypted or signed part of an
 an email, to prevent disclosure or tampering.
-For more information see https://github.com/autocrypt/memoryhole.
+For more information see https://github.com/autocrypt/protected-headers
 Currently NeoMutt only supports the Subject header.
 </para>
 <para>
@@ -20496,7 +20558,7 @@ you enable this variable.
 <sect2 id="crypt-protected-headers-subject">
 <title>crypt_protected_headers_subject</title>
 <literallayout>Type: string
-Default: <quote><literal>Encrypted subject</literal></quote></literallayout>
+Default: <quote><literal>...</literal></quote></literallayout>
 
 <para>
 When <link linkend="crypt-protected-headers-write">$crypt_protected_headers_write</link> is set, and the message is marked
@@ -20516,13 +20578,13 @@ to the empty string.
 Default: no</literallayout>
 
 <para>
-When set, NeoMutt will generate protected headers ("Memory Hole") for
-signed and encrypted emails.
+When set, NeoMutt will generate protected headers for signed and encrypted
+emails.
 </para>
 <para>
 Protected headers are stored inside the encrypted or signed part of an
 an email, to prevent disclosure or tampering.
-For more information see https://github.com/autocrypt/memoryhole.
+For more information see https://github.com/autocrypt/protected-headers
 </para>
 <para>
 Currently NeoMutt only supports the Subject header.
@@ -20944,16 +21006,6 @@ This value is ignored if <link linkend="use-envelope-from">$use_envelope_from</l
 </para>
 </sect2>
 
-<sect2 id="escape">
-<title>escape</title>
-<literallayout>Type: string
-Default: <quote><literal>~</literal></quote></literallayout>
-
-<para>
-Escape character to use for functions in the built-in editor.
-</para>
-</sect2>
-
 <sect2 id="external-search-command">
 <title>external_search_command</title>
 <literallayout>Type: command
@@ -21107,7 +21159,7 @@ If set, flagged messages can't be deleted.
 
 <sect2 id="folder">
 <title>folder</title>
-<literallayout>Type: string
+<literallayout>Type: mailbox
 Default: <quote><literal>~/Mail</literal></quote></literallayout>
 
 <para>
@@ -21856,7 +21908,7 @@ mileage may vary.
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, mutt will use the COMPRESS=DEFLATE extension (RFC4978)
+When <emphasis>set</emphasis>, NeoMutt will use the COMPRESS=DEFLATE extension (RFC4978)
 if advertised by the server.
 </para>
 <para>
@@ -21883,10 +21935,11 @@ connection.
 Default: 0</literallayout>
 
 <para>
-When set to a value greater than 0, new headers will be downloaded
-in sets of this size.  If you have a very large mailbox, this might
-prevent a timeout and disconnect when opening the mailbox, by sending
-a FETCH per set of this size instead of a single FETCH for all new
+When set to a value greater than 0, new headers will be
+downloaded in groups of this many headers per request.  If you
+have a very large mailbox, this might prevent a timeout and
+disconnect when opening the mailbox, by sending a FETCH per set
+of this many headers, instead of a single FETCH for all new
 headers.
 </para>
 </sect2>
@@ -22609,7 +22662,7 @@ will be shown. The match is always case-sensitive.
 
 <sect2 id="mbox">
 <title>mbox</title>
-<literallayout>Type: string
+<literallayout>Type: mailbox
 Default: <quote><literal>~/mbox</literal></quote></literallayout>
 
 <para>
@@ -23360,12 +23413,9 @@ the pager.  The current message, unless near the top or bottom of the
 folder, will be roughly one third of the way down this mini-index,
 giving the reader the context of a few messages before and after the
 message.  This is useful, for example, to determine how many messages
-remain to be read in the current thread.  One of the lines is reserved
-for the status bar from the index, so a setting of 6
-will only show 5 lines of the actual index.  A value of 0 results in
-no index being shown.  If the number of messages in the current folder
-is less than <link linkend="pager-index-lines">$pager_index_lines</link>, then the index will only use as
-many lines as it needs.
+remain to be read in the current thread.  A value of 0 results in no index
+being shown.  If the number of messages in the current folder is less than
+<link linkend="pager-index-lines">$pager_index_lines</link>, then the index will only use as many lines as it needs.
 </para>
 </sect2>
 
@@ -23378,6 +23428,31 @@ Default: no</literallayout>
 When <emphasis>set</emphasis>, the internal-pager will <emphasis role="bold">not</emphasis> move to the next message
 when you are at the end of a message and invoke the <literal>&lt;next-page&gt;</literal>
 function.
+</para>
+</sect2>
+
+<sect2 id="pattern-format">
+<title>pattern_format</title>
+<literallayout>Type: string
+Default: <quote><literal>%2n %-15e  %d</literal></quote></literallayout>
+
+<para>
+This variable describes the format of the <quote>pattern completion</quote> menu. The
+following <literal>printf(3)</literal>-style sequences are understood:
+
+</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry>%d  </entry><entry>pattern description
+</entry></row>
+<row><entry>%e  </entry><entry>pattern expression
+</entry></row>
+<row><entry>%n  </entry><entry>index number
+</entry></row></tbody></tgroup></informaltable>
+
+<para>
 </para>
 </sect2>
 
@@ -24033,10 +24108,24 @@ possible <literal>printf(3)</literal>-like sequences.
 Default: no</literallayout>
 
 <para>
-Used in connection with the <literal>&lt;pipe-message&gt;</literal> command.  When <emphasis>unset</emphasis>,
+Used in connection with the <literal>&lt;pipe-message&gt;</literal> function.  When <emphasis>unset</emphasis>,
 NeoMutt will pipe the messages without any preprocessing. When <emphasis>set</emphasis>, NeoMutt
-will weed headers and will attempt to decode the messages
-first.
+will attempt to decode the messages first.
+</para>
+<para>
+Also see <link linkend="pipe-decode-weed">$pipe_decode_weed</link>, which controls whether headers will
+be weeded when this is <emphasis>set</emphasis>.
+</para>
+</sect2>
+
+<sect2 id="pipe-decode-weed">
+<title>pipe_decode_weed</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+For <literal>&lt;pipe-message&gt;</literal>, when <link linkend="pipe-decode">$pipe_decode</link> is set, this further
+controls whether NeoMutt will weed headers.
 </para>
 </sect2>
 
@@ -24277,7 +24366,7 @@ Please use <link linkend="pgp-default-key">$pgp_default_key</link> or <link link
 
 <sect2 id="postponed">
 <title>postponed</title>
-<literallayout>Type: string
+<literallayout>Type: mailbox
 Default: <quote><literal>~/postponed</literal></quote></literallayout>
 
 <para>
@@ -24355,13 +24444,28 @@ This specifies the command pipe that should be used to print messages.
 Default: yes</literallayout>
 
 <para>
-Used in connection with the <literal>&lt;print-message&gt;</literal> command.  If this
+Used in connection with the <literal>&lt;print-message&gt;</literal> function.  If this
 option is <emphasis>set</emphasis>, the message is decoded before it is passed to the
 external command specified by <link linkend="print-command">$print_command</link>.  If this option
 is <emphasis>unset</emphasis>, no processing will be applied to the message when
 printing it.  The latter setting may be useful if you are using
 some advanced printer filter which is able to properly format
 e-mail messages for printing.
+</para>
+<para>
+Also see <link linkend="print-decode-weed">$print_decode_weed</link>, which controls whether headers will
+be weeded when this is <emphasis>set</emphasis>.
+</para>
+</sect2>
+
+<sect2 id="print-decode-weed">
+<title>print_decode_weed</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+For <literal>&lt;print-message&gt;</literal>, when <link linkend="print-decode">$print_decode</link> is set, this
+further controls whether NeoMutt will weed headers.
 </para>
 </sect2>
 
@@ -24371,7 +24475,7 @@ e-mail messages for printing.
 Default: no</literallayout>
 
 <para>
-Used in connection with the <literal>&lt;print-message&gt;</literal> command.  If this option
+Used in connection with the <literal>&lt;print-message&gt;</literal> function.  If this option
 is <emphasis>set</emphasis>, the command specified by <link linkend="print-command">$print_command</link> is executed once for
 each message which is to be printed.  If this option is <emphasis>unset</emphasis>,
 the command specified by <link linkend="print-command">$print_command</link> is executed only once, and
@@ -24487,18 +24591,6 @@ Match detection may be overridden by the <link linkend="smileys">$smileys</link>
 </para>
 </sect2>
 
-<sect2 id="toggle-quoted-show-levels">
-<title>toggle_quoted_show_levels</title>
-<literallayout>Type: number
-Default: 0</literallayout>
-
-<para>
-Quoted text may be filtered out using the <literal>&lt;toggle-quoted&gt;</literal> command.
-If set to a number greater than 0, then the <literal>&lt;toggle-quoted&gt;</literal>
-command will only filter out quote levels above this number.
-</para>
-</sect2>
-
 <sect2 id="read-inc">
 <title>read_inc</title>
 <literallayout>Type: number
@@ -24567,7 +24659,7 @@ Also see <link linkend="postponed">$postponed</link> variable.
 
 <sect2 id="record">
 <title>record</title>
-<literallayout>Type: string
+<literallayout>Type: mailbox
 Default: <quote><literal>~/sent</literal></quote></literallayout>
 
 <para>
@@ -25161,7 +25253,7 @@ Set this to indent mailboxes in the sidebar.
 <sect2 id="sidebar-format">
 <title>sidebar_format</title>
 <literallayout>Type: string
-Default: <quote><literal>%B%*  %n</literal></quote></literallayout>
+Default: <quote><literal>%D%*  %n</literal></quote></literallayout>
 
 <para>
 This variable allows you to customize the sidebar display. This string is
@@ -25324,7 +25416,7 @@ names relative to the previous name. Here's an example:
 Default: order</literallayout>
 
 <para>
-Specifies how to sort entries in the file browser.  By default, the
+Specifies how to sort mailbox entries in the sidebar.  By default, the
 entries are sorted alphabetically.  Valid values:
 
 </para>
@@ -25342,7 +25434,7 @@ entries are sorted alphabetically.  Valid values:
 
 <para>
 You may optionally use the "reverse-" prefix to specify reverse sorting
-order (example: "<literal>set sort_browser=reverse-date</literal>").
+order (example: "<literal>set sidebar_sort_method=reverse-alpha</literal>").
 </para>
 </sect2>
 
@@ -25947,19 +26039,6 @@ if you are the only one who can read the file.
 </para>
 </sect2>
 
-<sect2 id="smtp-user">
-<title>smtp_user</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-The username for the SMTP server.
-</para>
-<para>
-This variable defaults to your user name on the local machine.
-</para>
-</sect2>
-
 <sect2 id="smtp-url">
 <title>smtp_url</title>
 <literallayout>Type: string
@@ -25980,6 +26059,19 @@ variable.
 </para>
 <para>
 Also see <link linkend="write-bcc">$write_bcc</link>.
+</para>
+</sect2>
+
+<sect2 id="smtp-user">
+<title>smtp_user</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+The username for the SMTP server.
+</para>
+<para>
+This variable defaults to your user name on the local machine.
 </para>
 </sect2>
 
@@ -26136,7 +26228,7 @@ separator.
 
 <sect2 id="spoolfile">
 <title>spoolfile</title>
-<literallayout>Type: string
+<literallayout>Type: mailbox
 Default: (empty)</literallayout>
 
 <para>
@@ -26712,9 +26804,21 @@ Controls the character used to indicate mail addressed to you.
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
+<sect2 id="toggle-quoted-show-levels">
+<title>toggle_quoted_show_levels</title>
+<literallayout>Type: number
+Default: 0</literallayout>
+
+<para>
+Quoted text may be filtered out using the <literal>&lt;toggle-quoted&gt;</literal> command.
+If set to a number greater than 0, then the <literal>&lt;toggle-quoted&gt;</literal>
+command will only filter out quote levels above this number.
+</para>
+</sect2>
+
 <sect2 id="trash">
 <title>trash</title>
-<literallayout>Type: string
+<literallayout>Type: mailbox
 Default: (empty)</literallayout>
 
 <para>
@@ -26986,7 +27090,10 @@ Default: yes</literallayout>
 
 <para>
 When <emphasis>set</emphasis>, NeoMutt will weed headers when displaying, forwarding,
-printing, or replying to messages.
+or replying to messages.
+</para>
+<para>
+Also see <link linkend="copy-decode-weed">$copy_decode_weed</link>, <link linkend="pipe-decode-weed">$pipe_decode_weed</link>, <link linkend="print-decode-weed">$print_decode_weed</link>.
 </para>
 </sect2>
 
@@ -27043,15 +27150,15 @@ When <emphasis>set</emphasis>, searches will wrap around the first (or last) ite
 Default: no</literallayout>
 
 <para>
-Controls whether mutt writes out the <quote>Bcc:</quote> header when
+Controls whether NeoMutt writes out the <quote>Bcc:</quote> header when
 preparing messages to be sent.  Some MTAs, such as Exim and
 Courier, do not strip the <quote>Bcc:</quote> header; so it is advisable to
 leave this unset unless you have a particular need for the header
 to be in the sent message.
 </para>
 <para>
-If mutt is set to deliver directly via SMTP(see <link linkend="smtp-url">$smtp_url</link>),
-this option does nothing: mutt will never write out the <quote>Bcc:</quote>
+If NeoMutt is set to deliver directly via SMTP(see <link linkend="smtp-url">$smtp_url</link>),
+this option does nothing: NeoMutt will never write out the <quote>Bcc:</quote>
 header in this case.
 </para>
 <para>
@@ -27753,9 +27860,9 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;eol&gt;</literal></entry><entry>^E</entry><entry>jump to the end of the line</entry></row>
 <row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>^F</entry><entry>move the cursor one character to the right</entry></row>
 <row><entry><literal>&lt;forward-word&gt;</literal></entry><entry>Esc f</entry><entry>move the cursor to the end of the word</entry></row>
-<row><entry><literal>&lt;history-down&gt;</literal></entry><entry></entry><entry>scroll down through the history list</entry></row>
+<row><entry><literal>&lt;history-down&gt;</literal></entry><entry>^N</entry><entry>scroll down through the history list</entry></row>
 <row><entry><literal>&lt;history-search&gt;</literal></entry><entry>^R</entry><entry>search through the history list</entry></row>
-<row><entry><literal>&lt;history-up&gt;</literal></entry><entry></entry><entry>scroll up through the history list</entry></row>
+<row><entry><literal>&lt;history-up&gt;</literal></entry><entry>^P</entry><entry>scroll up through the history list</entry></row>
 <row><entry><literal>&lt;kill-eol&gt;</literal></entry><entry>^K</entry><entry>delete chars from cursor to end of line</entry></row>
 <row><entry><literal>&lt;kill-eow&gt;</literal></entry><entry>Esc d</entry><entry>delete chars from the cursor to the end of the word</entry></row>
 <row><entry><literal>&lt;kill-line&gt;</literal></entry><entry>^U</entry><entry>delete all chars on the line</entry></row>
@@ -27814,7 +27921,8 @@ bindings for all menus (except as noted).
         Mark Holloman, Andreas Holzmann, Marco d'Itri, Björn Jacke,
         Byrial Jensen, David Jeske, Christophe Kalt, Tommi Komulainen,
         Felix von Leitner (a.k.a <quote>Fefe</quote>), Brandon Long,
-        Jimmy Mäkelä, Lars Marowsky-Bree, Thomas <quote>Mike</quote> Michlmayr,
+        Jimmy Mäkelä, Lars Marowsky-Bree, Kevin J. McCarthy,
+        Thomas <quote>Mike</quote> Michlmayr,
         Andrew W. Nosenko, David O'Brien, Clint Olsen, Park Myeong Seok,
         Thomas Parmelan, Ollivier Robert, Thomas Roessler, Roland Rosenfeld,
         Rocco Rutte, TAKIZAWA Takashi, Allain Thivillon, Gero Treuner,
