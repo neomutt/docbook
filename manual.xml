@@ -8283,6 +8283,13 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 </entry>
               </row>
               <row>
+                <entry>~w <emphasis>EXPR</emphasis></entry>
+                <entry></entry>
+                <entry>
+                  newsgroups matching EXPR
+                </entry>
+              </row>
+              <row>
                 <entry>~x <emphasis>EXPR</emphasis></entry>
                 <entry></entry>
                 <entry>
@@ -18004,6 +18011,12 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
+              <entry>-D -O</entry>
+              <entry>
+                Like <emphasis role="bold">-D</emphasis>, but show one-liner documentation
+              </entry>
+            </row>
+            <row>
               <entry>-D -S</entry>
               <entry>
                 Like <emphasis role="bold">-D</emphasis>, but hide the value of
@@ -18127,7 +18140,8 @@ neomutt -a image.jpg *.png -- address1 address2
               <entry>
                 Query a configuration <literal>variable</literal> and print its
                 value to stdout (after the config has been read and any
-                commands executed)
+                commands executed).  Adding <literal>-O</literal> will display
+                one-liner documentation.
               </entry>
             </row>
             <row>
@@ -19923,7 +19937,7 @@ Default: no</literallayout>
 <para>
 When <emphasis>set</emphasis>, enables autocrypt, which provides
 passive encryption protection with keys exchanged via headers.
-See <quote><link linkend="guide/autocryptdoc">autocryptdoc</link></quote> for more details.
+See "<link linkend="guide/autocryptdoc">autocryptdoc</link>" for more details.
 (Autocrypt only)
 </para>
 </sect2>
@@ -19934,7 +19948,7 @@ See <quote><link linkend="guide/autocryptdoc">autocryptdoc</link></quote> for mo
 Default: <quote><literal>%4n %-30a %20p %10s</literal></quote></literallayout>
 
 <para>
-This variable describes the format of the <quote>autocrypt account</quote> menu.
+This variable describes the format of the "autocrypt account" menu.
 The following <literal>printf(3)</literal>-style sequences are understood
 
 </para>
@@ -19965,7 +19979,7 @@ Default: <quote><literal>~/.mutt/autocrypt</literal></quote></literallayout>
 
 <para>
 This variable sets where autocrypt files are stored, including the GPG
-keyring and SQLite database.  See <quote><link linkend="guide/autocryptdoc">autocryptdoc</link></quote> for more details.
+  keyring and SQLite database.  See "<link linkend="guide/autocryptdoc">autocryptdoc</link>" for more details.
 (Autocrypt only)
 </para>
 </sect2>
@@ -21299,10 +21313,10 @@ Default: ask-yes</literallayout>
 
 <para>
 When forwarding inline (i.e. <link linkend="mime-forward">$mime_forward</link> <emphasis>unset</emphasis> or
-answered with <quote>no</quote> and <link linkend="forward-decode">$forward_decode</link> <emphasis>set</emphasis>), attachments
+answered with "no" and <link linkend="forward-decode">$forward_decode</link> <emphasis>set</emphasis>), attachments
 which cannot be decoded in a reasonable manner will be attached
 to the newly composed message if this quadoption is <emphasis>set</emphasis> or
-answered with <quote>yes</quote>.
+answered with "yes".
 </para>
 </sect2>
 
@@ -21570,29 +21584,6 @@ Default: (empty)</literallayout>
 <para>
 This variable specifies the header cache backend.  By default it is
 <emphasis>unset</emphasis> so no header caching will be used.
-</para>
-</sect2>
-
-<sect2 id="header-cache-compress-level">
-<title>header_cache_compress_level</title>
-<literallayout>Type: number
-Default: 1</literallayout>
-
-<para>
-When NeoMutt is compiled with lz4, zstd or zlib, this option can be used
-to setup the compression level.
-</para>
-</sect2>
-
-<sect2 id="header-cache-compress-method">
-<title>header_cache_compress_method</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-When NeoMutt is compiled with lz4, zstd or zlib, the header cache backend
-can use these compression methods for compressing the cache files.
-This results in much smaller cache file sizes and may even improve speed.
 </para>
 </sect2>
 
@@ -22367,7 +22358,7 @@ Listed in <link linkend="to-chars">$to_chars</link>.
 <row><entry>%zt </entry><entry>Message tag flags
 </entry></row>
 <row><entry>%@name@ </entry><entry>insert and evaluate format-string from the matching
-<quote><link linkend="index-format-hook">index-format-hook</link></quote> command
+"<link linkend="index-format-hook">index-format-hook</link>" command
 </entry></row>
 <row><entry>%{fmt} </entry><entry>the date and time of the message is converted to sender's
 time zone, and "fmt" is expanded by the library function
@@ -22395,8 +22386,8 @@ format can be modified based on how old a message is.  See the section on
 "Conditional Dates" for an explanation and examples
 </para>
 <para>
-Note that for mbox/mmdf, <quote>%l</quote> applies to the unprocessed message, and
-for maildir/mh, the value comes from the <quote>Lines:</quote> header field when
+Note that for mbox/mmdf, "%l" applies to the unprocessed message, and
+for maildir/mh, the value comes from the "Lines:" header field when
 present (the meaning is normally the same). Thus the value depends on
 the encodings used in the different parts of the message and has little
 meaning in practice.
@@ -22412,7 +22403,7 @@ rightward text.
 </para>
 <para>
 Note that these expandos are supported in
-<quote><link linkend="save-hook">save-hook</link></quote>, <quote><link linkend="fcc-hook">fcc-hook</link></quote> and <quote><link linkend="fcc-save-hook">fcc-save-hook</link></quote>, too.
+"<link linkend="save-hook">save-hook</link>", "<link linkend="fcc-hook">fcc-hook</link>" and "<link linkend="fcc-save-hook">fcc-save-hook</link>", too.
 </para>
 </sect2>
 
@@ -22541,7 +22532,7 @@ Default: <quote><literal>~/.mailcap:/usr/share/neomutt/mailcap:/etc/mailcap:/etc
 <para>
 This variable specifies which files to consult when attempting to
 display MIME bodies not directly supported by NeoMutt.  The default value
-is generated during startup: see the <quote><link linkend="mailcap">mailcap</link></quote> section of the manual.
+is generated during startup: see the "<link linkend="mailcap">mailcap</link>" section of the manual.
 </para>
 <para>
 <link linkend="mailcap-path">$mailcap_path</link> is overridden by the environment variable <literal>$MAILCAPS</literal>.
@@ -23437,7 +23428,7 @@ function.
 Default: <quote><literal>%2n %-15e  %d</literal></quote></literallayout>
 
 <para>
-This variable describes the format of the <quote>pattern completion</quote> menu. The
+This variable describes the format of the "pattern completion" menu. The
 following <literal>printf(3)</literal>-style sequences are understood:
 
 </para>
@@ -24918,6 +24909,7 @@ to save attachments to files named like:
 
 <screen>
 =?iso-8859-1?Q?file=5F=E4=5F991116=2Ezip?=
+=?utf-8?Q?z=C4=99ta.png?=
 </screen><para>
 When this variable is <emphasis>set</emphasis> interactively, the change won't be
 active until you change folders.
@@ -24925,7 +24917,7 @@ active until you change folders.
 <para>
 Note that this use of RFC2047's encoding is explicitly
 prohibited by the standard, but nevertheless encountered in the
-wild.
+wild and produced by, e.g., Outlook.
 </para>
 <para>
 Also note that setting this parameter will <emphasis>not</emphasis> have the effect
@@ -27150,20 +27142,20 @@ When <emphasis>set</emphasis>, searches will wrap around the first (or last) ite
 Default: no</literallayout>
 
 <para>
-Controls whether NeoMutt writes out the <quote>Bcc:</quote> header when
+Controls whether NeoMutt writes out the "Bcc:" header when
 preparing messages to be sent.  Some MTAs, such as Exim and
-Courier, do not strip the <quote>Bcc:</quote> header; so it is advisable to
+Courier, do not strip the "Bcc:" header; so it is advisable to
 leave this unset unless you have a particular need for the header
 to be in the sent message.
 </para>
 <para>
 If NeoMutt is set to deliver directly via SMTP(see <link linkend="smtp-url">$smtp_url</link>),
-this option does nothing: NeoMutt will never write out the <quote>Bcc:</quote>
+this option does nothing: NeoMutt will never write out the "Bcc:"
 header in this case.
 </para>
 <para>
 Note this option only affects the sending of messages.  Fcc'ed
-copies of a message will always contain the <quote>Bcc:</quote> header if
+copies of a message will always contain the "Bcc:" header if
 one exists.
 </para>
 </sect2>
