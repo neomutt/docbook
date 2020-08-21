@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2020-06-26</releaseinfo>
+    <releaseinfo>version 2020-08-21</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -22294,7 +22294,7 @@ The following sequences are defined in NeoMutt:
 <row><entry>%K </entry><entry>The list to which the letter was sent (if any; otherwise: empty)
 </entry></row>
 <row><entry>%L </entry><entry>If an address in the "To:" or "Cc:" header field matches an address
-Defined by the users "<link linkend="subscribe">subscribe</link>" command, this displays
+Defined by the user's "<link linkend="subscribe">subscribe</link>" command, this displays
 "To &lt;list-name&gt;", otherwise the same as %F
 </entry></row>
 <row><entry>%l </entry><entry>number of lines in the unprocessed message (may not work with
