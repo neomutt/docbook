@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2020-08-21</releaseinfo>
+    <releaseinfo>version 2020-09-25</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -1069,7 +1069,7 @@ set sidebar_indent_string="  "          <emphasis role="comment"># Indent with t
 
 <screen>
 set sidebar_new_mail_only               <emphasis role="comment"># Only mailboxes with new/flagged email</emphasis>
-sidebar_whitelist fruit fruit/apple     <emphasis role="comment"># Always display these two mailboxes</emphasis>
+sidebar_whitelist +fruit +fruit/apple   <emphasis role="comment"># Always display these two mailboxes</emphasis>
 </screen>
 
           </sect4>
@@ -6814,23 +6814,27 @@ set spam_separator=", "
         <para>
           This command is used to set (and unset)
           <link linkend="variables">configuration variables</link>. There are
-          four basic types of variables: boolean, number, string and
-          quadoption. <emphasis>boolean</emphasis> variables can be
+          four basic types of variables: boolean, number, string, string list
+          and quadoption. <emphasis>boolean</emphasis> variables can be
           <emphasis>set</emphasis> (true) or <emphasis>unset</emphasis>
           (false). <emphasis>number</emphasis> variables can be assigned
           a positive integer value. Value of number variables can be
           incremented <emphasis>+=</emphasis> and decremented
-          <emphasis>-=</emphasis>. <emphasis>string</emphasis> variables
+          <emphasis>-=</emphasis>. <emphasis>String list</emphasis> variables
+          use <emphasis>+=</emphasis> for appending increment to the string list
+          and <emphasis>-=</emphasis> for removal decrement from the string list.
+          <emphasis>string</emphasis> variables
           consist of any number of printable characters and must be enclosed in
           quotes if they contain spaces or tabs. You may also use the escape
           sequences <quote>\n</quote> and <quote>\t</quote> for newline and
-          tab, respectively. <emphasis>quadoption</emphasis> variables are
-          used to control whether or not to be prompted for certain actions, or
-          to specify a default action. A value of <emphasis>yes</emphasis>
-          will cause the action to be carried out automatically as if you had
-          answered yes to the question. Similarly, a value of
-          <emphasis>no</emphasis> will cause the action to be carried out as if
-          you had answered <quote>no.</quote> A value of
+          tab, respectively. Content of a <emphasis>string</emphasis> variable
+          can be extended using <emphasis>+=</emphasis>.
+          <emphasis>quadoption</emphasis> variables are used to control whether
+          or not to be prompted for certain actions, or to specify a default action.
+          A value of <emphasis>yes</emphasis> will cause the action to be carried
+          out automatically as if you had answered yes to the question. Similarly,
+          a value of <emphasis>no</emphasis> will cause the action to be carried
+          out as if you had answered <quote>no.</quote> A value of
           <emphasis>ask-yes</emphasis> will cause a prompt with a default
           answer of <quote>yes</quote> and <emphasis>ask-no</emphasis> will
           provide a default answer of <quote>no.</quote>
@@ -7886,7 +7890,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
           (<literal>limit</literal>, <literal>tag-pattern</literal>,
           <literal>delete-pattern</literal>, etc.).
           <xref linkend="tab-patterns" /> shows several ways to select
-          messages.
+          messages while <xref linkend="tab-patterns-alias" /> shows ways of selecting aliases.
         </para>
 
         <table id="tab-patterns">
@@ -8390,6 +8394,46 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
             </tbody>
           </tgroup>
         </table>
+
+        <table id="tab-patterns-alias">
+          <title>Alias pattern modifiers</title>
+          <tgroup cols="3">
+            <thead>
+              <row>
+                <entry>Pattern modifier</entry>
+                <entry>Notes</entry>
+                <entry>Description</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>~c <emphasis>EXPR</emphasis></entry>
+                <entry></entry>
+                <entry>
+                  aliases which contain <emphasis>EXPR</emphasis> in the
+                  alias comment
+                </entry>
+              </row>
+              <row>
+                <entry>~f <emphasis>EXPR</emphasis></entry>
+                <entry></entry>
+                <entry>
+                  aliases which contain <emphasis>EXPR</emphasis> in the
+                  alias name (<emphasis>From</emphasis> part of alias)
+                </entry>
+              </row>
+              <row>
+                <entry>~t <emphasis>EXPR</emphasis></entry>
+                <entry></entry>
+                <entry>
+                  aliases which contain <emphasis>EXPR</emphasis> in the
+                  alias address (<emphasis>To</emphasis> part of alias)
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
         <para>
           Where <emphasis>EXPR</emphasis> is a
           <link linkend="regex">regular expression</link>, and
@@ -19979,7 +20023,7 @@ Default: <quote><literal>~/.mutt/autocrypt</literal></quote></literallayout>
 
 <para>
 This variable sets where autocrypt files are stored, including the GPG
-  keyring and SQLite database.  See "<link linkend="guide/autocryptdoc">autocryptdoc</link>" for more details.
+keyring and SQLite database.  See "<link linkend="guide/autocryptdoc">autocryptdoc</link>" for more details.
 (Autocrypt only)
 </para>
 </sect2>
@@ -20273,6 +20317,17 @@ set of <literal>printf(3)</literal>-like sequences:
 <para>
 See the text describing the <link linkend="status-format">$status_format</link> option for more
 information on how to set <link linkend="compose-format">$compose_format</link>.
+</para>
+</sect2>
+
+<sect2 id="compose-show-user-headers">
+<title>compose_show_user_headers</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, Neomutt will display user-defined headers (set via <link linkend="my-hdr">my_hdr</link>
+or from editing with edit-headers).
 </para>
 </sect2>
 
@@ -21584,6 +21639,29 @@ Default: (empty)</literallayout>
 <para>
 This variable specifies the header cache backend.  By default it is
 <emphasis>unset</emphasis> so no header caching will be used.
+</para>
+</sect2>
+
+<sect2 id="header-cache-compress-level">
+<title>header_cache_compress_level</title>
+<literallayout>Type: number
+Default: 1</literallayout>
+
+<para>
+When NeoMutt is compiled with lz4, zstd or zlib, this option can be used
+to setup the compression level.
+</para>
+</sect2>
+
+<sect2 id="header-cache-compress-method">
+<title>header_cache_compress_method</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+When NeoMutt is compiled with lz4, zstd or zlib, the header cache backend
+can use these compression methods for compressing the cache files.
+This results in much smaller cache file sizes and may even improve speed.
 </para>
 </sect2>
 
@@ -27559,6 +27637,8 @@ bindings for all menus (except as noted).
 </thead>
 <tbody>
 <row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
+<row><entry><literal>&lt;sort-alias&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
+<row><entry><literal>&lt;sort-alias-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
 <row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
 
 </tbody>
@@ -27582,6 +27662,8 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
 <row><entry><literal>&lt;query&gt;</literal></entry><entry>Q</entry><entry>query external program for addresses</entry></row>
 <row><entry><literal>&lt;query-append&gt;</literal></entry><entry>A</entry><entry>append new query results to current results</entry></row>
+<row><entry><literal>&lt;sort&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
+<row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
 
 </tbody>
 </tgroup>
