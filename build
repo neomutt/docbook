@@ -47,7 +47,6 @@ for FILE in feature/*.html; do
 
 	(
 		echo "---"
-		echo "layout: concertina"
 		echo "title: $TITLE"
 		echo "description: $DESC"
 		echo "since: "
@@ -65,7 +64,6 @@ for FILE in guide/*.html; do
 	TITLE=$(sed -n -e '/<h1 /{n;p}' $FILE | sed -e 's:</h1.*::' -e 's/.*[;>]//')
 	(
 		echo "---"
-		echo "layout: concertina"
 		echo "title: $TITLE"
 		echo "---"
 		echo "{% raw %}"
