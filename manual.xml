@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2020-09-25</releaseinfo>
+    <releaseinfo>version 2020-11-20</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -11343,6 +11343,12 @@ set preferred_languages="fr,en,de"
         download the message just once.
       </para>
       <para>
+        By default, Mutt will not search inside
+        <literal>multipart/alternative</literal> containers.  This can be changed
+        via the <link linkend="count-alternatives">$count_alternatives</link>
+        configuration variable.
+      </para>
+      <para>
         The syntax is:
       </para>
       <cmdsynopsis>
@@ -20424,6 +20430,25 @@ Default: no</literallayout>
 <para>
 Controls whether NeoMutt will weed headers when invoking the
 <literal>&lt;decode-copy&gt;</literal> or <literal>&lt;decode-save&gt;</literal> functions.
+</para>
+</sect2>
+
+<sect2 id="count-alternatives">
+<title>count_alternatives</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, Mutt will recurse inside multipart/alternatives while
+performing attachment searching and counting(see <link linkend="attachments">attachments</link>).
+</para>
+<para>
+Traditionally, multipart/alternative parts have simply represented
+different encodings of the main content of the email.  Unfortunately,
+some mail clients have started to place email attachments inside
+one of alternatives.  Setting this will allow Mutt to find
+and count matching attachments hidden there, and include them
+in the index via %X or through ~X pattern matching.
 </para>
 </sect2>
 
