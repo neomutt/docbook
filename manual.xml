@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2020-11-20</releaseinfo>
+    <releaseinfo>version 2020-11-27</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -3688,7 +3688,7 @@ set crypt_use_gpgme
         configurability can make it difficult when just getting started.  A few
         sample neomuttrc files come with NeoMutt, under
         <literal>doc/neomutt/samples/</literal>.  Among them,
-        <ulink url="https://github.com/neomutt/neomutt/blob/master/contrib/sample.neomuttrc-starter">sample.neomuttrc-starter</ulink>
+        <ulink url="https://github.com/neomutt/neomutt/blob/master/contrib/samples/sample.neomuttrc-starter">sample.neomuttrc-starter</ulink>
         is a basic example config with a few suggested settings and pointers to
         useful programs.
       </para>
@@ -9048,11 +9048,14 @@ Limit to messages matching: ~d 19950120-19951031
         save messages to a mailing list to a separate folder, or to delete all
         messages with a given subject. To tag all messages matching a pattern,
         use the <literal>&lt;tag-pattern&gt;</literal> function, which is bound
-        to <quote>shift-T</quote> by default. Or you can select individual
-        messages by hand using the <literal>&lt;tag-message&gt;</literal>
-        function, which is bound to <quote>t</quote> by default. See
-        <link linkend="patterns">patterns</link> for NeoMutt's pattern matching
-        syntax.
+        to <quote>shift-T</quote> by default. Patterns are completable in the 
+        editor menu. Invoke the <literal>&lt;complete&gt;</literal> function
+        (by default bound to <quote>Tab</quote>) after typing <quote>~</quote> 
+        to get a selectable list. Or you can select individual messages by hand 
+        using the <literal>&lt;tag-message&gt;</literal> function, which is 
+        bound to <quote>t</quote> by default. 
+        See <link linkend="patterns">patterns</link> for NeoMutt's pattern 
+        matching syntax.
       </para>
       <para>
         Once you have tagged the desired messages, you can use the
@@ -11459,6 +11462,8 @@ attachments  +I text/plain
 <emphasis role="comment"># course. These are off by default! The MIME elements contained</emphasis>
 <emphasis role="comment"># within a message/* or multipart/* are still examined, even if the</emphasis>
 <emphasis role="comment"># containers themselves don't qualify.</emphasis>
+<emphasis role="comment"># Recursion into multipart/alternatives containers is controlled by the</emphasis>
+<emphasis role="comment"># $count_alternatives setting.</emphasis>
 
 <emphasis role="comment">#attachments  +A message/.* multipart/.*</emphasis>
 <emphasis role="comment">#attachments  +I message/.* multipart/.*</emphasis>
@@ -26314,18 +26319,15 @@ The "unread" value is a synonym for "new".
 Default: yes</literallayout>
 
 <para>
-This variable is only useful when sorting by mailboxes in sidebar. By default,
-entries are unsorted.  Valid values:
-
+This variable is only useful when sorting by threads with
+<link linkend="strict-threads">$strict_threads</link> <emphasis>unset</emphasis>.  In that case, it changes the heuristic
+mutt uses to thread messages by subject.  With <link linkend="sort-re">$sort_re</link> <emphasis>set</emphasis>, mutt will
+only attach a message as the child of another message by subject if
+the subject of the child message starts with a substring matching the
+setting of <link linkend="reply-regex">$reply_regex</link>.  With <link linkend="sort-re">$sort_re</link> <emphasis>unset</emphasis>, mutt will attach
+the message whether or not this is the case, as long as the
+non-<link linkend="reply-regex">$reply_regex</link> parts of both messages are identical.
 </para>
-
-<itemizedlist>
-<listitem><para>count (all message count)
-</para></listitem><listitem><para>desc  (virtual mailbox description)
-</para></listitem><listitem><para>new (new message count)
-</para></listitem><listitem><para>path
-</para></listitem><listitem><para>unsorted
-</para></listitem></itemizedlist>
 </sect2>
 
 <sect2 id="spam-separator">
