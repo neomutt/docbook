@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2020-11-27</releaseinfo>
+    <releaseinfo>version 2021-02-05</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -2525,18 +2525,12 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           </varlistentry>
           <varlistentry>
             <term>
-              <literal>&lt;toggle-quoted&gt;</literal> (default: T)
-              <anchor id="toggle-quoted" />
+              <literal>&lt;skip-headers&gt;</literal> (default: H)
+              <anchor id="skip-headers"/>
             </term>
             <listitem>
               <para>
-                The pager uses the
-                <link linkend="quote-regex">$quote_regex</link> variable to
-                detect quoted text when displaying the body of the message.
-                This function toggles the display of the quoted material in the
-                message. It is particularly useful when being interested in
-                just the response and there is a large amount of quoted text in
-                the way.
+                This function will skip past the headers of the current message.
               </para>
               <para>
                 The variable
@@ -2575,6 +2569,21 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
               <para>
                 This function will go to the next line of non-quoted text which
                 comes after a line of quoted text in the internal pager.
+              </para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+              <literal>&lt;toggle-quoted&gt;</literal><anchor id="toggle-quoted"/>
+              (default: T)
+            </term>
+            <listitem>
+              <para>
+                The pager uses the <link linkend="quote-regex">$quote_regex</link>
+                variable to detect quoted text when displaying the body of the message.
+                This function toggles the display of the quoted material in the message.
+                It is particularly useful when being interested in just the response and
+                there is a large amount of quoted text in the way.
               </para>
             </listitem>
           </varlistentry>
@@ -5926,7 +5935,7 @@ unignore posted-to:
       <para>
         NeoMutt provides a number of advanced features for handling (possibly
         many) folders and new mail within them, please refer to
-        <xref linkend="feature/new-mail" /> for details (including in what situations
+        <xref linkend="new-mail" /> for details (including in what situations
         and how often NeoMutt checks for new mail). Additionally,
         <link linkend="new-mail-command">$new_mail_command</link> can be used
         to run a command when new mail is detected.
@@ -9048,13 +9057,13 @@ Limit to messages matching: ~d 19950120-19951031
         save messages to a mailing list to a separate folder, or to delete all
         messages with a given subject. To tag all messages matching a pattern,
         use the <literal>&lt;tag-pattern&gt;</literal> function, which is bound
-        to <quote>shift-T</quote> by default. Patterns are completable in the 
+        to <quote>shift-T</quote> by default. Patterns are completable in the
         editor menu. Invoke the <literal>&lt;complete&gt;</literal> function
-        (by default bound to <quote>Tab</quote>) after typing <quote>~</quote> 
-        to get a selectable list. Or you can select individual messages by hand 
-        using the <literal>&lt;tag-message&gt;</literal> function, which is 
-        bound to <quote>t</quote> by default. 
-        See <link linkend="patterns">patterns</link> for NeoMutt's pattern 
+        (by default bound to <quote>Tab</quote>) after typing <quote>~</quote>
+        to get a selectable list. Or you can select individual messages by hand
+        using the <literal>&lt;tag-message&gt;</literal> function, which is
+        bound to <quote>t</quote> by default.
+        See <link linkend="patterns">patterns</link> for NeoMutt's pattern
         matching syntax.
       </para>
       <para>
@@ -10251,6 +10260,87 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
           See table <xref linkend="tab-attachment-bindings" /> for all
           available functions.
         </para>
+
+        <sect3 id="attach-viewers">
+          <title>Viewing Attachments</title>
+
+          <para>
+          There are four(!) ways of viewing attachments, so the functions
+          deserve some extra explanation.
+          </para>
+
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>&lt;view-mailcap&gt;</literal>
+                (default keybinding: m)
+              </term>
+              <listitem>
+                <para>
+                  This will use the first matching mailcap entry.
+                </para>
+                <para>
+                  If no matching mailcap entries are found, it will abort with an
+                  error message.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <literal>&lt;view-attach&gt;</literal>
+                (default keybinding: &lt;Enter&gt;)
+              </term>
+              <listitem>
+                <para>
+                  Mutt will display internally supported MIME types (see <xref
+                  linkend="mime-pager"/>) in the pager.  This will respect
+                  <link linkend="auto-view">auto_view</link> settings, to determine
+                  whether to use a <literal>copiousoutput</literal> mailcap entry or
+                  just directly display the attachment.
+                </para>
+                <para>
+                  Other MIME types will use the first matching mailcap entry.
+                </para>
+                <para>
+                  If no matching mailcap entries are found, the attachment will
+                  be displayed in the pager as raw text.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <literal>&lt;view-pager&gt;</literal>
+              </term>
+              <listitem>
+                <para>
+                  Mutt will use the first matching
+                  <literal>copiousoutput</literal> mailcap entry to display the
+                  attachment in the pager (regardless of <link
+                  linkend="auto-view">auto_view</link> settings).
+                </para>
+                <para>
+                  If no matching mailcap entries are found, the attachment will
+                  be displayed in the pager as raw text.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <literal>&lt;view-text&gt;</literal>
+                (default keybinding: T)
+              </term>
+              <listitem>
+                <para>
+                  The attachment will always be displayed in the pager as raw
+                  text.
+                </para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </sect3>
       </sect2>
 
       <sect2 id="compose-menu">
@@ -27649,6 +27739,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;sidebar-prev-new&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox with new mail</entry></row>
 <row><entry><literal>&lt;sidebar-toggle-virtual&gt;</literal></entry><entry></entry><entry>toggle between mailboxes and virtual mailboxes</entry></row>
 <row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
+<row><entry><literal>&lt;skip-headers&gt;</literal></entry><entry>H</entry><entry>skip beyond headers</entry></row>
 <row><entry><literal>&lt;skip-quoted&gt;</literal></entry><entry>S</entry><entry>skip beyond quoted text</entry></row>
 <row><entry><literal>&lt;sort-mailbox&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
 <row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
@@ -27756,6 +27847,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
 <row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
 <row><entry><literal>&lt;view-mailcap&gt;</literal></entry><entry>m</entry><entry>force viewing of attachment using mailcap</entry></row>
+<row><entry><literal>&lt;view-pager&gt;</literal></entry><entry></entry><entry>view attachment in pager using copiousoutput mailcap</entry></row>
 <row><entry><literal>&lt;view-text&gt;</literal></entry><entry>T</entry><entry>view attachment as text</entry></row>
 
 </tbody>
