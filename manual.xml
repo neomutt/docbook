@@ -1077,7 +1077,7 @@ sidebar_whitelist +fruit +fruit/apple   <emphasis role="comment"># Always displa
 <screen>
 color sidebar_indicator default color17     <emphasis role="comment"># Dark blue background</emphasis>
 color sidebar_highlight white   color238    <emphasis role="comment"># Grey background</emphasis>
-color sidebar_spoolfile yellow  default     <emphasis role="comment"># Yellow</emphasis>
+color sidebar_spool_file yellow  default     <emphasis role="comment"># Yellow</emphasis>
 color sidebar_unread    cyan    default     <emphasis role="comment"># Light blue</emphasis>
 color sidebar_new       green   default     <emphasis role="comment"># Green</emphasis>
 color sidebar_ordinary  default default     <emphasis role="comment"># Default colors</emphasis>
@@ -1130,8 +1130,8 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                 </row>
                 <row>
                   <entry></entry>
-                  <entry><literal>sidebar_spoolfile</literal></entry>
-                  <entry>Mailbox is the spoolfile (receives incoming mail)</entry>
+                  <entry><literal>sidebar_spool_file</literal></entry>
+                  <entry>Mailbox is the spool_file (receives incoming mail)</entry>
                 </row>
                 <row>
                   <entry>Lowest</entry>
@@ -1929,7 +1929,10 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         </para>
         <para>
           Also, the internal pager supports a couple other advanced features.
-          For one, it will accept and translate the <quote>standard</quote>
+          For one, you can set <link linkend="pager-read-delay">$pager_read_delay</link>
+          to operate in a preview mode, where new messages are not marked
+          read unless you remain on the message for a certain length of time.
+          Additionally, it will accept and translate the <quote>standard</quote>
           nroff sequences for bold and underline. These sequences are a series
           of either the letter, backspace (<quote>^H</quote>), the letter
           again for bold or the letter, backspace, <quote>_</quote> for
@@ -2666,9 +2669,9 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           forwarding a message. You again have the chance to adjust recipients,
           subject, and security settings right before actually sending the
           message. See also
-          <link linkend="askcc">$askcc</link>,
-          <link linkend="askbcc">$askbcc</link>,
-          <link linkend="autoedit">$autoedit</link>,
+          <link linkend="ask-cc">$ask_cc</link>,
+          <link linkend="ask-bcc">$ask_bcc</link>,
+          <link linkend="auto-edit">$auto_edit</link>,
           <link linkend="bounce">$bounce</link>,
           <link linkend="fast-reply">$fast_reply</link>, and
           <link linkend="include">$include</link> for changing how and if
@@ -3629,9 +3632,8 @@ set crypt_use_gpgme
           <link linkend="mailcap-path">$mailcap_path</link>,
           <link linkend="news-server">$news_server</link>,
           <link linkend="shell">shell</link>,
-          <link linkend="spoolfile">$spoolfile</link>,
+          <link linkend="spool-file">$spool_file</link>,
           <link linkend="tmpdir">$tmpdir</link>,
-          <link linkend="visual">$visual</link>.
         </para>
         <para>
           Finally, it's possible to
@@ -3706,7 +3708,7 @@ set crypt_use_gpgme
       </para>
       <example id="ex-rc-multiple-cmds">
         <title>Multiple configuration commands per line</title>
-        <screen>set realname='John Smith' ; ignore x-</screen>
+        <screen>set real_name='John Smith' ; ignore x-</screen>
       </example>
       <para>
         The hash mark, or pound sign (<quote>#</quote>), is used as
@@ -3741,7 +3743,7 @@ my_hdr X-Disclaimer: Why are you listening to me?   <emphasis role="comment"># T
       </para>
       <example id="ex-rc-quote">
         <title>Escaping quotes in configuration files</title>
-        <screen>set realname="Michael \"MuttDude\" Elkins"</screen>
+        <screen>set real_name="Michael \"MuttDude\" Elkins"</screen>
       </example>
       <para>
         <quote>\\</quote> means to insert a literal <quote>\</quote> into the
@@ -4553,8 +4555,11 @@ bind index gg first-entry
       </para>
       <cmdsynopsis>
         <command>folder-hook</command>
+        <arg choice="opt">
+          <replaceable class="parameter">-noregex</replaceable>
+        </arg>
         <arg choice="plain">
-          <replaceable class="parameter">regex</replaceable>
+          <replaceable class="parameter">pattern</replaceable>
         </arg>
         <arg choice="plain">
           <replaceable class="parameter">command</replaceable>
@@ -4564,9 +4569,11 @@ bind index gg first-entry
         It is often desirable to change settings based on which mailbox you are
         reading. The <command>folder-hook</command> command provides a method
         by which you can execute any configuration command.
-        <emphasis>regex</emphasis> is a regular expression specifying in which
-        mailboxes to execute <emphasis>command</emphasis> before loading. If
-        a mailbox matches multiple <command>folder-hook</command>s, they are
+        The <emphasis>command</emphasis> is executed before loading any mailboxes
+        matching <emphasis>pattern</emphasis>. The <emphasis>-noregex</emphasis>
+        switch controls whether <emphasis>pattern</emphasis> is matched using
+        a simple string comparison or a full regex match.
+        If a mailbox matches multiple <command>folder-hook</command>s, they are
         executed in the order given in the <literal>.neomuttrc</literal>.
       </para>
       <para>
@@ -4578,7 +4585,7 @@ bind index gg first-entry
       <note>
         <para>
           If you use the <quote>!</quote> shortcut for
-          <link linkend="spoolfile">$spoolfile</link> at the beginning of the
+          <link linkend="spool-file">$spool_file</link> at the beginning of the
           pattern, you must place it inside of double or single quotes in order
           to distinguish it from the logical <emphasis>not</emphasis> operator
           for the expression.
@@ -5173,7 +5180,7 @@ uncolor index_date
                 <entry>Mailboxes that have no new/flagged mails, etc</entry>
               </row>
               <row>
-                <entry>sidebar_spoolfile</entry>
+                <entry>sidebar_spool_file</entry>
                 <entry>Mailbox that receives incoming mail</entry>
               </row>
               <row>
@@ -5842,8 +5849,11 @@ unignore posted-to:
       </para>
       <cmdsynopsis>
         <command>mbox-hook</command>
+        <arg choice="opt">
+          <replaceable class="parameter">-noregex</replaceable>
+        </arg>
         <arg choice="plain">
-          <replaceable class="parameter">regex</replaceable>
+          <replaceable class="parameter">pattern</replaceable>
         </arg>
         <arg choice="plain">
           <replaceable class="parameter">mailbox</replaceable>
@@ -5852,10 +5862,12 @@ unignore posted-to:
       <para>
         This command is used to move read messages from a specified mailbox to
         a different mailbox automatically when you quit or change folders.
-        <emphasis>regex</emphasis> is a regular expression specifying the
-        mailbox to treat as a <quote>spool</quote> mailbox and
-        <emphasis>mailbox</emphasis> specifies where mail should be saved when
-        read.
+        <emphasis>pattern</emphasis> is used to specifying the mailbox to
+        treat as a <quote>spool</quote> mailbox and <emphasis>mailbox</emphasis>
+        specifies where mail should be saved when read.
+        The <emphasis>-noregex</emphasis> switch controls whether
+        <emphasis>pattern</emphasis> is matched using a simple string
+        comparison or a full regex match.
       </para>
       <para>
         The regex parameter has
@@ -5947,7 +5959,7 @@ unignore posted-to:
           <link linkend="shortcuts">shortcut characters</link> (such as
           <quote>=</quote> and <quote>!</quote>), any variable definition that
           affects these characters (like <link linkend="folder">$folder</link>
-          and <link linkend="spoolfile">$spoolfile</link>) should be set before
+          and <link linkend="spool-file">$spool_file</link>) should be set before
           the <command>mailboxes</command> command. If none of these shortcuts
           are used, a local path should be absolute as otherwise NeoMutt tries
           to find it relative to the directory from where NeoMutt was started
@@ -6196,7 +6208,7 @@ save-hook aol\\.com$ +spam
           postponed draft. Adding a recipient after replying or editing the
           message will not cause any
           <command>send-hook</command> to be executed, similarly if
-          <link linkend="autoedit">$autoedit</link> is set (as then the initial
+          <link linkend="auto-edit">$auto_edit</link> is set (as then the initial
           list of recipients is empty). Also note that
           <link linkend="my-hdr"><command>my_hdr</command></link> commands
           which modify recipient headers, or the message's subject, don't have
@@ -6269,7 +6281,7 @@ message-hook '~f freshmeat-news' 'set pager="less \"+/^  subject: .*\""'
         crypt-hooks result in the use of multiple keyids for a recipient.
         During key selection, NeoMutt will confirm whether each crypt-hook is
         to be used (unless the
-        <link linkend="crypt-confirmhook">$crypt_confirmhook</link> option is
+        <link linkend="crypt-confirm-hook">$crypt_confirm_hook</link> option is
         unset). If all crypt-hooks for a recipient are declined, NeoMutt will
         use the original recipient address for key selection instead.
       </para>
@@ -6731,7 +6743,7 @@ set spam_separator=", "
             <term>e-mail address</term>
             <listitem>
               <para>
-                An email address either with or without realname. The older
+                An email address either with or without real_name. The older
                 <quote><literal>user@example.org (Joe User)</literal></quote>
                 form is supported but strongly deprecated.
               </para>
@@ -6844,7 +6856,7 @@ set spam_separator=", "
         </para>
         <para>
           Prefixing a variable with <quote>no</quote> will unset it. Example:
-          <literal><command>set</command> noaskbcc</literal>.
+          <literal><command>set</command> noask_bcc</literal>.
         </para>
         <para>
           For <emphasis>boolean</emphasis> variables, you may optionally prefix
@@ -9207,7 +9219,7 @@ send-hook ~C'^b@b\.b$' my_hdr from: c@c.c
       <para>
         In <xref linkend="ex-default-hook" />, by default the value of
         <link linkend="from">$from</link> and
-        <link linkend="realname">$realname</link> is not overridden. When
+        <link linkend="real-name">$real_name</link> is not overridden. When
         sending messages either To: or Cc: to <literal>&lt;b@b.b&gt;</literal>,
         the From: header is changed to <literal>&lt;c@c.c&gt;</literal>.
       </para>
@@ -9462,7 +9474,7 @@ roessler@does-not-exist.org        Thomas Roessler mutt pgp
             <row>
               <entry><literal>!</literal></entry>
               <entry>
-                your <link linkend="spoolfile">$spoolfile</link> (incoming)
+                your <link linkend="spool-file">$spool_file</link> (incoming)
                 mailbox
               </entry>
             </row>
@@ -9771,7 +9783,7 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
           <command>mailboxes</command> command. The interval depends on the
           folder type: for local/IMAP folders it consults
           <link linkend="mail-check">$mail_check</link> and
-          <link linkend="pop-checkinterval">$pop_checkinterval</link> for POP
+          <link linkend="pop-check-interval">$pop_check_interval</link> for POP
           folders.
         </para>
         <para>
@@ -9961,7 +9973,7 @@ macro pager \cb |urlview\n
 
 <screen>
 echo "Sourcing muttrc file"
-unset confirmappend
+unset confirm_append
 macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;echo 'Saved to archive'&lt;enter&gt;"
 </screen>
 
@@ -9988,8 +10000,8 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
         </listitem>
         <listitem>
           <para>Prompts for To, Cc, Bcc, Subject headers. See
-          <link linkend="askcc">$askcc</link>,
-          <link linkend="askbcc">$askbcc</link>,
+          <link linkend="ask-cc">$ask_cc</link>,
+          <link linkend="ask-bcc">$ask_bcc</link>,
           <link linkend="fast-reply">$fast_reply</link>.</para>
         </listitem>
         <listitem>
@@ -10029,7 +10041,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
         </listitem>
         <listitem>
           <para>
-            <link linkend="realname">$realname</link>part of From header setting.
+            <link linkend="real-name">$real_name</link>part of From header setting.
           </para>
         </listitem>
         <listitem>
@@ -10091,7 +10103,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
           <listitem>
             <para>
               NeoMutt normalizes all e-mail addresses to the simplest form
-              possible. If an address contains a realname, the form
+              possible. If an address contains a real_name, the form
               <emphasis>Joe User &lt;joe@example.com&gt;</emphasis> is used and
               the pure e-mail address without angle brackets otherwise, i.e.
               just <emphasis>joe@example.com</emphasis>.
@@ -10112,7 +10124,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
               <literal>$MAILDIR</literal> is taken into account. If that isn't
               present either, NeoMutt takes the user's mailbox in the mailspool
               as determined at compile-time (which may also reside in the home
-              directory). The <link linkend="spoolfile">$spoolfile</link>
+              directory). The <link linkend="spool-file">$spool_file</link>
               setting overrides this selection. Highest priority has the
               mailbox given with the <literal>-f</literal> command line option.
             </para>
@@ -11804,7 +11816,7 @@ smtp://user@host:587/
         Polling for new mail is more expensive over POP3 than locally. For this
         reason the frequency at which NeoMutt will check for mail remotely can
         be controlled by the
-        <link linkend="pop-checkinterval">$pop_checkinterval</link> variable,
+        <link linkend="pop-check-interval">$pop_check_interval</link> variable,
         which defaults to every 60 seconds.
       </para>
       <para>
@@ -11823,7 +11835,7 @@ smtp://user@host:587/
         <literal>&lt;fetch-mail&gt;</literal> function (default: G). It allows
         to connect to <link linkend="pop-host">$pop_host</link>, fetch all your
         new mail and place it in the local
-        <link linkend="spoolfile">$spoolfile</link>. After this point, NeoMutt
+        <link linkend="spool-file">$spool_file</link>. After this point, NeoMutt
         runs exactly as if the mail had always been local.
       </para>
       <note>
@@ -15887,11 +15899,11 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <entry></entry>
             </row>
             <row>
-              <entry><literal>virtual_spoolfile</literal></entry>
+              <entry><literal>virtual_spool_file</literal></entry>
               <entry>boolean</entry>
               <entry><literal>no</literal></entry>
               <entry>
-                Unnecessary since <link linkend="spoolfile">$spoolfile</link>
+                Unnecessary since <link linkend="spool-file">$spool_file</link>
                 supports mailbox descriptions.
               </entry>
             </row>
@@ -16118,8 +16130,8 @@ set nm_unread_tag = unread
 <emphasis role="comment"># %*X  soft-fill with character ``X'' as pad</emphasis>
 set vfolder_format = "%6n(%6N) %f"
 <emphasis role="comment"># When set, NeoMutt will use the first virtual mailbox (see virtual-mailboxes)</emphasis>
-<emphasis role="comment"># as a spoolfile.</emphasis>
-set virtual_spoolfile = no
+<emphasis role="comment"># as a spool_file.</emphasis>
+set virtual_spool_file = no
 <emphasis role="comment"># setup time window preferences</emphasis>
 <emphasis role="comment"># first setup the duration, and then the time unit of that duration</emphasis>
 <emphasis role="comment"># when set to 0 (the default) the search window feature is disabled</emphasis>
@@ -16913,7 +16925,7 @@ set sort_browser="reverse-size"
               </entry>
             </row>
             <row>
-              <entry><literal>sidebar_spoolfile</literal></entry>
+              <entry><literal>sidebar_spool_file</literal></entry>
               <entry>default</entry>
               <entry>
                 Mailbox that receives incoming mail
@@ -17088,8 +17100,8 @@ color sidebar_flagged red black
 color sidebar_new green black
 <emphasis role="comment"># Color to give mailboxes containing no new/flagged mail, etc.</emphasis>
 color sidebar_ordinary color245 default
-<emphasis role="comment"># Color to give the spoolfile mailbox</emphasis>
-color sidebar_spoolfile color207 default
+<emphasis role="comment"># Color to give the spool_file mailbox</emphasis>
+color sidebar_spool_file color207 default
 <emphasis role="comment"># Color to give mailboxes containing no unread mail</emphasis>
 color sidebar_unread color136 default
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
@@ -17853,11 +17865,11 @@ bind index D purge-message
         if <link linkend="autocrypt-reply">$autocrypt_reply</link> is
         <emphasis>set</emphasis>, autocrypt mode will be forced on,
         overriding the settings
-        <link linkend="crypt-autosign">$crypt_autosign</link>,
-        <link linkend="crypt-autoencrypt">$crypt_autoencrypt</link>,
-        <link linkend="crypt-replyencrypt">$crypt_replyencrypt</link>,
-        <link linkend="crypt-replysign">$crypt_replysign</link>,
-        <link linkend="crypt-replysignencrypted">$crypt_replysignencrypted</link>, and
+        <link linkend="crypt-auto-sign">$crypt_auto_sign</link>,
+        <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link>,
+        <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link>,
+        <link linkend="crypt-reply-sign">$crypt_reply_sign</link>,
+        <link linkend="crypt-reply-sign-encrypted">$crypt_reply_sign_encrypted</link>, and
         <link linkend="crypt-opportunistic-encrypt">$crypt_opportunistic_encrypt</link>.
       </para>
       <para>
@@ -19958,8 +19970,8 @@ the body of an outgoing message.
 </para>
 </sect2>
 
-<sect2 id="askbcc">
-<title>askbcc</title>
+<sect2 id="ask-bcc">
+<title>ask_bcc</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -19969,8 +19981,8 @@ before editing an outgoing message.
 </para>
 </sect2>
 
-<sect2 id="askcc">
-<title>askcc</title>
+<sect2 id="ask-cc">
+<title>ask_cc</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -20266,8 +20278,8 @@ isn't forced on for all encrypted replies.
 </para>
 </sect2>
 
-<sect2 id="autoedit">
-<title>autoedit</title>
+<sect2 id="auto-edit">
+<title>auto_edit</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -20576,8 +20588,8 @@ side effects (for example in regular expressions).
 </para>
 </sect2>
 
-<sect2 id="confirmappend">
-<title>confirmappend</title>
+<sect2 id="confirm-append">
+<title>confirm_append</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
 
@@ -20587,8 +20599,8 @@ an existing mailbox.
 </para>
 </sect2>
 
-<sect2 id="confirmcreate">
-<title>confirmcreate</title>
+<sect2 id="confirm-create">
+<title>confirm_create</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
 
@@ -20662,8 +20674,8 @@ in the index via %X or through ~X pattern matching.
 </para>
 </sect2>
 
-<sect2 id="crypt-autoencrypt">
-<title>crypt_autoencrypt</title>
+<sect2 id="crypt-auto-encrypt">
+<title>crypt_auto_encrypt</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -20679,21 +20691,21 @@ settings can be overridden by use of the smime menu instead.
 </para>
 </sect2>
 
-<sect2 id="crypt-autopgp">
-<title>crypt_autopgp</title>
+<sect2 id="crypt-auto-pgp">
+<title>crypt_auto_pgp</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
 
 <para>
 This variable controls whether or not NeoMutt may automatically enable
-PGP encryption/signing for messages.  See also <link linkend="crypt-autoencrypt">$crypt_autoencrypt</link>,
-<link linkend="crypt-replyencrypt">$crypt_replyencrypt</link>,
-<link linkend="crypt-autosign">$crypt_autosign</link>, <link linkend="crypt-replysign">$crypt_replysign</link> and <link linkend="smime-is-default">$smime_is_default</link>.
+PGP encryption/signing for messages.  See also <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link>,
+<link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link>,
+<link linkend="crypt-auto-sign">$crypt_auto_sign</link>, <link linkend="crypt-reply-sign">$crypt_reply_sign</link> and <link linkend="smime-is-default">$smime_is_default</link>.
 </para>
 </sect2>
 
-<sect2 id="crypt-autosign">
-<title>crypt_autosign</title>
+<sect2 id="crypt-auto-sign">
+<title>crypt_auto_sign</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -20708,16 +20720,16 @@ be overridden by use of the smime menu instead of the pgp menu.
 </para>
 </sect2>
 
-<sect2 id="crypt-autosmime">
-<title>crypt_autosmime</title>
+<sect2 id="crypt-auto-smime">
+<title>crypt_auto_smime</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
 
 <para>
 This variable controls whether or not NeoMutt may automatically enable
-S/MIME encryption/signing for messages. See also <link linkend="crypt-autoencrypt">$crypt_autoencrypt</link>,
-<link linkend="crypt-replyencrypt">$crypt_replyencrypt</link>,
-<link linkend="crypt-autosign">$crypt_autosign</link>, <link linkend="crypt-replysign">$crypt_replysign</link> and <link linkend="smime-is-default">$smime_is_default</link>.
+S/MIME encryption/signing for messages. See also <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link>,
+<link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link>,
+<link linkend="crypt-auto-sign">$crypt_auto_sign</link>, <link linkend="crypt-reply-sign">$crypt_reply_sign</link> and <link linkend="smime-is-default">$smime_is_default</link>.
 </para>
 </sect2>
 
@@ -20748,8 +20760,8 @@ Controls the characters used in cryptography flags.
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
-<sect2 id="crypt-confirmhook">
-<title>crypt_confirmhook</title>
+<sect2 id="crypt-confirm-hook">
+<title>crypt_confirm_hook</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
 
@@ -20783,7 +20795,7 @@ The pgp or smime menus provide a selection to temporarily disable
 this option for the current message.
 </para>
 <para>
-If <link linkend="crypt-autoencrypt">$crypt_autoencrypt</link> or <link linkend="crypt-replyencrypt">$crypt_replyencrypt</link> enable encryption for
+If <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link> or <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link> enable encryption for
 a message, this option will be disabled for that message.  It can
 be manually re-enabled in the pgp or smime menus.
 (Crypto only)
@@ -20904,8 +20916,8 @@ Currently NeoMutt only supports the Subject header.
 </para>
 </sect2>
 
-<sect2 id="crypt-replyencrypt">
-<title>crypt_replyencrypt</title>
+<sect2 id="crypt-reply-encrypt">
+<title>crypt_reply_encrypt</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
 
@@ -20916,8 +20928,8 @@ encrypted.
 </para>
 </sect2>
 
-<sect2 id="crypt-replysign">
-<title>crypt_replysign</title>
+<sect2 id="crypt-reply-sign">
+<title>crypt_reply_sign</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -20932,17 +20944,17 @@ signed.
 </para>
 </sect2>
 
-<sect2 id="crypt-replysignencrypted">
-<title>crypt_replysignencrypted</title>
+<sect2 id="crypt-reply-sign-encrypted">
+<title>crypt_reply_sign_encrypted</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
 <para>
 If <emphasis>set</emphasis>, automatically PGP or OpenSSL sign replies to messages
 which are encrypted. This makes sense in combination with
-<link linkend="crypt-replyencrypt">$crypt_replyencrypt</link>, because it allows you to sign all
+<link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link>, because it allows you to sign all
 messages which are automatically encrypted.  This works around
-the problem noted in <link linkend="crypt-replysign">$crypt_replysign</link>, that NeoMutt is not able
+the problem noted in <link linkend="crypt-reply-sign">$crypt_reply_sign</link>, that NeoMutt is not able
 to find out whether an encrypted message is also signed.
 (Crypto only)
 </para>
@@ -20976,7 +20988,7 @@ used interactively.
 </para>
 <para>
 Note that the GPGME backend does not support creating old-style inline
-(traditional) PGP encrypted or signed messages (see <link linkend="pgp-autoinline">$pgp_autoinline</link>).
+(traditional) PGP encrypted or signed messages (see <link linkend="pgp-auto-inline">$pgp_auto_inline</link>).
 </para>
 </sect2>
 
@@ -21371,7 +21383,7 @@ when replying to messages, and the initial prompt for subject is
 skipped when forwarding messages.
 </para>
 <para>
-<emphasis role="bold">Note:</emphasis> this variable has no effect when the <link linkend="autoedit">$autoedit</link>
+<emphasis role="bold">Note:</emphasis> this variable has no effect when the <link linkend="auto-edit">$auto_edit</link>
 variable is <emphasis>set</emphasis>.
 </para>
 </sect2>
@@ -22478,8 +22490,8 @@ https://github.com/neomutt/neomutt/issues/1689
 </para>
 </sect2>
 
-<sect2 id="imap-servernoise">
-<title>imap_servernoise</title>
+<sect2 id="imap-server-noise">
+<title>imap_server_noise</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
 
@@ -22548,8 +22560,8 @@ decrypting and including the message in their reply.
 </para>
 </sect2>
 
-<sect2 id="include-onlyfirst">
-<title>include_onlyfirst</title>
+<sect2 id="include-only-first">
+<title>include_only_first</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -23021,7 +23033,7 @@ will be shown. The match is always case-sensitive.
 Default: <quote><literal>~/mbox</literal></quote></literallayout>
 
 <para>
-This specifies the folder into which read mail in your <link linkend="spoolfile">$spoolfile</link>
+This specifies the folder into which read mail in your <link linkend="spool-file">$spool_file</link>
 folder will be appended.
 </para>
 <para>
@@ -23140,8 +23152,8 @@ high bit from <literal>0xf8</literal> is <literal>0x78</literal>, which is the A
 </para>
 </sect2>
 
-<sect2 id="metoo">
-<title>metoo</title>
+<sect2 id="me-too">
+<title>me_too</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -23830,8 +23842,8 @@ check the message for traditional pgp.
 </para>
 </sect2>
 
-<sect2 id="pgp-autoinline">
-<title>pgp_autoinline</title>
+<sect2 id="pgp-auto-inline">
+<title>pgp_auto_inline</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -23891,8 +23903,8 @@ against <link linkend="pgp-decryption-okay">$pgp_decryption_okay</link>.
 </para>
 </sect2>
 
-<sect2 id="pgp-clearsign-command">
-<title>pgp_clearsign_command</title>
+<sect2 id="pgp-clear-sign-command">
+<title>pgp_clear_sign_command</title>
 <literallayout>Type: command
 Default: (empty)</literallayout>
 
@@ -24105,8 +24117,8 @@ possible <literal>printf(3)</literal>-like sequences.
 </para>
 </sect2>
 
-<sect2 id="pgp-getkeys-command">
-<title>pgp_getkeys_command</title>
+<sect2 id="pgp-get-keys-command">
+<title>pgp_get_keys_command</title>
 <literallayout>Type: command
 Default: (empty)</literallayout>
 
@@ -24244,8 +24256,8 @@ Also note that using the old-style PGP message format is <emphasis role="bold">s
 </para>
 </sect2>
 
-<sect2 id="pgp-replyinline">
-<title>pgp_replyinline</title>
+<sect2 id="pgp-reply-inline">
+<title>pgp_reply_inline</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -24550,8 +24562,8 @@ Example:
 set pop_authenticators="digest-md5:apop:user"
 </screen></sect2>
 
-<sect2 id="pop-checkinterval">
-<title>pop_checkinterval</title>
+<sect2 id="pop-check-interval">
+<title>pop_check_interval</title>
 <literallayout>Type: number
 Default: 60</literallayout>
 
@@ -24987,8 +24999,8 @@ If <emphasis>set</emphasis>, all folders are opened in read-only mode.
 </para>
 </sect2>
 
-<sect2 id="realname">
-<title>realname</title>
+<sect2 id="real-name">
+<title>real_name</title>
 <literallayout>Type: string
 Default: (empty)</literallayout>
 
@@ -25139,7 +25151,7 @@ Default: no</literallayout>
 <para>
 This variable provides a toggle. When active, the From: header will be
 extracted from the current mail's 'X-Original-To:' header. This setting
-does not have precedence over "<link linkend="reverse-realname">reverse_realname</link>".
+does not have precedence over "<link linkend="reverse-real-name">reverse_real_name</link>".
 </para>
 <para>
 Assuming 'fast_reply' is disabled, this option will prompt the user with a
@@ -25241,12 +25253,12 @@ used doesn't match your "<link linkend="alternates">alternates</link>", the <emp
 your address on the current machine.
 </para>
 <para>
-Also see the "<link linkend="alternates">alternates</link>" command and <link linkend="reverse-realname">$reverse_realname</link>.
+Also see the "<link linkend="alternates">alternates</link>" command and <link linkend="reverse-real-name">$reverse_real_name</link>.
 </para>
 </sect2>
 
-<sect2 id="reverse-realname">
-<title>reverse_realname</title>
+<sect2 id="reverse-real-name">
+<title>reverse_real_name</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
 
@@ -25264,7 +25276,7 @@ When it is <emphasis>set</emphasis>, NeoMutt will use the matching address as-is
 </para>
 <para>
 In either case, a missing real name will be filled in afterwards
-using the value of <link linkend="realname">$realname</link>.
+using the value of <link linkend="real-name">$real_name</link>.
 </para>
 </sect2>
 
@@ -25318,7 +25330,7 @@ Default: yes</literallayout>
 
 <para>
 When <emphasis>unset</emphasis>, mailboxes which contain no saved messages will be removed
-when closed (the exception is <link linkend="spoolfile">$spoolfile</link> which is never removed).
+when closed (the exception is <link linkend="spool-file">$spool_file</link> which is never removed).
 If <emphasis>set</emphasis>, mailboxes are never removed.
 </para>
 <para>
@@ -25458,7 +25470,7 @@ Specifies the program and arguments used to deliver mail sent by NeoMutt.
 NeoMutt expects that the specified program interprets additional
 arguments as recipient addresses.  NeoMutt appends all recipients after
 adding a <literal>--</literal> delimiter (if not already present).  Additional
-flags, such as for <link linkend="use-8bitmime">$use_8bitmime</link>, <link linkend="use-envelope-from">$use_envelope_from</link>,
+flags, such as for <link linkend="use-8bit-mime">$use_8bit_mime</link>, <link linkend="use-envelope-from">$use_envelope_from</link>,
 <link linkend="dsn-notify">$dsn_notify</link>, or <link linkend="dsn-return">$dsn_return</link> will be added before the delimiter.
 </para>
 <para>
@@ -26218,7 +26230,7 @@ The default behavior of NeoMutt is to use PGP on all auto-sign/encryption
 operations. To override and to use OpenSSL instead this must be <emphasis>set</emphasis>.
 However, this has no effect while replying, since NeoMutt will automatically
 select the same application that was used to sign/encrypt the original
-message.  (Note that this variable can be overridden by unsetting <link linkend="crypt-autosmime">$crypt_autosmime</link>.)
+message.  (Note that this variable can be overridden by unsetting <link linkend="crypt-auto-smime">$crypt_auto_smime</link>.)
 (S/MIME only)
 </para>
 </sect2>
@@ -26601,15 +26613,15 @@ separator.
 </para>
 </sect2>
 
-<sect2 id="spoolfile">
-<title>spoolfile</title>
+<sect2 id="spool-file">
+<title>spool_file</title>
 <literallayout>Type: mailbox
 Default: (empty)</literallayout>
 
 <para>
 If your spool mailbox is in a non-default place where NeoMutt can't find
 it, you can specify its location with this variable. The description from
-"named-mailboxes" or "virtual-mailboxes" may be used for the spoolfile.
+"named-mailboxes" or "virtual-mailboxes" may be used for the spool_file.
 </para>
 <para>
 If not specified, then the environment variables <literal>$MAIL</literal> and
@@ -26779,8 +26791,8 @@ request it.
 </para>
 </sect2>
 
-<sect2 id="ssl-usesystemcerts">
-<title>ssl_usesystemcerts</title>
+<sect2 id="ssl-use-system-certs">
+<title>ssl_use_system_certs</title>
 <literallayout>Type: boolean
 Default: yes</literallayout>
 
@@ -27311,8 +27323,8 @@ index sorting, though.
 </para>
 </sect2>
 
-<sect2 id="use-8bitmime">
-<title>use_8bitmime</title>
+<sect2 id="use-8bit-mime">
+<title>use_8bit_mime</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -27407,8 +27419,8 @@ expandos as <link linkend="folder-format">$folder_format</link>.
 </para>
 </sect2>
 
-<sect2 id="virtual-spoolfile">
-<title>virtual_spoolfile</title>
+<sect2 id="virtual-spool-file">
+<title>virtual_spool_file</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -27417,7 +27429,7 @@ When <emphasis>set</emphasis>, NeoMutt will use the first defined virtual mailbo
 virtual-mailboxes) as a spool file.
 </para>
 <para>
-This command is now unnecessary. <link linkend="spoolfile">$spoolfile</link> has been extended to support
+This command is now unnecessary. <link linkend="spool-file">$spool_file</link> has been extended to support
 mailbox descriptions as a value.
 </para>
 </sect2>
