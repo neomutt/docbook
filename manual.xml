@@ -672,7 +672,7 @@ bind index,pager B sidebar-toggle-visible   <emphasis role="comment"># Use 'B' t
             <para>
               Finally, you might want to change the divider character. By
               default, Sidebar draws an ASCII line between it and the Index
-              panel If your terminal supports it, you can use a Unicode
+              panel. If your terminal supports it, you can use a Unicode
               line-drawing character.
             </para>
 
@@ -817,13 +817,6 @@ set sidebar_divider_char = '│'          <emphasis role="comment"># Pretty line
                     <entry>* ‡</entry>
                     <entry>
                       Number of tagged messages in the mailbox
-                    </entry>
-                  </row>
-                  <row>
-                    <entry>%Z</entry>
-                    <entry>* †</entry>
-                    <entry>
-                      Number of new messages in the mailbox (unread, unseen)
                     </entry>
                   </row>
                   <row>
@@ -7937,7 +7930,6 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                   <emphasis>STRING</emphasis> on the server, rather than
                   downloading each message and searching it locally.
                 </entry>
-                <entry></entry>
               </row>
               <row>
                 <entry>~B <emphasis>EXPR</emphasis></entry>
@@ -9845,7 +9837,7 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
             When using Maildir, you don't have to manually specify all your mailboxes. You can use this command instead:
           </para>
 <screen>
-mailboxes `find ~/.mail/ -type d -name cur | sort | sed -e 's:/cur/*$::' -e 's/ /\\ /g' | tr '\n' ' '`
+mailboxes `find ~/.mail/ -type d -name cur | sed -e 's:/cur/*$::' -e 's/ /\\ /g' | sort | tr '\n' ' '`
 </screen>
         </note>
       </sect2>
@@ -10390,7 +10382,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
         To get most out of MIME, it's important that a MIME part's content type
         matches the content as closely as possible so that the recipient's
         client can automatically select the right viewer for the content.
-        However, there's no reliable for NeoMutt to know how to detect every
+        However, there's no reliable way for NeoMutt to know how to detect every
         possible file type. Instead, it uses a simple plain text mapping file
         that specifies what file extension corresponds to what MIME type. This
         file is called <literal>mime.types</literal>.
@@ -10885,6 +10877,18 @@ text/html; lynx %s
                   <link linkend="timeout">$timeout</link> seconds.
                 </para>
                 <screen>text/html; firefox %s &amp; x-neomutt-keep</screen>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>x-neomutt-nowrap</term>
+              <listitem>
+                <para>
+                  <literal>x-neomutt-nowrap</literal> tells the NeoMutt pager
+                  to ignore the <link linkend="wrap">$wrap</link> parameter and
+                  to assume the output from the mailcap command to already be
+                  correctly wrapped.
+                </para>
+                <screen>text/html; /usr/local/bin/w3m -s -T text/html -o display_link_number=1 %s; nametemplate=%s.html; copiousoutput; x-neomutt-nowrap;</screen>
               </listitem>
             </varlistentry>
           </variablelist>
@@ -15052,11 +15056,6 @@ set new_mail_command = ""
               <entry>(empty)</entry>
             </row>
             <row>
-              <entry><literal>mime_subject</literal></entry>
-              <entry>boolean</entry>
-              <entry><literal>yes</literal></entry>
-            </row>
-            <row>
               <entry><literal>newsgroups_charset</literal></entry>
               <entry>string</entry>
               <entry><literal>utf-8</literal></entry>
@@ -15274,7 +15273,6 @@ set catchup_newsgroup = ask-yes
 set followup_to_poster = ask-yes
 set group_index_format = '%4C %M%N %5s  %-45.45f %d'
 set inews = ''
-set mime_subject = yes
 set newsgroups_charset = utf-8
 set newsrc = '~/.newsrc'
 set news_cache_dir = '~/.neomutt'
@@ -15842,7 +15840,9 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <entry><literal>nm_default_url</literal></entry>
               <entry>string</entry>
               <entry>(empty)</entry>
-              <entry></entry>
+              <entry>
+                Must use format: <literal>notmuch://&lt;absolute path&gt;</literal>
+              </entry>
             </row>
             <row>
               <entry><literal>nm_exclude_tags</literal></entry>
@@ -15893,6 +15893,40 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <entry>
                 Unnecessary since <link linkend="spoolfile">$spoolfile</link>
                 supports mailbox descriptions.
+              </entry>
+            </row>
+            <row>
+              <entry><literal>nm_query_window_enable</literal></entry>
+              <entry>boolean</entry>
+              <entry><literal>no</literal></entry>
+              <entry>
+                Enables windowed notmuch queries for
+                <literal>nm_query_window_duration = 0</literal>
+              </entry>
+            </row>
+            <row>
+              <entry><literal>nm_query_window_duration</literal></entry>
+              <entry>number</entry>
+              <entry><literal>0</literal></entry>
+              <entry>
+                Duration between start and end dates for windowed notmuch query.
+                This corresponds to a bounded notmuch <literal>date:</literal> query.
+                See <literal>notmuch-search-terms</literal> manual page for more info.
+
+                Value of <literal>0</literal> disables windowed queries unless
+                <literal>nm_query_window_enable=yes</literal>
+              </entry>
+            </row>
+            <row>
+              <entry><literal>nm_query_window_timebase</literal></entry>
+              <entry>string</entry>
+              <entry><literal>week</literal></entry>
+              <entry>
+                Time base for windowed notmuch queries.
+
+                Must be one of: <literal>hour</literal>, <literal>day</literal>,
+                <literal>week</literal>, <literal>month</literal>, or
+                <literal>year</literal>
               </entry>
             </row>
           </tbody>
@@ -16089,6 +16123,8 @@ set virtual_spoolfile = no
 <emphasis role="comment"># setup time window preferences</emphasis>
 <emphasis role="comment"># first setup the duration, and then the time unit of that duration</emphasis>
 <emphasis role="comment"># when set to 0 (the default) the search window feature is disabled</emphasis>
+<emphasis role="comment"># unless explicitly enabled with nm_query_window_enable.</emphasis>
+set nm_query_window_enable=yes
 set nm_query_window_duration=2
 set nm_query_window_timebase="week" # or "hour", "day", "week", "month", "year"
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
@@ -16147,6 +16183,85 @@ bind index &gt; vfolder-window-forward
         Raghavendra D Prabhu, Sami Farin, Stefan Assmann, Stefan Kuhn,
         Tim Stoakes, Vladimir Marek, Víctor Manuel Jáquez Leal,
         Richard Russon, Bernard 'Guyzmo' Pratz
+      </para>
+    </sect1>
+  </chapter>
+
+  <chapter id="feature/pager-read-delay-feature">
+    <title>Pager Read Delay Feature</title>
+    <subtitle>Delay when the pager marks a previewed message as
+    read</subtitle>
+
+    <sect1 id="pager-read-delay-support">
+      <title>Support</title>
+      <para>
+        <emphasis role="bold">Since:</emphasis> NeoMutt 2021-06-??
+      </para>
+      <para>
+        <emphasis role="bold">Dependencies:</emphasis> None
+      </para>
+    </sect1>
+
+    <sect1 id="pager-read-delay-intro">
+      <title>Introduction</title>
+      <para>
+        The <quote>Pager Read Delay</quote> feature adds a new
+        config variable to allow the pager to operate in a preview
+        mode.  A new message is not marked as read merely because
+        the pager opened it, but only after the pager remains on the
+        message for a given length of time.
+      </para>
+    </sect1>
+
+    <sect1 id="pager-read-delay-functions">
+      <title>Functions</title>
+      <para>
+        The <quote>Pager Read Delay</quote> feature adds no new
+        functions NeoMutt.  Existing pager functions for navigating
+        to a different message now check whether to mark a message
+        as read.
+      </para>
+    </sect1>
+
+    <sect1 id="pager-read-delay-variables">
+      <title>Variables</title>
+      <para>
+        The <quote>Pager Read Delay</quote> feature adds one new
+        config variable,
+        <link linkend="pager-read-delay">$pager_read_delay</link>, which
+        is an integer for how many seconds the pager must remain on
+        a given message before marking it as read.  The variable
+        defaults to 0 for the default behavior of marking a message
+        as read the moment the pager visits it.
+      </para>
+    </sect1>
+
+    <sect1 id="pager-read-delay-neomuttrc">
+      <title>neomuttrc</title>
+
+<screen>
+<emphasis role="comment"># Example NeoMutt config file for the pager-read-delay feature.</emphasis>
+
+<emphasis role="comment"># Stay at least 5 seconds on a message before
+the pager marks it as read</emphasis>
+set pager_read_delay = 5
+
+<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+</screen>
+
+    </sect1>
+
+    <sect1 id="pager-read-delay-known-bugs">
+      <title>Known Bugs</title>
+      <para>
+        None
+      </para>
+    </sect1>
+
+    <sect1 id="pager-read-delay-credits">
+      <title>Credits</title>
+      <para>
+        Eric Blake
       </para>
     </sect1>
   </chapter>
@@ -20534,14 +20649,14 @@ Controls whether NeoMutt will weed headers when invoking the
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, Mutt will recurse inside multipart/alternatives while
+When <emphasis>set</emphasis>, NeoMutt will recurse inside multipart/alternatives while
 performing attachment searching and counting(see <link linkend="attachments">attachments</link>).
 </para>
 <para>
 Traditionally, multipart/alternative parts have simply represented
 different encodings of the main content of the email.  Unfortunately,
 some mail clients have started to place email attachments inside
-one of alternatives.  Setting this will allow Mutt to find
+one of alternatives.  Setting this will allow NeoMutt to find
 and count matching attachments hidden there, and include them
 in the index via %X or through ~X pattern matching.
 </para>
@@ -21132,7 +21247,7 @@ ignored for interoperability reasons.
 <sect2 id="editor">
 <title>editor</title>
 <literallayout>Type: command
-Default: <quote><literal>vi</literal></quote></literallayout>
+Default: (empty)</literallayout>
 
 <para>
 This variable specifies which editor is used by NeoMutt.
@@ -21680,6 +21795,35 @@ a regular expression that will match the whole name so NeoMutt will expand
 </para>
 </sect2>
 
+<sect2 id="greeting">
+<title>greeting</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+When set, this is the string that will precede every message as a
+greeting phrase to the recipients.
+</para>
+<para>
+"Format strings" are similar to the strings used in the "C"
+function printf to format output (see the man page for more detail).
+The following sequences are defined in NeoMutt:
+</para>
+<para>
+
+</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry>%n </entry><entry>Recipient's real name
+</entry></row>
+<row><entry>%u </entry><entry>User (login) name of recipient
+</entry></row>
+<row><entry>%v </entry><entry>First name of recipient
+</entry></row></tbody></tgroup></informaltable>
+</sect2>
+
 <sect2 id="group-index-format">
 <title>group_index_format</title>
 <literallayout>Type: string
@@ -21848,8 +21992,8 @@ cut-off of first-level domains.
 Default: <quote><literal>unread,draft,flagged,passed,replied,attachment,signed,encrypted</literal></quote></literallayout>
 
 <para>
-This variable specifies private notmuch/imap tags which should not be printed
-on screen.
+This variable specifies a list of comma-separated private notmuch/imap tags
+which should not be printed on screen.
 </para>
 </sect2>
 
@@ -22046,7 +22190,7 @@ list.
 Default: (empty)</literallayout>
 
 <para>
-This is a colon-delimited list of authentication methods NeoMutt may
+This is a colon-separated list of authentication methods NeoMutt may
 attempt to use to log in to an IMAP server, in the order NeoMutt should
 try them.  Authentication methods are either "login" or the right
 side of an IMAP "AUTH=xxx" capability string, e.g. "digest-md5", "gssapi"
@@ -22461,7 +22605,7 @@ The following sequences are defined in NeoMutt:
 </entry></row>
 <row><entry>%b </entry><entry>Filename of the original message folder (think mailbox)
 </entry></row>
-<row><entry>%B </entry><entry>The list to which the letter was sent, or else the folder name (%b).
+<row><entry>%B </entry><entry>Same as %K
 </entry></row>
 <row><entry>%C </entry><entry>Current message number
 </entry></row>
@@ -22672,6 +22816,19 @@ a "<link linkend="mbox-hook">mbox-hook</link>" command.
 </para>
 </sect2>
 
+<sect2 id="local-date-header">
+<title>local_date_header</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+If <emphasis>set</emphasis>, convert the date in the Date header of sent emails into the
+local timezone of the sender. When <emphasis>unset</emphasis>, use UTC instead.
+This is meant for privacy-conscious users that do not want to disclose their
+time zone when they send mail.
+</para>
+</sect2>
+
 <sect2 id="mail-check">
 <title>mail_check</title>
 <literallayout>Type: number
@@ -22736,9 +22893,10 @@ how often (in seconds) NeoMutt will update message counts.
 Default: <quote><literal>~/.mailcap:/usr/share/neomutt/mailcap:/etc/mailcap:/etc/mailcap:/usr/etc/mailcap:/usr/local/etc/mailcap</literal></quote></literallayout>
 
 <para>
-This variable specifies which files to consult when attempting to
-display MIME bodies not directly supported by NeoMutt.  The default value
-is generated during startup: see the "<link linkend="mailcap">mailcap</link>" section of the manual.
+This variable specifies a list of colon-separated files to consult when
+attempting to display MIME bodies not directly supported by NeoMutt.  The
+default value is generated during startup: see the "<link linkend="mailcap">mailcap</link>" section of the
+manual.
 </para>
 <para>
 <link linkend="mailcap-path">$mailcap_path</link> is overridden by the environment variable <literal>$MAILCAPS</literal>.
@@ -23079,18 +23237,6 @@ Default: yes</literallayout>
 When forwarding multiple attachments of a MIME message from the attachment
 menu, attachments which can't be decoded in a reasonable manner will
 be attached to the newly composed message if this option is <emphasis>set</emphasis>.
-</para>
-</sect2>
-
-<sect2 id="mime-subject">
-<title>mime_subject</title>
-<literallayout>Type: boolean
-Default: yes</literallayout>
-
-<para>
-If <emphasis>unset</emphasis>, 8-bit "subject:" line in article header will not be
-encoded according to RFC2047 to base64.  This is useful when message
-is Usenet article, because MIME for news is nonstandard feature.
 </para>
 </sect2>
 
@@ -23613,6 +23759,22 @@ message.  This is useful, for example, to determine how many messages
 remain to be read in the current thread.  A value of 0 results in no index
 being shown.  If the number of messages in the current folder is less than
 <link linkend="pager-index-lines">$pager_index_lines</link>, then the index will only use as many lines as it needs.
+</para>
+</sect2>
+
+<sect2 id="pager-read-delay">
+<title>pager_read_delay</title>
+<literallayout>Type: number
+Default: 0</literallayout>
+
+<para>
+Determines the number of seconds that must elapse after first
+opening a new message in the pager before that message will be
+marked as read.  A value of 0 results in the message being marked
+read unconditionally; for other values, navigating to another
+message or exiting the pager before the timeout will leave the
+message marked unread.  This setting is ignored if <link linkend="pager">$pager</link> is not
+<emphasis role="bold">builtin</emphasis>.
 </para>
 </sect2>
 
@@ -24371,7 +24533,7 @@ available but authentication fails, NeoMutt will not connect to the POP server.
 Default: (empty)</literallayout>
 
 <para>
-This is a colon-delimited list of authentication methods NeoMutt may
+This is a colon-separated list of authentication methods NeoMutt may
 attempt to use to log in to an POP server, in the order NeoMutt should
 try them.  Authentication methods are either "user", "apop" or any
 SASL mechanism, e.g. "digest-md5", "gssapi" or "cram-md5".
@@ -24608,10 +24770,15 @@ remote machine without having to enter a password.
 Default: (empty)</literallayout>
 
 <para>
-RFC8255 : user preferred languages to be search in parts and display
-Ex. : set preferred_languages="en,fr,de"
+This variable specifies a list of comma-separated languages.
+RFC8255 : user preferred languages to be searched in parts and display.
+Example:
+
 </para>
-</sect2>
+
+<screen>
+set preferred_languages="en,fr,de"
+</screen></sect2>
 
 <sect2 id="print">
 <title>print</title>
@@ -26189,7 +26356,7 @@ possible <literal>printf(3)</literal>-like sequences.
 Default: (empty)</literallayout>
 
 <para>
-This is a colon-delimited list of authentication methods NeoMutt may
+This is a colon-separated list of authentication methods NeoMutt may
 attempt to use to log in to an SMTP server, in the order NeoMutt should
 try them.  Authentication methods are any SASL mechanism, e.g. "plain",
 "digest-md5", "gssapi" or "cram-md5".
@@ -27252,20 +27419,6 @@ virtual-mailboxes) as a spool file.
 <para>
 This command is now unnecessary. <link linkend="spoolfile">$spoolfile</link> has been extended to support
 mailbox descriptions as a value.
-</para>
-</sect2>
-
-<sect2 id="visual">
-<title>visual</title>
-<literallayout>Type: command
-Default: <quote><literal>vi</literal></quote></literallayout>
-
-<para>
-Specifies the visual editor to invoke when the "<literal>~v</literal>" command is
-given in the built-in editor.
-</para>
-<para>
-<link linkend="visual">$visual</link> is overridden by the environment variable <literal>$VISUAL</literal> or <literal>$EDITOR</literal>.
 </para>
 </sect2>
 
