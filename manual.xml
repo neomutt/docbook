@@ -5940,7 +5940,7 @@ unignore posted-to:
       <para>
         NeoMutt provides a number of advanced features for handling (possibly
         many) folders and new mail within them, please refer to
-        <xref linkend="new-mail" /> for details (including in what situations
+        <xref linkend="feature/new-mail" /> for details (including in what situations
         and how often NeoMutt checks for new mail). Additionally,
         <link linkend="new-mail-command">$new_mail_command</link> can be used
         to run a command when new mail is detected.
@@ -16207,7 +16207,7 @@ bind index &gt; vfolder-window-forward
     <sect1 id="pager-read-delay-support">
       <title>Support</title>
       <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2021-06-??
+        <emphasis role="bold">Since:</emphasis> NeoMutt 2021-06-16
       </para>
       <para>
         <emphasis role="bold">Dependencies:</emphasis> None
@@ -16243,7 +16243,7 @@ bind index &gt; vfolder-window-forward
         <link linkend="pager-read-delay">$pager_read_delay</link>, which
         is an integer for how many seconds the pager must remain on
         a given message before marking it as read.  The variable
-        defaults to 0 for the default behavior of marking a message
+        defaults to 0 for the original behavior of marking a message
         as read the moment the pager visits it.
       </para>
     </sect1>
@@ -16266,7 +16266,11 @@ set pager_read_delay = 5
     <sect1 id="pager-read-delay-known-bugs">
       <title>Known Bugs</title>
       <para>
-        None
+        When <link linkend="pager-index-lines">$pager_index_lines</link> is
+        non-zero, the <quote>N</quote> status indicator from the
+        <quote>%Z</quote> expando of <link
+        linkend="index-format">$index_format</link> does not
+        actively reflect the current new/read status of the message.
       </para>
     </sect1>
 
