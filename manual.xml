@@ -181,7 +181,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
     <sect1 id="copyright">
       <title>Copyright</title>
       <para>
-        NeoMutt is Copyright © 1996-2020 Michael R. Elkins
+        NeoMutt is Copyright © 1996-2021 Michael R. Elkins
         <email>me@neomutt.org</email> and others.
       </para>
       <para>
@@ -440,13 +440,13 @@ Seas          1/7|  4      Sep 25  Grace Hall       ( 27)  Capybara
           </para>
 
 <screen>
-bind index,pager \CP sidebar-prev       <emphasis role="comment"># Ctrl-Shift-P – Previous Mailbox</emphasis>
-bind index,pager \CN sidebar-next       <emphasis role="comment"># Ctrl-Shift-N – Next Mailbox</emphasis>
-bind index,pager \CO sidebar-open       <emphasis role="comment"># Ctrl-Shift-O – Open Highlighted Mailbox</emphasis>
+bind index,pager \CP sidebar-prev       <emphasis role="comment"># Ctrl-P – Previous Mailbox</emphasis>
+bind index,pager \CN sidebar-next       <emphasis role="comment"># Ctrl-N – Next Mailbox</emphasis>
+bind index,pager \CO sidebar-open       <emphasis role="comment"># Ctrl-O – Open Highlighted Mailbox</emphasis>
 </screen>
 
           <para>
-            Press <quote>Ctrl-Shift-N</quote> (Next mailbox) twice will move
+            Pressing <quote>Ctrl-N</quote> (Next mailbox) twice will move
             the Sidebar <emphasis role="bold">highlight</emphasis> to down to
             the <quote>Seas</quote> mailbox.
           </para>
@@ -473,7 +473,7 @@ Cars            4|  3    ! Aug 16  Ewan Brown       (333)  Hummingbird
             </para>
           </note>
           <para>
-            Press <quote>Ctrl-Shift-O</quote>
+            Press <quote>Ctrl-O</quote>
             (<literal>&lt;sidebar-open&gt;</literal>) to open the highlighted
             mailbox.
           </para>
@@ -1217,7 +1217,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         <title>Compose Menu</title>
         <para>
           The compose menu features a split screen containing the information
-          which really matter before actually sending a message by mail: who
+          which really matters before actually sending a message by mail: who
           gets the message as what (recipients and who gets what kind of copy).
           Additionally, users may set security options like deciding whether to
           sign, encrypt or sign and encrypt a message with/for what keys. Also,
@@ -1248,7 +1248,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           receiving messages of arbitrary MIME types. The attachment menu
           displays a message's structure in detail: what content parts are
           attached to which parent part (which gives a true tree structure),
-          which type is of what type and what size. Single parts may saved,
+          which part is of what type and what size. Single parts may saved,
           deleted or modified to offer great and easy access to message's
           internals.
         </para>
@@ -2526,13 +2526,9 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
             </term>
             <listitem>
               <para>
-                This function will skip past the headers of the current message.
-              </para>
-              <para>
-                The variable
-                <link linkend="toggle-quoted-show-levels">$toggle_quoted_show_levels</link>
-                can be used to show some context by continuing to show that number of levels
-                rather than hiding all quoted levels.
+                This function will skip to the first line of the body,
+                past the headers of the current message, regardless of
+                current position.
               </para>
             </listitem>
           </varlistentry>
@@ -2563,12 +2559,22 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
             </term>
             <listitem>
               <para>
-                This function will go to the next line of non-quoted text which
-                comes after a line of quoted text in the internal pager.
+                This function will make the internal pager go forward
+                to the next segment of non-quoted body text (whether
+                the first line of the body after headers, or following
+                a line of quoted text), or print a message if no
+                further unquoted text can be found.
+              </para>
+              <para>
+                The variable
+                <link linkend="pager-skip-quoted-context">$pager_skip_quoted_context</link>
+                can be used to show some quoted context prior to the
+                selected line.
               </para>
             </listitem>
           </varlistentry>
           <varlistentry>
+
             <term>
               <literal>&lt;toggle-quoted&gt;</literal><anchor id="toggle-quoted"/>
               (default: T)
@@ -2580,6 +2586,12 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                 This function toggles the display of the quoted material in the message.
                 It is particularly useful when being interested in just the response and
                 there is a large amount of quoted text in the way.
+              </para>
+              <para>
+                The variable
+                <link linkend="toggle-quoted-show-levels">$toggle_quoted_show_levels</link>
+                can be used to show some context by continuing to show that number of levels
+                rather than hiding all quoted levels.
               </para>
             </listitem>
           </varlistentry>
@@ -6829,15 +6841,15 @@ set spam_separator=", "
         <para>
           This command is used to set (and unset)
           <link linkend="variables">configuration variables</link>. There are
-          four basic types of variables: boolean, number, string, string list
+          several basic types of variables: boolean, number, string, string list
           and quadoption. <emphasis>boolean</emphasis> variables can be
           <emphasis>set</emphasis> (true) or <emphasis>unset</emphasis>
           (false). <emphasis>number</emphasis> variables can be assigned
-          a positive integer value. Value of number variables can be
+          a positive integer value. The value of numeric variables can be
           incremented <emphasis>+=</emphasis> and decremented
           <emphasis>-=</emphasis>. <emphasis>String list</emphasis> variables
-          use <emphasis>+=</emphasis> for appending increment to the string list
-          and <emphasis>-=</emphasis> for removal decrement from the string list.
+          use <emphasis>+=</emphasis> for appending to the string list
+          and <emphasis>-=</emphasis> for removal from the string list.
           <emphasis>string</emphasis> variables
           consist of any number of printable characters and must be enclosed in
           quotes if they contain spaces or tabs. You may also use the escape
@@ -6911,9 +6923,16 @@ set spam_separator=", "
           </para>
           <para>
             The <command>set</command> command either creates a custom
-            <literal>my_</literal> variable or changes its value if it does
-            exist already. The <command>unset</command> and
-            <command>reset</command> commands remove the variable entirely.
+            <literal>my_</literal> variable or changes its value if it
+            exists already. Use of <emphasis>+=</emphasis> will adjust
+            a custom variable using the same behavior as a string
+            variable, by appending additional characters (this is true
+            even if the current contents of the variable resemble an
+            integer, which is different than the behavior of
+            <emphasis>+=</emphasis> on built-in numeric
+            variables). The <command>unset</command> and
+            <command>reset</command> commands remove the variable
+            entirely.
           </para>
           <para>
             Since user-defined variables are expanded in the same way that
@@ -16023,6 +16042,14 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
                 backward
               </entry>
             </row>
+            <row>
+              <entry>index</entry>
+              <entry><literal>&lt;vfolder-window-reset&gt;</literal></entry>
+              <entry>
+                generate virtual folder by moving the query's time window to
+                the present
+              </entry>
+            </row>
           </tbody>
         </tgroup>
       </table>
@@ -16229,7 +16256,7 @@ bind index &gt; vfolder-window-forward
       <title>Functions</title>
       <para>
         The <quote>Pager Read Delay</quote> feature adds no new
-        functions NeoMutt.  Existing pager functions for navigating
+        functions to NeoMutt.  Existing pager functions for navigating
         to a different message now check whether to mark a message
         as read.
       </para>
@@ -16254,8 +16281,7 @@ bind index &gt; vfolder-window-forward
 <screen>
 <emphasis role="comment"># Example NeoMutt config file for the pager-read-delay feature.</emphasis>
 
-<emphasis role="comment"># Stay at least 5 seconds on a message before
-the pager marks it as read</emphasis>
+<emphasis role="comment"># Stay at least 5 seconds on a message before the pager marks it as read</emphasis>
 set pager_read_delay = 5
 
 <emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
@@ -17160,12 +17186,16 @@ color sidebar_unread color136 default
 
   <chapter id="feature/skip-quoted">
     <title>Skip Quoted Feature</title>
-    <subtitle>Leave some context visible</subtitle>
+    <subtitle>Managing quoted text in the pager</subtitle>
 
     <sect1 id="skip-quoted-support">
       <title>Support</title>
       <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-28
+        <emphasis role="bold">Since:</emphasis>
+        <literal>$skip_quoted_offset</literal> in NeoMutt
+        2016-03-28, <literal>$toggle_quoted_show_levels</literal> in
+        NeoMutt 2019-10-25, <literal>&lt;skip-headers&gt;</literal>
+        in NeoMutt 2021-02-05
       </para>
       <para>
         <emphasis role="bold">Dependencies:</emphasis> None
@@ -17175,15 +17205,55 @@ color sidebar_unread color136 default
     <sect1 id="skip-quoted-intro">
       <title>Introduction</title>
       <para>
-        When viewing an email, the <literal>&lt;skip-to-quoted&gt;</literal>
-        function (by default the <literal>S</literal> key) will scroll past
-        any email headers or quoted text. Sometimes, a little context is
-        useful.
+        When viewing an email, the
+        <literal>&lt;skip-quoted&gt;</literal> function (by default
+        the <literal>S</literal> key) will scroll past any email
+        headers or quoted text. Sometimes, a little context is
+        useful.  By setting the
+        <literal>$skip_quoted_offset</literal> variable, you can
+        select how much of the quoted text is left visible.
       </para>
       <para>
-        By setting the <literal>$skip_quoted_offset</literal> variable, you
-        can select how much of the quoted text is left visible.
+        When using the <literal>&lt;toggle-quoted&gt;</literal>
+        function (by default the <literal>T</literal> key), it can
+        be convenient to hide text that has been quoted multiple
+        times while still leaving quoted text that is relevant to
+        the unquoted reply intact.  This can be done by setting the
+        <literal>$toggle_quoted_show_levels</literal> variable.
       </para>
+      <para>
+        Also, it can be handy to jump directly to the start of the
+        email body with the <literal>&lt;skip-headers&gt;</literal>
+        function (by default the <literal>H</literal>key).
+      </para>
+    </sect1>
+
+    <sect1 id="skip-quoted-functions">
+      <title>Functions</title>
+
+      <table id="table-quoted-functions">
+        <title>Skip Quoted Functions</title>
+        <tgroup cols="4">
+          <thead>
+            <row>
+              <entry>Menus</entry>
+              <entry>Default Key</entry>
+              <entry>Function</entry>
+              <entry>Description</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>pager</entry>
+              <entry>H</entry>
+              <entry><literal>&lt;skip-headers&gt;</literal></entry>
+              <entry>
+                jump to first line after headers
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
     </sect1>
 
     <sect1 id="skip-quoted-variables">
@@ -17201,7 +17271,17 @@ color sidebar_unread color136 default
           </thead>
           <tbody>
             <row>
+              <entry><literal>pager_skip_quoted_context</literal></entry>
+              <entry>number</entry>
+              <entry>0</entry>
+            </row>
+            <row>
               <entry><literal>skip_quoted_offset</literal></entry>
+              <entry>synonym</entry>
+              <entry>pager_skip_quoted_context</entry>
+            </row>
+            <row>
+              <entry><literal>toggle_quoted_show_levels</literal></entry>
               <entry>number</entry>
               <entry>0</entry>
             </row>
@@ -17217,11 +17297,17 @@ color sidebar_unread color136 default
 <emphasis role="comment"># Example NeoMutt config file for the skip-quoted feature.</emphasis>
 
 <emphasis role="comment"># The 'S' (skip-quoted) command scrolls the pager past the quoted text (usually</emphasis>
-<emphasis role="comment"># indented with '&gt; '. Setting 'skip_quoted_offset' leaves some lines of quoted</emphasis>
-<emphasis role="comment"># text on screen for context.</emphasis>
+<emphasis role="comment"># indented with '&gt; '. Setting 'pager_skip_quoted_context leaves some lines</emphasis>
+<emphasis role="comment"># of quoted text on screen for context.</emphasis>
 
 <emphasis role="comment"># Show three quoted lines before the reply</emphasis>
-set skip_quoted_offset = 3
+set pager_skip_quoted_context = 3
+
+<emphasis role="comment"># The 'T' (toggle-quoted) command hides quoted text, but can</emphasis>
+<emphasis role="comment"># be limited to only hiding deeply-nested quotes.</emphasis>
+
+<emphasis role="comment"># Preserve the first level of quoted text</emphasis>
+set toggle_quoted_show_levels = 1
 
 <emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
 </screen>
@@ -17344,8 +17430,9 @@ set skip_quoted_offset = 3
 set status_format='-%r-NeoMutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? \
 Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%&gt;-(%P)---'
 set index_format='%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?) %s'
-set sort=threads
-set sort_aux=last-date-received
+set use_threads=yes
+set sort=last-date-received
+set sort_aux=date
 <emphasis role="comment"># 'status color' can take up to 2 extra parameters</emphasis>
 <emphasis role="comment"># color status foreground background [ regex [ num ]]</emphasis>
 <emphasis role="comment"># 0 extra parameters</emphasis>
@@ -17640,6 +17727,187 @@ bind index D purge-message
       <title>Credits</title>
       <para>
         Cedric Duval, Benjamin Kuperman, Paul Miller, Richard Russon
+      </para>
+    </sect1>
+  </chapter>
+
+  <chapter id="feature/use-threads">
+    <title>Use Threads Feature</title>
+    <subtitle>Improve the experience with viewing threads in the
+    index</subtitle>
+
+    <sect1 id="use-threads-support">
+      <title>Support</title>
+      <para>
+        <emphasis role="bold">Since:</emphasis> NeoMutt 2021-08-01
+      </para>
+      <para>
+        <emphasis role="bold">Dependencies:</emphasis> None
+      </para>
+    </sect1>
+
+    <sect1 id="use-threads-intro">
+      <title>Introduction</title>
+      <para>
+        The <quote>Use Threads</quote> feature adds a new config
+        variable to allow more precise control of how threads are
+        displayed in the index.  Whether threads are in use is now
+        orthogonal from how messages are sorted.
+      </para>
+    </sect1>
+
+    <sect1 id="use-thread-functions">
+      <title>Functions</title>
+      <para>
+        The <quote>Use Threads</quote> feature adds no new functions
+        to NeoMutt.  The existing functions
+        <literal>&lt;sort-mailbox&gt;</literal> and
+        <literal>&lt;sort-reverse&gt;</literal> are updated to
+        toggle the state of <literal>$use_threads</literal> once it
+        has been set, while preserving backwards-compatible behavior
+        on <literal>$sort</literal> if this feature is not used.
+      </para>
+    </sect1>
+
+    <sect1 id="use-threads-variables">
+      <title>Variables</title>
+      <para>
+        The <quote>Use Threads</quote> feature adds one new config
+        variable, <link linkend="use-threads">$use_threads</link>,
+        which is an enumeration of possible thread views.  The
+        variable defaults to unset for the original behavior of
+        overloading <link linkend="sort">$sort=threads</link> to
+        enable sorting.  It can be set to <literal>flat</literal>
+        (or <literal>no</literal>) for an unthreaded view based on
+        <literal>$sort</literal>, to <literal>threads</literal> (or
+        <literal>yes</literal> for a threaded view where roots
+        appear above children, or to <literal>reverse</literal> for
+        a threaded view where children appear above roots.
+      </para>
+      <para>
+        When sorting by threads, the value of <link
+        linkend="sort-aux">$sort_aux</link> determines which thread
+        floats to the top.  If <literal>$sort_aux</literal> does not
+        contain <literal>reverse-</literal>, the latest thread goes
+        to the bottom for <literal>use_threads=threads</literal> and
+        to the top for <literal>use_threads=reverse</literal>; the
+        direction of float is swapped if
+        <literal>$sort_aux</literal> also uses
+        <literal>reverse-</literal>.  If
+        <literal>$sort_aux</literal> includes
+        <literal>last-</literal>, the overall thread is sorted by
+        its descendant at any depth which would sort last in a flat
+        view; otherwise, the overall thread is sorted solely by the
+        thread root.  The <literal>last-</literal> prefix is ignored
+        when <literal>use_threads=flat</literal>.
+      </para>
+      <para>
+        The <quote>Use Threads</quote> feature also modifies the
+        existing config variable <link
+        linkend="status-format">$status_format</link>, adding the
+        <literal>%T</literal> expando which shows the current
+        threading method.
+      </para>
+    </sect1>
+
+    <sect1 id="use-threads-neomuttrc">
+      <title>neomuttrc</title>
+
+<screen>
+<emphasis role="comment"># Example NeoMutt config file for the use-threads feature.</emphasis>
+
+
+<emphasis role="comment"># ------------------------------------------------------------</emphasis>
+<emphasis role="comment"># Default configuration: flat view sorted by date</emphasis>
+<emphasis role="comment">#set use_threads=no sort=date sort_aux=date</emphasis>
+<emphasis role="comment">#   Anne     12:01  cover letter for thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:02  part 1 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:03  part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:04  part 3 of thread 1</emphasis>
+<emphasis role="comment">#   Barbara  12:05  thread 2</emphasis>
+<emphasis role="comment">#   Claire   12:06  thread 3</emphasis>
+<emphasis role="comment">#   Diane    12:07  re: part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Erica    12:08  re: thread 2</emphasis>
+
+<emphasis role="comment"># ------------------------------------------------------------</emphasis>
+<emphasis role="comment"># Legacy configuration: sorting threads by date started</emphasis>
+<emphasis role="comment">#set sort=threads sort_aux=date</emphasis>
+<emphasis role="comment"># Modern configuration for the same</emphasis>
+<emphasis role="comment"># Latest root message sorts last</emphasis>
+set use_threads=yes sort=date sort_aux=date
+<emphasis role="comment">#   Anne     12:01  cover letter for thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:02  |-&gt;part 1 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:03  |-&gt;part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Diane    12:07  | `-&gt;re: part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:04  `-&gt;part 3 of thread 1</emphasis>
+<emphasis role="comment">#   Barbara  12:05  thread 2</emphasis>
+<emphasis role="comment">#   Erica    12:08  `-&gt;re: thread 2</emphasis>
+<emphasis role="comment">#   Claire   12:06  thread 3</emphasis>
+
+<emphasis role="comment"># ------------------------------------------------------------</emphasis>
+<emphasis role="comment"># Legacy configuration: display threads upside-down</emphasis>
+<emphasis role="comment">#set sort=reverse-threads sort_aux=date</emphasis>
+<emphasis role="comment"># Modern configuration for the same</emphasis>
+<emphasis role="comment"># Latest root message sorts first</emphasis>
+set use_threads=reverse sort=date sort_aux=date
+<emphasis role="comment">#   Claire   12:06  thread 3</emphasis>
+<emphasis role="comment">#   Erica    12:08  ,-&gt;re: thread 2</emphasis>
+<emphasis role="comment">#   Barbara  12:05  thread 2</emphasis>
+<emphasis role="comment">#   Anne     12:04  ,-&gt;part 3 of thread 1</emphasis>
+<emphasis role="comment">#   Diane    12:07  | ,-&gt;re: part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:03  |-&gt;part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:02  |-&gt;part 1 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:01  cover letter for thread 1</emphasis>
+
+<emphasis role="comment"># ------------------------------------------------------------</emphasis>
+<emphasis role="comment"># Legacy configuration: recently active thread/subthread first</emphasis>
+<emphasis role="comment">#set sort=threads sort_aux=reverse-last-date</emphasis>
+<emphasis role="comment"># Modern configuration for the same</emphasis>
+<emphasis role="comment"># Note that subthreads are also rearranged</emphasis>
+set use_threads=threads sort=reverse-last-date sort_aux=reverse-last-date
+<emphasis role="comment">#   Barbara  12:05  thread 2</emphasis>
+<emphasis role="comment">#   Erica    12:08  `-&gt;re: thread 2</emphasis>
+<emphasis role="comment">#   Anne     12:01  cover letter for thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:03  |-&gt;part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Diane    12:07  | `-&gt;re: part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:04  |-&gt;part 3 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:02  `-&gt;part 1 of thread 1</emphasis>
+<emphasis role="comment">#   Claire   12:06  thread 3</emphasis>
+
+<emphasis role="comment"># ------------------------------------------------------------</emphasis>
+<emphasis role="comment"># Modern configuration: threads keep date order, recently active thread last</emphasis>
+<emphasis role="comment"># (not possible with legacy configuration)</emphasis>
+set use_threads=threads sort=last-date sort_aux=date
+<emphasis role="comment">#   Claire   12:06  thread 3</emphasis>
+<emphasis role="comment">#   Anne     12:01  cover letter for thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:02  |-&gt;part 1 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:03  |-&gt;part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Diane    12:07  | `-&gt;re: part 2 of thread 1</emphasis>
+<emphasis role="comment">#   Anne     12:04  `-&gt;part 3 of thread 1</emphasis>
+<emphasis role="comment">#   Barbara  12:05  thread 2</emphasis>
+<emphasis role="comment">#   Erica    12:08  `-&gt;re: thread 2</emphasis>
+
+<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+</screen>
+
+    </sect1>
+
+    <sect1 id="use-threads-known-bugs">
+      <title>Known Bugs</title>
+      <para>
+        Even though <literal>use_threads</literal> accepts the
+        values <literal>yes</literal> and <literal>no</literal>, it
+        does not behave like a boolean or quad-option variable.  A
+        bare <literal>set use_threads</literal> performs a query
+        rather than setting it to <literal>yes</literal>, and the
+        variable is not usable with <literal>toggle</literal>.
+      </para>
+    </sect1>
+
+    <sect1 id="use-threads-credits">
+      <title>Credits</title>
+      <para>
+        Eric Blake
       </para>
     </sect1>
   </chapter>
@@ -23794,6 +24062,24 @@ message marked unread.  This setting is ignored if <link linkend="pager">$pager<
 </para>
 </sect2>
 
+<sect2 id="pager-skip-quoted-context">
+<title>pager_skip_quoted_context</title>
+<literallayout>Type: number
+Default: 0</literallayout>
+
+<para>
+Determines the number of lines of context to show before the
+unquoted text when using the <literal>&lt;skip-quoted&gt;</literal> function. When set
+to a positive number at most that many lines of the previous quote
+are displayed. If the previous quote is shorter the whole quote is
+displayed.
+</para>
+<para>
+The (now deprecated) <emphasis>skip_quoted_offset</emphasis> is an alias for this
+variable, and should no longer be used.
+</para>
+</sect2>
+
 <sect2 id="pager-stop">
 <title>pager_stop</title>
 <literallayout>Type: boolean
@@ -25950,17 +26236,6 @@ See <link linkend="formatstrings-size">formatstrings-size</link>.
 </para>
 </sect2>
 
-<sect2 id="skip-quoted-offset">
-<title>skip_quoted_offset</title>
-<literallayout>Type: number
-Default: 0</literallayout>
-
-<para>
-Lines of quoted text that are displayed before the unquoted text after
-"skip to quoted" command (S)
-</para>
-</sect2>
-
 <sect2 id="sleep-time">
 <title>sleep_time</title>
 <literallayout>Type: number
@@ -26482,21 +26757,41 @@ are:
 </para></listitem></itemizedlist>
 
 <para>
-You may optionally use the "reverse-" prefix to specify reverse sorting
-order.
+You may optionally use the "reverse-" prefix to specify reverse
+sorting order, or the "last-" prefix to sort threads based on the
+corresponding attribute of the last descendant rather than the
+thread root.  If both prefixes are in use, "reverse-" must come
+before "last-".  The "last-" prefix has no effect on a flat view.
+</para>
+<para>
+Any ties in the primary sort are broken by <link linkend="sort-aux">$sort_aux</link>.  When
+<link linkend="use-threads">$use_threads</link> is "threads" or "reverse", <link linkend="sort">$sort</link> controls the
+sorting between threads, and <link linkend="sort-aux">$sort_aux</link> controls the sorting within
+a thread.
 </para>
 <para>
 The "date-sent" value is a synonym for "date". The "mailbox-order" value is
 a synonym for "unsorted".
 </para>
 <para>
-Example:
-
+The values of "threads" and "reverse-threads" are legacy options,
+which cause the value of <literal><link linkend="sort-aux">$sort_aux</link></literal> to also contol sorting
+between threads, and they may not be used with the "last-" prefix.
+The preferred way to enable a threaded view is via
+<literal><link linkend="use-threads">$use_threads</link></literal>.  This variable can also be set via the
+<literal>&lt;sort-mailbox&gt;</literal> and <literal>&lt;sort-reverse&gt;</literal> functions.
 </para>
-
-<screen>
-set sort=reverse-date-sent
-</screen></sect2>
+<para>
+Note: When <link linkend="use-threads">$use_threads</link> is "threads", the last thread sorts to the
+bottom; when it is "reversed", the last thread sorts to the top.
+The use of "reverse-" in <link linkend="sort">$sort</link> swaps which end the last thread
+will sort to.
+</para>
+<para>
+See the "Use Threads Feature" section for further explanation and
+examples.
+</para>
+</sect2>
 
 <sect2 id="sort-alias">
 <title>sort_alias</title>
@@ -26531,28 +26826,26 @@ This provides a secondary sort for messages in the "index" menu, used
 when the <link linkend="sort">$sort</link> value is equal for two messages.
 </para>
 <para>
-When sorting by threads, this variable controls how threads are sorted
-in relation to other threads, and how the branches of the thread trees
-are sorted.  This can be set to any value that <link linkend="sort">$sort</link> can, except
-"threads" (in that case, NeoMutt will just use "date").  You can also
-specify the "last-" prefix in addition to the "reverse-" prefix, but "last-"
-must come after "reverse-".  The "last-" prefix causes messages to be
-sorted against its siblings by which has the last descendant, using
-the rest of <link linkend="sort-aux">$sort_aux</link> as an ordering.  For instance,
+When sorting by threads, this variable controls how subthreads are
+sorted within a single thread (for the order between threads, see
+<link linkend="sort">$sort</link>).  This can be set to any value that <link linkend="sort">$sort</link> can, including
+with the use of "reverse-" and "last-" prefixes, except for
+variations using "threads" (in that case, NeoMutt will just use
+"date").  For instance,
 
 </para>
 
 <screen>
 set sort_aux=last-date-received
 </screen><para>
-would mean that if a new message is received in a
-thread, that thread becomes the last one displayed (or the first, if
-you have "<literal>set sort=reverse-threads</literal>".)
+would mean that if a new message is received in a thread, that
+subthread becomes the last one displayed (or the first, if you have
+"<literal>set use_threads=reverse</literal>".)  When using <link linkend="use-threads">$use_threads</link>, it is
+more common to use "last-" with <link linkend="sort">$sort</link> and not with <link linkend="sort-aux">$sort_aux</link>.
 </para>
 <para>
-Note: For reversed-threads <link linkend="sort">$sort</link>
-order, <link linkend="sort-aux">$sort_aux</link> is reversed again (which is not the right thing to do,
-but kept to not break any existing configuration setting).
+See the "Use Threads Feature" section for further explanation and
+examples.
 </para>
 </sect2>
 
@@ -26887,7 +27180,7 @@ forwarding, etc. are not permitted in this mode)
 <sect2 id="status-format">
 <title>status_format</title>
 <literallayout>Type: string
-Default: <quote><literal>-%r-NeoMutt: %D [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%&gt;-(%P)---</literal></quote></literallayout>
+Default: <quote><literal>-%r-NeoMutt: %D [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%?T?%T/?%s/%S)-%&gt;-(%P)---</literal></quote></literallayout>
 
 <para>
 Controls the format of the status line displayed in the "index"
@@ -26938,6 +27231,8 @@ According to <link linkend="status-chars">$status_chars</link>
 <row><entry>%S  </entry><entry>  </entry><entry>Current aux sorting method (<link linkend="sort-aux">$sort_aux</link>)
 </entry></row>
 <row><entry>%t  </entry><entry>* </entry><entry>Number of tagged messages in the mailbox
+</entry></row>
+<row><entry>%T  </entry><entry>* </entry><entry>Current threading mode (<link linkend="use-threads">$use_threads</link>)
 </entry></row>
 <row><entry>%u  </entry><entry>* </entry><entry>Number of unread messages in the mailbox (seen or unseen)
 </entry></row>
@@ -26991,6 +27286,14 @@ You can also switch between two strings using the following construct:
 <para>
 If the value of <emphasis>sequence_char</emphasis> is non-zero, <emphasis>if_string</emphasis> will
 be expanded, otherwise <emphasis>else_string</emphasis> will be expanded.
+</para>
+<para>
+As another example, here is how to show either <link linkend="sort">$sort</link> and
+<link linkend="sort-aux">$sort_aux</link> or <link linkend="use-threads">$use_threads</link> and <link linkend="sort">$sort</link>, based on whether threads
+are enabled with <link linkend="use-threads">$use_threads</link>:
+</para>
+<para>
+<literal>%?T?%s/%S&amp;%T/s?</literal>
 </para>
 <para>
 You can force the result of any <literal>printf(3)</literal>-like sequence to be lowercase
@@ -27399,6 +27702,41 @@ Normally, the default should work.
 </para>
 </sect2>
 
+<sect2 id="use-threads">
+<title>use_threads</title>
+<literallayout>Type: enumeration
+Default: </literallayout>
+
+<para>
+The style of threading used in the index. May be one of "flat" (no
+threading), "threads" (threaded, with subthreads below root
+message) or "reverse" (threaded, with subthreads above root
+message). For convenience, the value "yes" is a synonym for
+"threads", and "no" is a synonym for "flat".
+</para>
+<para>
+If this variable is never set, then <literal><link linkend="sort">$sort</link></literal> controls whether
+threading is used, <literal><link linkend="sort-aux">$sort_aux</link></literal> controls both the sorting of
+threads and subthreads, and using <literal>&lt;sort-mailbox&gt;</literal> to select
+threads affects only <literal><link linkend="sort">$sort</link></literal>.  Once this variable is set,
+attempting to set <literal><link linkend="sort">$sort</link></literal> to a value using "threads" will
+warn, the value of <literal><link linkend="sort">$sort</link></literal> controls the sorting between
+threads while <literal><link linkend="sort-aux">$sort_aux</link></literal> controls sorting within a thread,
+and <literal>&lt;sort-mailbox&gt;</literal> toggles <literal><link linkend="use-threads">$use_threads</link></literal>.
+</para>
+<para>
+Example:
+
+</para>
+
+<screen>
+set use_threads=yes
+</screen><para>
+See the "Use Threads Feature" section for further explanation and
+examples.
+</para>
+</sect2>
+
 <sect2 id="user-agent">
 <title>user_agent</title>
 <literallayout>Type: boolean
@@ -27776,6 +28114,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;vfolder-from-query-readonly&gt;</literal></entry><entry></entry><entry>generate a read-only virtual folder from query</entry></row>
 <row><entry><literal>&lt;vfolder-window-backward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window backwards</entry></row>
 <row><entry><literal>&lt;vfolder-window-forward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window forwards</entry></row>
+<row><entry><literal>&lt;vfolder-window-reset&gt;</literal></entry><entry></entry><entry>resets virtual folder time window to the present</entry></row>
 <row><entry><literal>&lt;view-attachments&gt;</literal></entry><entry>v</entry><entry>show MIME attachments</entry></row>
 <row><entry><literal>&lt;view-raw-message&gt;</literal></entry><entry></entry><entry>show the raw message</entry></row>
 <row><entry><literal>&lt;buffy-list&gt;</literal></entry><entry></entry><entry>list mailboxes with new mail</entry></row>
@@ -27908,7 +28247,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;sidebar-prev-new&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox with new mail</entry></row>
 <row><entry><literal>&lt;sidebar-toggle-virtual&gt;</literal></entry><entry></entry><entry>toggle between mailboxes and virtual mailboxes</entry></row>
 <row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
-<row><entry><literal>&lt;skip-headers&gt;</literal></entry><entry>H</entry><entry>skip beyond headers</entry></row>
+<row><entry><literal>&lt;skip-headers&gt;</literal></entry><entry>H</entry><entry>jump to first line after headers</entry></row>
 <row><entry><literal>&lt;skip-quoted&gt;</literal></entry><entry>S</entry><entry>skip beyond quoted text</entry></row>
 <row><entry><literal>&lt;sort-mailbox&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
 <row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
