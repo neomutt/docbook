@@ -20336,6 +20336,12 @@ Like other regular expressions in NeoMutt, the search is case sensitive
 if the pattern contains at least one upper case letter, and case
 insensitive otherwise.
 </para>
+<note>Before 2021-03-21, this was called $abort_noattach_regexp, $attach_keyword</note>
+</sect2>
+
+<sect2 id="abort-noattach-regexp">
+  <title>abort_noattach_regexp</title>
+  <note>Renamed to <link linkend="abort-noattach-regex">$abort_noattach_regex</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="abort-nosubject">
@@ -20498,6 +20504,7 @@ Default: no</literallayout>
 If <emphasis>set</emphasis>, NeoMutt will prompt you for blind-carbon-copy (Bcc) recipients
 before editing an outgoing message.
 </para>
+<note>Before 2021-03-21, this was called $askbcc</note>
 </sect2>
 
 <sect2 id="ask-cc">
@@ -20509,6 +20516,17 @@ Default: no</literallayout>
 If <emphasis>set</emphasis>, NeoMutt will prompt you for carbon-copy (Cc) recipients before
 editing the body of an outgoing message.
 </para>
+<note>Before 2021-03-21, this was called $askcc</note>
+</sect2>
+
+<sect2 id="askbcc">
+  <title>askbcc</title>
+  <note>Renamed to <link linkend="ask-bcc">$ask_bcc</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="askcc">
+  <title>askcc</title>
+  <note>Renamed to <link linkend="ask-cc">$ask_cc</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="ask-follow-up">
@@ -20645,6 +20663,11 @@ For an explanation of "soft-fill", see the <link linkend="index-format">$index_f
 </para>
 </sect2>
 
+<sect2 id="attach-keyword">
+  <title>attach_keyword</title>
+  <note>Renamed to <link linkend="abort-noattach-regex">$abort_noattach_regex</link> (2021-03-21)</note>
+</sect2>
+
 <sect2 id="attach-save-dir">
 <title>attach_save_dir</title>
 <literallayout>Type: path
@@ -20743,6 +20766,7 @@ list of recipients is empty.
 <para>
 Also see <link linkend="fast-reply">$fast_reply</link>.
 </para>
+<note>Before 2021-03-21, this was called $autoedit</note>
 </sect2>
 
 <sect2 id="auto-subscribe">
@@ -20839,6 +20863,11 @@ the same key for autocrypt as normal web-of-trust, so that autocrypt
 isn't forced on for all encrypted replies.
 (Autocrypt only)
 </para>
+</sect2>
+
+<sect2 id="autoedit">
+  <title>autoedit</title>
+  <note>Renamed to <link linkend="auto-edit">$auto_edit</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="beep">
@@ -21138,6 +21167,7 @@ Default: yes</literallayout>
 When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when appending messages to
 an existing mailbox.
 </para>
+<note>Before 2021-03-21, this was called $confirmappend</note>
 </sect2>
 
 <sect2 id="confirm-create">
@@ -21149,6 +21179,17 @@ Default: yes</literallayout>
 When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when saving messages to a
 mailbox which does not yet exist before creating it.
 </para>
+<note>Before 2021-03-21, this was called $confirmcreate</note>
+</sect2>
+
+<sect2 id="confirmappend">
+  <title>confirmappend</title>
+  <note>Renamed to <link linkend="confirm-append">$confirm_append</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="confirmcreate">
+  <title>confirmcreate</title>
+  <note>Renamed to <link linkend="confirm-create">$confirm_create</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="connect-timeout">
@@ -21230,6 +21271,7 @@ then OpenSSL is used instead to create S/MIME messages and
 settings can be overridden by use of the smime menu instead.
 (Crypto only)
 </para>
+<note>Before 2021-03-21, this was called $crypt_autoencrypt, $pgp_autoencrypt</note>
 </sect2>
 
 <sect2 id="crypt-auto-pgp">
@@ -21243,6 +21285,7 @@ PGP encryption/signing for messages.  See also <link linkend="crypt-auto-encrypt
 <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link>,
 <link linkend="crypt-auto-sign">$crypt_auto_sign</link>, <link linkend="crypt-reply-sign">$crypt_reply_sign</link> and <link linkend="smime-is-default">$smime_is_default</link>.
 </para>
+<note>Before 2021-03-21, this was called $crypt_autopgp</note>
 </sect2>
 
 <sect2 id="crypt-auto-sign">
@@ -21259,6 +21302,7 @@ then OpenSSL is used instead to create S/MIME messages and settings can
 be overridden by use of the smime menu instead of the pgp menu.
 (Crypto only)
 </para>
+<note>Before 2021-03-21, this was called $crypt_autosign, $pgp_autosign</note>
 </sect2>
 
 <sect2 id="crypt-auto-smime">
@@ -21272,6 +21316,27 @@ S/MIME encryption/signing for messages. See also <link linkend="crypt-auto-encry
 <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link>,
 <link linkend="crypt-auto-sign">$crypt_auto_sign</link>, <link linkend="crypt-reply-sign">$crypt_reply_sign</link> and <link linkend="smime-is-default">$smime_is_default</link>.
 </para>
+<note>Before 2021-03-21, this was called $crypt_autosmime</note>
+</sect2>
+
+<sect2 id="crypt-autoencrypt">
+  <title>crypt_autoencrypt</title>
+  <note>Renamed to <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="crypt-autopgp">
+  <title>crypt_autopgp</title>
+  <note>Renamed to <link linkend="crypt-auto-pgp">$crypt_auto_pgp</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="crypt-autosign">
+  <title>crypt_autosign</title>
+  <note>Renamed to <link linkend="crypt-auto-sign">$crypt_auto_sign</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="crypt-autosmime">
+  <title>crypt_autosmime</title>
+  <note>Renamed to <link linkend="crypt-auto-smime">$crypt_auto_smime</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="crypt-chars">
@@ -21312,6 +21377,12 @@ the <emphasis>crypt-hook</emphasis> command.  If unset, no such confirmation pro
 be presented.  This is generally considered unsafe, especially where
 typos are concerned.
 </para>
+<note>Before 2021-02-11, this was called $crypt_confirmhook</note>
+</sect2>
+
+<sect2 id="crypt-confirmhook">
+  <title>crypt_confirmhook</title>
+  <note>Renamed to <link linkend="crypt-confirm-hook">$crypt_confirm_hook</link> (2021-02-11)</note>
 </sect2>
 
 <sect2 id="crypt-opportunistic-encrypt">
@@ -21467,6 +21538,7 @@ If <emphasis>set</emphasis>, automatically PGP or OpenSSL encrypt replies to mes
 encrypted.
 (Crypto only)
 </para>
+<note>Before 2021-03-21, this was called $crypt_replyencrypt, $pgp_replyencrypt</note>
 </sect2>
 
 <sect2 id="crypt-reply-sign">
@@ -21483,6 +21555,7 @@ signed.
 <emphasis>and</emphasis> signed!
 (Crypto only)
 </para>
+<note>Before 2021-03-21, this was called $crypt_replysign, $pgp_replysign</note>
 </sect2>
 
 <sect2 id="crypt-reply-sign-encrypted">
@@ -21499,6 +21572,22 @@ the problem noted in <link linkend="crypt-reply-sign">$crypt_reply_sign</link>, 
 to find out whether an encrypted message is also signed.
 (Crypto only)
 </para>
+<note>Before 2021-03-21, this was called $crypt_replysignencrypted, $pgp_replysignencrypted</note>
+</sect2>
+
+<sect2 id="crypt-replyencrypt">
+  <title>crypt_replyencrypt</title>
+  <note>Renamed to <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="crypt-replysign">
+  <title>crypt_replysign</title>
+  <note>Renamed to <link linkend="crypt-reply-sign">$crypt_reply_sign</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="crypt-replysignencrypted">
+  <title>crypt_replysignencrypted</title>
+  <note>Renamed to <link linkend="crypt-reply-sign-encrypted">$crypt_reply_sign_encrypted</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="crypt-timestamp">
@@ -21556,6 +21645,7 @@ If <emphasis>"ask-*"</emphasis>, ask whether or not to verify the signature.
 If <emphasis>"no"</emphasis>, never attempt to verify cryptographic signatures.
 (Crypto only)
 </para>
+<note>Before 2002-01-24, this was called $pgp_verify_sig</note>
 </sect2>
 
 <sect2 id="date-format">
@@ -21774,6 +21864,11 @@ in the thread tree.
 </para>
 </sect2>
 
+<sect2 id="edit-hdrs">
+  <title>edit_hdrs</title>
+  <note>Renamed to <link linkend="edit-headers">$edit_headers</link> (2021-03-21)</note>
+</sect2>
+
 <sect2 id="edit-headers">
 <title>edit_headers</title>
 <literallayout>Type: boolean
@@ -21795,6 +21890,7 @@ labels, just as it would not when parsing an actual email.
 <emphasis role="bold">Note</emphasis> that changes made to the References: and Date: headers are
 ignored for interoperability reasons.
 </para>
+<note>Before 2021-03-21, this was called $edit_hdrs</note>
 </sect2>
 
 <sect2 id="editor">
@@ -21860,6 +21956,11 @@ library functions.
 </para>
 </sect2>
 
+<sect2 id="envelope-from">
+  <title>envelope_from</title>
+  <note>Renamed to <link linkend="use-envelope-from">$use_envelope_from</link> (2021-03-21)</note>
+</sect2>
+
 <sect2 id="envelope-from-address">
 <title>envelope_from_address</title>
 <literallayout>Type: e-mail address
@@ -21869,6 +21970,11 @@ Default: (empty)</literallayout>
 Manually sets the <emphasis>envelope</emphasis> sender for outgoing messages.
 This value is ignored if <link linkend="use-envelope-from">$use_envelope_from</link> is <emphasis>unset</emphasis>.
 </para>
+</sect2>
+
+<sect2 id="escape">
+  <title>escape</title>
+  <note>Deprecated, since 2021-03-18</note>
 </sect2>
 
 <sect2 id="external-search-command">
@@ -22172,6 +22278,26 @@ Also see the <link linkend="record">$record</link> variable.
 </para>
 </sect2>
 
+<sect2 id="forw-decode">
+  <title>forw_decode</title>
+  <note>Renamed to <link linkend="forward-decode">$forward_decode</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="forw-decrypt">
+  <title>forw_decrypt</title>
+  <note>Renamed to <link linkend="forward-decrypt">$forward_decrypt</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="forw-format">
+  <title>forw_format</title>
+  <note>Renamed to <link linkend="forward-format">$forward_format</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="forw-quote">
+  <title>forw_quote</title>
+  <note>Renamed to <link linkend="forward-quote">$forward_quote</link> (2021-03-21)</note>
+</sect2>
+
 <sect2 id="forward-attachments">
 <title>forward_attachments</title>
 <literallayout>Type: quadoption
@@ -22223,6 +22349,7 @@ forwarding a message.  The message header is also RFC2047 decoded.
 This variable is only used, if <link linkend="mime-forward">$mime_forward</link> is <emphasis>unset</emphasis>,
 otherwise <link linkend="mime-forward-decode">$mime_forward_decode</link> is used instead.
 </para>
+<note>Before 2021-03-21, this was called $forw_decode</note>
 </sect2>
 
 <sect2 id="forward-decrypt">
@@ -22237,6 +22364,7 @@ variable is only used if <link linkend="mime-forward">$mime_forward</link> is <e
 <link linkend="mime-forward-decode">$mime_forward_decode</link> is <emphasis>unset</emphasis>.
 (PGP only)
 </para>
+<note>Before 2021-03-21, this was called $forw_decrypt</note>
 </sect2>
 
 <sect2 id="forward-edit">
@@ -22260,6 +22388,7 @@ Default: <quote><literal>[%a: %s]</literal></quote></literallayout>
 This variable controls the default subject when forwarding a message.
 It uses the same format sequences as the <link linkend="index-format">$index_format</link> variable.
 </para>
+<note>Before 2021-03-21, this was called $forw_format</note>
 </sect2>
 
 <sect2 id="forward-quote">
@@ -22272,6 +22401,7 @@ When <emphasis>set</emphasis>, forwarded messages included in the main body of t
 message (when <link linkend="mime-forward">$mime_forward</link> is <emphasis>unset</emphasis>) will be quoted using
 <link linkend="indent-string">$indent_string</link>.
 </para>
+<note>Before 2021-03-21, this was called $forw_quote</note>
 </sect2>
 
 <sect2 id="forward-references">
@@ -22427,6 +22557,11 @@ has its own set of printf()-like sequences:
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
+<sect2 id="hdr-format">
+  <title>hdr_format</title>
+  <note>Renamed to <link linkend="index-format">$index_format</link> (2021-03-21)</note>
+</sect2>
+
 <sect2 id="hdrs">
 <title>hdrs</title>
 <literallayout>Type: boolean
@@ -22483,6 +22618,11 @@ tokyocabinet, kyotocabinet, qdbm, rocksdb, gdbm, bdb, tdb, lmdb.
 </para>
 </sect2>
 
+<sect2 id="header-cache-compress">
+  <title>header_cache_compress</title>
+  <note>Deprecated, since 2020-03-25</note>
+</sect2>
+
 <sect2 id="header-cache-compress-level">
 <title>header_cache_compress_level</title>
 <literallayout>Type: number
@@ -22504,6 +22644,11 @@ When NeoMutt is compiled with lz4, zstd or zlib, the header cache backend
 can use these compression methods for compressing the cache files.
 This results in much smaller cache file sizes and may even improve speed.
 </para>
+</sect2>
+
+<sect2 id="header-cache-pagesize">
+  <title>header_cache_pagesize</title>
+  <note>Deprecated, since 2020-03-25</note>
 </sect2>
 
 <sect2 id="header-color-partial">
@@ -22733,6 +22878,11 @@ When <emphasis>set</emphasis>, NeoMutt will encode international domain names us
 IDN.  Unset this if your SMTP server can handle newer (RFC6531)
 UTF-8 encoded domains. (IDN only)
 </para>
+</sect2>
+
+<sect2 id="ignore-linear-white-space">
+  <title>ignore_linear_white_space</title>
+  <note>Deprecated, since 2021-03-18</note>
 </sect2>
 
 <sect2 id="ignore-list-reply-to">
@@ -23059,6 +23209,12 @@ harmless, or generated due to configuration problems on the
 server which are out of the users' hands, you may wish to suppress
 them at some point.
 </para>
+<note>Before 2021-02-11, this was called $imap_servernoise</note>
+</sect2>
+
+<sect2 id="imap-servernoise">
+  <title>imap_servernoise</title>
+  <note>Renamed to <link linkend="imap-server-noise">$imap_server_noise</link> (2021-02-11)</note>
 </sect2>
 
 <sect2 id="imap-user">
@@ -23117,6 +23273,11 @@ decrypting and including the message in their reply.
 </para>
 </sect2>
 
+<sect2 id="include-onlyfirst">
+  <title>include_onlyfirst</title>
+  <note>Renamed to <link linkend="include-only-first">$include_only_first</link> (2021-03-21)</note>
+</sect2>
+
 <sect2 id="include-only-first">
 <title>include_only_first</title>
 <literallayout>Type: boolean
@@ -23126,6 +23287,12 @@ Default: no</literallayout>
 Controls whether or not NeoMutt includes only the first attachment
 of the message you are replying.
 </para>
+<note>Before 2021-03-21, this was called $include_onlyfirst</note>
+</sect2>
+
+<sect2 id="indent-str">
+  <title>indent_str</title>
+  <note>Renamed to <link linkend="indent-string">$indent_string</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="indent-string">
@@ -23146,6 +23313,7 @@ the quoting mechanism is strictly defined for format=flowed.
 This option is a format string, please see the description of
 <link linkend="index-format">$index_format</link> for supported <literal>printf(3)</literal>-style sequences.
 </para>
+<note>Before 2021-03-21, this was called $indent_str</note>
 </sect2>
 
 <sect2 id="index-format">
@@ -23329,6 +23497,7 @@ rightward text.
 Note that these expandos are supported in
 "<link linkend="save-hook">save-hook</link>", "<link linkend="fcc-hook">fcc-hook</link>" and "<link linkend="fcc-save-hook">fcc-save-hook</link>", too.
 </para>
+<note>Before 2021-03-21, this was called $hdr_format</note>
 </sect2>
 
 <sect2 id="inews">
@@ -23625,6 +23794,7 @@ Default: no</literallayout>
 If <emphasis>unset</emphasis>, NeoMutt will remove your address (see the "<link linkend="alternates">alternates</link>"
 command) from the list of recipients when replying to a message.
 </para>
+<note>Before 2021-03-21, this was called $metoo</note>
 </sect2>
 
 <sect2 id="menu-context">
@@ -23706,6 +23876,7 @@ This is the string displayed in the "attachment" menu for
 attachments of type <literal>message/rfc822</literal>.  For a full listing of defined
 <literal>printf(3)</literal>-like sequences see the section on <link linkend="index-format">$index_format</link>.
 </para>
+<note>Before 2021-03-21, this was called $msg_format</note>
 </sect2>
 
 <sect2 id="meta-key">
@@ -23722,6 +23893,11 @@ pressed Esc then "x".  This is because the result of removing the
 high bit from <literal>0xf8</literal> is <literal>0x78</literal>, which is the ASCII character
 "x".
 </para>
+</sect2>
+
+<sect2 id="metoo">
+  <title>metoo</title>
+  <note>Renamed to <link linkend="me-too">$me_too</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="mh-purge">
@@ -23787,6 +23963,7 @@ variable to "ask-no" or "ask-yes".
 <para>
 Also see <link linkend="forward-decode">$forward_decode</link> and <link linkend="mime-forward-decode">$mime_forward_decode</link>.
 </para>
+<note>Before 2021-03-21, this was called $mime_fwd</note>
 </sect2>
 
 <sect2 id="mime-forward-decode">
@@ -23811,6 +23988,16 @@ When forwarding multiple attachments of a MIME message from the attachment
 menu, attachments which can't be decoded in a reasonable manner will
 be attached to the newly composed message if this option is <emphasis>set</emphasis>.
 </para>
+</sect2>
+
+<sect2 id="mime-fwd">
+  <title>mime_fwd</title>
+  <note>Renamed to <link linkend="mime-forward">$mime_forward</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="mime-subject">
+  <title>mime_subject</title>
+  <note>Deprecated, since 2021-03-24</note>
 </sect2>
 
 <sect2 id="mime-type-query-command">
@@ -23906,6 +24093,11 @@ Controls whether or not NeoMutt will move read messages
 from your spool mailbox to your <link linkend="mbox">$mbox</link> mailbox, or as a result of
 a "<link linkend="mbox-hook">mbox-hook</link>" command.
 </para>
+</sect2>
+
+<sect2 id="msg-format">
+  <title>msg_format</title>
+  <note>Renamed to <link linkend="message-format">$message_format</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="narrow-tree">
@@ -24028,6 +24220,11 @@ This variable specifies the default limit used in notmuch queries.
 </para>
 </sect2>
 
+<sect2 id="nm-default-uri">
+  <title>nm_default_uri</title>
+  <note>Renamed to <link linkend="nm-default-url">$nm_default_url</link> (2021-02-11)</note>
+</sect2>
+
 <sect2 id="nm-default-url">
 <title>nm_default_url</title>
 <literallayout>Type: string
@@ -24037,6 +24234,7 @@ Default: (empty)</literallayout>
 This variable specifies the default Notmuch database in format
 notmuch://&lt;absolute path&gt;.
 </para>
+<note>Before 2021-02-11, this was called $nm_default_uri</note>
 </sect2>
 
 <sect2 id="nm-exclude-tags">
@@ -24404,6 +24602,7 @@ displayed.
 The (now deprecated) <emphasis>skip_quoted_offset</emphasis> is an alias for this
 variable, and should no longer be used.
 </para>
+<note>Before 2021-06-18, this was called $skip_quoted_offset</note>
 </sect2>
 
 <sect2 id="pager-stop">
@@ -24484,6 +24683,27 @@ Also note that using the old-style PGP message format is <emphasis role="bold">s
 <emphasis role="bold">deprecated</emphasis>.
 (PGP only)
 </para>
+<note>Before 2004-04-12, this was called $pgp_create_traditional, $pgp_autoinline</note>
+</sect2>
+
+<sect2 id="pgp-autoencrypt">
+  <title>pgp_autoencrypt</title>
+  <note>Renamed to <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="pgp-autoinline">
+  <title>pgp_autoinline</title>
+  <note>Renamed to <link linkend="pgp-auto-inline">$pgp_auto_inline</link> (2021-02-11)</note>
+</sect2>
+
+<sect2 id="pgp-autosign">
+  <title>pgp_autosign</title>
+  <note>Renamed to <link linkend="crypt-auto-sign">$crypt_auto_sign</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="pgp-auto-traditional">
+  <title>pgp_auto_traditional</title>
+  <note>Renamed to <link linkend="pgp-reply-inline">$pgp_reply_inline</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="pgp-check-exit">
@@ -24536,6 +24756,17 @@ Note that in this case, %r expands to the search string, which is a list of
 one or more quoted values such as email address, name, or keyid.
 (PGP only)
 </para>
+<note>Before 2021-02-11, this was called $pgp_clearsign_command</note>
+</sect2>
+
+<sect2 id="pgp-clearsign-command">
+  <title>pgp_clearsign_command</title>
+  <note>Renamed to <link linkend="pgp-clear-sign-command">$pgp_clear_sign_command</link> (2021-02-11)</note>
+</sect2>
+
+<sect2 id="pgp-create-traditional">
+  <title>pgp_create_traditional</title>
+  <note>Renamed to <link linkend="pgp-auto-inline">$pgp_auto_inline</link> (2004-04-12)</note>
 </sect2>
 
 <sect2 id="pgp-decode-command">
@@ -24576,6 +24807,7 @@ the <literal>samples/</literal> subdirectory which has been installed on your sy
 alongside the documentation.
 (PGP only)
 </para>
+<note>Before 2018-01-11, this was called $pgp_self_encrypt_as</note>
 </sect2>
 
 <sect2 id="pgp-decrypt-command">
@@ -24658,6 +24890,11 @@ Note that in this case, %r expands to the search string, which is a list of
 one or more quoted values such as email address, name, or keyid.
 (PGP only)
 </para>
+</sect2>
+
+<sect2 id="pgp-encrypt-self">
+  <title>pgp_encrypt_self</title>
+  <note>Deprecated, since 2019-09-09</note>
 </sect2>
 
 <sect2 id="pgp-encrypt-sign-command">
@@ -24746,6 +24983,12 @@ in this case, %r expands to the email address, not the public key ID (the key ID
 unknown, which is why NeoMutt is invoking this command).
 (PGP only)
 </para>
+<note>Before 2021-02-11, this was called $pgp_getkeys_command</note>
+</sect2>
+
+<sect2 id="pgp-getkeys-command">
+  <title>pgp_getkeys_command</title>
+  <note>Renamed to <link linkend="pgp-get-keys-command">$pgp_get_keys_command</link> (2021-02-11)</note>
 </sect2>
 
 <sect2 id="pgp-good-sign">
@@ -24900,6 +25143,27 @@ Also note that using the old-style PGP message format is <emphasis role="bold">s
 <emphasis role="bold">deprecated</emphasis>.
 (PGP only)
 </para>
+<note>Before 2021-03-21, this was called $pgp_auto_traditional, $pgp_replyinline</note>
+</sect2>
+
+<sect2 id="pgp-replyencrypt">
+  <title>pgp_replyencrypt</title>
+  <note>Renamed to <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="pgp-replyinline">
+  <title>pgp_replyinline</title>
+  <note>Renamed to <link linkend="pgp-reply-inline">$pgp_reply_inline</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="pgp-replysign">
+  <title>pgp_replysign</title>
+  <note>Renamed to <link linkend="crypt-reply-sign">$crypt_reply_sign</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="pgp-replysignencrypted">
+  <title>pgp_replysignencrypted</title>
+  <note>Renamed to <link linkend="crypt-reply-sign-encrypted">$crypt_reply_sign_encrypted</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="pgp-retainable-sigs">
@@ -24929,6 +25193,11 @@ When <emphasis>set</emphasis>, PGP encrypted messages will also be encrypted
 using the key in <link linkend="pgp-default-key">$pgp_default_key</link>.
 (PGP only)
 </para>
+</sect2>
+
+<sect2 id="pgp-self-encrypt-as">
+  <title>pgp_self_encrypt_as</title>
+  <note>Renamed to <link linkend="pgp-default-key">$pgp_default_key</link> (2018-01-11)</note>
 </sect2>
 
 <sect2 id="pgp-show-unusable">
@@ -25089,6 +25358,11 @@ possible <literal>printf(3)</literal>-like sequences.
 </para>
 </sect2>
 
+<sect2 id="pgp-verify-sig">
+  <title>pgp_verify_sig</title>
+  <note>Renamed to <link linkend="crypt-verify-sig">$crypt_verify_sig</link> (2002-01-24)</note>
+</sect2>
+
 <sect2 id="pipe-decode">
 <title>pipe_decode</title>
 <literallayout>Type: boolean
@@ -25187,6 +25461,12 @@ Default: 60</literallayout>
 This variable configures how often (in seconds) NeoMutt should look for
 new mail in the currently selected mailbox if it is a POP mailbox.
 </para>
+<note>Before 2021-02-11, this was called $pop_checkinterval</note>
+</sect2>
+
+<sect2 id="pop-checkinterval">
+  <title>pop_checkinterval</title>
+  <note>Renamed to <link linkend="pop-check-interval">$pop_check_interval</link> (2021-02-11)</note>
 </sect2>
 
 <sect2 id="pop-delete">
@@ -25284,6 +25564,11 @@ This variable defaults to your user name on the local machine.
 </para>
 </sect2>
 
+<sect2 id="post-indent-str">
+  <title>post_indent_str</title>
+  <note>Renamed to <link linkend="post-indent-string">$post_indent_string</link> (2021-03-21)</note>
+</sect2>
+
 <sect2 id="post-indent-string">
 <title>post_indent_string</title>
 <literallayout>Type: string
@@ -25293,6 +25578,7 @@ Default: (empty)</literallayout>
 Similar to the <link linkend="attribution">$attribution</link> variable, NeoMutt will append this
 string after the inclusion of a message which is being replied to.
 </para>
+<note>Before 2021-03-21, this was called $post_indent_str</note>
 </sect2>
 
 <sect2 id="post-moderated">
@@ -25420,6 +25706,11 @@ accidentally hit "p" often.
 </para>
 </sect2>
 
+<sect2 id="print-cmd">
+  <title>print_cmd</title>
+  <note>Renamed to <link linkend="print-command">$print_command</link> (2021-03-21)</note>
+</sect2>
+
 <sect2 id="print-command">
 <title>print_command</title>
 <literallayout>Type: command
@@ -25428,6 +25719,7 @@ Default: <quote><literal>lpr</literal></quote></literallayout>
 <para>
 This specifies the command pipe that should be used to print messages.
 </para>
+<note>Before 2021-03-21, this was called $print_cmd</note>
 </sect2>
 
 <sect2 id="print-decode">
@@ -25582,6 +25874,12 @@ the regular expression until it fails to produce a match.
 <para>
 Match detection may be overridden by the <link linkend="smileys">$smileys</link> regular expression.
 </para>
+<note>Before 2021-03-21, this was called $quote_regexp</note>
+</sect2>
+
+<sect2 id="quote-regexp">
+  <title>quote_regexp</title>
+  <note>Renamed to <link linkend="quote-regex">$quote_regex</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="read-inc">
@@ -25629,6 +25927,12 @@ when sending messages.
 If not specified, then the user's "real name" will be read from <literal>/etc/passwd</literal>.
 This option will not be used, if "<link linkend="from">$from</link>" is set.
 </para>
+<note>Before 2021-03-21, this was called $realname</note>
+</sect2>
+
+<sect2 id="realname">
+  <title>realname</title>
+  <note>Renamed to <link linkend="real-name">$real_name</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="recall">
@@ -25728,6 +26032,12 @@ A regular expression used to recognize reply messages when threading
 and replying. The default value corresponds to the English "Re:", the
 German "Aw:" and the Swedish "Sv:".
 </para>
+<note>Before 2021-03-21, this was called $reply_regexp</note>
+</sect2>
+
+<sect2 id="reply-regexp">
+  <title>reply_regexp</title>
+  <note>Renamed to <link linkend="reply-regex">$reply_regex</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="reply-self">
@@ -25895,6 +26205,12 @@ When it is <emphasis>set</emphasis>, NeoMutt will use the matching address as-is
 In either case, a missing real name will be filled in afterwards
 using the value of <link linkend="real-name">$real_name</link>.
 </para>
+<note>Before 2021-03-21, this was called $reverse_realname</note>
+</sect2>
+
+<sect2 id="reverse-realname">
+  <title>reverse_realname</title>
+  <note>Renamed to <link linkend="reverse-real-name">$reverse_real_name</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="rfc2047-parameters">
@@ -26563,6 +26879,11 @@ See <link linkend="formatstrings-size">formatstrings-size</link>.
 </para>
 </sect2>
 
+<sect2 id="skip-quoted-offset">
+  <title>skip_quoted_offset</title>
+  <note>Renamed to <link linkend="pager-skip-quoted-context">$pager_skip_quoted_context</link> (2021-06-18)</note>
+</sect2>
+
 <sect2 id="sleep-time">
 <title>sleep_time</title>
 <literallayout>Type: number
@@ -26728,6 +27049,7 @@ The (now deprecated) <emphasis>smime_self_encrypt_as</emphasis> is an alias for 
 variable, and should no longer be used.
 (S/MIME only)
 </para>
+<note>Before 2018-01-11, this was called $smime_self_encrypt_as</note>
 </sect2>
 
 <sect2 id="smime-encrypt-command">
@@ -26747,6 +27069,11 @@ possible <literal>printf(3)</literal>-like sequences.
 Encrypt the message to <link linkend="smime-default-key">$smime_default_key</link> too.
 (S/MIME only)
 </para>
+</sect2>
+
+<sect2 id="smime-encrypt-self">
+  <title>smime_encrypt_self</title>
+  <note>Deprecated, since 2019-09-09</note>
 </sect2>
 
 <sect2 id="smime-encrypt-with">
@@ -26883,6 +27210,11 @@ When <emphasis>set</emphasis>, S/MIME encrypted messages will also be encrypted
 using the certificate in <link linkend="smime-default-key">$smime_default_key</link>.
 (S/MIME only)
 </para>
+</sect2>
+
+<sect2 id="smime-self-encrypt-as">
+  <title>smime_self_encrypt_as</title>
+  <note>Renamed to <link linkend="smime-default-key">$smime_default_key</link> (2018-01-11)</note>
 </sect2>
 
 <sect2 id="smime-sign-as">
@@ -27251,6 +27583,12 @@ it, you can specify its location with this variable. The description from
 If not specified, then the environment variables <literal>$MAIL</literal> and
 <literal>$MAILDIR</literal> will be checked.
 </para>
+<note>Before 2021-03-21, this was called $spoolfile</note>
+</sect2>
+
+<sect2 id="spoolfile">
+  <title>spoolfile</title>
+  <note>Renamed to <link linkend="spool-file">$spool_file</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="ssl-ca-certificates-file">
@@ -27379,6 +27717,7 @@ If set to <emphasis>yes</emphasis>, NeoMutt will use CA certificates in the
 system-wide certificate store when checking if a server certificate
 is signed by a trusted CA. (OpenSSL only)
 </para>
+<note>Before 2021-02-11, this was called $ssl_usesystemcerts</note>
 </sect2>
 
 <sect2 id="ssl-use-tlsv1">
@@ -27425,6 +27764,11 @@ Default: yes</literallayout>
 If <emphasis>set</emphasis> , NeoMutt will use TLSv1.3 when communicating with servers that
 request it.
 </para>
+</sect2>
+
+<sect2 id="ssl-usesystemcerts">
+  <title>ssl_usesystemcerts</title>
+  <note>Renamed to <link linkend="ssl-use-system-certs">$ssl_use_system_certs</link> (2021-02-11)</note>
 </sect2>
 
 <sect2 id="ssl-verify-dates">
@@ -27862,6 +28206,7 @@ Default: no</literallayout>
 Controls whether NeoMutt tries to set the terminal status line and icon name.
 Most terminal emulators emulate the status line in the window title.
 </para>
+<note>Before 2021-03-21, this was called $xterm_set_titles</note>
 </sect2>
 
 <sect2 id="ts-icon-format">
@@ -27874,6 +28219,7 @@ Controls the format of the icon title, as long as "<link linkend="ts-enabled">$t
 This string is identical in formatting to the one used by
 "<link linkend="status-format">$status_format</link>".
 </para>
+<note>Before 2021-03-21, this was called $xterm_icon</note>
 </sect2>
 
 <sect2 id="ts-status-format">
@@ -27886,6 +28232,7 @@ Controls the format of the terminal status line (or window title),
 provided that "<link linkend="ts-enabled">$ts_enabled</link>" has been set. This string is identical in
 formatting to the one used by "<link linkend="status-format">$status_format</link>".
 </para>
+<note>Before 2021-03-21, this was called $xterm_title</note>
 </sect2>
 
 <sect2 id="tunnel">
@@ -27971,6 +28318,12 @@ of sendmail which supports the <literal>-B8BITMIME</literal> flag (such as sendm
 When <emphasis>set</emphasis>, NeoMutt will invoke <link linkend="sendmail">$sendmail</link> with the <literal>-B8BITMIME</literal>
 flag when sending 8-bit messages to enable ESMTP negotiation.
 </para>
+<note>Before 2021-03-21, this was called $use_8bitmime</note>
+</sect2>
+
+<sect2 id="use-8bitmime">
+  <title>use_8bitmime</title>
+  <note>Renamed to <link linkend="use-8bit-mime">$use_8bit_mime</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="use-domain">
@@ -28002,6 +28355,7 @@ Note that this information is passed to sendmail command using the
 if the <link linkend="sendmail">$sendmail</link> variable already contains <literal>-f</literal> or if the
 executable pointed to by <link linkend="sendmail">$sendmail</link> doesn't support the <literal>-f</literal> switch.
 </para>
+<note>Before 2021-03-21, this was called $envelope_from</note>
 </sect2>
 
 <sect2 id="use-from">
@@ -28101,6 +28455,17 @@ virtual-mailboxes) as a spool file.
 This command is now unnecessary. <link linkend="spool-file">$spool_file</link> has been extended to support
 mailbox descriptions as a value.
 </para>
+<note>Before 2021-02-11, this was called $virtual_spoolfile</note>
+</sect2>
+
+<sect2 id="virtual-spoolfile">
+  <title>virtual_spoolfile</title>
+  <note>Renamed to <link linkend="virtual-spool-file">$virtual_spool_file</link> (2021-02-11)</note>
+</sect2>
+
+<sect2 id="visual">
+  <title>visual</title>
+  <note>Deprecated, since 2021-03-18</note>
 </sect2>
 
 <sect2 id="wait-key">
@@ -28235,6 +28600,21 @@ Default: no</literallayout>
 If <emphasis>set</emphasis>, NeoMutt will add "X-Comment-To:" field (that contains full
 name of original article author) to article that followuped to newsgroup.
 </para>
+</sect2>
+
+<sect2 id="xterm-icon">
+  <title>xterm_icon</title>
+  <note>Renamed to <link linkend="ts-icon-format">$ts_icon_format</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="xterm-set-titles">
+  <title>xterm_set_titles</title>
+  <note>Renamed to <link linkend="ts-enabled">$ts_enabled</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="xterm-title">
+  <title>xterm_title</title>
+  <note>Renamed to <link linkend="ts-status-format">$ts_status_format</link> (2021-03-21)</note>
 </sect2>
 
     </sect1>
