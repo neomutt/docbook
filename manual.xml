@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2021-02-05</releaseinfo>
+    <releaseinfo>version 2021-10-29</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -79,7 +79,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
             <para>
               For the IRC user community, visit channel
               <emphasis>#neomutt</emphasis> on
-              <ulink url="https://kiwiirc.com/nextclient/irc.libera.chat/#neomutt">irc.libera.chat</ulink>.
+              <ulink url="https://web.libera.chat/#neomutt">irc.libera.chat</ulink>.
             </para>
           </listitem>
         </varlistentry>
@@ -1507,6 +1507,12 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           </tgroup>
         </table>
         <para>
+          <literal>^G</literal> is the generic <quote>abort</quote> key
+          in NeoMutt.  In addition to the line editor, it can also be used
+          to abort prompts.  Generally, typing <literal>^G</literal> at a
+          confirmation prompt or line editor should abort the entire action.
+        </para>
+        <para>
           You can remap the <emphasis>editor</emphasis> functions using the
           <link linkend="bind"><command>bind</command></link> command. For
           example, to make the &lt;Delete&gt; key delete the character in front
@@ -2190,7 +2196,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           In the <emphasis>index</emphasis>, the subject of threaded children
           messages will be prepended with thread tree characters. By default,
           the subject itself will not be duplicated unless
-          <link linkend="hide-thread-subject">$hide_thread_subject</link>is
+          <link linkend="hide-thread-subject">$hide_thread_subject</link> is
           unset.  Special characters will be added to the thread tree as
           detailed in <xref linkend="tab-thread-chars" />.
         </para>
@@ -2209,14 +2215,14 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                 <entry>&amp;</entry>
                 <entry>hidden message</entry>
                 <entry>see
-                <link linkend="hide-limited">$hide_limited</link>and
+                <link linkend="hide-limited">$hide_limited</link> and
                 <link linkend="hide-top-limited">$hide_top_limited</link></entry>
               </row>
               <row>
                 <entry>?</entry>
                 <entry>missing message</entry>
                 <entry>see
-                <link linkend="hide-missing">$hide_missing</link>and
+                <link linkend="hide-missing">$hide_missing</link> and
                 <link linkend="hide-top-missing">$hide_top_missing</link></entry>
               </row>
               <row>
@@ -2224,7 +2230,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                 <entry>pseudo thread</entry>
                 <entry>see
                 <link linkend="strict-threads">$strict_threads</link>; not displayed
-                when <link linkend="narrow-tree">$narrow_tree</link>is set</entry>
+                when <link linkend="narrow-tree">$narrow_tree</link> is set</entry>
               </row>
               <row>
                 <entry>=</entry>
@@ -2232,7 +2238,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                 <entry>see
                 <link linkend="duplicate-threads">$duplicate_threads</link>; not
                 displayed when
-                <link linkend="narrow-tree">$narrow_tree</link>is set</entry>
+                <link linkend="narrow-tree">$narrow_tree</link> is set</entry>
               </row>
             </tbody>
           </tgroup>
@@ -2273,7 +2279,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
             <listitem>
               <para>
                 Calculate statistics for all monitored mailboxes declared using
-                the <command>mailboxes</command>command. It will calculate
+                the <command>mailboxes</command> command. It will calculate
                 statistics despite <link linkend="mail-check-stats">$mail_check_stats</link>
                 being unset.
               </para>
@@ -2464,6 +2470,30 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           </varlistentry>
           <varlistentry>
             <term>
+              <literal>&lt;list-subscribe&gt;</literal>
+              <anchor id="list-subscribe" />
+            </term>
+            <listitem>
+              <para>
+                Send an email to the address specified in the List-Subscribe
+                header as specified in RFC2369.
+              </para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
+              <literal>&lt;list-unsubscribe&gt;</literal>
+              <anchor id="list-unsubscribe" />
+            </term>
+            <listitem>
+              <para>
+                Send an email to the address specified in the List-Unsubscribe
+                header as specified in RFC2369.
+              </para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>
               <literal>&lt;pipe-message&gt;</literal> (default: |)
               <anchor id="pipe-message" />
             </term>
@@ -2623,7 +2653,7 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
             <tbody>
               <row>
                 <entry>m</entry>
-                <entry><literal>&lt;compose&gt;</literal></entry>
+                <entry><literal>&lt;mail&gt;</literal></entry>
                 <entry>compose a new message</entry>
               </row>
               <row>
@@ -2644,7 +2674,17 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
               <row>
                 <entry>L</entry>
                 <entry><literal>&lt;list-reply&gt;</literal></entry>
-                <entry>reply to mailing list address</entry>
+                <entry>reply to a mailing list</entry>
+              </row>
+              <row>
+                <entry>L</entry>
+                <entry><literal>&lt;list-subscribe&gt;</literal></entry>
+                <entry>send a subscription email to a mailing list</entry>
+              </row>
+              <row>
+                <entry>L</entry>
+                <entry><literal>&lt;list-unsubscribe&gt;</literal></entry>
+                <entry>send an unsubscription email to a mailing list</entry>
               </row>
               <row>
                 <entry>f</entry>
@@ -3365,6 +3405,12 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
       <title>Encryption and Signing</title>
 
       <para>
+      NeoMutt supports encrypting and signing emails when used interactively.
+      In batch mode, cryptographic operations are disabled, so these options
+      can't be used to sign an email sent via a cron job, for instance.
+      </para>
+
+      <para>
         OpenPGP and S/MIME are enabled in one of two ways: <quote>classic
         mode</quote> or GPGME.  The former invokes external programs to perform
         the various operations; it is better tested and more flexible, but
@@ -3747,8 +3793,8 @@ my_hdr X-Disclaimer: Why are you listening to me?   <emphasis role="comment"># T
         <emphasis>not</emphasis> for single quotes.
       </para>
       <para>
-        <quote>\</quote> quotes the next character, just as in shells such as
-        bash and zsh. For example, if want to put quotes <quote>"</quote>
+        <quote>\</quote> quotes the next character, just like in a shell.
+        For example, if want to put quotes <quote>"</quote>
         inside of a string, you can use <quote>\</quote> to force the next
         character to be a literal instead of interpreted character.
       </para>
@@ -4106,7 +4152,7 @@ set alias_file=~/.mail_aliases
       </para>
       <para>
         In the alias menu, you can select as many aliases as you want with the
-        <literal>select-entry</literal> key (default: &lt;Return&gt;), and use
+        <literal>tag-entry</literal> key (default: &lt;Space&gt; or t), and use
         the <emphasis>exit</emphasis> key (default: q) to return to the address
         prompt.
       </para>
@@ -4391,6 +4437,10 @@ set alias_file=~/.mail_aliases
               <entry>Return</entry>
             </row>
             <row>
+              <entry>&lt;keypadenter&gt;</entry>
+              <entry>Enter key on numeric keypad</entry>
+            </row>
+            <row>
               <entry>&lt;home&gt;</entry>
               <entry>Home</entry>
             </row>
@@ -4435,6 +4485,31 @@ set alias_file=~/.mail_aliases
         The special function <literal>&lt;noop&gt;</literal> unbinds the
         specified key sequence.
       </para>
+
+      <sect2 id="crlf">
+        <title>Enter versus Return</title>
+        <para>
+          Prior to 2022, NeoMutt used a default ncurses mode
+          (<quote><literal>nl()</literal></quote>).  This mode maps keyboard
+          input of either <literal>&lt;Enter&gt;</literal> or
+          <literal>&lt;Return&gt;</literal> to the same value, which NeoMutt
+          interpreted as <literal>&lt;Return&gt;</literal> internally.
+        </para>
+        <para>
+          However, starting in version 2.2, this mode is turned off,
+          allowing <literal>&lt;Return&gt;</literal> and
+          <literal>&lt;Enter&gt;</literal> to be mapped separately, if
+          desired.  The default keyboard mappings set both, but you can
+          override this or create new bindings with one or the other (or
+          both).
+        </para>
+        <para>
+          Note that in terminal application, such as NeoMutt,
+          <literal>&lt;Enter&gt;</literal> is the same as <quote>\n</quote>
+          and <literal>^J</literal>; while <literal>&lt;Return&gt;</literal>
+          is the same as <quote>\r</quote> and <literal>^M</literal>.
+        </para>
+      </sect2>
 
       <sect2 id="bind-warnings">
         <title>Warnings about Duplicated Bindings</title>
@@ -4499,7 +4574,7 @@ bind index gg first-entry
           undef</quote>.  For example, <quote><literal>stty quit
           undef</literal></quote> will unbind <literal>^\</literal> (and
           <literal>^4</literal>) from sending the quit signal.  Once unbound
-          (e.g, by placing that line in your .bashrc, or in a NeoMutt wrapper
+          (e.g, by placing that line in your .profile, or in a NeoMutt wrapper
           script/function) you can use the key sequence in your NeoMutt
           bindings.
         </para>
@@ -5539,6 +5614,12 @@ uncolor status *
           not affected by this, NeoMutt tries to implement standards compliant
           folding.)
         </para>
+        <para>
+          Despite not being a real header, NeoMutt will also display an mbox
+          &quot;From_&quot; line in the pager along with other headers.  This
+          line can be manipulated with <command>ignore/unignore</command> and
+          <command>hdr_order/unhdr_order</command> commands.
+        </para>
       </sect2>
 
       <sect2 id="ignore">
@@ -5599,6 +5680,12 @@ unignore posted-to:
 </screen>
 
         </example>
+        <para>
+          The above example will show &quot;From:&quot; headers as well as mbox
+          &quot;From_&quot; lines.  To hide the latter, instead use
+          &quot;<literal>unignore from: date subject to cc</literal>&quot; on
+          the second line.
+        </para>
       </sect2>
 
       <sect2 id="hdr-order">
@@ -6320,21 +6407,21 @@ message-hook '~f freshmeat-news' 'set pager="less \"+/^  subject: .*\""'
       </cmdsynopsis>
       <para>
         This command is used to inject format strings dynamically into <link
-        linkend="index-format">$index_format</link>based on pattern matching
+        linkend="index-format">$index_format</link> based on pattern matching
         against the current message.
       </para>
       <para>
-        The <link linkend="index-format">$index_format</link>expando
-        <emphasis>%@name@</emphasis>specifies a placeholder for the injection.
-        Index-format-hooks with the same <emphasis>name</emphasis>are matched using
-        <link linkend="patterns"> <emphasis>pattern</emphasis> </link>against the
+        The <link linkend="index-format">$index_format</link> expando
+        <emphasis>%@name@</emphasis> specifies a placeholder for the injection.
+        Index-format-hooks with the same <emphasis>name</emphasis> are matched using
+        <link linkend="patterns"> <emphasis>pattern</emphasis> </link> against the
         current message. Matching is done in the order specified in the .muttrc,
         with the first match being used. The hook's
-        <emphasis>format-string</emphasis>is then substituted and evaluated.
+        <emphasis>format-string</emphasis> is then substituted and evaluated.
       </para>
       <para>
         Because the first match is used, best practice is to put a catch-all
-        <emphasis>~A</emphasis>pattern as the last hook. Here is an example showing
+        <emphasis>~A</emphasis> pattern as the last hook. Here is an example showing
         how to implement dynamic date formatting:
       </para>
 <screen>
@@ -6525,11 +6612,11 @@ folder-hook . 'push "&lt;enter-command&gt;score ~= 10&lt;enter&gt;"'
         defined for a given message.)
       </para>
       <para>
-        Note: the value displayed by <literal>%H</literal>and searched by
-        <literal>~H</literal>is stored in the
+        Note: the value displayed by <literal>%H</literal> and searched by
+        <literal>~H</literal> is stored in the
         <link linkend="caching">header cache</link>. NeoMutt isn't smart enough to
         invalidate a header cache entry based on changing <literal>spam</literal>
-        rules, so if you aren't seeing correct <literal>%H</literal>values, try
+        rules, so if you aren't seeing correct <literal>%H</literal> values, try
         temporarily turning off the header cache. If that fixes the problem,
         then once your spam rules are set to your liking, remove your stale
         header cache files and turn the header cache back on.
@@ -7965,7 +8052,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 <entry>~B <emphasis>EXPR</emphasis></entry>
                 <entry>d)</entry>
                 <entry>
-                  messages which contain <emphasis>EXPR</emphasis>in the whole
+                  messages which contain <emphasis>EXPR</emphasis> in the whole
                   message
                 </entry>
               </row>
@@ -7974,7 +8061,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 <entry></entry>
                 <entry>
                   If IMAP is enabled, like ~B but searches for
-                  <emphasis>STRING</emphasis>on the server, rather than
+                  <emphasis>STRING</emphasis> on the server, rather than
                   downloading each message and searching it locally.
                 </entry>
               </row>
@@ -8085,7 +8172,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 <entry>~h <emphasis>EXPR</emphasis></entry>
                 <entry>d)</entry>
                 <entry>
-                  messages which contain <emphasis>EXPR</emphasis>in the
+                  messages which contain <emphasis>EXPR</emphasis> in the
                   message header
                 </entry>
               </row>
@@ -8094,9 +8181,9 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%?l?%4l&amp;%4c?)%*  %s"
                 <entry></entry>
                 <entry>
                   If IMAP is enabled, like ~h but searches for
-                  <emphasis>STRING</emphasis>on the server, rather than
+                  <emphasis>STRING</emphasis> on the server, rather than
                   downloading each message and searching it locally;
-                  <emphasis>STRING</emphasis>must be of the form
+                  <emphasis>STRING</emphasis> must be of the form
                   <quote>header: substring</quote>(see below).
                 </entry>
               </row>
@@ -9550,6 +9637,18 @@ roessler@does-not-exist.org        Thomas Roessler mutt pgp
         be used to set <link linkend="record">$record</link>:
       </para>
       <screen>folder-hook . 'set record=^'</screen>
+      <para>
+        Note: the current mailbox shortcut,
+        <quote><literal>^</literal></quote>, has no value in some cases.  No
+        mailbox is opened when NeoMutt is invoked to send an email from the
+        command-line.  In interactive mode, NeoMutt reads the muttrc before
+        opening the mailbox, so immediate expansion won't work as expected
+        either.  This can be an issue when trying to directly assign to <link
+        linkend="record">$record</link>, but also affects the <link
+        linkend="fcc-hook">fcc-hook</link> mailbox, which is expanded
+        immediately too.  The folder-hook example above works because the
+        command is executed later, when the folder-hook fires.
+      </para>
     </sect1>
 
     <sect1 id="using-lists">
@@ -9811,7 +9910,8 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
           showing the files specified by the <command>mailboxes</command>
           command, and indicate which contain new messages. NeoMutt will
           automatically enter this mode when invoked from the command line with
-          the <literal>-y</literal> option.
+          the <literal>-y</literal> option, or from the index/pager via the
+          <literal>&lt;browse-mailboxes&gt;</literal> function.
         </para>
         <para>
           For the pager, index and directory browser menus, NeoMutt contains
@@ -9838,12 +9938,12 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
       <sect2 id="new-mail-monitoring">
         <title>Monitoring New Mail</title>
         <para>
-          When the <emphasis>Inotify</emphasis>mechanism for monitoring of
+          When the <emphasis>Inotify</emphasis> mechanism for monitoring of
           files is supported (Linux only) and not disabled at compilation time,
           NeoMutt immediately notifies about new mail for all folders configured
           via the <link linkend="mailboxes"><command>mailboxes</command></link>
           command.  Dependent on <link linkend="mailbox-formats">mailbox format</link>
-          also added <emphasis>old</emphasis>mails are tracked (not for Maildir).
+          also added <emphasis>old</emphasis> mails are tracked (not for Maildir).
         </para>
         <para>
           No configuration variables are available. Trace output is given when
@@ -9854,7 +9954,7 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
         <note>
           <para>
             Getting events about new mail is limited to the capabilities of the
-            underlying mechanism.  <emphasis>inotify</emphasis>only reports
+            underlying mechanism.  <emphasis>inotify</emphasis> only reports
             local changes, i. e. new mail notification works for mails
             delivered by an agent on the same machine as NeoMutt, but not when
             delivered remotely on a network file system as nfs. also the
@@ -10006,13 +10106,13 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
       <itemizedlist>
         <listitem>
           <para>Reply envelope settings.
-            <link linkend="reverse-name">$reverse_name</link>processing. To, Cc,
+            <link linkend="reverse-name">$reverse_name</link> processing. To, Cc,
             Subject, References header defaults.
           </para>
         </listitem>
         <listitem>
           <para>
-            <link linkend="my-hdr">my_hdr</link>processing for To, Cc, Bcc,
+            <link linkend="my-hdr">my_hdr</link> processing for To, Cc, Bcc,
             Subject headers.
           </para>
         </listitem>
@@ -10059,12 +10159,12 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
         </listitem>
         <listitem>
           <para>
-            <link linkend="real-name">$real_name</link>part of From header setting.
+            <link linkend="real-name">$real_name</link> part of From header setting.
           </para>
         </listitem>
         <listitem>
           <para>
-            <link linkend="editor">$editor</link>invocation for the message.
+            <link linkend="editor">$editor</link> invocation for the message.
           </para>
         </listitem>
         <listitem>
@@ -10315,7 +10415,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
               </term>
               <listitem>
                 <para>
-                  Mutt will display internally supported MIME types (see <xref
+                  NeoMutt will display internally supported MIME types (see <xref
                   linkend="mime-pager"/>) in the pager.  This will respect
                   <link linkend="auto-view">auto_view</link> settings, to determine
                   whether to use a <literal>copiousoutput</literal> mailcap entry or
@@ -10337,7 +10437,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
               </term>
               <listitem>
                 <para>
-                  Mutt will use the first matching
+                  NeoMutt will use the first matching
                   <literal>copiousoutput</literal> mailcap entry to display the
                   attachment in the pager (regardless of <link
                   linkend="auto-view">auto_view</link> settings).
@@ -11305,10 +11405,12 @@ alternative_order text/enriched text/plain text application/postscript image/*
           <listitem>
             <para>
               Tag the attachments that are alternatives, and press the
-              <command>&lt;group-alternatives&gt;</command> (&amp;) binding to group
-              them together. After this, the separate parts will be replaced by a single
-              new part with the <literal>multipart/alternative</literal> type and the
-              alternatives must be manipulated or deleted as a group.
+              <literal>&lt;group-alternatives&gt;</literal> (&amp;) binding to group
+              them together. After this, the separate parts will be displayed in a tree
+              structure. Attachments can still be edited separately and reordered within
+              the group, but must be ungrouped using the <literal>&lt;ungroup-attachment&gt;</literal>
+              (#) binding for more advanced editing before tagging and grouping together again
+              as described above.
             </para>
           </listitem>
           <listitem>
@@ -11323,15 +11425,6 @@ alternative_order text/enriched text/plain text application/postscript image/*
           as a <literal>multipart/alternative</literal> email, otherwise it will be sent
           as a <literal>multipart/mixed</literal> email.
         </para>
-        <para>
-          Note that after grouping, you can't view, edit or break the
-          <literal>multipart/alternative</literal> bundle, because it is in a temporary
-          form. But you can view and edit its primitive part using the
-          <command>&lt;edit&gt;</command> command. When postponing emails or on error
-          (e.g., no recipients address when sending emails) this
-          <literal>multipart/alternative</literal> will be broken apart and need to
-          be tagged and group together again as described above.
-        </para>
 
         <para>
           Be aware that when sending a <literal>multipart/alternative</literal> email,
@@ -11340,12 +11433,17 @@ alternative_order text/enriched text/plain text application/postscript image/*
           you can compose a plain text email as usual and turn that into a
           <literal>multipart/alternative</literal> email in one single command, with
           one part being <literal>text/plain</literal> and the other
-          <literal>text/html</literal>. An example macro will be the following:
+          <literal>text/html</literal>. An example macro which adds an HTML
+          part to the main body of an email and sends it could be the following:
 
 <screen>
-macro compose K "| pandoc -o /tmp/neomutt-alternative.html&lt;enter&gt; \
+  macro compose Y "&lt;first-entry&gt;&lt;enter-command&gt;set wait_key=no&lt;enter&gt; \
+    | pandoc -o /tmp/neomutt-alternative.html&lt;enter&gt; \
     &lt;attach-file&gt;/tmp/neomutt-alternative.html&lt;enter&gt; \
-    &lt;tag-entry&gt;&lt;previous-entry&gt;&lt;tag-entry&gt;&lt;group-alternatives&gt;"
+    &lt;toggle-unlink&gt;&lt;toggle-disposition&gt; \
+    &lt;tag-entry&gt;&lt;first-entry&gt;&lt;tag-entry&gt;&lt;group-alternatives&gt; \
+    &lt;enter-command&gt;set wait_key=yes&lt;enter&gt;&lt;send-message&gt;" \
+    "send the message as 'multipart/alternative'"
 </screen>
         </para>
       </sect2>
@@ -11407,14 +11505,14 @@ set preferred_languages="fr,en,de"
 
           <listitem>
             <para>
-              Tag them with <command>&lt;tag-entry&gt;</command>
+              Tag them with <literal>&lt;tag-entry&gt;</literal>
             </para>
           </listitem>
 
           <listitem>
             <para>
               Edit the <literal>Content-Language</literal> header of every attachment with command
-              <command>&lt;edit-language&gt;</command> (default to <literal>Ctrl-L</literal>). This
+              <literal>&lt;edit-language&gt;</literal> (default to <literal>Ctrl-L</literal>). This
               is important, otherwise the recipient of this email will not know the corresponding
               languages. You can set arbitrary string as <literal>Content-Language</literal>, but it
               is recommended to set it as some common prefixes such as "en", "zh" and "fr".
@@ -11422,7 +11520,7 @@ set preferred_languages="fr,en,de"
           </listitem>
           <listitem>
             <para>
-              Group all the tag messages together by <command>&lt;group-multilingual&gt;</command>
+              Group all the tag messages together by <literal>&lt;group-multilingual&gt;</literal>
               (default to <literal>^</literal>).
             </para>
           </listitem>
@@ -11440,12 +11538,119 @@ set preferred_languages="fr,en,de"
         </para>
 
         <para>
-          Note that after grouping, you can't view, edit or break the
-          <literal>multipart/multilingual</literal> email bundle, because it is in a temporary form.
-          But you can view and edit its primitive part using the <command>&lt;edit&gt;</command>
-          command. When postponing emails or on error (e.g., no recipients address when sending
-          emails) this <literal>multipart/multilingual</literal> will be broken apart and need to
-          be tagged and group together again as described above.
+          After grouping the separate parts will be displayed in a tree
+          structure. Attachments can still be edited separately and reordered within
+          the group, but must be ungrouped using the <literal>&lt;ungroup-attachment&gt;</literal>
+          (#) binding for more advanced editing before tagging and grouping together again
+          as described above.
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="related">
+      <title>MIME Multipart/Related</title>
+
+      <para>
+        Neomutt doesn't include any special support for reading <literal>multipart/related</literal>
+        emails, but it is possible to write a <literal>multipart/related</literal> email.
+        A <literal>multipart/related</literal> attachment is intended for compound objects
+        consisting of several inter-related body parts which are linked together using the
+        <literal>Content-ID</literal> header. Its format is described by
+        <ulink url="https://tools.ietf.org/html/rfc2387">RFC2387</ulink>.
+      </para>
+
+      <sect2 id="compose-multipart-related">
+        <title>Composing Multipart/Related Emails</title>
+        <para>
+          The procedure for composing a <literal>multipart/related</literal> email is similar
+          to that in <link linkend="compose-alternative-order">Composing Multipart/Alternative</link>.
+          You have to prepare every part manually or using some scripts, and then tag and group them
+          together into a <literal>multipart/related</literal> bundle before sending it:
+        </para>
+
+        <orderedlist>
+          <listitem>
+            <para>
+              Prepare parts of the related email.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Attach them as attachments.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Tag them with <literal>&lt;tag-entry&gt;</literal>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              One part can reference another using its <literal>Content-ID</literal> header.
+              For example, an HTML part that includes an embedded image needs to contain:
+              <literal>&lt;img src="cid:content-id"&gt;</literal> where an
+              attached image has a <literal>Content-ID</literal> header of <literal>content-id</literal>.
+              The <literal>Content-ID</literal> of an attachment can be set using
+              <literal>&lt;edit-content-id&gt;</literal> (default key <literal>Alt-i</literal>).
+              <literal>&lt;edit-content-id&gt;</literal> sets a random ID which can then be
+              changed if desired. Permitted characters for <literal>Content-ID</literal> are:
+              <literal>-.0-9@A-Z_a-z</literal>.
+            </para>
+            <para>
+              If the <literal>multipart/related</literal> group is intended to be inline,
+              members of the group should also have their <literal>Content-Disposition</literal>
+              header set to <literal>inline</literal> which can be toggled using
+              <literal>&lt;toggle-disposition&gt;</literal> (default key <literal>Ctrl-D</literal>).
+            </para>
+            <para>
+              It can also be desirable to give referenced files in the group a
+              <literal>filename</literal> even when the <literal>Content-Disposition</literal> is
+              set to be <literal>inline</literal>. To do this use <literal>&lt;rename-attachment&gt;</literal>
+              (default key <literal>Ctrl-O</literal>).
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Group all the tagged messages together with <literal>&lt;group-related&gt;</literal>
+              (default key <literal>%</literal>).
+            </para>
+            <para>
+              Top level attachments (excluding <literal>multipart</literal> ones) in the group
+              are automatically given a random <literal>Content-ID</literal> if they do not
+              already have one.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Send the email as usual.
+            </para>
+          </listitem>
+        </orderedlist>
+
+        <para>
+          Some care needs to be taken with the construction of a <literal>multipart/related</literal>
+          email to ensure it is correctly displayed by the receiving mail client.
+          A typical email with a <literal>multipart/alternative</literal> part
+          containing a <literal>text/plain</literal> part and a <literal>text/html</literal>
+          part with an embedded image, along with a separate attachment might end up like this:
+        </para>
+
+<screen>
+  I     1 &lt;no description&gt;                                         [multipart/related, 7bit, 0K]
+  I     2 ├─>&lt;no description&gt;                                  [multipart/alternative, 7bit, 0K]
+- I     3 │ ├─>/tmp/neomutt-hostname-XXXX-XXXXXX-XXXXXXXXXX   [text/plain, 7bit, us-ascii, 0.1K]
+- I     4 │ └─>/tmp/neomutt-alternative.html                      [text/html, 8bit, utf-8, 0.6K]
+  I     5 └─>image.png                                                  [image/png, base64, 19K]
+  A     6 attachment.pdf                                         [application/pdf, quoted, 7.1K]
+</screen>
+
+        <para>
+          In the above email <literal>/tmp/neomutt-alternative.html</literal> would reference
+          <literal>image.png</literal> using <literal>&lt;img src="cid:content-id"&gt;</literal>
+          and <literal>image.png</literal> has been given an explicit name of
+          <literal>image.png</literal> using <literal>&lt;rename-attachment&gt;</literal>
+          (regardless of its initial filename). <literal>&lt;group-related&gt;</literal>
+          has set its <literal>Content-ID</literal> header to a random value.
         </para>
       </sect2>
     </sect1>
@@ -11470,7 +11675,7 @@ set preferred_languages="fr,en,de"
         download the message just once.
       </para>
       <para>
-        By default, Mutt will not search inside
+        By default, NeoMutt will not search inside
         <literal>multipart/alternative</literal> containers.  This can be changed
         via the <link linkend="count-alternatives">$count_alternatives</link>
         configuration variable.
@@ -11795,7 +12000,7 @@ smtp://user@host:587/
         <title>Tunnel</title>
         <para>
           When connecting through a <link linkend="tunnel">$tunnel</link>
-          and <link linkend="tunnel-is-secure">$tunnel_is_secure"</link> is
+          and <link linkend="tunnel-is-secure">$tunnel_is_secure</link> is
           set(the default), NeoMutt will assume the connection to the server
           through the pipe is already secured.  NeoMutt will ignore <link
           linkend="ssl-starttls">$ssl_starttls</link> and <link
@@ -11803,7 +12008,7 @@ smtp://user@host:587/
           has already been negotiated.
         </para>
         <para>
-          When <link linkend="tunnel-is-secure">$tunnel_is_secure"</link> is
+          When <link linkend="tunnel-is-secure">$tunnel_is_secure</link> is
           unset, NeoMutt will respect the values of <link
           linkend="ssl-starttls">$ssl_starttls</link> and <link
           linkend="ssl-force-tls">$ssl_force_tls</link>.  It is
@@ -12046,12 +12251,12 @@ set timeout=15
     </sect1>
 
     <sect1 id="oauth">
-      <title>OAUTHBEARER Support</title>
+      <title>OAUTHBEARER and XOAUTH2 Support</title>
       <para>
         Preliminary OAUTH support for IMAP, POP, and SMTP is provided via external scripts.
       </para>
       <para>
-        At least for Gmail, you can use the <literal>oauth2.py</literal>script
+        At least for Gmail, you can use the <literal>oauth2.py</literal> script
         from Google's gmail-oauth2-tools:
         <ulink url="https://github.com/google/gmail-oauth2-tools/blob/master/python/oauth2.py">https://github.com/google/gmail-oauth2-tools/blob/master/python/oauth2.py</ulink>
       </para>
@@ -12073,8 +12278,25 @@ set imap_oauth_refresh_command="/path/to/oauth2.py --quiet --user=[email_address
 </screen>
 
       <para>
-        Substitute pop or smtp for imap in the above example to configure for
-        those.
+        For Office365, you can use the <literal>mutt_oauth2.py</literal> script
+        written by Alexander Perlis:
+        <ulink url="https://github.com/neomutt/neomutt/blob/master/contrib/oauth2/mutt_oauth2.py">https://github.com/neomutt/neomutt/blob/master/contrib/oauth2/mutt_oauth2.py</ulink>
+      </para>
+      <para>
+        You'll need to get your own oauth client credentials by following the
+        script instructions:
+        <ulink url="https://github.com/neomutt/neomutt/blob/master/contrib/oauth2/mutt_oauth2.py.README">https://github.com/neomutt/neomutt/blob/master/contrib/oauth2/mutt_oauth2.py.README</ulink>
+      </para>
+
+<screen>
+set imap_authenticators="xoauth2"
+set imap_oauth_refresh_command="/path/to/mutt_oauth2.py /path/to/token"
+</screen>
+
+      <para>
+        Substitute pop or smtp for imap in the above examples to configure for
+        those. Please note that xoauth2 support has not yet been implemented for
+        pop.
       </para>
     </sect1>
 
@@ -12200,7 +12422,7 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
         </para>
         <para>
           Additionally,
-          <link linkend="header-cache-backend">$header_cache_backend</link> must
+          <link linkend="header-cache-backend">$header_cache_backend</link> can
           be set to specify which backend to use. The list of available
           backends can be specified at configure time with a set of
           --with-&lt;backend&gt; options. Currently, the following backends are
@@ -15948,6 +16170,20 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               </entry>
             </row>
             <row>
+              <entry><literal>nm_query_window_or_terms</literal></entry>
+              <entry>string</entry>
+              <entry><literal>(empty)</literal></entry>
+              <entry>
+                Additional notmuch search terms to always include in the
+                window even if they're outside the date range. This turns the
+                window from <literal>date:...</literal> to
+                <literal>date:... or (additional search terms.)</literal>
+
+                For example, to always include flagged, unread emails, set to
+                <literal>tag:flagged and tag:unread</literal>
+              </entry>
+            </row>
+            <row>
               <entry><literal>nm_query_window_timebase</literal></entry>
               <entry>string</entry>
               <entry><literal>week</literal></entry>
@@ -16132,17 +16368,16 @@ set nm_open_timeout = 5
 <emphasis role="comment"># This variable specifies notmuch query type, supported types: 'threads' and</emphasis>
 <emphasis role="comment"># 'messages'.</emphasis>
 set nm_query_type = messages
-<emphasis role="comment"># Add messages stored to the NeoMutt record (see $record in the NeoMutt docs)</emphasis>
-<emphasis role="comment"># also to notmuch DB. If you reply to an email then the new email inherits</emphasis>
-<emphasis role="comment"># tags from the original email.</emphasis>
+<emphasis role="comment"># When writing a message in the NeoMutt record (see $record in the NeoMutt docs),</emphasis>
+<emphasis role="comment"># also add it to the notmuch DB. Replies inherit the tags from the original email.</emphasis>
 set nm_record = no
-<emphasis role="comment"># Tags that should be removed or added to the to the messages stored in the NeoMutt record.</emphasis>
+<emphasis role="comment"># Tags modifications to the messages stored in the NeoMutt record.</emphasis>
 <emphasis role="comment"># example:</emphasis>
 <emphasis role="comment">#   set record = "~/sent-mails"</emphasis>
 <emphasis role="comment">#   set nm_record = yes</emphasis>
 <emphasis role="comment">#   set nm_record_tags = "-inbox,archive,me"</emphasis>
 set nm_record_tags = ""
-<emphasis role="comment"># This variable specifies notmuch tag which is used for unread messages.</emphasis>
+<emphasis role="comment"># This variable specifies the notmuch tag used for unread messages.</emphasis>
 set nm_unread_tag = unread
 <emphasis role="comment"># This variable allows you to customize the file browser display for virtual</emphasis>
 <emphasis role="comment"># folders to your personal taste.</emphasis>
@@ -16165,6 +16400,8 @@ set virtual_spool_file = no
 set nm_query_window_enable=yes
 set nm_query_window_duration=2
 set nm_query_window_timebase="week" # or "hour", "day", "week", "month", "year"
+<emphasis role="comment"># Extend query window to always show mail matching these terms.</emphasis>
+set nm_query_window_or_terms="tag:unread and tag:flagged"
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 <emphasis role="comment"># FUNCTIONS – shown with an example mapping</emphasis>
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
@@ -17223,7 +17460,7 @@ color sidebar_unread color136 default
       <para>
         Also, it can be handy to jump directly to the start of the
         email body with the <literal>&lt;skip-headers&gt;</literal>
-        function (by default the <literal>H</literal>key).
+        function (by default the <literal>H</literal> key).
       </para>
     </sect1>
 
@@ -17813,7 +18050,13 @@ bind index D purge-message
         <literal>%T</literal> expando which shows the current
         threading method.
       </para>
+    </sect1>
+
+    <sect1 id="use-threads-value">
+      <title>Use Threads</title>
+
       <table>
+        <title>Use Threads</title>
         <tgroup cols="3">
           <thead>
             <row>
@@ -17841,7 +18084,11 @@ bind index D purge-message
 
 <emphasis role="comment"># ------------------------------------------------------------</emphasis>
 <emphasis role="comment"># Default configuration: flat view sorted by date</emphasis>
-<emphasis role="comment">#set use_threads=no sort=date sort_aux=date</emphasis>
+<emphasis role="comment"># selecting threads with &lt;sort-mailbox&gt; changes $sort</emphasis>
+<emphasis role="comment">#set use_threads=unset sort=date sort_aux=date</emphasis>
+<emphasis role="comment"># Modern configuration: explicit flat view sorted by date</emphasis>
+<emphasis role="comment"># selecting threads with &lt;sort-mailbox&gt; changes $use_threads</emphasis>
+<emphasis role="comment">set use_threads=no sort=date sort_aux=date</emphasis>
 <emphasis role="comment">#   Anne     12:01  cover letter for thread 1</emphasis>
 <emphasis role="comment">#   Anne     12:02  part 1 of thread 1</emphasis>
 <emphasis role="comment">#   Anne     12:03  part 2 of thread 1</emphasis>
@@ -20242,28 +20489,6 @@ and attachment trees, instead of the default <emphasis>ACS</emphasis> characters
 </para>
 </sect2>
 
-<sect2 id="ask-follow-up">
-<title>ask_follow_up</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-If set, NeoMutt will prompt you for follow-up groups before editing
-the body of an outgoing message.
-</para>
-</sect2>
-
-<sect2 id="ask-x-comment-to">
-<title>ask_x_comment_to</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-If set, NeoMutt will prompt you for x-comment-to field before editing
-the body of an outgoing message.
-</para>
-</sect2>
-
 <sect2 id="ask-bcc">
 <title>ask_bcc</title>
 <literallayout>Type: boolean
@@ -20283,6 +20508,28 @@ Default: no</literallayout>
 <para>
 If <emphasis>set</emphasis>, NeoMutt will prompt you for carbon-copy (Cc) recipients before
 editing the body of an outgoing message.
+</para>
+</sect2>
+
+<sect2 id="ask-follow-up">
+<title>ask_follow_up</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+If set, NeoMutt will prompt you for follow-up groups before editing
+the body of an outgoing message.
+</para>
+</sect2>
+
+<sect2 id="ask-x-comment-to">
+<title>ask_x_comment_to</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+If set, NeoMutt will prompt you for x-comment-to field before editing
+the body of an outgoing message.
 </para>
 </sect2>
 
@@ -20476,6 +20723,28 @@ this except to override that default.
 </para>
 </sect2>
 
+<sect2 id="auto-edit">
+<title>auto_edit</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis> along with <link linkend="edit-headers">$edit_headers</link>, NeoMutt will skip the initial
+send-menu (prompting for subject and recipients) and allow you to
+immediately begin editing the body of your
+message.  The send-menu may still be accessed once you have finished
+editing the body of your message.
+</para>
+<para>
+<emphasis role="bold">Note:</emphasis> when this option is <emphasis>set</emphasis>, you can't use send-hooks that depend
+on the recipients when composing a new (non-reply) message, as the initial
+list of recipients is empty.
+</para>
+<para>
+Also see <link linkend="fast-reply">$fast_reply</link>.
+</para>
+</sect2>
+
 <sect2 id="auto-subscribe">
 <title>auto_subscribe</title>
 <literallayout>Type: boolean
@@ -20569,28 +20838,6 @@ enables autocrypt in the reply.  You may want to unset this if you're using
 the same key for autocrypt as normal web-of-trust, so that autocrypt
 isn't forced on for all encrypted replies.
 (Autocrypt only)
-</para>
-</sect2>
-
-<sect2 id="auto-edit">
-<title>auto_edit</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-When <emphasis>set</emphasis> along with <link linkend="edit-headers">$edit_headers</link>, NeoMutt will skip the initial
-send-menu (prompting for subject and recipients) and allow you to
-immediately begin editing the body of your
-message.  The send-menu may still be accessed once you have finished
-editing the body of your message.
-</para>
-<para>
-<emphasis role="bold">Note:</emphasis> when this option is <emphasis>set</emphasis>, you can't use send-hooks that depend
-on the recipients when composing a new (non-reply) message, as the initial
-list of recipients is empty.
-</para>
-<para>
-Also see <link linkend="fast-reply">$fast_reply</link>.
 </para>
 </sect2>
 
@@ -21672,13 +21919,19 @@ of indexers other than notmuch to integrate them cleanly with NeoMutt.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, the initial prompt for recipients and subject are skipped
-when replying to messages, and the initial prompt for subject is
-skipped when forwarding messages.
+When <emphasis>set</emphasis>, the initial prompt for recipients (to, cc, bcc) and
+subject are skipped when the relevant information is already provided.
+These cases include replying to messages and passing the relevant
+command line arguments. The initial prompt for recipients
+is also skipped when composing a new message to the current message sender,
+while the initial prompt for subject is also skipped when forwarding messages.
 </para>
 <para>
 <emphasis role="bold">Note:</emphasis> this variable has no effect when the <link linkend="auto-edit">$auto_edit</link>
 variable is <emphasis>set</emphasis>.
+</para>
+<para>
+See also: <link linkend="auto-edit">$auto_edit</link>, <link linkend="edit-headers">$edit_headers</link>, <link linkend="ask-cc">$ask_cc</link>, <link linkend="ask-bcc">$ask_bcc</link>
 </para>
 </sect2>
 
@@ -21690,6 +21943,9 @@ Default: yes</literallayout>
 <para>
 This variable controls whether or not attachments on outgoing messages
 are saved along with the main body of your message.
+</para>
+<para>
+Note: <link linkend="fcc-before-send">$fcc_before_send</link> forces the default (set) behavior of this option.
 </para>
 </sect2>
 
@@ -21722,7 +21978,13 @@ Default: no</literallayout>
 When this variable is <emphasis>set</emphasis>, FCCs will be stored unencrypted and
 unsigned, even when the actual message is encrypted and/or
 signed.
+</para>
+<para>
+Note: <link linkend="fcc-before-send">$fcc_before_send</link> forces the default (unset) behavior of this option.
 (PGP only)
+</para>
+<para>
+See also <link linkend="pgp-self-encrypt">$pgp_self_encrypt</link>, <link linkend="smime-self-encrypt">$smime_self_encrypt</link>
 </para>
 </sect2>
 
@@ -22215,8 +22477,9 @@ MH or Maildir folders, see "<link linkend="caching">caching</link>" for details.
 Default: (empty)</literallayout>
 
 <para>
-This variable specifies the header cache backend.  By default it is
-<emphasis>unset</emphasis> so no header caching will be used.
+This variable specifies the header cache backend.  If no backend is
+specified, the first available backend will be used in the following order:
+tokyocabinet, kyotocabinet, qdbm, rocksdb, gdbm, bdb, tdb, lmdb.
 </para>
 </sect2>
 
@@ -22674,8 +22937,8 @@ Default: (empty)</literallayout>
 <para>
 The command to run to generate an OAUTH refresh token for
 authorizing your connection to your IMAP server.  This command will be
-run on every connection attempt that uses the OAUTHBEARER authentication
-mechanism.  See "<link linkend="oauth">oauth</link>" for details.
+run on every connection attempt that uses the OAUTHBEARER or XOAUTH2
+authentication mechanisms.  See "<link linkend="oauth">oauth</link>" for details.
 </para>
 </sect2>
 
@@ -23018,15 +23281,20 @@ Listed in <link linkend="to-chars">$to_chars</link>.
 </entry></row>
 <row><entry>%{fmt} </entry><entry>the date and time of the message is converted to sender's
 time zone, and "fmt" is expanded by the library function
-<literal>strftime(3)</literal>; a leading bang disables locales
+<literal>strftime(3)</literal>; if the first character inside the braces
+is a bang ("!"), the date is formatted ignoring any locale
+settings.  Note that the sender's time zone might only be
+available as a numerical offset, so "%Z" behaves like "%z".
 </entry></row>
 <row><entry>%[fmt] </entry><entry>the date and time of the message is converted to the local
 time zone, and "fmt" is expanded by the library function
-<literal>strftime(3)</literal>; a leading bang disables locales
+<literal>strftime(3)</literal>; if the first character inside the brackets
+is a bang ("!"), the date is formatted ignoring any locale settings.
 </entry></row>
-<row><entry>%(fmt) </entry><entry>the local date and time when the message was received.
+<row><entry>%(fmt) </entry><entry>the local date and time when the message was received, and
 "fmt" is expanded by the library function <literal>strftime(3)</literal>;
-a leading bang disables locales
+if the first character inside the parentheses is a bang ("!"),
+the date is formatted ignoring any locale settings.
 </entry></row>
 <row><entry>%&gt;X    </entry><entry>right justify the rest of the string and pad with character "X"
 </entry></row>
@@ -23128,10 +23396,9 @@ a "<link linkend="mbox-hook">mbox-hook</link>" command.
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, convert the date in the Date header of sent emails into the
-local timezone of the sender. When <emphasis>unset</emphasis>, use UTC instead.
-This is meant for privacy-conscious users that do not want to disclose their
-time zone when they send mail.
+If <emphasis>set</emphasis>, the date in the Date header of emails that you send will be in
+your local timezone. If unset a UTC date will be used instead to avoid
+leaking information about your current location.
 </para>
 </sect2>
 
@@ -23349,6 +23616,17 @@ This can also be set using the <literal>-m</literal> command-line option.
 </para>
 </sect2>
 
+<sect2 id="me-too">
+<title>me_too</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+If <emphasis>unset</emphasis>, NeoMutt will remove your address (see the "<link linkend="alternates">alternates</link>"
+command) from the list of recipients when replying to a message.
+</para>
+</sect2>
+
 <sect2 id="menu-context">
 <title>menu_context</title>
 <literallayout>Type: number
@@ -23443,17 +23721,6 @@ has an ASCII value of <literal>0xf8</literal>, then this is treated as if the us
 pressed Esc then "x".  This is because the result of removing the
 high bit from <literal>0xf8</literal> is <literal>0x78</literal>, which is the ASCII character
 "x".
-</para>
-</sect2>
-
-<sect2 id="me-too">
-<title>me_too</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-If <emphasis>unset</emphasis>, NeoMutt will remove your address (see the "<link linkend="alternates">alternates</link>"
-command) from the list of recipients when replying to a message.
 </para>
 </sect2>
 
@@ -23846,6 +24113,37 @@ Accepted values all non negative integers. A value of 0 disables the feature.
 </para>
 </sect2>
 
+<sect2 id="nm-query-window-enable">
+<title>nm_query_window_enable</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+This variable enables windowed notmuch queries even if window duration is 0.
+</para>
+</sect2>
+
+<sect2 id="nm-query-window-or-terms">
+<title>nm_query_window_or_terms</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+This variable contains additional notmuch search terms for messages to be
+shown regardless of date.
+</para>
+<para>
+Example:
+</para>
+<para>
+Using "notmuch://?query=tag:inbox" as the mailbox and "tag:flagged and
+tag:unread" as the or terms, NeoMutt will produce a query window such as:
+</para>
+<para>
+notmuch://?query=tag:inbox and (date:... or (tag:flagged and tag:unread))
+</para>
+</sect2>
+
 <sect2 id="nm-query-window-timebase">
 <title>nm_query_window_timebase</title>
 <literallayout>Type: string
@@ -23863,7 +24161,11 @@ Accepted values are 'minute', 'hour', 'day', 'week', 'month', 'year'
 Default: no</literallayout>
 
 <para>
-This variable specifies if the NeoMutt record should indexed by notmuch.
+This variable specifies whether, when writing a just-sent message to the
+<link linkend="record">$record</link>, the message should also be added to the notmuch DB. Replies inherit
+the notmuch tags from the original message. See <link linkend="nm-record-tags">$nm_record_tags</link> for how to
+modify the set of notmuch tags assigned to sent messages written to the
+record.
 </para>
 </sect2>
 
@@ -23873,8 +24175,10 @@ This variable specifies if the NeoMutt record should indexed by notmuch.
 Default: (empty)</literallayout>
 
 <para>
-This variable specifies the default tags applied to messages stored to the NeoMutt record.
-When set to 0 this variable disable the window feature.
+This variable specifies the notmuch tag modifications (addition, removal,
+toggling) applied to messages added to the Neomutt record when <link linkend="nm-record">$nm_record</link> is
+true. See the description of the <literal>&lt;modify-labels&gt;</literal> function for the
+syntax.
 </para>
 </sect2>
 
@@ -23885,7 +24189,7 @@ Default: <quote><literal>replied</literal></quote></literallayout>
 
 <para>
 This variable specifies notmuch tag which is used for replied messages. The
-variable is used to set the replied flag when modifiying tags. All other NeoMutt
+variable is used to set the replied flag when modifying tags. All other NeoMutt
 commands use standard (e.g. maildir) flags.
 </para>
 </sect2>
@@ -25201,7 +25505,8 @@ with the query string the user types.  NeoMutt will add quotes around the
 string substituted for "%s" automatically according to shell quoting
 rules, so you should avoid adding your own.  If no "%s" is found in
 the string, NeoMutt will append the user's query to the end of the string.
-See "<link linkend="query">query</link>" for more information.
+See "<link linkend="query">query</link>" (https://neomutt.org/guide/advancedusage.html#query) for more
+information.
 </para>
 </sect2>
 
@@ -26677,7 +26982,7 @@ This option is case-insensitive. If it is "unset"
 (the default) NeoMutt will try all available methods, in order from
 most-secure to least-secure. Support for the "plain" mechanism is
 bundled; other mechanisms are provided by an external SASL library (look
-for +USE_SASL in the output of neomutt -v).
+for '+sasl' in the output of neomutt -v).
 </para>
 <para>
 Example:
@@ -26696,8 +27001,8 @@ Default: (empty)</literallayout>
 <para>
 The command to run to generate an OAUTH refresh token for
 authorizing your connection to your SMTP server.  This command will be
-run on every connection attempt that uses the OAUTHBEARER authentication
-mechanism.  See "<link linkend="oauth">oauth</link>" for details.
+run on every connection attempt that uses the OAUTHBEARER or XOAUTH2
+authentication mechanisms.  See "<link linkend="oauth">oauth</link>" for details.
 </para>
 </sect2>
 
@@ -26998,7 +27303,7 @@ key.
 <sect2 id="ssl-force-tls">
 <title>ssl_force_tls</title>
 <literallayout>Type: boolean
-Default: no</literallayout>
+Default: yes</literallayout>
 
 <para>
 If this variable is <emphasis>set</emphasis>, NeoMutt will require that all connections
@@ -27064,6 +27369,18 @@ it is inadvisable. See https://tools.ietf.org/html/rfc7525 .</emphasis>
 </para>
 </sect2>
 
+<sect2 id="ssl-use-system-certs">
+<title>ssl_use_system_certs</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+If set to <emphasis>yes</emphasis>, NeoMutt will use CA certificates in the
+system-wide certificate store when checking if a server certificate
+is signed by a trusted CA. (OpenSSL only)
+</para>
+</sect2>
+
 <sect2 id="ssl-use-tlsv1">
 <title>ssl_use_tlsv1</title>
 <literallayout>Type: boolean
@@ -27107,18 +27424,6 @@ Default: yes</literallayout>
 <para>
 If <emphasis>set</emphasis> , NeoMutt will use TLSv1.3 when communicating with servers that
 request it.
-</para>
-</sect2>
-
-<sect2 id="ssl-use-system-certs">
-<title>ssl_use_system_certs</title>
-<literallayout>Type: boolean
-Default: yes</literallayout>
-
-<para>
-If set to <emphasis>yes</emphasis>, NeoMutt will use CA certificates in the
-system-wide certificate store when checking if a server certificate
-is signed by a trusted CA. (OpenSSL only)
 </para>
 </sect2>
 
@@ -27399,7 +27704,7 @@ Note that <link linkend="indent-string">$indent_string</link> is ignored when th
 Default: yes</literallayout>
 
 <para>
-Affects the <literal>~b</literal> and <literal>~h</literal> search operations described in
+Affects the <literal>~b</literal>, <literal>~B</literal>, and <literal>~h</literal> search operations described in
 section "<link linkend="patterns">patterns</link>".  If <emphasis>set</emphasis>, the headers and body/attachments of
 messages to be searched are decoded before searching. If <emphasis>unset</emphasis>,
 messages are searched as they appear in the folder.
@@ -27969,18 +28274,34 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;end-cond&gt;</literal></entry><entry></entry><entry>end of conditional execution (noop)</entry></row>
 <row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>enter a neomuttrc command</entry></row>
 <row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
+<row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>move to the first entry</entry></row>
 <row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>=</entry><entry>move to the first entry</entry></row>
 <row><entry><literal>&lt;half-down&gt;</literal></entry><entry>]</entry><entry>scroll down 1/2 page</entry></row>
 <row><entry><literal>&lt;half-up&gt;</literal></entry><entry>[</entry><entry>scroll up 1/2 page</entry></row>
 <row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>this screen</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry></entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>1</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>2</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>3</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>4</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>5</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>6</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>7</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>8</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>9</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;last-entry&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>move to the last entry</entry></row>
 <row><entry><literal>&lt;last-entry&gt;</literal></entry><entry>*</entry><entry>move to the last entry</entry></row>
 <row><entry><literal>&lt;middle-page&gt;</literal></entry><entry>M</entry><entry>move to the middle of the page</entry></row>
+<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>move to the next entry</entry></row>
 <row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>j</entry><entry>move to the next entry</entry></row>
 <row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&gt;</entry><entry>scroll down one line</entry></row>
+<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Pagedown&gt;</entry><entry>move to the next page</entry></row>
+<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>move to the next page</entry></row>
 <row><entry><literal>&lt;next-page&gt;</literal></entry><entry>z</entry><entry>move to the next page</entry></row>
+<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>move to the previous entry</entry></row>
 <row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>k</entry><entry>move to the previous entry</entry></row>
 <row><entry><literal>&lt;previous-line&gt;</literal></entry><entry>&lt;</entry><entry>scroll up one line</entry></row>
+<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>move to the previous page</entry></row>
+<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>&lt;Pageup&gt;</entry><entry>move to the previous page</entry></row>
 <row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>Z</entry><entry>move to the previous page</entry></row>
 <row><entry><literal>&lt;refresh&gt;</literal></entry><entry>^L</entry><entry>clear and redraw the screen</entry></row>
 <row><entry><literal>&lt;search&gt;</literal></entry><entry>/</entry><entry>search for a regular expression</entry></row>
@@ -27988,6 +28309,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;search-opposite&gt;</literal></entry><entry></entry><entry>search for next match in opposite direction</entry></row>
 <row><entry><literal>&lt;search-reverse&gt;</literal></entry><entry>Esc /</entry><entry>search backwards for a regular expression</entry></row>
 <row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>select the current entry</entry></row>
+<row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>select the current entry</entry></row>
 <row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>select the current entry</entry></row>
 <row><entry><literal>&lt;shell-escape&gt;</literal></entry><entry>!</entry><entry>invoke a command in a subshell</entry></row>
 <row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>t</entry><entry>tag the current entry</entry></row>
@@ -27995,7 +28317,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;tag-prefix-cond&gt;</literal></entry><entry></entry><entry>apply next function ONLY to tagged messages</entry></row>
 <row><entry><literal>&lt;top-page&gt;</literal></entry><entry>H</entry><entry>move to the top of the page</entry></row>
 <row><entry><literal>&lt;what-key&gt;</literal></entry><entry></entry><entry>display the keycode for a key press</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28013,9 +28334,11 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
+<row><entry><literal>&lt;alias-dialog&gt;</literal></entry><entry></entry><entry>open the aliases dialog</entry></row>
 <row><entry><literal>&lt;autocrypt-acct-menu&gt;</literal></entry><entry>A</entry><entry>manage autocrypt accounts</entry></row>
 <row><entry><literal>&lt;bounce-message&gt;</literal></entry><entry>b</entry><entry>remail a message to another user</entry></row>
 <row><entry><literal>&lt;break-thread&gt;</literal></entry><entry>#</entry><entry>break the thread in two</entry></row>
+<row><entry><literal>&lt;buffy-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
 <row><entry><literal>&lt;catchup&gt;</literal></entry><entry></entry><entry>mark all articles in newsgroup as read</entry></row>
 <row><entry><literal>&lt;change-folder&gt;</literal></entry><entry>c</entry><entry>open a different folder</entry></row>
 <row><entry><literal>&lt;change-folder-readonly&gt;</literal></entry><entry>Esc c</entry><entry>open a different folder in read only mode</entry></row>
@@ -28039,7 +28362,9 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;delete-thread&gt;</literal></entry><entry>^D</entry><entry>delete all messages in thread</entry></row>
 <row><entry><literal>&lt;display-address&gt;</literal></entry><entry>@</entry><entry>display full address of sender</entry></row>
 <row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>display a message</entry></row>
+<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>display a message</entry></row>
 <row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>display a message</entry></row>
+<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>display a message</entry></row>
 <row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>display message and toggle header weeding</entry></row>
 <row><entry><literal>&lt;edit&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
 <row><entry><literal>&lt;edit-label&gt;</literal></entry><entry>Y</entry><entry>add, change, or delete a message's label</entry></row>
@@ -28047,6 +28372,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;edit-raw-message&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
 <row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>x</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>extract supported public keys</entry></row>
 <row><entry><literal>&lt;fetch-mail&gt;</literal></entry><entry>G</entry><entry>retrieve mail from POP server</entry></row>
 <row><entry><literal>&lt;flag-message&gt;</literal></entry><entry>F</entry><entry>toggle a message's 'important' flag</entry></row>
@@ -28065,6 +28391,8 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;limit-current-thread&gt;</literal></entry><entry></entry><entry>limit view to current thread</entry></row>
 <row><entry><literal>&lt;link-threads&gt;</literal></entry><entry>&amp;</entry><entry>link tagged message to the current one</entry></row>
 <row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>reply to specified mailing list</entry></row>
+<row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>subscribe to a mailing list</entry></row>
+<row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>unsubscribe from a mailing list</entry></row>
 <row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
 <row><entry><literal>&lt;mail-key&gt;</literal></entry><entry>Esc k</entry><entry>mail a PGP public key</entry></row>
 <row><entry><literal>&lt;mailbox-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
@@ -28073,20 +28401,24 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags and then hide message</entry></row>
 <row><entry><literal>&lt;modify-tags&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags</entry></row>
 <row><entry><literal>&lt;modify-tags-then-hide&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags and then hide message</entry></row>
+<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>J</entry><entry>move to the next entry</entry></row>
 <row><entry><literal>&lt;next-new&gt;</literal></entry><entry></entry><entry>jump to the next new message</entry></row>
 <row><entry><literal>&lt;next-new-then-unread&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>jump to the next new or unread message</entry></row>
 <row><entry><literal>&lt;next-subthread&gt;</literal></entry><entry>Esc n</entry><entry>jump to the next subthread</entry></row>
 <row><entry><literal>&lt;next-thread&gt;</literal></entry><entry>^N</entry><entry>jump to the next thread</entry></row>
+<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>move to the next undeleted message</entry></row>
 <row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>j</entry><entry>move to the next undeleted message</entry></row>
 <row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>jump to the next unread message</entry></row>
 <row><entry><literal>&lt;next-unread-mailbox&gt;</literal></entry><entry></entry><entry>open next mailbox with new mail</entry></row>
 <row><entry><literal>&lt;parent-message&gt;</literal></entry><entry>P</entry><entry>jump to parent message in thread</entry></row>
 <row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;post-message&gt;</literal></entry><entry></entry><entry>post message to newsgroup</entry></row>
+<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>K</entry><entry>move to the previous entry</entry></row>
 <row><entry><literal>&lt;previous-new&gt;</literal></entry><entry></entry><entry>jump to the previous new message</entry></row>
 <row><entry><literal>&lt;previous-new-then-unread&gt;</literal></entry><entry>Esc &lt;Tab&gt;</entry><entry>jump to the previous new or unread message</entry></row>
 <row><entry><literal>&lt;previous-subthread&gt;</literal></entry><entry>Esc p</entry><entry>jump to previous subthread</entry></row>
 <row><entry><literal>&lt;previous-thread&gt;</literal></entry><entry>^P</entry><entry>jump to previous thread</entry></row>
+<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>move to the previous undeleted message</entry></row>
 <row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>k</entry><entry>move to the previous undeleted message</entry></row>
 <row><entry><literal>&lt;previous-unread&gt;</literal></entry><entry></entry><entry>jump to the previous unread message</entry></row>
 <row><entry><literal>&lt;print-message&gt;</literal></entry><entry>p</entry><entry>print the current entry</entry></row>
@@ -28139,8 +28471,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;vfolder-window-reset&gt;</literal></entry><entry></entry><entry>resets virtual folder time window to the present</entry></row>
 <row><entry><literal>&lt;view-attachments&gt;</literal></entry><entry>v</entry><entry>show MIME attachments</entry></row>
 <row><entry><literal>&lt;view-raw-message&gt;</literal></entry><entry></entry><entry>show the raw message</entry></row>
-<row><entry><literal>&lt;buffy-list&gt;</literal></entry><entry></entry><entry>list mailboxes with new mail</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28158,9 +28488,10 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;bottom&gt;</literal></entry><entry></entry><entry>jump to the bottom of the message</entry></row>
+<row><entry><literal>&lt;bottom&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>jump to the bottom of the message</entry></row>
 <row><entry><literal>&lt;bounce-message&gt;</literal></entry><entry>b</entry><entry>remail a message to another user</entry></row>
 <row><entry><literal>&lt;break-thread&gt;</literal></entry><entry>#</entry><entry>break the thread in two</entry></row>
+<row><entry><literal>&lt;buffy-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
 <row><entry><literal>&lt;change-folder&gt;</literal></entry><entry>c</entry><entry>open a different folder</entry></row>
 <row><entry><literal>&lt;change-folder-readonly&gt;</literal></entry><entry>Esc c</entry><entry>open a different folder in read only mode</entry></row>
 <row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry>i</entry><entry>open a different newsgroup</entry></row>
@@ -28188,7 +28519,9 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
 <row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>enter a neomuttrc command</entry></row>
 <row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>i</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>x</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>extract supported public keys</entry></row>
 <row><entry><literal>&lt;flag-message&gt;</literal></entry><entry>F</entry><entry>toggle a message's 'important' flag</entry></row>
 <row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>followup to newsgroup</entry></row>
@@ -28202,9 +28535,19 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>this screen</entry></row>
 <row><entry><literal>&lt;imap-fetch-mail&gt;</literal></entry><entry></entry><entry>force retrieval of mail from IMAP server</entry></row>
 <row><entry><literal>&lt;imap-logout-all&gt;</literal></entry><entry></entry><entry>logout from all IMAP servers</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry></entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>1</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>2</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>3</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>4</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>5</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>6</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>7</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>8</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry>9</entry><entry>jump to an index number</entry></row>
 <row><entry><literal>&lt;link-threads&gt;</literal></entry><entry>&amp;</entry><entry>link tagged message to the current one</entry></row>
 <row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>reply to specified mailing list</entry></row>
+<row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>subscribe to a mailing list</entry></row>
+<row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>unsubscribe from a mailing list</entry></row>
 <row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
 <row><entry><literal>&lt;mail-key&gt;</literal></entry><entry>Esc k</entry><entry>mail a PGP public key</entry></row>
 <row><entry><literal>&lt;mailbox-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
@@ -28215,12 +28558,16 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;modify-tags-then-hide&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags and then hide message</entry></row>
 <row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>J</entry><entry>move to the next entry</entry></row>
 <row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>scroll down one line</entry></row>
+<row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>scroll down one line</entry></row>
 <row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>scroll down one line</entry></row>
 <row><entry><literal>&lt;next-new&gt;</literal></entry><entry></entry><entry>jump to the next new message</entry></row>
 <row><entry><literal>&lt;next-new-then-unread&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>jump to the next new or unread message</entry></row>
+<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Pagedown&gt;</entry><entry>move to the next page</entry></row>
 <row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>move to the next page</entry></row>
 <row><entry><literal>&lt;next-subthread&gt;</literal></entry><entry>Esc n</entry><entry>jump to the next subthread</entry></row>
 <row><entry><literal>&lt;next-thread&gt;</literal></entry><entry>^N</entry><entry>jump to the next thread</entry></row>
+<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>move to the next undeleted message</entry></row>
+<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>move to the next undeleted message</entry></row>
 <row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>j</entry><entry>move to the next undeleted message</entry></row>
 <row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>jump to the next unread message</entry></row>
 <row><entry><literal>&lt;next-unread-mailbox&gt;</literal></entry><entry></entry><entry>open next mailbox with new mail</entry></row>
@@ -28228,12 +28575,15 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;post-message&gt;</literal></entry><entry></entry><entry>post message to newsgroup</entry></row>
 <row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>K</entry><entry>move to the previous entry</entry></row>
-<row><entry><literal>&lt;previous-line&gt;</literal></entry><entry></entry><entry>scroll up one line</entry></row>
+<row><entry><literal>&lt;previous-line&gt;</literal></entry><entry>&lt;Backspace&gt;</entry><entry>scroll up one line</entry></row>
 <row><entry><literal>&lt;previous-new&gt;</literal></entry><entry></entry><entry>jump to the previous new message</entry></row>
 <row><entry><literal>&lt;previous-new-then-unread&gt;</literal></entry><entry></entry><entry>jump to the previous new or unread message</entry></row>
+<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>&lt;Pageup&gt;</entry><entry>move to the previous page</entry></row>
 <row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>-</entry><entry>move to the previous page</entry></row>
 <row><entry><literal>&lt;previous-subthread&gt;</literal></entry><entry>Esc p</entry><entry>jump to previous subthread</entry></row>
 <row><entry><literal>&lt;previous-thread&gt;</literal></entry><entry>^P</entry><entry>jump to previous thread</entry></row>
+<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>move to the previous undeleted message</entry></row>
+<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>move to the previous undeleted message</entry></row>
 <row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>k</entry><entry>move to the previous undeleted message</entry></row>
 <row><entry><literal>&lt;previous-unread&gt;</literal></entry><entry></entry><entry>jump to the previous unread message</entry></row>
 <row><entry><literal>&lt;print-message&gt;</literal></entry><entry>p</entry><entry>print the current entry</entry></row>
@@ -28277,6 +28627,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;tag-message&gt;</literal></entry><entry>t</entry><entry>tag the current entry</entry></row>
 <row><entry><literal>&lt;toggle-quoted&gt;</literal></entry><entry>T</entry><entry>toggle display of quoted text</entry></row>
 <row><entry><literal>&lt;toggle-write&gt;</literal></entry><entry>%</entry><entry>toggle whether the mailbox will be rewritten</entry></row>
+<row><entry><literal>&lt;top&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>jump to the top of the message</entry></row>
 <row><entry><literal>&lt;top&gt;</literal></entry><entry>^</entry><entry>jump to the top of the message</entry></row>
 <row><entry><literal>&lt;undelete-message&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
 <row><entry><literal>&lt;undelete-subthread&gt;</literal></entry><entry>Esc u</entry><entry>undelete all messages in subthread</entry></row>
@@ -28286,8 +28637,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;view-attachments&gt;</literal></entry><entry>v</entry><entry>show MIME attachments</entry></row>
 <row><entry><literal>&lt;view-raw-message&gt;</literal></entry><entry></entry><entry>show the raw message</entry></row>
 <row><entry><literal>&lt;what-key&gt;</literal></entry><entry></entry><entry>display the keycode for a key press</entry></row>
-<row><entry><literal>&lt;buffy-list&gt;</literal></entry><entry></entry><entry>list mailboxes with new mail</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28307,10 +28656,11 @@ bindings for all menus (except as noted).
 <tbody>
 <row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
 <row><entry><literal>&lt;limit&gt;</literal></entry><entry>l</entry><entry>show only messages matching a pattern</entry></row>
+<row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
 <row><entry><literal>&lt;sort-alias&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
 <row><entry><literal>&lt;sort-alias-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
+<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>tag the current entry</entry></row>
 <row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28335,7 +28685,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;query-append&gt;</literal></entry><entry>A</entry><entry>append new query results to current results</entry></row>
 <row><entry><literal>&lt;sort&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
 <row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28368,6 +28717,8 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;group-chat-reply&gt;</literal></entry><entry></entry><entry>reply to all recipients preserving To/Cc</entry></row>
 <row><entry><literal>&lt;group-reply&gt;</literal></entry><entry>g</entry><entry>reply to all recipients</entry></row>
 <row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>reply to specified mailing list</entry></row>
+<row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>subscribe to a mailing list</entry></row>
+<row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>unsubscribe from a mailing list</entry></row>
 <row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;print-entry&gt;</literal></entry><entry>p</entry><entry>print the current entry</entry></row>
 <row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>reply to a message</entry></row>
@@ -28375,11 +28726,11 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;save-entry&gt;</literal></entry><entry>s</entry><entry>save message/attachment to a mailbox/file</entry></row>
 <row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
 <row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
+<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
 <row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
 <row><entry><literal>&lt;view-mailcap&gt;</literal></entry><entry>m</entry><entry>force viewing of attachment using mailcap</entry></row>
 <row><entry><literal>&lt;view-pager&gt;</literal></entry><entry></entry><entry>view attachment in pager using copiousoutput mailcap</entry></row>
 <row><entry><literal>&lt;view-text&gt;</literal></entry><entry>T</entry><entry>view attachment as text</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28407,10 +28758,11 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>display message and toggle header weeding</entry></row>
 <row><entry><literal>&lt;edit-bcc&gt;</literal></entry><entry>b</entry><entry>edit the BCC list</entry></row>
 <row><entry><literal>&lt;edit-cc&gt;</literal></entry><entry>c</entry><entry>edit the CC list</entry></row>
+<row><entry><literal>&lt;edit-content-id&gt;</literal></entry><entry>Esc i</entry><entry>edit the 'Content-ID' of the attachment</entry></row>
 <row><entry><literal>&lt;edit-description&gt;</literal></entry><entry>d</entry><entry>edit attachment description</entry></row>
 <row><entry><literal>&lt;edit-encoding&gt;</literal></entry><entry>^E</entry><entry>edit attachment transfer-encoding</entry></row>
 <row><entry><literal>&lt;edit-fcc&gt;</literal></entry><entry>f</entry><entry>enter a file to save a copy of this message in</entry></row>
-<row><entry><literal>&lt;edit-file&gt;</literal></entry><entry>^X e</entry><entry>edit the file to be attached</entry></row>
+<row><entry><literal>&lt;edit-file&gt;</literal></entry><entry>Esc e</entry><entry>edit the file to be attached</entry></row>
 <row><entry><literal>&lt;edit-followup-to&gt;</literal></entry><entry></entry><entry>edit the Followup-To field</entry></row>
 <row><entry><literal>&lt;edit-from&gt;</literal></entry><entry>Esc f</entry><entry>edit the from field</entry></row>
 <row><entry><literal>&lt;edit-headers&gt;</literal></entry><entry>E</entry><entry>edit the message with headers</entry></row>
@@ -28428,6 +28780,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;get-attachment&gt;</literal></entry><entry>G</entry><entry>get a temporary copy of an attachment</entry></row>
 <row><entry><literal>&lt;group-alternatives&gt;</literal></entry><entry>&amp;</entry><entry>group tagged attachments as 'multipart/alternative'</entry></row>
 <row><entry><literal>&lt;group-multilingual&gt;</literal></entry><entry>^</entry><entry>group tagged attachments as 'multipart/multilingual'</entry></row>
+<row><entry><literal>&lt;group-related&gt;</literal></entry><entry>%</entry><entry>group tagged attachments as 'multipart/related'</entry></row>
 <row><entry><literal>&lt;ispell&gt;</literal></entry><entry>i</entry><entry>run ispell on the message</entry></row>
 <row><entry><literal>&lt;mix&gt;</literal></entry><entry>M</entry><entry>send the message through a mixmaster remailer chain</entry></row>
 <row><entry><literal>&lt;move-down&gt;</literal></entry><entry>+</entry><entry>move an attachment down in the attachment list</entry></row>
@@ -28441,14 +28794,19 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;rename-file&gt;</literal></entry><entry>R</entry><entry>rename/move an attached file</entry></row>
 <row><entry><literal>&lt;send-message&gt;</literal></entry><entry>y</entry><entry>send the message</entry></row>
 <row><entry><literal>&lt;smime-menu&gt;</literal></entry><entry>S</entry><entry>show S/MIME options</entry></row>
+<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>T</entry><entry>tag the current entry</entry></row>
 <row><entry><literal>&lt;toggle-disposition&gt;</literal></entry><entry>^D</entry><entry>toggle disposition between inline/attachment</entry></row>
 <row><entry><literal>&lt;toggle-recode&gt;</literal></entry><entry></entry><entry>toggle recoding of this attachment</entry></row>
 <row><entry><literal>&lt;toggle-unlink&gt;</literal></entry><entry>u</entry><entry>toggle whether to delete file after sending it</entry></row>
+<row><entry><literal>&lt;ungroup-attachment&gt;</literal></entry><entry>#</entry><entry>ungroup 'multipart' attachment</entry></row>
 <row><entry><literal>&lt;update-encoding&gt;</literal></entry><entry>U</entry><entry>update an attachment's encoding info</entry></row>
 <row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
+<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
 <row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
+<row><entry><literal>&lt;view-mailcap&gt;</literal></entry><entry></entry><entry>force viewing of attachment using mailcap</entry></row>
+<row><entry><literal>&lt;view-pager&gt;</literal></entry><entry></entry><entry>view attachment in pager using copiousoutput mailcap</entry></row>
+<row><entry><literal>&lt;view-text&gt;</literal></entry><entry></entry><entry>view attachment as text</entry></row>
 <row><entry><literal>&lt;write-fcc&gt;</literal></entry><entry>w</entry><entry>write the message to a folder</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28468,7 +28826,6 @@ bindings for all menus (except as noted).
 <tbody>
 <row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
 <row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28486,6 +28843,7 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
+<row><entry><literal>&lt;buffy-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
 <row><entry><literal>&lt;catchup&gt;</literal></entry><entry></entry><entry>mark all articles in newsgroup as read</entry></row>
 <row><entry><literal>&lt;change-dir&gt;</literal></entry><entry>c</entry><entry>change directories</entry></row>
 <row><entry><literal>&lt;check-new&gt;</literal></entry><entry></entry><entry>check mailboxes for new mail</entry></row>
@@ -28510,8 +28868,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;unsubscribe&gt;</literal></entry><entry>u</entry><entry>unsubscribe from current mbox (IMAP/NNTP only)</entry></row>
 <row><entry><literal>&lt;unsubscribe-pattern&gt;</literal></entry><entry></entry><entry>unsubscribe from newsgroups matching a pattern</entry></row>
 <row><entry><literal>&lt;view-file&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>view file</entry></row>
-<row><entry><literal>&lt;buffy-list&gt;</literal></entry><entry></entry><entry>list mailboxes with new mail</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28531,7 +28887,6 @@ bindings for all menus (except as noted).
 <tbody>
 <row><entry><literal>&lt;verify-key&gt;</literal></entry><entry>c</entry><entry>verify a PGP public key</entry></row>
 <row><entry><literal>&lt;view-name&gt;</literal></entry><entry>%</entry><entry>view the key's user id</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28551,7 +28906,6 @@ bindings for all menus (except as noted).
 <tbody>
 <row><entry><literal>&lt;verify-key&gt;</literal></entry><entry>c</entry><entry>verify a PGP public key</entry></row>
 <row><entry><literal>&lt;view-name&gt;</literal></entry><entry>%</entry><entry>view the key's user id</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28570,13 +28924,16 @@ bindings for all menus (except as noted).
 </thead>
 <tbody>
 <row><entry><literal>&lt;accept&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>accept the chain constructed</entry></row>
+<row><entry><literal>&lt;accept&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>accept the chain constructed</entry></row>
 <row><entry><literal>&lt;accept&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>accept the chain constructed</entry></row>
 <row><entry><literal>&lt;append&gt;</literal></entry><entry>a</entry><entry>append a remailer to the chain</entry></row>
 <row><entry><literal>&lt;chain-next&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>select the next element of the chain</entry></row>
+<row><entry><literal>&lt;chain-next&gt;</literal></entry><entry>l</entry><entry>select the next element of the chain</entry></row>
 <row><entry><literal>&lt;chain-prev&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>select the previous element of the chain</entry></row>
+<row><entry><literal>&lt;chain-prev&gt;</literal></entry><entry>h</entry><entry>select the previous element of the chain</entry></row>
 <row><entry><literal>&lt;delete&gt;</literal></entry><entry>d</entry><entry>delete a remailer from the chain</entry></row>
 <row><entry><literal>&lt;insert&gt;</literal></entry><entry>i</entry><entry>insert a remailer into the chain</entry></row>
-
+<row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>select the current entry</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -28595,19 +28952,28 @@ bindings for all menus (except as noted).
 </thead>
 <tbody>
 <row><entry><literal>&lt;backspace&gt;</literal></entry><entry>&lt;Backspace&gt;</entry><entry>delete the char in front of the cursor</entry></row>
+<row><entry><literal>&lt;backspace&gt;</literal></entry><entry>&lt;Delete&gt;</entry><entry>delete the char in front of the cursor</entry></row>
+<row><entry><literal>&lt;backward-char&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>move the cursor one character to the left</entry></row>
 <row><entry><literal>&lt;backward-char&gt;</literal></entry><entry>^B</entry><entry>move the cursor one character to the left</entry></row>
 <row><entry><literal>&lt;backward-word&gt;</literal></entry><entry>Esc b</entry><entry>move the cursor to the beginning of the word</entry></row>
+<row><entry><literal>&lt;bol&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>jump to the beginning of the line</entry></row>
 <row><entry><literal>&lt;bol&gt;</literal></entry><entry>^A</entry><entry>jump to the beginning of the line</entry></row>
+<row><entry><literal>&lt;buffy-cycle&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>cycle among incoming mailboxes</entry></row>
 <row><entry><literal>&lt;capitalize-word&gt;</literal></entry><entry>Esc c</entry><entry>capitalize the word</entry></row>
 <row><entry><literal>&lt;complete&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>complete filename or alias</entry></row>
 <row><entry><literal>&lt;complete-query&gt;</literal></entry><entry>^T</entry><entry>complete address with query</entry></row>
+<row><entry><literal>&lt;delete-char&gt;</literal></entry><entry>&lt;Delete&gt;</entry><entry>delete the char under the cursor</entry></row>
 <row><entry><literal>&lt;delete-char&gt;</literal></entry><entry>^D</entry><entry>delete the char under the cursor</entry></row>
 <row><entry><literal>&lt;downcase-word&gt;</literal></entry><entry>Esc l</entry><entry>convert the word to lower case</entry></row>
+<row><entry><literal>&lt;eol&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>jump to the end of the line</entry></row>
 <row><entry><literal>&lt;eol&gt;</literal></entry><entry>^E</entry><entry>jump to the end of the line</entry></row>
+<row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>move the cursor one character to the right</entry></row>
 <row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>^F</entry><entry>move the cursor one character to the right</entry></row>
 <row><entry><literal>&lt;forward-word&gt;</literal></entry><entry>Esc f</entry><entry>move the cursor to the end of the word</entry></row>
+<row><entry><literal>&lt;history-down&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>scroll down through the history list</entry></row>
 <row><entry><literal>&lt;history-down&gt;</literal></entry><entry>^N</entry><entry>scroll down through the history list</entry></row>
 <row><entry><literal>&lt;history-search&gt;</literal></entry><entry>^R</entry><entry>search through the history list</entry></row>
+<row><entry><literal>&lt;history-up&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>scroll up through the history list</entry></row>
 <row><entry><literal>&lt;history-up&gt;</literal></entry><entry>^P</entry><entry>scroll up through the history list</entry></row>
 <row><entry><literal>&lt;kill-eol&gt;</literal></entry><entry>^K</entry><entry>delete chars from cursor to end of line</entry></row>
 <row><entry><literal>&lt;kill-eow&gt;</literal></entry><entry>Esc d</entry><entry>delete chars from the cursor to the end of the word</entry></row>
@@ -28617,8 +28983,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;quote-char&gt;</literal></entry><entry>^V</entry><entry>quote the next typed key</entry></row>
 <row><entry><literal>&lt;transpose-chars&gt;</literal></entry><entry></entry><entry>transpose character under cursor with previous</entry></row>
 <row><entry><literal>&lt;upcase-word&gt;</literal></entry><entry>Esc u</entry><entry>convert the word to upper case</entry></row>
-<row><entry><literal>&lt;buffy-cycle&gt;</literal></entry><entry></entry><entry>cycle among incoming mailboxes</entry></row>
-
 </tbody>
 </tgroup>
 </table>
@@ -28640,7 +29004,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;delete-account&gt;</literal></entry><entry>D</entry><entry>delete the current account</entry></row>
 <row><entry><literal>&lt;toggle-active&gt;</literal></entry><entry>a</entry><entry>toggle the current account active/inactive</entry></row>
 <row><entry><literal>&lt;toggle-prefer-encrypt&gt;</literal></entry><entry>p</entry><entry>toggle the current account prefer-encrypt flag</entry></row>
-
 </tbody>
 </tgroup>
 </table>
