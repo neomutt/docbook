@@ -18234,7 +18234,7 @@ set use_threads=threads sort=last-date sort_aux=date
       <title>First Run</title>
       <para>
         To enable Autocrypt, set <link
-        linkend="guide/autocrypt">$autocrypt</link>, and if desired change the
+        linkend="autocrypt">$autocrypt</link>, and if desired change the
         value of <link linkend="autocrypt-dir">$autocrypt_dir</link> in
         your muttrc.  The first time NeoMutt is run after that, you will be
         prompted to create
@@ -20796,7 +20796,7 @@ by default) to make the next function apply to all tagged messages.
 </para>
 </sect2>
 
-<sect2 id="guide/autocrypt">
+<sect2 id="autocrypt">
 <title>autocrypt</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
@@ -28653,21 +28653,14 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;current-top&gt;</literal></entry><entry></entry><entry>move entry to top of screen</entry></row>
 <row><entry><literal>&lt;end-cond&gt;</literal></entry><entry></entry><entry>end of conditional execution (noop)</entry></row>
 <row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>enter a neomuttrc command</entry></row>
+<row><entry><literal>&lt;error-history&gt;</literal></entry><entry></entry><entry>show log (and debug) messages</entry></row>
 <row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>move to the first entry</entry></row>
 <row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>=</entry><entry>move to the first entry</entry></row>
 <row><entry><literal>&lt;half-down&gt;</literal></entry><entry>]</entry><entry>scroll down 1/2 page</entry></row>
 <row><entry><literal>&lt;half-up&gt;</literal></entry><entry>[</entry><entry>scroll up 1/2 page</entry></row>
 <row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>this screen</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>1</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>2</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>3</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>4</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>5</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>6</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>7</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>8</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>9</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry></entry><entry>jump to an index number</entry></row>
 <row><entry><literal>&lt;last-entry&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>move to the last entry</entry></row>
 <row><entry><literal>&lt;last-entry&gt;</literal></entry><entry>*</entry><entry>move to the last entry</entry></row>
 <row><entry><literal>&lt;middle-page&gt;</literal></entry><entry>M</entry><entry>move to the middle of the page</entry></row>
@@ -28692,6 +28685,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>select the current entry</entry></row>
 <row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>select the current entry</entry></row>
 <row><entry><literal>&lt;shell-escape&gt;</literal></entry><entry>!</entry><entry>invoke a command in a subshell</entry></row>
+<row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry></entry><entry>show log (and debug) messages</entry></row>
 <row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>t</entry><entry>tag the current entry</entry></row>
 <row><entry><literal>&lt;tag-prefix&gt;</literal></entry><entry>;</entry><entry>apply next function to tagged messages</entry></row>
 <row><entry><literal>&lt;tag-prefix-cond&gt;</literal></entry><entry></entry><entry>apply next function ONLY to tagged messages</entry></row>
@@ -28899,6 +28893,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
 <row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>enter a neomuttrc command</entry></row>
 <row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
+<row><entry><literal>&lt;error-history&gt;</literal></entry><entry></entry><entry>show log (and debug) messages</entry></row>
 <row><entry><literal>&lt;exit&gt;</literal></entry><entry>i</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;exit&gt;</literal></entry><entry>x</entry><entry>exit this menu</entry></row>
@@ -28915,15 +28910,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>this screen</entry></row>
 <row><entry><literal>&lt;imap-fetch-mail&gt;</literal></entry><entry></entry><entry>force retrieval of mail from IMAP server</entry></row>
 <row><entry><literal>&lt;imap-logout-all&gt;</literal></entry><entry></entry><entry>logout from all IMAP servers</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>1</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>2</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>3</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>4</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>5</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>6</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>7</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>8</entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry>9</entry><entry>jump to an index number</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry></entry><entry>jump to an index number</entry></row>
 <row><entry><literal>&lt;link-threads&gt;</literal></entry><entry>&amp;</entry><entry>link tagged message to the current one</entry></row>
 <row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>reply to specified mailing list</entry></row>
 <row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>subscribe to a mailing list</entry></row>
@@ -28987,6 +28974,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;search-toggle&gt;</literal></entry><entry>\\</entry><entry>toggle search pattern coloring</entry></row>
 <row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>set a status flag on a message</entry></row>
 <row><entry><literal>&lt;shell-escape&gt;</literal></entry><entry>!</entry><entry>invoke a command in a subshell</entry></row>
+<row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry></entry><entry>show log (and debug) messages</entry></row>
 <row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>show the NeoMutt version number and date</entry></row>
 <row><entry><literal>&lt;sidebar-first&gt;</literal></entry><entry></entry><entry>move the highlight to the first mailbox</entry></row>
 <row><entry><literal>&lt;sidebar-last&gt;</literal></entry><entry></entry><entry>move the highlight to the last mailbox</entry></row>
