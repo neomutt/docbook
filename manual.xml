@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2021-10-29</releaseinfo>
+    <releaseinfo>version 2022-04-08</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -20279,7 +20279,7 @@ Default: <quote><literal>007</literal></quote></literallayout>
 
 <para>
 Specifies the key that can be used to abort prompts.  The format is the
-same as used in "bind" commands.  The default is equivalent to "\G".
+same as used in "bind" commands.  The default is equivalent to "Ctrl-G".
 Note that the specified key should not be used in other bindings, as the
 abort operation has higher precedence and the binding will not have the
 desired effect.
