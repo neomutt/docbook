@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2022-04-08</releaseinfo>
+    <releaseinfo>version 2022-04-15</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -3749,7 +3749,7 @@ set crypt_use_gpgme
         configurability can make it difficult when just getting started.  A few
         sample neomuttrc files come with NeoMutt, under
         <literal>doc/neomutt/samples/</literal>.  Among them,
-        <ulink url="https://github.com/neomutt/neomutt/blob/master/contrib/samples/sample.neomuttrc-starter">sample.neomuttrc-starter</ulink>
+        <ulink url="https://github.com/neomutt/neomutt/blob/main/contrib/samples/sample.neomuttrc-starter">sample.neomuttrc-starter</ulink>
         is a basic example config with a few suggested settings and pointers to
         useful programs.
       </para>
@@ -11437,13 +11437,13 @@ alternative_order text/enriched text/plain text application/postscript image/*
           part to the main body of an email and sends it could be the following:
 
 <screen>
-  macro compose Y "&lt;first-entry&gt;&lt;enter-command&gt;set wait_key=no&lt;enter&gt; \
-    | pandoc -o /tmp/neomutt-alternative.html&lt;enter&gt; \
-    &lt;attach-file&gt;/tmp/neomutt-alternative.html&lt;enter&gt; \
-    &lt;toggle-unlink&gt;&lt;toggle-disposition&gt; \
-    &lt;tag-entry&gt;&lt;first-entry&gt;&lt;tag-entry&gt;&lt;group-alternatives&gt; \
-    &lt;enter-command&gt;set wait_key=yes&lt;enter&gt;&lt;send-message&gt;" \
-    "send the message as 'multipart/alternative'"
+macro compose Y "&lt;first-entry&gt;&lt;enter-command&gt;set wait_key=no&lt;enter&gt;\
+&lt;pipe-entry&gt;pandoc -o /tmp/neomutt-alternative.html&lt;enter&gt;\
+&lt;attach-file&gt;/tmp/neomutt-alternative.html&lt;enter&gt;\
+&lt;toggle-unlink&gt;&lt;toggle-disposition&gt;\
+&lt;tag-entry&gt;&lt;first-entry&gt;&lt;tag-entry&gt;&lt;group-alternatives&gt;\
+&lt;enter-command&gt;set wait_key=yes&lt;enter&gt;&lt;send-message&gt;" \
+"send the message as 'multipart/alternative'"
 </screen>
         </para>
       </sect2>
@@ -11534,7 +11534,7 @@ set preferred_languages="fr,en,de"
 
         <para>
           As in <link linkend="compose-alternative-order">Composing Multipart/Alternative</link>, you can
-          also use Neomutt's macro and some external scripts to combine these procedure into one.
+          also use Neomutt's macro and some external scripts to combine this procedure into one.
         </para>
 
         <para>
@@ -12280,12 +12280,12 @@ set imap_oauth_refresh_command="/path/to/oauth2.py --quiet --user=[email_address
       <para>
         For Office365, you can use the <literal>mutt_oauth2.py</literal> script
         written by Alexander Perlis:
-        <ulink url="https://github.com/neomutt/neomutt/blob/master/contrib/oauth2/mutt_oauth2.py">https://github.com/neomutt/neomutt/blob/master/contrib/oauth2/mutt_oauth2.py</ulink>
+        <ulink url="https://github.com/neomutt/neomutt/blob/main/contrib/oauth2/mutt_oauth2.py">https://github.com/neomutt/neomutt/blob/main/contrib/oauth2/mutt_oauth2.py</ulink>
       </para>
       <para>
         You'll need to get your own oauth client credentials by following the
         script instructions:
-        <ulink url="https://github.com/neomutt/neomutt/blob/master/contrib/oauth2/mutt_oauth2.py.README">https://github.com/neomutt/neomutt/blob/master/contrib/oauth2/mutt_oauth2.py.README</ulink>
+        <ulink url="https://github.com/neomutt/neomutt/blob/main/contrib/oauth2/mutt_oauth2.py.README">https://github.com/neomutt/neomutt/blob/main/contrib/oauth2/mutt_oauth2.py.README</ulink>
       </para>
 
 <screen>
@@ -12431,7 +12431,7 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
         </para>
          <para>
           Take a look at the benchmark script provided in the following directory:
-          <ulink url="https://github.com/neomutt/neomutt/blob/master/contrib/hcache-bench">contrib/hcache-bench</ulink>
+          <ulink url="https://github.com/neomutt/neomutt/blob/main/contrib/hcache-bench">contrib/hcache-bench</ulink>
           of the neomutt sources, there you can find a way of finding the
           storage backend for your needs.
         </para>
@@ -28785,6 +28785,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>jump to the next unread message</entry></row>
 <row><entry><literal>&lt;next-unread-mailbox&gt;</literal></entry><entry></entry><entry>open next mailbox with new mail</entry></row>
 <row><entry><literal>&lt;parent-message&gt;</literal></entry><entry>P</entry><entry>jump to parent message in thread</entry></row>
+<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;post-message&gt;</literal></entry><entry></entry><entry>post message to newsgroup</entry></row>
 <row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>K</entry><entry>move to the previous entry</entry></row>
@@ -28868,8 +28869,8 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;buffy-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
 <row><entry><literal>&lt;change-folder&gt;</literal></entry><entry>c</entry><entry>open a different folder</entry></row>
 <row><entry><literal>&lt;change-folder-readonly&gt;</literal></entry><entry>Esc c</entry><entry>open a different folder in read only mode</entry></row>
-<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry>i</entry><entry>open a different newsgroup</entry></row>
-<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry>Esc i</entry><entry>open a different newsgroup in read only mode</entry></row>
+<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry></entry><entry>open a different newsgroup</entry></row>
+<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry></entry><entry>open a different newsgroup in read only mode</entry></row>
 <row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>open a different virtual folder</entry></row>
 <row><entry><literal>&lt;check-stats&gt;</literal></entry><entry></entry><entry>calculate message statistics for all mailboxes</entry></row>
 <row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>check for classic PGP</entry></row>
@@ -28939,6 +28940,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>jump to the next unread message</entry></row>
 <row><entry><literal>&lt;next-unread-mailbox&gt;</literal></entry><entry></entry><entry>open next mailbox with new mail</entry></row>
 <row><entry><literal>&lt;parent-message&gt;</literal></entry><entry>P</entry><entry>jump to parent message in thread</entry></row>
+<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;post-message&gt;</literal></entry><entry></entry><entry>post message to newsgroup</entry></row>
 <row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>K</entry><entry>move to the previous entry</entry></row>
@@ -28953,6 +28955,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>move to the previous undeleted message</entry></row>
 <row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>k</entry><entry>move to the previous undeleted message</entry></row>
 <row><entry><literal>&lt;previous-unread&gt;</literal></entry><entry></entry><entry>jump to the previous unread message</entry></row>
+<row><entry><literal>&lt;print-entry&gt;</literal></entry><entry></entry><entry>print the current entry</entry></row>
 <row><entry><literal>&lt;print-message&gt;</literal></entry><entry>p</entry><entry>print the current entry</entry></row>
 <row><entry><literal>&lt;purge-message&gt;</literal></entry><entry></entry><entry>delete the current entry, bypassing the trash folder</entry></row>
 <row><entry><literal>&lt;purge-thread&gt;</literal></entry><entry></entry><entry>delete the current thread, bypassing the trash folder</entry></row>
@@ -28966,6 +28969,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>reply to a message</entry></row>
 <row><entry><literal>&lt;resend-message&gt;</literal></entry><entry>Esc e</entry><entry>use the current message as a template for a new one</entry></row>
 <row><entry><literal>&lt;root-message&gt;</literal></entry><entry></entry><entry>jump to root message in thread</entry></row>
+<row><entry><literal>&lt;save-entry&gt;</literal></entry><entry></entry><entry>save message/attachment to a mailbox/file</entry></row>
 <row><entry><literal>&lt;save-message&gt;</literal></entry><entry>s</entry><entry>save message/attachment to a mailbox/file</entry></row>
 <row><entry><literal>&lt;search&gt;</literal></entry><entry>/</entry><entry>search for a regular expression</entry></row>
 <row><entry><literal>&lt;search-next&gt;</literal></entry><entry>n</entry><entry>search for next match</entry></row>
@@ -29088,6 +29092,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>subscribe to a mailing list</entry></row>
 <row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>unsubscribe from a mailing list</entry></row>
 <row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;print-entry&gt;</literal></entry><entry>p</entry><entry>print the current entry</entry></row>
 <row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>reply to a message</entry></row>
 <row><entry><literal>&lt;resend-message&gt;</literal></entry><entry>Esc e</entry><entry>use the current message as a template for a new one</entry></row>
@@ -29156,6 +29161,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;new-mime&gt;</literal></entry><entry>n</entry><entry>compose new attachment using mailcap entry</entry></row>
 <row><entry><literal>&lt;pgp-menu&gt;</literal></entry><entry>p</entry><entry>show PGP options</entry></row>
 <row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;postpone-message&gt;</literal></entry><entry>P</entry><entry>save this message to send later</entry></row>
 <row><entry><literal>&lt;print-entry&gt;</literal></entry><entry>l</entry><entry>print the current entry</entry></row>
 <row><entry><literal>&lt;rename-attachment&gt;</literal></entry><entry>^O</entry><entry>send attachment with a different name</entry></row>
