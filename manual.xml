@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2022-04-15</releaseinfo>
+    <releaseinfo>version 2022-04-29</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -28654,7 +28654,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;end-cond&gt;</literal></entry><entry></entry><entry>end of conditional execution (noop)</entry></row>
 <row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>enter a neomuttrc command</entry></row>
 <row><entry><literal>&lt;error-history&gt;</literal></entry><entry></entry><entry>show log (and debug) messages</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry></entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>move to the first entry</entry></row>
 <row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>=</entry><entry>move to the first entry</entry></row>
 <row><entry><literal>&lt;half-down&gt;</literal></entry><entry>]</entry><entry>scroll down 1/2 page</entry></row>
@@ -29027,6 +29027,7 @@ bindings for all menus (except as noted).
 </thead>
 <tbody>
 <row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;limit&gt;</literal></entry><entry>l</entry><entry>show only messages matching a pattern</entry></row>
 <row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
 <row><entry><literal>&lt;sort-alias&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
@@ -29051,6 +29052,7 @@ bindings for all menus (except as noted).
 </thead>
 <tbody>
 <row><entry><literal>&lt;create-alias&gt;</literal></entry><entry>a</entry><entry>create an alias from a message sender</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;limit&gt;</literal></entry><entry>l</entry><entry>show only messages matching a pattern</entry></row>
 <row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
 <row><entry><literal>&lt;query&gt;</literal></entry><entry>Q</entry><entry>query external program for addresses</entry></row>
@@ -29081,6 +29083,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
 <row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>display message and toggle header weeding</entry></row>
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>extract supported public keys</entry></row>
 <row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>followup to newsgroup</entry></row>
 <row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>wipe passphrases from memory</entry></row>
@@ -29148,6 +29151,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;edit-to&gt;</literal></entry><entry>t</entry><entry>edit the TO list</entry></row>
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^T</entry><entry>edit attachment content type</entry></row>
 <row><entry><literal>&lt;edit-x-comment-to&gt;</literal></entry><entry></entry><entry>edit the X-Comment-To field</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;filter-entry&gt;</literal></entry><entry>F</entry><entry>filter attachment through a shell command</entry></row>
 <row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>wipe passphrases from memory</entry></row>
 <row><entry><literal>&lt;get-attachment&gt;</literal></entry><entry>G</entry><entry>get a temporary copy of an attachment</entry></row>
@@ -29199,6 +29203,7 @@ bindings for all menus (except as noted).
 </thead>
 <tbody>
 <row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
 </tbody>
 </tgroup>
@@ -29226,6 +29231,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;descend-directory&gt;</literal></entry><entry></entry><entry>descend into a directory</entry></row>
 <row><entry><literal>&lt;display-filename&gt;</literal></entry><entry>@</entry><entry>display the currently selected file's name</entry></row>
 <row><entry><literal>&lt;enter-mask&gt;</literal></entry><entry>m</entry><entry>enter a file mask</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;goto-folder&gt;</literal></entry><entry>=</entry><entry>swap the current folder position with $folder if it exists</entry></row>
 <row><entry><literal>&lt;goto-parent&gt;</literal></entry><entry>p</entry><entry>go to parent directory</entry></row>
 <row><entry><literal>&lt;mailbox-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
@@ -29259,6 +29265,7 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;verify-key&gt;</literal></entry><entry>c</entry><entry>verify a PGP public key</entry></row>
 <row><entry><literal>&lt;view-name&gt;</literal></entry><entry>%</entry><entry>view the key's user id</entry></row>
 </tbody>
@@ -29278,6 +29285,7 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;verify-key&gt;</literal></entry><entry>c</entry><entry>verify a PGP public key</entry></row>
 <row><entry><literal>&lt;view-name&gt;</literal></entry><entry>%</entry><entry>view the key's user id</entry></row>
 </tbody>
@@ -29306,6 +29314,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;chain-prev&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>select the previous element of the chain</entry></row>
 <row><entry><literal>&lt;chain-prev&gt;</literal></entry><entry>h</entry><entry>select the previous element of the chain</entry></row>
 <row><entry><literal>&lt;delete&gt;</literal></entry><entry>d</entry><entry>delete a remailer from the chain</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;insert&gt;</literal></entry><entry>i</entry><entry>insert a remailer into the chain</entry></row>
 <row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>select the current entry</entry></row>
 </tbody>
@@ -29341,6 +29350,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;downcase-word&gt;</literal></entry><entry>Esc l</entry><entry>convert the word to lower case</entry></row>
 <row><entry><literal>&lt;eol&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>jump to the end of the line</entry></row>
 <row><entry><literal>&lt;eol&gt;</literal></entry><entry>^E</entry><entry>jump to the end of the line</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry></entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>move the cursor one character to the right</entry></row>
 <row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>^F</entry><entry>move the cursor one character to the right</entry></row>
 <row><entry><literal>&lt;forward-word&gt;</literal></entry><entry>Esc f</entry><entry>move the cursor to the end of the word</entry></row>
@@ -29376,6 +29386,7 @@ bindings for all menus (except as noted).
 <tbody>
 <row><entry><literal>&lt;create-account&gt;</literal></entry><entry>c</entry><entry>create a new autocrypt account</entry></row>
 <row><entry><literal>&lt;delete-account&gt;</literal></entry><entry>D</entry><entry>delete the current account</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;toggle-active&gt;</literal></entry><entry>a</entry><entry>toggle the current account active/inactive</entry></row>
 <row><entry><literal>&lt;toggle-prefer-encrypt&gt;</literal></entry><entry>p</entry><entry>toggle the current account prefer-encrypt flag</entry></row>
 </tbody>
