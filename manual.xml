@@ -12553,6 +12553,121 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
     </sect1>
   </chapter>
 
+  <chapter id="feature/account-cmd">
+    <title>Account Credentials Command Feature</title>
+    <subtitle>Populate account credentials via an external command</subtitle>
+
+    <sect1 id="account-cmd-support">
+      <title>Support</title>
+      <para><emphasis role="bold">Since:</emphasis> NeoMutt 2022-xx-yy</para>
+      <para><emphasis role="bold">Dependencies:</emphasis> None</para>
+    </sect1>
+
+    <sect1 id="account-cmd-intro">
+      <title>Introduction</title>
+      <para>
+        NeoMutt provides dedicated config variables to specify credentials
+        for network servers. These include <literal>imap_user</literal>,
+        <literal>imap_pass</literal>, <literal>smtp_user</literal>,
+        <literal>smtp_pass</literal>, etc.  There are a few downsides to this
+        approach. For one thing, their use encourages storing usernames and
+        passwords in plain text inside a NeoMutt config file. People have
+        come up with solutions to this, including using gpg-encrypted files
+        and populating <literal>my_</literal> variables via external scripts
+        through <literal>source "/path/to/script|"</literal>.
+        However, once the variables are set, the secrets can be inspected
+        with the <literal>set</literal> command.
+        Also, because these config variables are not account-specific, they
+        have been the cause of a proliferation of ways to mimic per-account
+        setups using a combination of convoluted hooks and macros to modify
+        them on on folder change or on a keypress.
+      </para>
+
+      <para>
+        The goal of this feature is to get rid of most <literal>_user</literal>
+        and <literal>_pass</literal> variables. To do so, we provide a way of
+        specifying an external command that NeoMutt will call to populate
+        account credentials for network servers such as IMAP, POP, or SMTP.
+        The external command is called with a number of arguments indicating
+        the known properties of the account such as the account type and
+        hostname; the external command provides NeoMutt with a list of
+        additional properties such as username and password.
+      </para>
+    </sect1>
+
+    <sect1 id="accound-cmd-usage">
+      <title>Usage</title>
+      <para>
+        The variable <literal>account_command</literal> configures an
+        external program to be used to gather account credentials.
+      </para>
+      <screen>set account_command = /path/to/my/script.sh</screen>
+      <para>
+        The program specified will be called by NeoMutt with a number of
+        key-value command line arguments.
+      </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            <literal>--hostname val</literal>: the network host name of the
+            service
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>--username val</literal>: the username for the account.
+            This might be specified in the URL itself, e.g.,
+            <literal>set folder="imaps://me@example.com@example.com"</literal> or
+            with a dedicated existing variable, e.g., 
+            <literal>set imap_user=me@example.com</literal>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>--type val</literal>: the type of the account, one of
+            <literal>imap</literal>, <literal>pop</literal>,
+            <literal>smtp</literal>, <literal>nntp</literal>, with an optional
+            trailing <literal>s</literal> if SSL/TLS is required.
+          </para>
+        </listitem>
+      </itemizedlist>
+
+      <para>
+        The program specified will have to respond by printing to stdout a
+        number of <literal>key: value</literal> lines. NeoMutt currently
+        recognizes the following keys.
+      </para>
+
+      <itemizedlist>
+        <listitem><para>login</para></listitem>
+        <listitem><para>username</para></listitem>
+        <listitem><para>password</para></listitem>
+      </itemizedlist>
+
+      <para>
+        Because password can contain any characters, including spaces, we
+        expect lines to match the regex <literal>^([[:alpha:]]+): (.*)$</literal>
+        exactly.
+      </para>
+    </sect1>
+
+    <sect1 id="account-cmd-known-bugs">
+      <title>Known Bugs</title>
+      <para>
+        None
+      </para>
+    </sect1>
+
+    <sect1 id="account-cmd-credits">
+      <title>Credits</title>
+      <para>
+        Pietro Cerutti
+      </para>
+    </sect1>
+
+  </chapter>
+
   <chapter id="feature/attach-headers-color">
     <title>Attach Headers Color Feature</title>
     <subtitle>Color attachment headers using regex, just like mail
@@ -20370,6 +20485,23 @@ to <emphasis>no</emphasis>, composition will never be aborted.
 </para>
 </sect2>
 
+<sect2 id="account-command">
+<title>account_command</title>
+<literallayout>Type: command
+Default: (empty)</literallayout>
+
+<para>
+If set, this command is used to retrieve account credentials. The command
+is invoked passing a number of <emphasis>--key value</emphasis> arguments with the
+specifics of the account to lookup. The command writes to standard output a
+number of <emphasis>key: value</emphasis> lines. Currently supported arguments are
+<emphasis>--hostname</emphasis>, <emphasis>--username</emphasis>, and <emphasis>--type</emphasis>, where type can be
+any of <emphasis>imap</emphasis>, <emphasis>imaps</emphasis>, <emphasis>pop</emphasis>, <emphasis>pops</emphasis>, <emphasis>smtp</emphasis>,
+<emphasis>smtps</emphasis>, <emphasis>nntp</emphasis>, and <emphasis>nntps</emphasis>. Currently supported output lines
+are <emphasis>login</emphasis>, <emphasis>username</emphasis>, and <emphasis>password</emphasis>.
+</para>
+</sect2>
+
 <sect2 id="alias-file">
 <title>alias_file</title>
 <literallayout>Type: path
@@ -20553,7 +20685,7 @@ the body of an outgoing message.
 
 <sect2 id="assumed-charset">
 <title>assumed_charset</title>
-<literallayout>Type: string
+<literallayout>Type: string list
 Default: (empty)</literallayout>
 
 <para>
@@ -20578,7 +20710,7 @@ However, only the first content is valid for the message body.
 
 <sect2 id="attach-charset">
 <title>attach_charset</title>
-<literallayout>Type: string
+<literallayout>Type: string list
 Default: (empty)</literallayout>
 
 <para>
@@ -26375,7 +26507,7 @@ before search results. By default, search results will be top-aligned.
 
 <sect2 id="send-charset">
 <title>send_charset</title>
-<literallayout>Type: string
+<literallayout>Type: string list
 Default: <quote><literal>us-ascii:iso-8859-1:utf-8</literal></quote></literallayout>
 
 <para>
