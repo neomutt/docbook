@@ -16138,7 +16138,7 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
               <row>
                 <entry>%N</entry>
                 <entry>
-                  N if mailbox has new mail, blank otherwise
+                  "N" if mailbox has new mail, " " (space) otherwise
                 </entry>
               </row>
               <row>
@@ -16491,7 +16491,7 @@ set nm_unread_tag = unread
 <emphasis role="comment"># %f   folder name (description)</emphasis>
 <emphasis role="comment"># %m   number of messages in the mailbox *</emphasis>
 <emphasis role="comment"># %n   number of unread messages in the mailbox *</emphasis>
-<emphasis role="comment"># %N   N if mailbox has new mail, blank otherwise</emphasis>
+<emphasis role="comment"># %N   "N" if mailbox has new mail, " " (space) otherwise</emphasis>
 <emphasis role="comment"># %>X  right justify the rest of the string and pad with character ``X''</emphasis>
 <emphasis role="comment"># %|X  pad to the end of the line with character ``X''</emphasis>
 <emphasis role="comment"># %*X  soft-fill with character ``X'' as pad</emphasis>
@@ -22317,7 +22317,7 @@ its own set of <literal>printf(3)</literal>-like sequences:
 </entry></row>
 <row><entry>%n  </entry><entry>* </entry><entry>Number of unread messages in the mailbox
 </entry></row>
-<row><entry>%N  </entry><entry>  </entry><entry>"N" if mailbox has new mail, blank otherwise
+<row><entry>%N  </entry><entry>  </entry><entry>"N" if mailbox has new mail, " " (space) otherwise
 </entry></row>
 <row><entry>%s  </entry><entry>  </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
@@ -23789,7 +23789,7 @@ This string is similar to <link linkend="index-format">$index_format</link>, but
 </entry></row>
 <row><entry>%n  </entry><entry>* </entry><entry>Number of unread messages in the mailbox
 </entry></row>
-<row><entry>%N  </entry><entry>  </entry><entry>"N" if mailbox has new mail, blank otherwise
+<row><entry>%N  </entry><entry>  </entry><entry>"N" if mailbox has new mail, " " (space) otherwise
 </entry></row>
 <row><entry>%s  </entry><entry>  </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
@@ -24987,10 +24987,6 @@ of a <literal>multipart/signed</literal> attachment when verifying it.
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
-For examples on how to configure these formats for the various versions
-of PGP which are floating around, see the pgp and gpg sample configuration files in
-the <literal>samples/</literal> subdirectory which has been installed on your system
-alongside the documentation.
 (PGP only)
 </para>
 <note>Before 2018-01-11, this was called $pgp_self_encrypt_as</note>
@@ -26771,7 +26767,7 @@ sequences:
 </entry></row>
 <row><entry>%L </entry><entry>* @ </entry><entry>Number of messages after limiting
 </entry></row>
-<row><entry>%n </entry><entry>    </entry><entry>'N' if mailbox has new mail, ' ' (space) otherwise
+<row><entry>%n </entry><entry>    </entry><entry>"N" if mailbox has new mail, " " (space) otherwise
 </entry></row>
 <row><entry>%N </entry><entry>*   </entry><entry>Number of unread messages in the mailbox (seen or unseen)
 </entry></row>
