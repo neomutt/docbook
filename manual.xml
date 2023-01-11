@@ -182,7 +182,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <title>Copyright</title>
       <para>
         NeoMutt is Copyright © 1996-2021 Michael R. Elkins
-        <email>me@neomutt.org</email> and others.
+        <email>me@mutt.org</email> and others.
       </para>
       <para>
         This program is free software; you can redistribute it and/or modify it
@@ -1986,6 +1986,12 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
                 </entry>
               </row>
               <row>
+                <entry>3</entry>
+                <entry>
+                  Italics on
+                </entry>
+              </row>
+              <row>
                 <entry>4</entry>
                 <entry>
                   Underline on
@@ -3739,11 +3745,8 @@ set crypt_use_gpgme
         NeoMutt is highly configurable because it's <emphasis>meant</emphasis>
         to be customized to your needs and preferences.  However, this
         configurability can make it difficult when just getting started.  A few
-        sample neomuttrc files come with NeoMutt, under
-        <literal>doc/neomutt/samples/</literal>.  Among them,
-        <ulink url="https://github.com/neomutt/neomutt/blob/main/contrib/samples/sample.neomuttrc-starter">sample.neomuttrc-starter</ulink>
-        is a basic example config with a few suggested settings and pointers to
-        useful programs.
+        sample neomuttrc files are available in the
+        <ulink url="https://github.com/neomutt/neomutt-contrib">Contrib Repo</ulink>.
       </para>
     </sect1>
 
@@ -5034,6 +5037,9 @@ folder-hook work "set sort=threads"
             <para>bold</para>
           </listitem>
           <listitem>
+            <para>italic</para>
+          </listitem>
+          <listitem>
             <para>reverse</para>
           </listitem>
           <listitem>
@@ -5171,53 +5177,6 @@ color prompt bold underline cyan default
 <screen>
 uncolor error
 uncolor prompt
-</screen>
-        <para>
-          Each of these objects will colour a certain expando in the index.
-          See <link linkend="index-format">$index_format</link> for more details.
-        </para>
-        <table id="color-simple-index">
-          <title>Simple Index Colours</title>
-          <tgroup cols="2">
-            <thead>
-              <row>
-                <entry>Colour Name</entry>
-                <entry>Description</entry>
-              </row>
-            </thead>
-            <tbody>
-              <row>
-                <entry>index_collapsed</entry>
-                <entry>Number of messages in a collapsed thread, <literal>%M</literal></entry>
-              </row>
-              <row>
-                <entry>index_date</entry>
-                <entry>Date field, <literal>%d</literal> <literal>%D</literal> <literal>%{fmt}</literal> <literal>%[fmt]</literal> <literal>%(fmt)</literal></entry>
-              </row>
-              <row>
-                <entry>index_label</entry>
-                <entry>Message label, <literal>%y</literal> <literal>%Y</literal></entry>
-              </row>
-              <row>
-                <entry>index_number</entry>
-                <entry>Message number, <literal>%C</literal></entry>
-              </row>
-              <row>
-                <entry>index_size</entry>
-                <entry>Message size, <literal>%c</literal> <literal>%cr</literal> <literal>%l</literal></entry>
-              </row>
-              <row>
-                <entry>index_tags</entry>
-                <entry>Transformed message tags, <literal>%g</literal> <literal>%J</literal></entry>
-              </row>
-            </tbody>
-          </tgroup>
-        </table>
-<screen>
-color index_date green default
-</screen>
-<screen>
-uncolor index_date
 </screen>
         <para>
           These are sidebar objects.
@@ -5464,9 +5423,34 @@ uncolor quoted2
                 <entry>Author in the index, %A %a %F %L %n</entry>
               </row>
               <row>
+                <entry>index_collapsed</entry>
+                <entry>pattern</entry>
+                <entry>Number of messages in a collapsed thread, <literal>%M</literal></entry>
+              </row>
+              <row>
+                <entry>index_date</entry>
+                <entry>pattern</entry>
+                <entry>Date field, <literal>%d</literal> <literal>%D</literal> <literal>%{fmt}</literal> <literal>%[fmt]</literal> <literal>%(fmt)</literal></entry>
+              </row>
+              <row>
                 <entry>index_flags</entry>
                 <entry>pattern</entry>
                 <entry>Flags in the index, %S %Z</entry>
+              </row>
+              <row>
+                <entry>index_label</entry>
+                <entry>pattern</entry>
+                <entry>Message label, <literal>%y</literal> <literal>%Y</literal></entry>
+              </row>
+              <row>
+                <entry>index_number</entry>
+                <entry>pattern</entry>
+                <entry>Message number, <literal>%C</literal></entry>
+              </row>
+              <row>
+                <entry>index_size</entry>
+                <entry>pattern</entry>
+                <entry>Message size, <literal>%c</literal> <literal>%cr</literal> <literal>%l</literal></entry>
               </row>
               <row>
                 <entry>index_subject</entry>
@@ -5477,6 +5461,11 @@ uncolor quoted2
                 <entry>index_tag</entry>
                 <entry>pattern</entry>
                 <entry>Tags in the index, %G</entry>
+              </row>
+              <row>
+                <entry>index_tags</entry>
+                <entry>pattern</entry>
+                <entry>Transformed message tags, <literal>%g</literal> <literal>%J</literal></entry>
               </row>
               <row>
                 <entry>status</entry>
@@ -6965,10 +6954,10 @@ set spam_separator=", "
         <para>
           Using the <literal>&lt;enter-command&gt;</literal> function in the
           <emphasis>index</emphasis> menu, you can query the value of
-          a variable by prefixing the name of the variable with a question
+          a variable by suffixing the name of the variable with a question
           mark:
         </para>
-        <screen>set ?allow_8bit</screen>
+        <screen>set allow_8bit?</screen>
         <para>
           The question mark is actually only required for boolean and
           quadoption variables.
@@ -7167,6 +7156,9 @@ mailboxes $my_mx +mailbox3
         <arg choice="plain">
           <replaceable class="parameter">filename</replaceable>
         </arg>
+        <arg choice="opt" rep="repeat">
+          <replaceable class="parameter">filename</replaceable>
+        </arg>
       </cmdsynopsis>
       <para>
         This command allows the inclusion of initialization commands from other
@@ -7178,6 +7170,32 @@ mailboxes $my_mx +mailbox3
         If the filename begins with a tilde (<quote>~</quote>), it will be
         expanded to the path of your home directory.
       </para>
+      <para>
+        If the filename is relative and the command <command>source</command>
+        is executed from the context of a configuration file, then the filename
+        is interpreted relative to the directory of that configuration file.
+        If the command is executed outside of a configuration file, e.g. from
+        the prompt, then the filename is interpreted relative to the current
+        working directory (see <link linkend="cd"><command>cd</command></link>
+        on how to change the current working directory at runtime).
+      </para>
+      <note>
+        <para>
+          Commands of a hook like
+          <link linkend="folder-hook"><command>folder-hook</command></link>
+          are not executed when being read from the configuration file but
+          later at runtime when they are triggered. Thus, relative paths in
+          hooks are interpreted relative to the current working directory and
+          not relative to the configuration file the hook was defined in.
+        </para>
+        <para>
+          For example: the hook defined with
+          <screen>folder-hook foo "source foo.rc"</screen>
+          in the file <literal>~/.config/neomutt/neomuttrc</literal> sources
+          the file <literal>$CWD/foo.rc</literal> and not
+          <literal>~/.config/neomutt/foo.rc</literal>.
+        </para>
+      </note>
       <para>
         If the filename ends with a vertical bar (<quote>|</quote>), then
         <emphasis>filename</emphasis> is considered to be an executable program
@@ -14457,69 +14475,67 @@ ifndef sidebar finish
       </para>
       <para>
         The index objects can be themed using the <literal>color</literal>
-        command. Some objects require a pattern.
+        command and an optional pattern. A missing pattern is equivalent to
+        a match-all <literal>.*</literal> pattern.
       </para>
 
 <screen>
-color index-object foreground background
-color index-object foreground background pattern
+color index-object foreground background [pattern]
 </screen>
 
       <table id="table-index-color-colors">
         <title>Index Colors</title>
-        <tgroup cols="3">
+        <tgroup cols="2">
           <thead>
             <row>
               <entry>Object</entry>
-              <entry>Pattern</entry>
               <entry>Highlights</entry>
             </row>
           </thead>
           <tbody>
             <row>
               <entry><literal>index</literal></entry>
-              <entry>yes</entry>
               <entry>Entire index line</entry>
             </row>
             <row>
               <entry><literal>index_author</literal></entry>
-              <entry>yes</entry>
               <entry>Author name, %A %a %F %L %n</entry>
             </row>
             <row>
               <entry><literal>index_collapsed</literal></entry>
-              <entry>no</entry>
               <entry>Number of messages in a collapsed thread, %M</entry>
             </row>
             <row>
               <entry><literal>index_date</literal></entry>
-              <entry>no</entry>
               <entry>Date field</entry>
             </row>
             <row>
               <entry><literal>index_flags</literal></entry>
-              <entry>yes</entry>
               <entry>Message flags, %S %Z</entry>
             </row>
             <row>
               <entry><literal>index_label</literal></entry>
-              <entry>no</entry>
               <entry>Message label, %y %Y</entry>
             </row>
             <row>
               <entry><literal>index_number</literal></entry>
-              <entry>no</entry>
               <entry>Message number, %C</entry>
             </row>
             <row>
               <entry><literal>index_size</literal></entry>
-              <entry>no</entry>
               <entry>Message size, %c %cr %l</entry>
             </row>
             <row>
               <entry><literal>index_subject</literal></entry>
-              <entry>yes</entry>
               <entry>Subject, %s</entry>
+            </row>
+            <row>
+              <entry><literal>index_tag</literal></entry>
+              <entry>Nessage tags, <literal>%G</literal></entry>
+            </row>
+            <row>
+              <entry><literal>index_tags</literal></entry>
+              <entry>Transformed message tags, <literal>%g</literal> <literal>%J</literal></entry>
             </row>
           </tbody>
         </tgroup>
@@ -15857,28 +15873,26 @@ bind index \CG get-message
     <sect1 id="custom-tags-colors">
       <title>Colors</title>
       <para>
-        Adds these to index-color feature:
+        Adds the objects, below, to index-color feature.
+        The objects can take an optional pattern.
       </para>
 
       <table id="table-custom-tags-colors">
         <title>Index Colors</title>
-        <tgroup cols="3">
+        <tgroup cols="2">
           <thead>
             <row>
               <entry>Object</entry>
-              <entry>Pattern</entry>
               <entry>Highlights</entry>
             </row>
           </thead>
           <tbody>
             <row>
               <entry><literal>index_tag</literal></entry>
-              <entry>yes</entry>
               <entry>an individual message tag, %G, uses tag name</entry>
             </row>
             <row>
               <entry><literal>index_tags</literal></entry>
-              <entry>no</entry>
               <entry>the transformed message tags, %g or %J</entry>
             </row>
           </tbody>
@@ -15942,10 +15956,8 @@ macro index,pager tt "&lt;modify-labels&gt;!todo\n" "Toggle the 'todo' tag"
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 <emphasis role="comment"># These symbols are added to the index-color feature:</emphasis>
 <emphasis role="comment"># an individual message tag, %G, uses tag name</emphasis>
-<emphasis role="comment"># this symbol uses a pattern</emphasis>
 color index_tag red white "inbox"
 <emphasis role="comment"># the transformed message tags, %g</emphasis>
-<emphasis role="comment"># this symbol does not use a pattern</emphasis>
 color index_tags green default
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 
@@ -16188,6 +16200,26 @@ virtual-mailboxes "My INBOX" "notmuch://?query=tag:inbox"
             </row>
           </thead>
           <tbody>
+            <row>
+              <entry><literal>nm_config_file</literal></entry>
+              <entry>path</entry>
+              <entry><literal>auto</literal></entry>
+              <entry>
+                Configuration file for the notmuch database. Either a path,
+                <literal>auto</literal> for detecting a config. file, or
+                empty for no configuration file. Only useful for notmuch
+                0.32+.
+              </entry>
+            </row>
+            <row>
+              <entry><literal>nm_config_profile</literal></entry>
+              <entry>string</entry>
+              <entry>(empty)</entry>
+              <entry>
+                Configuration profile for the notmuch database. Only useful
+                for notmuch 0.32+.
+              </entry>
+            </row>
             <row>
               <entry><literal>nm_db_limit</literal></entry>
               <entry>number</entry>
@@ -19549,7 +19581,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
             <arg choice="plain">
               <replaceable class="parameter">background</replaceable>
             </arg>
-            <arg choice="plain">
+            <arg choice="opt">
               <replaceable class="parameter">pattern</replaceable>
             </arg>
             <command>
@@ -24620,7 +24652,7 @@ authentication fails, NeoMutt will not connect to the IMAP server.
 
 <sect2 id="nntp-context">
 <title>nntp_context</title>
-<literallayout>Type: number
+<literallayout>Type: number (long)
 Default: 1000</literallayout>
 
 <para>
