@@ -3485,6 +3485,18 @@ set crypt_use_gpgme
         </para>
 
         <para>
+          When using GPGME as S/MIME backend, keys and certificates are
+          managed by GnuPG.  You can add your key (or certificates) to
+          GnuPG with the command
+          <quote><literal>gpgsm --import mykey.p12</literal></quote>.
+          Note that in order to use the key for signing or encrypting, the root
+          certificate of that key must be trusted, which might involve editing
+          <literal>~/.gnupg/trustlist.txt</literal>.
+          Consult your documentation of GnuPG for details, in particular
+          <literal>gpgsm</literal>.
+        </para>
+
+        <para>
           In <quote>classic mode</quote>, keys and certificates are managed by
           the <literal>smime_keys</literal> program that comes with NeoMutt.  By
           default they are stored under <literal>~/.smime/</literal>. (This is
@@ -5052,24 +5064,8 @@ folder-hook work "set sort=threads"
         <para>
           If your terminal supports it, the special keyword
           <emphasis>default</emphasis> can be used as a transparent color. The
-          value <emphasis>brightdefault</emphasis> is also valid. If NeoMutt is
-          linked against the <emphasis>S-Lang</emphasis> library, you also need
-          to set the <literal>$COLORFGBG</literal> environment variable to the
-          default colors of your terminal for this to work; for example (for
-          Bourne-like shells):
+          value <emphasis>brightdefault</emphasis> is also valid.
         </para>
-<screen>
-set COLORFGBG="green;black"
-export COLORFGBG
-</screen>
-        <note>
-          <para>
-            The <emphasis>S-Lang</emphasis> library requires you to use the
-            <emphasis>lightgray</emphasis> and <emphasis>brown</emphasis>
-            keywords instead of <emphasis>white</emphasis> and
-            <emphasis>yellow</emphasis> when setting this variable.
-          </para>
-        </note>
       </sect2>
 
       <sect2 id="color-simple">
@@ -24428,6 +24424,26 @@ is understood:
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
+<sect2 id="nm-config-file">
+<title>nm_config_file</title>
+<literallayout>Type: path
+Default: <quote><literal>auto</literal></quote></literallayout>
+
+<para>
+Configuration file for notmuch. Use 'auto' to detect configuration.
+</para>
+</sect2>
+
+<sect2 id="nm-config-profile">
+<title>nm_config_profile</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+Configuration profile for notmuch.
+</para>
+</sect2>
+
 <sect2 id="nm-db-limit">
 <title>nm_db_limit</title>
 <literallayout>Type: number
@@ -26430,7 +26446,7 @@ using the value of <link linkend="real-name">$real_name</link>.
 <sect2 id="rfc2047-parameters">
 <title>rfc2047_parameters</title>
 <literallayout>Type: boolean
-Default: no</literallayout>
+Default: yes</literallayout>
 
 <para>
 When this variable is <emphasis>set</emphasis>, NeoMutt will decode RFC2047-encoded MIME
