@@ -20684,6 +20684,7 @@ Default: no</literallayout>
 If set, NeoMutt will prompt you for follow-up groups before editing
 the body of an outgoing message.
 </para>
+<note>Before 2023-01-20, this was called $ask_follow_up</note>
 </sect2>
 
 <sect2 id="ask-x-comment-to">
