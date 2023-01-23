@@ -17454,7 +17454,7 @@ set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
 <emphasis role="comment"># Sort the mailboxes in the Sidebar using this method:</emphasis>
 <emphasis role="comment">#       count    – total number of messages</emphasis>
 <emphasis role="comment">#       flagged  – number of flagged messages</emphasis>
-<emphasis role="comment">#       new      – number of new messages</emphasis>
+<emphasis role="comment">#       unread   – number of unread messages</emphasis>
 <emphasis role="comment">#       path     – mailbox path</emphasis>
 <emphasis role="comment">#       unsorted – do not sort the mailboxes</emphasis>
 set sidebar_sort_method = 'unsorted'
@@ -22759,7 +22759,7 @@ By default it is <emphasis>unset</emphasis> so no header caching will be used.
 </para>
 <para>
 Header caching can greatly improve speed when opening POP, IMAP
-MH or Maildir folders, see "<link linkend="caching">caching</link>" for details.
+MH or Maildir folders, see "<link linkend="caching">caching</link>" in the NeoMutt Guide for details.
 </para>
 </sect2>
 
@@ -26088,6 +26088,11 @@ from NeoMutt.  If this option is <emphasis>set</emphasis>, they do quit, if it i
 have no effect, and if it is set to <emphasis>ask-yes</emphasis> or <emphasis>ask-no</emphasis>, you are
 prompted for confirmation when you try to quit.
 </para>
+<para>
+In order to quit from NeoMutt if this variable is <emphasis>unset</emphasis>, you must send
+the signal SIGINT to NeoMutt.  This can usually be achieved by pressing
+CTRL-C in the terminal.
+</para>
 </sect2>
 
 <sect2 id="quote-regex">
@@ -26252,6 +26257,13 @@ parts when <link linkend="reflow-text">$reflow_text</link> is <emphasis>set</emp
 be wrapped at the terminal's right margin.  A positive value sets the
 paragraph width relative to the left margin.  A negative value set the
 paragraph width relative to the right margin.
+</para>
+<para>
+Be aware that the reformatted lines of a paragraph are still subject to <link linkend="wrap">$wrap</link>.
+This means if <link linkend="reflow-wrap">$reflow_wrap</link> is 40 and <link linkend="wrap">$wrap</link> is 30, then the paragraph gets
+reformatted to 40 characters a line (due to <link linkend="reflow-wrap">$reflow_wrap</link>) and afterwards
+each 40-character-line is split at 30 characters (due to <link linkend="wrap">$wrap</link>), resulting in
+alternating line lengths of 30 and 10 characters.
 </para>
 <para>
 Also see <link linkend="wrap">$wrap</link>.
@@ -26884,7 +26896,7 @@ When set, the sidebar will only display mailboxes containing new, or
 flagged, mail.
 </para>
 <para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-whitelist">$sidebar_whitelist</link>, <link linkend="sidebar-non-empty-mailbox-only">$sidebar_non_empty_mailbox_only</link>.
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-whitelist">sidebar_whitelist</link>, <link linkend="sidebar-non-empty-mailbox-only">$sidebar_non_empty_mailbox_only</link>.
 </para>
 </sect2>
 
@@ -26910,7 +26922,7 @@ Default: no</literallayout>
 When set, the sidebar will only display mailboxes that contain one or more mails.
 </para>
 <para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-new-mail-only">$sidebar_new_mail_only</link>, <link linkend="sidebar-whitelist">$sidebar_whitelist</link>.
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-new-mail-only">$sidebar_new_mail_only</link>, <link linkend="sidebar-whitelist">sidebar_whitelist</link>.
 </para>
 </sect2>
 
@@ -26963,25 +26975,25 @@ Default: order</literallayout>
 
 <para>
 Specifies how to sort mailbox entries in the sidebar.  By default, the
-entries are sorted alphabetically.  Valid values:
+entries are <emphasis role="bold">unsorted</emphasis>.  Valid values:
 
 </para>
 
 <itemizedlist>
-<listitem><para>path (alphabetically)
-</para></listitem><listitem><para>count (all message count)
-</para></listitem><listitem><para>flagged (flagged message count)
-</para></listitem><listitem><para>new (unread message count)
-</para></listitem><listitem><para>unread (unread message count)
-</para></listitem><listitem><para>unsorted
+<listitem><para><emphasis role="bold">path</emphasis> (alphabetically)
+</para></listitem><listitem><para><emphasis role="bold">count</emphasis> (all message count)
+</para></listitem><listitem><para><emphasis role="bold">flagged</emphasis> (flagged message count)
+</para></listitem><listitem><para><emphasis role="bold">unread</emphasis> (unread message count)
+</para></listitem><listitem><para><emphasis role="bold">unsorted</emphasis>
 </para></listitem></itemizedlist>
 
 <para>
 You may optionally use the "reverse-" prefix to specify reverse sorting
-order (example: "<literal>set sidebar_sort_method=reverse-alpha</literal>").
+order (example: "<literal>set sidebar_sort_method=reverse-path</literal>").
 </para>
 <para>
-The "alpha" and "name" values are synonyms for "path".
+The <emphasis role="bold">alpha</emphasis> and <emphasis role="bold">name</emphasis> values are synonyms for <emphasis role="bold">path</emphasis>. The
+<emphasis role="bold">new</emphasis> value is a synonym for <emphasis role="bold">unread</emphasis>.
 </para>
 </sect2>
 
@@ -28304,8 +28316,21 @@ headers) which may lead to incorrect search results.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt uses the date received rather than the date sent
-to thread messages by subject.
+If <link linkend="strict-threads">$strict_threads</link> is <emphasis>unset</emphasis>, then messages may also be grouped by
+subject.  Unlike threading by "In-Reply-To:" and "References:" header,
+grouping by subject does not imply a parent-child relation between two
+messages.
+</para>
+<para>
+To determine the ancestry between messages grouped by subject, Neomutt uses
+their date: only newer messages can be descendants of older ones.
+</para>
+<para>
+When <link linkend="thread-received">$thread_received</link> is <emphasis>set</emphasis>, NeoMutt uses the date received rather
+than the date sent when comparing messages for the date.
+</para>
+<para>
+See also <link linkend="strict-threads">$strict_threads</link>, and <link linkend="sort-re">$sort_re</link>.
 </para>
 </sect2>
 
