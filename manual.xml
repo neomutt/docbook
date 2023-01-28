@@ -3012,6 +3012,27 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
           </para>
         </sect3>
 
+        <sect3 id="smime-header">
+          <title>Smime: Pseudo Header</title>
+          <para>
+            If you want to use S/MIME, you can specify
+          </para>
+          <para>
+            <literal>Smime:</literal> [
+            <literal>E</literal> |
+            <literal>S</literal> |
+            <literal>S</literal>
+            <emphasis>&lt;id&gt;</emphasis> ]
+          </para>
+          <para>
+            <quote>E</quote> selects encryption, <quote>S</quote> selects signing
+            and <quote>S&lt;id&gt;</quote> selects signing with the given key,
+            setting <link linkend="smime-sign-as">$smime_sign_as</link> for the
+            duration of the message composition session. The selection can later
+            be changed in the compose menu.
+          </para>
+        </sect3>
+
         <sect3 id="in-reply-to-header">
           <title>In-Reply-To: Header</title>
           <para>
@@ -7177,19 +7198,12 @@ mailboxes $my_mx +mailbox3
       </para>
       <note>
         <para>
-          Commands of a hook like
-          <link linkend="folder-hook"><command>folder-hook</command></link>
-          are not executed when being read from the configuration file but
-          later at runtime when they are triggered. Thus, relative paths in
-          hooks are interpreted relative to the current working directory and
-          not relative to the configuration file the hook was defined in.
-        </para>
-        <para>
-          For example: the hook defined with
-          <screen>folder-hook foo "source foo.rc"</screen>
-          in the file <literal>~/.config/neomutt/neomuttrc</literal> sources
-          the file <literal>$CWD/foo.rc</literal> and not
-          <literal>~/.config/neomutt/foo.rc</literal>.
+          A hook remembers the configuration file it was defined in and sets the
+          context to that file when executing its commands.  As a result
+          a <command>source</command> command inside a hook is executed in the
+          context of the configuration file the hook was defined in.  Thus
+          relative filenames are interpreted relative to the configuration file
+          the hook is defined in.
         </para>
       </note>
       <para>
@@ -11701,6 +11715,9 @@ set preferred_languages="fr,en,de"
         <arg choice="plain">
           <replaceable>mime-type</replaceable>
         </arg>
+        <arg choice="opt" rep="repeat">
+          <replaceable>mime-type</replaceable>
+        </arg>
         <command>unattachments</command>
         <group choice="req">
           <arg choice="plain">+</arg>
@@ -11710,6 +11727,9 @@ set preferred_languages="fr,en,de"
           <replaceable>disposition</replaceable>
         </arg>
         <arg choice="plain">
+          <replaceable>mime-type</replaceable>
+        </arg>
+        <arg choice="opt" rep="repeat">
           <replaceable>mime-type</replaceable>
         </arg>
         <command>attachments</command>
@@ -11756,6 +11776,13 @@ set preferred_languages="fr,en,de"
         actually evaluating a message.
       </para>
       <para>
+        Note that the first MIME part is treated slightly differently: It is
+        almost always the message text.  Thus, it is not counted as an
+        attachment if its disposition is <literal>inline</literal> and it is
+        not a <literal>multipart/*</literal> or <literal>message/*</literal>
+        MIME-type.
+      </para>
+      <para>
         Some examples might help to illustrate. The examples that are not
         commented out define the default configuration of the lists.
       </para>
@@ -11780,13 +11807,14 @@ set preferred_languages="fr,en,de"
 <emphasis role="comment"># text/x-vcard and application/pgp parts. (PGP parts are already known</emphasis>
 <emphasis role="comment"># to NeoMutt, and can be searched for with ~g, ~G, and ~k.)</emphasis>
 <emphasis role="comment">#</emphasis>
-<emphasis role="comment"># I've added x-pkcs7 to this, since it functions (for S/MIME)</emphasis>
+<emphasis role="comment"># I've added pkcs7/x-pkcs7 to this, since it functions (for S/MIME)</emphasis>
 <emphasis role="comment"># analogously to PGP signature attachments. S/MIME isn't supported</emphasis>
 <emphasis role="comment"># in a stock NeoMutt build, but we can still treat it specially here.</emphasis>
 <emphasis role="comment">#</emphasis>
 attachments  +A */.*
-attachments  -A text/x-vcard application/pgp.*
-attachments  -A application/x-pkcs7-.*
+attachments  -A text/x-vcard
+attachments  -A application/pgp.*
+attachments  -A application/pkcs7-.* application/x-pkcs7-.*
 <emphasis role="comment"># Discount all MIME parts with an "inline" disposition, unless they're</emphasis>
 <emphasis role="comment"># text/plain. (Why inline a text/plain part unless it's external to the</emphasis>
 <emphasis role="comment"># message flow?)</emphasis>
@@ -12457,7 +12485,7 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
         </para>
         <para>
           For configuration, the variable
-          <link linkend="message-cachedir">$message_cachedir</link> must point
+          <link linkend="message-cache-dir">$message_cache_dir</link> must point
           to a directory. There, NeoMutt will create a hierarchy of
           subdirectories named like the account and mailbox path the cache is
           for.
@@ -12469,7 +12497,7 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
         <para>
           For using both, header and body caching,
           <link linkend="header-cache">$header_cache</link> and
-          <link linkend="message-cachedir">$message_cachedir</link> can be
+          <link linkend="message-cache-dir">$message_cache_dir</link> can be
           safely set to the same value.
         </para>
         <para>
@@ -19411,6 +19439,9 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
             <arg choice="plain">
               <replaceable>mime-type</replaceable>
             </arg>
+            <arg choice="opt" rep="repeat">
+              <replaceable>mime-type</replaceable>
+            </arg>
             <command>
               <link linkend="attachments">unattachments</link>
             </command>
@@ -19422,6 +19453,9 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
               <replaceable>disposition</replaceable>
             </arg>
             <arg choice="plain">
+              <replaceable>mime-type</replaceable>
+            </arg>
+            <arg choice="opt" rep="repeat">
               <replaceable>mime-type</replaceable>
             </arg>
             <command>
@@ -22936,6 +22970,17 @@ This variable controls the size (in number of strings remembered) of
 the string history buffer per category. The buffer is cleared each time the
 variable is set.
 </para>
+<para>
+Note that strings (e.g. commands) starting with a space are never recorded
+in the history.  This is for example useful to prevent leaking sensitive
+information into the history file or for one off tests.
+</para>
+<para>
+Also note that a string is not added to the history if it exactly matches
+its immediate predecessor, e.g. executing the same command twice in a row
+results in only one copy being added to the history.  To prevent duplicates
+over all entries use <link linkend="history-remove-dups">$history_remove_dups</link>.
+</para>
 </sect2>
 
 <sect2 id="history-file">
@@ -23388,8 +23433,8 @@ This variable defaults to your user name on the local machine.
 </para>
 </sect2>
 
-<sect2 id="implicit-autoview">
-<title>implicit_autoview</title>
+<sect2 id="implicit-auto-view">
+<title>implicit_auto_view</title>
 <literallayout>Type: boolean
 Default: no</literallayout>
 
@@ -23400,6 +23445,12 @@ an internal viewer defined for.  If such an entry is found, NeoMutt will
 use the viewer defined in that entry to convert the body part to text
 form.
 </para>
+<note>Before 2023-01-25, this was called $implicit_autoview</note>
+</sect2>
+
+<sect2 id="implicit-autoview">
+  <title>implicit_autoview</title>
+  <note>Renamed to <link linkend="implicit-auto-view">$implicit_auto_view</link> (2023-01-25)</note>
 </sect2>
 
 <sect2 id="include">
@@ -24066,8 +24117,8 @@ every once in a while, since it can be a little slow
 </para>
 </sect2>
 
-<sect2 id="message-cachedir">
-<title>message_cachedir</title>
+<sect2 id="message-cache-dir">
+<title>message_cache_dir</title>
 <literallayout>Type: path
 Default: (empty)</literallayout>
 
@@ -24084,7 +24135,14 @@ as fast as for local folders.
 <para>
 Also see the <link linkend="message-cache-clean">$message_cache_clean</link> variable.
 </para>
+<note>Before 2023-01-25, this was called message_cachedir</note>
 </sect2>
+
+<sect2 id="message-cachedir">
+  <title>message_cachedir</title>
+  <note>Renamed to <link linkend="message-cache-dir">$message_cache_dir</link> (2023-01-25)</note>
+</sect2>
+
 
 <sect2 id="message-format">
 <title>message_format</title>
@@ -26529,6 +26587,11 @@ Default: 0</literallayout>
 This variable controls the size of the history (per category) saved in the
 <link linkend="history-file">$history_file</link> file.
 </para>
+<para>
+Setting this to a value greater than <link linkend="history">$history</link> is possible.  However, there
+will never be more than <link linkend="history">$history</link> entries to select from even if more are
+recorded in the history file.
+</para>
 </sect2>
 
 <sect2 id="save-name">
@@ -27220,7 +27283,7 @@ Default: (empty)</literallayout>
 
 <para>
 This format string specifies a command which is used to decrypt
-<literal>application/x-pkcs7-mime</literal> attachments.
+<literal>application/pkcs7-mime</literal> attachments.
 </para>
 <para>
 The OpenSSL command formats have their own set of <literal>printf(3)</literal>-like sequences
@@ -27539,7 +27602,7 @@ Default: (empty)</literallayout>
 
 <para>
 This command is used to verify S/MIME signatures of type
-<literal>application/x-pkcs7-mime</literal>.
+<literal>application/pkcs7-mime</literal>.
 </para>
 <para>
 This is a format string, see the <link linkend="smime-decrypt-command">$smime_decrypt_command</link> command for
@@ -27696,7 +27759,7 @@ will sort to.
 </para>
 <para>
 See the "Use Threads Feature" section for further explanation and
-examples, https://neomutt.org/feature/use-threads.
+examples, https://neomutt.org/feature/use-threads
 </para>
 </sect2>
 
@@ -27752,7 +27815,7 @@ more common to use "last-" with <link linkend="sort">$sort</link> and not with <
 </para>
 <para>
 See the "Use Threads Feature" section for further explanation and
-examples, https://neomutt.org/feature/use-threads.
+examples, https://neomutt.org/feature/use-threads
 </para>
 </sect2>
 
