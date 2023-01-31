@@ -2960,7 +2960,10 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         <sect3 id="fcc-header">
           <title>Fcc: Pseudo Header</title>
           <para>
-            If you specify
+            If you specify either of
+          </para>
+          <para>
+            <literal>Mutt-Fcc:</literal> <emphasis>filename</emphasis>
           </para>
           <para>
             <literal>Fcc:</literal> <emphasis>filename</emphasis>
@@ -2976,7 +2979,11 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         <sect3 id="attach-header">
           <title>Attach: Pseudo Header</title>
           <para>
-            You can also attach files to your message by specifying
+            You can also attach files to your message by specifying either of
+          </para>
+          <para>
+            <literal>Mutt-Attach:</literal>
+            <emphasis>filename</emphasis> [<emphasis>description</emphasis>]
           </para>
           <para>
             <literal>Attach:</literal>
@@ -2994,7 +3001,14 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         <sect3 id="pgp-header">
           <title>Pgp: Pseudo Header</title>
           <para>
-            If you want to use PGP, you can specify
+            If you want to use PGP, you can specify either of
+          </para>
+          <para>
+            <literal>Mutt-PGP:</literal> [
+            <literal>E</literal> |
+            <literal>S</literal> |
+            <literal>S</literal>
+            <emphasis>&lt;id&gt;</emphasis> ]
           </para>
           <para>
             <literal>Pgp:</literal> [
@@ -3015,7 +3029,14 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
         <sect3 id="smime-header">
           <title>Smime: Pseudo Header</title>
           <para>
-            If you want to use S/MIME, you can specify
+            If you want to use S/MIME, you can specify either of
+          </para>
+          <para>
+            <literal>Mutt-SMIME:</literal> [
+            <literal>E</literal> |
+            <literal>S</literal> |
+            <literal>S</literal>
+            <emphasis>&lt;id&gt;</emphasis> ]
           </para>
           <para>
             <literal>Smime:</literal> [
@@ -3051,6 +3072,24 @@ color sidebar_divider   color8  default     <emphasis role="comment"># Dark grey
             <quote>thread hijacking</quote>.
           </para>
         </sect3>
+
+        <sect3 id="mutt-mix-header">
+          <title>Mutt-Mix: Pseudo Header</title>
+          <para>
+            If you want to use <link linkend="sending-mixmaster">Mixmaster</link>,
+            you can specify the chain via:
+          </para>
+          <para>
+            <literal>Mutt-Mix:</literal>
+            [ <emphasis>remailer1</emphasis>
+            [ <emphasis>remailer2</emphasis>
+            [ ... ] ] ]
+          </para>
+          <para>
+            The chain can later be changed in the mixmaster menu.
+          </para>
+        </sect3>
+
       </sect2>
 
       <sect2 id="sending-crypto">
@@ -3721,7 +3760,7 @@ set crypt_use_gpgme
           <link linkend="news-server">$news_server</link>,
           <link linkend="shell">shell</link>,
           <link linkend="spool-file">$spool_file</link>,
-          <link linkend="tmpdir">$tmpdir</link>,
+          <link linkend="tmp-dir">$tmp_dir</link>,
         </para>
         <para>
           Finally, it's possible to
@@ -6921,6 +6960,13 @@ set spam_separator=", "
           <arg choice="opt" rep="repeat">
             <replaceable class="parameter">variable</replaceable>
           </arg>
+          <command>set</command>
+          <arg choice="plain">
+            <replaceable class="parameter">variable</replaceable>
+          </arg>
+          <arg choice="plain">
+            <option>?</option>
+          </arg>
         </cmdsynopsis>
         <para>
           This command is used to set (and unset)
@@ -6975,6 +7021,10 @@ set spam_separator=", "
           mark:
         </para>
         <screen>set allow_8bit?</screen>
+        <para>
+          The old prefix query syntax (<literal><command>set</command>
+          ?allow_8bit</literal>) is also still supported.
+        </para>
         <para>
           The question mark is actually only required for boolean and
           quadoption variables.
@@ -10341,11 +10391,12 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
           When you select a message from the index and view it in the pager,
           NeoMutt decodes as much of a message as possible to a text
           representation. NeoMutt internally supports a number of MIME types,
-          including the <literal>text</literal> major type (with all minor
-          types), the <literal>message/rfc822</literal> (mail messages) type
-          and some <literal>multipart</literal> types. In addition, it
-          recognizes a variety of PGP MIME types, including PGP/MIME and
-          <literal>application/pgp</literal>.
+          including the <literal>text/plain</literal> type, the
+          <literal>message/rfc822</literal> (mail messages) type and some
+          <literal>multipart</literal> types. In addition, it recognizes
+          a variety of PGP MIME and S/MIME types, including PGP/MIME and
+          <literal>application/pgp</literal>, and
+          <literal>application/pkcs7-mime</literal>.
         </para>
         <para>
           NeoMutt will denote attachments with a couple lines describing them.
@@ -13220,7 +13271,7 @@ append-hook '\.gz$' "gzip --stdout '%t' &gt;&gt; '%f'"
         <title>Security</title>
         <para>
           Encrypted files are decrypted into temporary files which are stored
-          in the <link linkend="tmpdir">$tmpdir</link> directory. This could
+          in the <link linkend="tmp-dir">$tmp_dir</link> directory. This could
           be a security risk.
         </para>
       </sect2>
@@ -13277,7 +13328,7 @@ close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &
         </listitem>
         <listitem>
           <para>
-            <link linkend="tmpdir">$tmpdir</link>
+            <link linkend="tmp-dir">$tmp_dir</link>
           </para>
         </listitem>
         <listitem>
@@ -14769,7 +14820,7 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
           </term>
           <listitem>
             <para>
-              <ulink url="http://fallabs.com/kyotocabinet/">Kyoto Cabinet libraries</ulink>
+              <ulink url="https://dbmx.net/kyotocabinet/">Kyoto Cabinet libraries</ulink>
             </para>
           </listitem>
         </varlistentry>
@@ -14817,7 +14868,7 @@ set index_format='%4C %Z %{%b %d} %I (%?l?%4l&amp;%4c?) %s'
         </listitem>
         <listitem>
           <para>
-            <ulink url="http://fallabs.com/kyotocabinet/">Kyoto Cabinet</ulink>
+            <ulink url="https://dbmx.net/kyotocabinet/">Kyoto Cabinet</ulink>
           </para>
         </listitem>
       </itemizedlist>
@@ -18723,7 +18774,7 @@ set use_threads=threads sort=last-date sort_aux=date
         digital signatures, etc. As long as being used, these files are visible
         by other users and maybe even readable in case of misconfiguration.
         Also, a different location for these files may be desired which can be
-        changed via the <link linkend="tmpdir">$tmpdir</link> variable.
+        changed via the <link linkend="tmp-dir">$tmp_dir</link> variable.
       </para>
     </sect1>
 
@@ -23762,8 +23813,11 @@ Default: no</literallayout>
 
 <para>
 If <emphasis>set</emphasis>, read messages marked as flagged will not be moved
-from your spool mailbox to your <link linkend="mbox">$mbox</link> mailbox, or as a result of
-a "<link linkend="mbox-hook">mbox-hook</link>" command.
+from your spool mailbox to your <link linkend="mbox">$mbox</link> mailbox or to the "mbox"
+specified by a <link linkend="mbox-hook">mbox-hook</link> command.
+</para>
+<para>
+Note that <link linkend="keep-flagged">$keep_flagged</link> only has an effect if <link linkend="move">$move</link> is set.
 </para>
 </sect2>
 
@@ -24143,7 +24197,6 @@ Also see the <link linkend="message-cache-clean">$message_cache_clean</link> var
   <note>Renamed to <link linkend="message-cache-dir">$message_cache_dir</link> (2023-01-25)</note>
 </sect2>
 
-
 <sect2 id="message-format">
 <title>message_format</title>
 <literallayout>Type: string
@@ -24367,9 +24420,12 @@ mixmaster chain.
 Default: no</literallayout>
 
 <para>
-Controls whether or not NeoMutt will move read messages
-from your spool mailbox to your <link linkend="mbox">$mbox</link> mailbox, or as a result of
-a "<link linkend="mbox-hook">mbox-hook</link>" command.
+If this variable is <emphasis>set</emphasis>, then NeoMutt will move read messages
+from your spool mailbox to your <link linkend="mbox">$mbox</link> mailbox or to the "mbox"
+specified by a <link linkend="mbox-hook">mbox-hook</link> command.
+</para>
+<para>
+See also <link linkend="keep-flagged">$keep_flagged</link>.
 </para>
 </sect2>
 
@@ -28447,8 +28503,8 @@ A value of zero or less will cause NeoMutt to never time out.
 </para>
 </sect2>
 
-<sect2 id="tmpdir">
-<title>tmpdir</title>
+<sect2 id="tmp-dir">
+<title>tmp_dir</title>
 <literallayout>Type: path
 Default: <quote><literal>/tmp</literal></quote></literallayout>
 
@@ -28460,6 +28516,12 @@ temporary files needed for displaying and composing messages.
 If this variable is not set, the environment variable <literal>$TMPDIR</literal> is
 used.  Failing that, then "<literal>/tmp</literal>" is used.
 </para>
+<note>Before 2023-01-25, this was called $tmpdir</note>
+</sect2>
+
+<sect2 id="tmpdir">
+  <title>tmp_dir</title>
+  <note>Renamed to <link linkend="tmp-dir">$tmp_dir</link> (2023-01-25)</note>
 </sect2>
 
 <sect2 id="to-chars">
