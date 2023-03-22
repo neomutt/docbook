@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2022-04-29</releaseinfo>
+    <releaseinfo>version 2023-03-22</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -21431,6 +21431,8 @@ come after a replied-to message which is quoted in the main body of the reply
 For a full listing of defined <literal>printf(3)</literal>-like sequences see the section
 on <link linkend="index-format">$index_format</link>.  See also <link linkend="attribution-locale">$attribution_locale</link>.
 </para>
+<note>Before 2021-03-21, this was called $post_indent_str</note>
+<note>Before 2023-02-20, this was called $post_indent_string</note>
 </sect2>
 
 <sect2 id="auto-edit">
@@ -26333,15 +26335,8 @@ This variable defaults to your user name on the local machine.
 </sect2>
 
 <sect2 id="post-indent-string">
-<title>post_indent_string</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-Similar to the <link linkend="attribution-intro">$attribution_intro</link> variable, NeoMutt will append this
-string after the inclusion of a message which is being replied to.
-</para>
-<note>Before 2021-03-21, this was called $post_indent_str</note>
+  <title>post_indent_string</title>
+  <note>Renamed to <link linkend="attribution-trailer">$attribution_trailer</link> (2023-02-20)</note>
 </sect2>
 
 <sect2 id="post-moderated">
