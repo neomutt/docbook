@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2023-03-22</releaseinfo>
+    <releaseinfo>version 2023-04-07</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -3468,29 +3468,36 @@ color sidebar_divider    color8  default     <emphasis role="comment"># Dark gre
       </para>
 
       <para>
-        OpenPGP and S/MIME are enabled in one of two ways: <quote>classic
-        mode</quote> or GPGME.  The former invokes external programs to perform
-        the various operations; it is better tested and more flexible, but
-        requires some configuration.  The latter uses the GnuPG project's GPGME
-        library.
-      </para>
-
-      <para>
-        To enable <quote>classic mode</quote>, ensure GPGME is disabled.
+        The recommended way to enable OpenPGP and S/MIME is to use GPGME.
+        This library is integrated into NeoMutt and can perform all the common
+        crypto functions the user will need.
       </para>
 
 <screen>
-unset crypt_use_gpgme
-source /usr/local/share/doc/neomutt/samples/gpg.rc
-source /usr/local/share/doc/neomutt/samples/smime.rc
+<emphasis role="comment"># Enable GPGME</emphasis>
+set crypt_use_gpgme
 </screen>
 
       <para>
-        To use GPGME instead, simply ensure the option is enabled in your .muttrc:
+        If you have complex crypto needs, then you can enable the
+        <quote>classic mode</quote> by disabling GPGME and setting all
+        <literal>pgp_command_*</literal> and <literal>smime_command_*</literal>
+        config variables.
+      </para>
+
+      <para>
+        For example config, see: <literal>gpg.rc</literal> and
+        <literal>smime.rc</literal> in the
+        <ulink url="https://github.com/neomutt/neomutt-contrib/">Contrib repository</ulink>.
       </para>
 
 <screen>
-set crypt_use_gpgme
+<emphasis role="comment"># Use manual crypto functions</emphasis>
+unset crypt_use_gpgme
+set pgp_clear_sign_command = "..."
+...
+set smime_decrypt_command = "..."
+...
 </screen>
 
       <sect2 id="enc-pgp">
@@ -23937,6 +23944,18 @@ server.
 </para>
 <para>
 This variable defaults to your user name on the local machine.
+</para>
+</sect2>
+
+<sect2 id="imap-send-id">
+<title>imap_send_id</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, NeoMutt will send an IMAP ID command (RFC2971) to the
+server when logging in if advertised by the server. This command provides
+information about the IMAP client, such as "NeoMutt" and the current version.
 </para>
 </sect2>
 
