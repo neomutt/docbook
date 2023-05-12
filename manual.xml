@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Elkins</surname>
       <email>me@cs.hmc.edu</email>
     </author>
-    <releaseinfo>version 2023-04-07</releaseinfo>
+    <releaseinfo>version 2023-05-12</releaseinfo>
     <abstract>
       <para>
         <quote>All mail clients suck. This one just sucks less.</quote>
@@ -5248,6 +5248,14 @@ folder-hook work "set sort=threads"
         If your terminal supports color, you can spice up NeoMutt by creating
         your own <link linkend="color-style">color scheme</link>.
       </para>
+      <note>
+        <para>
+          The config variable
+          <link linkend="color-directcolor">$color_directcolor</link> must be
+          set to its final value <emphasis>before</emphasis> using any
+          <literal>color</literal> command.
+        </para>
+      </note>
       <para>
         The types of objects that can be colored fall into two categories:
         <link linkend="color-simple">Simple Colors</link> such as the
@@ -5266,15 +5274,24 @@ folder-hook work "set sort=threads"
           <para>
             Objects must be given <emphasis>both</emphasis> a foreground and
             background color (it is not possible to specify one or the other).
+            Note that <literal>default</literal> can be used as transparent
+            color (see below).
           </para>
         </note>
         <para>
-          Colors can be specified in two ways, using their name
-          such as <literal>green</literal>, <literal>blue</literal>,
-          or by their number in the palette,
+          Colors can be specified in up to three ways, using their name
+          such as <literal>green</literal>, <literal>blue</literal>;
+          by their number in the palette,
           such as <literal>color12</literal>, <literal>color207</literal>
           (the palette consists of the
-          <ulink url="https://web.archive.org/web/20190712111427/https://jonasjacek.github.io/colors/">256 Xterm colors</ulink>).
+          <ulink url="https://web.archive.org/web/20190712111427/https://jonasjacek.github.io/colors/">256 Xterm colors</ulink>);
+          or by using hexadecimal RGB codes <literal>#RRGGBB</literal>, where
+          <literal>RR</literal>, <literal>GG</literal>, <literal>BB</literal>
+          are the red, green, and blue components given as a hexadecimal number
+          between 00 and FF (=255), e.g. <literal>#00FFFF</literal> (bright
+          cyan) or <literal>#12af84</literal> (greenish).  The last syntax is
+          only accepted if <link linkend="color-directcolor">$color_directcolor</link>
+          is set.
         </para>
         <para>
           Named colours may also be prefixed by a <emphasis>modifier</emphasis>.
@@ -5368,6 +5385,48 @@ folder-hook work "set sort=threads"
           If your terminal supports it, the special keyword
           <emphasis>default</emphasis> can be used as a transparent color. The
           value <emphasis>brightdefault</emphasis> is also valid.
+          In this case <emphasis>default</emphasis> can be used to only set the
+          foreground or background color.  The following sets the foreground
+          and background color individually: the first command leaves the
+          foreground untouched while the second one leaves the background
+          untouched:
+        </para>
+<screen>
+<emphasis role="comment"># Make error messages white text on a red background</emphasis>
+color error default red
+color error white   default
+</screen>
+        <para>
+          On startup NeoMutt tries to detect whether the terminal it is running
+          in supports directcolor (aka TrueColor aka 24-bit color).  If the
+          terminal does, NeoMutt enables the config variable
+          <link linkend="color-directcolor">$color_directcolor</link> otherwise
+          it disables it.  Furthermore, NeoMutt allows to use the RGB colors
+          syntax with the <literal>color</literal> command to colour elements
+          with 24-bit colors.
+        </para>
+        <para>
+          For the detection to work the
+          <emphasis>TERM</emphasis> environment variable must be set up
+          properly to advertise the terminals directcolor capability.
+          <emphasis>TERM</emphasis>-values which do that usually end in
+          <literal>-direct</literal>, e.g. <literal>xterm-direct</literal>.
+        </para>
+        <para>
+          If NeoMutt does not detect directcolor color support, but you are
+          sure your terminal supports it, you may try to explicitly set the
+          <emphasis>TERM</emphasis> environment variable by starting NeoMutt
+          from the terminal as follows:
+        </para>
+<screen>
+TERM=xterm-direct neomutt
+</screen>
+        <para>
+          If that still does not help, you can additionally force NeoMutt to
+          use directcolors by setting
+          <link linkend="color-directcolor">$color_directcolor</link>.
+          Setting this variable manually is strongly discouraged since it
+          usually leads to wrong colors.
         </para>
       </sect2>
 
@@ -9793,18 +9852,27 @@ folder-hook '\@imap\.example\.com' "set sort=threads"
       <para>
         You can alter the environment that NeoMutt passes on to its child
         processes using the <quote>setenv</quote> and <quote>unsetenv</quote>
-        operators. (N.B. These follow NeoMutt-style syntax, not shell-style!)
-        You can also query current environment values by prefixing
-        a <quote>?</quote> character.
+        commands. You can also query current environment values by adding a
+        <quote>?</quote> character.
       </para>
+
+      <note>
+        <para>
+          These follow NeoMutt-style syntax, not shell-style!
+        </para>
+      </note>
 
 <screen>
 setenv TERM vt100
 setenv ORGANIZATION "The NeoMutt Development Team"
 unsetenv DISPLAY
-setenv ?LESS
+setenv LESS?
 </screen>
 
+      <para>
+        Running <command>setenv</command> with no parameters will show a list of
+        all the environment variables.
+      </para>
     </sect1>
 
     <sect1 id="query">
@@ -21789,6 +21857,36 @@ unread messages.
 </para>
 </sect2>
 
+<sect2 id="color-directcolor">
+<title>color_directcolor</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, NeoMutt will use and allow 24bit colours (aka truecolor aka
+directcolor).  For colours to work properly support from the terminal is
+required as well as a properly set TERM environment variable advertising the
+terminals directcolor capability, e.g. "TERM=xterm-direct".
+</para>
+<para>
+NeoMutt tries to detect whether the terminal supports 24bit colours and
+enables this variable if it does.  If this fails for some reason, you can
+force 24bit colours by setting this variable manually.  You may also try to
+force a certain TERM environment variable by starting NeoMutt from
+a terminal as follows (this results in wrong colours if the terminal does
+not implement directcolors):
+
+</para>
+
+<screen>
+TERM=xterm-direct neomutt
+</screen><para>
+Note: This variable must be set before using any `color` commands.
+</para>
+<para>
+</para>
+</sect2>
+
 <sect2 id="compose-format">
 <title>compose_format</title>
 <literallayout>Type: string
@@ -25349,8 +25447,7 @@ folder, will be roughly one third of the way down this mini-index,
 giving the reader the context of a few messages before and after the
 message.  This is useful, for example, to determine how many messages
 remain to be read in the current thread.  A value of 0 results in no index
-being shown.  If the number of messages in the current folder is less than
-<link linkend="pager-index-lines">$pager_index_lines</link>, then the index will only use as many lines as it needs.
+being shown.
 </para>
 </sect2>
 
