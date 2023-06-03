@@ -23855,8 +23855,8 @@ up periodically, try unsetting this.
 </para>
 </sect2>
 
-<sect2 id="imap-keepalive">
-<title>imap_keepalive</title>
+<sect2 id="imap-keep-alive">
+<title>imap_keep_alive</title>
 <literallayout>Type: number
 Default: 300</literallayout>
 
@@ -23869,6 +23869,12 @@ a server is allowed to do this, but in practice the RFC does get
 violated every now and then. Reduce this number if you find yourself
 getting disconnected from your IMAP server due to inactivity.
 </para>
+<note>Before 2023-05-31, this was called $imap_keepalive</note>
+</sect2>
+
+<sect2 id="imap-keepalive">
+  <title>imap_keepalive</title>
+  <note>Renamed to <link linkend="imap-keep-alive">$imap_keep_alive</link> (2023-05-31)</note>
 </sect2>
 
 <sect2 id="imap-list-subscribed">
