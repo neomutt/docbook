@@ -4176,6 +4176,11 @@ unalias *
 </screen>
 
       <para>
+        Note: The alias <emphasis>key</emphasis> is matched case
+        insensitively when creating (checking for duplicates), removing, or
+        expanding aliases.
+      </para>
+      <para>
         Unlike other mailers, NeoMutt doesn't require aliases to be defined in
         a special file. The <command>alias</command> command can appear
         anywhere in a configuration file, as long as this file is
@@ -5656,7 +5661,7 @@ uncolor compose header
         <para>
           The quoted email colours don't use pattern.
           The first colour, <literal>quoted</literal> provides a default colour
-          for all quoted text.  Also, each diffent level of quoting can be given
+          for all quoted text.  Also, each different level of quoting can be given
           a different colour using, <literal>quoted1</literal>,
           <literal>quoted2</literal>, <literal>quoted3</literal> up to
           <literal>quoted9</literal>.
@@ -6340,22 +6345,47 @@ unignore posted-to:
       </para>
       <cmdsynopsis>
         <command>mailboxes</command>
-        <arg choice="plain">
-          <replaceable class="parameter">mailbox</replaceable>
+        <arg choice="opt">
+          <group choice="opt">
+            <arg choice="plain">
+              <option>-label</option>
+              <replaceable>label</replaceable>
+            </arg>
+            <arg choice="plain">
+              <option>-nolabel</option>
+            </arg>
+          </group>
+          <group choice="opt">
+            <arg choice="plain">
+              <option>-notify</option>
+            </arg>
+            <arg choice="plain">
+              <option>-nonotify</option>
+            </arg>
+          </group>
+          <group choice="opt">
+            <arg choice="plain">
+              <option>-poll</option>
+            </arg>
+            <arg choice="plain">
+              <option>-nopoll</option>
+            </arg>
+          </group>
+          <arg choice="plain">
+            <replaceable class="parameter">mailbox</replaceable>
+          </arg>
         </arg>
-        <arg choice="opt" rep="repeat">
-          <replaceable class="parameter">mailbox</replaceable>
-        </arg>
+        <arg choice="opt" rep="repeat"></arg>
         <command>named-mailboxes</command>
         <arg choice="plain">
-          <replaceable class="parameter">description</replaceable>
+          <replaceable class="parameter">label</replaceable>
           <arg choice="plain">
             <replaceable class="parameter">mailbox</replaceable>
           </arg>
         </arg>
         <group choice="req" rep="repeat">
           <arg choice="plain">
-            <replaceable class="parameter">description</replaceable>
+            <replaceable class="parameter">label</replaceable>
             <arg choice="plain">
               <replaceable class="parameter">mailbox</replaceable>
             </arg>
@@ -6374,6 +6404,27 @@ unignore posted-to:
       <para>
         This command specifies folders which can receive mail and which will be
         checked for new messages periodically.
+      </para>
+      <para>
+        The <literal>-label</literal> argument can be used to specify an
+        alternative label to print in the sidebar or mailbox browser instead
+        of the mailbox path.  A label may be removed via the
+        <literal>-nolabel</literal> argument.  If unspecified, an existing
+        mailbox label will be unchanged.
+      </para>
+      <para>
+        Use <literal>-nonotify</literal> to disable notifying when new mail
+        arrives.  The <literal>-notify</literal> argument can be used to reenable
+        notifying for an existing mailbox.  If unspecified: a new
+        mailbox will notify by default, while an existing mailbox will be
+        unchanged.
+      </para>
+      <para>
+        To disable polling, specify <literal>-nopoll</literal> before the
+        mailbox name.  The <literal>-poll</literal> argument can be used to
+        reenable polling for an existing mailbox.  If unspecified: a new
+        mailbox will poll by default, while an existing mailbox will be
+        unchanged.
       </para>
       <para>
         <emphasis>folder</emphasis> can either be a local file or directory
@@ -15844,7 +15895,7 @@ set new_mail_command="terminal-notifier -title '%v' -subtitle 'New Mail' \
 <emphasis role="comment"># Set the command you want NeoMutt to execute upon the receipt of a new email</emphasis>
 set new_mail_command = ""
 <emphasis role="comment"># Linux example:</emphasis>
-<emphasis role="comment"># set new_command="notify-send --icon='/home/santiago/Pictures/neomutt.png' \</emphasis>
+<emphasis role="comment"># set new_mail_command="notify-send --icon='/home/santiago/Pictures/neomutt.png' \</emphasis>
 <emphasis role="comment">#   'New Email in %f' '%n new messages, %u unread.' &amp;"</emphasis>
 <emphasis role="comment"># OS X example:</emphasis>
 <emphasis role="comment"># set new_mail_command="terminal-notifier -title '%v' -subtitle 'New Mail in %f' \</emphasis>
@@ -22467,7 +22518,7 @@ Default: <quote><literal>~f %s !~P | (~P ~C %s)</literal></quote></literallayout
 
 <para>
 This variable controls how some hooks are interpreted if their pattern is a
-plain string or a regex. i.e.  They don't contain a pattern, like <literal>~f</literal>
+plain string or a regex. i.e. they don't contain a pattern, like <literal>~f</literal>
 </para>
 <para>
 The hooks are: <link linkend="fcc-hook">fcc-hook</link>, <link linkend="fcc-save-hook">fcc-save-hook</link>, <link linkend="index-format-hook">index-format-hook</link>, <link linkend="message-hook">message-hook</link>,
@@ -28411,6 +28462,17 @@ The "unread" value is a synonym for "new".
 </para>
 </sect2>
 
+<sect2 id="browser-sort-dirs-first">
+<title>browser_sort_dirs_first</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+If this variable is <emphasis>set</emphasis>, the browser will group directories before
+files.
+</para>
+</sect2>
+
 <sect2 id="sort-re">
 <title>sort_re</title>
 <literallayout>Type: boolean
@@ -29576,6 +29638,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>select the current entry</entry></row>
 <row><entry><literal>&lt;shell-escape&gt;</literal></entry><entry>!</entry><entry>invoke a command in a subshell</entry></row>
 <row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry></entry><entry>show log (and debug) messages</entry></row>
+<row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>show the NeoMutt version number and date</entry></row>
 <row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>t</entry><entry>tag the current entry</entry></row>
 <row><entry><literal>&lt;tag-prefix&gt;</literal></entry><entry>;</entry><entry>apply next function to tagged messages</entry></row>
 <row><entry><literal>&lt;tag-prefix-cond&gt;</literal></entry><entry></entry><entry>apply next function ONLY to tagged messages</entry></row>
@@ -29703,7 +29766,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>set a status flag on a message</entry></row>
 <row><entry><literal>&lt;show-limit&gt;</literal></entry><entry>Esc l</entry><entry>show currently active limit pattern</entry></row>
 <row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry>M</entry><entry>show log (and debug) messages</entry></row>
-<row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>show the NeoMutt version number and date</entry></row>
 <row><entry><literal>&lt;sidebar-first&gt;</literal></entry><entry></entry><entry>move the highlight to the first mailbox</entry></row>
 <row><entry><literal>&lt;sidebar-last&gt;</literal></entry><entry></entry><entry>move the highlight to the last mailbox</entry></row>
 <row><entry><literal>&lt;sidebar-next&gt;</literal></entry><entry></entry><entry>move the highlight to next mailbox</entry></row>
@@ -30240,10 +30302,10 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;downcase-word&gt;</literal></entry><entry>Esc l</entry><entry>convert the word to lower case</entry></row>
 <row><entry><literal>&lt;eol&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>jump to the end of the line</entry></row>
 <row><entry><literal>&lt;eol&gt;</literal></entry><entry>^E</entry><entry>jump to the end of the line</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry></entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>move the cursor one character to the right</entry></row>
 <row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>^F</entry><entry>move the cursor one character to the right</entry></row>
 <row><entry><literal>&lt;forward-word&gt;</literal></entry><entry>Esc f</entry><entry>move the cursor to the end of the word</entry></row>
+<row><entry><literal>&lt;help&gt;</literal></entry><entry>Esc ?</entry><entry>this screen</entry></row>
 <row><entry><literal>&lt;history-down&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>scroll down through the history list</entry></row>
 <row><entry><literal>&lt;history-down&gt;</literal></entry><entry>^N</entry><entry>scroll down through the history list</entry></row>
 <row><entry><literal>&lt;history-search&gt;</literal></entry><entry>^R</entry><entry>search through the history list</entry></row>
@@ -30256,6 +30318,7 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;kill-word&gt;</literal></entry><entry>^W</entry><entry>delete the word in front of the cursor</entry></row>
 <row><entry><literal>&lt;mailbox-cycle&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>cycle among incoming mailboxes</entry></row>
 <row><entry><literal>&lt;quote-char&gt;</literal></entry><entry>^V</entry><entry>quote the next typed key</entry></row>
+<row><entry><literal>&lt;redraw-screen&gt;</literal></entry><entry>^L</entry><entry>clear and redraw the screen</entry></row>
 <row><entry><literal>&lt;transpose-chars&gt;</literal></entry><entry></entry><entry>transpose character under cursor with previous</entry></row>
 <row><entry><literal>&lt;upcase-word&gt;</literal></entry><entry>Esc u</entry><entry>convert the word to upper case</entry></row>
 </tbody>
