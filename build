@@ -17,6 +17,7 @@ for FILE in feature/*.html guide/*.html; do
 		| sed 'N;s/\([“”]\)\n */\1/' \
 		| sed 'N;s/\([“”]\)\n */\1/' \
 		| sed 'N;s/\([“”]\)\n */\1/' \
+		| sed 's!\(</code>\)\([^ -,:.<]\)!\1 \2!g' \
 		| sed '/&lt;$/N;s/&lt;\n */\&lt;/' \
 		| sed 's/\([a-zA-Z0-9_”]<[^>]\+>\)\([a-zA-Z0-9_]\)/\1 \2/g' \
 		| sed 's/\([a-zA-Z0-9_]<[^>]\+>\) \([sd]\)\>/\1\2/g' \

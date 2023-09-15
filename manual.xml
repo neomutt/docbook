@@ -27566,7 +27566,7 @@ flagged, mail.
 Default: no</literallayout>
 
 <para>
-When set, the <literal>&lt;sidebar-next-new&gt;</literal> command will not stop and the end of
+When set, the <literal>&lt;sidebar-next-new&gt;</literal> command will not stop at the end of
 the list of mailboxes, but wrap around to the beginning. The
 <literal>&lt;sidebar-prev-new&gt;</literal> command is similarly affected, wrapping around to
 the end of the list.
