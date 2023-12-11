@@ -5457,8 +5457,7 @@ folder-hook work "set sort=threads"
         </itemizedlist>
         <para>
           If your terminal supports it, the special keyword
-          <emphasis>default</emphasis> can be used as a transparent color. The
-          value <emphasis>brightdefault</emphasis> is also valid.
+          <emphasis>default</emphasis> can be used as a transparent color.
           In this case <emphasis>default</emphasis> can be used to only set the
           foreground or background color.  The following sets the foreground
           and background color individually: the first command leaves the
@@ -21798,6 +21797,17 @@ desirable to <emphasis>unset</emphasis> this variable.
 </para>
 </sect2>
 
+<sect2 id="browser-sort-dirs-first">
+<title>browser_sort_dirs_first</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+If this variable is <emphasis>set</emphasis>, the browser will group directories before
+files.
+</para>
+</sect2>
+
 <sect2 id="catchup-newsgroup">
 <title>catchup_newsgroup</title>
 <literallayout>Type: quadoption
@@ -23694,6 +23704,27 @@ Also see <link linkend="save-history">$save_history</link>.
 </para>
 </sect2>
 
+<sect2 id="history-format">
+<title>history_format</title>
+<literallayout>Type: string
+Default: <quote><literal>%s</literal></quote></literallayout>
+
+<para>
+Controls the format of the entries of the history list.
+This string is similar to <link linkend="index-format">$index_format</link>, but has its own
+set of <literal>printf(3)</literal>-like sequences:
+
+</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry>%C </entry><entry>Line number
+</entry></row>
+<row><entry>%s </entry><entry>History match
+</entry></row></tbody></tgroup></informaltable>
+</sect2>
+
 <sect2 id="history-remove-dups">
 <title>history_remove_dups</title>
 <literallayout>Type: boolean
@@ -24102,6 +24133,18 @@ https://github.com/neomutt/neomutt/issues/1689
 </para>
 </sect2>
 
+<sect2 id="imap-send-id">
+<title>imap_send_id</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, NeoMutt will send an IMAP ID command (RFC2971) to the
+server when logging in if advertised by the server. This command provides
+information about the IMAP client, such as "NeoMutt" and the current version.
+</para>
+</sect2>
+
 <sect2 id="imap-server-noise">
 <title>imap_server_noise</title>
 <literallayout>Type: boolean
@@ -24133,18 +24176,6 @@ server.
 </para>
 <para>
 This variable defaults to your user name on the local machine.
-</para>
-</sect2>
-
-<sect2 id="imap-send-id">
-<title>imap_send_id</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-When <emphasis>set</emphasis>, NeoMutt will send an IMAP ID command (RFC2971) to the
-server when logging in if advertised by the server. This command provides
-information about the IMAP client, such as "NeoMutt" and the current version.
 </para>
 </sect2>
 
@@ -28560,17 +28591,6 @@ order (example: "<literal>set sort_browser=reverse-date</literal>").
 </para>
 <para>
 The "unread" value is a synonym for "new".
-</para>
-</sect2>
-
-<sect2 id="browser-sort-dirs-first">
-<title>browser_sort_dirs_first</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-If this variable is <emphasis>set</emphasis>, the browser will group directories before
-files.
 </para>
 </sect2>
 
