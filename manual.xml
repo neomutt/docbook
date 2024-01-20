@@ -13173,7 +13173,7 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
 
     <sect1 id="account-cmd-support">
       <title>Support</title>
-      <para><emphasis role="bold">Since:</emphasis> NeoMutt 2022-xx-yy</para>
+      <para><emphasis role="bold">Since:</emphasis> NeoMutt 2022-05-16</para>
       <para><emphasis role="bold">Dependencies:</emphasis> None</para>
     </sect1>
 
@@ -13375,6 +13375,95 @@ color   attach_headers     brightmagenta   default    "invalid node with packet 
       <title>Credits</title>
       <para>
         Guillaume Brogi
+      </para>
+    </sect1>
+  </chapter>
+
+  <chapter id="feature/cli-crypto">
+    <title>Command-line Crypto (-C) Feature</title>
+    <subtitle>Enable message security in modes that by default don't
+    enable it</subtitle>
+
+    <sect1 id="cli-crypto-support">
+      <title>Support</title>
+      <para>
+        <emphasis role="bold">Since:</emphasis> NeoMutt 2023-xx-xx
+      </para>
+      <para>
+        <emphasis role="bold">Dependencies:</emphasis> Gpgme ??
+      </para>
+    </sect1>
+
+    <sect1 id="cli-crypto-intro">
+      <title>Introduction</title>
+      <para>
+        This feature allows enabling message security in modes that
+        don't enable it by default.  Those include batch mode, sending
+        a postponed message, and resending a message.
+
+        This allows using NeoMutt as a driver for git-send-email(1),
+        to send patches in signed and/or encrypted mail.
+      </para>
+    </sect1>
+
+    <sect1 id="cli-crypto-usage">
+      <title>Usage</title>
+      <para>
+        To send an email from a file, enabling cryptographic
+        operations as when sending interactively, simply use the
+        <literal>-C</literal> flag.
+      </para>
+      <screen>$ neomutt -C -H - &lt;/mail/to/be/sent</screen>
+    </sect1>
+
+    <sect1 id="cli-crypto-neomuttrc">
+      <title>neomuttrc</title>
+
+<screen>
+<emphasis role="comment"># Example NeoMutt config file for the cli-crypto feature.</emphasis>
+
+set pgp_default_key = 1111111111111111111111111111111111111111
+<emphasis role="comment"># Sign all mail</emphasis>
+set crypt_autosign = yes
+<emphasis role="comment"># Encrypt mail if all recipients have valid public keys</emphasis>
+set crypt_opportunistic_encrypt = yes
+<emphasis role="comment"># Sign/encrypt protected headers (Subject)</emphasis>
+set crypt_protected_headers_write = yes
+<emphasis role="comment"># Self encrypt mail</emphasis>
+set crypt_self_encrypt = yes
+
+<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+</screen>
+
+    </sect1>
+
+    <sect1 id="cli-crypto-gitconfig">
+      <title>neomuttrc</title>
+
+<screen>
+<emphasis role="comment"># Example .gitconfig config file for the cli-crypto feature.</emphasis>
+
+[sendemail]
+sendmailcmd = neomutt -C -H - &amp;&amp; true
+</screen>
+
+    </sect1>
+
+    <sect1 id="cli-crypto-known-bugs">
+      <title>Known Bugs</title>
+      <para>
+        We were unable to test some corner cases regarding crypt-hook
+        in combination with this feature.  We tried to fall on the
+        safe side, so NeoMutt may lock-up in a forever loop in some
+        cases, to prevent sending messages with less security.  If you
+        are able to trigger one of those cases, please let us know.
+      </para>
+    </sect1>
+
+    <sect1 id="cli-crypto-credits">
+      <title>Credits</title>
+      <para>
+        Alejandro Colomar, Richard Russon, Jenya Sovetkin
       </para>
     </sect1>
   </chapter>
@@ -19547,6 +19636,17 @@ neomutt -a image.jpg *.png -- address1 address2
               <entry>-b <literal>address</literal></entry>
               <entry>
                 Specify a blind carbon copy (Bcc) recipient
+              </entry>
+            </row>
+            <row>
+              <entry>-C</entry>
+              <entry>
+                Enable cryptographic operations
+                in the cases in which they're disabled by default.
+                Those include
+                batch mode,
+                sending a postponed message,
+                and resending a message.
               </entry>
             </row>
             <row>
