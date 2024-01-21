@@ -13387,10 +13387,10 @@ color   attach_headers     brightmagenta   default    "invalid node with packet 
     <sect1 id="cli-crypto-support">
       <title>Support</title>
       <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2023-xx-xx
+        <emphasis role="bold">Since:</emphasis> NeoMutt 2024-01-21
       </para>
       <para>
-        <emphasis role="bold">Dependencies:</emphasis> Gpgme ??
+        <emphasis role="bold">Dependencies:</emphasis> Gpgme
       </para>
     </sect1>
 
@@ -13400,7 +13400,8 @@ color   attach_headers     brightmagenta   default    "invalid node with packet 
         This feature allows enabling message security in modes that
         don't enable it by default.  Those include batch mode, sending
         a postponed message, and resending a message.
-
+      <para>
+      </para>
         This allows using NeoMutt as a driver for git-send-email(1),
         to send patches in signed and/or encrypted mail.
       </para>
@@ -13413,7 +13414,7 @@ color   attach_headers     brightmagenta   default    "invalid node with packet 
         operations as when sending interactively, simply use the
         <literal>-C</literal> flag.
       </para>
-      <screen>$ neomutt -C -H - &lt;/mail/to/be/sent</screen>
+      <screen>$ neomutt -C -H - &lt; /mail/to/be/sent</screen>
     </sect1>
 
     <sect1 id="cli-crypto-neomuttrc">
@@ -13422,7 +13423,7 @@ color   attach_headers     brightmagenta   default    "invalid node with packet 
 <screen>
 <emphasis role="comment"># Example NeoMutt config file for the cli-crypto feature.</emphasis>
 
-set pgp_default_key = 1111111111111111111111111111111111111111
+set pgp_default_key = "1111111111111111111111111111111111111111"
 <emphasis role="comment"># Sign all mail</emphasis>
 set crypt_autosign = yes
 <emphasis role="comment"># Encrypt mail if all recipients have valid public keys</emphasis>
@@ -19641,12 +19642,9 @@ neomutt -a image.jpg *.png -- address1 address2
             <row>
               <entry>-C</entry>
               <entry>
-                Enable cryptographic operations
-                in the cases in which they're disabled by default.
-                Those include
-                batch mode,
-                sending a postponed message,
-                and resending a message.
+                Enable cryptographic operations in the cases in which they're
+                disabled by default. Those include batch mode, sending a
+                postponed message, and resending a message.
               </entry>
             </row>
             <row>
