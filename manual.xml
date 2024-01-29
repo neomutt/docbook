@@ -8,15 +8,14 @@ vim: ts=2 sw=2 sts=2 expandtab:
   <bookinfo>
     <title>The NeoMutt E-Mail Client</title>
     <author>
-      <firstname>Michael</firstname>
-      <surname>Elkins</surname>
-      <email>me@cs.hmc.edu</email>
+      <firstname>Richard</firstname>
+      <surname>Russon</surname>
+      <email>rich@flatcap.org</email>
     </author>
     <releaseinfo>version 2023-12-21</releaseinfo>
     <abstract>
       <para>
-        <quote>All mail clients suck. This one just sucks less.</quote>
-        &mdash; me, circa 1995
+        <quote>Teaching an old dog new tricks</quote>
       </para>
     </abstract>
   </bookinfo>
@@ -181,8 +180,8 @@ vim: ts=2 sw=2 sts=2 expandtab:
     <sect1 id="copyright">
       <title>Copyright</title>
       <para>
-        NeoMutt is Copyright © 1996-2021 Michael R. Elkins
-        <email>me@mutt.org</email> and others.
+        NeoMutt is Copyright © 2015-2024 Richard Russon
+        <email>rich@flatcap.org</email> and friends.
       </para>
       <para>
         This program is free software; you can redistribute it and/or modify it
@@ -3986,7 +3985,7 @@ set imap_pass="`gpg --batch -q --decrypt ~/.neomutt/account.gpg`"
           <para>
             Because NeoMutt first recodes a line before it attempts to parse
             it, a conversion introducing question marks or other characters as
-            part of errors (unconvertable characters, transliteration) may
+            part of errors (unconvertible characters, transliteration) may
             introduce syntax errors or silently change the meaning of certain
             tokens (e.g. inserting question marks into regular expressions).
           </para>
@@ -6478,15 +6477,15 @@ unignore posted-to:
       </para>
       <para>
         Use <literal>-nonotify</literal> to disable notifying when new mail
-        arrives.  The <literal>-notify</literal> argument can be used to reenable
-        notifying for an existing mailbox.  If unspecified: a new
+        arrives.  The <literal>-notify</literal> argument can be used to
+        re-enable notifying for an existing mailbox.  If unspecified: a new
         mailbox will notify by default, while an existing mailbox will be
         unchanged.
       </para>
       <para>
         To disable polling, specify <literal>-nopoll</literal> before the
         mailbox name.  The <literal>-poll</literal> argument can be used to
-        reenable polling for an existing mailbox.  If unspecified: a new
+        re-enable polling for an existing mailbox.  If unspecified: a new
         mailbox will poll by default, while an existing mailbox will be
         unchanged.
       </para>
@@ -6660,8 +6659,8 @@ my_hdr Organization: A Really Big Company, Anytown, USA
 <screen>
 <emphasis role="comment"># default: save all to ~/Mail/&lt;author name&gt;</emphasis>
 save-hook . ~/Mail/%F
-<emphasis role="comment"># save from me@turing.cs.hmc.edu and me@cs.hmc.edu to $folder/elkins</emphasis>
-save-hook me@(turing\\.)?cs\\.hmc\\.edu$ +elkins
+<emphasis role="comment"># save from john@turing.ox.ac.uk and john@ox.ac.uk to $folder/smith</emphasis>
+save-hook john@(turing\\.)?ox\\.ac\\.uk$ +smith
 <emphasis role="comment"># save from aol.com to $folder/spam</emphasis>
 save-hook aol\\.com$ +spam
 </screen>
@@ -10070,7 +10069,7 @@ ma@yew.com      Murray Abraham  Oscar
         UNIX. All messages are stored in a single file. Each message has
         a line of the form:
       </para>
-      <screen>From me@cs.hmc.edu Fri, 11 Apr 1997 11:44:56 PST</screen>
+      <screen>From me@ox.ac.uk Fri, 11 Apr 1997 11:44:56 PST</screen>
       <para>
         to denote the start of a new message (this is often referred to as the
         <quote>From_</quote> line). The mbox format requires mailbox locking,
@@ -13400,8 +13399,8 @@ color   attach_headers     brightmagenta   default    "invalid node with packet 
         This feature allows enabling message security in modes that
         don't enable it by default.  Those include batch mode, sending
         a postponed message, and resending a message.
-      <para>
       </para>
+      <para>
         This allows using NeoMutt as a driver for git-send-email(1),
         to send patches in signed and/or encrypted mail.
       </para>
@@ -13448,17 +13447,6 @@ set crypt_self_encrypt = yes
 sendmailcmd = neomutt -C -H - &amp;&amp; true
 </screen>
 
-    </sect1>
-
-    <sect1 id="cli-crypto-known-bugs">
-      <title>Known Bugs</title>
-      <para>
-        We were unable to test some corner cases regarding crypt-hook
-        in combination with this feature.  We tried to fall on the
-        safe side, so NeoMutt may lock-up in a forever loop in some
-        cases, to prevent sending messages with less security.  If you
-        are able to trigger one of those cases, please let us know.
-      </para>
     </sect1>
 
     <sect1 id="cli-crypto-credits">
@@ -22139,7 +22127,7 @@ Please note that if setting <link linkend="charset">$charset</link> it must be d
 setting <link linkend="config-charset">$config_charset</link>.
 </para>
 <para>
-Recoding should be avoided as it may render unconvertable
+Recoding should be avoided as it may render unconvertible
 characters as question marks which can lead to undesired
 side effects (for example in regular expressions).
 </para>
@@ -25514,7 +25502,7 @@ Default: <quote><literal>unread</literal></quote></literallayout>
 <para>
 This variable specifies notmuch tag which is used for unread messages. The
 variable is used to count unread messages in DB and set the unread flag when
-modifiying tags. All other NeoMutt commands use standard (e.g. maildir) flags.
+modifying tags. All other NeoMutt commands use standard (e.g. maildir) flags.
 </para>
 </sect2>
 
