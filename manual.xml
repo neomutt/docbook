@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Russon</surname>
       <email>rich@flatcap.org</email>
     </author>
-    <releaseinfo>version 2023-12-21</releaseinfo>
+    <releaseinfo>version 2024-02-01</releaseinfo>
     <abstract>
       <para>
         <quote>Teaching an old dog new tricks</quote>
@@ -21320,6 +21320,8 @@ following <literal>printf(3)</literal>-style sequences are available:
 </entry></row>
 <row><entry>%t  </entry><entry>Character which indicates if the alias is tagged for inclusion
 </entry></row>
+<row><entry>%Y  </entry><entry>Comma-separated tags
+</entry></row>
 <row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
 </entry></row>
 <row><entry>%|X </entry><entry>pad to the end of the line with character "X"
@@ -26922,6 +26924,8 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <row><entry>%n  </entry><entry>  </entry><entry>Destination name
 </entry></row>
 <row><entry>%t  </entry><entry>  </entry><entry>"*" if current entry is tagged, a space otherwise
+</entry></row>
+<row><entry>%Y  </entry><entry>  </entry><entry>Comma-separated tags
 </entry></row>
 <row><entry>%&gt;X </entry><entry>  </entry><entry>Right justify the rest of the string and pad with "X"
 </entry></row>
