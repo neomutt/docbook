@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Russon</surname>
       <email>rich@flatcap.org</email>
     </author>
-    <releaseinfo>version 2024-02-01</releaseinfo>
+    <releaseinfo>version 2024-03-23</releaseinfo>
     <abstract>
       <para>
         <quote>Teaching an old dog new tricks</quote>
@@ -13438,7 +13438,7 @@ set crypt_self_encrypt = yes
     </sect1>
 
     <sect1 id="cli-crypto-gitconfig">
-      <title>neomuttrc</title>
+      <title>gitconfig</title>
 
 <screen>
 <emphasis role="comment"># Example .gitconfig config file for the cli-crypto feature.</emphasis>
@@ -15262,7 +15262,7 @@ color index-object foreground background [pattern]
             </row>
             <row>
               <entry><literal>index_tag</literal></entry>
-              <entry>Nessage tags, <literal>%G</literal></entry>
+              <entry>Message tags, <literal>%G</literal></entry>
             </row>
             <row>
               <entry><literal>index_tags</literal></entry>
@@ -21768,6 +21768,12 @@ The following <literal>printf(3)</literal>-style sequences are understood
 <row><entry>%p  </entry><entry>prefer-encrypt flag
 </entry></row>
 <row><entry>%s  </entry><entry>status flag (active/inactive)
+</entry></row>
+<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
+</entry></row>
+<row><entry>%|X </entry><entry>pad to the end of the line with character "X"
+</entry></row>
+<row><entry>%*X </entry><entry>soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -23159,6 +23165,8 @@ its own set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
+<row><entry>%a  </entry><entry>  </entry><entry>Alert: 1 if user is notified of new mail
+</entry></row>
 <row><entry>%C  </entry><entry>  </entry><entry>Current file number
 </entry></row>
 <row><entry>%d  </entry><entry>  </entry><entry>Date/time folder was last modified
@@ -23183,6 +23191,8 @@ the value of <link linkend="date-format">$date_format</link>.
 <row><entry>%n  </entry><entry>* </entry><entry>Number of unread messages in the mailbox
 </entry></row>
 <row><entry>%N  </entry><entry>  </entry><entry>"N" if mailbox has new mail, " " (space) otherwise
+</entry></row>
+<row><entry>%p  </entry><entry>  </entry><entry>Poll: 1 if Mailbox is checked for new mail
 </entry></row>
 <row><entry>%s  </entry><entry>  </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
@@ -23526,6 +23536,8 @@ has its own set of printf()-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
+<row><entry>%a  </entry><entry>Alert: 1 if user is notified of new mail
+</entry></row>
 <row><entry>%C  </entry><entry>Current newsgroup number
 </entry></row>
 <row><entry>%d  </entry><entry>Description of newsgroup (becomes from server)
@@ -23538,11 +23550,15 @@ has its own set of printf()-like sequences:
 </entry></row>
 <row><entry>%n  </entry><entry>Number of new articles in newsgroup
 </entry></row>
+<row><entry>%p  </entry><entry>Poll: 1 if Mailbox is checked for new mail
+</entry></row>
 <row><entry>%s  </entry><entry>Number of unread articles in newsgroup
 </entry></row>
 <row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with character "X"
 </entry></row>
 <row><entry>%|X </entry><entry>Pad to the end of the line with character "X"
+</entry></row>
+<row><entry>%*X </entry><entry>Soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -23807,9 +23823,15 @@ set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%C </entry><entry>Line number
+<row><entry>%C  </entry><entry>Line number
 </entry></row>
-<row><entry>%s </entry><entry>History match
+<row><entry>%s  </entry><entry>History match
+</entry></row>
+<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
+</entry></row>
+<row><entry>%|X </entry><entry>pad to the end of the line with character "X"
+</entry></row>
+<row><entry>%*X </entry><entry>soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -24386,29 +24408,27 @@ The following sequences are defined in NeoMutt:
 </entry></row>
 <row><entry>%B </entry><entry>Same as %K
 </entry></row>
-<row><entry>%C </entry><entry>Current message number
-</entry></row>
 <row><entry>%c </entry><entry>Number of characters (bytes) in the body of the message (see <link linkend="formatstrings-size">formatstrings-size</link>)
+</entry></row>
+<row><entry>%C </entry><entry>Current message number
 </entry></row>
 <row><entry>%cr </entry><entry>Number of characters (bytes) in the raw message, including the header (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%D </entry><entry>Date and time of message using <link linkend="date-format">date_format</link> and local timezone
-It is encouraged to use "%[fmt]" instead, where "fmt" is the value of <link linkend="date-format">$date_format</link>.
-</entry></row>
 <row><entry>%d </entry><entry>Date and time of message using <link linkend="date-format">date_format</link> and sender's timezone
 It is encouraged to use "%{fmt}" instead, where "fmt" is the value of <link linkend="date-format">$date_format</link>.
+</entry></row>
+<row><entry>%D </entry><entry>Date and time of message using <link linkend="date-format">date_format</link> and local timezone
+It is encouraged to use "%[fmt]" instead, where "fmt" is the value of <link linkend="date-format">$date_format</link>.
 </entry></row>
 <row><entry>%e </entry><entry>Current message number in thread
 </entry></row>
 <row><entry>%E </entry><entry>Number of messages in current thread
 </entry></row>
+<row><entry>%f </entry><entry>Sender (address + real name), either From: or Return-Path:
+</entry></row>
 <row><entry>%F </entry><entry>Author name, or recipient name if the message is from you
 </entry></row>
 <row><entry>%Fp </entry><entry>Like %F, but plain. No contextual formatting is applied to recipient name
-</entry></row>
-<row><entry>%f </entry><entry>Sender (address + real name), either From: or Return-Path:
-</entry></row>
-<row><entry>%g </entry><entry>Newsgroup name (if compiled with NNTP support)
 </entry></row>
 <row><entry>%g </entry><entry>Message tags (e.g. notmuch tags/imap flags)
 </entry></row>
@@ -24416,28 +24436,28 @@ It is encouraged to use "%{fmt}" instead, where "fmt" is the value of <link link
 </entry></row>
 <row><entry>%H </entry><entry>Spam attribute(s) of this message
 </entry></row>
-<row><entry>%I </entry><entry>Initials of author
-</entry></row>
 <row><entry>%i </entry><entry>Message-id of the current message
+</entry></row>
+<row><entry>%I </entry><entry>Initials of author
 </entry></row>
 <row><entry>%J </entry><entry>Message tags (if present, tree unfolded, and != parent's tags)
 </entry></row>
 <row><entry>%K </entry><entry>The list to which the letter was sent (if any; otherwise: empty)
 </entry></row>
+<row><entry>%l </entry><entry>number of lines in the unprocessed message (may not work with
+maildir, mh, and IMAP folders)
+</entry></row>
 <row><entry>%L </entry><entry>If an address in the "To:" or "Cc:" header field matches an address
 Defined by the user's "<link linkend="subscribe">subscribe</link>" command, this displays
 "To &lt;list-name&gt;", otherwise the same as %F
 </entry></row>
-<row><entry>%l </entry><entry>number of lines in the unprocessed message (may not work with
-maildir, mh, and IMAP folders)
+<row><entry>%m </entry><entry>Total number of message in the mailbox
 </entry></row>
 <row><entry>%M </entry><entry>Number of hidden messages if the thread is collapsed
 </entry></row>
-<row><entry>%m </entry><entry>Total number of message in the mailbox
+<row><entry>%n </entry><entry>Author's real name (or address if missing)
 </entry></row>
 <row><entry>%N </entry><entry>Message score
-</entry></row>
-<row><entry>%n </entry><entry>Author's real name (or address if missing)
 </entry></row>
 <row><entry>%O </entry><entry>Original save folder where NeoMutt would formerly have
 Stashed the message: list name or recipient name
@@ -24447,17 +24467,17 @@ If not sent to a list
 </entry></row>
 <row><entry>%q </entry><entry>Newsgroup name (if compiled with NNTP support)
 </entry></row>
-<row><entry>%R </entry><entry>Comma separated list of "Cc:" recipients
-</entry></row>
 <row><entry>%r </entry><entry>Comma separated list of "To:" recipients
 </entry></row>
-<row><entry>%S </entry><entry>Single character status of the message ("N"/"O"/"D"/"d"/"!"/"r"/"*")
+<row><entry>%R </entry><entry>Comma separated list of "Cc:" recipients
 </entry></row>
 <row><entry>%s </entry><entry>Subject of the message
 </entry></row>
-<row><entry>%T </entry><entry>The appropriate character from the <link linkend="to-chars">$to_chars</link> string
+<row><entry>%S </entry><entry>Single character status of the message ("N"/"O"/"D"/"d"/"!"/"r"/"*")
 </entry></row>
 <row><entry>%t </entry><entry>"To:" field (recipients)
+</entry></row>
+<row><entry>%T </entry><entry>The appropriate character from the <link linkend="to-chars">$to_chars</link> string
 </entry></row>
 <row><entry>%u </entry><entry>User (login) name of the author
 </entry></row>
@@ -24470,11 +24490,11 @@ If not sent to a list
 <row><entry>%X </entry><entry>Number of MIME attachments
 (please see the "<link linkend="attachments">attachments</link>" section for possible speed effects)
 </entry></row>
+<row><entry>%y </entry><entry>"X-Label:" field, if present
+</entry></row>
 <row><entry>%Y </entry><entry>"X-Label:" field, if present, and <emphasis>(1)</emphasis> not at part of a thread tree,
 <emphasis>(2)</emphasis> at the top of a thread, or <emphasis>(3)</emphasis> "X-Label:" is different from
 Preceding message's "X-Label:"
-</entry></row>
-<row><entry>%y </entry><entry>"X-Label:" field, if present
 </entry></row>
 <row><entry>%Z </entry><entry>A three character set of message status flags.
 The first character is new/read/replied flags ("n"/"o"/"r"/"O"/"N").
@@ -25739,6 +25759,12 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <row><entry>%e  </entry><entry>pattern expression
 </entry></row>
 <row><entry>%n  </entry><entry>index number
+</entry></row>
+<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
+</entry></row>
+<row><entry>%|X </entry><entry>pad to the end of the line with character "X"
+</entry></row>
+<row><entry>%*X </entry><entry>soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -26048,6 +26074,12 @@ but has its own set of <literal>printf(3)</literal>-like sequences:
 <row><entry>%u     </entry><entry>User id
 </entry></row>
 <row><entry>%[&lt;s&gt;] </entry><entry>Date of the key where &lt;s&gt; is an <literal>strftime(3)</literal> expression
+</entry></row>
+<row><entry>%&gt;X    </entry><entry>Right justify the rest of the string and pad with character "X"
+</entry></row>
+<row><entry>%|X    </entry><entry>Pad to the end of the line with character "X"
+</entry></row>
+<row><entry>%*X    </entry><entry>Soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -27705,6 +27737,8 @@ sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
+<row><entry>%a </entry><entry>    </entry><entry>Alert: 1 if user is notified of new mail
+</entry></row>
 <row><entry>%B </entry><entry>    </entry><entry>Name of the mailbox
 </entry></row>
 <row><entry>%d </entry><entry>* @ </entry><entry>Number of deleted messages in the mailbox
@@ -27720,6 +27754,8 @@ sequences:
 <row><entry>%N </entry><entry>*   </entry><entry>Number of unread messages in the mailbox (seen or unseen)
 </entry></row>
 <row><entry>%o </entry><entry>*   </entry><entry>Number of old messages in the mailbox (unread, seen)
+</entry></row>
+<row><entry>%p </entry><entry>    </entry><entry>Poll: 1 if Mailbox is checked for new mail
 </entry></row>
 <row><entry>%r </entry><entry>*   </entry><entry>Number of read messages in the mailbox (read, seen)
 </entry></row>
@@ -28117,24 +28153,24 @@ similar to PGP's:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%f </entry><entry>Expands to the name of a file containing a message.
-</entry></row>
-<row><entry>%s </entry><entry>Expands to the name of a file containing the signature part
-of a <literal>multipart/signed</literal> attachment when verifying it.
-</entry></row>
-<row><entry>%k </entry><entry>The key-pair specified with <link linkend="smime-default-key">$smime_default_key</link>
-</entry></row>
-<row><entry>%i </entry><entry>Intermediate certificates
-</entry></row>
-<row><entry>%c </entry><entry>One or more certificate IDs.
-</entry></row>
 <row><entry>%a </entry><entry>The algorithm used for encryption.
 </entry></row>
-<row><entry>%d </entry><entry>The message digest algorithm specified with <link linkend="smime-sign-digest-alg">$smime_sign_digest_alg</link>.
+<row><entry>%c </entry><entry>One or more certificate IDs.
 </entry></row>
 <row><entry>%C </entry><entry>CA location:  Depending on whether <link linkend="smime-ca-location">$smime_ca_location</link>
 points to a directory or file, this expands to
 "-CApath <link linkend="smime-ca-location">$smime_ca_location</link>" or "-CAfile <link linkend="smime-ca-location">$smime_ca_location</link>".
+</entry></row>
+<row><entry>%d </entry><entry>The message digest algorithm specified with <link linkend="smime-sign-digest-alg">$smime_sign_digest_alg</link>.
+</entry></row>
+<row><entry>%f </entry><entry>Expands to the name of a file containing a message.
+</entry></row>
+<row><entry>%i </entry><entry>Intermediate certificates
+</entry></row>
+<row><entry>%k </entry><entry>The key-pair specified with <link linkend="smime-default-key">$smime_default_key</link>
+</entry></row>
+<row><entry>%s </entry><entry>Expands to the name of a file containing the signature part
+of a <literal>multipart/signed</literal> attachment when verifying it.
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
