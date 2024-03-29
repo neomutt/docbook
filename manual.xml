@@ -1499,6 +1499,11 @@ color sidebar_divider    color8  default     <emphasis role="comment"># Dark gre
           </listitem>
           <listitem>
             <para>
+              mailboxes
+            </para>
+          </listitem>
+          <listitem>
+            <para>
               filenames
             </para>
           </listitem>
@@ -3320,14 +3325,16 @@ color sidebar_divider    color8  default     <emphasis role="comment"># Dark gre
       </para>
       <para>
         Forwarding can be done by including the original message in the new
-        message's body (surrounded by indicating lines) or including it as
-        a MIME attachment, depending on the value of the
-        <link linkend="mime-forward">$mime_forward</link> variable. Decoding of
-        attachments, like in the pager, can be controlled by the
+        message's body (surrounded by indicating lines: see
+        <link linkend="forward-attribution-intro">$forward_attribution_intro</link>
+        and <link linkend="forward-attribution-trailer">$forward_attribution_trailer</link>)
+        or including it as a MIME attachment, depending on the value of the
+        <link linkend="mime-forward">$mime_forward</link> variable.  Decoding
+        of attachments, like in the pager, can be controlled by the
         <link linkend="forward-decode">$forward_decode</link> and
         <link linkend="mime-forward-decode">$mime_forward_decode</link>
-        variables, respectively. The desired forwarding format may depend on
-        the content, therefore
+        variables, respectively.
+        The desired forwarding format may depend on the content, therefore
         <link linkend="mime-forward">$mime_forward</link> is a quadoption
         which, for example, can be set to <quote>ask-no</quote>.
       </para>
@@ -3343,6 +3350,8 @@ color sidebar_divider    color8  default     <emphasis role="comment"># Dark gre
         The inclusion of headers is controlled by the current setting of the
         <link linkend="weed">$weed</link> variable, unless
         <link linkend="mime-forward">$mime_forward</link> is set.
+        The subject of the email is controlled by
+        <link linkend="forward-format">$forward_format</link>.
       </para>
       <para>
         By default a forwarded message does not reference the messages it
@@ -4443,8 +4452,11 @@ set alias_file=~/.mail_aliases
           equivalent. An alternative form is to specify the key as a three digit
           octal number prefixed with a <quote>\</quote> (for example
           <emphasis>\177</emphasis> is equivalent to <emphasis>\c?</emphasis>).
-          In addition, <emphasis>key</emphasis> may be a symbolic name as shown
-          in <xref linkend="tab-key-names" />.
+          You can also use the form <emphasis>&lt;177&gt;</emphasis>, which
+          allows octal numbers with an arbitrary number of digits.  In addition,
+          <emphasis>key</emphasis> may be a symbolic name as shown in <xref
+          linkend="tab-key-names"/>.
+
         </para>
 
         <table id="tab-key-names">
@@ -10458,7 +10470,8 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
           When in the index menu and being idle (also see
           <link linkend="timeout">$timeout</link>), NeoMutt periodically checks
           for new mail in all folders which have been configured via the
-          <command>mailboxes</command> command. The interval depends on the
+          <command>mailboxes</command> command (excepting those specified with
+          the <literal>-nopoll</literal> flag). The interval depends on the
           folder type: for local/IMAP folders it consults
           <link linkend="mail-check">$mail_check</link> and
           <link linkend="pop-check-interval">$pop_check_interval</link> for POP
@@ -10503,7 +10516,8 @@ subjectrx '\[[^]]*\]:? *' '%L%R'
           files is supported (Linux only) and not disabled at compilation time,
           NeoMutt immediately notifies about new mail for all folders configured
           via the <link linkend="mailboxes"><command>mailboxes</command></link>
-          command.  Dependent on <link linkend="mailbox-formats">mailbox format</link>
+          command (excepting those specified with the <literal>-nopoll</literal> flag).
+          Dependent on <link linkend="mailbox-formats">mailbox format</link>
           also added <emphasis>old</emphasis> mails are tracked (not for Maildir).
         </para>
         <para>
@@ -10539,9 +10553,9 @@ mailboxes `find ~/.mail/ -type d -name cur | sed -e 's:/cur/*$::' -e 's/ /\\ /g'
           If <link linkend="mail-check-stats">$mail_check_stats</link> is set,
           NeoMutt will periodically calculate the unread, flagged, and total
           message counts for each mailbox watched by the
-          <command>mailboxes</command> command. This calculation takes place at
-          the same time as new mail polling, but is controlled by a separate
-          timer:
+          <command>mailboxes</command> command.  (Note: IMAP mailboxes only support
+          unread and total counts).  This calculation takes place at the same
+          time as new mail polling, but is controlled by a separate timer:
           <link linkend="mail-check-stats-interval">$mail_check_stats_interval</link>.
         </para>
         <para>
@@ -11931,7 +11945,10 @@ alternative_order text/enriched text/plain text application/postscript image/*
           </listitem>
           <listitem>
             <para>
-              Failing that, NeoMutt will look for any text type.
+              Failing that, NeoMutt will look first for
+              <literal>text/enriched</literal>, followed by
+              <literal>text/plain</literal>, and finally
+              <literal>text/html</literal>.
             </para>
           </listitem>
           <listitem>
@@ -12613,40 +12630,72 @@ smtp://user@host:587/
         <literal>pops</literal> for encrypted communication, see
         <xref linkend="url-syntax" /> for details.
       </para>
-      <para>
-        Polling for new mail is more expensive over POP3 than locally. For this
-        reason the frequency at which NeoMutt will check for mail remotely can
-        be controlled by the
-        <link linkend="pop-check-interval">$pop_check_interval</link> variable,
-        which defaults to every 60 seconds.
-      </para>
-      <para>
-        POP is read-only which doesn't allow for some features like editing
-        messages or changing flags. However, using
-        <xref linkend="header-caching" /> and <xref linkend="body-caching" />
-        NeoMutt simulates the new/old/read flags as well as flagged and
-        replied. NeoMutt applies some logic on top of remote messages but
-        cannot change them so that modifications of flags are lost when
-        messages are downloaded from the POP server (either by NeoMutt or other
-        tools).
-      </para>
-      <anchor id="fetch-mail" />
-      <para>
-        Another way to access your POP3 mail is the
-        <literal>&lt;fetch-mail&gt;</literal> function (default: G). It allows
-        to connect to <link linkend="pop-host">$pop_host</link>, fetch all your
-        new mail and place it in the local
-        <link linkend="spool-file">$spool_file</link>. After this point, NeoMutt
-        runs exactly as if the mail had always been local.
-      </para>
-      <note>
+      <sect2 id="pop-mailbox">
+        <title>Remote POP3 mailboxes</title>
         <para>
-          If you only need to fetch all messages to a local mailbox you should
-          consider using a specialized program, such as
-          <literal>fetchmail(1)</literal>, <literal>getmail(1)</literal> or
-          similar.
+          Polling for new mail is more expensive over POP3 than locally. For this
+          reason the frequency at which NeoMutt will check for mail remotely can
+          be controlled by the
+          <link linkend="pop-check-interval">$pop_check_interval</link> variable,
+          which defaults to every 60 seconds.
         </para>
-      </note>
+        <para>
+          Due to limitations in POP3, this method doesn't allow for some
+          features such as editing messages, changing their flags or even
+          deleting them. However, using
+          <xref linkend="header-caching" /> and
+          <xref linkend="body-caching" />, NeoMutt simulates the new/old/read
+          flags as well as flagged and replied. NeoMutt applies some logic on
+          top of remote messages but cannot change them so that modifications
+          of flags are lost when messages are downloaded from the POP3 server
+          (either by NeoMutt or other tools).
+        </para>
+<screen>
+<emphasis role="comment"># A sample configuration file for setting up a remote POP3 mailbox</emphasis>
+
+<emphasis role="comment"># If an SMTP password has been set, use this to set the same password for POP3.</emphasis>
+set pop_pass=$smtp_pass
+
+<emphasis role="comment"># Set the POP3 server and user</emphasis>
+set pop_host="pops://user@example.com"
+
+<emphasis role="comment"># Use the remote server as the mailbox</emphasis>
+set folder=$pop_host
+set spool_file=+
+</screen>
+      </sect2>
+      <sect2 id="fetch-mail">
+        <title>Fetching mail from a POP3 server</title>
+        <para>
+          Another way to access your POP3 mail is the
+          <literal>&lt;fetch-mail&gt;</literal> function (default: G). It allows
+          to connect to <link linkend="pop-host">$pop_host</link>, fetch all your
+          new mail and place it in the local
+          <link linkend="spool-file">$spool_file</link>. After this point, NeoMutt
+          runs exactly as if the mail had always been local. The
+          <literal>&lt;fetch-mail&gt;</literal> function will ask whether you
+          want to delete the messages on the remote server, leaving only your
+          local copies.
+        </para>
+        <note>
+          <para>
+            If you only need to fetch all messages to a local mailbox, you
+            should consider using a specialized program, such as
+            <literal>fetchmail(1)</literal>, <literal>getmail(1)</literal> or
+            similar.
+          </para>
+        </note>
+<screen>
+<emphasis role="comment"># A sample configuration file for fetching mail from a POP3 server</emphasis>
+
+<emphasis role="comment"># The spool file contains the local copies of your messages. If it doesn't</emphasis>
+<emphasis role="comment"># exist, initialize it as an empty file.</emphasis>
+set spool_file="/home/user/.mailspool"
+
+<emphasis role="comment"># The POP3 server and user from which to fetch messages</emphasis>
+set pop_host="pops://user@example.com"
+</screen>
+      </sect2>
     </sect1>
 
     <sect1 id="imap">
@@ -18044,7 +18093,7 @@ set sort_browser="reverse-size"
           <tbody>
             <row>
               <entry><literal>alpha</literal></entry>
-              <entry>Alphabetically by path</entry>
+              <entry>Alphabetically by path or label</entry>
             </row>
             <row>
               <entry><literal>count</literal></entry>
@@ -18060,7 +18109,7 @@ set sort_browser="reverse-size"
             </row>
             <row>
               <entry><literal>name</literal></entry>
-              <entry>Alphabetically by path</entry>
+              <entry>Alphabetically by path or label</entry>
             </row>
             <row>
               <entry><literal>new</literal></entry>
@@ -18068,7 +18117,7 @@ set sort_browser="reverse-size"
             </row>
             <row>
               <entry><literal>path</literal></entry>
-              <entry>Alphabetically by path</entry>
+              <entry>Alphabetically by path (ignores label)</entry>
             </row>
             <row>
               <entry><literal>unread</literal></entry>
@@ -19422,7 +19471,9 @@ set use_threads=threads sort=last-date sort_aux=date
         </para>
         <para>
           To prevent these issues, NeoMutt by default only accepts the
-          <literal>Subject</literal> and <literal>Body</literal> headers.
+          <literal>Subject</literal>, <literal>Body</literal>,
+          <literal>Cc</literal>, <literal>In-Reply-To</literal>, and
+          <literal>References</literal> headers.
           Allowed headers can be adjusted with the
           <link linkend="mailto-allow"><command>mailto_allow</command></link>
           and
@@ -19925,12 +19976,14 @@ neomutt -s "data set for run #2" professor@bigschool.edu &lt; ~/run2.dat
       </para>
       <para>
         A draft file passed with <literal>-H</literal> will be used as the
-        initial header and body for the message. Multipart messages can be used
-        as a draft file. When combined with <literal>-E</literal>, the draft
-        file will be updated to the final state of the message after
-        composition, regardless of whether the message is sent, aborted, or
-        even postponed. Note that if the message is sent encrypted or signed,
-        the draft file will be saved that way too.
+        initial header and body for the message. Multipart messages can be
+        used as a draft file, and are processed the same in interactive and
+        batch mode; they are not passed through untouched.  For example,
+        encrypted draft files will be decrypted.  When combined with
+        <literal>-E</literal>, the draft file will be updated to the final
+        state of the message after composition, regardless of whether the
+        message is sent, aborted, or even postponed.  Note that if the message
+        is sent encrypted or signed, the draft file will be saved that way too.
       </para>
       <para>
         All files passed with <literal>-a</literal> <emphasis>file</emphasis>
@@ -24660,10 +24713,6 @@ since the last time you opened the mailbox.  When <emphasis>unset</emphasis>, Ne
 if any new mail exists in the mailbox, regardless of whether you have visited it
 recently.
 </para>
-<para>
-When <emphasis><link linkend="mark-old">$mark_old</link></emphasis> is set, NeoMutt does not consider the mailbox to contain new
-mail if only old messages exist.
-</para>
 </sect2>
 
 <sect2 id="mail-check-stats">
@@ -24674,10 +24723,14 @@ Default: no</literallayout>
 <para>
 When <emphasis>set</emphasis>, NeoMutt will periodically calculate message
 statistics of a mailbox while polling for new mail.  It will
-check for unread, flagged, and total message counts.  Because
-this operation is more performance intensive, it defaults to
-<emphasis>unset</emphasis>, and has a separate option, <link linkend="mail-check-stats-interval">$mail_check_stats_interval</link>, to
-control how often to update these counts.
+check for unread, flagged, and total message counts.
+(Note: IMAP mailboxes only support unread and total counts).
+</para>
+<para>
+Because this operation is more performance intensive, it defaults
+to <emphasis>unset</emphasis>, and has a separate option,
+<link linkend="mail-check-stats-interval">$mail_check_stats_interval</link>, to control how often to update these
+counts.
 </para>
 <para>
 Message statistics can also be explicitly calculated by invoking the
@@ -27174,8 +27227,27 @@ Default: <quote><literal>^((re|aw|sv)(\[[0-9]+\])*:[ \t]*)*</literal></quote></l
 
 <para>
 A regular expression used to recognize reply messages when threading
-and replying. The default value corresponds to the English "Re:", the
-German "Aw:" and the Swedish "Sv:".
+and replying. The default value corresponds to the standard Latin "Re:"
+prefix, the German "Aw:" or the Swedish "Sv:".  You can add your
+own prefixes by swapping out or appending to that list.  For example:
+<literal>"^(re|se)"</literal> or <literal>"^(re|aw|se)"</literal>.
+</para>
+<para>
+The second parenthesized expression matches zero or more
+bracketed numbers following the prefix, such as <literal>"Re[1]: "</literal>.
+The initial <literal>"\\["</literal> means a literal left-bracket character.
+Note the backslash must be doubled when used inside a double
+quoted string in the neomuttrc.  <literal>"[0-9]+"</literal> means one or more
+numbers.  <literal>"\\]"</literal> means a literal right-bracket.  Finally the
+whole parenthesized expression has a <literal>"*"</literal> suffix, meaning it
+can occur zero or more times.
+</para>
+<para>
+The last part matches a colon followed by an optional space or
+tab.  Note <literal>"\t"</literal> is converted to a literal tab inside a
+double quoted string.  If you use a single quoted string, you
+would have to type an actual tab character, and would need to
+convert the double-backslashes to single backslashes.
 </para>
 <note>Before 2021-03-21, this was called $reply_regexp</note>
 </sect2>
@@ -27559,6 +27631,14 @@ arguments as recipient addresses.  NeoMutt appends all recipients after
 adding a <literal>--</literal> delimiter (if not already present).  Additional
 flags, such as for <link linkend="use-8bit-mime">$use_8bit_mime</link>, <link linkend="use-envelope-from">$use_envelope_from</link>,
 <link linkend="dsn-notify">$dsn_notify</link>, or <link linkend="dsn-return">$dsn_return</link> will be added before the delimiter.
+</para>
+<para>
+<emphasis role="bold">Note:</emphasis> This command is invoked differently from most other
+commands in NeoMutt.  It is tokenized by space, and invoked directly
+via <literal>execvp(3)</literal> with an array of arguments - so commands or
+arguments with spaces in them are not supported.  The shell is
+not used to run the command, so shell quoting is also not
+supported.
 </para>
 <para>
 <emphasis role="bold">See also:</emphasis> <link linkend="write-bcc">$write_bcc</link>.
@@ -28205,7 +28285,8 @@ set to the keyid (the hash-value that OpenSSL generates) to work properly.
 </para>
 <para>
 It will be used for encryption (see <link linkend="postpone-encrypt">$postpone_encrypt</link> and
-<link linkend="smime-self-encrypt">$smime_self_encrypt</link>).
+<link linkend="smime-self-encrypt">$smime_self_encrypt</link>). If GPGME is enabled, this is the key id displayed
+by gpgsm.
 </para>
 <para>
 It will be used for decryption unless <link linkend="smime-decrypt-use-default-key">$smime_decrypt_use_default_key</link>
@@ -29502,10 +29583,11 @@ when the current thread is <emphasis>un</emphasis>collapsed.
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will automatically uncollapse any collapsed thread
-that receives a new message. When <emphasis>unset</emphasis>, collapsed threads will
-remain collapsed. the presence of the new message will still affect
-index sorting, though.
+When <emphasis>set</emphasis>, NeoMutt will automatically uncollapse any collapsed
+thread that receives a newly delivered message.  When
+<emphasis>unset</emphasis>, collapsed threads will remain collapsed. The
+presence of the newly delivered message will still affect index
+sorting, though.
 </para>
 </sect2>
 
