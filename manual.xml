@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Russon</surname>
       <email>rich@flatcap.org</email>
     </author>
-    <releaseinfo>version 2024-03-23</releaseinfo>
+    <releaseinfo>version 2024-04-16</releaseinfo>
     <abstract>
       <para>
         <quote>Teaching an old dog new tricks</quote>
@@ -21990,7 +21990,10 @@ Example:
 
 <screen>
 set certificate_file=~/.neomutt/certificates
-</screen></sect2>
+</screen><para>
+(OpenSSL and GnuTLS only)
+</para>
+</sect2>
 
 <sect2 id="change-folder-next">
 <title>change_folder_next</title>
@@ -22123,6 +22126,24 @@ TERM=xterm-direct neomutt
 Note: This variable must be set before using any `color` commands.
 </para>
 <para>
+</para>
+</sect2>
+
+<sect2 id="compose-confirm-detach-first">
+<title>compose_confirm_detach_first</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when trying to use
+<literal>&lt;detach-file&gt;</literal> on the first entry in the compose menu. This is to help
+prevent irreversible loss of the typed message by accidentally hitting 'D' in
+the menu.
+</para>
+<para>
+Note: NeoMutt only prompts for the first entry.  It doesn't keep track of
+which message is the typed message if the entries are reordered, or if the
+first entry was already deleted.
 </para>
 </sect2>
 
@@ -22997,7 +23018,7 @@ Default: (empty)</literallayout>
 
 <para>
 The file which includes random data that is used to initialize SSL
-library functions.
+library functions. (OpenSSL only)
 </para>
 </sect2>
 
@@ -25222,6 +25243,10 @@ supported:
 </entry></row>
 <row><entry>%*X </entry><entry>soft-fill with character "X" as pad
 </entry></row></tbody></tgroup></informaltable>
+
+<para>
+(Mixmaster only)
+</para>
 </sect2>
 
 <sect2 id="mixmaster">
@@ -25233,7 +25258,7 @@ Default: <quote><literal>mixmaster</literal></quote></literallayout>
 This variable contains the path to the Mixmaster binary on your
 system.  It is used with various sets of parameters to gather the
 list of known remailers, and to finally send a message through the
-mixmaster chain.
+mixmaster chain. (Mixmaster only)
 </para>
 </sect2>
 
@@ -25683,11 +25708,11 @@ connect to news server.
 <sect2 id="pager">
 <title>pager</title>
 <literallayout>Type: command
-Default: <quote><literal>builtin</literal></quote></literallayout>
+Default: (empty)</literallayout>
 
 <para>
 This variable specifies which pager you would like to use to view
-messages. The value "builtin" means to use the built-in pager, otherwise this
+messages. When empty, NeoMutt will use the built-in pager, otherwise this
 variable should specify the pathname of the external pager you would
 like to use.
 </para>
@@ -25757,8 +25782,7 @@ opening a new message in the pager before that message will be
 marked as read.  A value of 0 results in the message being marked
 read unconditionally; for other values, navigating to another
 message or exiting the pager before the timeout will leave the
-message marked unread.  This setting is ignored if <link linkend="pager">$pager</link> is not
-<emphasis role="bold">builtin</emphasis>.
+message marked unread.  This setting is ignored if <link linkend="pager">$pager</link> is set.
 </para>
 </sect2>
 
@@ -27226,11 +27250,15 @@ Also see <link linkend="wrap">$wrap</link>.
 Default: <quote><literal>^((re|aw|sv)(\[[0-9]+\])*:[ \t]*)*</literal></quote></literallayout>
 
 <para>
-A regular expression used to recognize reply messages when threading
-and replying. The default value corresponds to the standard Latin "Re:"
-prefix, the German "Aw:" or the Swedish "Sv:".  You can add your
-own prefixes by swapping out or appending to that list.  For example:
-<literal>"^(re|se)"</literal> or <literal>"^(re|aw|se)"</literal>.
+A regular expression used to recognize reply messages when
+threading and replying. The default value corresponds to the
+standard Latin "Re:" prefix.
+</para>
+<para>
+This value may have been localized by the translator for your
+locale, adding other prefixes that are common in the locale. You
+can add your own prefixes by appending inside <literal>"^(re)"</literal>.  For
+example: <literal>"^(re|sv)"</literal> or <literal>"^(re|aw|sv)"</literal>.
 </para>
 <para>
 The second parenthesized expression matches zero or more
@@ -27248,6 +27276,15 @@ tab.  Note <literal>"\t"</literal> is converted to a literal tab inside a
 double quoted string.  If you use a single quoted string, you
 would have to type an actual tab character, and would need to
 convert the double-backslashes to single backslashes.
+</para>
+<para>
+Note: the result of this regex match against the subject is
+stored in the header cache.  Mutt isn't smart enough to
+invalidate a header cache entry based on changing <link linkend="reply-regex">$reply_regex</link>,
+so if you aren't seeing correct values in the index, try
+temporarily turning off the header cache.  If that fixes the
+problem, then once the variable is set to your liking, remove
+your stale header cache files and turn the header cache back on.
 </para>
 <note>Before 2021-03-21, this was called $reply_regexp</note>
 </sect2>
