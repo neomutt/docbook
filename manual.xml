@@ -2538,7 +2538,7 @@ color sidebar_divider    color8  default     <emphasis role="comment"># Dark gre
           <varlistentry>
             <term>
               <literal>&lt;skip-quoted&gt;</literal> (default: S)
-              <anchor id="skip-quoted" />
+              <anchor id="feature/skip-quoted" />
             </term>
             <listitem>
               <para>
@@ -3940,14 +3940,14 @@ set imap_pass="`gpg --batch -q --decrypt ~/.neomutt/account.gpg`"
         <screen>set record = "+sent_on_$HOSTNAME"</screen>
       </example>
       <para>
-        If NeoMutt can't find a matching <emphasis>config</emphasis> variable,
-        it will try to find a matching <emphasis>environment</emphasis> variable.
-      </para>
-      <para>
         will cause NeoMutt to save outgoing messages to a folder named
         <quote>sent_on_kremvax</quote> if the environment variable
         <literal>$HOSTNAME</literal> is set to <quote>kremvax.</quote> (See
         <link linkend="record">$record</link> for details.)
+      </para>
+      <para>
+        If NeoMutt can't find a matching <emphasis>config</emphasis> variable,
+        it will try to find a matching <emphasis>environment</emphasis> variable.
       </para>
       <para>
         NeoMutt expands the variable when it is assigned, not when it is used.
@@ -11039,6 +11039,36 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
             </varlistentry>
           </variablelist>
         </sect3>
+
+        <sect3 id="attach-saving">
+          <title>Saving Attachments</title>
+
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>&lt;save-entry&gt;</literal>
+                (default keybinding: s)
+              </term>
+              <listitem>
+                <para>
+                  This will save the attachment to disk.
+                </para>
+                <para>
+                  The permissions of the saved file will depend on the user's
+                  <literal>umask</literal>. e.g. <literal>umask 022</literal>
+                  will create a file with permissions <literal>rw-r--r--</literal>.
+                </para>
+                <para>
+                  See also: <link linkend="attach-save-dir">$attach_save_dir</link>,
+                  <link linkend="attach-save-without-prompting">$attach_save_without_prompting</link>,
+                  <link linkend="attach-sep">$attach_sep</link>,
+                  <link linkend="attach-split">$attach_split</link>
+                </para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </sect3>
+
       </sect2>
 
       <sect2 id="compose-menu">
@@ -13476,8 +13506,6 @@ set pgp_default_key = "1111111111111111111111111111111111111111"
 set crypt_autosign = yes
 <emphasis role="comment"># Encrypt mail if all recipients have valid public keys</emphasis>
 set crypt_opportunistic_encrypt = yes
-<emphasis role="comment"># Sign/encrypt protected headers (Subject)</emphasis>
-set crypt_protected_headers_write = yes
 <emphasis role="comment"># Self encrypt mail</emphasis>
 set crypt_self_encrypt = yes
 
@@ -14536,6 +14564,54 @@ set smime_default_key = "SMIME-KEY"
       <title>Credits</title>
       <para>
         Omen Wild, Richard Russon, Guillaume Brogi
+      </para>
+    </sect1>
+  </chapter>
+
+  <chapter id="encryption-info">
+    <title>Encryption information block</title>
+    <subtitle>Show a block of encryption information about a message
+    </subtitle>
+
+    <sect1 id="encryption-info-support">
+      <title>Support</title>
+      <para>
+        <emphasis role="bold">Since:</emphasis> NeoMutt 2024-04-10
+      </para>
+      <para>
+        <emphasis role="bold">Dependencies:</emphasis> Gpgme
+      </para>
+    </sect1>
+
+    <sect1 id="encryption-info-intro">
+      <title>Introduction</title>
+      <para>
+        This feature shows a block of information that provides
+        information about an encrypted message;
+        mainly about its recipients.
+        Here is an example of such a block:
+      </para>
+<screen>
+[-- Begin encryption information --]
+Recipient: RSA key, ID 00C14A7DBBDD521C
+Recipient: RSA key, ID 0000000000000000
+[-- End encryption information --]
+</screen>
+    </sect1>
+
+    <sect1 id="encryption-info-usage">
+      <title>Usage</title>
+      <para>
+        It's enabled by default.
+        The variable to control it is
+        <literal>crypt_encryption_info</literal>.
+      </para>
+    </sect1>
+
+    <sect1 id="encryption-info-credits">
+      <title>Credits</title>
+      <para>
+        Alejandro Colomar, Richard Russon, наб
       </para>
     </sect1>
   </chapter>
@@ -22553,6 +22629,17 @@ to the empty string.
 </para>
 </sect2>
 
+<sect2 id="crypt-protected-headers-weed">
+<title>crypt_protected_headers_weed</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+Controls whether NeoMutt will weed protected header fields.
+(Crypto only)
+</para>
+</sect2>
+
 <sect2 id="crypt-protected-headers-write">
 <title>crypt_protected_headers_write</title>
 <literallayout>Type: boolean
@@ -22822,6 +22909,17 @@ Default: yes</literallayout>
 If this option is <emphasis>set</emphasis>, NeoMutt will untag messages when marking them
 for deletion.  This applies when you either explicitly delete a message,
 or when you save it to another folder.
+</para>
+</sect2>
+
+<sect2 id="devel-security">
+<title>devel_security</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+If this option is <emphasis>set</emphasis>, NeoMutt will enable the <emphasis role="bold">Security</emphasis> development features.
+See: https://github.com/neomutt/neomutt/discussions/4251
 </para>
 </sect2>
 
