@@ -2538,7 +2538,7 @@ color sidebar_divider    color8  default     <emphasis role="comment"># Dark gre
           <varlistentry>
             <term>
               <literal>&lt;skip-quoted&gt;</literal> (default: S)
-              <anchor id="feature/skip-quoted" />
+              <anchor id="skip-quoted" />
             </term>
             <listitem>
               <para>
@@ -14568,7 +14568,7 @@ set smime_default_key = "SMIME-KEY"
     </sect1>
   </chapter>
 
-  <chapter id="encryption-info">
+  <chapter id="feature/encryption-info">
     <title>Encryption information block</title>
     <subtitle>Show a block of encryption information about a message
     </subtitle>
