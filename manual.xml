@@ -22569,7 +22569,7 @@ Controls whether NeoMutt will weed protected header fields.
 <sect2 id="crypt-protected-headers-write">
 <title>crypt_protected_headers_write</title>
 <literallayout>Type: boolean
-Default: no</literallayout>
+Default: yes</literallayout>
 
 <para>
 When set, NeoMutt will generate protected headers for signed and encrypted
@@ -25249,6 +25249,16 @@ Default: no</literallayout>
 When <emphasis>set</emphasis>, the <link linkend="mime-type-query-command">$mime_type_query_command</link> will be run before the
 mime.types lookup.
 </para>
+</sect2>
+
+<sect2 id="mix-entry-format">
+  <title>mix_entry_format</title>
+  <note>Deprecated, since 2024-05-30</note>
+</sect2>
+
+<sect2 id="mixmaster">
+  <title>mixmaster</title>
+  <note>Deprecated, since 2024-05-30</note>
 </sect2>
 
 <sect2 id="move">
