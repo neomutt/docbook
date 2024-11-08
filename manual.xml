@@ -5133,7 +5133,7 @@ folder-hook work "set sort=threads"
           This command will remove a macro.
         </para>
         <cmdsynopsis>
-          <command>macro</command>
+          <command>unmacro</command>
           <arg choice="plain">
             <replaceable class="parameter">menu</replaceable>
           </arg>
@@ -30343,7 +30343,9 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;sort-alias&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
 <row><entry><literal>&lt;sort-alias-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
 <row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>tag the current entry</entry></row>
+<row><entry><literal>&lt;tag-pattern&gt;</literal></entry><entry>T</entry><entry>tag non-hidden messages matching a pattern</entry></row>
 <row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
+<row><entry><literal>&lt;untag-pattern&gt;</literal></entry><entry>^T</entry><entry>untag non-hidden messages matching a pattern</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -30369,6 +30371,9 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;query-append&gt;</literal></entry><entry>A</entry><entry>append new query results to current results</entry></row>
 <row><entry><literal>&lt;sort&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
 <row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
+<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>tag the current entry</entry></row>
+<row><entry><literal>&lt;tag-pattern&gt;</literal></entry><entry>T</entry><entry>tag non-hidden messages matching a pattern</entry></row>
+<row><entry><literal>&lt;untag-pattern&gt;</literal></entry><entry>^T</entry><entry>untag non-hidden messages matching a pattern</entry></row>
 </tbody>
 </tgroup>
 </table>
