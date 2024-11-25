@@ -13469,6 +13469,106 @@ sendmailcmd = neomutt -C -H - &amp;&amp; true
     </sect1>
   </chapter>
 
+  <chapter id="feature/compose-message-preview">
+    <title>Compose Message Preview Feature</title>
+    <subtitle>Show a preview of the message in the compose dialog</subtitle>
+
+    <sect1 id="compose-message-preview-support">
+      <title>Support</title>
+      <para><emphasis role="bold">Since:</emphasis> NeoMutt 2024-11-25</para>
+      <para><emphasis role="bold">Dependencies:</emphasis> None</para>
+    </sect1>
+
+    <sect1 id="compose-message-preview-intro">
+      <title>Introduction</title>
+      <para>
+        NeoMutt shows you a preview of the message you are about to send in
+        the compose dialog.
+      </para>
+    </sect1>
+
+    <sect1 id="compose-message-preview-variables">
+      <title>Variables</title>
+
+      <table id="table-compose-message-preview-variables">
+        <title>Message Preview Variables</title>
+        <tgroup cols="4">
+          <thead>
+            <row>
+              <entry>Name</entry>
+              <entry>Type</entry>
+              <entry>Default</entry>
+              <entry>Description</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry><literal>compose_show_preview</literal></entry>
+              <entry>boolean</entry>
+              <entry><literal>true</literal></entry>
+              <entry>Enable or disable the message preview feature</entry>
+            </row>
+            <row>
+              <entry><literal>compose_preview_min_rows</literal></entry>
+              <entry>number</entry>
+              <entry><literal>5</literal></entry>
+              <entry>Hide the preview if it has less than this number of rows</entry>
+            </row>
+            <row>
+              <entry><literal>compose_preview_above_attachments</literal></entry>
+              <entry>boolean</entry>
+              <entry><literal>false</literal></entry>
+              <entry>Show the message preview above the attachments list.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </sect1>
+
+    <sect1 id="compose-message-preview-functions">
+      <title>Functions</title>
+      <para>
+        The message preview is controller by the following functions.
+      </para>
+
+      <table id="compose-message-preview-functions-table">
+        <title>Message Preview Functions</title>
+        <tgroup cols="3">
+          <thead>
+            <row>
+              <entry>Menus</entry>
+              <entry>Function</entry>
+              <entry>Description</entry>
+              <entry>Default</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>compose</entry>
+              <entry><literal>&lt;preview-page-down&gt;</literal></entry>
+              <entry>show the next page of the message</entry>
+              <entry><literal>&lt;pagedown&gt;</literal></entry>
+            </row>
+            <row>
+              <entry>compose</entry>
+              <entry><literal>&lt;preview-page-up&gt;</literal></entry>
+              <entry>show the previous page of the message</entry>
+              <entry><literal>&lt;pageup&gt;</literal></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </sect1>
+
+    <sect1 id="compose-message-preview-credits">
+      <title>Credits</title>
+      <para>
+        Dennis Schön
+      </para>
+    </sect1>
+
+  </chapter>
+
   <chapter id="feature/compose-to-sender">
     <title>Compose to Sender Feature</title>
     <subtitle>Send new mail to the sender of the current mail</subtitle>
@@ -22269,6 +22369,38 @@ information on how to set <link linkend="compose-format">$compose_format</link>.
 </para>
 </sect2>
 
+<sect2 id="compose-preview-min-rows">
+<title>compose_preview_min_rows</title>
+<literallayout>Type: number
+Default: 5</literallayout>
+
+<para>
+This variable specifies the minimun number of rows that have to be
+available for the message preview window to shown.
+</para>
+</sect2>
+
+<sect2 id="compose-preview-above-attachments">
+<title>compose_preview_above_attachments</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+Show the message preview above the attachments list.
+By default it is shown below it.
+</para>
+</sect2>
+
+<sect2 id="compose-show-preview">
+<title>compose_show_preview</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, Neomutt with display a preview of message in the compose view.
+</para>
+</sect2>
+
 <sect2 id="compose-show-user-headers">
 <title>compose_show_user_headers</title>
 <literallayout>Type: boolean
@@ -30536,6 +30668,8 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
 <row><entry><literal>&lt;postpone-message&gt;</literal></entry><entry>P</entry><entry>save this message to send later</entry></row>
+<row><entry><literal>&lt;preview-page-down&gt;</literal></entry><entry>&lt;Pagedown&gt;</entry><entry>show the next page of the message</entry></row>
+<row><entry><literal>&lt;preview-page-up&gt;</literal></entry><entry>&lt;Pageup&gt;</entry><entry>show the previous page of the message</entry></row>
 <row><entry><literal>&lt;print-entry&gt;</literal></entry><entry>l</entry><entry>print the current entry</entry></row>
 <row><entry><literal>&lt;rename-attachment&gt;</literal></entry><entry>^O</entry><entry>send attachment with a different name</entry></row>
 <row><entry><literal>&lt;rename-file&gt;</literal></entry><entry>R</entry><entry>rename/move an attached file</entry></row>
