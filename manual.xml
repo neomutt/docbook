@@ -13512,7 +13512,7 @@ sendmailcmd = neomutt -C -H - &amp;&amp; true
               <entry><literal>compose_preview_min_rows</literal></entry>
               <entry>number</entry>
               <entry><literal>5</literal></entry>
-              <entry>Hide the preview if it has less than this number of rows</entry>
+              <entry>Hide the preview if it has fewer than this number of rows</entry>
             </row>
             <row>
               <entry><literal>compose_preview_above_attachments</literal></entry>
@@ -22375,7 +22375,7 @@ information on how to set <link linkend="compose-format">$compose_format</link>.
 Default: 5</literallayout>
 
 <para>
-This variable specifies the minimun number of rows that have to be
+This variable specifies the minimum number of rows that have to be
 available for the message preview window to shown.
 </para>
 </sect2>
@@ -22397,7 +22397,7 @@ By default it is shown below it.
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, Neomutt with display a preview of message in the compose view.
+When <emphasis>set</emphasis>, Neomutt will display a preview of message in the compose view.
 </para>
 </sect2>
 
@@ -27228,7 +27228,7 @@ information.
 <sect2 id="query-format">
 <title>query_format</title>
 <literallayout>Type: string
-Default: <quote><literal>%3c %t %-25.25n %-25.25a | %e</literal></quote></literallayout>
+Default: <quote><literal>%3i %t %-25N %-25E | %C%&gt; %Y</literal></quote></literallayout>
 
 <para>
 This variable describes the format of the "query" menu. The
