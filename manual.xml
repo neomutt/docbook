@@ -13560,13 +13560,32 @@ sendmailcmd = neomutt -C -H - &amp;&amp; true
       </table>
     </sect1>
 
+    <sect1 id="compose-message-preview-limitations">
+      <title>Limitations</title>
+      <para>
+        This is a new feature and it's still under development. If you find
+        any problems, or you'd like to help improve it, please let us know.
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Pager displays simple text, no colour or attributes
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Text wrapping is not supported
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
     <sect1 id="compose-message-preview-credits">
       <title>Credits</title>
       <para>
         Dennis Schön
       </para>
     </sect1>
-
   </chapter>
 
   <chapter id="feature/compose-to-sender">
@@ -24848,6 +24867,8 @@ time zone, and "fmt" is expanded by the library function
 is a bang ("!"), the date is formatted ignoring any locale
 settings.  Note that the sender's time zone might only be
 available as a numerical offset, so "%Z" behaves like "%z".
+%{fmt} behaves like %[fmt] on systems where struct tm
+doesn't have a tm_gmtoff member.
 </entry></row>
 <row><entry>%[fmt] </entry><entry>the date and time of the message is converted to the local
 time zone, and "fmt" is expanded by the library function
