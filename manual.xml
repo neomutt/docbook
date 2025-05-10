@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Russon</surname>
       <email>rich@flatcap.org</email>
     </author>
-    <releaseinfo>version 2025-04-04</releaseinfo>
+    <releaseinfo>version 2025-05-10</releaseinfo>
     <abstract>
       <para>
         <quote>Teaching an old dog new tricks</quote>
@@ -15143,7 +15143,7 @@ set header_cache_compress_method = ""
         Tino Reichardt
       </para>
     </sect1>
-</chapter>
+  </chapter>
 
   <chapter id="feature/ifdef">
     <title>Ifdef Feature</title>
