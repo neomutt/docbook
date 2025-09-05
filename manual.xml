@@ -12,7 +12,7 @@ vim: ts=2 sw=2 sts=2 expandtab:
       <surname>Russon</surname>
       <email>rich@flatcap.org</email>
     </author>
-    <releaseinfo>version 2025-05-10</releaseinfo>
+    <releaseinfo>version 2025-09-05</releaseinfo>
     <abstract>
       <para>
         <quote>Teaching an old dog new tricks</quote>
@@ -13150,7 +13150,7 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
           NeoMutt does not (yet) support maintenance features for header cache
           database files so that files have to be removed in case they grow too
           big. It depends on the database library used for header caching
-          whether disk space freed by removing messages is re-used.
+          whether disk space freed by removing messages is reused.
         </para>
         <para>
           For body caches, NeoMutt can keep the local cache in sync with the
@@ -22483,6 +22483,17 @@ mailbox which does not yet exist before creating it.
 <sect2 id="confirmcreate">
   <title>confirmcreate</title>
   <note>Renamed to <link linkend="confirm-create">$confirm_create</link> (2021-03-21)</note>
+</sect2>
+
+<sect2 id="confirm-empty-to">
+<title>confirm_empty_to</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when sending an e-mail
+with an empty To recipients list.
+</para>
 </sect2>
 
 <sect2 id="content-type">
