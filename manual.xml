@@ -21825,7 +21825,7 @@ Default: (empty)</literallayout>
 
 <para>
 The locale used by <literal>strftime(3)</literal> to format dates in the
-attribution strings.  Legal values are the strings your system
+attribution strings.  Valid values are the strings your system
 accepts for the locale environment variable <literal>$LC_TIME</literal>.
 </para>
 <para>
@@ -22278,15 +22278,15 @@ unread messages.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will use and allow 24bit colours (aka truecolor aka
+When <emphasis>set</emphasis>, NeoMutt will use and allow 24-bit colours (aka truecolor aka
 directcolor).  For colours to work properly support from the terminal is
 required as well as a properly set TERM environment variable advertising the
 terminals directcolor capability, e.g. "TERM=xterm-direct".
 </para>
 <para>
-NeoMutt tries to detect whether the terminal supports 24bit colours and
+NeoMutt tries to detect whether the terminal supports 24-bit colours and
 enables this variable if it does.  If this fails for some reason, you can
-force 24bit colours by setting this variable manually.  You may also try to
+force 24-bit colours by setting this variable manually.  You may also try to
 force a certain TERM environment variable by starting NeoMutt from
 a terminal as follows (this results in wrong colours if the terminal does
 not implement directcolors):
@@ -22707,7 +22707,7 @@ and will update the index and header cache with revised headers.
 </para>
 <para>
 Protected headers are stored inside the encrypted or signed part of an
-an email, to prevent disclosure or tampering.
+email, to prevent disclosure or tampering.
 For more information see https://github.com/autocrypt/protected-headers
 Currently NeoMutt only supports the Subject header.
 </para>
@@ -22791,7 +22791,7 @@ emails.
 </para>
 <para>
 Protected headers are stored inside the encrypted or signed part of an
-an email, to prevent disclosure or tampering.
+email, to prevent disclosure or tampering.
 For more information see https://github.com/autocrypt/protected-headers
 </para>
 <para>
@@ -25219,6 +25219,68 @@ command) from the list of recipients when replying to a message.
 <note>Before 2021-03-21, this was called $metoo</note>
 </sect2>
 
+<sect2 id="message-id-format">
+<title>message_id_format</title>
+<literallayout>Type: string
+Default: <quote><literal>&lt;%z@%f&gt;</literal></quote></literallayout>
+
+<para>
+This variable allows you to choose a custom format for the Message-Id when
+sending messages. The value may end in <quote>|</quote> to invoke an external filter.
+See <link linkend="formatstrings-filters">formatstrings-filters</link>.
+</para>
+<para>
+Please note that the Message-ID value follows a strict syntax, and you are
+responsible for ensuring correctness if you change this from the default.
+In particular, the value must follow the syntax in RFC 5322:
+<quote><literal>"&lt;" id-left "@" id-right "&gt;"</literal></quote>.  No spaces are allowed, and
+<literal>id-left</literal> should follow the dot-atom-text syntax in the RFC.
+The <literal>id-right</literal> should generally be left as <quote><literal>%f</literal></quote>.
+</para>
+<para>
+If unset, NeoMutt will use a long random format.
+</para>
+<para>
+If the format doesn't begin/end with <quote>&lt;</quote>, <quote>&gt;</quote> they will be added.
+</para>
+<para>
+The old Message-ID format can be used by setting this to:
+<quote><literal>&lt;%Y%02m%02d%02H%02M%02S.G%c%p@%f&gt;</literal></quote>
+</para>
+<para>
+The following <literal>printf(3)</literal>-style sequences are understood:
+
+</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry>%c </entry><entry>Step counter looping from <quote>A</quote> to <quote>Z</quote>
+</entry></row>
+<row><entry>%d </entry><entry>Current day of the month (GMT)
+</entry></row>
+<row><entry>%f </entry><entry><link linkend="hostname">$hostname</link>
+</entry></row>
+<row><entry>%H </entry><entry>Current hour using a 24-hour clock (GMT)
+</entry></row>
+<row><entry>%m </entry><entry>Current month number (GMT)
+</entry></row>
+<row><entry>%M </entry><entry>Current minute of the hour (GMT)
+</entry></row>
+<row><entry>%p </entry><entry>Pid of the running mutt process
+</entry></row>
+<row><entry>%r </entry><entry>3 bytes of pseudo-random data encoded in Base64
+</entry></row>
+<row><entry>%S </entry><entry>Current second of the minute (GMT)
+</entry></row>
+<row><entry>%x </entry><entry>1 byte of pseudo-random data hex encoded (example: '1b')
+</entry></row>
+<row><entry>%Y </entry><entry>Current year using 4 digits (GMT)
+</entry></row>
+<row><entry>%z </entry><entry>4 byte timestamp + 8 bytes of pseudo-random data encoded in Base64
+</entry></row></tbody></tgroup></informaltable>
+</sect2>
+
 <sect2 id="menu-context">
 <title>menu_context</title>
 <literallayout>Type: number
@@ -26555,7 +26617,7 @@ e.g. <literal>set pgp_key_sort = "reverse-date"</literal>
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, use 64 bit PGP key IDs, if <emphasis>unset</emphasis> use the normal 32 bit key IDs.
+If <emphasis>set</emphasis>, use 64-bit PGP key IDs, if <emphasis>unset</emphasis> use the normal 32-bit key IDs.
 NOTE: Internally, NeoMutt has transitioned to using fingerprints (or long key IDs
 as a fallback).  This option now only controls the display of key IDs
 in the key selection menu and a few other places.
@@ -27200,7 +27262,7 @@ all the messages are concatenated, with a form feed as the message
 separator.
 </para>
 <para>
-Those who use the <literal>enscript</literal>(1) program's mail-printing mode will
+Those who use the <literal>enscript(1)</literal> program's mail-printing mode will
 most likely want to <emphasis>set</emphasis> this option.
 </para>
 </sect2>
@@ -28361,7 +28423,7 @@ Default: <quote><literal>~/.signature</literal></quote></literallayout>
 
 <para>
 Specifies the filename of your signature, which is appended to all
-outgoing messages.   If the filename ends with a pipe ("|"), it is
+outgoing messages.  If the filename ends with a pipe ("|"), it is
 assumed that filename is a shell command and input should be read from
 its standard output.
 </para>
@@ -29166,11 +29228,11 @@ Default: (empty)</literallayout>
 
 <para>
 Contains a colon-separated list of ciphers to use when using SSL.
-For OpenSSL, see ciphers(1) for the syntax of the string.
+For OpenSSL, see <literal>ciphers(1)</literal> for the syntax of the string.
 </para>
 <para>
 For GnuTLS, this option will be used in place of "NORMAL" at the
-start of the priority string.  See gnutls_priority_init(3) for the
+start of the priority string.  See <literal>gnutls_priority_init(3)</literal> for the
 syntax and more details. (Note: GnuTLS version 2.1.7 or higher is
 required.)
 </para>
@@ -29232,28 +29294,13 @@ recommended if you rely on <literal>STARTTLS</literal>.
 </sect2>
 
 <sect2 id="ssl-use-sslv2">
-<title>ssl_use_sslv2</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-If <emphasis>set</emphasis> , NeoMutt will use SSLv2 when communicating with servers that
-request it. <emphasis role="bold">N.B. As of 2011, SSLv2 is considered insecure, and using
-is inadvisable</emphasis>. See https://tools.ietf.org/html/rfc6176
-(OpenSSL only)
-</para>
+  <title>ssl_use_sslv2</title>
+  <note>Deprecated, since 2025-12-07</note>
 </sect2>
 
 <sect2 id="ssl-use-sslv3">
-<title>ssl_use_sslv3</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-If <emphasis>set</emphasis> , NeoMutt will use SSLv3 when communicating with servers that
-request it. <emphasis role="bold">N.B. As of 2015, SSLv3 is considered insecure, and using
-it is inadvisable</emphasis>. See https://tools.ietf.org/html/rfc7525
-</para>
+  <title>ssl_use_sslv3</title>
+  <note>Deprecated, since 2025-12-07</note>
 </sect2>
 
 <sect2 id="ssl-use-system-certs">
@@ -29270,27 +29317,13 @@ is signed by a trusted CA. (OpenSSL only)
 </sect2>
 
 <sect2 id="ssl-use-tlsv1">
-<title>ssl_use_tlsv1</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-If <emphasis>set</emphasis> , NeoMutt will use TLSv1.0 when communicating with servers that
-request it. <emphasis role="bold">N.B. As of 2015, TLSv1.0 is considered insecure, and using
-it is inadvisable</emphasis>. See https://tools.ietf.org/html/rfc7525
-</para>
+  <title>ssl_use_tlsv1</title>
+  <note>Deprecated, since 2025-12-07</note>
 </sect2>
 
 <sect2 id="ssl-use-tlsv1-1">
-<title>ssl_use_tlsv1_1</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-If <emphasis>set</emphasis> , NeoMutt will use TLSv1.1 when communicating with servers that
-request it. <emphasis role="bold">N.B. As of 2015, TLSv1.1 is considered insecure, and using
-it is inadvisable</emphasis>. See https://tools.ietf.org/html/rfc7525
-</para>
+  <title>ssl_use_tlsv1_1</title>
+  <note>Deprecated, since 2025-12-07</note>
 </sect2>
 
 <sect2 id="ssl-use-tlsv1-2">
