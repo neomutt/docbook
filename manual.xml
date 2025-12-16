@@ -16345,7 +16345,7 @@ set new_mail_command = ""
               <entry><literal>%4C %M%N %5s %-45.45f %d</literal></entry>
             </row>
             <row>
-              <entry><literal>inews</literal></entry>
+              <entry><literal>inews_command</literal></entry>
               <entry>string</entry>
               <entry>(empty)</entry>
             </row>
@@ -16566,7 +16566,7 @@ set ask_x_comment_to = no
 set catchup_newsgroup = ask-yes
 set followup_to_poster = ask-yes
 set group_index_format = '%4C %M%N %5s  %-45.45f %d'
-set inews = ''
+set inews_command = ''
 set newsgroups_charset = utf-8
 set newsrc = '~/.newsrc'
 set news_cache_dir = '~/.neomutt'
@@ -21802,6 +21802,11 @@ NeoMutt will operate on the attachments one by one.
 </para>
 </sect2>
 
+<sect2 id="attribution">
+  <title>attribution</title>
+  <note>Renamed to <link linkend="attribution-intro">$attribution_intro</link> (2023-02-20)</note>
+</sect2>
+
 <sect2 id="attribution-intro">
 <title>attribution_intro</title>
 <literallayout>Type: string
@@ -21816,6 +21821,7 @@ set).
 For a full listing of defined <literal>printf(3)</literal>-like sequences see the section
 on <link linkend="index-format">$index_format</link>.  See also <link linkend="attribution-locale">$attribution_locale</link>.
 </para>
+<note>Before 2023-02-20, this was called $attribution</note>
 </sect2>
 
 <sect2 id="attribution-locale">
@@ -22356,17 +22362,6 @@ information on how to set <link linkend="compose-format">$compose_format</link>.
 </para>
 </sect2>
 
-<sect2 id="compose-preview-min-rows">
-<title>compose_preview_min_rows</title>
-<literallayout>Type: number
-Default: 5</literallayout>
-
-<para>
-This variable specifies the minimum number of rows that have to be
-available for the message preview window to shown.
-</para>
-</sect2>
-
 <sect2 id="compose-preview-above-attachments">
 <title>compose_preview_above_attachments</title>
 <literallayout>Type: boolean
@@ -22375,6 +22370,17 @@ Default: no</literallayout>
 <para>
 Show the message preview above the attachments list.
 By default it is shown below it.
+</para>
+</sect2>
+
+<sect2 id="compose-preview-min-rows">
+<title>compose_preview_min_rows</title>
+<literallayout>Type: number
+Default: 5</literallayout>
+
+<para>
+This variable specifies the minimum number of rows that have to be
+available for the message preview window to shown.
 </para>
 </sect2>
 
@@ -22444,6 +22450,17 @@ mailbox which does not yet exist before creating it.
 <note>Before 2021-03-21, this was called $confirmcreate</note>
 </sect2>
 
+<sect2 id="confirm-empty-to">
+<title>confirm_empty_to</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when sending an e-mail
+with an empty To recipients list.
+</para>
+</sect2>
+
 <sect2 id="confirmappend">
   <title>confirmappend</title>
   <note>Renamed to <link linkend="confirm-append">$confirm_append</link> (2021-03-21)</note>
@@ -22454,15 +22471,9 @@ mailbox which does not yet exist before creating it.
   <note>Renamed to <link linkend="confirm-create">$confirm_create</link> (2021-03-21)</note>
 </sect2>
 
-<sect2 id="confirm-empty-to">
-<title>confirm_empty_to</title>
-<literallayout>Type: boolean
-Default: no</literallayout>
-
-<para>
-When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when sending an e-mail
-with an empty To recipients list.
-</para>
+<sect2 id="connect-timeout">
+  <title>connect_timeout</title>
+  <note>Renamed to <link linkend="socket-timeout">$socket_timeout</link> (2023-02-15)</note>
 </sect2>
 
 <sect2 id="content-type">
@@ -22644,6 +22655,19 @@ typos are concerned.
 <sect2 id="crypt-confirmhook">
   <title>crypt_confirmhook</title>
   <note>Renamed to <link linkend="crypt-confirm-hook">$crypt_confirm_hook</link> (2021-02-11)</note>
+</sect2>
+
+<sect2 id="crypt-encryption-info">
+<title>crypt_encryption_info</title>
+<literallayout>Type: boolean
+Default: yes</literallayout>
+
+<para>
+If <emphasis>set</emphasis>, NeoMutt will include an informative block
+before an encrypted part,
+with details about the encryption.
+(Crypto only)
+</para>
 </sect2>
 
 <sect2 id="crypt-opportunistic-encrypt">
@@ -22847,19 +22871,6 @@ to find out whether an encrypted message is also signed.
 <note>Before 2021-03-21, this was called $crypt_replysignencrypted, $pgp_replysignencrypted</note>
 </sect2>
 
-<sect2 id="crypt-encryption-info">
-<title>crypt_encryption_info</title>
-<literallayout>Type: boolean
-Default: yes</literallayout>
-
-<para>
-If <emphasis>set</emphasis>, NeoMutt will include an informative block
-before an encrypted part,
-with details about the encryption.
-(Crypto only)
-</para>
-</sect2>
-
 <sect2 id="crypt-replyencrypt">
   <title>crypt_replyencrypt</title>
   <note>Renamed to <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link> (2021-03-21)</note>
@@ -22931,6 +22942,11 @@ If <emphasis>"no"</emphasis>, never attempt to verify cryptographic signatures.
 (Crypto only)
 </para>
 <note>Before 2002-01-24, this was called $pgp_verify_sig</note>
+</sect2>
+
+<sect2 id="cursor-overlay">
+  <title>cursor_overlay</title>
+  <note>Deprecated, since 2020-07-20</note>
 </sect2>
 
 <sect2 id="date-format">
@@ -24662,11 +24678,6 @@ decrypting and including the message in their reply.
 </para>
 </sect2>
 
-<sect2 id="include-onlyfirst">
-  <title>include_onlyfirst</title>
-  <note>Renamed to <link linkend="include-only-first">$include_only_first</link> (2021-03-21)</note>
-</sect2>
-
 <sect2 id="include-only-first">
 <title>include_only_first</title>
 <literallayout>Type: boolean
@@ -24677,6 +24688,11 @@ Controls whether or not NeoMutt includes only the first attachment
 of the message you are replying.
 </para>
 <note>Before 2021-03-21, this was called $include_onlyfirst</note>
+</sect2>
+
+<sect2 id="include-onlyfirst">
+  <title>include_onlyfirst</title>
+  <note>Renamed to <link linkend="include-only-first">$include_only_first</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="indent-str">
@@ -24892,7 +24908,12 @@ Note that these expandos are supported in
 </sect2>
 
 <sect2 id="inews">
-<title>inews</title>
+  <title>inews</title>
+  <note>Renamed to <link linkend="inews-command">$inews_command</link> (2025-12-15)</note>
+</sect2>
+
+<sect2 id="inews-command">
+<title>inews_command</title>
 <literallayout>Type: command
 Default: (empty)</literallayout>
 
@@ -24925,8 +24946,10 @@ Example:
 </para>
 
 <screen>
-set inews="/usr/local/bin/inews -hS"
+set inews_command="/usr/local/bin/inews -hS"
 </screen></sect2>
+
+<note>Before 2025-12-15, this was called $inews</note>
 
 <sect2 id="ispell">
 <title>ispell</title>
@@ -25219,68 +25242,6 @@ command) from the list of recipients when replying to a message.
 <note>Before 2021-03-21, this was called $metoo</note>
 </sect2>
 
-<sect2 id="message-id-format">
-<title>message_id_format</title>
-<literallayout>Type: string
-Default: <quote><literal>&lt;%z@%f&gt;</literal></quote></literallayout>
-
-<para>
-This variable allows you to choose a custom format for the Message-Id when
-sending messages. The value may end in <quote>|</quote> to invoke an external filter.
-See <link linkend="formatstrings-filters">formatstrings-filters</link>.
-</para>
-<para>
-Please note that the Message-ID value follows a strict syntax, and you are
-responsible for ensuring correctness if you change this from the default.
-In particular, the value must follow the syntax in RFC 5322:
-<quote><literal>"&lt;" id-left "@" id-right "&gt;"</literal></quote>.  No spaces are allowed, and
-<literal>id-left</literal> should follow the dot-atom-text syntax in the RFC.
-The <literal>id-right</literal> should generally be left as <quote><literal>%f</literal></quote>.
-</para>
-<para>
-If unset, NeoMutt will use a long random format.
-</para>
-<para>
-If the format doesn't begin/end with <quote>&lt;</quote>, <quote>&gt;</quote> they will be added.
-</para>
-<para>
-The old Message-ID format can be used by setting this to:
-<quote><literal>&lt;%Y%02m%02d%02H%02M%02S.G%c%p@%f&gt;</literal></quote>
-</para>
-<para>
-The following <literal>printf(3)</literal>-style sequences are understood:
-
-</para>
-
-<informaltable>
-<tgroup cols="2">
-<tbody>
-<row><entry>%c </entry><entry>Step counter looping from <quote>A</quote> to <quote>Z</quote>
-</entry></row>
-<row><entry>%d </entry><entry>Current day of the month (GMT)
-</entry></row>
-<row><entry>%f </entry><entry><link linkend="hostname">$hostname</link>
-</entry></row>
-<row><entry>%H </entry><entry>Current hour using a 24-hour clock (GMT)
-</entry></row>
-<row><entry>%m </entry><entry>Current month number (GMT)
-</entry></row>
-<row><entry>%M </entry><entry>Current minute of the hour (GMT)
-</entry></row>
-<row><entry>%p </entry><entry>Pid of the running mutt process
-</entry></row>
-<row><entry>%r </entry><entry>3 bytes of pseudo-random data encoded in Base64
-</entry></row>
-<row><entry>%S </entry><entry>Current second of the minute (GMT)
-</entry></row>
-<row><entry>%x </entry><entry>1 byte of pseudo-random data hex encoded (example: '1b')
-</entry></row>
-<row><entry>%Y </entry><entry>Current year using 4 digits (GMT)
-</entry></row>
-<row><entry>%z </entry><entry>4 byte timestamp + 8 bytes of pseudo-random data encoded in Base64
-</entry></row></tbody></tgroup></informaltable>
-</sect2>
-
 <sect2 id="menu-context">
 <title>menu_context</title>
 <literallayout>Type: number
@@ -25367,6 +25328,68 @@ attachments of type <literal>message/rfc822</literal>.  For a full listing of de
 <literal>printf(3)</literal>-like sequences see the section on <link linkend="index-format">$index_format</link>.
 </para>
 <note>Before 2021-03-21, this was called $msg_format</note>
+</sect2>
+
+<sect2 id="message-id-format">
+<title>message_id_format</title>
+<literallayout>Type: string
+Default: <quote><literal>&lt;%z@%f&gt;</literal></quote></literallayout>
+
+<para>
+This variable allows you to choose a custom format for the Message-Id when
+sending messages. The value may end in <quote>|</quote> to invoke an external filter.
+See <link linkend="formatstrings-filters">formatstrings-filters</link>.
+</para>
+<para>
+Please note that the Message-ID value follows a strict syntax, and you are
+responsible for ensuring correctness if you change this from the default.
+In particular, the value must follow the syntax in RFC 5322:
+<quote><literal>"&lt;" id-left "@" id-right "&gt;"</literal></quote>.  No spaces are allowed, and
+<literal>id-left</literal> should follow the dot-atom-text syntax in the RFC.
+The <literal>id-right</literal> should generally be left as <quote><literal>%f</literal></quote>.
+</para>
+<para>
+If unset, NeoMutt will use a long random format.
+</para>
+<para>
+If the format doesn't begin/end with <quote>&lt;</quote>, <quote>&gt;</quote> they will be added.
+</para>
+<para>
+The old Message-ID format can be used by setting this to:
+<quote><literal>&lt;%Y%02m%02d%02H%02M%02S.G%c%p@%f&gt;</literal></quote>
+</para>
+<para>
+The following <literal>printf(3)</literal>-style sequences are understood:
+
+</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry>%c </entry><entry>Step counter looping from <quote>A</quote> to <quote>Z</quote>
+</entry></row>
+<row><entry>%d </entry><entry>Current day of the month (GMT)
+</entry></row>
+<row><entry>%f </entry><entry><link linkend="hostname">$hostname</link>
+</entry></row>
+<row><entry>%H </entry><entry>Current hour using a 24-hour clock (GMT)
+</entry></row>
+<row><entry>%m </entry><entry>Current month number (GMT)
+</entry></row>
+<row><entry>%M </entry><entry>Current minute of the hour (GMT)
+</entry></row>
+<row><entry>%p </entry><entry>Pid of the running mutt process
+</entry></row>
+<row><entry>%r </entry><entry>3 bytes of pseudo-random data encoded in Base64
+</entry></row>
+<row><entry>%S </entry><entry>Current second of the minute (GMT)
+</entry></row>
+<row><entry>%x </entry><entry>1 byte of pseudo-random data hex encoded (example: '1b')
+</entry></row>
+<row><entry>%Y </entry><entry>Current year using 4 digits (GMT)
+</entry></row>
+<row><entry>%z </entry><entry>4 byte timestamp + 8 bytes of pseudo-random data encoded in Base64
+</entry></row></tbody></tgroup></informaltable>
 </sect2>
 
 <sect2 id="meta-key">
@@ -26169,6 +26192,11 @@ Also note that using the old-style PGP message format is <emphasis role="bold">s
 <note>Before 2004-04-12, this was called $pgp_create_traditional, $pgp_autoinline</note>
 </sect2>
 
+<sect2 id="pgp-auto-traditional">
+  <title>pgp_auto_traditional</title>
+  <note>Renamed to <link linkend="pgp-reply-inline">$pgp_reply_inline</link> (2021-03-21)</note>
+</sect2>
+
 <sect2 id="pgp-autoencrypt">
   <title>pgp_autoencrypt</title>
   <note>Renamed to <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link> (2021-03-21)</note>
@@ -26182,11 +26210,6 @@ Also note that using the old-style PGP message format is <emphasis role="bold">s
 <sect2 id="pgp-autosign">
   <title>pgp_autosign</title>
   <note>Renamed to <link linkend="crypt-auto-sign">$crypt_auto_sign</link> (2021-03-21)</note>
-</sect2>
-
-<sect2 id="pgp-auto-traditional">
-  <title>pgp_auto_traditional</title>
-  <note>Renamed to <link linkend="pgp-reply-inline">$pgp_reply_inline</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="pgp-check-exit">
@@ -26526,6 +26549,41 @@ possible <literal>printf(3)</literal>-like sequences.
 </para>
 </sect2>
 
+<sect2 id="pgp-key-sort">
+<title>pgp_key_sort</title>
+<literallayout>Type: sort order
+Default: address</literallayout>
+
+<para>
+Specifies how the entries in the pgp menu are sorted.
+
+</para>
+
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row><entry><emphasis role="bold">Value</emphasis>   </entry><entry><emphasis role="bold">Sort by</emphasis>
+</entry></row>
+<row><entry><literal>address</literal> </entry><entry>Address
+</entry></row>
+<row><entry><literal>date</literal>    </entry><entry>Date
+</entry></row>
+<row><entry><literal>keyid</literal>   </entry><entry>Key id
+</entry></row>
+<row><entry><literal>trust</literal>   </entry><entry>Trust level
+</entry></row></tbody></tgroup></informaltable>
+
+<para>
+Prefixing the value with <literal>reverse-</literal> sorts the entries in reverse order,
+e.g. <literal>set pgp_key_sort = "reverse-date"</literal>
+</para>
+<para>
+(PGP only)
+</para>
+
+<note>Before 2024-11-20, this was called $pgp_sort_keys</note>
+</sect2>
+
 <sect2 id="pgp-list-pubring-command">
 <title>pgp_list_pubring_command</title>
 <literallayout>Type: command
@@ -26574,41 +26632,6 @@ This is a format string, see the <link linkend="pgp-decode-command">$pgp_decode_
 possible <literal>printf(3)</literal>-like sequences.
 (PGP only)
 </para>
-</sect2>
-
-<sect2 id="pgp-key-sort">
-<title>pgp_key_sort</title>
-<literallayout>Type: sort order
-Default: address</literallayout>
-
-<para>
-Specifies how the entries in the pgp menu are sorted.
-
-</para>
-
-<informaltable>
-<tgroup cols="2">
-<tbody>
-<row><entry><emphasis role="bold">Value</emphasis>   </entry><entry><emphasis role="bold">Sort by</emphasis>
-</entry></row>
-<row><entry><literal>address</literal> </entry><entry>Address
-</entry></row>
-<row><entry><literal>date</literal>    </entry><entry>Date
-</entry></row>
-<row><entry><literal>keyid</literal>   </entry><entry>Key id
-</entry></row>
-<row><entry><literal>trust</literal>   </entry><entry>Trust level
-</entry></row></tbody></tgroup></informaltable>
-
-<para>
-Prefixing the value with <literal>reverse-</literal> sorts the entries in reverse order,
-e.g. <literal>set pgp_key_sort = "reverse-date"</literal>
-</para>
-<para>
-(PGP only)
-</para>
-
-<note>Before 2024-11-20, this was called $pgp_sort_keys</note>
 </sect2>
 
 <sect2 id="pgp-long-ids">
@@ -27068,7 +27091,7 @@ This variable defaults to your user name on the local machine.
 
 <sect2 id="post-indent-str">
   <title>post_indent_str</title>
-  <note>Renamed to <link linkend="post-indent-string">$post_indent_string</link> (2021-03-21)</note>
+  <note>Renamed to <link linkend="attribution-trailer">$attribution_trailer</link> (2021-03-21)</note>
 </sect2>
 
 <sect2 id="post-indent-string">
