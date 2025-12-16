@@ -22732,7 +22732,7 @@ and will update the index and header cache with revised headers.
 <para>
 Protected headers are stored inside the encrypted or signed part of an
 email, to prevent disclosure or tampering.
-For more information see https://github.com/autocrypt/protected-headers
+For more information see <ulink url="https://github.com/autocrypt/protected-headers">https://github.com/autocrypt/protected-headers</ulink>
 Currently NeoMutt only supports the Subject header.
 </para>
 <para>
@@ -22816,7 +22816,7 @@ emails.
 <para>
 Protected headers are stored inside the encrypted or signed part of an
 email, to prevent disclosure or tampering.
-For more information see https://github.com/autocrypt/protected-headers
+For more information see <ulink url="https://github.com/autocrypt/protected-headers">https://github.com/autocrypt/protected-headers</ulink>
 </para>
 <para>
 Currently NeoMutt only supports the Subject header.
@@ -22924,9 +22924,9 @@ Note that the GPGME backend does not support creating old-style inline
 Default: no</literallayout>
 
 <para>
-Controls whether NeoMutt uses PKA
-(see http://www.g10code.de/docs/pka-intro.de.pdf) during signature
-verification (only supported by the GPGME backend).
+Controls whether NeoMutt uses PKA during signature verification
+(only supported by the GPGME backend).
+See: <ulink url="http://www.g10code.de/docs/pka-intro.de.pdf">http://www.g10code.de/docs/pka-intro.de.pdf</ulink>
 </para>
 </sect2>
 
@@ -23088,7 +23088,7 @@ Default: no</literallayout>
 
 <para>
 If this option is <emphasis>set</emphasis>, NeoMutt will enable the <emphasis role="bold">Security</emphasis> development features.
-See: https://github.com/neomutt/neomutt/discussions/4251
+See: <ulink url="https://github.com/neomutt/neomutt/discussions/4251">https://github.com/neomutt/neomutt/discussions/4251</ulink>
 </para>
 </sect2>
 
@@ -24580,8 +24580,7 @@ When <emphasis>set</emphasis>, NeoMutt will use the IMAP ENABLE extension (RFC51
 select CAPABILITIES. Some servers (notably Coremail System IMap Server) do
 not properly respond to ENABLE commands, which might cause NeoMutt to hang.
 If your connection seems to freeze at login, try unsetting this. See also
-https://github.com/neomutt/neomutt/issues/1689
-</para>
+<ulink url="https://github.com/neomutt/neomutt/issues/1689">https://github.com/neomutt/neomutt/issues/1689</ulink></para>
 </sect2>
 
 <sect2 id="imap-send-id">
@@ -25380,7 +25379,7 @@ The following <literal>printf(3)</literal>-style sequences are understood:
 </entry></row>
 <row><entry>%p </entry><entry>Pid of the running mutt process
 </entry></row>
-<row><entry>%r </entry><entry>3 bytes of pseudo-random data encoded in Base64
+<row><entry>%r </entry><entry>3 bytes of pseudo-random data encoded in Base64Url
 </entry></row>
 <row><entry>%S </entry><entry>Current second of the minute (GMT)
 </entry></row>
@@ -25388,8 +25387,12 @@ The following <literal>printf(3)</literal>-style sequences are understood:
 </entry></row>
 <row><entry>%Y </entry><entry>Current year using 4 digits (GMT)
 </entry></row>
-<row><entry>%z </entry><entry>4 byte timestamp + 8 bytes of pseudo-random data encoded in Base64
+<row><entry>%z </entry><entry>4 byte timestamp + 8 bytes of pseudo-random data encoded in Base64Url
 </entry></row></tbody></tgroup></informaltable>
+
+<para>
+See also: Base64Url: <ulink url="https://datatracker.ietf.org/doc/html/rfc4648#section-5">https://datatracker.ietf.org/doc/html/rfc4648#section-5</ulink>
+</para>
 </sect2>
 
 <sect2 id="meta-key">
@@ -26329,7 +26332,7 @@ to use a different pinentry-program when running NeoMutt in order to avoid
 problems.
 </para>
 <para>
-See also: https://github.com/neomutt/neomutt/issues/1014
+See also: <ulink url="https://github.com/neomutt/neomutt/issues/1014">https://github.com/neomutt/neomutt/issues/1014</ulink>
 </para>
 </sect2>
 
@@ -27300,8 +27303,7 @@ with the query string the user types.  NeoMutt will add quotes around the
 string substituted for "%s" automatically according to shell quoting
 rules, so you should avoid adding your own.  If no "%s" is found in
 the string, NeoMutt will append the user's query to the end of the string.
-See "<link linkend="query">query</link>" (https://neomutt.org/guide/advancedusage.html#query) for more
-information.
+See "<link linkend="query">query</link>": <ulink url="https://neomutt.org/guide/advancedusage.html#query">https://neomutt.org/guide/advancedusage.html#query</ulink>
 </para>
 </sect2>
 
@@ -29108,7 +29110,7 @@ will sort to.
 </para>
 <para>
 See the "Use Threads Feature" section for further explanation and
-examples, https://neomutt.org/feature/use-threads
+examples, <ulink url="https://neomutt.org/feature/use-threads">https://neomutt.org/feature/use-threads</ulink>
 </para>
 </sect2>
 
@@ -29146,7 +29148,7 @@ more common to use "last-" with <link linkend="sort">$sort</link> and not with <
 </para>
 <para>
 See the "Use Threads Feature" section for further explanation and
-examples, https://neomutt.org/feature/use-threads
+examples, <ulink url="https://neomutt.org/feature/use-threads">https://neomutt.org/feature/use-threads</ulink>
 </para>
 </sect2>
 

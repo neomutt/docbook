@@ -1,5 +1,5 @@
---- bare	2025-12-16 01:46:31.052005074 +0000
-+++ manual.xml	2025-12-16 01:46:44.742052172 +0000
+--- bare	2025-12-16 10:11:18.210017847 +0000
++++ manual.xml	2025-12-16 10:11:25.423029851 +0000
 @@ -21327,6 +21327,12 @@
  if the pattern contains at least one upper case letter, and case
  insensitive otherwise.
@@ -457,7 +457,7 @@
  </sect2>
  
  <sect2 id="imap-list-subscribed">
-@@ -24424,6 +24608,12 @@
+@@ -24423,6 +24607,12 @@
  server which are out of the users' hands, you may wish to suppress
  them at some point.
  </para>
@@ -470,7 +470,7 @@
  </sect2>
  
  <sect2 id="imap-user">
-@@ -24452,6 +24642,12 @@
+@@ -24451,6 +24641,12 @@
  use the viewer defined in that entry to convert the body part to text
  form.
  </para>
@@ -483,7 +483,7 @@
  </sect2>
  
  <sect2 id="include">
-@@ -24491,6 +24687,17 @@
+@@ -24490,6 +24686,17 @@
  Controls whether or not NeoMutt includes only the first attachment
  of the message you are replying.
  </para>
@@ -501,7 +501,7 @@
  </sect2>
  
  <sect2 id="indent-string">
-@@ -24511,6 +24718,7 @@
+@@ -24510,6 +24717,7 @@
  This option is a format string, please see the description of
  <link linkend="index-format">$index_format</link> for supported <literal>printf(3)</literal>-style sequences.
  </para>
@@ -509,7 +509,7 @@
  </sect2>
  
  <sect2 id="index-format">
-@@ -24696,6 +24904,12 @@
+@@ -24695,6 +24903,12 @@
  Note that these expandos are supported in
  "<link linkend="save-hook">save-hook</link>", "<link linkend="fcc-hook">fcc-hook</link>" and "<link linkend="fcc-save-hook">fcc-save-hook</link>", too.
  </para>
@@ -522,7 +522,7 @@
  </sect2>
  
  <sect2 id="inews-command">
-@@ -24735,6 +24949,8 @@
+@@ -24734,6 +24948,8 @@
  set inews_command="/usr/local/bin/inews -hS"
  </screen></sect2>
  
@@ -531,7 +531,7 @@
  <sect2 id="ispell">
  <title>ispell</title>
  <literallayout>Type: command
-@@ -25023,6 +25239,7 @@
+@@ -25022,6 +25238,7 @@
  If <emphasis>unset</emphasis>, NeoMutt will remove your address (see the "<link linkend="alternates">alternates</link>"
  command) from the list of recipients when replying to a message.
  </para>
@@ -539,7 +539,7 @@
  </sect2>
  
  <sect2 id="menu-context">
-@@ -25092,6 +25309,12 @@
+@@ -25091,6 +25308,12 @@
  <para>
  Also see the <link linkend="message-cache-clean">$message_cache_clean</link> variable.
  </para>
@@ -552,7 +552,7 @@
  </sect2>
  
  <sect2 id="message-format">
-@@ -25104,6 +25327,7 @@
+@@ -25103,6 +25326,7 @@
  attachments of type <literal>message/rfc822</literal>.  For a full listing of defined
  <literal>printf(3)</literal>-like sequences see the section on <link linkend="index-format">$index_format</link>.
  </para>
@@ -560,7 +560,7 @@
  </sect2>
  
  <sect2 id="message-id-format">
-@@ -25184,6 +25408,11 @@
+@@ -25187,6 +25411,11 @@
  </para>
  </sect2>
  
@@ -572,7 +572,7 @@
  <sect2 id="mh-purge">
  <title>mh_purge</title>
  <literallayout>Type: boolean
-@@ -25247,6 +25476,7 @@
+@@ -25250,6 +25479,7 @@
  <para>
  Also see <link linkend="forward-decode">$forward_decode</link> and <link linkend="mime-forward-decode">$mime_forward_decode</link>.
  </para>
@@ -580,7 +580,7 @@
  </sect2>
  
  <sect2 id="mime-forward-decode">
-@@ -25273,6 +25503,16 @@
+@@ -25276,6 +25506,16 @@
  </para>
  </sect2>
  
@@ -597,7 +597,7 @@
  <sect2 id="mime-type-query-command">
  <title>mime_type_query_command</title>
  <literallayout>Type: command
-@@ -25312,6 +25552,16 @@
+@@ -25315,6 +25555,16 @@
  </para>
  </sect2>
  
@@ -614,7 +614,7 @@
  <sect2 id="move">
  <title>move</title>
  <literallayout>Type: quadoption
-@@ -25327,6 +25577,11 @@
+@@ -25330,6 +25580,11 @@
  </para>
  </sect2>
  
@@ -626,7 +626,7 @@
  <sect2 id="narrow-tree">
  <title>narrow_tree</title>
  <literallayout>Type: boolean
-@@ -25467,6 +25722,11 @@
+@@ -25470,6 +25725,11 @@
  </para>
  </sect2>
  
@@ -638,7 +638,7 @@
  <sect2 id="nm-default-url">
  <title>nm_default_url</title>
  <literallayout>Type: string
-@@ -25476,6 +25736,7 @@
+@@ -25479,6 +25739,7 @@
  This variable specifies the default Notmuch database in format
  notmuch://&lt;absolute path&gt;.
  </para>
@@ -646,7 +646,7 @@
  </sect2>
  
  <sect2 id="nm-exclude-tags">
-@@ -25837,6 +26098,7 @@
+@@ -25840,6 +26101,7 @@
  are displayed. If the previous quote is shorter the whole quote is
  displayed.
  </para>
@@ -654,7 +654,7 @@
  </sect2>
  
  <sect2 id="pager-stop">
-@@ -25923,6 +26185,27 @@
+@@ -25926,6 +26188,27 @@
  <emphasis role="bold">deprecated</emphasis>.
  (PGP only)
  </para>
@@ -682,7 +682,7 @@
  </sect2>
  
  <sect2 id="pgp-check-exit">
-@@ -25975,6 +26258,17 @@
+@@ -25978,6 +26261,17 @@
  one or more quoted values such as email address, name, or keyid.
  (PGP only)
  </para>
@@ -700,7 +700,7 @@
  </sect2>
  
  <sect2 id="pgp-decode-command">
-@@ -26093,6 +26387,11 @@
+@@ -26096,6 +26390,11 @@
  </para>
  </sect2>
  
@@ -712,7 +712,7 @@
  <sect2 id="pgp-encrypt-sign-command">
  <title>pgp_encrypt_sign_command</title>
  <literallayout>Type: command
-@@ -26192,6 +26491,12 @@
+@@ -26195,6 +26494,12 @@
  unknown, which is why NeoMutt is invoking this command).
  (PGP only)
  </para>
@@ -725,7 +725,7 @@
  </sect2>
  
  <sect2 id="pgp-good-sign">
-@@ -26268,6 +26573,8 @@
+@@ -26271,6 +26576,8 @@
  <para>
  (PGP only)
  </para>
@@ -734,7 +734,7 @@
  </sect2>
  
  <sect2 id="pgp-list-pubring-command">
-@@ -26379,6 +26686,27 @@
+@@ -26382,6 +26689,27 @@
  <emphasis role="bold">deprecated</emphasis>.
  (PGP only)
  </para>
@@ -762,7 +762,7 @@
  </sect2>
  
  <sect2 id="pgp-retainable-sigs">
-@@ -26410,6 +26738,11 @@
+@@ -26413,6 +26741,11 @@
  </para>
  </sect2>
  
@@ -774,7 +774,7 @@
  <sect2 id="pgp-show-unusable">
  <title>pgp_show_unusable</title>
  <literallayout>Type: boolean
-@@ -26453,6 +26786,11 @@
+@@ -26456,6 +26789,11 @@
  </para>
  </sect2>
  
@@ -786,7 +786,7 @@
  <sect2 id="pgp-strict-enc">
  <title>pgp_strict_enc</title>
  <literallayout>Type: boolean
-@@ -26538,6 +26876,11 @@
+@@ -26541,6 +26879,11 @@
  </para>
  </sect2>
  
@@ -798,7 +798,7 @@
  <sect2 id="pipe-decode">
  <title>pipe_decode</title>
  <literallayout>Type: boolean
-@@ -26636,6 +26979,12 @@
+@@ -26639,6 +26982,12 @@
  This variable configures how often (in seconds) NeoMutt should look for
  new mail in the currently selected mailbox if it is a POP mailbox.
  </para>
@@ -811,7 +811,7 @@
  </sect2>
  
  <sect2 id="pop-delete">
-@@ -26733,6 +27082,16 @@
+@@ -26736,6 +27085,16 @@
  </para>
  </sect2>
  
@@ -828,7 +828,7 @@
  <sect2 id="post-moderated">
  <title>post_moderated</title>
  <literallayout>Type: quadoption
-@@ -26776,6 +27135,11 @@
+@@ -26779,6 +27138,11 @@
  </para>
  </sect2>
  
@@ -840,7 +840,7 @@
  <sect2 id="postponed">
  <title>postponed</title>
  <literallayout>Type: mailbox
-@@ -26845,6 +27209,11 @@
+@@ -26848,6 +27212,11 @@
  </para>
  </sect2>
  
@@ -852,7 +852,7 @@
  <sect2 id="print-command">
  <title>print_command</title>
  <literallayout>Type: command
-@@ -26853,6 +27222,7 @@
+@@ -26856,6 +27225,7 @@
  <para>
  This specifies the command pipe that should be used to print messages.
  </para>
@@ -860,7 +860,7 @@
  </sect2>
  
  <sect2 id="print-decode">
-@@ -27029,6 +27399,12 @@
+@@ -27031,6 +27401,12 @@
  <para>
  Match detection may be overridden by the <link linkend="smileys">$smileys</link> regular expression.
  </para>
@@ -873,7 +873,7 @@
  </sect2>
  
  <sect2 id="read-inc">
-@@ -27076,6 +27452,12 @@
+@@ -27078,6 +27454,12 @@
  If not specified, then the user's "real name" will be read from <literal>/etc/passwd</literal>.
  This option will not be used, if "<link linkend="from">$from</link>" is set.
  </para>
@@ -886,7 +886,7 @@
  </sect2>
  
  <sect2 id="recall">
-@@ -27214,6 +27596,12 @@
+@@ -27216,6 +27598,12 @@
  problem, then once the variable is set to your liking, remove
  your stale header cache files and turn the header cache back on.
  </para>
@@ -899,7 +899,7 @@
  </sect2>
  
  <sect2 id="reply-self">
-@@ -27385,6 +27773,12 @@
+@@ -27387,6 +27775,12 @@
  In either case, a missing real name will be filled in afterwards
  using the value of <link linkend="real-name">$real_name</link>.
  </para>
@@ -912,7 +912,7 @@
  </sect2>
  
  <sect2 id="rfc2047-parameters">
-@@ -27967,6 +28361,13 @@
+@@ -27969,6 +28363,13 @@
  
  <para>
  </para>
@@ -926,7 +926,7 @@
  </sect2>
  
  <sect2 id="sidebar-visible">
-@@ -28103,6 +28504,11 @@
+@@ -28105,6 +28506,11 @@
  </para>
  </sect2>
  
@@ -938,7 +938,7 @@
  <sect2 id="sleep-time">
  <title>sleep_time</title>
  <literallayout>Type: number
-@@ -28267,6 +28673,7 @@
+@@ -28269,6 +28675,7 @@
  <para>
  (S/MIME only)
  </para>
@@ -946,7 +946,7 @@
  </sect2>
  
  <sect2 id="smime-encrypt-command">
-@@ -28288,6 +28695,11 @@
+@@ -28290,6 +28697,11 @@
  </para>
  </sect2>
  
@@ -958,7 +958,7 @@
  <sect2 id="smime-encrypt-with">
  <title>smime_encrypt_with</title>
  <literallayout>Type: string
-@@ -28424,6 +28836,11 @@
+@@ -28426,6 +28838,11 @@
  </para>
  </sect2>
  
@@ -970,7 +970,7 @@
  <sect2 id="smime-sign-as">
  <title>smime_sign_as</title>
  <literallayout>Type: string
-@@ -28695,6 +29112,11 @@
+@@ -28697,6 +29114,11 @@
  </para>
  </sect2>
  
@@ -982,7 +982,7 @@
  <sect2 id="sort-aux">
  <title>sort_aux</title>
  <literallayout>Type: sort order
-@@ -28728,6 +29150,11 @@
+@@ -28730,6 +29152,11 @@
  </para>
  </sect2>
  
@@ -994,7 +994,7 @@
  <sect2 id="sort-re">
  <title>sort_re</title>
  <literallayout>Type: boolean
-@@ -28773,6 +29200,12 @@
+@@ -28775,6 +29202,12 @@
  If not specified, then the environment variables <literal>$MAIL</literal> and
  <literal>$MAILDIR</literal> will be checked.
  </para>
@@ -1007,7 +1007,7 @@
  </sect2>
  
  <sect2 id="ssl-ca-certificates-file">
-@@ -28866,6 +29299,16 @@
+@@ -28868,6 +29301,16 @@
  </para>
  </sect2>
  
@@ -1024,7 +1024,7 @@
  <sect2 id="ssl-use-system-certs">
  <title>ssl_use_system_certs</title>
  <literallayout>Type: boolean
-@@ -28876,6 +29319,17 @@
+@@ -28878,6 +29321,17 @@
  system-wide certificate store when checking if a server certificate
  is signed by a trusted CA. (OpenSSL only)
  </para>
@@ -1042,7 +1042,7 @@
  </sect2>
  
  <sect2 id="ssl-use-tlsv1-2">
-@@ -28900,6 +29354,11 @@
+@@ -28902,6 +29356,11 @@
  </para>
  </sect2>
  
@@ -1054,7 +1054,7 @@
  <sect2 id="ssl-verify-dates">
  <title>ssl_verify_dates</title>
  <literallayout>Type: boolean
-@@ -29282,6 +29741,12 @@
+@@ -29284,6 +29743,12 @@
  If this variable is not set, the environment variable <literal>$TMPDIR</literal> is
  used.  Failing that, then "<literal>/tmp</literal>" is used.
  </para>
@@ -1067,7 +1067,7 @@
  </sect2>
  
  <sect2 id="to-chars">
-@@ -29352,6 +29817,7 @@
+@@ -29354,6 +29819,7 @@
  Controls whether NeoMutt tries to set the terminal status line and icon name.
  Most terminal emulators emulate the status line in the window title.
  </para>
@@ -1075,7 +1075,7 @@
  </sect2>
  
  <sect2 id="ts-icon-format">
-@@ -29364,6 +29830,7 @@
+@@ -29366,6 +29832,7 @@
  This string is identical in formatting to the one used by
  "<link linkend="status-format">$status_format</link>".
  </para>
@@ -1083,7 +1083,7 @@
  </sect2>
  
  <sect2 id="ts-status-format">
-@@ -29376,6 +29843,7 @@
+@@ -29378,6 +29845,7 @@
  provided that "<link linkend="ts-enabled">$ts_enabled</link>" has been set. This string is identical in
  formatting to the one used by "<link linkend="status-format">$status_format</link>".
  </para>
@@ -1091,7 +1091,7 @@
  </sect2>
  
  <sect2 id="tunnel">
-@@ -29462,6 +29930,12 @@
+@@ -29464,6 +29932,12 @@
  When <emphasis>set</emphasis>, NeoMutt will invoke <link linkend="sendmail">$sendmail</link> with the <literal>-B8BITMIME</literal>
  flag when sending 8-bit messages to enable ESMTP negotiation.
  </para>
@@ -1104,7 +1104,7 @@
  </sect2>
  
  <sect2 id="use-domain">
-@@ -29493,6 +29967,7 @@
+@@ -29495,6 +29969,7 @@
  if the <link linkend="sendmail">$sendmail</link> variable already contains <literal>-f</literal> or if the
  executable pointed to by <link linkend="sendmail">$sendmail</link> doesn't support the <literal>-f</literal> switch.
  </para>
@@ -1112,7 +1112,7 @@
  </sect2>
  
  <sect2 id="use-from">
-@@ -29567,6 +30042,26 @@
+@@ -29569,6 +30044,26 @@
  </para>
  </sect2>
  
@@ -1139,7 +1139,7 @@
  <sect2 id="wait-key">
  <title>wait_key</title>
  <literallayout>Type: boolean
-@@ -29701,6 +30196,21 @@
+@@ -29703,6 +30198,21 @@
  </para>
  </sect2>
  
