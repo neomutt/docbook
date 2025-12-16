@@ -26098,10 +26098,6 @@ to a positive number at most that many lines of the previous quote
 are displayed. If the previous quote is shorter the whole quote is
 displayed.
 </para>
-<para>
-The (now deprecated) <emphasis>skip_quoted_offset</emphasis> is an alias for this
-variable, and should no longer be used.
-</para>
 <note>Before 2021-06-18, this was called $skip_quoted_offset</note>
 </sect2>
 
@@ -26309,7 +26305,6 @@ of a <literal>multipart/signed</literal> attachment when verifying it.
 <para>
 (PGP only)
 </para>
-<note>Before 2018-01-11, this was called $pgp_self_encrypt_as</note>
 </sect2>
 
 <sect2 id="pgp-decrypt-command">
@@ -26371,8 +26366,6 @@ used for encryption (see <link linkend="postpone-encrypt">$postpone_encrypt</lin
 It will also be used for signing unless <link linkend="pgp-sign-as">$pgp_sign_as</link> is set.
 </para>
 <para>
-The (now deprecated) <emphasis>pgp_self_encrypt_as</emphasis> is an alias for this
-variable, and should no longer be used.
 (PGP only)
 </para>
 </sect2>
@@ -27137,22 +27130,14 @@ Default: no</literallayout>
 <para>
 When <emphasis>set</emphasis>, postponed messages that are marked for encryption will be
 self-encrypted.  NeoMutt will first try to encrypt using the value specified
-in <link linkend="pgp-default-key">$pgp_default_key</link> or <link linkend="smime-default-key">$smime_default_key</link>.  If those are not
-set, it will try the deprecated <link linkend="postpone-encrypt-as">$postpone_encrypt_as</link>.
+in <link linkend="pgp-default-key">$pgp_default_key</link> or <link linkend="smime-default-key">$smime_default_key</link>.
 (Crypto only)
 </para>
 </sect2>
 
 <sect2 id="postpone-encrypt-as">
-<title>postpone_encrypt_as</title>
-<literallayout>Type: string
-Default: (empty)</literallayout>
-
-<para>
-This is a deprecated fall-back variable for <link linkend="postpone-encrypt">$postpone_encrypt</link>.
-Please use <link linkend="pgp-default-key">$pgp_default_key</link> or <link linkend="smime-default-key">$smime_default_key</link>.
-(Crypto only)
-</para>
+  <title>postpone_encrypt_as</title>
+  <note>Deprecated, since 2025-12-16</note>
 </sect2>
 
 <sect2 id="postponed">
@@ -28686,8 +28671,6 @@ is <emphasis>unset</emphasis>.
 It will also be used for signing unless <link linkend="smime-sign-as">$smime_sign_as</link> is set.
 </para>
 <para>
-The (now deprecated) <emphasis>smime_self_encrypt_as</emphasis> is an alias for this
-variable, and should no longer be used.
 (S/MIME only)
 </para>
 <note>Before 2018-01-11, this was called $smime_self_encrypt_as</note>

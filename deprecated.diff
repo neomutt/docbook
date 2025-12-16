@@ -1,5 +1,5 @@
---- bare	2025-12-09 16:57:06.928298472 +0000
-+++ manual.xml	2025-12-09 16:59:59.517961002 +0000
+--- bare	2025-12-16 01:46:31.052005074 +0000
++++ manual.xml	2025-12-16 01:46:44.742052172 +0000
 @@ -21327,6 +21327,12 @@
  if the pattern contains at least one upper case letter, and case
  insensitive otherwise.
@@ -646,15 +646,15 @@
  </sect2>
  
  <sect2 id="nm-exclude-tags">
-@@ -25841,6 +26102,7 @@
- The (now deprecated) <emphasis>skip_quoted_offset</emphasis> is an alias for this
- variable, and should no longer be used.
+@@ -25837,6 +26098,7 @@
+ are displayed. If the previous quote is shorter the whole quote is
+ displayed.
  </para>
 +<note>Before 2021-06-18, this was called $skip_quoted_offset</note>
  </sect2>
  
  <sect2 id="pager-stop">
-@@ -25927,6 +26189,27 @@
+@@ -25923,6 +26185,27 @@
  <emphasis role="bold">deprecated</emphasis>.
  (PGP only)
  </para>
@@ -682,7 +682,7 @@
  </sect2>
  
  <sect2 id="pgp-check-exit">
-@@ -25979,6 +26262,17 @@
+@@ -25975,6 +26258,17 @@
  one or more quoted values such as email address, name, or keyid.
  (PGP only)
  </para>
@@ -700,15 +700,7 @@
  </sect2>
  
  <sect2 id="pgp-decode-command">
-@@ -26015,6 +26309,7 @@
- <para>
- (PGP only)
- </para>
-+<note>Before 2018-01-11, this was called $pgp_self_encrypt_as</note>
- </sect2>
- 
- <sect2 id="pgp-decrypt-command">
-@@ -26099,6 +26394,11 @@
+@@ -26093,6 +26387,11 @@
  </para>
  </sect2>
  
@@ -720,7 +712,7 @@
  <sect2 id="pgp-encrypt-sign-command">
  <title>pgp_encrypt_sign_command</title>
  <literallayout>Type: command
-@@ -26198,6 +26498,12 @@
+@@ -26192,6 +26491,12 @@
  unknown, which is why NeoMutt is invoking this command).
  (PGP only)
  </para>
@@ -733,7 +725,7 @@
  </sect2>
  
  <sect2 id="pgp-good-sign">
-@@ -26274,6 +26580,8 @@
+@@ -26268,6 +26573,8 @@
  <para>
  (PGP only)
  </para>
@@ -742,7 +734,7 @@
  </sect2>
  
  <sect2 id="pgp-list-pubring-command">
-@@ -26385,6 +26693,27 @@
+@@ -26379,6 +26686,27 @@
  <emphasis role="bold">deprecated</emphasis>.
  (PGP only)
  </para>
@@ -770,7 +762,7 @@
  </sect2>
  
  <sect2 id="pgp-retainable-sigs">
-@@ -26416,6 +26745,11 @@
+@@ -26410,6 +26738,11 @@
  </para>
  </sect2>
  
@@ -782,7 +774,7 @@
  <sect2 id="pgp-show-unusable">
  <title>pgp_show_unusable</title>
  <literallayout>Type: boolean
-@@ -26459,6 +26793,11 @@
+@@ -26453,6 +26786,11 @@
  </para>
  </sect2>
  
@@ -794,7 +786,7 @@
  <sect2 id="pgp-strict-enc">
  <title>pgp_strict_enc</title>
  <literallayout>Type: boolean
-@@ -26544,6 +26883,11 @@
+@@ -26538,6 +26876,11 @@
  </para>
  </sect2>
  
@@ -806,7 +798,7 @@
  <sect2 id="pipe-decode">
  <title>pipe_decode</title>
  <literallayout>Type: boolean
-@@ -26642,6 +26986,12 @@
+@@ -26636,6 +26979,12 @@
  This variable configures how often (in seconds) NeoMutt should look for
  new mail in the currently selected mailbox if it is a POP mailbox.
  </para>
@@ -819,7 +811,7 @@
  </sect2>
  
  <sect2 id="pop-delete">
-@@ -26739,6 +27089,16 @@
+@@ -26733,6 +27082,16 @@
  </para>
  </sect2>
  
@@ -836,7 +828,19 @@
  <sect2 id="post-moderated">
  <title>post_moderated</title>
  <literallayout>Type: quadoption
-@@ -26864,6 +27224,11 @@
+@@ -26776,6 +27135,11 @@
+ </para>
+ </sect2>
+ 
++<sect2 id="postpone-encrypt-as">
++  <title>postpone_encrypt_as</title>
++  <note>Deprecated, since 2025-12-16</note>
++</sect2>
++
+ <sect2 id="postponed">
+ <title>postponed</title>
+ <literallayout>Type: mailbox
+@@ -26845,6 +27209,11 @@
  </para>
  </sect2>
  
@@ -848,7 +852,7 @@
  <sect2 id="print-command">
  <title>print_command</title>
  <literallayout>Type: command
-@@ -26872,6 +27237,7 @@
+@@ -26853,6 +27222,7 @@
  <para>
  This specifies the command pipe that should be used to print messages.
  </para>
@@ -856,7 +860,7 @@
  </sect2>
  
  <sect2 id="print-decode">
-@@ -27048,6 +27414,12 @@
+@@ -27029,6 +27399,12 @@
  <para>
  Match detection may be overridden by the <link linkend="smileys">$smileys</link> regular expression.
  </para>
@@ -869,7 +873,7 @@
  </sect2>
  
  <sect2 id="read-inc">
-@@ -27095,6 +27467,12 @@
+@@ -27076,6 +27452,12 @@
  If not specified, then the user's "real name" will be read from <literal>/etc/passwd</literal>.
  This option will not be used, if "<link linkend="from">$from</link>" is set.
  </para>
@@ -882,7 +886,7 @@
  </sect2>
  
  <sect2 id="recall">
-@@ -27233,6 +27611,12 @@
+@@ -27214,6 +27596,12 @@
  problem, then once the variable is set to your liking, remove
  your stale header cache files and turn the header cache back on.
  </para>
@@ -895,7 +899,7 @@
  </sect2>
  
  <sect2 id="reply-self">
-@@ -27404,6 +27788,12 @@
+@@ -27385,6 +27773,12 @@
  In either case, a missing real name will be filled in afterwards
  using the value of <link linkend="real-name">$real_name</link>.
  </para>
@@ -908,7 +912,7 @@
  </sect2>
  
  <sect2 id="rfc2047-parameters">
-@@ -27986,6 +28376,13 @@
+@@ -27967,6 +28361,13 @@
  
  <para>
  </para>
@@ -922,7 +926,7 @@
  </sect2>
  
  <sect2 id="sidebar-visible">
-@@ -28122,6 +28519,11 @@
+@@ -28103,6 +28504,11 @@
  </para>
  </sect2>
  
@@ -934,15 +938,15 @@
  <sect2 id="sleep-time">
  <title>sleep_time</title>
  <literallayout>Type: number
-@@ -28288,6 +28690,7 @@
- variable, and should no longer be used.
+@@ -28267,6 +28673,7 @@
+ <para>
  (S/MIME only)
  </para>
 +<note>Before 2018-01-11, this was called $smime_self_encrypt_as</note>
  </sect2>
  
  <sect2 id="smime-encrypt-command">
-@@ -28309,6 +28712,11 @@
+@@ -28288,6 +28695,11 @@
  </para>
  </sect2>
  
@@ -954,7 +958,7 @@
  <sect2 id="smime-encrypt-with">
  <title>smime_encrypt_with</title>
  <literallayout>Type: string
-@@ -28445,6 +28853,11 @@
+@@ -28424,6 +28836,11 @@
  </para>
  </sect2>
  
@@ -966,7 +970,7 @@
  <sect2 id="smime-sign-as">
  <title>smime_sign_as</title>
  <literallayout>Type: string
-@@ -28716,6 +29129,11 @@
+@@ -28695,6 +29112,11 @@
  </para>
  </sect2>
  
@@ -978,7 +982,7 @@
  <sect2 id="sort-aux">
  <title>sort_aux</title>
  <literallayout>Type: sort order
-@@ -28749,6 +29167,11 @@
+@@ -28728,6 +29150,11 @@
  </para>
  </sect2>
  
@@ -990,7 +994,7 @@
  <sect2 id="sort-re">
  <title>sort_re</title>
  <literallayout>Type: boolean
-@@ -28794,6 +29217,12 @@
+@@ -28773,6 +29200,12 @@
  If not specified, then the environment variables <literal>$MAIL</literal> and
  <literal>$MAILDIR</literal> will be checked.
  </para>
@@ -1003,7 +1007,7 @@
  </sect2>
  
  <sect2 id="ssl-ca-certificates-file">
-@@ -28887,6 +29316,16 @@
+@@ -28866,6 +29299,16 @@
  </para>
  </sect2>
  
@@ -1020,7 +1024,7 @@
  <sect2 id="ssl-use-system-certs">
  <title>ssl_use_system_certs</title>
  <literallayout>Type: boolean
-@@ -28897,6 +29336,17 @@
+@@ -28876,6 +29319,17 @@
  system-wide certificate store when checking if a server certificate
  is signed by a trusted CA. (OpenSSL only)
  </para>
@@ -1038,7 +1042,7 @@
  </sect2>
  
  <sect2 id="ssl-use-tlsv1-2">
-@@ -28921,6 +29371,11 @@
+@@ -28900,6 +29354,11 @@
  </para>
  </sect2>
  
@@ -1050,7 +1054,7 @@
  <sect2 id="ssl-verify-dates">
  <title>ssl_verify_dates</title>
  <literallayout>Type: boolean
-@@ -29303,6 +29758,12 @@
+@@ -29282,6 +29741,12 @@
  If this variable is not set, the environment variable <literal>$TMPDIR</literal> is
  used.  Failing that, then "<literal>/tmp</literal>" is used.
  </para>
@@ -1063,7 +1067,7 @@
  </sect2>
  
  <sect2 id="to-chars">
-@@ -29373,6 +29834,7 @@
+@@ -29352,6 +29817,7 @@
  Controls whether NeoMutt tries to set the terminal status line and icon name.
  Most terminal emulators emulate the status line in the window title.
  </para>
@@ -1071,7 +1075,7 @@
  </sect2>
  
  <sect2 id="ts-icon-format">
-@@ -29385,6 +29847,7 @@
+@@ -29364,6 +29830,7 @@
  This string is identical in formatting to the one used by
  "<link linkend="status-format">$status_format</link>".
  </para>
@@ -1079,7 +1083,7 @@
  </sect2>
  
  <sect2 id="ts-status-format">
-@@ -29397,6 +29860,7 @@
+@@ -29376,6 +29843,7 @@
  provided that "<link linkend="ts-enabled">$ts_enabled</link>" has been set. This string is identical in
  formatting to the one used by "<link linkend="status-format">$status_format</link>".
  </para>
@@ -1087,7 +1091,7 @@
  </sect2>
  
  <sect2 id="tunnel">
-@@ -29483,6 +29947,12 @@
+@@ -29462,6 +29930,12 @@
  When <emphasis>set</emphasis>, NeoMutt will invoke <link linkend="sendmail">$sendmail</link> with the <literal>-B8BITMIME</literal>
  flag when sending 8-bit messages to enable ESMTP negotiation.
  </para>
@@ -1100,7 +1104,7 @@
  </sect2>
  
  <sect2 id="use-domain">
-@@ -29514,6 +29984,7 @@
+@@ -29493,6 +29967,7 @@
  if the <link linkend="sendmail">$sendmail</link> variable already contains <literal>-f</literal> or if the
  executable pointed to by <link linkend="sendmail">$sendmail</link> doesn't support the <literal>-f</literal> switch.
  </para>
@@ -1108,7 +1112,7 @@
  </sect2>
  
  <sect2 id="use-from">
-@@ -29588,6 +30059,26 @@
+@@ -29567,6 +30042,26 @@
  </para>
  </sect2>
  
@@ -1135,7 +1139,7 @@
  <sect2 id="wait-key">
  <title>wait_key</title>
  <literallayout>Type: boolean
-@@ -29722,6 +30213,21 @@
+@@ -29701,6 +30196,21 @@
  </para>
  </sect2>
  
