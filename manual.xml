@@ -21414,29 +21414,37 @@ following <literal>printf(3)</literal>-style sequences are available:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a  </entry><entry>Alias name
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%A  </entry><entry>Full Address (Name and Email)
+<row><entry><literal>%A</literal>    </entry><entry><literal>%{address}</literal>      </entry><entry>Full Address (Name and Email)
 </entry></row>
-<row><entry>%C  </entry><entry>Comment
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{alias}</literal>        </entry><entry>Alias name
 </entry></row>
-<row><entry>%E  </entry><entry>Email Address
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{comment}</literal>      </entry><entry>Comment
 </entry></row>
-<row><entry>%f  </entry><entry>Flags - currently, a "d" for an alias marked for deletion
+<row><entry><literal>%E</literal>    </entry><entry><literal>%{email}</literal>        </entry><entry>Email Address
 </entry></row>
-<row><entry>%i  </entry><entry>Index number
+<row><entry><literal>%f</literal>    </entry><entry><literal>%{flags}</literal>        </entry><entry>Flags - currently, a <literal>d</literal> for an alias marked for deletion
 </entry></row>
-<row><entry>%N  </entry><entry>Real name
+<row><entry><literal>%i</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Index number
 </entry></row>
-<row><entry>%t  </entry><entry>Alias is tagged (selected)
+<row><entry><literal>%N</literal>    </entry><entry><literal>%{name}</literal>         </entry><entry>Real name
 </entry></row>
-<row><entry>%Y  </entry><entry>User-defined tags (labels)
+<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged}</literal>       </entry><entry>Alias is tagged (selected)
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
+<row><entry><literal>%Y</literal>    </entry><entry><literal>%{tags}</literal>         </entry><entry>User-defined tags (labels)
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with character "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%c</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%C</literal> instead
+</entry></row>
+<row><entry><literal>%n</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%i</literal> instead
+</entry></row>
+<row><entry><literal>%r</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%A</literal> instead
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -21702,46 +21710,48 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%C  </entry><entry>Charset
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>           </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%c  </entry><entry>Requires charset conversion ("n" or "c")
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{charset}</literal>          </entry><entry>Charset
 </entry></row>
-<row><entry>%D  </entry><entry>Deleted flag
+<row><entry><literal>%c</literal>    </entry><entry><literal>%{charset-convert}</literal>  </entry><entry>Requires charset conversion (<literal>n</literal> or <literal>c</literal>)
 </entry></row>
-<row><entry>%d  </entry><entry>Description (if none, falls back to %F)
+<row><entry><literal>%D</literal>    </entry><entry><literal>%{deleted}</literal>          </entry><entry>Deleted flag
 </entry></row>
-<row><entry>%e  </entry><entry>MIME content-transfer-encoding
+<row><entry><literal>%d</literal>    </entry><entry><literal>%{description}</literal>      </entry><entry>Description (if none, falls back to <literal>%F</literal>)
 </entry></row>
-<row><entry>%f  </entry><entry>Filename
+<row><entry><literal>%e</literal>    </entry><entry><literal>%{mime-encoding}</literal>    </entry><entry>MIME content-transfer-encoding
 </entry></row>
-<row><entry>%F  </entry><entry>Filename in content-disposition header (if none, falls back to %f)
+<row><entry><literal>%F</literal>    </entry><entry><literal>%{file-disposition}</literal> </entry><entry>Filename in content-disposition header (if none, falls back to <literal>%f</literal>)
 </entry></row>
-<row><entry>%I  </entry><entry>Disposition ("I" for inline, "A" for attachment)
+<row><entry><literal>%f</literal>    </entry><entry><literal>%{file}</literal>             </entry><entry>Filename
 </entry></row>
-<row><entry>%m  </entry><entry>Major MIME type
+<row><entry><literal>%I</literal>    </entry><entry><literal>%{disposition}</literal>      </entry><entry>Disposition (<literal>I</literal> for inline, <literal>A</literal> for attachment)
 </entry></row>
-<row><entry>%M  </entry><entry>MIME subtype
+<row><entry><literal>%M</literal>    </entry><entry><literal>%{mime-minor}</literal>       </entry><entry>MIME subtype
 </entry></row>
-<row><entry>%n  </entry><entry>Attachment number
+<row><entry><literal>%m</literal>    </entry><entry><literal>%{mime-major}</literal>       </entry><entry>Major MIME type
 </entry></row>
-<row><entry>%Q  </entry><entry>"Q", if MIME part qualifies for attachment counting
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{number}</literal>           </entry><entry>Attachment number
 </entry></row>
-<row><entry>%s  </entry><entry>Size (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry><literal>%Q</literal>    </entry><entry><literal>%{attach-qualifies}</literal> </entry><entry><literal>Q</literal>, if MIME part qualifies for attachment counting
 </entry></row>
-<row><entry>%T  </entry><entry>Graphic tree characters
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{file-size}</literal>        </entry><entry>Size (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%t  </entry><entry>Tagged flag
+<row><entry><literal>%T</literal>    </entry><entry><literal>%{tree}</literal>             </entry><entry>Graphic tree characters
 </entry></row>
-<row><entry>%u  </entry><entry>Unlink (=to delete) flag
+<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged}</literal>           </entry><entry>Tagged flag
 </entry></row>
-<row><entry>%X  </entry><entry>Number of qualifying MIME parts in this part and its children
-(please see the "<link linkend="attachments">attachments</link>" section for possible speed effects)
+<row><entry><literal>%u</literal>    </entry><entry><literal>%{unlink}</literal>           </entry><entry>Unlink (=to delete) flag
 </entry></row>
-<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with character "X"
+<row><entry><literal>%X</literal>    </entry><entry><literal>%{attach-count}</literal>     </entry><entry>Number of qualifying MIME parts in this part and its children
+(see the <link linkend="attachments">$attachments</link> section for possible speed effects)
 </entry></row>
-<row><entry>%|X </entry><entry>Pad to the end of the line with character "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>     </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>Soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal>     </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>      </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -21941,21 +21951,23 @@ The following <literal>printf(3)</literal>-style sequences are understood
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a  </entry><entry>email address
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>         </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%k  </entry><entry>gpg keyid
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{address}</literal>        </entry><entry>Email address
 </entry></row>
-<row><entry>%n  </entry><entry>current entry number
+<row><entry><literal>%k</literal>    </entry><entry><literal>%{keyid}</literal>          </entry><entry>GPG keyid
 </entry></row>
-<row><entry>%p  </entry><entry>prefer-encrypt flag
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{number}</literal>         </entry><entry>Current entry number
 </entry></row>
-<row><entry>%s  </entry><entry>status flag (active/inactive)
+<row><entry><literal>%p</literal>    </entry><entry><literal>%{prefer-encrypt}</literal> </entry><entry>Prefer-encrypt flag
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{enabled}</literal>        </entry><entry>Status flag (active/inactive)
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with character "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>   </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal>   </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>    </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -22341,19 +22353,21 @@ set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a  </entry><entry>Total number of attachments
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%h  </entry><entry>Local hostname
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{attach-count}</literal> </entry><entry>Total number of attachments
 </entry></row>
-<row><entry>%l  </entry><entry>Approximate size (in bytes) of the current message (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry><literal>%h</literal>    </entry><entry><literal>%{hostname}</literal>     </entry><entry>Local hostname
 </entry></row>
-<row><entry>%v  </entry><entry>NeoMutt version string
+<row><entry><literal>%l</literal>    </entry><entry><literal>%{attach-size}</literal>  </entry><entry>Approximate size (in bytes) of the current message (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
+<row><entry><literal>%v</literal>    </entry><entry><literal>%{version}</literal>      </entry><entry>NeoMutt version string
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with character "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -23506,48 +23520,49 @@ its own set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a  </entry><entry>  </entry><entry>Alert: 1 if user is notified of new mail
+<row><entry><emphasis role="bold">Short</emphasis>  </entry><entry><emphasis role="bold">Long Name</emphasis>        </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%C  </entry><entry>  </entry><entry>Current file number
+<row><entry><literal>%a</literal>     </entry><entry><literal>%{notify}</literal>        </entry><entry>Alert: 1 if user is notified of new mail
 </entry></row>
-<row><entry>%d  </entry><entry>  </entry><entry>Date/time folder was last modified
+<row><entry><literal>%C</literal>     </entry><entry><literal>%{number}</literal>        </entry><entry>Current file number
 </entry></row>
-<row><entry>%D  </entry><entry>  </entry><entry>Date/time folder was last modified using <link linkend="date-format">$date_format</link>.
-It is encouraged to use "%[fmt]" instead, where "fmt" is
-the value of <link linkend="date-format">$date_format</link>.
+<row><entry><literal>%D</literal>     </entry><entry><literal>%{date}</literal>          </entry><entry>Date/time folder was last modified using <link linkend="date-format">$date_format</link>.
+It is recommended to use <literal>%[fmt]</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
 </entry></row>
-<row><entry>%f  </entry><entry>  </entry><entry>Filename ("/" is appended to directory names,
-"@" to symbolic links and "*" to executable files)
+<row><entry><literal>%d</literal>     </entry><entry><literal>%{date-format}</literal>   </entry><entry>Date/time folder was last modified
 </entry></row>
-<row><entry>%F  </entry><entry>  </entry><entry>File permissions
+<row><entry><literal>%F</literal>     </entry><entry><literal>%{file-mode}</literal>     </entry><entry>File permissions
 </entry></row>
-<row><entry>%g  </entry><entry>  </entry><entry>Group name (or numeric gid, if missing)
+<row><entry><literal>%f</literal>     </entry><entry><literal>%{filename}</literal>      </entry><entry>Filename (<literal>/</literal> is appended to directory names,
+<literal>@</literal> to symbolic links and <literal>*</literal> to executable files)
 </entry></row>
-<row><entry>%i  </entry><entry>  </entry><entry>Description of the folder
+<row><entry><literal>%g</literal>     </entry><entry><literal>%{file-group}</literal>    </entry><entry>Group name (or numeric gid, if missing)
 </entry></row>
-<row><entry>%l  </entry><entry>  </entry><entry>Number of hard links
+<row><entry><literal>%i</literal>     </entry><entry><literal>%{description}</literal>   </entry><entry>Description of the folder
 </entry></row>
-<row><entry>%m  </entry><entry>* </entry><entry>Number of messages in the mailbox
+<row><entry><literal>%l</literal>     </entry><entry><literal>%{hard-links}</literal>    </entry><entry>Number of hard links
 </entry></row>
-<row><entry>%n  </entry><entry>* </entry><entry>Number of unread messages in the mailbox
+<row><entry><literal>%m</literal>     </entry><entry><literal>%{message-count}</literal> </entry><entry>Number of messages in the mailbox
 </entry></row>
-<row><entry>%N  </entry><entry>  </entry><entry>"N" if mailbox has new mail, " " (space) otherwise
+<row><entry><literal>%N</literal>     </entry><entry><literal>%{new-mail}</literal>      </entry><entry><literal>N</literal> if mailbox has new mail, <literal> </literal> (space) otherwise
 </entry></row>
-<row><entry>%p  </entry><entry>  </entry><entry>Poll: 1 if Mailbox is checked for new mail
+<row><entry><literal>%n</literal>     </entry><entry><literal>%{unread-count}</literal>  </entry><entry>Number of unread messages in the mailbox
 </entry></row>
-<row><entry>%s  </entry><entry>  </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry><literal>%p</literal>     </entry><entry><literal>%{poll}</literal>          </entry><entry>Poll: 1 if Mailbox is checked for new mail
 </entry></row>
-<row><entry>%t  </entry><entry>  </entry><entry>"*" if the file is tagged, blank otherwise
+<row><entry><literal>%s</literal>     </entry><entry><literal>%{file-size}</literal>     </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%u  </entry><entry>  </entry><entry>Owner name (or numeric uid, if missing)
+<row><entry><literal>%t</literal>     </entry><entry><literal>%{tagged}</literal>        </entry><entry><literal>*</literal> if the file is tagged, blank otherwise
 </entry></row>
-<row><entry>%[fmt] </entry><entry>  </entry><entry>Date/time folder was last modified using an <literal>strftime(3)</literal> expression
+<row><entry><literal>%u</literal>     </entry><entry><literal>%{file-owner}</literal>    </entry><entry>Owner name (or numeric uid, if missing)
 </entry></row>
-<row><entry>%&gt;X </entry><entry>  </entry><entry>Right justify the rest of the string and pad with character "X"
+<row><entry><literal>%[fmt]</literal> </entry><entry>                       </entry><entry>Date/time folder was last modified using an <literal>strftime(3)</literal> expression
 </entry></row>
-<row><entry>%|X </entry><entry>  </entry><entry>Pad to the end of the line with character "X"
+<row><entry><literal>%*X</literal>    </entry><entry><literal>%{padding-soft}</literal>  </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>  </entry><entry>Soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>    </entry><entry><literal>%{padding-hard}</literal>  </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>    </entry><entry><literal>%{padding-eol}</literal>   </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -23854,11 +23869,13 @@ The following sequences are defined in NeoMutt:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%n </entry><entry>Recipient's real name
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>     </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%u </entry><entry>User (login) name of recipient
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{real-name}</literal>  </entry><entry>Recipient's real name
 </entry></row>
-<row><entry>%v </entry><entry>First name of recipient
+<row><entry><literal>%u</literal>    </entry><entry><literal>%{user-name}</literal>  </entry><entry>User (login) name of recipient
+</entry></row>
+<row><entry><literal>%v</literal>    </entry><entry><literal>%{first-name}</literal> </entry><entry>First name of recipient
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -23877,29 +23894,31 @@ has its own set of printf()-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a  </entry><entry>Alert: 1 if user is notified of new mail
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%C  </entry><entry>Current newsgroup number
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{notify}</literal>       </entry><entry>Alert: 1 if user is notified of new mail
 </entry></row>
-<row><entry>%d  </entry><entry>Description of newsgroup (becomes from server)
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Current newsgroup number
 </entry></row>
-<row><entry>%f  </entry><entry>Newsgroup name
+<row><entry><literal>%d</literal>    </entry><entry><literal>%{description}</literal>  </entry><entry>Description of newsgroup (becomes from server)
 </entry></row>
-<row><entry>%M  </entry><entry>- if newsgroup not allowed for direct post (moderated for example)
+<row><entry><literal>%f</literal>    </entry><entry><literal>%{newsgroup}</literal>    </entry><entry>Newsgroup name
 </entry></row>
-<row><entry>%N  </entry><entry>N if newsgroup is new, u if unsubscribed, blank otherwise
+<row><entry><literal>%M</literal>    </entry><entry><literal>%{flags}</literal>        </entry><entry><literal>-</literal> if newsgroup not allowed for direct post (moderated for example)
 </entry></row>
-<row><entry>%n  </entry><entry>Number of new articles in newsgroup
+<row><entry><literal>%N</literal>    </entry><entry><literal>%{flags2}</literal>       </entry><entry><literal>N</literal> if newsgroup is new, <literal>u</literal> if unsubscribed, <literal> </literal> (space) otherwise
 </entry></row>
-<row><entry>%p  </entry><entry>Poll: 1 if Mailbox is checked for new mail
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{new-count}</literal>    </entry><entry>Number of new articles in newsgroup
 </entry></row>
-<row><entry>%s  </entry><entry>Number of unread articles in newsgroup
+<row><entry><literal>%p</literal>    </entry><entry><literal>%{poll}</literal>         </entry><entry>Poll: 1 if Mailbox is checked for new mail
 </entry></row>
-<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with character "X"
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{unread-count}</literal> </entry><entry>Number of unread articles in newsgroup
 </entry></row>
-<row><entry>%|X </entry><entry>Pad to the end of the line with character "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>Soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -24164,15 +24183,17 @@ set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%C  </entry><entry>Line number
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%s  </entry><entry>History match
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Line number
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{match}</literal>        </entry><entry>History match
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with character "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -24740,141 +24761,131 @@ The following sequences are defined in NeoMutt:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a </entry><entry>Address of the author
+<row><entry><emphasis role="bold">Short</emphasis>   </entry><entry><emphasis role="bold">Long Name</emphasis>              </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%A </entry><entry>Reply-to address (if present; otherwise: address of author)
+<row><entry><literal>%A</literal>      </entry><entry><literal>%{reply-to}</literal>            </entry><entry>Reply-to address (if present; otherwise: address of author)
 </entry></row>
-<row><entry>%b </entry><entry>Filename of the original message folder (think mailbox)
+<row><entry><literal>%a</literal>      </entry><entry><literal>%{from}</literal>                </entry><entry>Address of the author
 </entry></row>
-<row><entry>%B </entry><entry>Same as %K
+<row><entry><literal>%B</literal>      </entry><entry><literal>%{list-address}</literal>        </entry><entry>List to which the email was sent (if any; otherwise: Mailbox name)
 </entry></row>
-<row><entry>%c </entry><entry>Number of characters (bytes) in the body of the message (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry><literal>%b</literal>      </entry><entry><literal>%{mailbox-name}</literal>        </entry><entry>Filename of the original message folder (think mailbox)
 </entry></row>
-<row><entry>%C </entry><entry>Current message number
+<row><entry><literal>%C</literal>      </entry><entry><literal>%{number}</literal>              </entry><entry>Current message number
 </entry></row>
-<row><entry>%cr </entry><entry>Number of characters (bytes) in the raw message, including the header (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry><literal>%c</literal>      </entry><entry><literal>%{body-characters}</literal>     </entry><entry>Number of characters (bytes) in the body of the message (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%d </entry><entry>Date and time of message using <link linkend="date-format">date_format</link> and sender's timezone
-It is encouraged to use "%{fmt}" instead, where "fmt" is the value of <link linkend="date-format">$date_format</link>.
+<row><entry><literal>%cr</literal>     </entry><entry><literal>%{size}</literal>                </entry><entry>Number of characters (bytes) in the raw message, including the header (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%D </entry><entry>Date and time of message using <link linkend="date-format">date_format</link> and local timezone
-It is encouraged to use "%[fmt]" instead, where "fmt" is the value of <link linkend="date-format">$date_format</link>.
+<row><entry><literal>%D</literal>      </entry><entry><literal>%{date-format-local}</literal>   </entry><entry>Date and time of message using <link linkend="date-format">$date_format</link> and local timezone.
+It is recommended to use <literal>%[fmt]</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
 </entry></row>
-<row><entry>%e </entry><entry>Current message number in thread
+<row><entry><literal>%d</literal>      </entry><entry><literal>%{date-format}</literal>         </entry><entry>Date and time of message using <link linkend="date-format">$date_format</link> and sender's timezone.
+It is recommended to use <literal>%{fmt}</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
 </entry></row>
-<row><entry>%E </entry><entry>Number of messages in current thread
+<row><entry><literal>%E</literal>      </entry><entry><literal>%{thread-count}</literal>        </entry><entry>Number of messages in current thread
 </entry></row>
-<row><entry>%f </entry><entry>Sender (address + real name), either From: or Return-Path:
+<row><entry><literal>%e</literal>      </entry><entry><literal>%{thread-number}</literal>       </entry><entry>Current message number in thread
 </entry></row>
-<row><entry>%F </entry><entry>Author name, or recipient name if the message is from you
+<row><entry><literal>%F</literal>      </entry><entry><literal>%{sender}</literal>              </entry><entry>Author name, or recipient name if the message is from you
 </entry></row>
-<row><entry>%Fp </entry><entry>Like %F, but plain. No contextual formatting is applied to recipient name
+<row><entry><literal>%Fp</literal>     </entry><entry><literal>%{sender-plain}</literal>        </entry><entry>Like <literal>%F</literal>, but plain. No contextual formatting is applied to recipient name
 </entry></row>
-<row><entry>%g </entry><entry>Message tags (e.g. notmuch tags/imap flags)
+<row><entry><literal>%f</literal>      </entry><entry><literal>%{from-full}</literal>           </entry><entry>Sender (address + real name), either From: or Return-Path:
 </entry></row>
-<row><entry>%Gx </entry><entry>Individual message tag (e.g. notmuch tags/imap flags)
+<row><entry><literal>%Gx</literal>     </entry><entry><literal>%{tags-transformed}</literal>    </entry><entry>Individual message tag (e.g. Notmuch tags/imap flags)
 </entry></row>
-<row><entry>%H </entry><entry>Spam attribute(s) of this message
+<row><entry><literal>%g</literal>      </entry><entry><literal>%{tags}</literal>                </entry><entry>Message tags (e.g. Notmuch tags/imap flags)
 </entry></row>
-<row><entry>%i </entry><entry>Message-id of the current message
+<row><entry><literal>%H</literal>      </entry><entry><literal>%{spam}</literal>                </entry><entry>Spam attribute(s) of this message
 </entry></row>
-<row><entry>%I </entry><entry>Initials of author
+<row><entry><literal>%I</literal>      </entry><entry><literal>%{initials}</literal>            </entry><entry>Initials of author
 </entry></row>
-<row><entry>%J </entry><entry>Message tags (if present, tree unfolded, and != parent's tags)
+<row><entry><literal>%i</literal>      </entry><entry><literal>%{message-id}</literal>          </entry><entry>Message-id of the current message
 </entry></row>
-<row><entry>%K </entry><entry>The list to which the letter was sent (if any; otherwise: empty)
+<row><entry><literal>%J</literal>      </entry><entry><literal>%{thread-tags}</literal>         </entry><entry>Message tags (if present, tree unfolded, and != parent's tags)
 </entry></row>
-<row><entry>%l </entry><entry>number of lines in the unprocessed message (may not work with
-maildir, mh, and IMAP folders)
+<row><entry><literal>%K</literal>      </entry><entry><literal>%{list-empty}</literal>          </entry><entry>List to which the email was sent (if any; otherwise: empty)
 </entry></row>
-<row><entry>%L </entry><entry>If an address in the "To:" or "Cc:" header field matches an address
-Defined by the user's "<link linkend="subscribe">subscribe</link>" command, this displays
-"To &lt;list-name&gt;", otherwise the same as %F
+<row><entry><literal>%L</literal>      </entry><entry><literal>%{from-list}</literal>           </entry><entry>If an address in the <literal>To:</literal> or <literal>Cc:</literal> header field matches an address
+defined by the user's <link linkend="subscribe">$subscribe</link> command, this displays.
 </entry></row>
-<row><entry>%m </entry><entry>Total number of message in the mailbox
+<row><entry><literal>%l</literal>      </entry><entry><literal>%{lines}</literal>               </entry><entry>Number of lines in the unprocessed message (may not work with maildir, mh, and IMAP folders)
 </entry></row>
-<row><entry>%M </entry><entry>Number of hidden messages if the thread is collapsed
+<row><entry><literal>%M</literal>      </entry><entry><literal>%{thread-hidden-count}</literal> </entry><entry>Number of hidden messages if the thread is collapsed
 </entry></row>
-<row><entry>%n </entry><entry>Author's real name (or address if missing)
+<row><entry><literal>%m</literal>      </entry><entry><literal>%{message-count}</literal>       </entry><entry>Total number of message in the mailbox
 </entry></row>
-<row><entry>%N </entry><entry>Message score
+<row><entry><literal>%N</literal>      </entry><entry><literal>%{score}</literal>               </entry><entry>Message score
 </entry></row>
-<row><entry>%O </entry><entry>Original save folder where NeoMutt would formerly have
-Stashed the message: list name or recipient name
-If not sent to a list
+<row><entry><literal>%n</literal>      </entry><entry><literal>%{name}</literal>                </entry><entry>Author's real name (or address if missing)
 </entry></row>
-<row><entry>%P </entry><entry>Progress indicator for the built-in pager (how much of the file has been displayed)
+<row><entry><literal>%O</literal>      </entry><entry><literal>%{save-folder}</literal>         </entry><entry>Original save folder where NeoMutt would formerly have Stashed the message:
+list name or recipient name if not sent to a list
 </entry></row>
-<row><entry>%q </entry><entry>Newsgroup name (if compiled with NNTP support)
+<row><entry><literal>%P</literal>      </entry><entry><literal>%{percentage}</literal>          </entry><entry>Progress indicator for the built-in pager (how much of the file has been displayed)
 </entry></row>
-<row><entry>%r </entry><entry>Comma separated list of "To:" recipients
+<row><entry><literal>%q</literal>      </entry><entry><literal>%{newsgroup}</literal>           </entry><entry>Newsgroup name (if compiled with NNTP support)
 </entry></row>
-<row><entry>%R </entry><entry>Comma separated list of "Cc:" recipients
+<row><entry><literal>%R</literal>      </entry><entry><literal>%{cc-all}</literal>              </entry><entry>Comma separated list of <literal>Cc:</literal> recipients
 </entry></row>
-<row><entry>%s </entry><entry>Subject of the message
+<row><entry><literal>%r</literal>      </entry><entry><literal>%{to-all}</literal>              </entry><entry>Comma separated list of <literal>To:</literal> recipients
 </entry></row>
-<row><entry>%S </entry><entry>Single character status of the message ("N"/"O"/"D"/"d"/"!"/"r"/"*")
+<row><entry><literal>%S</literal>      </entry><entry><literal>%{flag-chars}</literal>          </entry><entry>Single character status of the message (<literal>N</literal>/<literal>O</literal>/<literal>D</literal>/<literal>d</literal>/<literal>!</literal>/<literal>r</literal>/<literal>*</literal>)
 </entry></row>
-<row><entry>%t </entry><entry>"To:" field (recipients)
+<row><entry><literal>%s</literal>      </entry><entry><literal>%{subject}</literal>             </entry><entry>Subject of the message
 </entry></row>
-<row><entry>%T </entry><entry>The appropriate character from the <link linkend="to-chars">$to_chars</link> string
+<row><entry><literal>%T</literal>      </entry><entry><literal>%{to-chars}</literal>            </entry><entry>Appropriate character from the <link linkend="to-chars">$to_chars</link> string
 </entry></row>
-<row><entry>%u </entry><entry>User (login) name of the author
+<row><entry><literal>%t</literal>      </entry><entry><literal>%{to}</literal>                  </entry><entry><literal>%{To:}</literal> field (recipients)
 </entry></row>
-<row><entry>%v </entry><entry>First name of the author, or the recipient if the message is from you
+<row><entry><literal>%u</literal>      </entry><entry><literal>%{username}</literal>            </entry><entry>User (login) name of the author
 </entry></row>
-<row><entry>%W </entry><entry>Name of organization of author ("Organization:" field)
+<row><entry><literal>%v</literal>      </entry><entry><literal>%{first-name}</literal>          </entry><entry>First name of the author, or the recipient if the message is from you
 </entry></row>
-<row><entry>%x </entry><entry>"X-Comment-To:" field (if present and compiled with NNTP support)
+<row><entry><literal>%W</literal>      </entry><entry><literal>%{organization}</literal>        </entry><entry>Name of organization of author (<literal>Organization:</literal> field)
 </entry></row>
-<row><entry>%X </entry><entry>Number of MIME attachments
-(please see the "<link linkend="attachments">attachments</link>" section for possible speed effects)
+<row><entry><literal>%X</literal>      </entry><entry><literal>%{attachment-count}</literal>    </entry><entry>Number of MIME attachments (see the <link linkend="attachments">$attachments</link> section for possible speed effects)
 </entry></row>
-<row><entry>%y </entry><entry>"X-Label:" field, if present
+<row><entry><literal>%x</literal>      </entry><entry><literal>%{x-comment-to}</literal>        </entry><entry><literal>%{X-Comment-To:}</literal> field (if present)
 </entry></row>
-<row><entry>%Y </entry><entry>"X-Label:" field, if present, and <emphasis>(1)</emphasis> not at part of a thread tree,
-<emphasis>(2)</emphasis> at the top of a thread, or <emphasis>(3)</emphasis> "X-Label:" is different from
-Preceding message's "X-Label:"
+<row><entry><literal>%Y</literal>      </entry><entry><literal>%{thread-x-label}</literal>      </entry><entry><literal>%{X-Label:}</literal> field, if present, and
+1. not at part of a thread tree
+2. at the top of a thread, or
+3. <literal>X-Label:</literal> is different from Preceding message's <literal>X-Label:</literal>
 </entry></row>
-<row><entry>%Z </entry><entry>A three character set of message status flags.
-The first character is new/read/replied flags ("n"/"o"/"r"/"O"/"N").
-The second is deleted or encryption flags ("D"/"d"/"S"/"P"/"s"/"K").
-The third is either tagged/flagged ("*"/"!"), or one of the characters
+<row><entry><literal>%y</literal>      </entry><entry><literal>%{x-label}</literal>             </entry><entry><literal>%{X-Label:}</literal> field, if present
+</entry></row>
+<row><entry><literal>%Z</literal>      </entry><entry><literal>%{combined-flags}</literal>      </entry><entry>A three character set of message status flags.
+The first character is new/read/replied flags (<literal>n</literal>/<literal>o</literal>/<literal>r</literal>/<literal>O</literal>/<literal>N</literal>).
+The second is deleted or encryption flags (<literal>D</literal>/<literal>d</literal>/<literal>S</literal>/<literal>P</literal>/<literal>s</literal>/<literal>K</literal>).
+The third is either tagged/flagged (<literal>*</literal>/<literal>!</literal>), or one of the characters.
 Listed in <link linkend="to-chars">$to_chars</link>.
 </entry></row>
-<row><entry>%zc </entry><entry>Message crypto flags
+<row><entry><literal>%zc</literal>     </entry><entry><literal>%{crypto-flags}</literal>        </entry><entry>Message crypto flags
 </entry></row>
-<row><entry>%zs </entry><entry>Message status flags
+<row><entry><literal>%zs</literal>     </entry><entry><literal>%{status-flags}</literal>        </entry><entry>Message status flags
 </entry></row>
-<row><entry>%zt </entry><entry>Message tag flags
+<row><entry><literal>%zt</literal>     </entry><entry><literal>%{message-flags}</literal>       </entry><entry>Message tag flags
 </entry></row>
-<row><entry>%@name@ </entry><entry>insert and evaluate format-string from the matching
-"<link linkend="index-format-hook">index-format-hook</link>" command
+<row><entry><literal>%@name@</literal> </entry><entry>                             </entry><entry>Insert and evaluate format-string from the matching <literal><link linkend="index-format-hook">index-format-hook</link></literal> command
 </entry></row>
-<row><entry>%{fmt} </entry><entry>the date and time of the message is converted to sender's
-time zone, and "fmt" is expanded by the library function
-<literal>strftime(3)</literal>; if the first character inside the braces
-is a bang ("!"), the date is formatted ignoring any locale
-settings.  Note that the sender's time zone might only be
-available as a numerical offset, so "%Z" behaves like "%z".
-%{fmt} behaves like %[fmt] on systems where struct tm
-doesn't have a tm_gmtoff member.
+<row><entry><literal>%{fmt}</literal>  </entry><entry>                             </entry><entry>Date and time of the message is converted to sender's time zone, and <literal>fmt</literal> is expanded by the library function <literal>strftime(3)</literal>;
+if the first character inside the braces is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
+Note that the sender's time zone might only be available as a numerical offset, so <literal>%Z</literal> behaves like <literal>%z</literal>.
+<literal>%{fmt}</literal> behaves like <literal>%[fmt]</literal> on systems where <literal>struct tm</literal> doesn't have a <literal>tm_gmtoff</literal> member.
 </entry></row>
-<row><entry>%[fmt] </entry><entry>the date and time of the message is converted to the local
-time zone, and "fmt" is expanded by the library function
-<literal>strftime(3)</literal>; if the first character inside the brackets
-is a bang ("!"), the date is formatted ignoring any locale settings.
+<row><entry><literal>%[fmt]</literal>  </entry><entry>                             </entry><entry>Date and time of the message is converted to the local time zone, and <literal>fmt</literal> is expanded by the library function <literal>strftime(3)</literal>;
+if the first character inside the brackets is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
 </entry></row>
-<row><entry>%(fmt) </entry><entry>the local date and time when the message was received, and
-"fmt" is expanded by the library function <literal>strftime(3)</literal>;
-if the first character inside the parentheses is a bang ("!"),
-the date is formatted ignoring any locale settings.
+<row><entry><literal>%(fmt)</literal>  </entry><entry>                             </entry><entry>Local date and time when the message was received, and <literal>fmt</literal> is expanded by the library function <literal>strftime(3)</literal>;
+if the first character inside the parentheses is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
 </entry></row>
-<row><entry>%&gt;X    </entry><entry>right justify the rest of the string and pad with character "X"
+<row><entry><literal>%*X</literal>     </entry><entry><literal>%{padding-soft}</literal>        </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%|X    </entry><entry>pad to the end of the line with character "X"
+<row><entry><literal>%&gt;X</literal>     </entry><entry><literal>%{padding-hard}</literal>        </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry>%*X    </entry><entry>soft-fill with character "X" as pad
+<row><entry><literal>%|X</literal>     </entry><entry><literal>%{padding-eol}</literal>         </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -25365,29 +25376,31 @@ The following <literal>printf(3)</literal>-style sequences are understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%c </entry><entry>Step counter looping from <quote>A</quote> to <quote>Z</quote>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>    </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%d </entry><entry>Current day of the month (GMT)
+<row><entry>%c          </entry><entry><literal>%{counter}</literal>   </entry><entry>Step counter looping from <literal>A</literal> to <literal>Z</literal>
 </entry></row>
-<row><entry>%f </entry><entry><link linkend="hostname">$hostname</link>
+<row><entry>%d          </entry><entry><literal>%{day}</literal>       </entry><entry>Current day of the month (GMT)
 </entry></row>
-<row><entry>%H </entry><entry>Current hour using a 24-hour clock (GMT)
+<row><entry>%f          </entry><entry><literal>%{hostname}</literal>  </entry><entry><link linkend="hostname">$hostname</link>
 </entry></row>
-<row><entry>%m </entry><entry>Current month number (GMT)
+<row><entry>%H          </entry><entry><literal>%{hour}</literal>      </entry><entry>Current hour using a 24-hour clock (GMT)
 </entry></row>
-<row><entry>%M </entry><entry>Current minute of the hour (GMT)
+<row><entry>%m          </entry><entry><literal>%{minute}</literal>    </entry><entry>Current month number (GMT)
 </entry></row>
-<row><entry>%p </entry><entry>Pid of the running mutt process
+<row><entry>%M          </entry><entry><literal>%{month}</literal>     </entry><entry>Current minute of the hour (GMT)
 </entry></row>
-<row><entry>%r </entry><entry>3 bytes of pseudo-random data encoded in Base64Url
+<row><entry>%p          </entry><entry><literal>%{pid}</literal>       </entry><entry>Pid of the running mutt process
 </entry></row>
-<row><entry>%S </entry><entry>Current second of the minute (GMT)
+<row><entry>%r          </entry><entry><literal>%{random_3}</literal>  </entry><entry>3 bytes of pseudo-random data encoded in Base64
 </entry></row>
-<row><entry>%x </entry><entry>1 byte of pseudo-random data hex encoded (example: '1b')
+<row><entry>%S          </entry><entry><literal>%{second}</literal>    </entry><entry>Current second of the minute (GMT)
 </entry></row>
-<row><entry>%Y </entry><entry>Current year using 4 digits (GMT)
+<row><entry>%x          </entry><entry><literal>%{random_1}</literal>  </entry><entry>1 byte of pseudo-random data hex encoded (example: <literal>1b</literal>)
 </entry></row>
-<row><entry>%z </entry><entry>4 byte timestamp + 8 bytes of pseudo-random data encoded in Base64Url
+<row><entry>%Y          </entry><entry><literal>%{year}</literal>      </entry><entry>Current year using 4 digits (GMT)
+</entry></row>
+<row><entry>%z          </entry><entry><literal>%{random_12}</literal> </entry><entry>4 byte timestamp + 8 bytes of pseudo-random data encoded in Base64
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -25679,19 +25692,19 @@ is understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Expando</emphasis> </entry><entry><emphasis role="bold">Description</emphasis> </entry><entry><emphasis role="bold">Example</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>   </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%a </entry><entry>Account url       </entry><entry><literal>news:news.gmane.org</literal>
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{account}</literal>  </entry><entry>Account url
 </entry></row>
-<row><entry>%p </entry><entry>Port              </entry><entry><literal>119</literal>
+<row><entry><literal>%P</literal>    </entry><entry><literal>%{port-if}</literal>  </entry><entry>Port if specified
 </entry></row>
-<row><entry>%P </entry><entry>Port if specified </entry><entry><literal>10119</literal>
+<row><entry><literal>%p</literal>    </entry><entry><literal>%{port}</literal>     </entry><entry>Port
 </entry></row>
-<row><entry>%s </entry><entry>News server name  </entry><entry><literal>news.gmane.org</literal>
+<row><entry><literal>%S</literal>    </entry><entry><literal>%{schema}</literal>   </entry><entry>Url schema
 </entry></row>
-<row><entry>%S </entry><entry>Url schema        </entry><entry><literal>news</literal>
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{server}</literal>   </entry><entry>News server name
 </entry></row>
-<row><entry>%u </entry><entry>Username          </entry><entry><literal>username</literal>
+<row><entry><literal>%u</literal>    </entry><entry><literal>%{username}</literal> </entry><entry>Username
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -26130,17 +26143,19 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%d  </entry><entry>pattern description
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%e  </entry><entry>pattern expression
+<row><entry><literal>%d</literal>    </entry><entry><literal>%{description}</literal>  </entry><entry>Pattern description
 </entry></row>
-<row><entry>%n  </entry><entry>index number
+<row><entry><literal>%e</literal>    </entry><entry><literal>%{expression}</literal>   </entry><entry>Pattern expression
 </entry></row>
-<row><entry>%&gt;X </entry><entry>right justify the rest of the string and pad with character "X"
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Index number
 </entry></row>
-<row><entry>%|X </entry><entry>pad to the end of the line with character "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -26291,18 +26306,19 @@ The PGP command formats have their own set of <literal>printf(3)</literal>-like 
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a </entry><entry>The value of <link linkend="pgp-sign-as">$pgp_sign_as</link> if set, otherwise the value
-of <link linkend="pgp-default-key">$pgp_default_key</link>.
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>         </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%f </entry><entry>Expands to the name of a file containing a message.
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{sign-as}</literal>        </entry><entry>Value of <link linkend="pgp-sign-as">$pgp_sign_as</link> if set, otherwise the value of <link linkend="pgp-default-key">$pgp_default_key</link>
 </entry></row>
-<row><entry>%p </entry><entry>Expands to PGPPASSFD=0 when a pass phrase is needed, to an empty
-string otherwise. Note: This may be used with a %&lt;...&gt; construct.
+<row><entry><literal>%f</literal>    </entry><entry><literal>%{file-message}</literal>   </entry><entry>Expands to the name of a file containing a message
 </entry></row>
-<row><entry>%r </entry><entry>One or more key IDs (or fingerprints if available).
+<row><entry><literal>%p</literal>    </entry><entry><literal>%{need-pass}</literal>      </entry><entry>Expands to <literal>PGPPASSFD=0</literal> when a pass phrase is needed, to an empty string otherwise.
+Note: This may be used with a <literal>%&lt;...&gt;</literal> construct.
 </entry></row>
-<row><entry>%s </entry><entry>Expands to the name of a file containing the signature part
-of a <literal>multipart/signed</literal> attachment when verifying it.
+<row><entry><literal>%r</literal>    </entry><entry><literal>%{key-ids}</literal>        </entry><entry>One or more key IDs (or fingerprints if available)
+</entry></row>
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{file-signature}</literal> </entry><entry>Expands to the name of a file containing the signature part
+of a <literal>multipart/signed</literal> attachment when verifying it
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -26426,33 +26442,47 @@ but has its own set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a     </entry><entry>Algorithm
+<row><entry><emphasis role="bold">Short</emphasis>    </entry><entry><emphasis role="bold">Long Name</emphasis>            </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%c     </entry><entry>Capabilities
+<row><entry><literal>%a</literal>       </entry><entry><literal>%{key-algorithm}</literal>     </entry><entry>Algorithm
 </entry></row>
-<row><entry>%f     </entry><entry>Flags
+<row><entry><literal>%c</literal>       </entry><entry><literal>%{key-capabilities}</literal>  </entry><entry>Capabilities
 </entry></row>
-<row><entry>%i     </entry><entry>Key fingerprint (or long key id if non-existent)
+<row><entry><literal>%f</literal>       </entry><entry><literal>%{key-flags}</literal>         </entry><entry>Flags
 </entry></row>
-<row><entry>%k     </entry><entry>Key id
+<row><entry><literal>%i</literal>       </entry><entry><literal>%{key-fingerprint}</literal>   </entry><entry>Key fingerprint (or long key id if non-existent)
 </entry></row>
-<row><entry>%l     </entry><entry>Key length
+<row><entry><literal>%k</literal>       </entry><entry><literal>%{key-id}</literal>            </entry><entry>Key id
 </entry></row>
-<row><entry>%n     </entry><entry>Number
+<row><entry><literal>%l</literal>       </entry><entry><literal>%{key-length}</literal>        </entry><entry>Key length
 </entry></row>
-<row><entry>%p     </entry><entry>Protocol
+<row><entry><literal>%n</literal>       </entry><entry><literal>%{number}</literal>            </entry><entry>Number
 </entry></row>
-<row><entry>%t     </entry><entry>Trust/validity of the key-uid association
+<row><entry><literal>%p</literal>       </entry><entry><literal>%{protocol}</literal>          </entry><entry>Protocol
 </entry></row>
-<row><entry>%u     </entry><entry>User id
+<row><entry><literal>%t</literal>       </entry><entry><literal>%{trust}</literal>             </entry><entry>Trust/validity of the key-uid association
 </entry></row>
-<row><entry>%[&lt;s&gt;] </entry><entry>Date of the key where &lt;s&gt; is an <literal>strftime(3)</literal> expression
+<row><entry><literal>%u</literal>       </entry><entry><literal>%{user-id}</literal>           </entry><entry>User id
 </entry></row>
-<row><entry>%&gt;X    </entry><entry>Right justify the rest of the string and pad with character "X"
+<row><entry><literal>%A</literal>       </entry><entry><literal>%{pkey-algorithm}</literal>    </entry><entry>Primary Key Algorithm
 </entry></row>
-<row><entry>%|X    </entry><entry>Pad to the end of the line with character "X"
+<row><entry><literal>%C</literal>       </entry><entry><literal>%{pkey-capabilities}</literal> </entry><entry>Primary Key Capabilities
 </entry></row>
-<row><entry>%*X    </entry><entry>Soft-fill with character "X" as pad
+<row><entry><literal>%F</literal>       </entry><entry><literal>%{pkey-flags}</literal>        </entry><entry>Primary Key Flags
+</entry></row>
+<row><entry><literal>%I</literal>       </entry><entry><literal>%{pkey-fingerprint}</literal>  </entry><entry>Primary Key fingerprint (or long key id if non-existent)
+</entry></row>
+<row><entry><literal>%K</literal>       </entry><entry><literal>%{pkey-id}</literal>           </entry><entry>Primary Key id
+</entry></row>
+<row><entry><literal>%L</literal>       </entry><entry><literal>%{pkey-length}</literal>       </entry><entry>Primary Key length
+</entry></row>
+<row><entry><literal>%[&lt;s&gt;]</literal>   </entry><entry><literal>%{date}</literal>              </entry><entry>Date of the key where <literal>&lt;s&gt;</literal> is an <literal>strftime(3)</literal> expression
+</entry></row>
+<row><entry><literal>%*X</literal>      </entry><entry><literal>%{padding-soft}</literal>      </entry><entry>Soft-fill with character <literal>X</literal> as pad
+</entry></row>
+<row><entry><literal>%&gt;X</literal>      </entry><entry><literal>%{padding-hard}</literal>      </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>      </entry><entry><literal>%{padding-eol}</literal>       </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -27321,25 +27351,35 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%A  </entry><entry>Full Address (Name and Email)
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%C  </entry><entry>Comment
+<row><entry><literal>%A</literal>    </entry><entry><literal>%{address}</literal>      </entry><entry>Full Address (Name and Email)
 </entry></row>
-<row><entry>%E  </entry><entry>Email Address
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{comment}</literal>      </entry><entry>Comment
 </entry></row>
-<row><entry>%i  </entry><entry>Index number
+<row><entry><literal>%E</literal>    </entry><entry><literal>%{email}</literal>        </entry><entry>Email Address
 </entry></row>
-<row><entry>%N  </entry><entry>Real name
+<row><entry><literal>%i</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Index number
 </entry></row>
-<row><entry>%t  </entry><entry>Alias is tagged (selected)
+<row><entry><literal>%N</literal>    </entry><entry><literal>%{name}</literal>         </entry><entry>Real name
 </entry></row>
-<row><entry>%Y  </entry><entry>User-defined tags (labels)
+<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged}</literal>       </entry><entry>Alias is tagged (selected)
 </entry></row>
-<row><entry>%&gt;X </entry><entry>Right justify the rest of the string and pad with "X"
+<row><entry><literal>%Y</literal>    </entry><entry><literal>%{tags}</literal>         </entry><entry>User-defined tags (labels)
 </entry></row>
-<row><entry>%|X </entry><entry>Pad to the end of the line with "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>Soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%a</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%E</literal> instead
+</entry></row>
+<row><entry><literal>%c</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%i</literal> instead
+</entry></row>
+<row><entry><literal>%e</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%C</literal> instead
+</entry></row>
+<row><entry><literal>%n</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%N</literal> instead
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -28166,51 +28206,49 @@ sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a </entry><entry>    </entry><entry>Alert: 1 if user is notified of new mail
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>        </entry><entry><emphasis role="bold">Cur</emphasis> </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%B </entry><entry>    </entry><entry>Name of the mailbox
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{notify}</literal>        </entry><entry>          </entry><entry>Alert: 1 if user is notified of new mail
 </entry></row>
-<row><entry>%d </entry><entry>* @ </entry><entry>Number of deleted messages in the mailbox
+<row><entry><literal>%B</literal>    </entry><entry><literal>%{name}</literal>          </entry><entry>          </entry><entry>Name of the mailbox
 </entry></row>
-<row><entry>%D </entry><entry>    </entry><entry>Descriptive name of the mailbox
+<row><entry><literal>%D</literal>    </entry><entry><literal>%{description}</literal>   </entry><entry>          </entry><entry>Descriptive name of the mailbox
 </entry></row>
-<row><entry>%F </entry><entry>*   </entry><entry>Number of flagged messages in the mailbox
+<row><entry><literal>%d</literal>    </entry><entry><literal>%{deleted-count}</literal> </entry><entry>Cur       </entry><entry>Number of deleted messages in the mailbox
 </entry></row>
-<row><entry>%L </entry><entry>* @ </entry><entry>Number of messages after limiting
+<row><entry><literal>%F</literal>    </entry><entry><literal>%{flagged-count}</literal> </entry><entry>          </entry><entry>Number of flagged messages in the mailbox
 </entry></row>
-<row><entry>%n </entry><entry>    </entry><entry>"N" if mailbox has new mail, " " (space) otherwise
+<row><entry><literal>%L</literal>    </entry><entry><literal>%{limited-count}</literal> </entry><entry>Cur       </entry><entry>Number of messages after limiting
 </entry></row>
-<row><entry>%N </entry><entry>*   </entry><entry>Number of unread messages in the mailbox (seen or unseen)
+<row><entry><literal>%N</literal>    </entry><entry><literal>%{new-mail}</literal>      </entry><entry>          </entry><entry>Number of unread messages in the mailbox (seen or unseen)
 </entry></row>
-<row><entry>%o </entry><entry>*   </entry><entry>Number of old messages in the mailbox (unread, seen)
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{unread-count}</literal>  </entry><entry>          </entry><entry><literal>N</literal> if mailbox has new mail, <literal> </literal> (space) otherwise
 </entry></row>
-<row><entry>%p </entry><entry>    </entry><entry>Poll: 1 if Mailbox is checked for new mail
+<row><entry><literal>%o</literal>    </entry><entry><literal>%{old-count}</literal>     </entry><entry>          </entry><entry>Number of old messages in the mailbox (unread, seen)
 </entry></row>
-<row><entry>%r </entry><entry>*   </entry><entry>Number of read messages in the mailbox (read, seen)
+<row><entry><literal>%p</literal>    </entry><entry><literal>%{poll}</literal>          </entry><entry>          </entry><entry>Poll: 1 if Mailbox is checked for new mail
 </entry></row>
-<row><entry>%S </entry><entry>*   </entry><entry>Size of mailbox (total number of messages)
+<row><entry><literal>%r</literal>    </entry><entry><literal>%{read-count}</literal>    </entry><entry>          </entry><entry>Number of read messages in the mailbox (read, seen)
 </entry></row>
-<row><entry>%t </entry><entry>* @ </entry><entry>Number of tagged messages in the mailbox
+<row><entry><literal>%S</literal>    </entry><entry><literal>%{message-count}</literal> </entry><entry>          </entry><entry>Size of mailbox (total number of messages)
 </entry></row>
-<row><entry>%Z </entry><entry>*   </entry><entry>Number of new messages in the mailbox (unread, unseen)
+<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged-count}</literal>  </entry><entry>Cur       </entry><entry>Number of tagged messages in the mailbox
 </entry></row>
-<row><entry>%! </entry><entry>    </entry><entry>"!" : one flagged message;
-"!!" : two flagged messages;
-"n!" : n flagged messages (for n &gt; 2).
-Otherwise prints nothing.
+<row><entry><literal>%Z</literal>    </entry><entry><literal>%{unseen-count}</literal>  </entry><entry>          </entry><entry>Number of new messages in the mailbox (unread, unseen)
 </entry></row>
-<row><entry>%&gt;X </entry><entry></entry><entry>Right justify the rest of the string and pad with "X"
+<row><entry><literal>%!</literal>    </entry><entry><literal>%{flagged}</literal>       </entry><entry>          </entry><entry><literal>!</literal> : one flagged message
+<literal>!!</literal> : two flagged messages
+<literal>%{n!}</literal> : n flagged messages (for n &gt; 2)
 </entry></row>
-<row><entry>%|X </entry><entry></entry><entry>Pad to the end of the line with "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>  </entry><entry>          </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry></entry><entry>Soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal>  </entry><entry>          </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>   </entry><entry>          </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
-* = Can be optionally printed if nonzero
-</para>
-<para>
-@ = Only applicable to the current folder
+<emphasis role="bold">Cur</emphasis> = Only applicable to the current folder
 </para>
 <para>
 In order to use %S, %N, %F, and %!, <link linkend="mail-check-stats">$mail_check_stats</link> must
@@ -28610,24 +28648,25 @@ similar to PGP's:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a </entry><entry>The algorithm used for encryption.
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>           </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%c </entry><entry>One or more certificate IDs.
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{algorithm}</literal>        </entry><entry>Algorithm used for encryption
 </entry></row>
-<row><entry>%C </entry><entry>CA location:  Depending on whether <link linkend="smime-ca-location">$smime_ca_location</link>
-points to a directory or file, this expands to
-"-CApath <link linkend="smime-ca-location">$smime_ca_location</link>" or "-CAfile <link linkend="smime-ca-location">$smime_ca_location</link>".
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{certificate-path}</literal> </entry><entry>CA location:  Depending on whether <link linkend="smime-ca-location">$smime_ca_location</link> points to a directory or file,
+this expands to "-CApath <link linkend="smime-ca-location">$smime_ca_location</link>" or "-CAfile <link linkend="smime-ca-location">$smime_ca_location</link>"
 </entry></row>
-<row><entry>%d </entry><entry>The message digest algorithm specified with <link linkend="smime-sign-digest-alg">$smime_sign_digest_alg</link>.
+<row><entry><literal>%c</literal>    </entry><entry><literal>%{certificate-ids}</literal>  </entry><entry>One or more certificate IDs
 </entry></row>
-<row><entry>%f </entry><entry>Expands to the name of a file containing a message.
+<row><entry><literal>%d</literal>    </entry><entry><literal>%{digest-algorithm}</literal> </entry><entry>Message digest algorithm specified with <link linkend="smime-sign-digest-alg">$smime_sign_digest_alg</link>
 </entry></row>
-<row><entry>%i </entry><entry>Intermediate certificates
+<row><entry><literal>%f</literal>    </entry><entry><literal>%{message-file}</literal>     </entry><entry>Expands to the name of a file containing a message
 </entry></row>
-<row><entry>%k </entry><entry>The key-pair specified with <link linkend="smime-default-key">$smime_default_key</link>
+<row><entry><literal>%i</literal>    </entry><entry><literal>%{intermediate-ids}</literal> </entry><entry>Intermediate certificates
 </entry></row>
-<row><entry>%s </entry><entry>Expands to the name of a file containing the signature part
-of a <literal>multipart/signed</literal> attachment when verifying it.
+<row><entry><literal>%k</literal>    </entry><entry><literal>%{key}</literal>              </entry><entry>Key-pair specified with <link linkend="smime-default-key">$smime_default_key</link>
+</entry></row>
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{signature-file}</literal>   </entry><entry>Expands to the name of a file containing the signature part
+of a <literal>multipart/signed</literal> attachment when verifying it
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -29453,59 +29492,59 @@ set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%b  </entry><entry>* </entry><entry>Number of mailboxes with new mail
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>           </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry>%d  </entry><entry>* </entry><entry>Number of deleted messages
+<row><entry><literal>%b</literal>    </entry><entry><literal>%{unread-mailboxes}</literal> </entry><entry>Number of mailboxes with new mail
 </entry></row>
-<row><entry>%D  </entry><entry>  </entry><entry>Description of the mailbox
+<row><entry><literal>%D</literal>    </entry><entry><literal>%{description}</literal>      </entry><entry>Description of the mailbox
 </entry></row>
-<row><entry>%f  </entry><entry>  </entry><entry>The full pathname of the current mailbox
+<row><entry><literal>%d</literal>    </entry><entry><literal>%{deleted-count}</literal>    </entry><entry>Number of deleted messages
 </entry></row>
-<row><entry>%F  </entry><entry>* </entry><entry>Number of flagged messages
+<row><entry><literal>%f</literal>    </entry><entry><literal>%{flagged-count}</literal>    </entry><entry>Full pathname of the current mailbox
 </entry></row>
-<row><entry>%h  </entry><entry>  </entry><entry>Local hostname
+<row><entry><literal>%F</literal>    </entry><entry><literal>%{mailbox-path}</literal>     </entry><entry>Number of flagged messages
 </entry></row>
-<row><entry>%l  </entry><entry>* </entry><entry>Size (in bytes) of the current mailbox (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry><literal>%h</literal>    </entry><entry><literal>%{hostname}</literal>         </entry><entry>Local hostname
 </entry></row>
-<row><entry>%L  </entry><entry>* </entry><entry>Size (in bytes) of the messages shown
-(i.e., which match the current limit) (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry><literal>%l</literal>    </entry><entry><literal>%{limit-size}</literal>       </entry><entry>Size (in bytes) of the current mailbox (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%m  </entry><entry>* </entry><entry>The number of messages in the mailbox
+<row><entry><literal>%L</literal>    </entry><entry><literal>%{mailbox-size}</literal>     </entry><entry>Size (in bytes) of the messages shown (i.e., which match the current limit) (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry>%M  </entry><entry>* </entry><entry>The number of messages shown (i.e., which match the current limit)
+<row><entry><literal>%m</literal>    </entry><entry><literal>%{limit-count}</literal>      </entry><entry>Number of messages in the mailbox
 </entry></row>
-<row><entry>%n  </entry><entry>* </entry><entry>Number of new messages in the mailbox (unread, unseen)
+<row><entry><literal>%M</literal>    </entry><entry><literal>%{message-count}</literal>    </entry><entry>Number of messages shown (i.e., which match the current limit)
 </entry></row>
-<row><entry>%o  </entry><entry>* </entry><entry>Number of old messages in the mailbox (unread, seen)
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{new-count}</literal>        </entry><entry>Number of new messages in the mailbox (unread, unseen)
 </entry></row>
-<row><entry>%p  </entry><entry>* </entry><entry>Number of postponed messages
+<row><entry><literal>%o</literal>    </entry><entry><literal>%{old-count}</literal>        </entry><entry>Number of old messages in the mailbox (unread, seen)
 </entry></row>
-<row><entry>%P  </entry><entry>  </entry><entry>Percentage of the way through the index
+<row><entry><literal>%P</literal>    </entry><entry><literal>%{percentage}</literal>       </entry><entry>Percentage of the way through the index
 </entry></row>
-<row><entry>%r  </entry><entry>  </entry><entry>Modified/read-only/won't-write/attach-message indicator,
-According to <link linkend="status-chars">$status_chars</link>
+<row><entry><literal>%p</literal>    </entry><entry><literal>%{postponed-count}</literal>  </entry><entry>Number of postponed messages
 </entry></row>
-<row><entry>%R  </entry><entry>* </entry><entry>Number of read messages in the mailbox (read, seen)
+<row><entry><literal>%r</literal>    </entry><entry><literal>%{read-count}</literal>       </entry><entry>Modified/read-only/won't-write/attach-message indicator, According to <link linkend="status-chars">$status_chars</link>
 </entry></row>
-<row><entry>%s  </entry><entry>  </entry><entry>Current sorting mode (<link linkend="sort">$sort</link>)
+<row><entry><literal>%R</literal>    </entry><entry><literal>%{readonly}</literal>         </entry><entry>Number of read messages in the mailbox (read, seen)
 </entry></row>
-<row><entry>%S  </entry><entry>  </entry><entry>Current aux sorting method (<link linkend="sort-aux">$sort_aux</link>)
+<row><entry><literal>%S</literal>    </entry><entry><literal>%{sort-aux}</literal>         </entry><entry>Current aux sorting method (<link linkend="sort-aux">$sort_aux</link>)
 </entry></row>
-<row><entry>%t  </entry><entry>* </entry><entry>Number of tagged messages in the mailbox
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{sort}</literal>             </entry><entry>Current sorting mode (<link linkend="sort">$sort</link>)
 </entry></row>
-<row><entry>%T  </entry><entry>* </entry><entry>Current threading mode (<link linkend="use-threads">$use_threads</link>)
+<row><entry><literal>%T</literal>    </entry><entry><literal>%{use-threads}</literal>      </entry><entry>Current threading mode (<link linkend="use-threads">$use_threads</link>)
 </entry></row>
-<row><entry>%u  </entry><entry>* </entry><entry>Number of unread messages in the mailbox (seen or unseen)
+<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged-count}</literal>     </entry><entry>Number of tagged messages in the mailbox
 </entry></row>
-<row><entry>%v  </entry><entry>  </entry><entry>NeoMutt version string
+<row><entry><literal>%u</literal>    </entry><entry><literal>%{unread-count}</literal>     </entry><entry>Number of unread messages in the mailbox (seen or unseen)
 </entry></row>
-<row><entry>%V  </entry><entry>* </entry><entry>Currently active limit pattern, if any
+<row><entry><literal>%v</literal>    </entry><entry><literal>%{limit-pattern}</literal>    </entry><entry>NeoMutt version string
 </entry></row>
-<row><entry>%&gt;X </entry><entry>  </entry><entry>Right justify the rest of the string and pad with "X"
+<row><entry><literal>%V</literal>    </entry><entry><literal>%{version}</literal>          </entry><entry>Currently active limit pattern, if any
 </entry></row>
-<row><entry>%|X </entry><entry>  </entry><entry>Pad to the end of the line with "X"
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>     </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry>%*X </entry><entry>  </entry><entry>Soft-fill with character "X" as pad
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal>     </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+</entry></row>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>      </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
