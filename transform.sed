@@ -30,6 +30,7 @@ s:"keywords":"feature/keywords":
 s:"kyoto-cabinet":"feature/kyoto-cabinet":
 s:"limit-current-thread":"feature/limit-current-thread":
 s:"lmdb":"feature/lmdb":
+s:"lua":"feature/lua":
 s:"mimesupport":"guide/mimesupport":
 s:"miscellany":"guide/miscellany":
 s:"multiple-fcc":"feature/multiple-fcc":
