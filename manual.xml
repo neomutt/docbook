@@ -1050,13 +1050,13 @@ set sidebar_indent_string="  "          <emphasis role="comment"># Indent with t
             </para>
             <para>
               If you want some mailboxes to be always visible, then use the
-              <literal>sidebar_pin</literal> command. It takes a list of
+              <literal>sidebar-pin</literal> command. It takes a list of
               mailboxes as parameters.
             </para>
 
 <screen>
 set sidebar_new_mail_only         <emphasis role="comment"># Only mailboxes with new/flagged email</emphasis>
-sidebar_pin +fruit +fruit/apple   <emphasis role="comment"># Always display these two mailboxes</emphasis>
+sidebar-pin +fruit +fruit/apple   <emphasis role="comment"># Always display these two mailboxes</emphasis>
 </screen>
 
           </sect4>
@@ -3824,7 +3824,7 @@ set smime_decrypt_command = "..."
         <title>Commenting configuration files</title>
 
 <screen>
-my_hdr X-Disclaimer: Why are you listening to me?   <emphasis role="comment"># This is a comment</emphasis>
+my-header X-Disclaimer: Why are you listening to me?   <emphasis role="comment"># This is a comment</emphasis>
 </screen>
 
       </example>
@@ -3890,7 +3890,7 @@ over several lines"
       </para>
       <example id="ex-rc-backtick">
         <title>Using external command's output in configuration files</title>
-        <screen>my_hdr X-Operating-System: `uname -a`</screen>
+        <screen>my-header X-Operating-System: `uname -a`</screen>
       </example>
       <para>
         To avoid the output of backticks being parsed, place them inside double
@@ -4651,36 +4651,6 @@ set alias_file=~/.mail_aliases
                 <entry><literal>&lt;exit&gt;</literal></entry>
               </row>
               <row>
-                <entry>alias</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>alias</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>attach</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>attach</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>browser</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>browser</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
-              </row>
-              <row>
                 <entry>editor</entry>
                 <entry>&lt;backspace&gt;</entry>
                 <entry><literal>&lt;backspace&gt;</literal></entry>
@@ -4701,26 +4671,6 @@ set alias_file=~/.mail_aliases
                 <entry><literal>&lt;display-message&gt;</literal></entry>
               </row>
               <row>
-                <entry>index</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>index</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>compose</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>compose</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
-              </row>
-              <row>
                 <entry>pager</entry>
                 <entry>?</entry>
                 <entry><literal>&lt;help&gt;</literal></entry>
@@ -4734,56 +4684,6 @@ set alias_file=~/.mail_aliases
                 <entry>pager</entry>
                 <entry>:</entry>
                 <entry><literal>&lt;enter-command&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>pgp</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>pgp</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>smime</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>smime</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>postpone</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>postpone</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>query</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>query</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>mix</entry>
-                <entry>?</entry>
-                <entry><literal>&lt;help&gt;</literal></entry>
-              </row>
-              <row>
-                <entry>mix</entry>
-                <entry>q</entry>
-                <entry><literal>&lt;exit&gt;</literal></entry>
               </row>
             </tbody>
           </tgroup>
@@ -6009,7 +5909,7 @@ uncolor status *
           Despite not being a real header, NeoMutt will also display an mbox
           &quot;From_&quot; line in the pager along with other headers.  This
           line can be manipulated with <command>ignore/unignore</command> and
-          <command>hdr_order/unhdr_order</command> commands.
+          <command>header-order/unheader-order</command> commands.
         </para>
       </sect2>
 
@@ -6079,20 +5979,20 @@ unignore posted-to:
         </para>
       </sect2>
 
-      <sect2 id="hdr-order">
+      <sect2 id="header-order">
         <title>Ordering Displayed Headers</title>
         <para>
           Usage:
         </para>
         <cmdsynopsis>
-          <command>hdr_order</command>
+          <command>header-order</command>
           <arg choice="plain">
             <replaceable class="parameter">header</replaceable>
           </arg>
           <arg choice="opt" rep="repeat">
             <replaceable class="parameter">header</replaceable>
           </arg>
-          <command>unhdr_order</command>
+          <command>unheader-order</command>
           <group choice="req">
             <arg choice="plain">
               <replaceable>*</replaceable>
@@ -6103,18 +6003,18 @@ unignore posted-to:
           </group>
         </cmdsynopsis>
         <para>
-          With the <command>hdr_order</command> command you can specify an
+          With the <command>header-order</command> command you can specify an
           order in which NeoMutt will attempt to present these headers to you
           when viewing messages.
         </para>
         <para>
-          <quote><command>unhdr_order</command>*</quote> will clear all
+          <quote><command>unheader-order</command>*</quote> will clear all
           previous headers from the order list, thus removing the header order
           effects set by the system-wide startup file.
         </para>
-        <example id="ex-hdr-order">
+        <example id="ex-header-order">
           <title>Configuring header display order</title>
-          <screen>hdr_order From Date: From: To: Cc: Subject:</screen>
+          <screen>header-order From Date: From: To: Cc: Subject:</screen>
         </example>
       </sect2>
     </sect1>
@@ -6500,17 +6400,17 @@ unignore posted-to:
       </note>
     </sect1>
 
-    <sect1 id="my-hdr">
+    <sect1 id="my-header">
       <title>User-Defined Headers</title>
       <para>
         Usage:
       </para>
       <cmdsynopsis>
-        <command>my_hdr</command>
+        <command>my-header</command>
         <arg choice="plain">
           <replaceable class="parameter">string</replaceable>
         </arg>
-        <command>unmy_hdr</command>
+        <command>unmy-header</command>
         <group choice="req">
           <arg choice="plain">
             <replaceable class="parameter">*</replaceable>
@@ -6521,7 +6421,7 @@ unignore posted-to:
         </group>
       </cmdsynopsis>
       <para>
-        The <command>my_hdr</command> command allows you to create your own
+        The <command>my-header</command> command allows you to create your own
         header fields which will be added to every message you send and appear
         in the editor if <link linkend="edit-headers">$edit_headers</link> is
         set.
@@ -6529,14 +6429,14 @@ unignore posted-to:
       <para>
         For example, if you would like to add an <quote>Organization:</quote>
         header field to all of your outgoing messages, you can put the command
-        something like shown in <xref linkend="ex-my-hdr" /> in your
+        something like shown in <xref linkend="ex-my-header" /> in your
         <literal>.neomuttrc</literal>.
       </para>
-      <example id="ex-my-hdr">
+      <example id="ex-my-header">
         <title>Defining custom headers</title>
 
 <screen>
-my_hdr Organization: A Really Big Company, Anytown, USA
+my-header Organization: A Really Big Company, Anytown, USA
 </screen>
 
       </example>
@@ -6557,12 +6457,12 @@ my_hdr Organization: A Really Big Company, Anytown, USA
       </para>
       <para>
         To remove user defined header fields, use the
-        <command>unmy_hdr</command> command. You may specify an asterisk
+        <command>unmy-header</command> command. You may specify an asterisk
         (<quote>*</quote>) to remove all header fields, or the fields to
         remove. For example, to remove all <quote>To</quote> and
         <quote>Cc</quote> header fields, you could use:
       </para>
-      <screen>unmy_hdr to cc</screen>
+      <screen>unmy-header to cc</screen>
     </sect1>
 
     <sect1 id="default-save-mailbox">
@@ -6750,7 +6650,7 @@ save-hook aol\\.com$ +spam
           <command>send-hook</command> to be executed, similarly if
           <link linkend="auto-edit">$auto_edit</link> is set (as then the initial
           list of recipients is empty). Also note that
-          <link linkend="my-hdr"><command>my_hdr</command></link> commands
+          <link linkend="my-header"><command>my-header</command></link> commands
           which modify recipient headers, or the message's subject, don't have
           any effect on the current message when executed from
           a <command>send-hook</command>.
@@ -8002,7 +7902,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%&lt;l?%4l&amp;%4c&gt;)%*  %s"
         Usage:
       </para>
       <cmdsynopsis>
-        <command>mailto_allow</command>
+        <command>mailto-allow</command>
         <group choice="req">
           <arg choice="plain">
             <replaceable class="parameter">*</replaceable>
@@ -8011,7 +7911,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%&lt;l?%4l&amp;%4c&gt;)%*  %s"
             <replaceable class="parameter">header-field</replaceable>
           </arg>
         </group>
-        <command>unmailto_allow</command>
+        <command>unmailto-allow</command>
         <group choice="req">
           <arg choice="plain">
             <replaceable class="parameter">*</replaceable>
@@ -8026,7 +7926,7 @@ set index_format="%4C %Z %{%b %d} %-15.15L (%&lt;l?%4l&amp;%4c&gt;)%*  %s"
         fields from a <literal>mailto:</literal> URL. This is necessary since
         NeoMutt will handle certain header fields, such as
         <literal>Attach:</literal>, in a special way. The
-        <literal>mailto_allow</literal> and <literal>unmailto_allow</literal>
+        <literal>mailto-allow</literal> and <literal>unmailto-allow</literal>
         commands allow the user to modify the list of approved headers.
       </para>
       <para>
@@ -9838,8 +9738,8 @@ Limit to messages matching: ~d 19950120-19951031
         <title>Specifying a <quote>default</quote> hook</title>
 
 <screen>
-send-hook . 'unmy_hdr From:'
-send-hook ~C'^b@b\\.b$' my_hdr from: c@c.c
+send-hook . 'unmy-header From:'
+send-hook ~C'^b@b\\.b$' my-header from: c@c.c
 </screen>
 
       </example>
@@ -9880,7 +9780,7 @@ send-hook ~C'^b@b\\.b$' my_hdr from: c@c.c
         </para>
 
 <screen>
-send-hook '~t ^user@work\\.com$' 'my_hdr From: John Smith &lt;user@host&gt;'
+send-hook '~t ^user@work\\.com$' 'my-header From: John Smith &lt;user@host&gt;'
 </screen>
 
         <para>
@@ -10647,7 +10547,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
         </listitem>
         <listitem>
           <para>
-            <link linkend="my-hdr">my_hdr</link> processing for To, Cc, Bcc,
+            <link linkend="my-header">my-header</link> processing for To, Cc, Bcc,
             Subject headers.
           </para>
         </listitem>
@@ -10679,7 +10579,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
         </listitem>
         <listitem>
           <para>
-            <link linkend="my-hdr">my_hdr</link> processing for From, Reply-To,
+            <link linkend="my-header">my-header</link> processing for From, Reply-To,
             Message-ID and user-defined headers. The To, Cc, Bcc, Subject, and
             Return-Path headers are ignored at this stage.
           </para>
@@ -10953,7 +10853,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
                 <para>
                   NeoMutt will display internally supported MIME types (see <xref
                   linkend="mime-pager"/>) in the pager.  This will respect
-                  <link linkend="auto-view">auto_view</link> settings, to determine
+                  <link linkend="auto-view">auto-view</link> settings, to determine
                   whether to use a <literal>copiousoutput</literal> mailcap entry or
                   just directly display the attachment.
                 </para>
@@ -10976,7 +10876,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
                   NeoMutt will use the first matching
                   <literal>copiousoutput</literal> mailcap entry to display the
                   attachment in the pager (regardless of <link
-                  linkend="auto-view">auto_view</link> settings).
+                  linkend="auto-view">auto-view</link> settings).
                 </para>
                 <para>
                   If no matching mailcap entries are found, the attachment will
@@ -11454,7 +11354,7 @@ text/html; lynx -dump -width ${COLUMNS:-80} %s; copiousoutput
               <listitem>
                 <para>
                   NeoMutt uses this flag when viewing attachments with
-                  <link linkend="auto-view"><command>auto_view</command></link>,
+                  <link linkend="auto-view"><command>auto-view</command></link>,
                   in order to decide whether it should honor the setting of the
                   <link linkend="wait-key">$wait_key</link> variable or not.
                   When an attachment is viewed using an interactive program,
@@ -11612,7 +11512,7 @@ image/gif;      ; print=anytopnm %s | pnmtops | lpr; \
           </para>
           <para>
             In addition, you can use this with
-            <link linkend="auto-view"><command>auto_view</command></link> to
+            <link linkend="auto-view"><command>auto-view</command></link> to
             denote two commands for viewing an attachment, one to be viewed
             automatically, the other to be viewed interactively from the
             attachment menu using the <literal>&lt;view-mailcap&gt;</literal>
@@ -11628,7 +11528,7 @@ text/html;      lynx -dump %s; nametemplate=%s.html; copiousoutput
 </screen>
 
           <para>
-            For <link linkend="auto-view"><command>auto_view</command></link>,
+            For <link linkend="auto-view"><command>auto-view</command></link>,
             NeoMutt will choose the third entry because of the
             <literal>copiousoutput</literal> tag. For interactive viewing,
             NeoMutt will run the program <literal>RunningX</literal> to
@@ -11817,7 +11717,7 @@ application/ms-excel;   open.pl %s
         Usage:
       </para>
       <cmdsynopsis>
-        <command>auto_view</command>
+        <command>auto-view</command>
         <arg choice="plain">
           <replaceable>mime-type</replaceable>
         </arg>
@@ -11832,7 +11732,7 @@ application/ms-excel;   open.pl %s
             <replaceable>/mime-subtype</replaceable>
           </arg>
         </arg>
-        <command>unauto_view</command>
+        <command>unauto-view</command>
         <group choice="req">
           <arg choice="plain">*</arg>
           <arg choice="opt" rep="repeat">
@@ -11858,13 +11758,13 @@ application/ms-excel;   open.pl %s
         attachment to a text representation which you can view in the pager.
       </para>
       <para>
-        You then use the <command>auto_view</command> configuration command to
+        You then use the <command>auto-view</command> configuration command to
         list the content-types that you wish to view automatically. For
         instance, if you set it to:
       </para>
 
 <screen>
-auto_view text/html application/x-gunzip \
+auto-view text/html application/x-gunzip \
   application/postscript image/gif application/x-tar-gz
 </screen>
 
@@ -11884,11 +11784,11 @@ application/postscript; ps2ascii %s; copiousoutput
 </screen>
 
       <para>
-        <command>unauto_view</command> can be used to remove previous entries
-        from the <command>auto_view</command> list. This can be used with
+        <command>unauto-view</command> can be used to remove previous entries
+        from the <command>auto-view</command> list. This can be used with
         <link linkend="message-hook"><command>message-hook</command></link> to
         autoview messages based on size, etc.
-        <quote><command>unauto_view</command>&#160;*</quote> will remove all
+        <quote><command>unauto-view</command>&#160;*</quote> will remove all
         previous entries.
       </para>
     </sect1>
@@ -11915,21 +11815,21 @@ application/postscript; ps2ascii %s; copiousoutput
         <orderedlist>
           <listitem>
             <para>
-              First, NeoMutt will check the <command>alternative_order</command>
+              First, NeoMutt will check the <command>alternative-order</command>
               list to determine if one of the available types is preferred. It
               consists of a number of MIME types in order, including support for
               implicit and explicit wildcards. For example:
             </para>
 
 <screen>
-alternative_order text/enriched text/plain text application/postscript image/*
+alternative-order text/enriched text/plain text application/postscript image/*
 </screen>
 
           </listitem>
           <listitem>
             <para>
               Next, NeoMutt will check if any of the types have a defined
-              <link linkend="auto-view"><command>auto_view</command></link>, and
+              <link linkend="auto-view"><command>auto-view</command></link>, and
               use that.
             </para>
           </listitem>
@@ -11949,8 +11849,8 @@ alternative_order text/enriched text/plain text application/postscript image/*
           </listitem>
         </orderedlist>
         <para>
-          To remove a MIME type from the <command>alternative_order</command>
-          list, use the <command>unalternative_order</command> command.
+          To remove a MIME type from the <command>alternative-order</command>
+          list, use the <command>unalternative-order</command> command.
         </para>
       </sect2>
 
@@ -12405,7 +12305,7 @@ attachments  -I message/external-body
         Usage:
       </para>
       <cmdsynopsis>
-        <command>mime_lookup</command>
+        <command>mime-lookup</command>
         <arg choice="plain">
           <replaceable>mime-type</replaceable>
         </arg>
@@ -12420,7 +12320,7 @@ attachments  -I message/external-body
             <replaceable>/mime-subtype</replaceable>
           </arg>
         </arg>
-        <command>unmime_lookup</command>
+        <command>unmime-lookup</command>
         <group choice="req">
           <arg choice="plain">*</arg>
           <arg choice="opt" rep="repeat">
@@ -12434,25 +12334,25 @@ attachments  -I message/external-body
         </group>
       </cmdsynopsis>
       <para>
-        NeoMutt's <command>mime_lookup</command> list specifies a list of MIME
+        NeoMutt's <command>mime-lookup</command> list specifies a list of MIME
         types that should <emphasis>not</emphasis> be treated according to
         their mailcap entry. This option is designed to deal with binary types
         such as <literal>application/octet-stream</literal>. When an
-        attachment's MIME type is listed in <command>mime_lookup</command>,
+        attachment's MIME type is listed in <command>mime-lookup</command>,
         then the extension of the filename will be compared to the list of
         extensions in the <literal>mime.types</literal> file. The MIME type
         associated with this extension will then be used to process the
         attachment according to the rules in the mailcap file and according to
-        any other configuration options (such as <command>auto_view</command>)
+        any other configuration options (such as <command>auto-view</command>)
         specified. Common usage would be:
       </para>
 
 <screen>
-mime_lookup application/octet-stream application/X-Lotus-Manuscript
+mime-lookup application/octet-stream application/X-Lotus-Manuscript
 </screen>
 
       <para>
-        In addition, the <literal>unmime_lookup</literal> command may be used
+        In addition, the <literal>unmime-lookup</literal> command may be used
         to disable this feature for any particular MIME type if it had been
         set, for example, in a global <literal>.neomuttrc</literal>.
       </para>
@@ -18115,14 +18015,14 @@ set browser_sort = "reverse-size"
       <anchor id="sidebar-pin" />
       <anchor id="sidebar-unpin" />
       <cmdsynopsis>
-        <command>sidebar_pin</command>
+        <command>sidebar-pin</command>
         <arg choice="plain">
           <replaceable class="parameter">mailbox</replaceable>
         </arg>
         <arg choice="opt" rep="repeat">
           <replaceable class="parameter">mailbox</replaceable>
         </arg>
-        <command>sidebar_unpin</command>
+        <command>sidebar-unpin</command>
         <group choice="req">
           <arg choice="plain">
             <replaceable class="parameter">*</replaceable>
@@ -18139,9 +18039,9 @@ set browser_sort = "reverse-size"
         is set and the mailbox does not contain new mail.
       </para>
       <para>
-        The <quote>sidebar_unpin</quote> command is used to remove
+        The <quote>sidebar-unpin</quote> command is used to remove
         a mailbox from the list of always displayed mailboxes. Use
-        <quote>sidebar_unpin&#160;*</quote> to remove all mailboxes.
+        <quote>sidebar-unpin&#160;*</quote> to remove all mailboxes.
       </para>
     </sect1>
 
@@ -18321,8 +18221,8 @@ set sidebar_new_mail_only = no
 <emphasis role="comment"># sidebar_new_mail_only option is enabled.</emphasis>
 set sidebar_non_empty_mailbox_only = no
 <emphasis role="comment"># Only show mailboxes that contain some mail</emphasis>
-sidebar_pin '/home/user/mailbox1'
-sidebar_pin '/home/user/mailbox2'
+sidebar-pin '/home/user/mailbox1'
+sidebar-pin '/home/user/mailbox2'
 <emphasis role="comment"># When searching for mailboxes containing new mail, should the search wrap</emphasis>
 <emphasis role="comment"># around when it reaches the end of the list?</emphasis>
 set sidebar_next_new_wrap = no
@@ -19630,9 +19530,9 @@ set use_threads=threads sort=last-date sort_aux=date
           <literal>Cc</literal>, <literal>In-Reply-To</literal>, and
           <literal>References</literal> headers.
           Allowed headers can be adjusted with the
-          <link linkend="mailto-allow"><command>mailto_allow</command></link>
+          <link linkend="mailto-allow"><command>mailto-allow</command></link>
           and
-          <link linkend="mailto-allow"><command>unmailto_allow</command></link>
+          <link linkend="mailto-allow"><command>unmailto-allow</command></link>
           commands.
         </para>
       </sect2>
@@ -20257,7 +20157,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="alternative-order">alternative_order</link>
+              <link linkend="alternative-order">alternative-order</link>
             </command>
             <arg choice="plain">
               <replaceable>mime-type</replaceable>
@@ -20274,7 +20174,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
               </arg>
             </arg>
             <command>
-              <link linkend="alternative-order">unalternative_order</link>
+              <link linkend="alternative-order">unalternative-order</link>
             </command>
             <group choice="req">
               <arg choice="plain">*</arg>
@@ -20340,7 +20240,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="auto-view">auto_view</link>
+              <link linkend="auto-view">auto-view</link>
             </command>
             <arg choice="plain">
               <replaceable>mime-type</replaceable>
@@ -20357,7 +20257,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
               </arg>
             </arg>
             <command>
-              <link linkend="auto-view">unauto_view</link>
+              <link linkend="auto-view">unauto-view</link>
             </command>
             <group choice="req">
               <arg choice="plain">*</arg>
@@ -20638,7 +20538,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="hdr-order">hdr_order</link>
+              <link linkend="header-order">header-order</link>
             </command>
             <arg choice="plain">
               <replaceable class="parameter">header</replaceable>
@@ -20647,7 +20547,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
               <replaceable class="parameter">header</replaceable>
             </arg>
             <command>
-              <link linkend="hdr-order">unhdr_order</link>
+              <link linkend="header-order">unheader-order</link>
             </command>
             <group choice="req">
               <arg choice="plain">
@@ -20860,7 +20760,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="mailto-allow">mailto_allow</link>
+              <link linkend="mailto-allow">mailto-allow</link>
             </command>
             <group choice="req">
               <arg choice="plain">
@@ -20871,7 +20771,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
               </arg>
             </group>
             <command>
-              <link linkend="mailto-allow">unmailto_allow</link>
+              <link linkend="mailto-allow">unmailto-allow</link>
             </command>
             <group choice="req">
               <arg choice="plain">
@@ -20915,7 +20815,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="mime-lookup">mime_lookup</link>
+              <link linkend="mime-lookup">mime-lookup</link>
             </command>
             <arg choice="plain">
               <replaceable>mime-type</replaceable>
@@ -20932,7 +20832,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
               </arg>
             </arg>
             <command>
-              <link linkend="mime-lookup">unmime_lookup</link>
+              <link linkend="mime-lookup">unmime-lookup</link>
             </command>
             <group choice="req">
               <arg choice="plain">*</arg>
@@ -21014,13 +20914,13 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="my-hdr">my_hdr</link>
+              <link linkend="my-header">my-header</link>
             </command>
             <arg choice="plain">
               <replaceable class="parameter">string</replaceable>
             </arg>
             <command>
-              <link linkend="my-hdr">unmy_hdr</link>
+              <link linkend="my-header">unmy-header</link>
             </command>
             <group choice="req">
               <arg choice="plain">
@@ -21209,7 +21109,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
         <listitem>
           <cmdsynopsis>
             <command>
-              <link linkend="sidebar-pin">sidebar_pin</link>
+              <link linkend="sidebar-pin">sidebar-pin</link>
             </command>
             <arg choice="plain">
               <replaceable class="parameter">mailbox</replaceable>
@@ -21218,7 +21118,7 @@ neomutt mailto:some@one.org?subject=test&amp;cc=other@one.org
               <replaceable class="parameter">mailbox</replaceable>
             </arg>
             <command>
-              <link linkend="sidebar-pin">sidebar_unpin</link>
+              <link linkend="sidebar-pin">sidebar-unpin</link>
             </command>
             <group choice="req">
               <arg choice="plain">
@@ -21422,12 +21322,12 @@ Like other regular expressions in NeoMutt, the search is case sensitive
 if the pattern contains at least one upper case letter, and case
 insensitive otherwise.
 </para>
-<note>Before 2021-03-21, this was called $abort_noattach_regexp, $attach_keyword</note>
+<note><para>Before 2021-03-21, this was called $abort_noattach_regexp, $attach_keyword</para></note>
 </sect2>
 
 <sect2 id="abort-noattach-regexp">
   <title>abort_noattach_regexp</title>
-  <note>Renamed to <link linkend="abort-noattach-regex">$abort_noattach_regex</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="abort-noattach-regex">$abort_noattach_regex</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="abort-nosubject">
@@ -21606,7 +21506,7 @@ Note: This also affects the entries of the address query menu, thus
 potentially overruling the order of entries as generated by <link linkend="query-command">$query_command</link>.
 </para>
 
-<note>Before 2024-11-19, this was called $sort_alias</note>
+<note><para>Before 2024-11-19, this was called $sort_alias</para></note>
 </sect2>
 
 <sect2 id="allow-8bit">
@@ -21687,7 +21587,7 @@ Default: no</literallayout>
 If <emphasis>set</emphasis>, NeoMutt will prompt you for blind-carbon-copy (Bcc) recipients
 before editing an outgoing message.
 </para>
-<note>Before 2021-03-21, this was called $askbcc</note>
+<note><para>Before 2021-03-21, this was called $askbcc</para></note>
 </sect2>
 
 <sect2 id="ask-cc">
@@ -21699,12 +21599,12 @@ Default: no</literallayout>
 If <emphasis>set</emphasis>, NeoMutt will prompt you for carbon-copy (Cc) recipients before
 editing the body of an outgoing message.
 </para>
-<note>Before 2021-03-21, this was called $askcc</note>
+<note><para>Before 2021-03-21, this was called $askcc</para></note>
 </sect2>
 
 <sect2 id="ask-follow-up">
   <title>ask_follow_up</title>
-  <note>Renamed to <link linkend="ask-followup-to">$ask_followup_to</link> (2023-01-20)</note>
+  <note><para>Renamed to <link linkend="ask-followup-to">$ask_followup_to</link> (2023-01-20)</para></note>
 </sect2>
 
 <sect2 id="ask-followup-to">
@@ -21716,7 +21616,7 @@ Default: no</literallayout>
 If set, NeoMutt will prompt you for follow-up groups before editing
 the body of an outgoing message.
 </para>
-<note>Before 2023-01-20, this was called $ask_follow_up</note>
+<note><para>Before 2023-01-20, this was called $ask_follow_up</para></note>
 </sect2>
 
 <sect2 id="ask-x-comment-to">
@@ -21732,12 +21632,12 @@ the body of an outgoing message.
 
 <sect2 id="askbcc">
   <title>askbcc</title>
-  <note>Renamed to <link linkend="ask-bcc">$ask_bcc</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="ask-bcc">$ask_bcc</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="askcc">
   <title>askcc</title>
-  <note>Renamed to <link linkend="ask-cc">$ask_cc</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="ask-cc">$ask_cc</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="assumed-charset">
@@ -21856,7 +21756,7 @@ For an explanation of "soft-fill", see the <link linkend="index-format">$index_f
 
 <sect2 id="attach-keyword">
   <title>attach_keyword</title>
-  <note>Renamed to <link linkend="abort-noattach-regex">$abort_noattach_regex</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="abort-noattach-regex">$abort_noattach_regex</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="attach-save-dir">
@@ -21909,7 +21809,7 @@ NeoMutt will operate on the attachments one by one.
 
 <sect2 id="attribution">
   <title>attribution</title>
-  <note>Renamed to <link linkend="attribution-intro">$attribution_intro</link> (2023-02-20)</note>
+  <note><para>Renamed to <link linkend="attribution-intro">$attribution_intro</link> (2023-02-20)</para></note>
 </sect2>
 
 <sect2 id="attribution-intro">
@@ -21926,7 +21826,7 @@ set).
 For a full listing of defined <literal>printf(3)</literal>-like sequences see the section
 on <link linkend="index-format">$index_format</link>.  See also <link linkend="attribution-locale">$attribution_locale</link>.
 </para>
-<note>Before 2023-02-20, this was called $attribution</note>
+<note><para>Before 2023-02-20, this was called $attribution</para></note>
 </sect2>
 
 <sect2 id="attribution-locale">
@@ -21965,8 +21865,8 @@ come after a replied-to message which is quoted in the main body of the reply
 For a full listing of defined <literal>printf(3)</literal>-like sequences see the section
 on <link linkend="index-format">$index_format</link>.  See also <link linkend="attribution-locale">$attribution_locale</link>.
 </para>
-<note>Before 2021-03-21, this was called $post_indent_str</note>
-<note>Before 2023-02-20, this was called $post_indent_string</note>
+<note><para>Before 2021-03-21, this was called $post_indent_str</para></note>
+<note><para>Before 2023-02-20, this was called $post_indent_string</para></note>
 </sect2>
 
 <sect2 id="auto-edit">
@@ -21989,7 +21889,7 @@ list of recipients is empty.
 <para>
 Also see <link linkend="fast-reply">$fast_reply</link>.
 </para>
-<note>Before 2021-03-21, this was called $autoedit</note>
+<note><para>Before 2021-03-21, this was called $autoedit</para></note>
 </sect2>
 
 <sect2 id="auto-subscribe">
@@ -22098,7 +21998,7 @@ isn't forced on for all encrypted replies.
 
 <sect2 id="autoedit">
   <title>autoedit</title>
-  <note>Renamed to <link linkend="auto-edit">$auto_edit</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="auto-edit">$auto_edit</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="beep">
@@ -22227,7 +22127,7 @@ Prefixing the value with <literal>reverse-</literal> sorts the entries in revers
 e.g. <literal>set browser_sort = "reverse-date"</literal>
 </para>
 
-<note>Before 2024-11-20, this was called $sort_browser</note>
+<note><para>Before 2024-11-20, this was called $sort_browser</para></note>
 </sect2>
 
 <sect2 id="browser-sort-dirs-first">
@@ -22509,7 +22409,7 @@ When <emphasis>set</emphasis>, NeoMutt will display a preview of message in the 
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will display user-defined headers (set via <link linkend="my-hdr">my_hdr</link>
+When <emphasis>set</emphasis>, NeoMutt will display user-defined headers (set via <link linkend="my-header">my-header</link>
 or from editing with edit-headers).
 </para>
 </sect2>
@@ -22544,7 +22444,7 @@ Default: yes</literallayout>
 When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when appending messages to
 an existing mailbox.
 </para>
-<note>Before 2021-03-21, this was called $confirmappend</note>
+<note><para>Before 2021-03-21, this was called $confirmappend</para></note>
 </sect2>
 
 <sect2 id="confirm-create">
@@ -22556,7 +22456,7 @@ Default: yes</literallayout>
 When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when saving messages to a
 mailbox which does not yet exist before creating it.
 </para>
-<note>Before 2021-03-21, this was called $confirmcreate</note>
+<note><para>Before 2021-03-21, this was called $confirmcreate</para></note>
 </sect2>
 
 <sect2 id="confirm-empty-to">
@@ -22572,17 +22472,17 @@ with an empty To recipients list.
 
 <sect2 id="confirmappend">
   <title>confirmappend</title>
-  <note>Renamed to <link linkend="confirm-append">$confirm_append</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="confirm-append">$confirm_append</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="confirmcreate">
   <title>confirmcreate</title>
-  <note>Renamed to <link linkend="confirm-create">$confirm_create</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="confirm-create">$confirm_create</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="connect-timeout">
   <title>connect_timeout</title>
-  <note>Renamed to <link linkend="socket-timeout">$socket_timeout</link> (2023-02-15)</note>
+  <note><para>Renamed to <link linkend="socket-timeout">$socket_timeout</link> (2023-02-15)</para></note>
 </sect2>
 
 <sect2 id="content-type">
@@ -22652,7 +22552,7 @@ then OpenSSL is used instead to create S/MIME messages and
 settings can be overridden by use of the smime menu instead.
 (Crypto only)
 </para>
-<note>Before 2021-03-21, this was called $crypt_autoencrypt, $pgp_autoencrypt</note>
+<note><para>Before 2021-03-21, this was called $crypt_autoencrypt, $pgp_autoencrypt</para></note>
 </sect2>
 
 <sect2 id="crypt-auto-pgp">
@@ -22666,7 +22566,7 @@ PGP encryption/signing for messages.  See also <link linkend="crypt-auto-encrypt
 <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link>,
 <link linkend="crypt-auto-sign">$crypt_auto_sign</link>, <link linkend="crypt-reply-sign">$crypt_reply_sign</link> and <link linkend="smime-is-default">$smime_is_default</link>.
 </para>
-<note>Before 2021-03-21, this was called $crypt_autopgp</note>
+<note><para>Before 2021-03-21, this was called $crypt_autopgp</para></note>
 </sect2>
 
 <sect2 id="crypt-auto-sign">
@@ -22683,7 +22583,7 @@ then OpenSSL is used instead to create S/MIME messages and settings can
 be overridden by use of the smime menu instead of the pgp menu.
 (Crypto only)
 </para>
-<note>Before 2021-03-21, this was called $crypt_autosign, $pgp_autosign</note>
+<note><para>Before 2021-03-21, this was called $crypt_autosign, $pgp_autosign</para></note>
 </sect2>
 
 <sect2 id="crypt-auto-smime">
@@ -22697,27 +22597,27 @@ S/MIME encryption/signing for messages. See also <link linkend="crypt-auto-encry
 <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link>,
 <link linkend="crypt-auto-sign">$crypt_auto_sign</link>, <link linkend="crypt-reply-sign">$crypt_reply_sign</link> and <link linkend="smime-is-default">$smime_is_default</link>.
 </para>
-<note>Before 2021-03-21, this was called $crypt_autosmime</note>
+<note><para>Before 2021-03-21, this was called $crypt_autosmime</para></note>
 </sect2>
 
 <sect2 id="crypt-autoencrypt">
   <title>crypt_autoencrypt</title>
-  <note>Renamed to <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="crypt-autopgp">
   <title>crypt_autopgp</title>
-  <note>Renamed to <link linkend="crypt-auto-pgp">$crypt_auto_pgp</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-auto-pgp">$crypt_auto_pgp</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="crypt-autosign">
   <title>crypt_autosign</title>
-  <note>Renamed to <link linkend="crypt-auto-sign">$crypt_auto_sign</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-auto-sign">$crypt_auto_sign</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="crypt-autosmime">
   <title>crypt_autosmime</title>
-  <note>Renamed to <link linkend="crypt-auto-smime">$crypt_auto_smime</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-auto-smime">$crypt_auto_smime</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="crypt-chars">
@@ -22758,12 +22658,12 @@ the <emphasis>crypt-hook</emphasis> command.  If unset, no such confirmation pro
 be presented.  This is generally considered unsafe, especially where
 typos are concerned.
 </para>
-<note>Before 2021-02-11, this was called $crypt_confirmhook</note>
+<note><para>Before 2021-02-11, this was called $crypt_confirmhook</para></note>
 </sect2>
 
 <sect2 id="crypt-confirmhook">
   <title>crypt_confirmhook</title>
-  <note>Renamed to <link linkend="crypt-confirm-hook">$crypt_confirm_hook</link> (2021-02-11)</note>
+  <note><para>Renamed to <link linkend="crypt-confirm-hook">$crypt_confirm_hook</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="crypt-encryption-info">
@@ -22943,7 +22843,7 @@ If <emphasis>set</emphasis>, automatically PGP or OpenSSL encrypt replies to mes
 encrypted.
 (Crypto only)
 </para>
-<note>Before 2021-03-21, this was called $crypt_replyencrypt, $pgp_replyencrypt</note>
+<note><para>Before 2021-03-21, this was called $crypt_replyencrypt, $pgp_replyencrypt</para></note>
 </sect2>
 
 <sect2 id="crypt-reply-sign">
@@ -22960,7 +22860,7 @@ signed.
 <emphasis>and</emphasis> signed!
 (Crypto only)
 </para>
-<note>Before 2021-03-21, this was called $crypt_replysign, $pgp_replysign</note>
+<note><para>Before 2021-03-21, this was called $crypt_replysign, $pgp_replysign</para></note>
 </sect2>
 
 <sect2 id="crypt-reply-sign-encrypted">
@@ -22977,22 +22877,22 @@ the problem noted in <link linkend="crypt-reply-sign">$crypt_reply_sign</link>, 
 to find out whether an encrypted message is also signed.
 (Crypto only)
 </para>
-<note>Before 2021-03-21, this was called $crypt_replysignencrypted, $pgp_replysignencrypted</note>
+<note><para>Before 2021-03-21, this was called $crypt_replysignencrypted, $pgp_replysignencrypted</para></note>
 </sect2>
 
 <sect2 id="crypt-replyencrypt">
   <title>crypt_replyencrypt</title>
-  <note>Renamed to <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="crypt-replysign">
   <title>crypt_replysign</title>
-  <note>Renamed to <link linkend="crypt-reply-sign">$crypt_reply_sign</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-reply-sign">$crypt_reply_sign</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="crypt-replysignencrypted">
   <title>crypt_replysignencrypted</title>
-  <note>Renamed to <link linkend="crypt-reply-sign-encrypted">$crypt_reply_sign_encrypted</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-reply-sign-encrypted">$crypt_reply_sign_encrypted</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="crypt-timestamp">
@@ -23050,12 +22950,12 @@ If <emphasis>"ask-*"</emphasis>, ask whether or not to verify the signature.
 If <emphasis>"no"</emphasis>, never attempt to verify cryptographic signatures.
 (Crypto only)
 </para>
-<note>Before 2002-01-24, this was called $pgp_verify_sig</note>
+<note><para>Before 2002-01-24, this was called $pgp_verify_sig</para></note>
 </sect2>
 
 <sect2 id="cursor-overlay">
   <title>cursor_overlay</title>
-  <note>Deprecated, since 2020-07-20</note>
+  <note><para>Deprecated, since 2020-07-20</para></note>
 </sect2>
 
 <sect2 id="date-format">
@@ -23308,7 +23208,7 @@ in the thread tree.
 
 <sect2 id="edit-hdrs">
   <title>edit_hdrs</title>
-  <note>Renamed to <link linkend="edit-headers">$edit_headers</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="edit-headers">$edit_headers</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="edit-headers">
@@ -23332,7 +23232,7 @@ labels, just as it would not when parsing an actual email.
 <emphasis role="bold">Note</emphasis> that changes made to the References: and Date: headers are
 ignored for interoperability reasons.
 </para>
-<note>Before 2021-03-21, this was called $edit_hdrs</note>
+<note><para>Before 2021-03-21, this was called $edit_hdrs</para></note>
 </sect2>
 
 <sect2 id="editor">
@@ -23400,7 +23300,7 @@ library functions. (OpenSSL only)
 
 <sect2 id="envelope-from">
   <title>envelope_from</title>
-  <note>Renamed to <link linkend="use-envelope-from">$use_envelope_from</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="use-envelope-from">$use_envelope_from</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="envelope-from-address">
@@ -23416,7 +23316,7 @@ This value is ignored if <link linkend="use-envelope-from">$use_envelope_from</l
 
 <sect2 id="escape">
   <title>escape</title>
-  <note>Deprecated, since 2021-03-18</note>
+  <note><para>Deprecated, since 2021-03-18</para></note>
 </sect2>
 
 <sect2 id="external-search-command">
@@ -23731,22 +23631,22 @@ Also see the <link linkend="record">$record</link> variable.
 
 <sect2 id="forw-decode">
   <title>forw_decode</title>
-  <note>Renamed to <link linkend="forward-decode">$forward_decode</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="forward-decode">$forward_decode</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="forw-decrypt">
   <title>forw_decrypt</title>
-  <note>Renamed to <link linkend="forward-decrypt">$forward_decrypt</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="forward-decrypt">$forward_decrypt</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="forw-format">
   <title>forw_format</title>
-  <note>Renamed to <link linkend="forward-format">$forward_format</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="forward-format">$forward_format</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="forw-quote">
   <title>forw_quote</title>
-  <note>Renamed to <link linkend="forward-quote">$forward_quote</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="forward-quote">$forward_quote</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="forward-attachments">
@@ -23800,7 +23700,7 @@ forwarding a message.  The message header is also RFC2047 decoded.
 This variable is only used, if <link linkend="mime-forward">$mime_forward</link> is <emphasis>unset</emphasis>,
 otherwise <link linkend="mime-forward-decode">$mime_forward_decode</link> is used instead.
 </para>
-<note>Before 2021-03-21, this was called $forw_decode</note>
+<note><para>Before 2021-03-21, this was called $forw_decode</para></note>
 </sect2>
 
 <sect2 id="forward-decrypt">
@@ -23814,7 +23714,7 @@ When <emphasis>set</emphasis>, the outer layer of encryption is stripped off.  T
 variable is only used if <link linkend="mime-forward">$mime_forward</link> is <emphasis>set</emphasis> and
 <link linkend="mime-forward-decode">$mime_forward_decode</link> is <emphasis>unset</emphasis>.
 </para>
-<note>Before 2021-03-21, this was called $forw_decrypt</note>
+<note><para>Before 2021-03-21, this was called $forw_decrypt</para></note>
 </sect2>
 
 <sect2 id="forward-edit">
@@ -23838,7 +23738,7 @@ Default: <quote><literal>[%a: %s]</literal></quote></literallayout>
 This variable controls the default subject when forwarding a message.
 It uses the same format sequences as the <link linkend="index-format">$index_format</link> variable.
 </para>
-<note>Before 2021-03-21, this was called $forw_format</note>
+<note><para>Before 2021-03-21, this was called $forw_format</para></note>
 </sect2>
 
 <sect2 id="forward-quote">
@@ -23851,7 +23751,7 @@ When <emphasis>set</emphasis>, forwarded messages included in the main body of t
 message (when <link linkend="mime-forward">$mime_forward</link> is <emphasis>unset</emphasis>) will be quoted using
 <link linkend="indent-string">$indent_string</link>.
 </para>
-<note>Before 2021-03-21, this was called $forw_quote</note>
+<note><para>Before 2021-03-21, this was called $forw_quote</para></note>
 </sect2>
 
 <sect2 id="forward-references">
@@ -23874,7 +23774,7 @@ Default: (empty)</literallayout>
 
 <para>
 When <emphasis>set</emphasis>, this variable contains a default "from" address.  It
-can be overridden using "<link linkend="my-hdr">my_hdr</link>" (including from a "<link linkend="send-hook">send-hook</link>") and
+can be overridden using "<link linkend="my-header">my-header</link>" (including from a "<link linkend="send-hook">send-hook</link>") and
 <link linkend="reverse-name">$reverse_name</link>.  This variable is ignored if <link linkend="use-from">$use_from</link> is <emphasis>unset</emphasis>.
 </para>
 <para>
@@ -24019,7 +23919,7 @@ has its own set of printf()-like sequences:
 
 <sect2 id="hdr-format">
   <title>hdr_format</title>
-  <note>Renamed to <link linkend="index-format">$index_format</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="index-format">$index_format</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="hdrs">
@@ -24028,7 +23928,7 @@ has its own set of printf()-like sequences:
 Default: yes</literallayout>
 
 <para>
-When <emphasis>unset</emphasis>, the header fields normally added by the "<link linkend="my-hdr">my_hdr</link>"
+When <emphasis>unset</emphasis>, the header fields normally added by the "<link linkend="my-header">my-header</link>"
 command are not created.  This variable <emphasis>must</emphasis> be unset before
 composing a new message or replying in order to take effect.  If <emphasis>set</emphasis>,
 the user defined header fields are added to every new message.
@@ -24080,7 +23980,7 @@ tokyocabinet, kyotocabinet, qdbm, rocksdb, gdbm, bdb, tdb, lmdb.
 
 <sect2 id="header-cache-compress">
   <title>header_cache_compress</title>
-  <note>Deprecated, since 2020-03-25</note>
+  <note><para>Deprecated, since 2020-03-25</para></note>
 </sect2>
 
 <sect2 id="header-cache-compress-level">
@@ -24108,7 +24008,7 @@ This results in much smaller cache file sizes and may even improve speed.
 
 <sect2 id="header-cache-pagesize">
   <title>header_cache_pagesize</title>
-  <note>Deprecated, since 2020-03-25</note>
+  <note><para>Deprecated, since 2020-03-25</para></note>
 </sect2>
 
 <sect2 id="header-color-partial">
@@ -24379,7 +24279,7 @@ UTF-8 encoded domains. (IDN only)
 
 <sect2 id="ignore-linear-white-space">
   <title>ignore_linear_white_space</title>
-  <note>Deprecated, since 2021-03-18</note>
+  <note><para>Deprecated, since 2021-03-18</para></note>
 </sect2>
 
 <sect2 id="ignore-list-reply-to">
@@ -24549,12 +24449,12 @@ a server is allowed to do this, but in practice the RFC does get
 violated every now and then. Reduce this number if you find yourself
 getting disconnected from your IMAP server due to inactivity.
 </para>
-<note>Before 2023-05-31, this was called $imap_keepalive</note>
+<note><para>Before 2023-05-31, this was called $imap_keepalive</para></note>
 </sect2>
 
 <sect2 id="imap-keepalive">
   <title>imap_keepalive</title>
-  <note>Renamed to <link linkend="imap-keep-alive">$imap_keep_alive</link> (2023-05-31)</note>
+  <note><para>Renamed to <link linkend="imap-keep-alive">$imap_keep_alive</link> (2023-05-31)</para></note>
 </sect2>
 
 <sect2 id="imap-list-subscribed">
@@ -24723,12 +24623,12 @@ harmless, or generated due to configuration problems on the
 server which are out of the users' hands, you may wish to suppress
 them at some point.
 </para>
-<note>Before 2021-02-11, this was called $imap_servernoise</note>
+<note><para>Before 2021-02-11, this was called $imap_servernoise</para></note>
 </sect2>
 
 <sect2 id="imap-servernoise">
   <title>imap_servernoise</title>
-  <note>Renamed to <link linkend="imap-server-noise">$imap_server_noise</link> (2021-02-11)</note>
+  <note><para>Renamed to <link linkend="imap-server-noise">$imap_server_noise</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="imap-user">
@@ -24757,12 +24657,12 @@ an internal viewer defined for.  If such an entry is found, NeoMutt will
 use the viewer defined in that entry to convert the body part to text
 form.
 </para>
-<note>Before 2023-01-25, this was called $implicit_autoview</note>
+<note><para>Before 2023-01-25, this was called $implicit_autoview</para></note>
 </sect2>
 
 <sect2 id="implicit-autoview">
   <title>implicit_autoview</title>
-  <note>Renamed to <link linkend="implicit-auto-view">$implicit_auto_view</link> (2023-01-25)</note>
+  <note><para>Renamed to <link linkend="implicit-auto-view">$implicit_auto_view</link> (2023-01-25)</para></note>
 </sect2>
 
 <sect2 id="include">
@@ -24802,17 +24702,17 @@ Default: no</literallayout>
 Controls whether or not NeoMutt includes only the first attachment
 of the message you are replying.
 </para>
-<note>Before 2021-03-21, this was called $include_onlyfirst</note>
+<note><para>Before 2021-03-21, this was called $include_onlyfirst</para></note>
 </sect2>
 
 <sect2 id="include-onlyfirst">
   <title>include_onlyfirst</title>
-  <note>Renamed to <link linkend="include-only-first">$include_only_first</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="include-only-first">$include_only_first</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="indent-str">
   <title>indent_str</title>
-  <note>Renamed to <link linkend="indent-string">$indent_string</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="indent-string">$indent_string</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="indent-string">
@@ -24833,7 +24733,7 @@ the quoting mechanism is strictly defined for format=flowed.
 This option is a format string, please see the description of
 <link linkend="index-format">$index_format</link> for supported <literal>printf(3)</literal>-style sequences.
 </para>
-<note>Before 2021-03-21, this was called $indent_str</note>
+<note><para>Before 2021-03-21, this was called $indent_str</para></note>
 </sect2>
 
 <sect2 id="index-format">
@@ -25009,12 +24909,12 @@ rightward text.
 Note that these expandos are supported in
 "<link linkend="save-hook">save-hook</link>", "<link linkend="fcc-hook">fcc-hook</link>" and "<link linkend="fcc-save-hook">fcc-save-hook</link>", too.
 </para>
-<note>Before 2021-03-21, this was called $hdr_format</note>
+<note><para>Before 2021-03-21, this was called $hdr_format</para></note>
 </sect2>
 
 <sect2 id="inews">
   <title>inews</title>
-  <note>Renamed to <link linkend="inews-command">$inews_command</link> (2025-12-15)</note>
+  <note><para>Renamed to <link linkend="inews-command">$inews_command</link> (2025-12-15)</para></note>
 </sect2>
 
 <sect2 id="inews-command">
@@ -25052,9 +24952,10 @@ Example:
 
 <screen>
 set inews_command="/usr/local/bin/inews -hS"
-</screen></sect2>
+</screen>
 
-<note>Before 2025-12-15, this was called $inews</note>
+<note><para>Before 2025-12-15, this was called $inews</para></note>
+</sect2>
 
 <sect2 id="ispell">
 <title>ispell</title>
@@ -25344,7 +25245,7 @@ Default: no</literallayout>
 If <emphasis>unset</emphasis>, NeoMutt will remove your address (see the "<link linkend="alternates">alternates</link>"
 command) from the list of recipients when replying to a message.
 </para>
-<note>Before 2021-03-21, this was called $metoo</note>
+<note><para>Before 2021-03-21, this was called $metoo</para></note>
 </sect2>
 
 <sect2 id="menu-context">
@@ -25414,12 +25315,12 @@ as fast as for local folders.
 <para>
 Also see the <link linkend="message-cache-clean">$message_cache_clean</link> variable.
 </para>
-<note>Before 2023-01-25, this was called message_cachedir</note>
+<note><para>Before 2023-01-25, this was called message_cachedir</para></note>
 </sect2>
 
 <sect2 id="message-cachedir">
   <title>message_cachedir</title>
-  <note>Renamed to <link linkend="message-cache-dir">$message_cache_dir</link> (2023-01-25)</note>
+  <note><para>Renamed to <link linkend="message-cache-dir">$message_cache_dir</link> (2023-01-25)</para></note>
 </sect2>
 
 <sect2 id="message-format">
@@ -25432,7 +25333,7 @@ This is the string displayed in the "attachment" menu for
 attachments of type <literal>message/rfc822</literal>.  For a full listing of defined
 <literal>printf(3)</literal>-like sequences see the section on <link linkend="index-format">$index_format</link>.
 </para>
-<note>Before 2021-03-21, this was called $msg_format</note>
+<note><para>Before 2021-03-21, this was called $msg_format</para></note>
 </sect2>
 
 <sect2 id="message-id-format">
@@ -25521,7 +25422,7 @@ high bit from <literal>0xf8</literal> is <literal>0x78</literal>, which is the A
 
 <sect2 id="metoo">
   <title>metoo</title>
-  <note>Renamed to <link linkend="me-too">$me_too</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="me-too">$me_too</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="mh-purge">
@@ -25587,7 +25488,7 @@ variable to "ask-no" or "ask-yes".
 <para>
 Also see <link linkend="forward-decode">$forward_decode</link> and <link linkend="mime-forward-decode">$mime_forward_decode</link>.
 </para>
-<note>Before 2021-03-21, this was called $mime_fwd</note>
+<note><para>Before 2021-03-21, this was called $mime_fwd</para></note>
 </sect2>
 
 <sect2 id="mime-forward-decode">
@@ -25616,12 +25517,12 @@ be attached to the newly composed message if this option is <emphasis>set</empha
 
 <sect2 id="mime-fwd">
   <title>mime_fwd</title>
-  <note>Renamed to <link linkend="mime-forward">$mime_forward</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="mime-forward">$mime_forward</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="mime-subject">
   <title>mime_subject</title>
-  <note>Deprecated, since 2021-03-24</note>
+  <note><para>Deprecated, since 2021-03-24</para></note>
 </sect2>
 
 <sect2 id="mime-type-query-command">
@@ -25665,12 +25566,12 @@ mime.types lookup.
 
 <sect2 id="mix-entry-format">
   <title>mix_entry_format</title>
-  <note>Deprecated, since 2024-05-30</note>
+  <note><para>Deprecated, since 2024-05-30</para></note>
 </sect2>
 
 <sect2 id="mixmaster">
   <title>mixmaster</title>
-  <note>Deprecated, since 2024-05-30</note>
+  <note><para>Deprecated, since 2024-05-30</para></note>
 </sect2>
 
 <sect2 id="move">
@@ -25690,7 +25591,7 @@ See also <link linkend="keep-flagged">$keep_flagged</link>.
 
 <sect2 id="msg-format">
   <title>msg_format</title>
-  <note>Renamed to <link linkend="message-format">$message_format</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="message-format">$message_format</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="narrow-tree">
@@ -25835,7 +25736,7 @@ This variable specifies the default limit used in notmuch queries.
 
 <sect2 id="nm-default-uri">
   <title>nm_default_uri</title>
-  <note>Renamed to <link linkend="nm-default-url">$nm_default_url</link> (2021-02-11)</note>
+  <note><para>Renamed to <link linkend="nm-default-url">$nm_default_url</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="nm-default-url">
@@ -25847,7 +25748,7 @@ Default: (empty)</literallayout>
 This variable specifies the default Notmuch database in format
 notmuch://&lt;absolute path&gt;.
 </para>
-<note>Before 2021-02-11, this was called $nm_default_uri</note>
+<note><para>Before 2021-02-11, this was called $nm_default_uri</para></note>
 </sect2>
 
 <sect2 id="nm-exclude-tags">
@@ -26209,7 +26110,7 @@ to a positive number at most that many lines of the previous quote
 are displayed. If the previous quote is shorter the whole quote is
 displayed.
 </para>
-<note>Before 2021-06-18, this was called $skip_quoted_offset</note>
+<note><para>Before 2021-06-18, this was called $skip_quoted_offset</para></note>
 </sect2>
 
 <sect2 id="pager-stop">
@@ -26298,27 +26199,27 @@ Also note that using the old-style PGP message format is <emphasis role="bold">s
 <emphasis role="bold">deprecated</emphasis>.
 (PGP only)
 </para>
-<note>Before 2004-04-12, this was called $pgp_create_traditional, $pgp_autoinline</note>
+<note><para>Before 2004-04-12, this was called $pgp_create_traditional, $pgp_autoinline</para></note>
 </sect2>
 
 <sect2 id="pgp-auto-traditional">
   <title>pgp_auto_traditional</title>
-  <note>Renamed to <link linkend="pgp-reply-inline">$pgp_reply_inline</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="pgp-reply-inline">$pgp_reply_inline</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="pgp-autoencrypt">
   <title>pgp_autoencrypt</title>
-  <note>Renamed to <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-auto-encrypt">$crypt_auto_encrypt</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="pgp-autoinline">
   <title>pgp_autoinline</title>
-  <note>Renamed to <link linkend="pgp-auto-inline">$pgp_auto_inline</link> (2021-02-11)</note>
+  <note><para>Renamed to <link linkend="pgp-auto-inline">$pgp_auto_inline</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="pgp-autosign">
   <title>pgp_autosign</title>
-  <note>Renamed to <link linkend="crypt-auto-sign">$crypt_auto_sign</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-auto-sign">$crypt_auto_sign</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="pgp-check-exit">
@@ -26371,17 +26272,17 @@ Note that in this case, %r expands to the search string, which is a list of
 one or more quoted values such as email address, name, or keyid.
 (PGP only)
 </para>
-<note>Before 2021-02-11, this was called $pgp_clearsign_command</note>
+<note><para>Before 2021-02-11, this was called $pgp_clearsign_command</para></note>
 </sect2>
 
 <sect2 id="pgp-clearsign-command">
   <title>pgp_clearsign_command</title>
-  <note>Renamed to <link linkend="pgp-clear-sign-command">$pgp_clear_sign_command</link> (2021-02-11)</note>
+  <note><para>Renamed to <link linkend="pgp-clear-sign-command">$pgp_clear_sign_command</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="pgp-create-traditional">
   <title>pgp_create_traditional</title>
-  <note>Renamed to <link linkend="pgp-auto-inline">$pgp_auto_inline</link> (2004-04-12)</note>
+  <note><para>Renamed to <link linkend="pgp-auto-inline">$pgp_auto_inline</link> (2004-04-12)</para></note>
 </sect2>
 
 <sect2 id="pgp-decode-command">
@@ -26503,7 +26404,7 @@ one or more quoted values such as email address, name, or keyid.
 
 <sect2 id="pgp-encrypt-self">
   <title>pgp_encrypt_self</title>
-  <note>Deprecated, since 2019-09-09</note>
+  <note><para>Deprecated, since 2019-09-09</para></note>
 </sect2>
 
 <sect2 id="pgp-encrypt-sign-command">
@@ -26619,12 +26520,12 @@ in this case, %r expands to the email address, not the public key ID (the key ID
 unknown, which is why NeoMutt is invoking this command).
 (PGP only)
 </para>
-<note>Before 2021-02-11, this was called $pgp_getkeys_command</note>
+<note><para>Before 2021-02-11, this was called $pgp_getkeys_command</para></note>
 </sect2>
 
 <sect2 id="pgp-getkeys-command">
   <title>pgp_getkeys_command</title>
-  <note>Renamed to <link linkend="pgp-get-keys-command">$pgp_get_keys_command</link> (2021-02-11)</note>
+  <note><para>Renamed to <link linkend="pgp-get-keys-command">$pgp_get_keys_command</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="pgp-good-sign">
@@ -26702,7 +26603,7 @@ e.g. <literal>set pgp_key_sort = "reverse-date"</literal>
 (PGP only)
 </para>
 
-<note>Before 2024-11-20, this was called $pgp_sort_keys</note>
+<note><para>Before 2024-11-20, this was called $pgp_sort_keys</para></note>
 </sect2>
 
 <sect2 id="pgp-list-pubring-command">
@@ -26814,27 +26715,27 @@ Also note that using the old-style PGP message format is <emphasis role="bold">s
 <emphasis role="bold">deprecated</emphasis>.
 (PGP only)
 </para>
-<note>Before 2021-03-21, this was called $pgp_auto_traditional, $pgp_replyinline</note>
+<note><para>Before 2021-03-21, this was called $pgp_auto_traditional, $pgp_replyinline</para></note>
 </sect2>
 
 <sect2 id="pgp-replyencrypt">
   <title>pgp_replyencrypt</title>
-  <note>Renamed to <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-reply-encrypt">$crypt_reply_encrypt</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="pgp-replyinline">
   <title>pgp_replyinline</title>
-  <note>Renamed to <link linkend="pgp-reply-inline">$pgp_reply_inline</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="pgp-reply-inline">$pgp_reply_inline</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="pgp-replysign">
   <title>pgp_replysign</title>
-  <note>Renamed to <link linkend="crypt-reply-sign">$crypt_reply_sign</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-reply-sign">$crypt_reply_sign</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="pgp-replysignencrypted">
   <title>pgp_replysignencrypted</title>
-  <note>Renamed to <link linkend="crypt-reply-sign-encrypted">$crypt_reply_sign_encrypted</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="crypt-reply-sign-encrypted">$crypt_reply_sign_encrypted</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="pgp-retainable-sigs">
@@ -26868,7 +26769,7 @@ using the key in <link linkend="pgp-default-key">$pgp_default_key</link>.
 
 <sect2 id="pgp-self-encrypt-as">
   <title>pgp_self_encrypt_as</title>
-  <note>Renamed to <link linkend="pgp-default-key">$pgp_default_key</link> (2018-01-11)</note>
+  <note><para>Renamed to <link linkend="pgp-default-key">$pgp_default_key</link> (2018-01-11)</para></note>
 </sect2>
 
 <sect2 id="pgp-show-unusable">
@@ -26916,7 +26817,7 @@ possible <literal>printf(3)</literal>-like sequences.
 
 <sect2 id="pgp-sort-keys">
   <title>pgp_sort_keys</title>
-  <note>Renamed to <link linkend="pgp-key-sort">$pgp_key_sort</link>(2024-11-20)</note>
+  <note><para>Renamed to <link linkend="pgp-key-sort">$pgp_key_sort</link>(2024-11-20)</para></note>
 </sect2>
 
 <sect2 id="pgp-strict-enc">
@@ -27006,7 +26907,7 @@ possible <literal>printf(3)</literal>-like sequences.
 
 <sect2 id="pgp-verify-sig">
   <title>pgp_verify_sig</title>
-  <note>Renamed to <link linkend="crypt-verify-sig">$crypt_verify_sig</link> (2002-01-24)</note>
+  <note><para>Renamed to <link linkend="crypt-verify-sig">$crypt_verify_sig</link> (2002-01-24)</para></note>
 </sect2>
 
 <sect2 id="pipe-decode">
@@ -27107,12 +27008,12 @@ Default: 60</literallayout>
 This variable configures how often (in seconds) NeoMutt should look for
 new mail in the currently selected mailbox if it is a POP mailbox.
 </para>
-<note>Before 2021-02-11, this was called $pop_checkinterval</note>
+<note><para>Before 2021-02-11, this was called $pop_checkinterval</para></note>
 </sect2>
 
 <sect2 id="pop-checkinterval">
   <title>pop_checkinterval</title>
-  <note>Renamed to <link linkend="pop-check-interval">$pop_check_interval</link> (2021-02-11)</note>
+  <note><para>Renamed to <link linkend="pop-check-interval">$pop_check_interval</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="pop-delete">
@@ -27212,12 +27113,12 @@ This variable defaults to your user name on the local machine.
 
 <sect2 id="post-indent-str">
   <title>post_indent_str</title>
-  <note>Renamed to <link linkend="attribution-trailer">$attribution_trailer</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="attribution-trailer">$attribution_trailer</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="post-indent-string">
   <title>post_indent_string</title>
-  <note>Renamed to <link linkend="attribution-trailer">$attribution_trailer</link> (2023-02-20)</note>
+  <note><para>Renamed to <link linkend="attribution-trailer">$attribution_trailer</link> (2023-02-20)</para></note>
 </sect2>
 
 <sect2 id="post-moderated">
@@ -27265,7 +27166,7 @@ in <link linkend="pgp-default-key">$pgp_default_key</link> or <link linkend="smi
 
 <sect2 id="postpone-encrypt-as">
   <title>postpone_encrypt_as</title>
-  <note>Deprecated, since 2025-12-16</note>
+  <note><para>Deprecated, since 2025-12-16</para></note>
 </sect2>
 
 <sect2 id="postponed">
@@ -27339,7 +27240,7 @@ accidentally hit "p" often.
 
 <sect2 id="print-cmd">
   <title>print_cmd</title>
-  <note>Renamed to <link linkend="print-command">$print_command</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="print-command">$print_command</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="print-command">
@@ -27350,7 +27251,7 @@ Default: <quote><literal>lpr</literal></quote></literallayout>
 <para>
 This specifies the command pipe that should be used to print messages.
 </para>
-<note>Before 2021-03-21, this was called $print_cmd</note>
+<note><para>Before 2021-03-21, this was called $print_cmd</para></note>
 </sect2>
 
 <sect2 id="print-decode">
@@ -27536,12 +27437,12 @@ the regular expression until it fails to produce a match.
 <para>
 Match detection may be overridden by the <link linkend="smileys">$smileys</link> regular expression.
 </para>
-<note>Before 2021-03-21, this was called $quote_regexp</note>
+<note><para>Before 2021-03-21, this was called $quote_regexp</para></note>
 </sect2>
 
 <sect2 id="quote-regexp">
   <title>quote_regexp</title>
-  <note>Renamed to <link linkend="quote-regex">$quote_regex</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="quote-regex">$quote_regex</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="read-inc">
@@ -27589,12 +27490,12 @@ when sending messages.
 If not specified, then the user's "real name" will be read from <literal>/etc/passwd</literal>.
 This option will not be used, if "<link linkend="from">$from</link>" is set.
 </para>
-<note>Before 2021-03-21, this was called $realname</note>
+<note><para>Before 2021-03-21, this was called $realname</para></note>
 </sect2>
 
 <sect2 id="realname">
   <title>realname</title>
-  <note>Renamed to <link linkend="real-name">$real_name</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="real-name">$real_name</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="recall">
@@ -27624,7 +27525,7 @@ Default: <quote><literal>~/sent</literal></quote></literallayout>
 <para>
 This specifies the file into which your outgoing messages should be
 appended.  (This is meant as the primary method for saving a copy of
-your messages, but another way to do this is using the "<link linkend="my-hdr">my_hdr</link>"
+your messages, but another way to do this is using the "<link linkend="my-header">my-header</link>"
 command to create a "Bcc:" field with your email address in it.)
 </para>
 <para>
@@ -27733,12 +27634,12 @@ temporarily turning off the header cache.  If that fixes the
 problem, then once the variable is set to your liking, remove
 your stale header cache files and turn the header cache back on.
 </para>
-<note>Before 2021-03-21, this was called $reply_regexp</note>
+<note><para>Before 2021-03-21, this was called $reply_regexp</para></note>
 </sect2>
 
 <sect2 id="reply-regexp">
   <title>reply_regexp</title>
-  <note>Renamed to <link linkend="reply-regex">$reply_regex</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="reply-regex">$reply_regex</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="reply-self">
@@ -27910,12 +27811,12 @@ When it is <emphasis>set</emphasis>, NeoMutt will use the matching address as-is
 In either case, a missing real name will be filled in afterwards
 using the value of <link linkend="real-name">$real_name</link>.
 </para>
-<note>Before 2021-03-21, this was called $reverse_realname</note>
+<note><para>Before 2021-03-21, this was called $reverse_realname</para></note>
 </sect2>
 
 <sect2 id="reverse-realname">
   <title>reverse_realname</title>
-  <note>Renamed to <link linkend="reverse-real-name">$reverse_real_name</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="reverse-real-name">$reverse_real_name</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="rfc2047-parameters">
@@ -28376,7 +28277,7 @@ When set, the sidebar will only display mailboxes containing new, or
 flagged, mail.
 </para>
 <para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-pin">sidebar_pin</link>, <link linkend="sidebar-non-empty-mailbox-only">$sidebar_non_empty_mailbox_only</link>.
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-pin">sidebar-pin</link>, <link linkend="sidebar-non-empty-mailbox-only">$sidebar_non_empty_mailbox_only</link>.
 </para>
 </sect2>
 
@@ -28402,7 +28303,7 @@ Default: no</literallayout>
 When set, the sidebar will only display mailboxes that contain one or more mails.
 </para>
 <para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-new-mail-only">$sidebar_new_mail_only</link>, <link linkend="sidebar-pin">sidebar_pin</link>.
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-new-mail-only">$sidebar_new_mail_only</link>, <link linkend="sidebar-pin">sidebar-pin</link>.
 </para>
 </sect2>
 
@@ -28497,12 +28398,12 @@ Specifies how to sort mailbox entries in the sidebar.
 <para>
 </para>
 
-<note>Before 2024-11-20, this was called $sidebar_sort_method</note>
+<note><para>Before 2024-11-20, this was called $sidebar_sort_method</para></note>
 </sect2>
 
 <sect2 id="sidebar-sort-method">
   <title>sidebar_sort_method</title>
-  <note>Renamed to <link linkend="sidebar-sort">$sidebar_sort</link>(2024-11-20)</note>
+  <note><para>Renamed to <link linkend="sidebar-sort">$sidebar_sort</link>(2024-11-20)</para></note>
 </sect2>
 
 <sect2 id="sidebar-visible">
@@ -28641,7 +28542,7 @@ See <link linkend="formatstrings-size">formatstrings-size</link>.
 
 <sect2 id="skip-quoted-offset">
   <title>skip_quoted_offset</title>
-  <note>Renamed to <link linkend="pager-skip-quoted-context">$pager_skip_quoted_context</link> (2021-06-18)</note>
+  <note><para>Renamed to <link linkend="pager-skip-quoted-context">$pager_skip_quoted_context</link> (2021-06-18)</para></note>
 </sect2>
 
 <sect2 id="sleep-time">
@@ -28809,7 +28710,7 @@ It will also be used for signing unless <link linkend="smime-sign-as">$smime_sig
 <para>
 (S/MIME only)
 </para>
-<note>Before 2018-01-11, this was called $smime_self_encrypt_as</note>
+<note><para>Before 2018-01-11, this was called $smime_self_encrypt_as</para></note>
 </sect2>
 
 <sect2 id="smime-encrypt-command">
@@ -28833,7 +28734,7 @@ Encrypt the message to <link linkend="smime-default-key">$smime_default_key</lin
 
 <sect2 id="smime-encrypt-self">
   <title>smime_encrypt_self</title>
-  <note>Deprecated, since 2019-09-09</note>
+  <note><para>Deprecated, since 2019-09-09</para></note>
 </sect2>
 
 <sect2 id="smime-encrypt-with">
@@ -28974,7 +28875,7 @@ using the certificate in <link linkend="smime-default-key">$smime_default_key</l
 
 <sect2 id="smime-self-encrypt-as">
   <title>smime_self_encrypt_as</title>
-  <note>Renamed to <link linkend="smime-default-key">$smime_default_key</link> (2018-01-11)</note>
+  <note><para>Renamed to <link linkend="smime-default-key">$smime_default_key</link> (2018-01-11)</para></note>
 </sect2>
 
 <sect2 id="smime-sign-as">
@@ -29250,7 +29151,7 @@ examples, <ulink url="https://neomutt.org/feature/use-threads">https://neomutt.o
 
 <sect2 id="sort-alias">
   <title>sort_alias</title>
-  <note>Renamed to <link linkend="alias-sort">$alias_sort</link>(2024-11-19)</note>
+  <note><para>Renamed to <link linkend="alias-sort">$alias_sort</link>(2024-11-19)</para></note>
 </sect2>
 
 <sect2 id="sort-aux">
@@ -29288,7 +29189,7 @@ examples, <ulink url="https://neomutt.org/feature/use-threads">https://neomutt.o
 
 <sect2 id="sort-browser">
   <title>sort_browser</title>
-  <note>Renamed to <link linkend="browser-sort">$browser_sort</link>(2024-11-20)</note>
+  <note><para>Renamed to <link linkend="browser-sort">$browser_sort</link>(2024-11-20)</para></note>
 </sect2>
 
 <sect2 id="sort-re">
@@ -29336,12 +29237,12 @@ it, you can specify its location with this variable. The description from
 If not specified, then the environment variables <literal>$MAIL</literal> and
 <literal>$MAILDIR</literal> will be checked.
 </para>
-<note>Before 2021-03-21, this was called $spoolfile</note>
+<note><para>Before 2021-03-21, this was called $spoolfile</para></note>
 </sect2>
 
 <sect2 id="spoolfile">
   <title>spoolfile</title>
-  <note>Renamed to <link linkend="spool-file">$spool_file</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="spool-file">$spool_file</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="ssl-ca-certificates-file">
@@ -29437,12 +29338,12 @@ recommended if you rely on <literal>STARTTLS</literal>.
 
 <sect2 id="ssl-use-sslv2">
   <title>ssl_use_sslv2</title>
-  <note>Deprecated, since 2025-12-07</note>
+  <note><para>Deprecated, since 2025-12-07</para></note>
 </sect2>
 
 <sect2 id="ssl-use-sslv3">
   <title>ssl_use_sslv3</title>
-  <note>Deprecated, since 2025-12-07</note>
+  <note><para>Deprecated, since 2025-12-07</para></note>
 </sect2>
 
 <sect2 id="ssl-use-system-certs">
@@ -29455,17 +29356,17 @@ If set to <emphasis>yes</emphasis>, NeoMutt will use CA certificates in the
 system-wide certificate store when checking if a server certificate
 is signed by a trusted CA. (OpenSSL only)
 </para>
-<note>Before 2021-02-11, this was called $ssl_usesystemcerts</note>
+<note><para>Before 2021-02-11, this was called $ssl_usesystemcerts</para></note>
 </sect2>
 
 <sect2 id="ssl-use-tlsv1">
   <title>ssl_use_tlsv1</title>
-  <note>Deprecated, since 2025-12-07</note>
+  <note><para>Deprecated, since 2025-12-07</para></note>
 </sect2>
 
 <sect2 id="ssl-use-tlsv1-1">
   <title>ssl_use_tlsv1_1</title>
-  <note>Deprecated, since 2025-12-07</note>
+  <note><para>Deprecated, since 2025-12-07</para></note>
 </sect2>
 
 <sect2 id="ssl-use-tlsv1-2">
@@ -29492,7 +29393,7 @@ request it.
 
 <sect2 id="ssl-usesystemcerts">
   <title>ssl_usesystemcerts</title>
-  <note>Renamed to <link linkend="ssl-use-system-certs">$ssl_use_system_certs</link> (2021-02-11)</note>
+  <note><para>Renamed to <link linkend="ssl-use-system-certs">$ssl_use_system_certs</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="ssl-verify-dates">
@@ -29877,12 +29778,12 @@ temporary files needed for displaying and composing messages.
 If this variable is not set, the environment variable <literal>$TMPDIR</literal> is
 used.  Failing that, then "<literal>/tmp</literal>" is used.
 </para>
-<note>Before 2023-01-25, this was called $tmpdir</note>
+<note><para>Before 2023-01-25, this was called $tmpdir</para></note>
 </sect2>
 
 <sect2 id="tmpdir">
   <title>tmpdir</title>
-  <note>Renamed to <link linkend="tmp-dir">$tmp_dir</link> (2023-01-25)</note>
+  <note><para>Renamed to <link linkend="tmp-dir">$tmp_dir</link> (2023-01-25)</para></note>
 </sect2>
 
 <sect2 id="to-chars">
@@ -29953,7 +29854,7 @@ Default: no</literallayout>
 Controls whether NeoMutt tries to set the terminal status line and icon name.
 Most terminal emulators emulate the status line in the window title.
 </para>
-<note>Before 2021-03-21, this was called $xterm_set_titles</note>
+<note><para>Before 2021-03-21, this was called $xterm_set_titles</para></note>
 </sect2>
 
 <sect2 id="ts-icon-format">
@@ -29966,7 +29867,7 @@ Controls the format of the icon title, as long as "<link linkend="ts-enabled">$t
 This string is identical in formatting to the one used by
 "<link linkend="status-format">$status_format</link>".
 </para>
-<note>Before 2021-03-21, this was called $xterm_icon</note>
+<note><para>Before 2021-03-21, this was called $xterm_icon</para></note>
 </sect2>
 
 <sect2 id="ts-status-format">
@@ -29979,7 +29880,7 @@ Controls the format of the terminal status line (or window title),
 provided that "<link linkend="ts-enabled">$ts_enabled</link>" has been set. This string is identical in
 formatting to the one used by "<link linkend="status-format">$status_format</link>".
 </para>
-<note>Before 2021-03-21, this was called $xterm_title</note>
+<note><para>Before 2021-03-21, this was called $xterm_title</para></note>
 </sect2>
 
 <sect2 id="tunnel">
@@ -30066,12 +29967,12 @@ of sendmail which supports the <literal>-B8BITMIME</literal> flag (such as sendm
 When <emphasis>set</emphasis>, NeoMutt will invoke <link linkend="sendmail">$sendmail</link> with the <literal>-B8BITMIME</literal>
 flag when sending 8-bit messages to enable ESMTP negotiation.
 </para>
-<note>Before 2021-03-21, this was called $use_8bitmime</note>
+<note><para>Before 2021-03-21, this was called $use_8bitmime</para></note>
 </sect2>
 
 <sect2 id="use-8bitmime">
   <title>use_8bitmime</title>
-  <note>Renamed to <link linkend="use-8bit-mime">$use_8bit_mime</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="use-8bit-mime">$use_8bit_mime</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="use-domain">
@@ -30103,7 +30004,7 @@ Note that this information is passed to sendmail command using the
 if the <link linkend="sendmail">$sendmail</link> variable already contains <literal>-f</literal> or if the
 executable pointed to by <link linkend="sendmail">$sendmail</link> doesn't support the <literal>-f</literal> switch.
 </para>
-<note>Before 2021-03-21, this was called $envelope_from</note>
+<note><para>Before 2021-03-21, this was called $envelope_from</para></note>
 </sect2>
 
 <sect2 id="use-from">
@@ -30114,7 +30015,7 @@ Default: yes</literallayout>
 <para>
 When <emphasis>set</emphasis>, NeoMutt will generate the "From:" header field when
 sending messages.  If <emphasis>unset</emphasis>, no "From:" header field will be
-generated unless the user explicitly sets one using the "<link linkend="my-hdr">my_hdr</link>"
+generated unless the user explicitly sets one using the "<link linkend="my-header">my-header</link>"
 command.
 </para>
 </sect2>
@@ -30180,22 +30081,22 @@ them.
 
 <sect2 id="vfolder-format">
   <title>vfolder_format</title>
-  <note>Deprecated, since 2018-11-01</note>
+  <note><para>Deprecated, since 2018-11-01</para></note>
 </sect2>
 
 <sect2 id="virtual-spool-file">
   <title>virtual_spool_file</title>
-  <note>Deprecated, since 2025-12-08</note>
+  <note><para>Deprecated, since 2025-12-08</para></note>
 </sect2>
 
 <sect2 id="virtual-spoolfile">
   <title>virtual_spoolfile</title>
-  <note>Renamed to <link linkend="virtual-spool-file">$virtual_spool_file</link> (2021-02-11)</note>
+  <note><para>Renamed to <link linkend="virtual-spool-file">$virtual_spool_file</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="visual">
   <title>visual</title>
-  <note>Deprecated, since 2021-03-18</note>
+  <note><para>Deprecated, since 2021-03-18</para></note>
 </sect2>
 
 <sect2 id="wait-key">
@@ -30210,7 +30111,7 @@ has been invoked by these functions: <literal>&lt;shell-escape&gt;</literal>,
 and <literal>&lt;print-entry&gt;</literal> commands.
 </para>
 <para>
-It is also used when viewing attachments with "<link linkend="auto-view">auto_view</link>", provided
+It is also used when viewing attachments with "<link linkend="auto-view">auto-view</link>", provided
 that the corresponding mailcap entry has a <emphasis>needsterminal</emphasis> flag,
 and the external program is interactive.
 </para>
@@ -30334,17 +30235,17 @@ name of original article author) to article that followuped to newsgroup.
 
 <sect2 id="xterm-icon">
   <title>xterm_icon</title>
-  <note>Renamed to <link linkend="ts-icon-format">$ts_icon_format</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="ts-icon-format">$ts_icon_format</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="xterm-set-titles">
   <title>xterm_set_titles</title>
-  <note>Renamed to <link linkend="ts-enabled">$ts_enabled</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="ts-enabled">$ts_enabled</link> (2021-03-21)</para></note>
 </sect2>
 
 <sect2 id="xterm-title">
   <title>xterm_title</title>
-  <note>Renamed to <link linkend="ts-status-format">$ts_status_format</link> (2021-03-21)</note>
+  <note><para>Renamed to <link linkend="ts-status-format">$ts_status_format</link> (2021-03-21)</para></note>
 </sect2>
 
     </sect1>
@@ -30542,17 +30443,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>set a status flag on a message</entry></row>
 <row><entry><literal>&lt;show-limit&gt;</literal></entry><entry>Esc l</entry><entry>show currently active limit pattern</entry></row>
 <row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry>M</entry><entry>show log (and debug) messages</entry></row>
-<row><entry><literal>&lt;sidebar-first&gt;</literal></entry><entry></entry><entry>move the highlight to the first mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-last&gt;</literal></entry><entry></entry><entry>move the highlight to the last mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-next&gt;</literal></entry><entry></entry><entry>move the highlight to next mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-next-new&gt;</literal></entry><entry></entry><entry>move the highlight to next mailbox with new mail</entry></row>
-<row><entry><literal>&lt;sidebar-open&gt;</literal></entry><entry></entry><entry>open highlighted mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-page-down&gt;</literal></entry><entry></entry><entry>scroll the sidebar down 1 page</entry></row>
-<row><entry><literal>&lt;sidebar-page-up&gt;</literal></entry><entry></entry><entry>scroll the sidebar up 1 page</entry></row>
-<row><entry><literal>&lt;sidebar-prev&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-prev-new&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox with new mail</entry></row>
-<row><entry><literal>&lt;sidebar-toggle-virtual&gt;</literal></entry><entry></entry><entry>toggle between mailboxes and virtual mailboxes</entry></row>
-<row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
 <row><entry><literal>&lt;sort-mailbox&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
 <row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
 <row><entry><literal>&lt;sync-mailbox&gt;</literal></entry><entry>$</entry><entry>save changes to mailbox</entry></row>
@@ -30621,7 +30511,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
 <row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>enter a neomuttrc command</entry></row>
 <row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>i</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;exit&gt;</literal></entry><entry>x</entry><entry>exit this menu</entry></row>
 <row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>extract supported public keys</entry></row>
@@ -30706,17 +30595,6 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;shell-escape&gt;</literal></entry><entry>!</entry><entry>invoke a command in a subshell</entry></row>
 <row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry></entry><entry>show log (and debug) messages</entry></row>
 <row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>show the NeoMutt version number and date</entry></row>
-<row><entry><literal>&lt;sidebar-first&gt;</literal></entry><entry></entry><entry>move the highlight to the first mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-last&gt;</literal></entry><entry></entry><entry>move the highlight to the last mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-next&gt;</literal></entry><entry></entry><entry>move the highlight to next mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-next-new&gt;</literal></entry><entry></entry><entry>move the highlight to next mailbox with new mail</entry></row>
-<row><entry><literal>&lt;sidebar-open&gt;</literal></entry><entry></entry><entry>open highlighted mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-page-down&gt;</literal></entry><entry></entry><entry>scroll the sidebar down 1 page</entry></row>
-<row><entry><literal>&lt;sidebar-page-up&gt;</literal></entry><entry></entry><entry>scroll the sidebar up 1 page</entry></row>
-<row><entry><literal>&lt;sidebar-prev&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-prev-new&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox with new mail</entry></row>
-<row><entry><literal>&lt;sidebar-toggle-virtual&gt;</literal></entry><entry></entry><entry>toggle between mailboxes and virtual mailboxes</entry></row>
-<row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
 <row><entry><literal>&lt;skip-headers&gt;</literal></entry><entry>H</entry><entry>jump to first line after headers</entry></row>
 <row><entry><literal>&lt;skip-quoted&gt;</literal></entry><entry>S</entry><entry>skip beyond quoted text</entry></row>
 <row><entry><literal>&lt;sort-mailbox&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
@@ -31070,6 +30948,34 @@ bindings for all menus (except as noted).
 <row><entry><literal>&lt;redraw-screen&gt;</literal></entry><entry>^L</entry><entry>clear and redraw the screen</entry></row>
 <row><entry><literal>&lt;transpose-chars&gt;</literal></entry><entry></entry><entry>transpose character under cursor with previous</entry></row>
 <row><entry><literal>&lt;upcase-word&gt;</literal></entry><entry>Esc u</entry><entry>convert the word to upper case</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect2>
+
+<sect2 id="sidebar-map">
+<title>Sidebar Menu</title>
+
+
+<table id="tab-sidebar-bindings">
+<title>Default Sidebar Menu Bindings</title>
+<tgroup cols="3">
+<thead>
+<row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
+</thead>
+<tbody>
+<row><entry><literal>&lt;sidebar-first&gt;</literal></entry><entry></entry><entry>move the highlight to the first mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-last&gt;</literal></entry><entry></entry><entry>move the highlight to the last mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-next&gt;</literal></entry><entry></entry><entry>move the highlight to next mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-next-new&gt;</literal></entry><entry></entry><entry>move the highlight to next mailbox with new mail</entry></row>
+<row><entry><literal>&lt;sidebar-open&gt;</literal></entry><entry></entry><entry>open highlighted mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-page-down&gt;</literal></entry><entry></entry><entry>scroll the sidebar down 1 page</entry></row>
+<row><entry><literal>&lt;sidebar-page-up&gt;</literal></entry><entry></entry><entry>scroll the sidebar up 1 page</entry></row>
+<row><entry><literal>&lt;sidebar-prev&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-prev-new&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox with new mail</entry></row>
+<row><entry><literal>&lt;sidebar-toggle-virtual&gt;</literal></entry><entry></entry><entry>toggle between mailboxes and virtual mailboxes</entry></row>
+<row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
 </tbody>
 </tgroup>
 </table>
