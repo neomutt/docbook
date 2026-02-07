@@ -8444,495 +8444,302 @@ subscribe "only\\.dot@example\\.org"
               <row>
                 <entry>~A</entry>
                 <entry></entry>
-                <entry>
-                  all messages
-                </entry>
+                <entry>all messages</entry>
               </row>
               <row>
-                <entry>~b <emphasis>EXPR</emphasis></entry>
+                <entry>~b <emphasis>REGEX</emphasis></entry>
                 <entry>d)</entry>
-                <entry>
-                  messages which contain <emphasis>EXPR</emphasis> in the
-                  message body
-                </entry>
+                <entry>messages whose body matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>=b <emphasis>STRING</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  If IMAP is enabled, like ~b but searches for
-                  <emphasis>STRING</emphasis> on the server, rather than
-                  downloading each message and searching it locally.
-                </entry>
+                <entry>IMAP: messages whose body contains <emphasis>STRING</emphasis> (searches on the server)</entry>
               </row>
               <row>
-                <entry>~B <emphasis>EXPR</emphasis></entry>
+                <entry>~B <emphasis>REGEX</emphasis></entry>
                 <entry>d)</entry>
-                <entry>
-                  messages which contain <emphasis>EXPR</emphasis> in the whole
-                  message
-                </entry>
+                <entry>messages whose body or headers match <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>=B <emphasis>STRING</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  If IMAP is enabled, like ~B but searches for
-                  <emphasis>STRING</emphasis> on the server, rather than
-                  downloading each message and searching it locally.
-                </entry>
+                <entry>IMAP: messages whose body or headers contain <emphasis>STRING (searches on the server)</emphasis></entry>
               </row>
               <row>
-                <entry>~c <emphasis>EXPR</emphasis></entry>
+                <entry>~c <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages carbon-copied to <emphasis>EXPR</emphasis>
-                </entry>
+                <entry>messages whose <quote>Cc:</quote> header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>%c <emphasis>GROUP</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages carbon-copied to any member of
-                  <emphasis>GROUP</emphasis>
-                </entry>
+                <entry>messages whose <quote>Cc:</quote> is a member of <emphasis>GROUP</emphasis></entry>
               </row>
               <row>
-                <entry>~C <emphasis>EXPR</emphasis></entry>
+                <entry>~C <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages either to:, cc: or bcc: <emphasis>EXPR</emphasis>
-                </entry>
+                <entry>messages whose <quote>To:</quote>, <quote>Cc:</quote> or <quote>Bcc:</quote> header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>%C <emphasis>GROUP</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages either to:, cc: or bcc: to any member of
-                  <emphasis>GROUP</emphasis>
-                </entry>
+                <entry>messages whose <quote>To:</quote>, <quote>Cc:</quote> or <quote>Bcc:</quote> is a member of <emphasis>GROUP</emphasis></entry>
               </row>
               <row>
-                <entry>~d [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
+                <entry>~d <emphasis>DATERANGE</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages with <quote>date-sent</quote> in a Date range
-                </entry>
+                <entry>messages sent in <emphasis>DATERANGE</emphasis></entry>
               </row>
               <row>
                 <entry>~D</entry>
                 <entry></entry>
-                <entry>
-                  deleted messages
-                </entry>
+                <entry>deleted messages</entry>
               </row>
               <row>
-                <entry>~e <emphasis>EXPR</emphasis></entry>
+                <entry>~e <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages which contains <emphasis>EXPR</emphasis> in the
-                  <quote>Sender</quote> field
-                </entry>
+                <entry>messages whose <quote>Sender:</quote> header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>%e <emphasis>GROUP</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages which contain a member of <emphasis>GROUP</emphasis>
-                  in the <quote>Sender</quote> field
-                </entry>
+                <entry>messages whose <quote>Sender:</quote> is a member of <emphasis>GROUP</emphasis></entry>
               </row>
               <row>
                 <entry>~E</entry>
                 <entry></entry>
-                <entry>
-                  expired messages
-                </entry>
+                <entry>expired messages</entry>
               </row>
               <row>
-                <entry>~F</entry>
+                <entry>~f <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  flagged messages
-                </entry>
-              </row>
-              <row>
-                <entry>~f <emphasis>EXPR</emphasis></entry>
-                <entry></entry>
-                <entry>
-                  messages originating from <emphasis>EXPR</emphasis>
-                </entry>
+                <entry>messages whose <quote>From:</quote> header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>%f <emphasis>GROUP</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages originating from any member of
-                  <emphasis>GROUP</emphasis>
-                </entry>
+                <entry>messages whose <quote>From:</quote> is a member of <emphasis>GROUP</emphasis></entry>
+              </row>
+              <row>
+                <entry>~F</entry>
+                <entry></entry>
+                <entry>flagged messages</entry>
               </row>
               <row>
                 <entry>~g</entry>
                 <entry></entry>
-                <entry>
-                  cryptographically signed messages
-                </entry>
+                <entry>cryptographically signed messages</entry>
               </row>
               <row>
                 <entry>~G</entry>
                 <entry></entry>
-                <entry>
-                  cryptographically encrypted messages
-                </entry>
+                <entry>cryptographically encrypted messages</entry>
               </row>
               <row>
-                <entry>~h <emphasis>EXPR</emphasis></entry>
+                <entry>~h <emphasis>REGEX</emphasis></entry>
                 <entry>d)</entry>
-                <entry>
-                  messages which contain <emphasis>EXPR</emphasis> in the
-                  message header
-                </entry>
+                <entry>messages whose header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>=h <emphasis>STRING</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  If IMAP is enabled, like ~h but searches for
-                  <emphasis>STRING</emphasis> on the server, rather than
-                  downloading each message and searching it locally;
-                  <emphasis>STRING</emphasis> must be of the form
-                  <quote>header: substring</quote>(see below).
-                </entry>
+                <entry>IMAP: messages whose header contains <emphasis>STRING (searches on the server)</emphasis></entry>
               </row>
               <row>
-                <entry>~H <emphasis>EXPR</emphasis></entry>
+                <entry>~H <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages with a spam attribute matching
-                  <emphasis>EXPR</emphasis>
-                </entry>
+                <entry>messages whose spam header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
-                <entry>~i <emphasis>EXPR</emphasis></entry>
+                <entry>~i <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages which match <emphasis>EXPR</emphasis> in the
-                  <quote>Message-ID</quote> field
-                </entry>
+                <entry>messages whose <quote>Message-Id:</quote> header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>~I <emphasis>QUERY</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages whose <quote>Message-ID</quote> field is included in
-                  the results returned from an external search program, when the program
-                  is run with <emphasis>QUERY</emphasis> as its argument.
-                  This is explained in greater detail in the variable reference entry
-                  <xref linkend="external-search-command"/>,
-                </entry>
+                <entry>messages whose <quote>Message-Id:</quote> is included in results from $external_search_command (see: <xref linkend="external-search-command" />)</entry>
               </row>
               <row>
                 <entry>~k</entry>
                 <entry></entry>
-                <entry>
-                  messages which contain PGP key material
-                </entry>
+                <entry>messages which contain a PGP key</entry>
               </row>
               <row>
-                <entry>~K <emphasis>EXPR</emphasis></entry>
+                <entry>~K <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages blind carbon-copied to <emphasis>EXPR</emphasis>
-                </entry>
-              </row>
-              <row>
-                <entry>~L <emphasis>EXPR</emphasis></entry>
-                <entry></entry>
-                <entry>
-                  messages either originated or received by
-                  <emphasis>EXPR</emphasis>
-                </entry>
-              </row>
-              <row>
-                <entry>%L <emphasis>GROUP</emphasis></entry>
-                <entry></entry>
-                <entry>
-                  message either originated or received by any member of
-                  <emphasis>GROUP</emphasis>
-                </entry>
+                <entry>messages whose <quote>Bcc:</quote> header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>~l</entry>
                 <entry></entry>
-                <entry>
-                  messages addressed to a known mailing list
-                </entry>
+                <entry>messages addressed to known mailing lists</entry>
               </row>
               <row>
-                <entry>~m [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
+                <entry>~L <emphasis>REGEX</emphasis></entry>
+                <entry></entry>
+                <entry>messages whose <quote>From:</quote>, <quote>Sender:</quote>, <quote>To:</quote> or <quote>Cc:</quote> header matches <emphasis>REGEX</emphasis></entry>
+              </row>
+              <row>
+                <entry>%L <emphasis>GROUP</emphasis></entry>
+                <entry></entry>
+                <entry>messages whose <quote>From:</quote>, <quote>Sender:</quote>, <quote>To:</quote> or <quote>Cc:</quote> is a member of <emphasis>GROUP</emphasis></entry>
+              </row>
+              <row>
+                <entry>~m <emphasis>RANGE</emphasis></entry>
                 <entry>c)</entry>
-                <entry>
-                  messages with numbers in the range <emphasis>MIN</emphasis>
-                  to <emphasis>MAX</emphasis>
-                </entry>
+                <entry>messages whose number is in <emphasis>RANGE</emphasis></entry>
               </row>
               <row>
-                <entry>~m &lt;[<emphasis>MAX</emphasis>]</entry>
-                <entry>c)</entry>
-                <entry>
-                  messages with numbers less than <emphasis>MAX</emphasis>
-                </entry>
-              </row>
-              <row>
-                <entry>~m &gt;[<emphasis>MIN</emphasis>]</entry>
-                <entry>c)</entry>
-                <entry>
-                  messages with numbers greater than <emphasis>MIN</emphasis>
-                </entry>
-              </row>
-              <row>
-                <entry>~m [<emphasis>M</emphasis>]</entry>
-                <entry>c)</entry>
-                <entry>
-                  just message number <emphasis>M</emphasis>
-                </entry>
-              </row>
-              <row>
-                <entry>~m [<emphasis>MIN</emphasis>],[<emphasis>MAX</emphasis>]</entry>
-                <entry>c)</entry>
-                <entry>
-                  messages with offsets (from selected message) in the range
-                  <emphasis>MIN</emphasis> to <emphasis>MAX</emphasis>
-                </entry>
-              </row>
-              <row>
-                <entry>~M <emphasis>EXPR</emphasis></entry>
+                <entry>~M <emphasis>REGEX</emphasis></entry>
                 <entry>d)</entry>
-                <entry>
-                   messages which contain a mime Content-Type matching
-                   <emphasis>EXPR</emphasis>
-                </entry>
+                <entry>messages with a Content-Type matching <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
-                <entry>~n [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
+                <entry>~n <emphasis>RANGE</emphasis></entry>
                 <entry>a)</entry>
-                <entry>
-                  messages with a score in the range <emphasis>MIN</emphasis>
-                  to <emphasis>MAX</emphasis>
-                </entry>
+                <entry>messages whose score is in <emphasis>RANGE</emphasis></entry>
               </row>
               <row>
                 <entry>~N</entry>
                 <entry></entry>
-                <entry>
-                  new messages
-                </entry>
+                <entry>new messages</entry>
               </row>
               <row>
                 <entry>~O</entry>
                 <entry></entry>
-                <entry>
-                  old messages
-                </entry>
+                <entry>old messages</entry>
               </row>
               <row>
                 <entry>~p</entry>
                 <entry></entry>
-                <entry>
-                  messages addressed to you (consults <link linkend="from">$from</link>,
-                  <command>alternates</command>, and local account/hostname information)
-                </entry>
+                <entry>messages addressed to you (consults <link linkend="from">$from</link>, <command>alternates</command>, and local account/hostname information)</entry>
               </row>
               <row>
                 <entry>~P</entry>
                 <entry></entry>
-                <entry>
-                  messages from you (consults <link linkend="from">$from</link>,
-                  <command>alternates</command>, and local account/hostname information)
-                </entry>
+                <entry>messages from you (consults <link linkend="from">$from</link>, <command>alternates</command>, and local account/hostname information)</entry>
               </row>
               <row>
                 <entry>~Q</entry>
                 <entry></entry>
-                <entry>
-                  messages which have been replied to
-                </entry>
+                <entry>messages which have been replied to</entry>
               </row>
               <row>
-                <entry>~r [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
+                <entry>~r <emphasis>DATERANGE</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages with <quote>date-received</quote> in a Date range
-                </entry>
+                <entry>messages received in <emphasis>DATERANGE</emphasis></entry>
               </row>
               <row>
                 <entry>~R</entry>
                 <entry></entry>
-                <entry>
-                  read messages
-                </entry>
+                <entry>read messages</entry>
               </row>
               <row>
-                <entry>~s <emphasis>EXPR</emphasis></entry>
+                <entry>~s <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages having <emphasis>EXPR</emphasis> in the
-                  <quote>Subject</quote> field.
-                </entry>
+                <entry>messages whose <quote>Subject:</quote> header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>~S</entry>
                 <entry></entry>
-                <entry>
-                  superseded messages
-                </entry>
+                <entry>superseded messages</entry>
               </row>
               <row>
-                <entry>~t <emphasis>EXPR</emphasis></entry>
+                <entry>~t <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages addressed to <emphasis>EXPR</emphasis>
-                </entry>
+                <entry>messages whose <quote>To:</quote> header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
                 <entry>~T</entry>
                 <entry></entry>
-                <entry>
-                  tagged messages
-                </entry>
+                <entry>tagged messages</entry>
               </row>
               <row>
                 <entry>~u</entry>
                 <entry></entry>
-                <entry>
-                  messages addressed to a subscribed mailing list
-                </entry>
+                <entry>messages addressed to subscribed mailing lists</entry>
               </row>
               <row>
                 <entry>~U</entry>
                 <entry></entry>
-                <entry>
-                  unread messages
-                </entry>
+                <entry>unread messages</entry>
               </row>
               <row>
                 <entry>~v</entry>
                 <entry></entry>
-                <entry>
-                  messages part of a collapsed thread.
-                </entry>
+                <entry>messages in collapsed threads</entry>
               </row>
               <row>
                 <entry>~V</entry>
                 <entry></entry>
-                <entry>
-                  cryptographically verified messages
-                </entry>
+                <entry>cryptographically verified messages</entry>
               </row>
               <row>
-                <entry>~w <emphasis>EXPR</emphasis></entry>
+                <entry>~w <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  newsgroups matching EXPR
-                </entry>
+                <entry>newsgroups matching <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
-                <entry>~x <emphasis>EXPR</emphasis></entry>
+                <entry>~x <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages which contain <emphasis>EXPR</emphasis> in the
-                  <quote>References</quote> or <quote>In-Reply-To</quote> field
-                </entry>
+                <entry>messages whose <quote>References:</quote> or <quote>In-Reply-To</quote> headers matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
-                <entry>~X [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
+                <entry>~X <emphasis>RANGE</emphasis></entry>
                 <entry>a), d)</entry>
-                <entry>
-                  messages with <emphasis>MIN</emphasis> to <emphasis>MAX</emphasis> attachments
-                </entry>
+                <entry>messages with <emphasis>RANGE</emphasis>attachments</entry>
               </row>
               <row>
-                <entry>~y <emphasis>EXPR</emphasis></entry>
+                <entry>~y <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages which contain <emphasis>EXPR</emphasis> in their
-                  keywords
-                </entry>
+                <entry>messages whose <quote>X-Label:</quote> header matches <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
-                <entry>~Y <emphasis>EXPR</emphasis></entry>
+                <entry>~Y <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
-                <entry>
-                  messages whose tags match <emphasis>EXPR</emphasis>
-                </entry>
+                <entry>messages whose tags match <emphasis>REGEX</emphasis></entry>
               </row>
               <row>
-                <entry>~z [<emphasis>MIN</emphasis>]-[<emphasis>MAX</emphasis>]</entry>
+                <entry>~z <emphasis>RANGE</emphasis></entry>
                 <entry>a), b)</entry>
-                <entry>
-                  messages with a size in the range <emphasis>MIN</emphasis> to
-                  <emphasis>MAX</emphasis>
-                </entry>
-              </row>
-              <row>
-                <entry>=/ <emphasis>STRING</emphasis></entry>
-                <entry></entry>
-                <entry>
-                  IMAP custom server-side search for
-                  <emphasis>STRING</emphasis>. Currently only defined for
-                  Gmail. See:
-                  <link linkend="gmail-patterns">Gmail Patterns</link>
-                </entry>
-              </row>
-              <row>
-                <entry>~=</entry>
-                <entry></entry>
-                <entry>
-                  duplicated messages (see
-                  <link linkend="duplicate-threads">$duplicate_threads</link>)
-                </entry>
+                <entry>messages whose size is in <emphasis>RANGE</emphasis></entry>
               </row>
               <row>
                 <entry>~#</entry>
                 <entry></entry>
-                <entry>
-                  broken threads (see
-                  <link linkend="strict-threads">$strict_threads</link>)
-                </entry>
+                <entry>broken threads (see <link linkend="strict-threads">$strict_threads</link>)</entry>
               </row>
               <row>
                 <entry>~$</entry>
                 <entry></entry>
-                <entry>
-                  unreferenced messages (requires threaded view)
-                </entry>
+                <entry>unreferenced messages (requires threaded view)</entry>
+              </row>
+              <row>
+                <entry>=/ <emphasis>STRING</emphasis></entry>
+                <entry></entry>
+                <entry>GMail: custom server-side search for <emphasis>STRING</emphasis></entry>
+              </row>
+              <row>
+                <entry>~=</entry>
+                <entry></entry>
+                <entry>duplicated messages (see <link linkend="duplicate-threads">$duplicate_threads</link>)</entry>
               </row>
               <row>
                 <entry>~(<emphasis>PATTERN</emphasis>)</entry>
                 <entry></entry>
-                <entry>
-                  messages in threads containing messages matching
-                  <emphasis>PATTERN</emphasis>, e.g. all threads containing
-                  messages from you: ~(~P)
-                </entry>
+                <entry>messages in threads containing messages matching <emphasis>PATTERN</emphasis>, e.g. all threads containing messages from you: <quote>~(~P)</quote></entry>
               </row>
               <row>
                 <entry>~&lt;(<emphasis>PATTERN</emphasis>)</entry>
                 <entry></entry>
-                <entry>
-                  messages whose immediate parent matches
-                  <emphasis>PATTERN</emphasis>, e.g. replies to your messages:
-                  ~&lt;(~P)
-                </entry>
+                <entry>messages whose immediate parent matches <emphasis>PATTERN</emphasis>, e.g. replies to your messages: <quote>~&lt;(~P)</quote></entry>
               </row>
               <row>
                 <entry>~&gt;(<emphasis>PATTERN</emphasis>)</entry>
                 <entry></entry>
-                <entry>
-                  messages having an immediate child matching
-                  <emphasis>PATTERN</emphasis>, e.g. messages you replied to:
-                  ~&gt;(~P)
-                </entry>
+                <entry>messages having an immediate child matching <emphasis>PATTERN</emphasis>, e.g. messages you replied to: <quote>~&gt;(~P)</quote></entry>
               </row>
             </tbody>
           </tgroup>
@@ -8950,26 +8757,26 @@ subscribe "only\\.dot@example\\.org"
             </thead>
             <tbody>
               <row>
-                <entry>~c <emphasis>EXPR</emphasis></entry>
+                <entry>~c <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
                 <entry>
-                  aliases which contain <emphasis>EXPR</emphasis> in the
+                  aliases which contain <emphasis>REGEX</emphasis> in the
                   alias comment
                 </entry>
               </row>
               <row>
-                <entry>~f <emphasis>EXPR</emphasis></entry>
+                <entry>~f <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
                 <entry>
-                  aliases which contain <emphasis>EXPR</emphasis> in the
+                  aliases which contain <emphasis>REGEX</emphasis> in the
                   alias name (<emphasis>From</emphasis> part of alias)
                 </entry>
               </row>
               <row>
-                <entry>~t <emphasis>EXPR</emphasis></entry>
+                <entry>~t <emphasis>REGEX</emphasis></entry>
                 <entry></entry>
                 <entry>
-                  aliases which contain <emphasis>EXPR</emphasis> in the
+                  aliases which contain <emphasis>REGEX</emphasis> in the
                   alias address (<emphasis>To</emphasis> part of alias)
                 </entry>
               </row>
@@ -8977,12 +8784,52 @@ subscribe "only\\.dot@example\\.org"
           </tgroup>
         </table>
 
-        <para>
-          Where <emphasis>EXPR</emphasis> is a
-          <link linkend="regex">regular expression</link>, and
-          <emphasis>GROUP</emphasis> is an
-          <link linkend="addrgroup">address group</link>.
-        </para>
+        <para>Argument Types:</para>
+
+        <variablelist>
+          <varlistentry>
+            <term>REGEX</term>
+            <listitem>
+          <para>Regular expression, see <xref linkend="regex" /></para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>STRING</term>
+            <listitem>
+              <para>Plain text string (for IMAP server-side search)</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>GROUP</term>
+            <listitem>
+              <para>Address group name (defined via <command>group</command> command, see <xref linkend="addrgroup" />)</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>DATERANGE</term>
+            <listitem>
+              <para>Date or date range (see <xref linkend="date-patterns" />)</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>RANGE</term>
+            <listitem>
+              <para>Numeric range: 
+              <literal>N</literal>, 
+              <literal>N-M</literal>, 
+              <literal>&lt;N</literal>, 
+              <literal>&gt;N</literal>, 
+              <literal>N,M</literal> (relative) (see <xref linkend="message-ranges" />)</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>QUERY</term>
+            <listitem>
+              <para>Query string for external search command</para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+
         <para>
           a) The forms <quote>&lt;[<emphasis>MAX</emphasis>]</quote>,
           <quote>&gt;[<emphasis>MIN</emphasis>]</quote>,
@@ -9030,7 +8877,7 @@ save-hook ~h"list-id:\\\\s*&lt;only\\\\.dot&gt;"    '=archive'
       </example>
         <para>
           You can force NeoMutt to treat
-          <emphasis>EXPR</emphasis> as a simple substring instead of a regular
+          <emphasis>REGEX</emphasis> as a simple substring instead of a regular
           expression by using = instead of ~ in the pattern name. For example,
           <literal>=b *.*</literal> will find all messages that contain the
           literal string <quote>*.*</quote>. Simple string matches are less
@@ -19785,14 +19632,14 @@ folder-hook ^pop 'set read_inc=1'
               </entry>
             </row>
             <row>
-              <entry>-A <literal>alias</literal></entry>
+              <entry>-A, --alias <literal>alias</literal></entry>
               <entry>
                 Print an expanded version of the given <literal>alias</literal>
                 to stdout and exit
               </entry>
             </row>
             <row>
-              <entry>-a <literal>file</literal></entry>
+              <entry>-a, --attach <literal>file</literal></entry>
               <entry>
                 Attach one or more <literal>file</literal>s to a message (must
                 be the last option). Add any addresses after the
@@ -19806,13 +19653,13 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-b <literal>address</literal></entry>
+              <entry>-b, --bcc <literal>address</literal></entry>
               <entry>
                 Specify a blind carbon copy (Bcc) recipient
               </entry>
             </row>
             <row>
-              <entry>-C</entry>
+              <entry>-C, --crypto</entry>
               <entry>
                 Enable cryptographic operations in the cases in which they're
                 disabled by default. Those include batch mode, sending a
@@ -19820,13 +19667,13 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-c <literal>address</literal></entry>
+              <entry>-c, --cc <literal>address</literal></entry>
               <entry>
                 Specify a carbon copy (Cc) recipient
               </entry>
             </row>
             <row>
-              <entry>-D</entry>
+              <entry>-D, --dump-config</entry>
               <entry>
                 Dump all config variables as
                 &apos;<emphasis role="bold">name=value</emphasis>&apos; pairs
@@ -19834,27 +19681,28 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-D -D (or -DD)</entry>
+              <entry>-DD, --dump-changed-config</entry>
               <entry>
-                Like <emphasis role="bold">-D</emphasis>, but only show the
-                config that has changed
+                Dump all changed config variables as
+                &apos;<emphasis role="bold">name=value</emphasis>&apos; pairs
+                to stdout
               </entry>
             </row>
             <row>
-              <entry>-D -O</entry>
+              <entry>-D -O, --with-docs</entry>
               <entry>
                 Like <emphasis role="bold">-D</emphasis>, but show one-liner documentation
               </entry>
             </row>
             <row>
-              <entry>-D -S</entry>
+              <entry>-D -S, --hide-sensitive</entry>
               <entry>
                 Like <emphasis role="bold">-D</emphasis>, but hide the value of
-                sensitive variables
+                sensitive config options
               </entry>
             </row>
             <row>
-              <entry>-d <literal>level</literal></entry>
+              <entry>-d, --debug-level <literal>level</literal></entry>
               <entry>
                 Log debugging output to a file (default is
                 &quot;<literal>~/.neomuttdebug0</literal>&quot;).
@@ -19868,7 +19716,7 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-E</entry>
+              <entry>-E, --edit-message</entry>
               <entry>
                 Edit
                 <literal>draft</literal> (<emphasis role="bold">-H</emphasis>) or
@@ -19877,14 +19725,14 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-e <literal>command</literal></entry>
+              <entry>-e, --command <literal>command</literal></entry>
               <entry>
                 Specify a <literal>command</literal> to be run after reading
                 the config files
               </entry>
             </row>
             <row>
-              <entry>-F <literal>config</literal></entry>
+              <entry>-F, --config <literal>config</literal></entry>
               <entry>
                 Specify an alternative initialization file to read, see section
                 <link linkend="configuration-files">Location of Initialization Files</link>
@@ -19892,7 +19740,7 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-f <literal>mailbox</literal></entry>
+              <entry>-f, --folder <literal>mailbox</literal></entry>
               <entry>
                 Specify a <literal>mailbox</literal> (as defined with
                 <link linkend="mailboxes"><command>mailboxes</command> command</link>)
@@ -19900,40 +19748,40 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-G</entry>
+              <entry>-G, --nntp-browser</entry>
               <entry>
                 Start NeoMutt with a listing of subscribed newsgroups
               </entry>
             </row>
             <row>
-              <entry>-g <literal>server</literal></entry>
+              <entry>-g, --nntp-server <literal>server</literal></entry>
               <entry>
                 Like <emphasis role="bold">-G</emphasis>, but start at
                 specified news <literal>server</literal>
               </entry>
             </row>
             <row>
-              <entry>-H <literal>draft</literal></entry>
+              <entry>-H, --draft <literal>draft</literal></entry>
               <entry>
                 Specify a <literal>draft</literal> file with header and body
                 for message composing
               </entry>
             </row>
             <row>
-              <entry>-h</entry>
+              <entry>-h, --help</entry>
               <entry>
                 Print this help message and exit
               </entry>
             </row>
             <row>
-              <entry>-i <literal>include</literal></entry>
+              <entry>-i, --include <literal>include</literal></entry>
               <entry>
                 Specify an <literal>include</literal> file to be embedded in
                 the body of a message
               </entry>
             </row>
             <row>
-              <entry>-l <literal>file</literal></entry>
+              <entry>-l, --debug-file <literal>file</literal></entry>
               <entry>
                 Specify a <literal>file</literal> for debugging output (default
                 &quot;<literal>~/.neomuttdebug0</literal>&quot;). This
@@ -19946,7 +19794,7 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-m <literal>type</literal></entry>
+              <entry>-m, --mbox-type <literal>type</literal></entry>
               <entry>
                 Specify a default mailbox format <literal>type</literal> for
                 newly created folders. The <literal>type</literal> is either
@@ -19954,19 +19802,19 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-n</entry>
+              <entry>-n, --no-system-config</entry>
               <entry>
                 Do not read the system-wide configuration file
               </entry>
             </row>
             <row>
-              <entry>-p</entry>
+              <entry>-p, --postponed</entry>
               <entry>
                 Resume a prior postponed message, if any
               </entry>
             </row>
             <row>
-              <entry>-Q <literal>variable</literal></entry>
+              <entry>-Q, --query <literal>variable</literal></entry>
               <entry>
                 Query a configuration <literal>variable</literal> and print its
                 value to stdout (after the config has been read and any
@@ -19975,45 +19823,45 @@ neomutt -a image.jpg *.png -- address1 address2
               </entry>
             </row>
             <row>
-              <entry>-R</entry>
+              <entry>-R, --read-only</entry>
               <entry>
                 Open mailbox in read-only mode
               </entry>
             </row>
             <row>
-              <entry>-s <literal>subject</literal></entry>
+              <entry>-s, --subject <literal>subject</literal></entry>
               <entry>
                 Specify a <literal>subject</literal> (must be enclosed in
                 quotes if it has spaces)
               </entry>
             </row>
             <row>
-              <entry>-v</entry>
+              <entry>-v, --version</entry>
               <entry>
                 Print the NeoMutt version and compile-time definitions and exit
               </entry>
             </row>
             <row>
-              <entry>-vv</entry>
+              <entry>-vv, --license</entry>
               <entry>
                 Print the NeoMutt license and copyright information and exit
               </entry>
             </row>
             <row>
-              <entry>-y</entry>
+              <entry>-y, --browser</entry>
               <entry>
                 Start NeoMutt with a listing of all defined mailboxes
               </entry>
             </row>
             <row>
-              <entry>-Z</entry>
+              <entry>-Z, --check-new-mail</entry>
               <entry>
                 Open the first mailbox with new message or exit immediately
                 with exit code 1 if none is found in all defined mailboxes
               </entry>
             </row>
             <row>
-              <entry>-z</entry>
+              <entry>-z, --check-any-mail</entry>
               <entry>
                 Open the first or specified
                 (<emphasis role="bold">-f</emphasis>) mailbox if it holds any
@@ -21730,12 +21578,6 @@ following <literal>printf(3)</literal>-style sequences are available:
 <row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
 <row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
-</entry></row>
-<row><entry><literal>%c</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%C</literal> instead
-</entry></row>
-<row><entry><literal>%n</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%i</literal> instead
-</entry></row>
-<row><entry><literal>%r</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%A</literal> instead
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -22036,7 +21878,8 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <row><entry><literal>%u</literal>    </entry><entry><literal>%{unlink}</literal>           </entry><entry>Unlink (=to delete) flag
 </entry></row>
 <row><entry><literal>%X</literal>    </entry><entry><literal>%{attach-count}</literal>     </entry><entry>Number of qualifying MIME parts in this part and its children
-(see the <link linkend="attachments">$attachments</link> section for possible speed effects)
+</entry></row>
+<row><entry>            </entry><entry>                          </entry><entry>(see the <link linkend="attachments">$attachments</link> section for possible speed effects)
 </entry></row>
 <row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>     </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
@@ -22178,9 +22021,9 @@ message.  The send-menu may still be accessed once you have finished
 editing the body of your message.
 </para>
 <para>
-<emphasis role="bold">Note:</emphasis> when this option is <emphasis>set</emphasis>, you can't use send-hooks that depend
-on the recipients when composing a new (non-reply) message, as the initial
-list of recipients is empty.
+<emphasis role="bold">Note:</emphasis> when this option is <emphasis>set</emphasis>, you can't use send-hooks that
+depend on the recipients when composing a new (non-reply) message, as the
+initial list of recipients is empty.
 </para>
 <para>
 Also see <link linkend="fast-reply">$fast_reply</link>.
@@ -22313,8 +22156,8 @@ When this variable is <emphasis>set</emphasis>, NeoMutt will beep when an error 
 Default: no</literallayout>
 
 <para>
-When this variable is <emphasis>set</emphasis>, NeoMutt will beep whenever it prints a message
-notifying you of new mail.  This is independent of the setting of the
+When this variable is <emphasis>set</emphasis>, NeoMutt will beep whenever it prints a
+message notifying you of new mail. This is independent of the setting of the
 <link linkend="beep">$beep</link> variable.
 </para>
 </sect2>
@@ -22338,8 +22181,8 @@ and thus not recommended, because you are unable to bounce messages.
 Default: yes</literallayout>
 
 <para>
-When this variable is <emphasis>set</emphasis>, NeoMutt will include Delivered-To headers when
-bouncing messages.  Postfix users may wish to <emphasis>unset</emphasis> this variable.
+When this variable is <emphasis>set</emphasis>, NeoMutt will include Delivered-To headers
+when bouncing messages. Postfix users may wish to <emphasis>unset</emphasis> this variable.
 </para>
 </sect2>
 
@@ -22349,11 +22192,11 @@ bouncing messages.  Postfix users may wish to <emphasis>unset</emphasis> this va
 Default: no</literallayout>
 
 <para>
-When this variable is <emphasis>set</emphasis>, NeoMutt will place the cursor at the beginning
-of the current line in menus, even when the <link linkend="arrow-cursor">$arrow_cursor</link> variable
+When this variable is <emphasis>set</emphasis>, NeoMutt will place the cursor at the
+beginning of the current line in menus, even when the <link linkend="arrow-cursor">$arrow_cursor</link> variable
 is <emphasis>unset</emphasis>, making it easier for blind persons using Braille displays to
-follow these menus.  The option is <emphasis>unset</emphasis> by default because many
-visual terminals don't permit making the cursor invisible.
+follow these menus. The option is <emphasis>unset</emphasis> by default because many visual
+terminals don't permit making the cursor invisible.
 </para>
 </sect2>
 
@@ -22514,8 +22357,8 @@ character set used correctly.
 Default: no</literallayout>
 
 <para>
-When this variable is <emphasis>set</emphasis>, NeoMutt will use file size attribute instead of
-access time when checking for new mail in mbox and mmdf folders.
+When this variable is <emphasis>set</emphasis>, NeoMutt will use file size attribute instead
+of access time when checking for new mail in mbox and mmdf folders.
 </para>
 <para>
 This variable is <emphasis>unset</emphasis> by default and should only be enabled when
@@ -22695,7 +22538,8 @@ available for the message preview window to shown.
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will display a preview of message in the compose view.
+When <emphasis>set</emphasis>, NeoMutt will display a preview of message in the compose
+view.
 </para>
 </sect2>
 
@@ -22737,8 +22581,8 @@ side effects (for example in regular expressions).
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when appending messages to
-an existing mailbox.
+When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when appending messages
+to an existing mailbox.
 </para>
 <note><para>Before 2021-03-21, this was called $confirmappend</para></note>
 </sect2>
@@ -22749,8 +22593,8 @@ an existing mailbox.
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when saving messages to a
-mailbox which does not yet exist before creating it.
+When <emphasis>set</emphasis>, NeoMutt will prompt for confirmation when saving messages to
+a mailbox which does not yet exist before creating it.
 </para>
 <note><para>Before 2021-03-21, this was called $confirmcreate</para></note>
 </sect2>
@@ -23030,9 +22874,9 @@ GPGME_VALIDITY_ULTIMATE validity flag.
 Default: yes</literallayout>
 
 <para>
-When set, NeoMutt will display protected headers ("Memory Hole") in the pager,
-When set, NeoMutt will display protected headers in the pager,
-and will update the index and header cache with revised headers.
+When set, NeoMutt will display protected headers ("Memory Hole") in the
+pager, When set, NeoMutt will display protected headers in the pager, and
+will update the index and header cache with revised headers.
 </para>
 <para>
 Protected headers are stored inside the encrypted or signed part of an
@@ -23135,9 +22979,8 @@ Currently NeoMutt only supports the Subject header.
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, automatically PGP or OpenSSL encrypt replies to messages which are
-encrypted.
-(Crypto only)
+If <emphasis>set</emphasis>, automatically PGP or OpenSSL encrypt replies to messages which
+are encrypted. (Crypto only)
 </para>
 <note><para>Before 2021-03-21, this was called $crypt_replyencrypt, $pgp_replyencrypt</para></note>
 </sect2>
@@ -23211,11 +23054,10 @@ you may <emphasis>unset</emphasis> this setting.
 Default: yes</literallayout>
 
 <para>
-This variable controls the use of the GPGME-enabled crypto backends.
-If it is <emphasis>set</emphasis> and NeoMutt was built with GPGME support, the gpgme code for
-S/MIME and PGP will be used instead of the classic code.  Note that
-you need to set this option in .neomuttrc; it won't have any effect when
-used interactively.
+This variable controls the use of the GPGME-enabled crypto backends. If it is
+<emphasis>set</emphasis> and NeoMutt was built with GPGME support, the gpgme code for S/MIME
+and PGP will be used instead of the classic code. Note that you need to set
+this option in .neomuttrc; it won't have any effect when used interactively.
 </para>
 <para>
 Note that the GPGME backend does not support creating old-style inline
@@ -23298,10 +23140,11 @@ Composing: <link linkend="attribution-intro">$attribution_intro</link>, <link li
 Default: <quote><literal>~/.neomuttdebug</literal></quote></literallayout>
 
 <para>
-Debug logging is controlled by the variables <literal><link linkend="debug-file">$debug_file</link></literal> and <literal><link linkend="debug-level">$debug_level</link></literal>.
-<literal><link linkend="debug-file">$debug_file</link></literal> specifies the root of the filename.  NeoMutt will add "0" to the end.
-Each time NeoMutt is run with logging enabled, the log files are rotated.
-A maximum of five log files are kept, numbered 0 (most recent) to 4 (oldest).
+Debug logging is controlled by the variables <literal><link linkend="debug-file">$debug_file</link></literal> and
+<literal><link linkend="debug-level">$debug_level</link></literal>. <literal><link linkend="debug-file">$debug_file</link></literal> specifies the root of the filename.
+NeoMutt will add "0" to the end. Each time NeoMutt is run with logging
+enabled, the log files are rotated. A maximum of five log files are kept,
+numbered 0 (most recent) to 4 (oldest).
 </para>
 <para>
 This option can be enabled on the command line, "neomutt -l mylog"
@@ -23317,13 +23160,14 @@ See also: <literal><link linkend="debug-level">$debug_level</link></literal>
 Default: 0</literallayout>
 
 <para>
-Debug logging is controlled by the variables <literal><link linkend="debug-file">$debug_file</link></literal> and <literal><link linkend="debug-level">$debug_level</link></literal>.
+Debug logging is controlled by the variables <literal><link linkend="debug-file">$debug_file</link></literal> and
+<literal><link linkend="debug-level">$debug_level</link></literal>.
 </para>
 <para>
-The debug level controls how much information is saved to the log file.
-If you have a problem with NeoMutt, then enabling logging may help find the cause.
-Levels 1-3 will usually provide enough information for writing a bug report.
-Levels 4,5 will be extremely verbose.
+The debug level controls how much information is saved to the log file. If
+you have a problem with NeoMutt, then enabling logging may help find the
+cause. Levels 1-3 will usually provide enough information for writing a bug
+report. Levels 4,5 will be extremely verbose.
 </para>
 <para>
 Warning: Logging at high levels may save private information to the file.
@@ -23392,9 +23236,9 @@ or when you save it to another folder.
 Default: no</literallayout>
 
 <para>
-If this option is <emphasis>set</emphasis>, NeoMutt will enable the <emphasis role="bold">Security</emphasis> development features.
-See: <ulink url="https://github.com/neomutt/neomutt/discussions/4251">https://github.com/neomutt/neomutt/discussions/4251</ulink>
-</para>
+If this option is <emphasis>set</emphasis>, NeoMutt will enable the <emphasis role="bold">Security</emphasis>
+development features. See:
+<ulink url="https://github.com/neomutt/neomutt/discussions/4251">https://github.com/neomutt/neomutt/discussions/4251</ulink></para>
 </sect2>
 
 <sect2 id="digest-collapse">
@@ -23403,8 +23247,9 @@ See: <ulink url="https://github.com/neomutt/neomutt/discussions/4251">https://gi
 Default: yes</literallayout>
 
 <para>
-If this option is <emphasis>set</emphasis>, NeoMutt's received-attachments menu will not show the subparts of
-individual messages in a multipart/digest.  To see these subparts, press "v" on that menu.
+If this option is <emphasis>set</emphasis>, NeoMutt's received-attachments menu will not
+show the subparts of individual messages in a multipart/digest. To see these
+subparts, press "v" on that menu.
 </para>
 </sect2>
 
@@ -23425,7 +23270,8 @@ text.  They are of the form: <literal>&lt;esc&gt;]9;XXX&lt;bel&gt;</literal> whe
 </para>
 <para>
 If these escape sequences interfere with your filter, they can be removed
-using a tool like <literal>ansifilter</literal> or <literal>sed 's/^\x1b]9;[0-9]\+\x7//'</literal>
+using a tool like <literal>ansifilter</literal> or
+<literal>sed 's/^\x1b]9;[0-9]\+\x7//'</literal>
 </para>
 <para>
 If they are removed, then PGP and MIME headers will no longer be coloured.
@@ -23455,11 +23301,11 @@ Example:
 <screen>
 set dsn_notify="failure,delay"
 </screen><para>
-<emphasis role="bold">Note:</emphasis> when using <link linkend="sendmail">$sendmail</link> for delivery, you should not enable
-this unless you are either using Sendmail 8.8.x or greater or a MTA
-providing a <literal>sendmail(1)</literal>-compatible interface supporting the <literal>-N</literal> option
-for DSN. For SMTP delivery, DSN support is auto-detected so that it
-depends on the server whether DSN will be used or not.
+<emphasis role="bold">Note:</emphasis> when using <link linkend="sendmail">$sendmail</link> for delivery, you should not enable this
+unless you are either using Sendmail 8.8.x or greater or a MTA providing a
+<literal>sendmail(1)</literal>-compatible interface supporting the <literal>-N</literal> option for
+DSN. For SMTP delivery, DSN support is auto-detected so that it depends on
+the server whether DSN will be used or not.
 </para>
 </sect2>
 
@@ -23481,11 +23327,11 @@ Example:
 <screen>
 set dsn_return=hdrs
 </screen><para>
-<emphasis role="bold">Note:</emphasis> when using <link linkend="sendmail">$sendmail</link> for delivery, you should not enable
-this unless you are either using Sendmail 8.8.x or greater or a MTA
-providing a <literal>sendmail(1)</literal>-compatible interface supporting the <literal>-R</literal> option
-for DSN. For SMTP delivery, DSN support is auto-detected so that it
-depends on the server whether DSN will be used or not.
+<emphasis role="bold">Note:</emphasis> when using <link linkend="sendmail">$sendmail</link> for delivery, you should not enable this
+unless you are either using Sendmail 8.8.x or greater or a MTA providing a
+<literal>sendmail(1)</literal>-compatible interface supporting the <literal>-R</literal> option for
+DSN. For SMTP delivery, DSN support is auto-detected so that it depends on
+the server whether DSN will be used or not.
 </para>
 </sect2>
 
@@ -23495,10 +23341,10 @@ depends on the server whether DSN will be used or not.
 Default: yes</literallayout>
 
 <para>
-This variable controls whether NeoMutt, when <link linkend="sort">$sort</link> is set to <emphasis>threads</emphasis>, threads
-messages with the same Message-Id together.  If it is <emphasis>set</emphasis>, it will indicate
-that it thinks they are duplicates of each other with an equals sign
-in the thread tree.
+This variable controls whether NeoMutt, when <link linkend="sort">$sort</link> is set to <emphasis>threads</emphasis>,
+threads messages with the same Message-Id together. If it is <emphasis>set</emphasis>, it
+will indicate that it thinks they are duplicates of each other with an equals
+sign in the thread tree.
 </para>
 </sect2>
 
@@ -23537,14 +23383,14 @@ ignored for interoperability reasons.
 Default: (empty)</literallayout>
 
 <para>
-This variable specifies which editor is used by NeoMutt.
-It defaults to the value of the <literal>$VISUAL</literal>, or <literal>$EDITOR</literal>, environment
-variable, or to the string "vi" if neither of those are set.
+This variable specifies which editor is used by NeoMutt. It defaults to the
+value of the <literal>$VISUAL</literal>, or <literal>$EDITOR</literal>, environment variable, or to
+the string "vi" if neither of those are set.
 </para>
 <para>
-The <literal><link linkend="editor">$editor</link></literal> string may contain a <emphasis>%s</emphasis> escape, which will be replaced by the name
-of the file to be edited.  If the <emphasis>%s</emphasis> escape does not appear in <literal><link linkend="editor">$editor</link></literal>, a
-space and the name to be edited are appended.
+The <literal><link linkend="editor">$editor</link></literal> string may contain a <emphasis>%s</emphasis> escape, which will be
+replaced by the name of the file to be edited. If the <emphasis>%s</emphasis> escape does
+not appear in <literal><link linkend="editor">$editor</link></literal>, a space and the name to be edited are appended.
 </para>
 <para>
 The resulting string is then executed by running
@@ -23575,10 +23421,10 @@ with an empty subject.  It defaults to "Re: your mail".
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will quoted-printable encode messages when
-they contain the string "From " (note the trailing space) in the beginning of a line.
-This is useful to avoid the tampering certain mail delivery and transport
-agents tend to do with messages (in order to prevent tools from
+When <emphasis>set</emphasis>, NeoMutt will quoted-printable encode messages when they
+contain the string "From " (note the trailing space) in the beginning of a
+line. This is useful to avoid the tampering certain mail delivery and
+transport agents tend to do with messages (in order to prevent tools from
 misinterpreting the line as a mbox message separator).
 </para>
 </sect2>
@@ -23663,12 +23509,12 @@ of indexers other than notmuch to integrate them cleanly with NeoMutt.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, the initial prompt for recipients (to, cc, bcc) and
-subject are skipped when the relevant information is already provided.
-These cases include replying to messages and passing the relevant
-command line arguments. The initial prompt for recipients
-is also skipped when composing a new message to the current message sender,
-while the initial prompt for subject is also skipped when forwarding messages.
+When <emphasis>set</emphasis>, the initial prompt for recipients (to, cc, bcc) and subject
+are skipped when the relevant information is already provided. These cases
+include replying to messages and passing the relevant command line arguments.
+The initial prompt for recipients is also skipped when composing a new
+message to the current message sender, while the initial prompt for subject
+is also skipped when forwarding messages.
 </para>
 <para>
 <emphasis role="bold">Note:</emphasis> this variable has no effect when the <link linkend="auto-edit">$auto_edit</link>
@@ -23818,14 +23664,16 @@ its own set of <literal>printf(3)</literal>-like sequences:
 <row><entry><literal>%C</literal>     </entry><entry><literal>%{number}</literal>        </entry><entry>Current file number
 </entry></row>
 <row><entry><literal>%D</literal>     </entry><entry><literal>%{date}</literal>          </entry><entry>Date/time folder was last modified using <link linkend="date-format">$date_format</link>.
-It is recommended to use <literal>%[fmt]</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
+</entry></row>
+<row><entry>             </entry><entry>                       </entry><entry>It is recommended to use <literal>%[fmt]</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
 </entry></row>
 <row><entry><literal>%d</literal>     </entry><entry><literal>%{date-format}</literal>   </entry><entry>Date/time folder was last modified
 </entry></row>
 <row><entry><literal>%F</literal>     </entry><entry><literal>%{file-mode}</literal>     </entry><entry>File permissions
 </entry></row>
 <row><entry><literal>%f</literal>     </entry><entry><literal>%{filename}</literal>      </entry><entry>Filename (<literal>/</literal> is appended to directory names,
-<literal>@</literal> to symbolic links and <literal>*</literal> to executable files)
+</entry></row>
+<row><entry>             </entry><entry>                       </entry><entry><literal>@</literal> to symbolic links and <literal>*</literal> to executable files)
 </entry></row>
 <row><entry><literal>%g</literal>     </entry><entry><literal>%{file-group}</literal>    </entry><entry>Group name (or numeric gid, if missing)
 </entry></row>
@@ -24074,7 +23922,8 @@ can be overridden using "<link linkend="my-header">my-header</link>" (including 
 <link linkend="reverse-name">$reverse_name</link>.  This variable is ignored if <link linkend="use-from">$use_from</link> is <emphasis>unset</emphasis>.
 </para>
 <para>
-If not specified, then it may be read from the environment variable <literal>$EMAIL</literal>.
+If not specified, then it may be read from the environment variable
+<literal>$EMAIL</literal>.
 </para>
 </sect2>
 
@@ -24132,9 +23981,9 @@ should set it to "<literal>.*</literal>".
 </para>
 <para>
 This can be useful if you see the following behavior: you address an e-mail
-to user ID "stevef" whose full name is "Steve Franklin".  If NeoMutt expands
-"stevef" to '"Franklin" stevef@foo.bar' then you should set the <link linkend="gecos-mask">$gecos_mask</link> to
-a regular expression that will match the whole name so NeoMutt will expand
+to user ID "stevef" whose full name is "Steve Franklin". If NeoMutt expands
+"stevef" to '"Franklin" stevef@foo.bar' then you should set the <link linkend="gecos-mask">$gecos_mask</link>
+to a regular expression that will match the whole name so NeoMutt will expand
 "Franklin" to "Franklin, Steve".
 </para>
 </sect2>
@@ -24371,8 +24220,8 @@ which should not be printed on screen.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will not show the presence of messages that are hidden
-by limiting, in the thread tree.
+When <emphasis>set</emphasis>, NeoMutt will not show the presence of messages that are
+hidden by limiting, in the thread tree.
 </para>
 </sect2>
 
@@ -24405,8 +24254,8 @@ displayed sibling.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will not show the presence of messages that are hidden
-by limiting, at the top of threads in the thread tree.  Note that when
+When <emphasis>set</emphasis>, NeoMutt will not show the presence of messages that are
+hidden by limiting, at the top of threads in the thread tree. Note that when
 <link linkend="hide-limited">$hide_limited</link> is <emphasis>set</emphasis>, this option will have no effect.
 </para>
 </sect2>
@@ -24539,7 +24388,8 @@ containing the host's name and the DNS domain it belongs to. It is used
 as the domain part (after "@") for local email addresses.
 </para>
 <para>
-If not specified in a config file, then NeoMutt will try to determine the hostname itself.
+If not specified in a config file, then NeoMutt will try to determine the
+hostname itself.
 </para>
 <para>
 Optionally, NeoMutt can be compiled with a fixed domain name.
@@ -24797,9 +24647,9 @@ authentication mechanisms.  See "<link linkend="oauth">oauth</link>" for details
 Default: (empty)</literallayout>
 
 <para>
-Specifies the password for your IMAP account.  If <emphasis>unset</emphasis>, NeoMutt will
-prompt you for your password when you invoke the <literal>&lt;imap-fetch-mail&gt;</literal> function
-or try to open an IMAP folder.
+Specifies the password for your IMAP account. If <emphasis>unset</emphasis>, NeoMutt will
+prompt you for your password when you invoke the <literal>&lt;imap-fetch-mail&gt;</literal>
+function or try to open an IMAP folder.
 </para>
 <para>
 <emphasis role="bold">Warning</emphasis>: you should only use this option when you are on a
@@ -24828,10 +24678,10 @@ is slow.
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will avoid implicitly marking your mail as read whenever
-you fetch a message from the server. This is generally a good thing,
-but can make closing an IMAP folder somewhat slower. This option
-exists to appease speed freaks.
+When <emphasis>set</emphasis>, NeoMutt will avoid implicitly marking your mail as read
+whenever you fetch a message from the server. This is generally a good thing,
+but can make closing an IMAP folder somewhat slower. This option exists to
+appease speed freaks.
 </para>
 </sect2>
 
@@ -24948,10 +24798,9 @@ Default: no</literallayout>
 
 <para>
 If set to "yes", NeoMutt will look for a mailcap entry with the
-"<literal>copiousoutput</literal>" flag set for <emphasis>every</emphasis> MIME attachment it doesn't have
-an internal viewer defined for.  If such an entry is found, NeoMutt will
-use the viewer defined in that entry to convert the body part to text
-form.
+"<literal>copiousoutput</literal>" flag set for <emphasis>every</emphasis> MIME attachment it doesn't
+have an internal viewer defined for. If such an entry is found, NeoMutt will
+use the viewer defined in that entry to convert the body part to text form.
 </para>
 <note><para>Before 2023-01-25, this was called $implicit_autoview</para></note>
 </sect2>
@@ -25042,10 +24891,10 @@ This variable allows you to customize the message index display to
 your personal taste.
 </para>
 <para>
-"Format strings" are similar to the strings used in the C
-function <literal>printf(3)</literal> to format output (see the man page for more details).
-For an explanation of the %&lt;...&gt; construct, see the <link linkend="status-format">status_format</link> description.
-The following sequences are defined in NeoMutt:
+"Format strings" are similar to the strings used in the C function
+<literal>printf(3)</literal> to format output (see the man page for more details). For an
+explanation of the %&lt;...&gt; construct, see the <link linkend="status-format">status_format</link> description. The
+following sequences are defined in NeoMutt:
 
 </para>
 
@@ -25069,10 +24918,12 @@ The following sequences are defined in NeoMutt:
 <row><entry><literal>%cr</literal>     </entry><entry><literal>%{size}</literal>                </entry><entry>Number of characters (bytes) in the raw message, including the header (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
 <row><entry><literal>%D</literal>      </entry><entry><literal>%{date-format-local}</literal>   </entry><entry>Date and time of message using <link linkend="date-format">$date_format</link> and local timezone.
-It is recommended to use <literal>%[fmt]</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>It is recommended to use <literal>%[fmt]</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
 </entry></row>
 <row><entry><literal>%d</literal>      </entry><entry><literal>%{date-format}</literal>         </entry><entry>Date and time of message using <link linkend="date-format">$date_format</link> and sender's timezone.
-It is recommended to use <literal>%{fmt}</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>It is recommended to use <literal>%{fmt}</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
 </entry></row>
 <row><entry><literal>%E</literal>      </entry><entry><literal>%{thread-count}</literal>        </entry><entry>Number of messages in current thread
 </entry></row>
@@ -25099,7 +24950,8 @@ It is recommended to use <literal>%{fmt}</literal> instead, where <literal>fmt</
 <row><entry><literal>%K</literal>      </entry><entry><literal>%{list-empty}</literal>          </entry><entry>List to which the email was sent (if any; otherwise: empty)
 </entry></row>
 <row><entry><literal>%L</literal>      </entry><entry><literal>%{from-list}</literal>           </entry><entry>If an address in the <literal>To:</literal> or <literal>Cc:</literal> header field matches an address
-defined by the user's <link linkend="subscribe">$subscribe</link> command, this displays.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>defined by the user's <link linkend="subscribe">$subscribe</link> command, this displays.
 </entry></row>
 <row><entry><literal>%l</literal>      </entry><entry><literal>%{lines}</literal>               </entry><entry>Number of lines in the unprocessed message (may not work with maildir, mh, and IMAP folders)
 </entry></row>
@@ -25112,7 +24964,8 @@ defined by the user's <link linkend="subscribe">$subscribe</link> command, this 
 <row><entry><literal>%n</literal>      </entry><entry><literal>%{name}</literal>                </entry><entry>Author's real name (or address if missing)
 </entry></row>
 <row><entry><literal>%O</literal>      </entry><entry><literal>%{save-folder}</literal>         </entry><entry>Original save folder where NeoMutt would formerly have Stashed the message:
-list name or recipient name if not sent to a list
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>list name or recipient name if not sent to a list
 </entry></row>
 <row><entry><literal>%P</literal>      </entry><entry><literal>%{percentage}</literal>          </entry><entry>Progress indicator for the built-in pager (how much of the file has been displayed)
 </entry></row>
@@ -25141,17 +24994,24 @@ list name or recipient name if not sent to a list
 <row><entry><literal>%x</literal>      </entry><entry><literal>%{x-comment-to}</literal>        </entry><entry><literal>%{X-Comment-To:}</literal> field (if present)
 </entry></row>
 <row><entry><literal>%Y</literal>      </entry><entry><literal>%{thread-x-label}</literal>      </entry><entry><literal>%{X-Label:}</literal> field, if present, and
-1. not at part of a thread tree
-2. at the top of a thread, or
-3. <literal>X-Label:</literal> is different from Preceding message's <literal>X-Label:</literal>
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>1. not at part of a thread tree
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>2. at the top of a thread, or
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>3. <literal>X-Label:</literal> is different from Preceding message's <literal>X-Label:</literal>
 </entry></row>
 <row><entry><literal>%y</literal>      </entry><entry><literal>%{x-label}</literal>             </entry><entry><literal>%{X-Label:}</literal> field, if present
 </entry></row>
 <row><entry><literal>%Z</literal>      </entry><entry><literal>%{combined-flags}</literal>      </entry><entry>A three character set of message status flags.
-The first character is new/read/replied flags (<literal>n</literal>/<literal>o</literal>/<literal>r</literal>/<literal>O</literal>/<literal>N</literal>).
-The second is deleted or encryption flags (<literal>D</literal>/<literal>d</literal>/<literal>S</literal>/<literal>P</literal>/<literal>s</literal>/<literal>K</literal>).
-The third is either tagged/flagged (<literal>*</literal>/<literal>!</literal>), or one of the characters.
-Listed in <link linkend="to-chars">$to_chars</link>.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>The first character is new/read/replied flags (<literal>n</literal>/<literal>o</literal>/<literal>r</literal>/<literal>O</literal>/<literal>N</literal>).
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>The second is deleted or encryption flags (<literal>D</literal>/<literal>d</literal>/<literal>S</literal>/<literal>P</literal>/<literal>s</literal>/<literal>K</literal>).
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>The third is either tagged/flagged (<literal>*</literal>/<literal>!</literal>), or one of the characters.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>Listed in <link linkend="to-chars">$to_chars</link>.
 </entry></row>
 <row><entry><literal>%zc</literal>     </entry><entry><literal>%{crypto-flags}</literal>        </entry><entry>Message crypto flags
 </entry></row>
@@ -25162,15 +25022,20 @@ Listed in <link linkend="to-chars">$to_chars</link>.
 <row><entry><literal>%@name@</literal> </entry><entry>                             </entry><entry>Insert and evaluate format-string from the matching <literal><link linkend="index-format-hook">index-format-hook</link></literal> command
 </entry></row>
 <row><entry><literal>%{fmt}</literal>  </entry><entry>                             </entry><entry>Date and time of the message is converted to sender's time zone, and <literal>fmt</literal> is expanded by the library function <literal>strftime(3)</literal>;
-if the first character inside the braces is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
-Note that the sender's time zone might only be available as a numerical offset, so <literal>%Z</literal> behaves like <literal>%z</literal>.
-<literal>%{fmt}</literal> behaves like <literal>%[fmt]</literal> on systems where <literal>struct tm</literal> doesn't have a <literal>tm_gmtoff</literal> member.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>if the first character inside the braces is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>Note that the sender's time zone might only be available as a numerical offset, so <literal>%Z</literal> behaves like <literal>%z</literal>.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry><literal>%{fmt}</literal> behaves like <literal>%[fmt]</literal> on systems where <literal>struct tm</literal> doesn't have a <literal>tm_gmtoff</literal> member.
 </entry></row>
 <row><entry><literal>%[fmt]</literal>  </entry><entry>                             </entry><entry>Date and time of the message is converted to the local time zone, and <literal>fmt</literal> is expanded by the library function <literal>strftime(3)</literal>;
-if the first character inside the brackets is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>if the first character inside the brackets is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
 </entry></row>
 <row><entry><literal>%(fmt)</literal>  </entry><entry>                             </entry><entry>Local date and time when the message was received, and <literal>fmt</literal> is expanded by the library function <literal>strftime(3)</literal>;
-if the first character inside the parentheses is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
+</entry></row>
+<row><entry>              </entry><entry>                             </entry><entry>if the first character inside the parentheses is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
 </entry></row>
 <row><entry><literal>%*X</literal>     </entry><entry><literal>%{padding-soft}</literal>        </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
@@ -25307,10 +25172,10 @@ new mail. Also see the <link linkend="timeout">$timeout</link> variable.
 Default: yes</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will only notify you about new mail that has been received
-since the last time you opened the mailbox.  When <emphasis>unset</emphasis>, NeoMutt will notify you
-if any new mail exists in the mailbox, regardless of whether you have visited it
-recently.
+When <emphasis>set</emphasis>, NeoMutt will only notify you about new mail that has been
+received since the last time you opened the mailbox. When <emphasis>unset</emphasis>,
+NeoMutt will notify you if any new mail exists in the mailbox, regardless of
+whether you have visited it recently.
 </para>
 </sect2>
 
@@ -25586,10 +25451,9 @@ is cleared and the next or previous page of the menu is displayed
 Default: no</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, NeoMutt will clean out obsolete entries from the message cache when
-the mailbox is synchronized. You probably only want to set it
-every once in a while, since it can be a little slow
-(especially for large folders).
+If <emphasis>set</emphasis>, NeoMutt will clean out obsolete entries from the message cache
+when the mailbox is synchronized. You probably only want to set it every once
+in a while, since it can be a little slow (especially for large folders).
 </para>
 </sect2>
 
@@ -25706,13 +25570,12 @@ See also: Base64Url: <ulink url="https://datatracker.ietf.org/doc/html/rfc4648#s
 Default: no</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, forces NeoMutt to interpret keystrokes with the high bit (bit 8)
-set as if the user had pressed the Esc key and whatever key remains
-after having the high bit removed.  For example, if the key pressed
-has an ASCII value of <literal>0xf8</literal>, then this is treated as if the user had
-pressed Esc then "x".  This is because the result of removing the
-high bit from <literal>0xf8</literal> is <literal>0x78</literal>, which is the ASCII character
-"x".
+If <emphasis>set</emphasis>, forces NeoMutt to interpret keystrokes with the high bit (bit
+8) set as if the user had pressed the Esc key and whatever key remains after
+having the high bit removed. For example, if the key pressed has an ASCII
+value of <literal>0xf8</literal>, then this is treated as if the user had pressed Esc then
+"x". This is because the result of removing the high bit from <literal>0xf8</literal> is
+<literal>0x78</literal>, which is the ASCII character "x".
 </para>
 </sect2>
 
@@ -25727,8 +25590,8 @@ high bit from <literal>0xf8</literal> is <literal>0x78</literal>, which is the A
 Default: no</literallayout>
 
 <para>
-When <emphasis>unset</emphasis>, NeoMutt will mimic mh's behavior and rename deleted messages
-to <emphasis>,&lt;old file name&gt;</emphasis> in mh folders instead of really deleting
+When <emphasis>unset</emphasis>, NeoMutt will mimic mh's behavior and rename deleted
+messages to <emphasis>,&lt;old file name&gt;</emphasis> in mh folders instead of really deleting
 them. This leaves the message on disk but makes programs reading the folder
 ignore it. If the variable is <emphasis>set</emphasis>, the message files will simply be
 deleted.
@@ -25774,12 +25637,12 @@ The name of the MH sequence used for unseen messages.
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, the message you are forwarding will be attached as a
-separate <literal>message/rfc822</literal> MIME part instead of included in the main body of the
-message.  This is useful for forwarding MIME messages so the receiver
-can properly view the message as it was delivered to you. If you like
-to switch between MIME and not MIME from mail to mail, set this
-variable to "ask-no" or "ask-yes".
+When <emphasis>set</emphasis>, the message you are forwarding will be attached as a separate
+<literal>message/rfc822</literal> MIME part instead of included in the main body of the
+message. This is useful for forwarding MIME messages so the receiver can
+properly view the message as it was delivered to you. If you like to switch
+between MIME and not MIME from mail to mail, set this variable to "ask-no" or
+"ask-yes".
 </para>
 <para>
 Also see <link linkend="forward-decode">$forward_decode</link> and <link linkend="mime-forward-decode">$mime_forward_decode</link>.
@@ -26065,8 +25928,9 @@ Default: <quote><literal>flagged</literal></quote></literallayout>
 
 <para>
 This variable specifies notmuch tag which is used for flagged messages. The
-variable is used to count flagged messages in DB and set the flagged flag when
-modifying tags. All other NeoMutt commands use standard (e.g. maildir) flags.
+variable is used to count flagged messages in DB and set the flagged flag
+when modifying tags. All other NeoMutt commands use standard (e.g. maildir)
+flags.
 </para>
 </sect2>
 
@@ -26086,7 +25950,8 @@ This variable specifies the timeout for database open in seconds.
 Default: <quote><literal>messages</literal></quote></literallayout>
 
 <para>
-This variable specifies the default query type (threads or messages) used in notmuch queries.
+This variable specifies the default query type (threads or messages) used in
+notmuch queries.
 </para>
 </sect2>
 
@@ -26096,7 +25961,8 @@ This variable specifies the default query type (threads or messages) used in not
 Default: 0</literallayout>
 
 <para>
-This variable contains the position of the current search for window based vfolder.
+This variable contains the position of the current search for window based
+vfolder.
 </para>
 </sect2>
 
@@ -26106,7 +25972,8 @@ This variable contains the position of the current search for window based vfold
 Default: (empty)</literallayout>
 
 <para>
-This variable contains the currently setup notmuch search for window based vfolder.
+This variable contains the currently setup notmuch search for window based
+vfolder.
 </para>
 </sect2>
 
@@ -26197,8 +26064,8 @@ Default: <quote><literal>replied</literal></quote></literallayout>
 
 <para>
 This variable specifies notmuch tag which is used for replied messages. The
-variable is used to set the replied flag when modifying tags. All other NeoMutt
-commands use standard (e.g. maildir) flags.
+variable is used to set the replied flag when modifying tags. All other
+NeoMutt commands use standard (e.g. maildir) flags.
 </para>
 </sect2>
 
@@ -26462,9 +26329,9 @@ Default: no</literallayout>
 <para>
 If <emphasis>set</emphasis>, NeoMutt will automatically attempt to decrypt traditional PGP
 messages whenever the user performs an operation which ordinarily would
-result in the contents of the message being operated on.  For example,
-if the user displays a pgp-traditional message which has not been manually
-checked with the <literal><link linkend="check-traditional-pgp">&lt;check-traditional-pgp&gt;</link></literal> function, NeoMutt will automatically
+result in the contents of the message being operated on. For example, if the
+user displays a pgp-traditional message which has not been manually checked
+with the <literal><link linkend="check-traditional-pgp">&lt;check-traditional-pgp&gt;</link></literal> function, NeoMutt will automatically
 check the message for traditional pgp.
 </para>
 </sect2>
@@ -26591,7 +26458,8 @@ This format strings specifies a command which is used to decode
 application/pgp attachments.
 </para>
 <para>
-The PGP command formats have their own set of <literal>printf(3)</literal>-like sequences:
+The PGP command formats have their own set of <literal>printf(3)</literal>-like
+sequences:
 
 </para>
 
@@ -26605,12 +26473,14 @@ The PGP command formats have their own set of <literal>printf(3)</literal>-like 
 <row><entry><literal>%f</literal>    </entry><entry><literal>%{file-message}</literal>   </entry><entry>Expands to the name of a file containing a message
 </entry></row>
 <row><entry><literal>%p</literal>    </entry><entry><literal>%{need-pass}</literal>      </entry><entry>Expands to <literal>PGPPASSFD=0</literal> when a pass phrase is needed, to an empty string otherwise.
-Note: This may be used with a <literal>%&lt;...&gt;</literal> construct.
+</entry></row>
+<row><entry>            </entry><entry>                        </entry><entry>Note: This may be used with a <literal>%&lt;...&gt;</literal> construct.
 </entry></row>
 <row><entry><literal>%r</literal>    </entry><entry><literal>%{key-ids}</literal>        </entry><entry>One or more key IDs (or fingerprints if available)
 </entry></row>
 <row><entry><literal>%s</literal>    </entry><entry><literal>%{file-signature}</literal> </entry><entry>Expands to the name of a file containing the signature part
-of a <literal>multipart/signed</literal> attachment when verifying it
+</entry></row>
+<row><entry>            </entry><entry>                        </entry><entry>of a <literal>multipart/signed</literal> attachment when verifying it
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -26801,6 +26671,12 @@ This is a format string, see the <link linkend="pgp-decode-command">$pgp_decode_
 possible <literal>printf(3)</literal>-like sequences.
 (PGP only)
 </para>
+<note><para>Before 2021-02-11, this was called $pgp_getkeys_command</para></note>
+</sect2>
+
+<sect2 id="pgp-getkeys-command">
+  <title>pgp_getkeys_command</title>
+  <note><para>Renamed to <link linkend="pgp-get-keys-command">$pgp_get_keys_command</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="pgp-get-keys-command">
@@ -26809,19 +26685,13 @@ possible <literal>printf(3)</literal>-like sequences.
 Default: (empty)</literallayout>
 
 <para>
-This command is invoked whenever NeoMutt needs to fetch the public key associated with
-an email address.  Of the sequences supported by <link linkend="pgp-decode-command">$pgp_decode_command</link>, %r is
-the only <literal>printf(3)</literal>-like sequence used with this format.  Note that
-in this case, %r expands to the email address, not the public key ID (the key ID is
-unknown, which is why NeoMutt is invoking this command).
-(PGP only)
+This command is invoked whenever NeoMutt needs to fetch the public key
+associated with an email address. Of the sequences supported by
+<link linkend="pgp-decode-command">$pgp_decode_command</link>, %r is the only <literal>printf(3)</literal>-like sequence used with
+this format. Note that in this case, %r expands to the email address, not the
+public key ID (the key ID is unknown, which is why NeoMutt is invoking this
+command). (PGP only)
 </para>
-<note><para>Before 2021-02-11, this was called $pgp_getkeys_command</para></note>
-</sect2>
-
-<sect2 id="pgp-getkeys-command">
-  <title>pgp_getkeys_command</title>
-  <note><para>Renamed to <link linkend="pgp-get-keys-command">$pgp_get_keys_command</link> (2021-02-11)</para></note>
 </sect2>
 
 <sect2 id="pgp-good-sign">
@@ -26958,11 +26828,10 @@ possible <literal>printf(3)</literal>-like sequences.
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, use 64-bit PGP key IDs, if <emphasis>unset</emphasis> use the normal 32-bit key IDs.
-NOTE: Internally, NeoMutt has transitioned to using fingerprints (or long key IDs
-as a fallback).  This option now only controls the display of key IDs
-in the key selection menu and a few other places.
-(PGP only)
+If <emphasis>set</emphasis>, use 64-bit PGP key IDs, if <emphasis>unset</emphasis> use the normal 32-bit
+key IDs. NOTE: Internally, NeoMutt has transitioned to using fingerprints (or
+long key IDs as a fallback). This option now only controls the display of key
+IDs in the key selection menu and a few other places. (PGP only)
 </para>
 </sect2>
 
@@ -27212,9 +27081,9 @@ possible <literal>printf(3)</literal>-like sequences.
 Default: no</literallayout>
 
 <para>
-Used in connection with the <literal>&lt;pipe-message&gt;</literal> function.  When <emphasis>unset</emphasis>,
-NeoMutt will pipe the messages without any preprocessing. When <emphasis>set</emphasis>, NeoMutt
-will attempt to decode the messages first.
+Used in connection with the <literal>&lt;pipe-message&gt;</literal> function. When <emphasis>unset</emphasis>,
+NeoMutt will pipe the messages without any preprocessing. When <emphasis>set</emphasis>,
+NeoMutt will attempt to decode the messages first.
 </para>
 <para>
 Also see <link linkend="pipe-decode-weed">$pipe_decode_weed</link>, which controls whether headers will
@@ -27265,10 +27134,10 @@ and the <link linkend="pipe-sep">$pipe_sep</link> separator is added after each 
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, NeoMutt will try all available authentication methods.
-When <emphasis>unset</emphasis>, NeoMutt will only fall back to other authentication
-methods if the previous methods are unavailable. If a method is
-available but authentication fails, NeoMutt will not connect to the POP server.
+If <emphasis>set</emphasis>, NeoMutt will try all available authentication methods. When
+<emphasis>unset</emphasis>, NeoMutt will only fall back to other authentication methods if
+the previous methods are unavailable. If a method is available but
+authentication fails, NeoMutt will not connect to the POP server.
 </para>
 </sect2>
 
@@ -27318,9 +27187,9 @@ new mail in the currently selected mailbox if it is a POP mailbox.
 Default: ask-no</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, NeoMutt will delete successfully downloaded messages from the POP
-server when using the <literal><link linkend="fetch-mail">&lt;fetch-mail&gt;</link></literal> function.  When <emphasis>unset</emphasis>, NeoMutt will
-download messages but also leave them on the POP server.
+If <emphasis>set</emphasis>, NeoMutt will delete successfully downloaded messages from the
+POP server when using the <literal><link linkend="fetch-mail">&lt;fetch-mail&gt;</link></literal> function. When <emphasis>unset</emphasis>,
+NeoMutt will download messages but also leave them on the POP server.
 </para>
 </sect2>
 
@@ -27348,8 +27217,8 @@ where "[...]" denotes an optional part.
 Default: no</literallayout>
 
 <para>
-If this variable is <emphasis>set</emphasis>, NeoMutt will try to use the "<literal>LAST</literal>" POP command
-for retrieving only unread messages from the POP server when using
+If this variable is <emphasis>set</emphasis>, NeoMutt will try to use the "<literal>LAST</literal>" POP
+command for retrieving only unread messages from the POP server when using
 the <literal><link linkend="fetch-mail">&lt;fetch-mail&gt;</link></literal> function.
 </para>
 </sect2>
@@ -27461,8 +27330,14 @@ in <link linkend="pgp-default-key">$pgp_default_key</link> or <link linkend="smi
 </sect2>
 
 <sect2 id="postpone-encrypt-as">
-  <title>postpone_encrypt_as</title>
-  <note><para>Deprecated, since 2025-12-16</para></note>
+<title>postpone_encrypt_as</title>
+<literallayout>Type: string
+Default: (empty)</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, NeoMutt will use this as a fallback encryption key for
+postponed messages.
+</para>
 </sect2>
 
 <sect2 id="postponed">
@@ -27664,14 +27539,6 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
 <row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
-</entry></row>
-<row><entry><literal>%a</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%E</literal> instead
-</entry></row>
-<row><entry><literal>%c</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%i</literal> instead
-</entry></row>
-<row><entry><literal>%e</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%C</literal> instead
-</entry></row>
-<row><entry><literal>%n</literal>    </entry><entry>                      </entry><entry><emphasis role="bold">Deprecated:</emphasis> Use <literal>%N</literal> instead
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -27701,10 +27568,10 @@ The following sequences are deprecated; they will be removed in the future.
 Default: yes</literallayout>
 
 <para>
-This variable controls whether "quit" and "exit" actually quit
-from NeoMutt.  If this option is <emphasis>set</emphasis>, they do quit, if it is <emphasis>unset</emphasis>, they
-have no effect, and if it is set to <emphasis>ask-yes</emphasis> or <emphasis>ask-no</emphasis>, you are
-prompted for confirmation when you try to quit.
+This variable controls whether "quit" and "exit" actually quit from NeoMutt.
+If this option is <emphasis>set</emphasis>, they do quit, if it is <emphasis>unset</emphasis>, they have no
+effect, and if it is set to <emphasis>ask-yes</emphasis> or <emphasis>ask-no</emphasis>, you are prompted
+for confirmation when you try to quit.
 </para>
 <para>
 In order to quit from NeoMutt if this variable is <emphasis>unset</emphasis>, you must send
@@ -27747,15 +27614,14 @@ Match detection may be overridden by the <link linkend="smileys">$smileys</link>
 Default: 10</literallayout>
 
 <para>
-If set to a value greater than 0, NeoMutt will display which message it
-is currently on when reading a mailbox or when performing search actions
-such as search and limit. The message is printed after
-this many messages have been read or searched (e.g., if set to 25, NeoMutt will
-print a message when it is at message 25, and then again when it gets
-to message 50).  This variable is meant to indicate progress when
-reading or searching large mailboxes which may take some time.
-When set to 0, only a single message will appear before the reading
-the mailbox.
+If set to a value greater than 0, NeoMutt will display which message it is
+currently on when reading a mailbox or when performing search actions such as
+search and limit. The message is printed after this many messages have been
+read or searched (e.g., if set to 25, NeoMutt will print a message when it is
+at message 25, and then again when it gets to message 50). This variable is
+meant to indicate progress when reading or searching large mailboxes which
+may take some time. When set to 0, only a single message will appear before
+the reading the mailbox.
 </para>
 <para>
 Also see the <link linkend="write-inc">$write_inc</link>, <link linkend="net-inc">$net_inc</link> and <link linkend="time-inc">$time_inc</link> variables and the
@@ -27783,8 +27649,8 @@ This variable specifies what "real" or "personal" name should be used
 when sending messages.
 </para>
 <para>
-If not specified, then the user's "real name" will be read from <literal>/etc/passwd</literal>.
-This option will not be used, if "<link linkend="from">$from</link>" is set.
+If not specified, then the user's "real name" will be read from
+<literal>/etc/passwd</literal>. This option will not be used, if "<link linkend="from">$from</link>" is set.
 </para>
 <note><para>Before 2021-03-21, this was called $realname</para></note>
 </sect2>
@@ -27870,18 +27736,18 @@ Also see <link linkend="reflow-wrap">$reflow_wrap</link>, and <link linkend="wra
 Default: 78</literallayout>
 
 <para>
-This variable controls the maximum paragraph width when reformatting text/plain
-parts when <link linkend="reflow-text">$reflow_text</link> is <emphasis>set</emphasis>.  When the value is 0, paragraphs will
-be wrapped at the terminal's right margin.  A positive value sets the
-paragraph width relative to the left margin.  A negative value set the
-paragraph width relative to the right margin.
+This variable controls the maximum paragraph width when reformatting
+text/plain parts when <link linkend="reflow-text">$reflow_text</link> is <emphasis>set</emphasis>. When the value is 0,
+paragraphs will be wrapped at the terminal's right margin. A positive value
+sets the paragraph width relative to the left margin. A negative value set
+the paragraph width relative to the right margin.
 </para>
 <para>
-Be aware that the reformatted lines of a paragraph are still subject to <link linkend="wrap">$wrap</link>.
-This means if <link linkend="reflow-wrap">$reflow_wrap</link> is 40 and <link linkend="wrap">$wrap</link> is 30, then the paragraph gets
-reformatted to 40 characters a line (due to <link linkend="reflow-wrap">$reflow_wrap</link>) and afterwards
-each 40-character-line is split at 30 characters (due to <link linkend="wrap">$wrap</link>), resulting in
-alternating line lengths of 30 and 10 characters.
+Be aware that the reformatted lines of a paragraph are still subject to
+<link linkend="wrap">$wrap</link>. This means if <link linkend="reflow-wrap">$reflow_wrap</link> is 40 and <link linkend="wrap">$wrap</link> is 30, then the
+paragraph gets reformatted to 40 characters a line (due to <link linkend="reflow-wrap">$reflow_wrap</link>) and
+afterwards each 40-character-line is split at 30 characters (due to <link linkend="wrap">$wrap</link>),
+resulting in alternating line lengths of 30 and 10 characters.
 </para>
 <para>
 Also see <link linkend="wrap">$wrap</link>.
@@ -27891,7 +27757,7 @@ Also see <link linkend="wrap">$wrap</link>.
 <sect2 id="reply-regex">
 <title>reply_regex</title>
 <literallayout>Type: regular expression
-Default: <quote><literal>^((re|aw|sv)(\[[0-9]+\])*:[ \t]*)*</literal></quote></literallayout>
+Default: <quote><literal>^((re)(\[[0-9]+\])*:[ \t]*)*</literal></quote></literallayout>
 
 <para>
 A regular expression used to recognize reply messages when
@@ -28286,13 +28152,12 @@ before search results. By default, search results will be top-aligned.
 Default: <quote><literal>us-ascii:iso-8859-1:utf-8</literal></quote></literallayout>
 
 <para>
-A colon-delimited list of character sets for outgoing messages. NeoMutt will use the
-first character set into which the text can be converted exactly.
-If your <link linkend="charset">$charset</link> is not "iso-8859-1" and recipients may not
-understand "UTF-8", it is advisable to include in the list an
-appropriate widely used standard character set (such as
-"iso-8859-2", "koi8-r" or "iso-2022-jp") either instead of or after
-"iso-8859-1".
+A colon-delimited list of character sets for outgoing messages. NeoMutt will
+use the first character set into which the text can be converted exactly. If
+your <link linkend="charset">$charset</link> is not "iso-8859-1" and recipients may not understand "UTF-8",
+it is advisable to include in the list an appropriate widely used standard
+character set (such as "iso-8859-2", "koi8-r" or "iso-2022-jp") either
+instead of or after "iso-8859-1".
 </para>
 <para>
 In case the text can't be converted into one of these exactly,
@@ -28446,7 +28311,8 @@ IMAP mailboxes are often named: 'folder1.folder2.mailbox'.
 <screen>
 set sidebar_delim_chars='.'
 </screen><para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-short-path">$sidebar_short_path</link>, <link linkend="sidebar-folder-indent">$sidebar_folder_indent</link>, <link linkend="sidebar-indent-string">$sidebar_indent_string</link>.
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-short-path">$sidebar_short_path</link>, <link linkend="sidebar-folder-indent">$sidebar_folder_indent</link>,
+<link linkend="sidebar-indent-string">$sidebar_indent_string</link>.
 </para>
 </sect2>
 
@@ -28479,7 +28345,8 @@ Default: no</literallayout>
 Set this to indent mailboxes in the sidebar.
 </para>
 <para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-short-path">$sidebar_short_path</link>, <link linkend="sidebar-indent-string">$sidebar_indent_string</link>, <link linkend="sidebar-delim-chars">$sidebar_delim_chars</link>.
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-short-path">$sidebar_short_path</link>, <link linkend="sidebar-indent-string">$sidebar_indent_string</link>,
+<link linkend="sidebar-delim-chars">$sidebar_delim_chars</link>.
 </para>
 </sect2>
 
@@ -28529,8 +28396,10 @@ sequences:
 <row><entry><literal>%Z</literal>    </entry><entry><literal>%{unseen-count}</literal>  </entry><entry>          </entry><entry>Number of new messages in the mailbox (unread, unseen)
 </entry></row>
 <row><entry><literal>%!</literal>    </entry><entry><literal>%{flagged}</literal>       </entry><entry>          </entry><entry><literal>!</literal> : one flagged message
-<literal>!!</literal> : two flagged messages
-<literal>%{n!}</literal> : n flagged messages (for n &gt; 2)
+</entry></row>
+<row><entry>            </entry><entry>                       </entry><entry>          </entry><entry><literal>!!</literal> : two flagged messages
+</entry></row>
+<row><entry>            </entry><entry>                       </entry><entry>          </entry><entry><literal>n!</literal> : n flagged messages (for n &gt; 2)
 </entry></row>
 <row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>  </entry><entry>          </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
@@ -28559,7 +28428,8 @@ This specifies the string that is used to indent mailboxes in the sidebar.
 It defaults to two spaces.
 </para>
 <para>
-<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-short-path">$sidebar_short_path</link>, <link linkend="sidebar-folder-indent">$sidebar_folder_indent</link>, <link linkend="sidebar-delim-chars">$sidebar_delim_chars</link>.
+<emphasis role="bold">See also:</emphasis> <link linkend="sidebar-short-path">$sidebar_short_path</link>, <link linkend="sidebar-folder-indent">$sidebar_folder_indent</link>,
+<link linkend="sidebar-delim-chars">$sidebar_delim_chars</link>.
 </para>
 </sect2>
 
@@ -28596,7 +28466,8 @@ the end of the list.
 Default: no</literallayout>
 
 <para>
-When set, the sidebar will only display mailboxes that contain one or more mails.
+When set, the sidebar will only display mailboxes that contain one or more
+mails.
 </para>
 <para>
 <emphasis role="bold">See also:</emphasis> <link linkend="sidebar-new-mail-only">$sidebar_new_mail_only</link>, <link linkend="sidebar-pin">sidebar-pin</link>.
@@ -28734,12 +28605,12 @@ Chinese characters.
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, a line containing "-- " (note the trailing space) will be inserted before your
-<link linkend="signature">$signature</link>.  It is <emphasis role="bold">strongly</emphasis> recommended that you not <emphasis>unset</emphasis>
-this variable unless your signature contains just your name.  The
-reason for this is because many software packages use "-- \n" to
-detect your signature.  For example, NeoMutt has the ability to highlight
-the signature in a different color in the built-in pager.
+If <emphasis>set</emphasis>, a line containing "-- " (note the trailing space) will be
+inserted before your <link linkend="signature">$signature</link>. It is <emphasis role="bold">strongly</emphasis> recommended that you
+not <emphasis>unset</emphasis> this variable unless your signature contains just your name.
+The reason for this is because many software packages use "-- \n" to detect
+your signature. For example, NeoMutt has the ability to highlight the
+signature in a different color in the built-in pager.
 </para>
 </sect2>
 
@@ -28831,8 +28702,8 @@ or equal to 1 megabyte.  See <link linkend="formatstrings-size">formatstrings-si
 Default: no</literallayout>
 
 <para>
-If <emphasis>set</emphasis>, message sizes units will be displayed to the left of the number.
-See <link linkend="formatstrings-size">formatstrings-size</link>.
+If <emphasis>set</emphasis>, message sizes units will be displayed to the left of the
+number. See <link linkend="formatstrings-size">formatstrings-size</link>.
 </para>
 </sect2>
 
@@ -28911,14 +28782,12 @@ contains trusted certificates for use with OpenSSL.
 Default: (empty)</literallayout>
 
 <para>
-Since for S/MIME there is no pubring/secring as with PGP, NeoMutt has to handle
-storage and retrieval of keys by itself. This is very basic right
-now, and keys and certificates are stored in two different
-directories, both named as the hash-value retrieved from
-OpenSSL. There is an index file which contains mailbox-address
-keyid pairs, and which can be manually edited. This option points to
-the location of the certificates.
-(S/MIME only)
+Since for S/MIME there is no pubring/secring as with PGP, NeoMutt has to
+handle storage and retrieval of keys by itself. This is very basic right now,
+and keys and certificates are stored in two different directories, both named
+as the hash-value retrieved from OpenSSL. There is an index file which
+contains mailbox-address keyid pairs, and which can be manually edited. This
+option points to the location of the certificates. (S/MIME only)
 </para>
 </sect2>
 
@@ -28932,8 +28801,8 @@ This format string specifies a command which is used to decrypt
 <literal>application/pkcs7-mime</literal> attachments.
 </para>
 <para>
-The OpenSSL command formats have their own set of <literal>printf(3)</literal>-like sequences
-similar to PGP's:
+The OpenSSL command formats have their own set of <literal>printf(3)</literal>-like
+sequences similar to PGP's:
 
 </para>
 
@@ -28945,7 +28814,8 @@ similar to PGP's:
 <row><entry><literal>%a</literal>    </entry><entry><literal>%{algorithm}</literal>        </entry><entry>Algorithm used for encryption
 </entry></row>
 <row><entry><literal>%C</literal>    </entry><entry><literal>%{certificate-path}</literal> </entry><entry>CA location:  Depending on whether <link linkend="smime-ca-location">$smime_ca_location</link> points to a directory or file,
-this expands to "-CApath <link linkend="smime-ca-location">$smime_ca_location</link>" or "-CAfile <link linkend="smime-ca-location">$smime_ca_location</link>"
+</entry></row>
+<row><entry>            </entry><entry>                          </entry><entry>this expands to "-CApath <link linkend="smime-ca-location">$smime_ca_location</link>" or "-CAfile <link linkend="smime-ca-location">$smime_ca_location</link>"
 </entry></row>
 <row><entry><literal>%c</literal>    </entry><entry><literal>%{certificate-ids}</literal>  </entry><entry>One or more certificate IDs
 </entry></row>
@@ -28958,7 +28828,8 @@ this expands to "-CApath <link linkend="smime-ca-location">$smime_ca_location</l
 <row><entry><literal>%k</literal>    </entry><entry><literal>%{key}</literal>              </entry><entry>Key-pair specified with <link linkend="smime-default-key">$smime_default_key</link>
 </entry></row>
 <row><entry><literal>%s</literal>    </entry><entry><literal>%{signature-file}</literal>   </entry><entry>Expands to the name of a file containing the signature part
-of a <literal>multipart/signed</literal> attachment when verifying it
+</entry></row>
+<row><entry>            </entry><entry>                          </entry><entry>of a <literal>multipart/signed</literal> attachment when verifying it
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -28975,10 +28846,10 @@ alongside the documentation.
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis> (default) this tells NeoMutt to use the default key for decryption. Otherwise,
-if managing multiple certificate-key-pairs, NeoMutt will try to use the mailbox-address
-to determine the key to use. It will ask you to supply a key, if it can't find one.
-(S/MIME only)
+If <emphasis>set</emphasis> (default) this tells NeoMutt to use the default key for
+decryption. Otherwise, if managing multiple certificate-key-pairs, NeoMutt
+will try to use the mailbox-address to determine the key to use. It will ask
+you to supply a key, if it can't find one. (S/MIME only)
 </para>
 </sect2>
 
@@ -29039,8 +28910,8 @@ Encrypt the message to <link linkend="smime-default-key">$smime_default_key</lin
 Default: <quote><literal>aes256</literal></quote></literallayout>
 
 <para>
-This sets the algorithm that should be used for encryption.
-Valid choices are "aes128", "aes192", "aes256", "des", "des3", "rc2-40", "rc2-64", "rc2-128".
+This sets the algorithm that should be used for encryption. Valid choices are
+"aes128", "aes192", "aes256", "des", "des3", "rc2-40", "rc2-64", "rc2-128".
 (S/MIME only)
 </para>
 </sect2>
@@ -29083,8 +28954,8 @@ possible <literal>printf(3)</literal>-like sequences.
 Default: (empty)</literallayout>
 
 <para>
-This command is used to extract only the signers X509 certificate from a S/MIME
-signature, so that the certificate's owner may get compared to the
+This command is used to extract only the signers X509 certificate from a
+S/MIME signature, so that the certificate's owner may get compared to the
 email's "From:" field.
 </para>
 <para>
@@ -29120,8 +28991,8 @@ The default behavior of NeoMutt is to use PGP on all auto-sign/encryption
 operations. To override and to use OpenSSL instead this must be <emphasis>set</emphasis>.
 However, this has no effect while replying, since NeoMutt will automatically
 select the same application that was used to sign/encrypt the original
-message.  (Note that this variable can be overridden by unsetting <link linkend="crypt-auto-smime">$crypt_auto_smime</link>.)
-(S/MIME only)
+message. (Note that this variable can be overridden by unsetting
+<link linkend="crypt-auto-smime">$crypt_auto_smime</link>.) (S/MIME only)
 </para>
 </sect2>
 
@@ -29131,13 +29002,12 @@ message.  (Note that this variable can be overridden by unsetting <link linkend=
 Default: (empty)</literallayout>
 
 <para>
-Since for S/MIME there is no pubring/secring as with PGP, NeoMutt has to handle
-storage and retrieval of keys/certs by itself. This is very basic right now,
-and stores keys and certificates in two different directories, both
-named as the hash-value retrieved from OpenSSL. There is an index file
-which contains mailbox-address keyid pair, and which can be manually
-edited. This option points to the location of the private keys.
-(S/MIME only)
+Since for S/MIME there is no pubring/secring as with PGP, NeoMutt has to
+handle storage and retrieval of keys/certs by itself. This is very basic
+right now, and stores keys and certificates in two different directories,
+both named as the hash-value retrieved from OpenSSL. There is an index file
+which contains mailbox-address keyid pair, and which can be manually edited.
+This option points to the location of the private keys. (S/MIME only)
 </para>
 </sect2>
 
@@ -29232,7 +29102,8 @@ not used.
 Default: (empty)</literallayout>
 
 <para>
-This command is used to verify S/MIME signatures of type <literal>multipart/signed</literal>.
+This command is used to verify S/MIME signatures of type
+<literal>multipart/signed</literal>.
 </para>
 <para>
 This is a format string, see the <link linkend="smime-decrypt-command">$smime_decrypt_command</link> command for
@@ -29620,9 +29491,9 @@ the default from the GNUTLS library. (GnuTLS only)
 Default: yes</literallayout>
 
 <para>
-If <emphasis>set</emphasis> (the default), NeoMutt will attempt to use <literal>STARTTLS</literal> on servers
-advertising the capability. When <emphasis>unset</emphasis>, NeoMutt will not attempt to
-use <literal>STARTTLS</literal> regardless of the server's capabilities.
+If <emphasis>set</emphasis> (the default), NeoMutt will attempt to use <literal>STARTTLS</literal> on
+servers advertising the capability. When <emphasis>unset</emphasis>, NeoMutt will not
+attempt to use <literal>STARTTLS</literal> regardless of the server's capabilities.
 </para>
 <para>
 <emphasis role="bold">Note</emphasis> that <literal>STARTTLS</literal> is subject to many kinds of
@@ -29759,13 +29630,16 @@ Controls the characters used by the "%r" indicator in <link linkend="status-form
 <row><entry>2 </entry><entry>* </entry><entry>Mailbox has been changed and needs to be resynchronized
 </entry></row>
 <row><entry>3 </entry><entry>% </entry><entry>Mailbox is read-only, or will not be written when exiting.
-(You can toggle whether to write changes to a mailbox
-with the <literal>&lt;toggle-write&gt;</literal> operation, bound by default
-to "%")
+</entry></row>
+<row><entry>  </entry><entry>  </entry><entry>(You can toggle whether to write changes to a mailbox
+</entry></row>
+<row><entry>  </entry><entry>  </entry><entry>with the <literal>&lt;toggle-write&gt;</literal> operation, bound by default to "%")
 </entry></row>
 <row><entry>4 </entry><entry>A </entry><entry>Folder opened in attach-message mode.
-(Certain operations like composing a new mail, replying,
-forwarding, etc. are not permitted in this mode)
+</entry></row>
+<row><entry>  </entry><entry>  </entry><entry>(Certain operations like composing a new mail, replying,
+</entry></row>
+<row><entry>  </entry><entry>  </entry><entry>forwarding, etc. are not permitted in this mode)
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -29887,9 +29761,9 @@ are enabled with <link linkend="use-threads">$use_threads</link>:
 <literal>%&lt;T?%s/%S&amp;%T/%s&gt;</literal>
 </para>
 <para>
-You can force the result of any <literal>printf(3)</literal>-like sequence to be lowercase
-by prefixing the sequence character with an underscore ("_") sign.
-For example, if you want to display the local hostname in lowercase,
+You can force the result of any <literal>printf(3)</literal>-like sequence to be
+lowercase by prefixing the sequence character with an underscore ("_")
+sign. For example, if you want to display the local hostname in lowercase,
 you would use: "<literal>%_h</literal>".
 </para>
 <para>
@@ -29951,11 +29825,11 @@ the above mentioned use case of "<literal>xterm -e neomutt</literal>".
 Default: no</literallayout>
 
 <para>
-When <emphasis>set</emphasis>, NeoMutt will generate "format=flowed" bodies with a content type
-of "<literal>text/plain; format=flowed</literal>".
-This format is easier to handle for some mailing software, and generally
-just looks like ordinary text.  To actually make use of this format's
-features, you'll need support in your editor.
+When <emphasis>set</emphasis>, NeoMutt will generate "format=flowed" bodies with a content
+type of "<literal>text/plain; format=flowed</literal>". This format is easier to handle
+for some mailing software, and generally just looks like ordinary text. To
+actually make use of this format's features, you'll need support in your
+editor.
 </para>
 <para>
 The option only controls newly composed messages.  Postponed messages,
@@ -29973,17 +29847,17 @@ Note that <link linkend="indent-string">$indent_string</link> is ignored when th
 Default: yes</literallayout>
 
 <para>
-Affects the <literal>~b</literal>, <literal>~B</literal>, and <literal>~h</literal> search operations described in
-section "<link linkend="patterns">patterns</link>".  If <emphasis>set</emphasis>, the headers and body/attachments of
-messages to be searched are decoded before searching. If <emphasis>unset</emphasis>,
-messages are searched as they appear in the folder.
+Affects the <literal>~b</literal>, <literal>~B</literal>, and <literal>~h</literal> search operations
+described in section "<link linkend="patterns">patterns</link>".  If <emphasis>set</emphasis>, the headers and
+body/attachments of messages to be searched are decoded before searching.
+If <emphasis>unset</emphasis>, messages are searched as they appear in the folder.
 </para>
 <para>
-Users searching attachments or for non-ASCII characters should <emphasis>set</emphasis>
-this value because decoding also includes MIME parsing/decoding and possible
-character set conversions. Otherwise NeoMutt will attempt to match against the
-raw message received (for example quoted-printable encoded or with encoded
-headers) which may lead to incorrect search results.
+Users searching attachments or for non-ASCII characters should <emphasis>set</emphasis> this
+value because decoding also includes MIME parsing/decoding and possible
+character set conversions. Otherwise NeoMutt will attempt to match against
+the raw message received (for example quoted-printable encoded or with
+encoded headers) which may lead to incorrect search results.
 </para>
 </sect2>
 
@@ -30045,19 +29919,12 @@ Also see the "<link linkend="guide/tuning">tuning</link>" section of the manual 
 Default: 600</literallayout>
 
 <para>
-When NeoMutt is waiting for user input either idling in menus or
-in an interactive prompt, NeoMutt would block until input is
-present. Depending on the context, this would prevent certain
-operations from working, like checking for new mail or keeping
-an IMAP connection alive.
+This variable sets the time interval in seconds in which <emphasis>timeout-hook</emphasis>
+commands get executed while waiting for user input either idling in menus
+or in an interactive prompt.
 </para>
 <para>
-This variable controls how many seconds NeoMutt will at most wait
-until it aborts waiting for input, performs these operations and
-continues to wait for input.
-</para>
-<para>
-A value of zero or less will cause NeoMutt to never time out.
+A value of zero disables timeout hooks.
 </para>
 </sect2>
 
@@ -30323,8 +30190,8 @@ Default: yes</literallayout>
 
 <para>
 When <emphasis>set</emphasis>, NeoMutt will look for IPv6 addresses of hosts it tries to
-contact.  If this option is <emphasis>unset</emphasis>, NeoMutt will restrict itself to IPv4 addresses.
-Normally, the default should work.
+contact. If this option is <emphasis>unset</emphasis>, NeoMutt will restrict itself to IPv4
+addresses. Normally, the default should work.
 </para>
 </sect2>
 
@@ -30381,8 +30248,14 @@ them.
 </sect2>
 
 <sect2 id="virtual-spool-file">
-  <title>virtual_spool_file</title>
-  <note><para>Deprecated, since 2025-12-08</para></note>
+<title>virtual_spool_file</title>
+<literallayout>Type: boolean
+Default: no</literallayout>
+
+<para>
+When <emphasis>set</emphasis>, NeoMutt will use the first Notmuch virtual mailbox as a
+spool file.
+</para>
 </sect2>
 
 <sect2 id="virtual-spoolfile">
@@ -30401,10 +30274,10 @@ them.
 Default: yes</literallayout>
 
 <para>
-Controls whether NeoMutt will ask you to press a key after an external command
-has been invoked by these functions: <literal>&lt;shell-escape&gt;</literal>,
-<literal>&lt;pipe-message&gt;</literal>, <literal>&lt;pipe-entry&gt;</literal>, <literal>&lt;print-message&gt;</literal>,
-and <literal>&lt;print-entry&gt;</literal> commands.
+Controls whether NeoMutt will ask you to press a key after an external
+command has been invoked by these functions: <literal>&lt;shell-escape&gt;</literal>,
+<literal>&lt;pipe-message&gt;</literal>, <literal>&lt;pipe-entry&gt;</literal>, <literal>&lt;print-message&gt;</literal>, and
+<literal>&lt;print-entry&gt;</literal> commands.
 </para>
 <para>
 It is also used when viewing attachments with "<link linkend="auto-view">auto-view</link>", provided
@@ -30412,8 +30285,8 @@ that the corresponding mailcap entry has a <emphasis>needsterminal</emphasis> fl
 and the external program is interactive.
 </para>
 <para>
-When <emphasis>set</emphasis>, NeoMutt will always ask for a key. When <emphasis>unset</emphasis>, NeoMutt will wait
-for a key only if the external command returned a non-zero status.
+When <emphasis>set</emphasis>, NeoMutt will always ask for a key. When <emphasis>unset</emphasis>, NeoMutt
+will wait for a key only if the external command returned a non-zero status.
 </para>
 </sect2>
 
