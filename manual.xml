@@ -4890,7 +4890,7 @@ bind index gg first-entry
       <note>
         <para>
           Settings are <emphasis>not</emphasis> restored when you leave the
-          mailbox. For example, a command action to perform is to change the
+          mailbox. For example, a common action to perform is to change the
           sorting method based upon the mailbox being read:
         </para>
         <screen>folder-hook work "set sort=threads"</screen>
@@ -7588,9 +7588,9 @@ mailboxes $my_mx +mailbox3
       </note>
       <para>
         If the filename ends with a vertical bar (<quote>|</quote>), then
-        <emphasis>filename</emphasis> is considered to be an executable program
-        from which to read input (e.g.
-        <literal><command>source</command> ~/bin/myscript|</literal>).
+        <emphasis>filename</emphasis> is considered to be a command line which
+        will be executed using <literal><command>/bin/sh -c</command></literal>
+        (e.g.  <literal><command>source</command> ~/bin/myscript arg1 arg2|</literal>).
       </para>
     </sect1>
 
@@ -8778,6 +8778,13 @@ subscribe "only\\.dot@example\\.org"
                 <entry>
                   aliases which contain <emphasis>REGEX</emphasis> in the
                   alias address (<emphasis>To</emphasis> part of alias)
+                </entry>
+              </row>
+              <row>
+                <entry>~Y <emphasis>REGEX</emphasis></entry>
+                <entry></entry>
+                <entry>
+                  aliases whose tags match <emphasis>REGEX</emphasis>
                 </entry>
               </row>
             </tbody>
@@ -12994,7 +13001,6 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
     <sect1 id="account-cmd-support">
       <title>Support</title>
       <para><emphasis role="bold">Since:</emphasis> NeoMutt 2022-05-16</para>
-      <para><emphasis role="bold">Dependencies:</emphasis> None</para>
     </sect1>
 
     <sect1 id="account-cmd-intro">
@@ -13105,16 +13111,6 @@ folder-hook imap://user@host2/ 'set folder=imap://host2/ ; set record=+INBOX/Sen
     <title>Attach Headers Color Feature</title>
     <subtitle>Color attachment headers using regex, just like mail
     bodies</subtitle>
-
-    <sect1 id="attach-headers-color-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="attach-headers-color-intro">
       <title>Introduction</title>
@@ -13283,7 +13279,6 @@ sendmailcmd = neomutt -C -H - &amp;&amp; true
     <sect1 id="compose-message-preview-support">
       <title>Support</title>
       <para><emphasis role="bold">Since:</emphasis> NeoMutt 2024-12-12</para>
-      <para><emphasis role="bold">Dependencies:</emphasis> None</para>
     </sect1>
 
     <sect1 id="compose-message-preview-intro">
@@ -13399,16 +13394,6 @@ sendmailcmd = neomutt -C -H - &amp;&amp; true
     <title>Compose to Sender Feature</title>
     <subtitle>Send new mail to the sender of the current mail</subtitle>
 
-    <sect1 id="compose-to-sender-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-10-02
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
-
     <sect1 id="compose-to-sender-intro">
       <title>Introduction</title>
       <para>
@@ -13485,16 +13470,6 @@ bind index,pager @ compose-to-sender
   <chapter id="feature/compress">
     <title>Compressed Folders Feature</title>
     <subtitle>Read from/write to compressed mailboxes</subtitle>
-
-    <sect1 id="compress-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-05-30
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="compress-intro">
       <title>Introduction</title>
@@ -13907,25 +13882,6 @@ close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &
     <title>Conditional Dates Feature</title>
     <subtitle>Use rules to choose date format</subtitle>
 
-    <sect1 id="cond-date-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
-      </para>
-      <variablelist>
-        <varlistentry>
-          <term>
-            <emphasis role="bold">Dependencies:</emphasis>
-          </term>
-          <listitem>
-            <para>
-              <link linkend="feature/nested-if">nested-if feature</link>
-            </para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </sect1>
-
     <sect1 id="cond-date-intro">
       <title>Introduction</title>
       <para>
@@ -14292,16 +14248,6 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
     <title>Encrypt-to-Self Feature</title>
     <subtitle>Save a self-encrypted copy of emails</subtitle>
 
-    <sect1 id="encrypt-to-self-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-07-23
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
-
     <sect1 id="encrypt-to-self-intro">
       <title>Introduction</title>
       <para>
@@ -14483,9 +14429,6 @@ Recipient: RSA key, ID 0000000000000000
 
     <sect1 id="fmemopen-support">
       <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
-      </para>
       <variablelist>
         <varlistentry>
           <term>
@@ -14561,16 +14504,6 @@ Recipient: RSA key, ID 0000000000000000
     <title>Forgotten Attachment Feature</title>
     <subtitle>Alert user when (s)he forgets to attach a file to an outgoing
     email.</subtitle>
-
-    <sect1 id="forgotten-attachment-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="forgotten-attachment-intro">
       <title>Introduction</title>
@@ -14726,9 +14659,6 @@ startup-hook 'echo `action.sh ARGS`'
         <title>Timeout Hook</title>
         <subtitle>Run a command periodically</subtitle>
         <para>
-          <emphasis role="bold">Since:</emphasis> NeoMutt 2016-08-08
-        </para>
-        <para>
           This feature implements a new hook that is called periodically when
           NeoMutt checks for new mail. This hook is called every
           <literal>$timeout</literal> seconds.
@@ -14739,9 +14669,6 @@ startup-hook 'echo `action.sh ARGS`'
         <title>Startup Hook</title>
         <subtitle>Run a command when NeoMutt starts up, before opening the
           first mailbox</subtitle>
-        <para>
-          <emphasis role="bold">Since:</emphasis> NeoMutt 2016-11-25
-        </para>
         <para>
           This feature implements a new hook that is called when NeoMutt
           first starts up, but before opening the first mailbox. This is most
@@ -14754,9 +14681,6 @@ startup-hook 'echo `action.sh ARGS`'
         <title>Shutdown Hook</title>
         <subtitle>Run a command when NeoMutt shuts down, before closing the last
         mailbox</subtitle>
-        <para>
-          <emphasis role="bold">Since:</emphasis> NeoMutt 2016-11-25
-        </para>
         <para>
           This feature implements a hook that is called when NeoMutt shuts
           down, but before closing the last mailbox. This is most likely to
@@ -14837,17 +14761,6 @@ shutdown-hook 'exec sync-mailbox'
   <chapter id="feature/hccompress">
     <title>Header Cache Compression Feature</title>
     <subtitle>Options for compressing the header cache files</subtitle>
-
-    <sect1 id="hccompress-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2020-02-22
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis>
-        <link linkend="caching">header cache</link>
-      </para>
-    </sect1>
 
     <sect1 id="hccompress-intro">
       <title>Introduction</title>
@@ -14967,16 +14880,6 @@ set header_cache_compress_method = ""
   <chapter id="feature/ifdef">
     <title>Ifdef Feature</title>
     <subtitle>Conditional config options</subtitle>
-
-    <sect1 id="ifdef-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="ifdef-intro">
       <title>Introduction</title>
@@ -15150,25 +15053,6 @@ ifndef sidebar finish
   <chapter id="feature/index-color">
     <title>Index Color Feature</title>
     <subtitle>Custom rules for theming the email index</subtitle>
-
-    <sect1 id="index-color-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
-      </para>
-      <variablelist>
-        <varlistentry>
-          <term>
-            <emphasis role="bold">Dependencies:</emphasis>
-          </term>
-          <listitem>
-            <para>
-              <link linkend="feature/status-color">status-color feature</link>
-            </para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </sect1>
 
     <sect1 id="index-color-intro">
       <title>Introduction</title>
@@ -15351,16 +15235,6 @@ color index_size cyan default
     <title>Initials Expando Feature</title>
     <subtitle>Expando for author's initials</subtitle>
 
-    <sect1 id="initials-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
-
     <sect1 id="initials-intro">
       <title>Introduction</title>
       <para>
@@ -15458,9 +15332,6 @@ set index_format='%4C %Z %{%b %d} %I (%&lt;l?%4l&amp;%4c&gt;) %s'
 
     <sect1 id="kyoto-cabinet-support">
       <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-10-02
-      </para>
       <variablelist>
         <varlistentry>
           <term>
@@ -15541,16 +15412,6 @@ set index_format='%4C %Z %{%b %d} %I (%&lt;l?%4l&amp;%4c&gt;) %s'
     <title>Limit Current Thread Feature</title>
     <subtitle>Focus on one Email Thread</subtitle>
 
-    <sect1 id="limit-current-thread-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-28
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
-
     <sect1 id="limit-current-thread-intro">
       <title>Introduction</title>
       <para>
@@ -15624,16 +15485,6 @@ bind index &lt;esc&gt;L limit-current-thread
     <title>LMDB Feature</title>
     <subtitle>LMDB backend for the header cache</subtitle>
 
-    <sect1 id="lmdb-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-07-23
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
-
     <sect1 id="lmdb-intro">
       <title>Introduction</title>
       <para>
@@ -15677,16 +15528,6 @@ bind index &lt;esc&gt;L limit-current-thread
   <chapter id="feature/lua">
     <title>Lua</title>
     <subtitle>Embedded Lua Scripting</subtitle>
-
-    <sect1 id="lua-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2017-04-14
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="lua-intro">
       <title>Introduction</title>
@@ -15789,16 +15630,6 @@ macro index &lt;F1&gt; "&lt;enter-command&gt;lua 'sw()'&lt;enter&gt;
     <title>Multiple FCC Feature</title>
     <subtitle>Save multiple copies of outgoing mail</subtitle>
 
-    <sect1 id="multiple-fcc-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-08-08
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
-
     <sect1 id="multiple-fcc-intro">
       <title>Introduction</title>
       <para>
@@ -15862,16 +15693,6 @@ macro index &lt;F1&gt; "&lt;enter-command&gt;lua 'sw()'&lt;enter&gt;
   <chapter id="feature/nested-if">
     <title>Nested If Feature</title>
     <subtitle>Allow complex nested conditions in format strings</subtitle>
-
-    <sect1 id="nested-if-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="nested-if-intro">
       <title>Introduction</title>
@@ -16047,16 +15868,6 @@ set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp
     <title>New Mail Feature</title>
     <subtitle>Execute a command upon the receipt of new mail.</subtitle>
 
-    <sect1 id="new-mail-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-07-23
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
-
     <sect1 id="new-mail-intro">
       <title>Introduction</title>
       <para>
@@ -16181,16 +15992,6 @@ set new_mail_command = ""
   <chapter id="feature/nntp">
     <title>NNTP Feature</title>
     <subtitle>Talk to a Usenet news server</subtitle>
-
-    <sect1 id="nntp-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-05-30
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="nntp-intro">
       <title>Introduction</title>
@@ -16580,28 +16381,6 @@ bind index \CG get-message
     <title>Custom backend based Tags Feature</title>
     <subtitle>Implements Notmuch tags and Imap keywords</subtitle>
 
-    <sect1 id="custom-tags-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2017-10-16
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis>
-      </para>
-      <itemizedlist>
-        <listitem>
-          <para>
-            <link linkend="feature/quasi-delete">quasi-delete feature</link>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            <link linkend="feature/index-color">index-color feature</link>
-          </para>
-        </listitem>
-      </itemizedlist>
-    </sect1>
-
     <sect1 id="custom-tags-intro">
         <title>Introduction</title>
         <para>
@@ -16830,28 +16609,8 @@ color index_tags green default
     <sect1 id="notmuch-support">
       <title>Support</title>
       <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-17
+        <emphasis role="bold">Dependencies:</emphasis> Notmuch libraries
       </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis>
-      </para>
-      <itemizedlist>
-        <listitem>
-          <para>
-            <link linkend="feature/quasi-delete">quasi-delete feature</link>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            <link linkend="feature/index-color">index-color feature</link>
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Notmuch libraries
-          </para>
-        </listitem>
-      </itemizedlist>
     </sect1>
 
     <sect1 id="notmuch-intro">
@@ -17311,9 +17070,6 @@ bind index &gt; vfolder-window-forward
       <para>
         <emphasis role="bold">Since:</emphasis> NeoMutt 2021-06-16
       </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
     </sect1>
 
     <sect1 id="pager-read-delay-intro">
@@ -17386,16 +17142,6 @@ set pager_read_delay = 5
   <chapter id="feature/progress">
     <title>Progress Bar Feature</title>
     <subtitle>Show a visual progress bar on slow operations</subtitle>
-
-    <sect1 id="progress-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="progress-intro">
       <title>Introduction</title>
@@ -17476,16 +17222,6 @@ color progress white red
   <chapter id="feature/quasi-delete">
     <title>Quasi-Delete Feature</title>
     <subtitle>Mark emails that should be hidden, but not deleted</subtitle>
-
-    <sect1 id="quasi-delete-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="quasi-delete-intro">
       <title>Introduction</title>
@@ -17572,16 +17308,6 @@ bind index,pager Q quasi-delete
     <title>Reply With X-Original-To Feature</title>
     <subtitle>Direct reply to email using X-Original-To header</subtitle>
 
-    <sect1 id="reply-with-xorig-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
-
     <sect1 id="reply-with-xorig-intro">
       <title>Introduction</title>
       <para>
@@ -17644,16 +17370,6 @@ set reply_with_xorig = "yes"
   <chapter id="feature/sensible-browser">
     <title>Sensible Browser Feature</title>
     <subtitle>Make the file browser behave</subtitle>
-
-    <sect1 id="sensible-browser-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="sensible-browser-intro">
       <title>Introduction</title>
@@ -17753,17 +17469,6 @@ set browser_sort = "reverse-size"
   <chapter id="feature/sidebar">
     <title>Sidebar Feature</title>
     <subtitle>Overview of mailboxes</subtitle>
-
-    <sect1 id="sidebar-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10, NeoMutt
-        1.7.0
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="sidebar-intro">
       <title>Introduction</title>
@@ -18285,9 +17990,6 @@ color sidebar_unread color136 default
         NeoMutt 2019-10-25, <literal>&lt;skip-headers&gt;</literal>
         in NeoMutt 2021-02-05
       </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
     </sect1>
 
     <sect1 id="skip-quoted-intro">
@@ -18420,16 +18122,6 @@ set toggle_quoted_show_levels = 1
   <chapter id="feature/status-color">
     <title>Status Color Feature</title>
     <subtitle>Custom rules for theming the status bar</subtitle>
-
-    <sect1 id="status-color-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
-      </para>
-    </sect1>
 
     <sect1 id="status-color-intro">
       <title>Introduction</title>
@@ -18605,20 +18297,8 @@ color status brightwhite default 'NeoMutt: ([^ ]+)' 1
     <sect1 id="tls-sni-support">
       <title>Support</title>
       <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-03-07
+        <emphasis role="bold">Dependencies:</emphasis> OpenSSL
       </para>
-      <variablelist>
-        <varlistentry>
-          <term>
-            <emphasis role="bold">Dependencies:</emphasis>
-          </term>
-          <listitem>
-            <para>
-              OpenSSL
-            </para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
     </sect1>
 
     <sect1 id="tls-sni-intro">
@@ -18666,26 +18346,6 @@ openssl s_client -host &lt;imap server&gt; -port &lt;port&gt; -tls1 -servername 
   <chapter id="feature/trash">
     <title>Trash Folder Feature</title>
     <subtitle>Automatically move deleted emails to a trash bin</subtitle>
-
-    <sect1 id="trash-folder-support">
-      <title>Support</title>
-      <para>
-        <emphasis role="bold">Since:</emphasis> NeoMutt 2016-09-10, NeoMutt
-        1.7.0
-      </para>
-      <variablelist>
-        <varlistentry>
-          <term>
-            <emphasis role="bold">Dependencies:</emphasis>
-          </term>
-          <listitem>
-            <para>
-              If IMAP is enabled, the trash folder will use it wisely
-            </para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </sect1>
 
     <sect1 id="trash-folder-intro">
       <title>Introduction</title>
@@ -18828,9 +18488,6 @@ bind index D purge-message
       <title>Support</title>
       <para>
         <emphasis role="bold">Since:</emphasis> NeoMutt 2021-08-01
-      </para>
-      <para>
-        <emphasis role="bold">Dependencies:</emphasis> None
       </para>
     </sect1>
 
