@@ -17,8 +17,10 @@ s:"cond-date":"feature/cond-date":
 s:"configuration":"guide/configuration":
 s:"custom-tags":"feature/custom-tags":
 s:"encrypt-to-self":"feature/encrypt-to-self":
+s:"encryption-info":"feature/encryption-info":
 s:"fmemopen":"feature/fmemopen":
 s:"forgotten-attachment":"feature/forgotten-attachment":
+s:"fuzzy":"feature/fuzzy":
 s:"gettingstarted":"guide/gettingstarted":
 s:"global-hooks":"feature/global-hooks":
 s:"hccompress":"feature/hccompress":
@@ -49,6 +51,7 @@ s:"reply-with-xorig-patch":"feature/reply-with-xorig-patch":
 s:"security":"guide/security":
 s:"sensible-browser":"feature/sensible-browser":
 s:"sidebar":"feature/sidebar":
+s:"sidebar-search":"feature/sidebar-search":
 s:"skip-quoted":"feature/skip-quoted":
 s:"skip-quoted-patch":"feature/skip-quoted-patch":
 s:"status-color":"feature/status-color":
