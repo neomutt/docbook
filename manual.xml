@@ -2132,6 +2132,26 @@ color sidebar_divider    color8  default     <emphasis role="comment"># Dark gre
                 <entry>toggle collapse for all threads</entry>
               </row>
               <row>
+                <entry></entry>
+                <entry><literal>&lt;open-thread&gt;</literal></entry>
+                <entry>open the current thread</entry>
+              </row>
+              <row>
+                <entry></entry>
+                <entry><literal>&lt;open-all-threads&gt;</literal></entry>
+                <entry>open all threads</entry>
+              </row>
+              <row>
+                <entry></entry>
+                <entry><literal>&lt;close-thread&gt;</literal></entry>
+                <entry>collapse the current thread</entry>
+              </row>
+              <row>
+                <entry></entry>
+                <entry><literal>&lt;close-all-threads&gt;</literal></entry>
+                <entry>collapse all threads</entry>
+              </row>
+              <row>
                 <entry>P</entry>
                 <entry><literal>&lt;parent-message&gt;</literal></entry>
                 <entry>jump to parent message in thread</entry>
@@ -10715,7 +10735,7 @@ macro index ,a "&lt;save-message&gt;=archive&lt;enter&gt;&lt;enter-command&gt;ec
           <literal>message/rfc822</literal>.
         </para>
         <para>
-          See table <xref linkend="tab-attachment-bindings" /> for all
+          See table <xref linkend="tab-attach-bindings" /> for all
           available functions.
         </para>
 
@@ -13159,7 +13179,7 @@ color   attach_headers     brightmagenta   default    "can't handle these multip
 color   attach_headers     brightmagenta   default    "signature verification suppressed"
 color   attach_headers     brightmagenta   default    "invalid node with packet of type"
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -13247,7 +13267,7 @@ set crypt_opportunistic_encrypt = yes
 <emphasis role="comment"># Self encrypt mail</emphasis>
 set crypt_self_encrypt = yes
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -13447,7 +13467,7 @@ sendmailcmd = neomutt -C -H - &amp;&amp; true
 <emphasis role="comment"># Compose a new email (not a reply) to the sender</emphasis>
 bind index,pager @ compose-to-sender
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -13833,7 +13853,7 @@ close-hook  '\.pgp$' "pgp -fe YourPgpUserIdOrKeyId &lt; '%t' &gt; '%f'"
 open-hook   '\.gpg$' "gpg --decrypt &lt; '%f' &gt; '%t'"
 close-hook  '\.gpg$' "gpg --encrypt --recipient YourGpgUserIdOrKeyId &lt; '%t' &gt; '%f'"
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -14199,7 +14219,7 @@ set index_format='%4C %Z %&lt;[y?%&lt;[m?%&lt;[d?%[%H:%M ]&amp;%[%a %d]&gt;&amp;
 <emphasis role="comment"># %[y   This year   %[%b %d]       Dec 10</emphasis>
 <emphasis role="comment">#  —    Older       %[%m/%y ]      06/15</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -14355,7 +14375,7 @@ set smime_self_encrypt = "yes"
 set smime_default_key = "SMIME-KEY"
 <emphasis role="comment"># set smime_sign_as = "SMIME-SIGNING-KEY"</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -14577,7 +14597,7 @@ set abort_noattach_regex = "\\&lt;attach(|ed|ments?)\\&gt;"
 <emphasis role="comment"># Français:</emphasis>
 <emphasis role="comment"># set abort_noattach_regex = "\\&lt;(attaché|attachés|attache|attachons|joint|jointe|joints|jointes|joins|joignons)\\&gt;"</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -14592,7 +14612,7 @@ set abort_noattach_regex = "\\&lt;attach(|ed|ments?)\\&gt;"
         </listitem>
         <listitem>
           <para>
-            <link linkend="attachment-map">The Attachment Menu key mappings</link>
+            <link linkend="attach-map">The Attachment Menu key mappings</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -15242,7 +15262,7 @@ startup-hook 'exec sync-mailbox'
 <emphasis role="comment"># When NeoMutt quits, run this NeoMutt command</emphasis>
 shutdown-hook 'exec sync-mailbox'
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -15372,7 +15392,7 @@ shutdown-hook 'exec sync-mailbox'
 set header_cache_compress_level = 1
 set header_cache_compress_method = ""
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -15545,7 +15565,7 @@ ifdef imap-fetch-mail 'source ~/.neomutt/imap.rc'
 <emphasis role="comment"># stop reading the current config file.</emphasis>
 ifndef sidebar finish
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -15694,7 +15714,7 @@ color index_number red default
 <emphasis role="comment"># Message size, %c %cr %l</emphasis>
 color index_size cyan default
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -15800,7 +15820,7 @@ set index_format='%4C %Z %{%b %d} %I (%&lt;l?%4l&amp;%4c&gt;) %s'
 <emphasis role="comment">#       3   + Nov 16 JH Voodoo Child    ( 263)</emphasis>
 <emphasis role="comment">#       4   + Nov 16 DH Parallel Lines  ( 540)</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -15976,7 +15996,7 @@ set index_format='%4C %Z %{%b %d} %I (%&lt;l?%4l&amp;%4c&gt;) %s'
 <emphasis role="comment"># Limit view to current thread</emphasis>
 bind index &lt;esc&gt;L limit-current-thread
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -16338,7 +16358,7 @@ set index_format='%4C %Z %{%b %d} %-25.25n %s%&gt; %&lt;M?%M Msgs &amp;%&lt;l?%l
 <emphasis role="comment">#       display the size of the message in bytes (%c)</emphasis>
 set index_format='%4C %Z %{%b %d} %-25.25n %&lt;M?[%M] %s&amp;%s%* %&lt;l?%l&amp;%c&gt;&gt;'
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -16473,7 +16493,7 @@ set new_mail_command = ""
 <emphasis role="comment">#   -message '%n new messages, %u unread.' -activate 'com.apple.Terminal'"</emphasis>
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -16872,7 +16892,7 @@ bind index \eG get-parent
 bind index \CG get-message
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -17105,7 +17125,7 @@ color index_tag red white "inbox"
 color index_tags green default
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -17538,7 +17558,7 @@ bind index &lt; vfolder-window-backward
 bind index &gt; vfolder-window-forward
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -17630,7 +17650,7 @@ bind index &gt; vfolder-window-forward
 <emphasis role="comment"># Stay at least 5 seconds on a message before the pager marks it as read</emphasis>
 set pager_read_delay = 5
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -17703,7 +17723,7 @@ set pager_read_delay = 5
 <emphasis role="comment"># White text on a red background</emphasis>
 color progress white red
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -17788,7 +17808,7 @@ color progress white red
 <emphasis role="comment"># from the index, but NOT deleted.</emphasis>
 bind index,pager Q quasi-delete
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -17869,7 +17889,7 @@ bind index,pager Q quasi-delete
 <emphasis role="comment"># is found.</emphasis>
 set reply_with_xorig = "yes"
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -18454,7 +18474,7 @@ color sidebar_spool_file color207 default
 color sidebar_unread color136 default
 <emphasis role="comment"># --------------------------------------------------------------------------</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -18624,7 +18644,7 @@ set pager_skip_quoted_context = 3
 <emphasis role="comment"># Preserve the first level of quoted text</emphasis>
 set toggle_quoted_show_levels = 1
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -18764,7 +18784,7 @@ color status red default '\[([^]]+)\]' 1
 color status brightwhite default 'NeoMutt: ([^ ]+)' 1
 <emphasis role="comment"># Search for 'NeoMutt: ' but only highlight what comes after it</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -18973,7 +18993,7 @@ set trash='/home/flatcap/Mail/Trash'
 bind index D purge-message
 <emphasis role="comment"># Note: Deleting emails from the 'trash' folder will REALLY delete them.</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -19190,7 +19210,7 @@ set use_threads=threads sort=last-date sort_aux=date
 <emphasis role="comment">#   Barbara  12:05  thread 2</emphasis>
 <emphasis role="comment">#   Erica    12:08  `-&gt;re: thread 2</emphasis>
 
-<emphasis role="comment"># vim: syntax=neomuttrc</emphasis>
+<emphasis role="comment"># vim: filetype=neomuttrc</emphasis>
 </screen>
 
     </sect1>
@@ -19598,7 +19618,8 @@ set use_threads=threads sort=last-date sort_aux=date
         digital signatures, etc. As long as being used, these files are visible
         by other users and maybe even readable in case of misconfiguration.
         Also, a different location for these files may be desired which can be
-        changed via the <link linkend="tmp-dir">$tmp_dir</link> variable.
+        changed via the <link linkend="tmp-dir">$tmp_dir</link> and
+        <link linkend="tmp-draft-dir">$tmp_draft_dir</link> variables.
       </para>
     </sect1>
 
@@ -21735,31 +21756,31 @@ following <literal>printf(3)</literal>-style sequences are available:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>         </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry><literal>%A</literal>    </entry><entry><literal>%{address}</literal>      </entry><entry>Full Address (Name and Email)
+<row><entry><literal>%A</literal>    </entry><entry><literal>%{address}</literal>        </entry><entry>Full Address (Name and Email)
 </entry></row>
-<row><entry><literal>%a</literal>    </entry><entry><literal>%{alias}</literal>        </entry><entry>Alias name
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{alias}</literal>          </entry><entry>Alias name
 </entry></row>
-<row><entry><literal>%C</literal>    </entry><entry><literal>%{comment}</literal>      </entry><entry>Comment
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{comment}</literal>        </entry><entry>Comment
 </entry></row>
-<row><entry><literal>%E</literal>    </entry><entry><literal>%{email}</literal>        </entry><entry>Email Address
+<row><entry><literal>%E</literal>    </entry><entry><literal>%{email}</literal>          </entry><entry>Email Address
 </entry></row>
-<row><entry><literal>%f</literal>    </entry><entry><literal>%{flags}</literal>        </entry><entry>Flags - currently, a <literal>d</literal> for an alias marked for deletion
+<row><entry><literal>%f</literal>    </entry><entry><literal>%{flags}</literal>          </entry><entry>Flags - currently, a <literal>d</literal> for an alias marked for deletion
 </entry></row>
-<row><entry><literal>%i</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Index number
+<row><entry><literal>%i</literal>    </entry><entry><literal>%{number}</literal>         </entry><entry>Index number
 </entry></row>
-<row><entry><literal>%N</literal>    </entry><entry><literal>%{name}</literal>         </entry><entry>Real name
+<row><entry><literal>%N</literal>    </entry><entry><literal>%{name}</literal>           </entry><entry>Real name
 </entry></row>
-<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged}</literal>       </entry><entry>Alias is tagged (selected)
+<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged}</literal>         </entry><entry>Alias is tagged (selected)
 </entry></row>
-<row><entry><literal>%Y</literal>    </entry><entry><literal>%{tags}</literal>         </entry><entry>User-defined tags (labels)
+<row><entry><literal>%Y</literal>    </entry><entry><literal>%{tags}</literal>           </entry><entry>User-defined tags (labels)
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -22063,11 +22084,11 @@ following <literal>printf(3)</literal>-style sequences are understood:
 </entry></row>
 <row><entry>            </entry><entry>                          </entry><entry>(see the <link linkend="attachments">$attachments</link> section for possible speed effects)
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>     </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal>   </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal>     </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal>   </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>      </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>    </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -22267,23 +22288,23 @@ The following <literal>printf(3)</literal>-style sequences are understood
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>         </entry><entry><emphasis role="bold">Description</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>          </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry><literal>%a</literal>    </entry><entry><literal>%{address}</literal>        </entry><entry>Email address
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{address}</literal>         </entry><entry>Email address
 </entry></row>
-<row><entry><literal>%k</literal>    </entry><entry><literal>%{keyid}</literal>          </entry><entry>GPG keyid
+<row><entry><literal>%k</literal>    </entry><entry><literal>%{keyid}</literal>           </entry><entry>GPG keyid
 </entry></row>
-<row><entry><literal>%n</literal>    </entry><entry><literal>%{number}</literal>         </entry><entry>Current entry number
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{number}</literal>          </entry><entry>Current entry number
 </entry></row>
-<row><entry><literal>%p</literal>    </entry><entry><literal>%{prefer-encrypt}</literal> </entry><entry>Prefer-encrypt flag
+<row><entry><literal>%p</literal>    </entry><entry><literal>%{prefer-encrypt}</literal>  </entry><entry>Prefer-encrypt flag
 </entry></row>
-<row><entry><literal>%s</literal>    </entry><entry><literal>%{enabled}</literal>        </entry><entry>Status flag (active/inactive)
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{enabled}</literal>         </entry><entry>Status flag (active/inactive)
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>   </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal>  </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal>   </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal>  </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>    </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>   </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -22669,21 +22690,21 @@ set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>         </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry><literal>%a</literal>    </entry><entry><literal>%{attach-count}</literal> </entry><entry>Total number of attachments
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{attach-count}</literal>   </entry><entry>Total number of attachments
 </entry></row>
-<row><entry><literal>%h</literal>    </entry><entry><literal>%{hostname}</literal>     </entry><entry>Local hostname
+<row><entry><literal>%h</literal>    </entry><entry><literal>%{hostname}</literal>       </entry><entry>Local hostname
 </entry></row>
-<row><entry><literal>%l</literal>    </entry><entry><literal>%{attach-size}</literal>  </entry><entry>Approximate size (in bytes) of the current message (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry><literal>%l</literal>    </entry><entry><literal>%{attach-size}</literal>    </entry><entry>Approximate size (in bytes) of the current message (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry><literal>%v</literal>    </entry><entry><literal>%{version}</literal>      </entry><entry>NeoMutt version string
+<row><entry><literal>%v</literal>    </entry><entry><literal>%{version}</literal>        </entry><entry>NeoMutt version string
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -23839,51 +23860,51 @@ its own set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Short</emphasis>  </entry><entry><emphasis role="bold">Long Name</emphasis>        </entry><entry><emphasis role="bold">Description</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis>  </entry><entry><emphasis role="bold">Long Name</emphasis>          </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry><literal>%a</literal>     </entry><entry><literal>%{notify}</literal>        </entry><entry>Alert: 1 if user is notified of new mail
+<row><entry><literal>%a</literal>     </entry><entry><literal>%{notify}</literal>          </entry><entry>Alert: 1 if user is notified of new mail
 </entry></row>
-<row><entry><literal>%C</literal>     </entry><entry><literal>%{number}</literal>        </entry><entry>Current file number
+<row><entry><literal>%C</literal>     </entry><entry><literal>%{number}</literal>          </entry><entry>Current file number
 </entry></row>
-<row><entry><literal>%D</literal>     </entry><entry><literal>%{date}</literal>          </entry><entry>Date/time folder was last modified using <link linkend="date-format">$date_format</link>.
+<row><entry><literal>%D</literal>     </entry><entry><literal>%{date}</literal>            </entry><entry>Date/time folder was last modified using <link linkend="date-format">$date_format</link>.
 </entry></row>
-<row><entry>             </entry><entry>                       </entry><entry>It is recommended to use <literal>%[fmt]</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
+<row><entry>             </entry><entry>                         </entry><entry>It is recommended to use <literal>%[fmt]</literal> instead, where <literal>fmt</literal> is the value of <link linkend="date-format">$date_format</link>.
 </entry></row>
-<row><entry><literal>%d</literal>     </entry><entry><literal>%{date-format}</literal>   </entry><entry>Date/time folder was last modified
+<row><entry><literal>%d</literal>     </entry><entry><literal>%{date-format}</literal>     </entry><entry>Date/time folder was last modified
 </entry></row>
-<row><entry><literal>%F</literal>     </entry><entry><literal>%{file-mode}</literal>     </entry><entry>File permissions
+<row><entry><literal>%F</literal>     </entry><entry><literal>%{file-mode}</literal>       </entry><entry>File permissions
 </entry></row>
-<row><entry><literal>%f</literal>     </entry><entry><literal>%{filename}</literal>      </entry><entry>Filename (<literal>/</literal> is appended to directory names,
+<row><entry><literal>%f</literal>     </entry><entry><literal>%{filename}</literal>        </entry><entry>Filename (<literal>/</literal> is appended to directory names,
 </entry></row>
-<row><entry>             </entry><entry>                       </entry><entry><literal>@</literal> to symbolic links and <literal>*</literal> to executable files)
+<row><entry>             </entry><entry>                         </entry><entry><literal>@</literal> to symbolic links and <literal>*</literal> to executable files)
 </entry></row>
-<row><entry><literal>%g</literal>     </entry><entry><literal>%{file-group}</literal>    </entry><entry>Group name (or numeric gid, if missing)
+<row><entry><literal>%g</literal>     </entry><entry><literal>%{file-group}</literal>      </entry><entry>Group name (or numeric gid, if missing)
 </entry></row>
-<row><entry><literal>%i</literal>     </entry><entry><literal>%{description}</literal>   </entry><entry>Description of the folder
+<row><entry><literal>%i</literal>     </entry><entry><literal>%{description}</literal>     </entry><entry>Description of the folder
 </entry></row>
-<row><entry><literal>%l</literal>     </entry><entry><literal>%{hard-links}</literal>    </entry><entry>Number of hard links
+<row><entry><literal>%l</literal>     </entry><entry><literal>%{hard-links}</literal>      </entry><entry>Number of hard links
 </entry></row>
-<row><entry><literal>%m</literal>     </entry><entry><literal>%{message-count}</literal> </entry><entry>Number of messages in the mailbox
+<row><entry><literal>%m</literal>     </entry><entry><literal>%{message-count}</literal>   </entry><entry>Number of messages in the mailbox
 </entry></row>
-<row><entry><literal>%N</literal>     </entry><entry><literal>%{new-mail}</literal>      </entry><entry><literal>N</literal> if mailbox has new mail, <literal> </literal> (space) otherwise
+<row><entry><literal>%N</literal>     </entry><entry><literal>%{new-mail}</literal>        </entry><entry><literal>N</literal> if mailbox has new mail, <literal> </literal> (space) otherwise
 </entry></row>
-<row><entry><literal>%n</literal>     </entry><entry><literal>%{unread-count}</literal>  </entry><entry>Number of unread messages in the mailbox
+<row><entry><literal>%n</literal>     </entry><entry><literal>%{unread-count}</literal>    </entry><entry>Number of unread messages in the mailbox
 </entry></row>
-<row><entry><literal>%p</literal>     </entry><entry><literal>%{poll}</literal>          </entry><entry>Poll: 1 if Mailbox is checked for new mail
+<row><entry><literal>%p</literal>     </entry><entry><literal>%{poll}</literal>            </entry><entry>Poll: 1 if Mailbox is checked for new mail
 </entry></row>
-<row><entry><literal>%s</literal>     </entry><entry><literal>%{file-size}</literal>     </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
+<row><entry><literal>%s</literal>     </entry><entry><literal>%{file-size}</literal>       </entry><entry>Size in bytes (see <link linkend="formatstrings-size">formatstrings-size</link>)
 </entry></row>
-<row><entry><literal>%t</literal>     </entry><entry><literal>%{tagged}</literal>        </entry><entry><literal>*</literal> if the file is tagged, blank otherwise
+<row><entry><literal>%t</literal>     </entry><entry><literal>%{tagged}</literal>          </entry><entry><literal>*</literal> if the file is tagged, blank otherwise
 </entry></row>
-<row><entry><literal>%u</literal>     </entry><entry><literal>%{file-owner}</literal>    </entry><entry>Owner name (or numeric uid, if missing)
+<row><entry><literal>%u</literal>     </entry><entry><literal>%{file-owner}</literal>      </entry><entry>Owner name (or numeric uid, if missing)
 </entry></row>
-<row><entry><literal>%[fmt]</literal> </entry><entry>                       </entry><entry>Date/time folder was last modified using an <literal>strftime(3)</literal> expression
+<row><entry><literal>%[fmt]</literal> </entry><entry>                         </entry><entry>Date/time folder was last modified using an <literal>strftime(3)</literal> expression
 </entry></row>
-<row><entry><literal>%*X</literal>    </entry><entry><literal>%{padding-soft}</literal>  </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>    </entry><entry><literal>%{padding-soft:X}</literal>  </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>    </entry><entry><literal>%{padding-hard}</literal>  </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>    </entry><entry><literal>%{padding-hard:X}</literal>  </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>    </entry><entry><literal>%{padding-eol}</literal>   </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>    </entry><entry><literal>%{padding-eol:X}</literal>   </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -24216,31 +24237,31 @@ has its own set of printf()-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>         </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry><literal>%a</literal>    </entry><entry><literal>%{notify}</literal>       </entry><entry>Alert: 1 if user is notified of new mail
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{notify}</literal>         </entry><entry>Alert: 1 if user is notified of new mail
 </entry></row>
-<row><entry><literal>%C</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Current newsgroup number
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{number}</literal>         </entry><entry>Current newsgroup number
 </entry></row>
-<row><entry><literal>%d</literal>    </entry><entry><literal>%{description}</literal>  </entry><entry>Description of newsgroup (becomes from server)
+<row><entry><literal>%d</literal>    </entry><entry><literal>%{description}</literal>    </entry><entry>Description of newsgroup (becomes from server)
 </entry></row>
-<row><entry><literal>%f</literal>    </entry><entry><literal>%{newsgroup}</literal>    </entry><entry>Newsgroup name
+<row><entry><literal>%f</literal>    </entry><entry><literal>%{newsgroup}</literal>      </entry><entry>Newsgroup name
 </entry></row>
-<row><entry><literal>%M</literal>    </entry><entry><literal>%{flags}</literal>        </entry><entry><literal>-</literal> if newsgroup not allowed for direct post (moderated for example)
+<row><entry><literal>%M</literal>    </entry><entry><literal>%{flags}</literal>          </entry><entry><literal>-</literal> if newsgroup not allowed for direct post (moderated for example)
 </entry></row>
-<row><entry><literal>%N</literal>    </entry><entry><literal>%{flags2}</literal>       </entry><entry><literal>N</literal> if newsgroup is new, <literal>u</literal> if unsubscribed, <literal> </literal> (space) otherwise
+<row><entry><literal>%N</literal>    </entry><entry><literal>%{flags2}</literal>         </entry><entry><literal>N</literal> if newsgroup is new, <literal>u</literal> if unsubscribed, <literal> </literal> (space) otherwise
 </entry></row>
-<row><entry><literal>%n</literal>    </entry><entry><literal>%{new-count}</literal>    </entry><entry>Number of new articles in newsgroup
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{new-count}</literal>      </entry><entry>Number of new articles in newsgroup
 </entry></row>
-<row><entry><literal>%p</literal>    </entry><entry><literal>%{poll}</literal>         </entry><entry>Poll: 1 if Mailbox is checked for new mail
+<row><entry><literal>%p</literal>    </entry><entry><literal>%{poll}</literal>           </entry><entry>Poll: 1 if Mailbox is checked for new mail
 </entry></row>
-<row><entry><literal>%s</literal>    </entry><entry><literal>%{unread-count}</literal> </entry><entry>Number of unread articles in newsgroup
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{unread-count}</literal>   </entry><entry>Number of unread articles in newsgroup
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -24505,17 +24526,17 @@ set of <literal>printf(3)</literal>-like sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>         </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry><literal>%C</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Line number
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{number}</literal>         </entry><entry>Line number
 </entry></row>
-<row><entry><literal>%s</literal>    </entry><entry><literal>%{match}</literal>        </entry><entry>History match
+<row><entry><literal>%s</literal>    </entry><entry><literal>%{match}</literal>          </entry><entry>History match
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 </sect2>
 
@@ -25219,11 +25240,11 @@ following sequences are defined in NeoMutt:
 </entry></row>
 <row><entry>              </entry><entry>                             </entry><entry>if the first character inside the parentheses is a bang (<literal>!</literal>), the date is formatted ignoring any locale settings.
 </entry></row>
-<row><entry><literal>%*X</literal>     </entry><entry><literal>%{padding-soft}</literal>        </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>     </entry><entry><literal>%{padding-soft:X}</literal>      </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>     </entry><entry><literal>%{padding-hard}</literal>        </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>     </entry><entry><literal>%{padding-hard:X}</literal>      </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>     </entry><entry><literal>%{padding-eol}</literal>         </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>     </entry><entry><literal>%{padding-eol:X}</literal>       </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -25275,17 +25296,17 @@ news server.  The following printf-style sequence is understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry>%a </entry><entry>account url
+<row><entry>%a </entry><entry>%{account}  </entry><entry>account url
 </entry></row>
-<row><entry>%p </entry><entry>port
+<row><entry>%p </entry><entry>%{port}     </entry><entry>port
 </entry></row>
-<row><entry>%P </entry><entry>port if specified
+<row><entry>%P </entry><entry>%{port-if}  </entry><entry>port if specified
 </entry></row>
-<row><entry>%s </entry><entry>news server name
+<row><entry>%s </entry><entry>%{server}   </entry><entry>news server name
 </entry></row>
-<row><entry>%S </entry><entry>url schema
+<row><entry>%S </entry><entry>%{schema}   </entry><entry>url schema
 </entry></row>
-<row><entry>%u </entry><entry>username
+<row><entry>%u </entry><entry>%{username} </entry><entry>username
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -26484,19 +26505,19 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>         </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry><literal>%d</literal>    </entry><entry><literal>%{description}</literal>  </entry><entry>Pattern description
+<row><entry><literal>%d</literal>    </entry><entry><literal>%{description}</literal>    </entry><entry>Pattern description
 </entry></row>
-<row><entry><literal>%e</literal>    </entry><entry><literal>%{expression}</literal>   </entry><entry>Pattern expression
+<row><entry><literal>%e</literal>    </entry><entry><literal>%{expression}</literal>     </entry><entry>Pattern expression
 </entry></row>
-<row><entry><literal>%n</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Index number
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{number}</literal>         </entry><entry>Index number
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -26822,11 +26843,11 @@ but has its own set of <literal>printf(3)</literal>-like sequences:
 </entry></row>
 <row><entry><literal>%[&lt;s&gt;]</literal>   </entry><entry><literal>%{date}</literal>              </entry><entry>Date of the key where <literal>&lt;s&gt;</literal> is an <literal>strftime(3)</literal> expression
 </entry></row>
-<row><entry><literal>%*X</literal>      </entry><entry><literal>%{padding-soft}</literal>      </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>      </entry><entry><literal>%{padding-soft:X}</literal>    </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>      </entry><entry><literal>%{padding-hard}</literal>      </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>      </entry><entry><literal>%{padding-hard:X}</literal>    </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>      </entry><entry><literal>%{padding-eol}</literal>       </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>      </entry><entry><literal>%{padding-eol:X}</literal>     </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -27700,27 +27721,27 @@ following <literal>printf(3)</literal>-style sequences are understood:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>       </entry><entry><emphasis role="bold">Description</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>         </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry><literal>%A</literal>    </entry><entry><literal>%{address}</literal>      </entry><entry>Full Address (Name and Email)
+<row><entry><literal>%A</literal>    </entry><entry><literal>%{address}</literal>        </entry><entry>Full Address (Name and Email)
 </entry></row>
-<row><entry><literal>%C</literal>    </entry><entry><literal>%{comment}</literal>      </entry><entry>Comment
+<row><entry><literal>%C</literal>    </entry><entry><literal>%{comment}</literal>        </entry><entry>Comment
 </entry></row>
-<row><entry><literal>%E</literal>    </entry><entry><literal>%{email}</literal>        </entry><entry>Email Address
+<row><entry><literal>%E</literal>    </entry><entry><literal>%{email}</literal>          </entry><entry>Email Address
 </entry></row>
-<row><entry><literal>%i</literal>    </entry><entry><literal>%{number}</literal>       </entry><entry>Index number
+<row><entry><literal>%i</literal>    </entry><entry><literal>%{number}</literal>         </entry><entry>Index number
 </entry></row>
-<row><entry><literal>%N</literal>    </entry><entry><literal>%{name}</literal>         </entry><entry>Real name
+<row><entry><literal>%N</literal>    </entry><entry><literal>%{name}</literal>           </entry><entry>Real name
 </entry></row>
-<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged}</literal>       </entry><entry>Alias is tagged (selected)
+<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged}</literal>         </entry><entry>Alias is tagged (selected)
 </entry></row>
-<row><entry><literal>%Y</literal>    </entry><entry><literal>%{tags}</literal>         </entry><entry>User-defined tags (labels)
+<row><entry><literal>%Y</literal>    </entry><entry><literal>%{tags}</literal>           </entry><entry>User-defined tags (labels)
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal> </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal> </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>  </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -28547,47 +28568,47 @@ sequences:
 <informaltable>
 <tgroup cols="2">
 <tbody>
-<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>        </entry><entry><emphasis role="bold">Cur</emphasis> </entry><entry><emphasis role="bold">Description</emphasis>
+<row><entry><emphasis role="bold">Short</emphasis> </entry><entry><emphasis role="bold">Long Name</emphasis>          </entry><entry><emphasis role="bold">Cur</emphasis> </entry><entry><emphasis role="bold">Description</emphasis>
 </entry></row>
-<row><entry><literal>%a</literal>    </entry><entry><literal>%{notify}</literal>        </entry><entry>          </entry><entry>Alert: 1 if user is notified of new mail
+<row><entry><literal>%a</literal>    </entry><entry><literal>%{notify}</literal>          </entry><entry>          </entry><entry>Alert: 1 if user is notified of new mail
 </entry></row>
-<row><entry><literal>%B</literal>    </entry><entry><literal>%{name}</literal>          </entry><entry>          </entry><entry>Name of the mailbox
+<row><entry><literal>%B</literal>    </entry><entry><literal>%{name}</literal>            </entry><entry>          </entry><entry>Name of the mailbox
 </entry></row>
-<row><entry><literal>%D</literal>    </entry><entry><literal>%{description}</literal>   </entry><entry>          </entry><entry>Descriptive name of the mailbox
+<row><entry><literal>%D</literal>    </entry><entry><literal>%{description}</literal>     </entry><entry>          </entry><entry>Descriptive name of the mailbox
 </entry></row>
-<row><entry><literal>%d</literal>    </entry><entry><literal>%{deleted-count}</literal> </entry><entry>Cur       </entry><entry>Number of deleted messages in the mailbox
+<row><entry><literal>%d</literal>    </entry><entry><literal>%{deleted-count}</literal>   </entry><entry>Cur       </entry><entry>Number of deleted messages in the mailbox
 </entry></row>
-<row><entry><literal>%F</literal>    </entry><entry><literal>%{flagged-count}</literal> </entry><entry>          </entry><entry>Number of flagged messages in the mailbox
+<row><entry><literal>%F</literal>    </entry><entry><literal>%{flagged-count}</literal>   </entry><entry>          </entry><entry>Number of flagged messages in the mailbox
 </entry></row>
-<row><entry><literal>%L</literal>    </entry><entry><literal>%{limited-count}</literal> </entry><entry>Cur       </entry><entry>Number of messages after limiting
+<row><entry><literal>%L</literal>    </entry><entry><literal>%{limited-count}</literal>   </entry><entry>Cur       </entry><entry>Number of messages after limiting
 </entry></row>
-<row><entry><literal>%N</literal>    </entry><entry><literal>%{new-mail}</literal>      </entry><entry>          </entry><entry>Number of unread messages in the mailbox (seen or unseen)
+<row><entry><literal>%N</literal>    </entry><entry><literal>%{new-mail}</literal>        </entry><entry>          </entry><entry>Number of unread messages in the mailbox (seen or unseen)
 </entry></row>
-<row><entry><literal>%n</literal>    </entry><entry><literal>%{unread-count}</literal>  </entry><entry>          </entry><entry><literal>N</literal> if mailbox has new mail, <literal> </literal> (space) otherwise
+<row><entry><literal>%n</literal>    </entry><entry><literal>%{unread-count}</literal>    </entry><entry>          </entry><entry><literal>N</literal> if mailbox has new mail, <literal> </literal> (space) otherwise
 </entry></row>
-<row><entry><literal>%o</literal>    </entry><entry><literal>%{old-count}</literal>     </entry><entry>          </entry><entry>Number of old messages in the mailbox (unread, seen)
+<row><entry><literal>%o</literal>    </entry><entry><literal>%{old-count}</literal>       </entry><entry>          </entry><entry>Number of old messages in the mailbox (unread, seen)
 </entry></row>
-<row><entry><literal>%p</literal>    </entry><entry><literal>%{poll}</literal>          </entry><entry>          </entry><entry>Poll: 1 if Mailbox is checked for new mail
+<row><entry><literal>%p</literal>    </entry><entry><literal>%{poll}</literal>            </entry><entry>          </entry><entry>Poll: 1 if Mailbox is checked for new mail
 </entry></row>
-<row><entry><literal>%r</literal>    </entry><entry><literal>%{read-count}</literal>    </entry><entry>          </entry><entry>Number of read messages in the mailbox (read, seen)
+<row><entry><literal>%r</literal>    </entry><entry><literal>%{read-count}</literal>      </entry><entry>          </entry><entry>Number of read messages in the mailbox (read, seen)
 </entry></row>
-<row><entry><literal>%S</literal>    </entry><entry><literal>%{message-count}</literal> </entry><entry>          </entry><entry>Size of mailbox (total number of messages)
+<row><entry><literal>%S</literal>    </entry><entry><literal>%{message-count}</literal>   </entry><entry>          </entry><entry>Size of mailbox (total number of messages)
 </entry></row>
-<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged-count}</literal>  </entry><entry>Cur       </entry><entry>Number of tagged messages in the mailbox
+<row><entry><literal>%t</literal>    </entry><entry><literal>%{tagged-count}</literal>    </entry><entry>Cur       </entry><entry>Number of tagged messages in the mailbox
 </entry></row>
-<row><entry><literal>%Z</literal>    </entry><entry><literal>%{unseen-count}</literal>  </entry><entry>          </entry><entry>Number of new messages in the mailbox (unread, unseen)
+<row><entry><literal>%Z</literal>    </entry><entry><literal>%{unseen-count}</literal>    </entry><entry>          </entry><entry>Number of new messages in the mailbox (unread, unseen)
 </entry></row>
-<row><entry><literal>%!</literal>    </entry><entry><literal>%{flagged}</literal>       </entry><entry>          </entry><entry><literal>!</literal> : one flagged message
+<row><entry><literal>%!</literal>    </entry><entry><literal>%{flagged}</literal>         </entry><entry>          </entry><entry><literal>!</literal> : one flagged message
 </entry></row>
-<row><entry>            </entry><entry>                       </entry><entry>          </entry><entry><literal>!!</literal> : two flagged messages
+<row><entry>            </entry><entry>                         </entry><entry>          </entry><entry><literal>!!</literal> : two flagged messages
 </entry></row>
-<row><entry>            </entry><entry>                       </entry><entry>          </entry><entry><literal>n!</literal> : n flagged messages (for n &gt; 2)
+<row><entry>            </entry><entry>                         </entry><entry>          </entry><entry><literal>n!</literal> : n flagged messages (for n &gt; 2)
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>  </entry><entry>          </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal>  </entry><entry>          </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal>  </entry><entry>          </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal>  </entry><entry>          </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>   </entry><entry>          </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>   </entry><entry>          </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -29888,11 +29909,11 @@ set of <literal>printf(3)</literal>-like sequences:
 </entry></row>
 <row><entry><literal>%V</literal>    </entry><entry><literal>%{version}</literal>          </entry><entry>Currently active limit pattern, if any
 </entry></row>
-<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft}</literal>     </entry><entry>Soft-fill with character <literal>X</literal> as pad
+<row><entry><literal>%*X</literal>   </entry><entry><literal>%{padding-soft:X}</literal>   </entry><entry>Soft-fill with character <literal>X</literal> as pad
 </entry></row>
-<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard}</literal>     </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
+<row><entry><literal>%&gt;X</literal>   </entry><entry><literal>%{padding-hard:X}</literal>   </entry><entry>Right justify the rest of the string and pad with character <literal>X</literal>
 </entry></row>
-<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol}</literal>      </entry><entry>Pad to the end of the line with character <literal>X</literal>
+<row><entry><literal>%|X</literal>   </entry><entry><literal>%{padding-eol:X}</literal>    </entry><entry>Pad to the end of the line with character <literal>X</literal>
 </entry></row></tbody></tgroup></informaltable>
 
 <para>
@@ -30117,7 +30138,7 @@ Default: <quote><literal>/tmp</literal></quote></literallayout>
 
 <para>
 This variable allows you to specify where NeoMutt will place its
-temporary files needed for displaying and composing messages.
+temporary files needed for displaying messages.
 </para>
 <para>
 If this variable is not set, the environment variable <literal>$TMPDIR</literal> is
@@ -30129,6 +30150,26 @@ used.  Failing that, then "<literal>/tmp</literal>" is used.
 <sect2 id="tmpdir">
   <title>tmpdir</title>
   <note><para>Renamed to <link linkend="tmp-dir">$tmp_dir</link> (2023-01-25)</para></note>
+</sect2>
+
+<sect2 id="tmp-draft-dir">
+<title>tmp_draft_dir</title>
+<literallayout>Type: path
+Default: <quote><literal>/var/tmp</literal></quote></literallayout>
+
+<para>
+This variable allows you to specify where NeoMutt will place its
+temporary files when composing messages.
+</para>
+<para>
+If this variable is not set, the environment variable <literal>$TMPDIR</literal> is
+used.  Failing that, then "<literal>/var/tmp</literal>" is used.
+</para>
+<para>
+It is recommended that this be set to a directory whose contents
+won't be removed during an unanticipated reboot, so that draft files
+will survive a crash or other unplanned computer shutdown.
+</para>
 </sect2>
 
 <sect2 id="to-chars">
@@ -30628,51 +30669,51 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;bottom-page&gt;</literal></entry><entry>L</entry><entry>move to the bottom of the page</entry></row>
-<row><entry><literal>&lt;check-stats&gt;</literal></entry><entry></entry><entry>calculate message statistics for all mailboxes</entry></row>
-<row><entry><literal>&lt;current-bottom&gt;</literal></entry><entry></entry><entry>move entry to bottom of screen</entry></row>
-<row><entry><literal>&lt;current-middle&gt;</literal></entry><entry></entry><entry>move entry to middle of screen</entry></row>
-<row><entry><literal>&lt;current-top&gt;</literal></entry><entry></entry><entry>move entry to top of screen</entry></row>
-<row><entry><literal>&lt;end-cond&gt;</literal></entry><entry></entry><entry>end of conditional execution (noop)</entry></row>
-<row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>enter a neomuttrc command</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry></entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>move to the first entry</entry></row>
-<row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>=</entry><entry>move to the first entry</entry></row>
-<row><entry><literal>&lt;half-down&gt;</literal></entry><entry>]</entry><entry>scroll down 1/2 page</entry></row>
-<row><entry><literal>&lt;half-up&gt;</literal></entry><entry>[</entry><entry>scroll up 1/2 page</entry></row>
-<row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>this screen</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry></entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;last-entry&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>move to the last entry</entry></row>
-<row><entry><literal>&lt;last-entry&gt;</literal></entry><entry>*</entry><entry>move to the last entry</entry></row>
-<row><entry><literal>&lt;middle-page&gt;</literal></entry><entry>M</entry><entry>move to the middle of the page</entry></row>
-<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>move to the next entry</entry></row>
-<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>j</entry><entry>move to the next entry</entry></row>
-<row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&gt;</entry><entry>scroll down one line</entry></row>
-<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Pagedown&gt;</entry><entry>move to the next page</entry></row>
-<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>move to the next page</entry></row>
-<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>z</entry><entry>move to the next page</entry></row>
-<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>move to the previous entry</entry></row>
-<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>k</entry><entry>move to the previous entry</entry></row>
-<row><entry><literal>&lt;previous-line&gt;</literal></entry><entry>&lt;</entry><entry>scroll up one line</entry></row>
-<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>move to the previous page</entry></row>
-<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>&lt;Pageup&gt;</entry><entry>move to the previous page</entry></row>
-<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>Z</entry><entry>move to the previous page</entry></row>
-<row><entry><literal>&lt;redraw-screen&gt;</literal></entry><entry>^L</entry><entry>clear and redraw the screen</entry></row>
-<row><entry><literal>&lt;search&gt;</literal></entry><entry>/</entry><entry>search for a regular expression</entry></row>
-<row><entry><literal>&lt;search-next&gt;</literal></entry><entry>n</entry><entry>search for next match</entry></row>
-<row><entry><literal>&lt;search-opposite&gt;</literal></entry><entry></entry><entry>search for next match in opposite direction</entry></row>
-<row><entry><literal>&lt;search-reverse&gt;</literal></entry><entry>Esc /</entry><entry>search backwards for a regular expression</entry></row>
-<row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>select the current entry</entry></row>
-<row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>select the current entry</entry></row>
-<row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>select the current entry</entry></row>
-<row><entry><literal>&lt;shell-escape&gt;</literal></entry><entry>!</entry><entry>invoke a command in a subshell</entry></row>
-<row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry></entry><entry>show log (and debug) messages</entry></row>
-<row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>show the NeoMutt version number and date</entry></row>
-<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>t</entry><entry>tag the current entry</entry></row>
-<row><entry><literal>&lt;tag-prefix&gt;</literal></entry><entry>;</entry><entry>apply next function to tagged messages</entry></row>
-<row><entry><literal>&lt;tag-prefix-cond&gt;</literal></entry><entry></entry><entry>apply next function ONLY to tagged messages</entry></row>
-<row><entry><literal>&lt;top-page&gt;</literal></entry><entry>H</entry><entry>move to the top of the page</entry></row>
-<row><entry><literal>&lt;what-key&gt;</literal></entry><entry></entry><entry>display the keycode for a key press</entry></row>
+<row><entry><literal>&lt;bottom-page&gt;</literal></entry><entry>L</entry><entry>Move to the bottom of the page</entry></row>
+<row><entry><literal>&lt;check-stats&gt;</literal></entry><entry></entry><entry>Calculate message statistics for all mailboxes</entry></row>
+<row><entry><literal>&lt;current-bottom&gt;</literal></entry><entry></entry><entry>Move entry to bottom of screen</entry></row>
+<row><entry><literal>&lt;current-middle&gt;</literal></entry><entry></entry><entry>Move entry to middle of screen</entry></row>
+<row><entry><literal>&lt;current-top&gt;</literal></entry><entry></entry><entry>Move entry to top of screen</entry></row>
+<row><entry><literal>&lt;end-cond&gt;</literal></entry><entry></entry><entry>End of conditional execution (noop)</entry></row>
+<row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>Enter a neomuttrc command</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry></entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>Move to the first entry</entry></row>
+<row><entry><literal>&lt;first-entry&gt;</literal></entry><entry>=</entry><entry>Move to the first entry</entry></row>
+<row><entry><literal>&lt;half-down&gt;</literal></entry><entry>]</entry><entry>Scroll down 1/2 page</entry></row>
+<row><entry><literal>&lt;half-up&gt;</literal></entry><entry>[</entry><entry>Scroll up 1/2 page</entry></row>
+<row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>This screen</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry></entry><entry>Jump to an index number</entry></row>
+<row><entry><literal>&lt;last-entry&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>Move to the last entry</entry></row>
+<row><entry><literal>&lt;last-entry&gt;</literal></entry><entry>*</entry><entry>Move to the last entry</entry></row>
+<row><entry><literal>&lt;middle-page&gt;</literal></entry><entry>M</entry><entry>Move to the middle of the page</entry></row>
+<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>Move to the next entry</entry></row>
+<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>j</entry><entry>Move to the next entry</entry></row>
+<row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&gt;</entry><entry>Scroll down one line</entry></row>
+<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Pagedown&gt;</entry><entry>Move to the next page</entry></row>
+<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>Move to the next page</entry></row>
+<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>z</entry><entry>Move to the next page</entry></row>
+<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>Move to the previous entry</entry></row>
+<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>k</entry><entry>Move to the previous entry</entry></row>
+<row><entry><literal>&lt;previous-line&gt;</literal></entry><entry>&lt;</entry><entry>Scroll up one line</entry></row>
+<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>Move to the previous page</entry></row>
+<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>&lt;Pageup&gt;</entry><entry>Move to the previous page</entry></row>
+<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>Z</entry><entry>Move to the previous page</entry></row>
+<row><entry><literal>&lt;redraw-screen&gt;</literal></entry><entry>^L</entry><entry>Clear and redraw the screen</entry></row>
+<row><entry><literal>&lt;search&gt;</literal></entry><entry>/</entry><entry>Search for a regular expression</entry></row>
+<row><entry><literal>&lt;search-next&gt;</literal></entry><entry>n</entry><entry>Search for next match</entry></row>
+<row><entry><literal>&lt;search-opposite&gt;</literal></entry><entry></entry><entry>Search for next match in opposite direction</entry></row>
+<row><entry><literal>&lt;search-reverse&gt;</literal></entry><entry>Esc /</entry><entry>Search backwards for a regular expression</entry></row>
+<row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>Select the current entry</entry></row>
+<row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>Select the current entry</entry></row>
+<row><entry><literal>&lt;select-entry&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>Select the current entry</entry></row>
+<row><entry><literal>&lt;shell-escape&gt;</literal></entry><entry>!</entry><entry>Invoke a command in a subshell</entry></row>
+<row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry></entry><entry>Show log (and debug) messages</entry></row>
+<row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>Show the NeoMutt version number and date</entry></row>
+<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>t</entry><entry>Tag the current entry</entry></row>
+<row><entry><literal>&lt;tag-prefix&gt;</literal></entry><entry>;</entry><entry>Apply next function to tagged messages</entry></row>
+<row><entry><literal>&lt;tag-prefix-cond&gt;</literal></entry><entry></entry><entry>Apply next function ONLY to tagged messages</entry></row>
+<row><entry><literal>&lt;top-page&gt;</literal></entry><entry>H</entry><entry>Move to the top of the page</entry></row>
+<row><entry><literal>&lt;what-key&gt;</literal></entry><entry></entry><entry>Display the keycode for a key press</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -30690,131 +30731,135 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;alias-dialog&gt;</literal></entry><entry></entry><entry>open the aliases dialog</entry></row>
-<row><entry><literal>&lt;autocrypt-acct-menu&gt;</literal></entry><entry>A</entry><entry>manage autocrypt accounts</entry></row>
-<row><entry><literal>&lt;bounce-message&gt;</literal></entry><entry>b</entry><entry>remail a message to another user</entry></row>
-<row><entry><literal>&lt;break-thread&gt;</literal></entry><entry>#</entry><entry>break the thread in two</entry></row>
-<row><entry><literal>&lt;catchup&gt;</literal></entry><entry></entry><entry>mark all articles in newsgroup as read</entry></row>
-<row><entry><literal>&lt;change-folder&gt;</literal></entry><entry>c</entry><entry>open a different folder</entry></row>
-<row><entry><literal>&lt;change-folder-readonly&gt;</literal></entry><entry>Esc c</entry><entry>open a different folder in read only mode</entry></row>
-<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry>i</entry><entry>open a different newsgroup</entry></row>
-<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry>Esc i</entry><entry>open a different newsgroup in read only mode</entry></row>
-<row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>open a different virtual folder</entry></row>
-<row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>check for classic PGP</entry></row>
-<row><entry><literal>&lt;clear-flag&gt;</literal></entry><entry>W</entry><entry>clear a status flag from a message</entry></row>
-<row><entry><literal>&lt;collapse-all&gt;</literal></entry><entry>Esc V</entry><entry>collapse/uncollapse all threads</entry></row>
-<row><entry><literal>&lt;collapse-thread&gt;</literal></entry><entry>Esc v</entry><entry>collapse/uncollapse current thread</entry></row>
-<row><entry><literal>&lt;compose-to-sender&gt;</literal></entry><entry></entry><entry>compose new message to the current message sender</entry></row>
-<row><entry><literal>&lt;copy-message&gt;</literal></entry><entry>C</entry><entry>copy a message to a file/mailbox</entry></row>
-<row><entry><literal>&lt;create-alias&gt;</literal></entry><entry>a</entry><entry>create an alias from a message sender</entry></row>
-<row><entry><literal>&lt;decode-copy&gt;</literal></entry><entry>Esc C</entry><entry>make decoded (text/plain) copy</entry></row>
-<row><entry><literal>&lt;decode-save&gt;</literal></entry><entry>Esc s</entry><entry>make decoded copy (text/plain) and delete</entry></row>
-<row><entry><literal>&lt;decrypt-copy&gt;</literal></entry><entry></entry><entry>make decrypted copy</entry></row>
-<row><entry><literal>&lt;decrypt-save&gt;</literal></entry><entry></entry><entry>make decrypted copy and delete</entry></row>
-<row><entry><literal>&lt;delete-message&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
-<row><entry><literal>&lt;delete-pattern&gt;</literal></entry><entry>D</entry><entry>delete non-hidden messages matching a pattern</entry></row>
-<row><entry><literal>&lt;delete-subthread&gt;</literal></entry><entry>Esc d</entry><entry>delete all messages in subthread</entry></row>
-<row><entry><literal>&lt;delete-thread&gt;</literal></entry><entry>^D</entry><entry>delete all messages in thread</entry></row>
-<row><entry><literal>&lt;display-address&gt;</literal></entry><entry>@</entry><entry>display full address of sender</entry></row>
-<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>display a message</entry></row>
-<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>display a message</entry></row>
-<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>display a message</entry></row>
-<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>display a message</entry></row>
-<row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>display message and toggle header weeding</entry></row>
-<row><entry><literal>&lt;edit&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
-<row><entry><literal>&lt;edit-label&gt;</literal></entry><entry>Y</entry><entry>add, change, or delete a message's label</entry></row>
-<row><entry><literal>&lt;edit-or-view-raw-message&gt;</literal></entry><entry>e</entry><entry>edit the raw message if the mailbox is not read-only, otherwise view it</entry></row>
-<row><entry><literal>&lt;edit-raw-message&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
-<row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
-<row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>x</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>extract supported public keys</entry></row>
-<row><entry><literal>&lt;fetch-mail&gt;</literal></entry><entry>G</entry><entry>retrieve mail from POP server</entry></row>
-<row><entry><literal>&lt;flag-message&gt;</literal></entry><entry>F</entry><entry>toggle a message's 'important' flag</entry></row>
-<row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>followup to newsgroup</entry></row>
-<row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>wipe passphrases from memory</entry></row>
-<row><entry><literal>&lt;forward-message&gt;</literal></entry><entry>f</entry><entry>forward a message with comments</entry></row>
-<row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>forward to newsgroup</entry></row>
-<row><entry><literal>&lt;get-children&gt;</literal></entry><entry></entry><entry>get all children of the current message</entry></row>
-<row><entry><literal>&lt;get-message&gt;</literal></entry><entry></entry><entry>get message with Message-Id</entry></row>
-<row><entry><literal>&lt;get-parent&gt;</literal></entry><entry></entry><entry>get parent of the current message</entry></row>
-<row><entry><literal>&lt;group-chat-reply&gt;</literal></entry><entry></entry><entry>reply to all recipients preserving To/Cc</entry></row>
-<row><entry><literal>&lt;group-reply&gt;</literal></entry><entry>g</entry><entry>reply to all recipients</entry></row>
-<row><entry><literal>&lt;imap-fetch-mail&gt;</literal></entry><entry></entry><entry>force retrieval of mail from IMAP server</entry></row>
-<row><entry><literal>&lt;imap-logout-all&gt;</literal></entry><entry></entry><entry>logout from all IMAP servers</entry></row>
-<row><entry><literal>&lt;limit&gt;</literal></entry><entry>l</entry><entry>show only messages matching a pattern</entry></row>
-<row><entry><literal>&lt;limit-current-thread&gt;</literal></entry><entry></entry><entry>limit view to current thread</entry></row>
-<row><entry><literal>&lt;link-threads&gt;</literal></entry><entry>&amp;</entry><entry>link tagged message to the current one</entry></row>
-<row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>reply to specified mailing list</entry></row>
-<row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>subscribe to a mailing list</entry></row>
-<row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>unsubscribe from a mailing list</entry></row>
-<row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
-<row><entry><literal>&lt;mail-key&gt;</literal></entry><entry>Esc k</entry><entry>mail a PGP public key</entry></row>
-<row><entry><literal>&lt;mailbox-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
-<row><entry><literal>&lt;mark-message&gt;</literal></entry><entry>~</entry><entry>create a hotkey macro for the current message</entry></row>
-<row><entry><literal>&lt;modify-labels&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags</entry></row>
-<row><entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags and then hide message</entry></row>
-<row><entry><literal>&lt;modify-tags&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags</entry></row>
-<row><entry><literal>&lt;modify-tags-then-hide&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags and then hide message</entry></row>
-<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>J</entry><entry>move to the next entry</entry></row>
-<row><entry><literal>&lt;next-new&gt;</literal></entry><entry></entry><entry>jump to the next new message</entry></row>
-<row><entry><literal>&lt;next-new-then-unread&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>jump to the next new or unread message</entry></row>
-<row><entry><literal>&lt;next-subthread&gt;</literal></entry><entry>Esc n</entry><entry>jump to the next subthread</entry></row>
-<row><entry><literal>&lt;next-thread&gt;</literal></entry><entry>^N</entry><entry>jump to the next thread</entry></row>
-<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>move to the next undeleted message</entry></row>
-<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>j</entry><entry>move to the next undeleted message</entry></row>
-<row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>jump to the next unread message</entry></row>
-<row><entry><literal>&lt;next-unread-mailbox&gt;</literal></entry><entry></entry><entry>open next mailbox with new mail</entry></row>
-<row><entry><literal>&lt;parent-message&gt;</literal></entry><entry>P</entry><entry>jump to parent message in thread</entry></row>
-<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
-<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
-<row><entry><literal>&lt;post-message&gt;</literal></entry><entry></entry><entry>post message to newsgroup</entry></row>
-<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>K</entry><entry>move to the previous entry</entry></row>
-<row><entry><literal>&lt;previous-new&gt;</literal></entry><entry></entry><entry>jump to the previous new message</entry></row>
-<row><entry><literal>&lt;previous-new-then-unread&gt;</literal></entry><entry>Esc &lt;Tab&gt;</entry><entry>jump to the previous new or unread message</entry></row>
-<row><entry><literal>&lt;previous-subthread&gt;</literal></entry><entry>Esc p</entry><entry>jump to previous subthread</entry></row>
-<row><entry><literal>&lt;previous-thread&gt;</literal></entry><entry>^P</entry><entry>jump to previous thread</entry></row>
-<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>move to the previous undeleted message</entry></row>
-<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>k</entry><entry>move to the previous undeleted message</entry></row>
-<row><entry><literal>&lt;previous-unread&gt;</literal></entry><entry></entry><entry>jump to the previous unread message</entry></row>
-<row><entry><literal>&lt;print-message&gt;</literal></entry><entry>p</entry><entry>print the current entry</entry></row>
-<row><entry><literal>&lt;purge-message&gt;</literal></entry><entry></entry><entry>delete the current entry, bypassing the trash folder</entry></row>
-<row><entry><literal>&lt;purge-thread&gt;</literal></entry><entry></entry><entry>delete the current thread, bypassing the trash folder</entry></row>
-<row><entry><literal>&lt;quasi-delete&gt;</literal></entry><entry></entry><entry>delete from NeoMutt, don't touch on disk</entry></row>
-<row><entry><literal>&lt;query&gt;</literal></entry><entry>Q</entry><entry>query external program for addresses</entry></row>
-<row><entry><literal>&lt;quit&gt;</literal></entry><entry>q</entry><entry>save changes to mailbox and quit</entry></row>
-<row><entry><literal>&lt;read-subthread&gt;</literal></entry><entry>Esc r</entry><entry>mark the current subthread as read</entry></row>
-<row><entry><literal>&lt;read-thread&gt;</literal></entry><entry>^R</entry><entry>mark the current thread as read</entry></row>
-<row><entry><literal>&lt;recall-message&gt;</literal></entry><entry>R</entry><entry>recall a postponed message</entry></row>
-<row><entry><literal>&lt;reconstruct-thread&gt;</literal></entry><entry></entry><entry>reconstruct thread containing current message</entry></row>
-<row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>reply to a message</entry></row>
-<row><entry><literal>&lt;resend-message&gt;</literal></entry><entry>Esc e</entry><entry>use the current message as a template for a new one</entry></row>
-<row><entry><literal>&lt;root-message&gt;</literal></entry><entry></entry><entry>jump to root message in thread</entry></row>
-<row><entry><literal>&lt;save-message&gt;</literal></entry><entry>s</entry><entry>save message/attachment to a mailbox/file</entry></row>
-<row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>set a status flag on a message</entry></row>
-<row><entry><literal>&lt;show-limit&gt;</literal></entry><entry>Esc l</entry><entry>show currently active limit pattern</entry></row>
-<row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry>M</entry><entry>show log (and debug) messages</entry></row>
-<row><entry><literal>&lt;sort-mailbox&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
-<row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
-<row><entry><literal>&lt;sync-mailbox&gt;</literal></entry><entry>$</entry><entry>save changes to mailbox</entry></row>
-<row><entry><literal>&lt;tag-pattern&gt;</literal></entry><entry>T</entry><entry>tag non-hidden messages matching a pattern</entry></row>
-<row><entry><literal>&lt;tag-subthread&gt;</literal></entry><entry></entry><entry>tag the current subthread</entry></row>
-<row><entry><literal>&lt;tag-thread&gt;</literal></entry><entry>Esc t</entry><entry>tag the current thread</entry></row>
-<row><entry><literal>&lt;toggle-new&gt;</literal></entry><entry>N</entry><entry>toggle a message's 'new' flag</entry></row>
-<row><entry><literal>&lt;toggle-read&gt;</literal></entry><entry></entry><entry>toggle view of read messages</entry></row>
-<row><entry><literal>&lt;toggle-write&gt;</literal></entry><entry>%</entry><entry>toggle whether the mailbox will be rewritten</entry></row>
-<row><entry><literal>&lt;undelete-message&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
-<row><entry><literal>&lt;undelete-pattern&gt;</literal></entry><entry>U</entry><entry>undelete non-hidden messages matching a pattern</entry></row>
-<row><entry><literal>&lt;undelete-subthread&gt;</literal></entry><entry>Esc u</entry><entry>undelete all messages in subthread</entry></row>
-<row><entry><literal>&lt;undelete-thread&gt;</literal></entry><entry>^U</entry><entry>undelete all messages in thread</entry></row>
-<row><entry><literal>&lt;untag-pattern&gt;</literal></entry><entry>^T</entry><entry>untag non-hidden messages matching a pattern</entry></row>
-<row><entry><literal>&lt;vfolder-from-query&gt;</literal></entry><entry></entry><entry>generate virtual folder from query</entry></row>
-<row><entry><literal>&lt;vfolder-from-query-readonly&gt;</literal></entry><entry></entry><entry>generate a read-only virtual folder from query</entry></row>
-<row><entry><literal>&lt;vfolder-window-backward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window backwards</entry></row>
-<row><entry><literal>&lt;vfolder-window-forward&gt;</literal></entry><entry></entry><entry>shifts virtual folder time window forwards</entry></row>
-<row><entry><literal>&lt;vfolder-window-reset&gt;</literal></entry><entry></entry><entry>resets virtual folder time window to the present</entry></row>
-<row><entry><literal>&lt;view-attachments&gt;</literal></entry><entry>v</entry><entry>show MIME attachments</entry></row>
-<row><entry><literal>&lt;view-raw-message&gt;</literal></entry><entry></entry><entry>show the raw message</entry></row>
+<row><entry><literal>&lt;alias-dialog&gt;</literal></entry><entry></entry><entry>Open the aliases dialog</entry></row>
+<row><entry><literal>&lt;autocrypt-acct-menu&gt;</literal></entry><entry>A</entry><entry>Manage autocrypt accounts</entry></row>
+<row><entry><literal>&lt;bounce-message&gt;</literal></entry><entry>b</entry><entry>Remail a message to another user</entry></row>
+<row><entry><literal>&lt;break-thread&gt;</literal></entry><entry>#</entry><entry>Break the thread in two</entry></row>
+<row><entry><literal>&lt;catchup&gt;</literal></entry><entry></entry><entry>Mark all articles in newsgroup as read</entry></row>
+<row><entry><literal>&lt;change-folder&gt;</literal></entry><entry>c</entry><entry>Open a different folder</entry></row>
+<row><entry><literal>&lt;change-folder-readonly&gt;</literal></entry><entry>Esc c</entry><entry>Open a different folder in read only mode</entry></row>
+<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry>i</entry><entry>Open a different newsgroup</entry></row>
+<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry>Esc i</entry><entry>Open a different newsgroup in read only mode</entry></row>
+<row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>Open a different virtual folder</entry></row>
+<row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>Check for classic PGP</entry></row>
+<row><entry><literal>&lt;clear-flag&gt;</literal></entry><entry>W</entry><entry>Clear a status flag from a message</entry></row>
+<row><entry><literal>&lt;close-all-threads&gt;</literal></entry><entry></entry><entry>Collapse all threads</entry></row>
+<row><entry><literal>&lt;close-thread&gt;</literal></entry><entry></entry><entry>Collapse current thread</entry></row>
+<row><entry><literal>&lt;collapse-all&gt;</literal></entry><entry>Esc V</entry><entry>Collapse/uncollapse all threads</entry></row>
+<row><entry><literal>&lt;collapse-thread&gt;</literal></entry><entry>Esc v</entry><entry>Collapse/uncollapse current thread</entry></row>
+<row><entry><literal>&lt;compose-to-sender&gt;</literal></entry><entry></entry><entry>Compose new message to the current message sender</entry></row>
+<row><entry><literal>&lt;copy-message&gt;</literal></entry><entry>C</entry><entry>Copy a message to a file/mailbox</entry></row>
+<row><entry><literal>&lt;create-alias&gt;</literal></entry><entry>a</entry><entry>Create an alias from a message sender</entry></row>
+<row><entry><literal>&lt;decode-copy&gt;</literal></entry><entry>Esc C</entry><entry>Make decoded (text/plain) copy</entry></row>
+<row><entry><literal>&lt;decode-save&gt;</literal></entry><entry>Esc s</entry><entry>Make decoded copy (text/plain) and delete</entry></row>
+<row><entry><literal>&lt;decrypt-copy&gt;</literal></entry><entry></entry><entry>Make decrypted copy</entry></row>
+<row><entry><literal>&lt;decrypt-save&gt;</literal></entry><entry></entry><entry>Make decrypted copy and delete</entry></row>
+<row><entry><literal>&lt;delete-message&gt;</literal></entry><entry>d</entry><entry>Delete the current entry</entry></row>
+<row><entry><literal>&lt;delete-pattern&gt;</literal></entry><entry>D</entry><entry>Delete non-hidden messages matching a pattern</entry></row>
+<row><entry><literal>&lt;delete-subthread&gt;</literal></entry><entry>Esc d</entry><entry>Delete all messages in subthread</entry></row>
+<row><entry><literal>&lt;delete-thread&gt;</literal></entry><entry>^D</entry><entry>Delete all messages in thread</entry></row>
+<row><entry><literal>&lt;display-address&gt;</literal></entry><entry>@</entry><entry>Display full address of sender</entry></row>
+<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>Display a message</entry></row>
+<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>Display a message</entry></row>
+<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>Display a message</entry></row>
+<row><entry><literal>&lt;display-message&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>Display a message</entry></row>
+<row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>Display message and toggle header weeding</entry></row>
+<row><entry><literal>&lt;edit&gt;</literal></entry><entry></entry><entry>Edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
+<row><entry><literal>&lt;edit-label&gt;</literal></entry><entry>Y</entry><entry>Add, change, or delete a message's label</entry></row>
+<row><entry><literal>&lt;edit-or-view-raw-message&gt;</literal></entry><entry>e</entry><entry>Edit the raw message if the mailbox is not read-only, otherwise view it</entry></row>
+<row><entry><literal>&lt;edit-raw-message&gt;</literal></entry><entry></entry><entry>Edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
+<row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>Edit attachment content type</entry></row>
+<row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>Read entire thread of the current message</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>x</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>Extract supported public keys</entry></row>
+<row><entry><literal>&lt;fetch-mail&gt;</literal></entry><entry>G</entry><entry>Retrieve mail from POP server</entry></row>
+<row><entry><literal>&lt;flag-message&gt;</literal></entry><entry>F</entry><entry>Toggle a message's 'important' flag</entry></row>
+<row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>Followup to newsgroup</entry></row>
+<row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>Wipe passphrases from memory</entry></row>
+<row><entry><literal>&lt;forward-message&gt;</literal></entry><entry>f</entry><entry>Forward a message with comments</entry></row>
+<row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>Forward to newsgroup</entry></row>
+<row><entry><literal>&lt;get-children&gt;</literal></entry><entry></entry><entry>Get all children of the current message</entry></row>
+<row><entry><literal>&lt;get-message&gt;</literal></entry><entry></entry><entry>Get message with Message-Id</entry></row>
+<row><entry><literal>&lt;get-parent&gt;</literal></entry><entry></entry><entry>Get parent of the current message</entry></row>
+<row><entry><literal>&lt;group-chat-reply&gt;</literal></entry><entry></entry><entry>Reply to all recipients preserving To/Cc</entry></row>
+<row><entry><literal>&lt;group-reply&gt;</literal></entry><entry>g</entry><entry>Reply to all recipients</entry></row>
+<row><entry><literal>&lt;imap-fetch-mail&gt;</literal></entry><entry></entry><entry>Force retrieval of mail from IMAP server</entry></row>
+<row><entry><literal>&lt;imap-logout-all&gt;</literal></entry><entry></entry><entry>Logout from all IMAP servers</entry></row>
+<row><entry><literal>&lt;limit&gt;</literal></entry><entry>l</entry><entry>Show only messages matching a pattern</entry></row>
+<row><entry><literal>&lt;limit-current-thread&gt;</literal></entry><entry></entry><entry>Limit view to current thread</entry></row>
+<row><entry><literal>&lt;link-threads&gt;</literal></entry><entry>&amp;</entry><entry>Link tagged message to the current one</entry></row>
+<row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>Reply to specified mailing list</entry></row>
+<row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>Subscribe to a mailing list</entry></row>
+<row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>Unsubscribe from a mailing list</entry></row>
+<row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>Compose a new mail message</entry></row>
+<row><entry><literal>&lt;mail-key&gt;</literal></entry><entry>Esc k</entry><entry>Mail a PGP public key</entry></row>
+<row><entry><literal>&lt;mailbox-list&gt;</literal></entry><entry>.</entry><entry>List mailboxes with new mail</entry></row>
+<row><entry><literal>&lt;mark-message&gt;</literal></entry><entry>~</entry><entry>Create a hotkey macro for the current message</entry></row>
+<row><entry><literal>&lt;modify-labels&gt;</literal></entry><entry></entry><entry>Modify (notmuch/imap) tags</entry></row>
+<row><entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry><entry></entry><entry>Modify (notmuch/imap) tags and then hide message</entry></row>
+<row><entry><literal>&lt;modify-tags&gt;</literal></entry><entry></entry><entry>Modify (notmuch/imap) tags</entry></row>
+<row><entry><literal>&lt;modify-tags-then-hide&gt;</literal></entry><entry></entry><entry>Modify (notmuch/imap) tags and then hide message</entry></row>
+<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>J</entry><entry>Move to the next entry</entry></row>
+<row><entry><literal>&lt;next-new&gt;</literal></entry><entry></entry><entry>Jump to the next new message</entry></row>
+<row><entry><literal>&lt;next-new-then-unread&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>Jump to the next new or unread message</entry></row>
+<row><entry><literal>&lt;next-subthread&gt;</literal></entry><entry>Esc n</entry><entry>Jump to the next subthread</entry></row>
+<row><entry><literal>&lt;next-thread&gt;</literal></entry><entry>^N</entry><entry>Jump to the next thread</entry></row>
+<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>Move to the next undeleted message</entry></row>
+<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>j</entry><entry>Move to the next undeleted message</entry></row>
+<row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>Jump to the next unread message</entry></row>
+<row><entry><literal>&lt;next-unread-mailbox&gt;</literal></entry><entry></entry><entry>Open next mailbox with new mail</entry></row>
+<row><entry><literal>&lt;open-all-threads&gt;</literal></entry><entry></entry><entry>Uncollapse all threads</entry></row>
+<row><entry><literal>&lt;open-thread&gt;</literal></entry><entry></entry><entry>Uncollapse current thread</entry></row>
+<row><entry><literal>&lt;parent-message&gt;</literal></entry><entry>P</entry><entry>Jump to parent message in thread</entry></row>
+<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>Pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>Pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;post-message&gt;</literal></entry><entry></entry><entry>Post message to newsgroup</entry></row>
+<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>K</entry><entry>Move to the previous entry</entry></row>
+<row><entry><literal>&lt;previous-new&gt;</literal></entry><entry></entry><entry>Jump to the previous new message</entry></row>
+<row><entry><literal>&lt;previous-new-then-unread&gt;</literal></entry><entry>Esc &lt;Tab&gt;</entry><entry>Jump to the previous new or unread message</entry></row>
+<row><entry><literal>&lt;previous-subthread&gt;</literal></entry><entry>Esc p</entry><entry>Jump to previous subthread</entry></row>
+<row><entry><literal>&lt;previous-thread&gt;</literal></entry><entry>^P</entry><entry>Jump to previous thread</entry></row>
+<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>Move to the previous undeleted message</entry></row>
+<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>k</entry><entry>Move to the previous undeleted message</entry></row>
+<row><entry><literal>&lt;previous-unread&gt;</literal></entry><entry></entry><entry>Jump to the previous unread message</entry></row>
+<row><entry><literal>&lt;print-message&gt;</literal></entry><entry>p</entry><entry>Print the current entry</entry></row>
+<row><entry><literal>&lt;purge-message&gt;</literal></entry><entry></entry><entry>Delete the current entry, bypassing the trash folder</entry></row>
+<row><entry><literal>&lt;purge-thread&gt;</literal></entry><entry></entry><entry>Delete the current thread, bypassing the trash folder</entry></row>
+<row><entry><literal>&lt;quasi-delete&gt;</literal></entry><entry></entry><entry>Delete from NeoMutt, don't touch on disk</entry></row>
+<row><entry><literal>&lt;query&gt;</literal></entry><entry>Q</entry><entry>Query external program for addresses</entry></row>
+<row><entry><literal>&lt;quit&gt;</literal></entry><entry>q</entry><entry>Save changes to mailbox and quit</entry></row>
+<row><entry><literal>&lt;read-subthread&gt;</literal></entry><entry>Esc r</entry><entry>Mark the current subthread as read</entry></row>
+<row><entry><literal>&lt;read-thread&gt;</literal></entry><entry>^R</entry><entry>Mark the current thread as read</entry></row>
+<row><entry><literal>&lt;recall-message&gt;</literal></entry><entry>R</entry><entry>Recall a postponed message</entry></row>
+<row><entry><literal>&lt;reconstruct-thread&gt;</literal></entry><entry></entry><entry>Reconstruct thread containing current message</entry></row>
+<row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>Reply to a message</entry></row>
+<row><entry><literal>&lt;resend-message&gt;</literal></entry><entry>Esc e</entry><entry>Use the current message as a template for a new one</entry></row>
+<row><entry><literal>&lt;root-message&gt;</literal></entry><entry></entry><entry>Jump to root message in thread</entry></row>
+<row><entry><literal>&lt;save-message&gt;</literal></entry><entry>s</entry><entry>Save message/attachment to a mailbox/file</entry></row>
+<row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>Set a status flag on a message</entry></row>
+<row><entry><literal>&lt;show-limit&gt;</literal></entry><entry>Esc l</entry><entry>Show currently active limit pattern</entry></row>
+<row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry>M</entry><entry>Show log (and debug) messages</entry></row>
+<row><entry><literal>&lt;sort-mailbox&gt;</literal></entry><entry>o</entry><entry>Sort messages</entry></row>
+<row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>Sort messages in reverse order</entry></row>
+<row><entry><literal>&lt;sync-mailbox&gt;</literal></entry><entry>$</entry><entry>Save changes to mailbox</entry></row>
+<row><entry><literal>&lt;tag-pattern&gt;</literal></entry><entry>T</entry><entry>Tag non-hidden messages matching a pattern</entry></row>
+<row><entry><literal>&lt;tag-subthread&gt;</literal></entry><entry></entry><entry>Tag the current subthread</entry></row>
+<row><entry><literal>&lt;tag-thread&gt;</literal></entry><entry>Esc t</entry><entry>Tag the current thread</entry></row>
+<row><entry><literal>&lt;toggle-new&gt;</literal></entry><entry>N</entry><entry>Toggle a message's 'new' flag</entry></row>
+<row><entry><literal>&lt;toggle-read&gt;</literal></entry><entry></entry><entry>Toggle view of read messages</entry></row>
+<row><entry><literal>&lt;toggle-write&gt;</literal></entry><entry>%</entry><entry>Toggle whether the mailbox will be rewritten</entry></row>
+<row><entry><literal>&lt;undelete-message&gt;</literal></entry><entry>u</entry><entry>Undelete the current entry</entry></row>
+<row><entry><literal>&lt;undelete-pattern&gt;</literal></entry><entry>U</entry><entry>Undelete non-hidden messages matching a pattern</entry></row>
+<row><entry><literal>&lt;undelete-subthread&gt;</literal></entry><entry>Esc u</entry><entry>Undelete all messages in subthread</entry></row>
+<row><entry><literal>&lt;undelete-thread&gt;</literal></entry><entry>^U</entry><entry>Undelete all messages in thread</entry></row>
+<row><entry><literal>&lt;untag-pattern&gt;</literal></entry><entry>^T</entry><entry>Untag non-hidden messages matching a pattern</entry></row>
+<row><entry><literal>&lt;vfolder-from-query&gt;</literal></entry><entry></entry><entry>Generate virtual folder from query</entry></row>
+<row><entry><literal>&lt;vfolder-from-query-readonly&gt;</literal></entry><entry></entry><entry>Generate a read-only virtual folder from query</entry></row>
+<row><entry><literal>&lt;vfolder-window-backward&gt;</literal></entry><entry></entry><entry>Shifts virtual folder time window backwards</entry></row>
+<row><entry><literal>&lt;vfolder-window-forward&gt;</literal></entry><entry></entry><entry>Shifts virtual folder time window forwards</entry></row>
+<row><entry><literal>&lt;vfolder-window-reset&gt;</literal></entry><entry></entry><entry>Resets virtual folder time window to the present</entry></row>
+<row><entry><literal>&lt;view-attachments&gt;</literal></entry><entry>v</entry><entry>Show MIME attachments</entry></row>
+<row><entry><literal>&lt;view-raw-message&gt;</literal></entry><entry></entry><entry>Show the raw message</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -30832,138 +30877,138 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;bottom&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>jump to the bottom of the message</entry></row>
-<row><entry><literal>&lt;bounce-message&gt;</literal></entry><entry>b</entry><entry>remail a message to another user</entry></row>
-<row><entry><literal>&lt;break-thread&gt;</literal></entry><entry>#</entry><entry>break the thread in two</entry></row>
-<row><entry><literal>&lt;change-folder&gt;</literal></entry><entry>c</entry><entry>open a different folder</entry></row>
-<row><entry><literal>&lt;change-folder-readonly&gt;</literal></entry><entry>Esc c</entry><entry>open a different folder in read only mode</entry></row>
-<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry></entry><entry>open a different newsgroup</entry></row>
-<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry></entry><entry>open a different newsgroup in read only mode</entry></row>
-<row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>open a different virtual folder</entry></row>
-<row><entry><literal>&lt;check-stats&gt;</literal></entry><entry></entry><entry>calculate message statistics for all mailboxes</entry></row>
-<row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>check for classic PGP</entry></row>
-<row><entry><literal>&lt;clear-flag&gt;</literal></entry><entry>W</entry><entry>clear a status flag from a message</entry></row>
-<row><entry><literal>&lt;compose-to-sender&gt;</literal></entry><entry></entry><entry>compose new message to the current message sender</entry></row>
-<row><entry><literal>&lt;copy-message&gt;</literal></entry><entry>C</entry><entry>copy a message to a file/mailbox</entry></row>
-<row><entry><literal>&lt;create-alias&gt;</literal></entry><entry>a</entry><entry>create an alias from a message sender</entry></row>
-<row><entry><literal>&lt;decode-copy&gt;</literal></entry><entry>Esc C</entry><entry>make decoded (text/plain) copy</entry></row>
-<row><entry><literal>&lt;decode-save&gt;</literal></entry><entry>Esc s</entry><entry>make decoded copy (text/plain) and delete</entry></row>
-<row><entry><literal>&lt;decrypt-copy&gt;</literal></entry><entry></entry><entry>make decrypted copy</entry></row>
-<row><entry><literal>&lt;decrypt-save&gt;</literal></entry><entry></entry><entry>make decrypted copy and delete</entry></row>
-<row><entry><literal>&lt;delete-message&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
-<row><entry><literal>&lt;delete-subthread&gt;</literal></entry><entry>Esc d</entry><entry>delete all messages in subthread</entry></row>
-<row><entry><literal>&lt;delete-thread&gt;</literal></entry><entry>^D</entry><entry>delete all messages in thread</entry></row>
-<row><entry><literal>&lt;display-address&gt;</literal></entry><entry>@</entry><entry>display full address of sender</entry></row>
-<row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>display message and toggle header weeding</entry></row>
-<row><entry><literal>&lt;edit&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
-<row><entry><literal>&lt;edit-label&gt;</literal></entry><entry>Y</entry><entry>add, change, or delete a message's label</entry></row>
-<row><entry><literal>&lt;edit-or-view-raw-message&gt;</literal></entry><entry>e</entry><entry>edit the raw message if the mailbox is not read-only, otherwise view it</entry></row>
-<row><entry><literal>&lt;edit-raw-message&gt;</literal></entry><entry></entry><entry>edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
-<row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
-<row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>enter a neomuttrc command</entry></row>
-<row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>read entire thread of the current message</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>x</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>extract supported public keys</entry></row>
-<row><entry><literal>&lt;flag-message&gt;</literal></entry><entry>F</entry><entry>toggle a message's 'important' flag</entry></row>
-<row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>followup to newsgroup</entry></row>
-<row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>wipe passphrases from memory</entry></row>
-<row><entry><literal>&lt;forward-message&gt;</literal></entry><entry>f</entry><entry>forward a message with comments</entry></row>
-<row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>forward to newsgroup</entry></row>
-<row><entry><literal>&lt;group-chat-reply&gt;</literal></entry><entry></entry><entry>reply to all recipients preserving To/Cc</entry></row>
-<row><entry><literal>&lt;group-reply&gt;</literal></entry><entry>g</entry><entry>reply to all recipients</entry></row>
-<row><entry><literal>&lt;half-down&gt;</literal></entry><entry></entry><entry>scroll down 1/2 page</entry></row>
-<row><entry><literal>&lt;half-up&gt;</literal></entry><entry></entry><entry>scroll up 1/2 page</entry></row>
-<row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>this screen</entry></row>
-<row><entry><literal>&lt;imap-fetch-mail&gt;</literal></entry><entry></entry><entry>force retrieval of mail from IMAP server</entry></row>
-<row><entry><literal>&lt;imap-logout-all&gt;</literal></entry><entry></entry><entry>logout from all IMAP servers</entry></row>
-<row><entry><literal>&lt;jump&gt;</literal></entry><entry></entry><entry>jump to an index number</entry></row>
-<row><entry><literal>&lt;link-threads&gt;</literal></entry><entry>&amp;</entry><entry>link tagged message to the current one</entry></row>
-<row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>reply to specified mailing list</entry></row>
-<row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>subscribe to a mailing list</entry></row>
-<row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>unsubscribe from a mailing list</entry></row>
-<row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
-<row><entry><literal>&lt;mail-key&gt;</literal></entry><entry>Esc k</entry><entry>mail a PGP public key</entry></row>
-<row><entry><literal>&lt;mailbox-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
-<row><entry><literal>&lt;mark-as-new&gt;</literal></entry><entry>N</entry><entry>toggle a message's 'new' flag</entry></row>
-<row><entry><literal>&lt;modify-labels&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags</entry></row>
-<row><entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags and then hide message</entry></row>
-<row><entry><literal>&lt;modify-tags&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags</entry></row>
-<row><entry><literal>&lt;modify-tags-then-hide&gt;</literal></entry><entry></entry><entry>modify (notmuch/imap) tags and then hide message</entry></row>
-<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>J</entry><entry>move to the next entry</entry></row>
-<row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>scroll down one line</entry></row>
-<row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>scroll down one line</entry></row>
-<row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>scroll down one line</entry></row>
-<row><entry><literal>&lt;next-new&gt;</literal></entry><entry></entry><entry>jump to the next new message</entry></row>
-<row><entry><literal>&lt;next-new-then-unread&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>jump to the next new or unread message</entry></row>
-<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Pagedown&gt;</entry><entry>move to the next page</entry></row>
-<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>move to the next page</entry></row>
-<row><entry><literal>&lt;next-subthread&gt;</literal></entry><entry>Esc n</entry><entry>jump to the next subthread</entry></row>
-<row><entry><literal>&lt;next-thread&gt;</literal></entry><entry>^N</entry><entry>jump to the next thread</entry></row>
-<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>move to the next undeleted message</entry></row>
-<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>move to the next undeleted message</entry></row>
-<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>j</entry><entry>move to the next undeleted message</entry></row>
-<row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>jump to the next unread message</entry></row>
-<row><entry><literal>&lt;next-unread-mailbox&gt;</literal></entry><entry></entry><entry>open next mailbox with new mail</entry></row>
-<row><entry><literal>&lt;parent-message&gt;</literal></entry><entry>P</entry><entry>jump to parent message in thread</entry></row>
-<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
-<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
-<row><entry><literal>&lt;post-message&gt;</literal></entry><entry></entry><entry>post message to newsgroup</entry></row>
-<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>K</entry><entry>move to the previous entry</entry></row>
-<row><entry><literal>&lt;previous-line&gt;</literal></entry><entry>&lt;Backspace&gt;</entry><entry>scroll up one line</entry></row>
-<row><entry><literal>&lt;previous-new&gt;</literal></entry><entry></entry><entry>jump to the previous new message</entry></row>
-<row><entry><literal>&lt;previous-new-then-unread&gt;</literal></entry><entry></entry><entry>jump to the previous new or unread message</entry></row>
-<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>&lt;Pageup&gt;</entry><entry>move to the previous page</entry></row>
-<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>-</entry><entry>move to the previous page</entry></row>
-<row><entry><literal>&lt;previous-subthread&gt;</literal></entry><entry>Esc p</entry><entry>jump to previous subthread</entry></row>
-<row><entry><literal>&lt;previous-thread&gt;</literal></entry><entry>^P</entry><entry>jump to previous thread</entry></row>
-<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>move to the previous undeleted message</entry></row>
-<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>move to the previous undeleted message</entry></row>
-<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>k</entry><entry>move to the previous undeleted message</entry></row>
-<row><entry><literal>&lt;previous-unread&gt;</literal></entry><entry></entry><entry>jump to the previous unread message</entry></row>
-<row><entry><literal>&lt;print-entry&gt;</literal></entry><entry></entry><entry>print the current entry</entry></row>
-<row><entry><literal>&lt;print-message&gt;</literal></entry><entry>p</entry><entry>print the current entry</entry></row>
-<row><entry><literal>&lt;purge-message&gt;</literal></entry><entry></entry><entry>delete the current entry, bypassing the trash folder</entry></row>
-<row><entry><literal>&lt;purge-thread&gt;</literal></entry><entry></entry><entry>delete the current thread, bypassing the trash folder</entry></row>
-<row><entry><literal>&lt;quasi-delete&gt;</literal></entry><entry></entry><entry>delete from NeoMutt, don't touch on disk</entry></row>
-<row><entry><literal>&lt;quit&gt;</literal></entry><entry>Q</entry><entry>save changes to mailbox and quit</entry></row>
-<row><entry><literal>&lt;read-subthread&gt;</literal></entry><entry>Esc r</entry><entry>mark the current subthread as read</entry></row>
-<row><entry><literal>&lt;read-thread&gt;</literal></entry><entry>^R</entry><entry>mark the current thread as read</entry></row>
-<row><entry><literal>&lt;recall-message&gt;</literal></entry><entry>R</entry><entry>recall a postponed message</entry></row>
-<row><entry><literal>&lt;reconstruct-thread&gt;</literal></entry><entry></entry><entry>reconstruct thread containing current message</entry></row>
-<row><entry><literal>&lt;redraw-screen&gt;</literal></entry><entry>^L</entry><entry>clear and redraw the screen</entry></row>
-<row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>reply to a message</entry></row>
-<row><entry><literal>&lt;resend-message&gt;</literal></entry><entry>Esc e</entry><entry>use the current message as a template for a new one</entry></row>
-<row><entry><literal>&lt;root-message&gt;</literal></entry><entry></entry><entry>jump to root message in thread</entry></row>
-<row><entry><literal>&lt;save-entry&gt;</literal></entry><entry></entry><entry>save message/attachment to a mailbox/file</entry></row>
-<row><entry><literal>&lt;save-message&gt;</literal></entry><entry>s</entry><entry>save message/attachment to a mailbox/file</entry></row>
-<row><entry><literal>&lt;search&gt;</literal></entry><entry>/</entry><entry>search for a regular expression</entry></row>
-<row><entry><literal>&lt;search-next&gt;</literal></entry><entry>n</entry><entry>search for next match</entry></row>
-<row><entry><literal>&lt;search-opposite&gt;</literal></entry><entry></entry><entry>search for next match in opposite direction</entry></row>
-<row><entry><literal>&lt;search-reverse&gt;</literal></entry><entry>Esc /</entry><entry>search backwards for a regular expression</entry></row>
-<row><entry><literal>&lt;search-toggle&gt;</literal></entry><entry>\\</entry><entry>toggle search pattern coloring</entry></row>
-<row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>set a status flag on a message</entry></row>
-<row><entry><literal>&lt;shell-escape&gt;</literal></entry><entry>!</entry><entry>invoke a command in a subshell</entry></row>
-<row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry></entry><entry>show log (and debug) messages</entry></row>
-<row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>show the NeoMutt version number and date</entry></row>
-<row><entry><literal>&lt;skip-headers&gt;</literal></entry><entry>H</entry><entry>jump to first line after headers</entry></row>
-<row><entry><literal>&lt;skip-quoted&gt;</literal></entry><entry>S</entry><entry>skip beyond quoted text</entry></row>
-<row><entry><literal>&lt;sort-mailbox&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
-<row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
-<row><entry><literal>&lt;sync-mailbox&gt;</literal></entry><entry>$</entry><entry>save changes to mailbox</entry></row>
-<row><entry><literal>&lt;tag-message&gt;</literal></entry><entry>t</entry><entry>tag the current entry</entry></row>
-<row><entry><literal>&lt;toggle-quoted&gt;</literal></entry><entry>T</entry><entry>toggle display of quoted text</entry></row>
-<row><entry><literal>&lt;toggle-write&gt;</literal></entry><entry>%</entry><entry>toggle whether the mailbox will be rewritten</entry></row>
-<row><entry><literal>&lt;top&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>jump to the top of the message</entry></row>
-<row><entry><literal>&lt;top&gt;</literal></entry><entry>^</entry><entry>jump to the top of the message</entry></row>
-<row><entry><literal>&lt;undelete-message&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
-<row><entry><literal>&lt;undelete-subthread&gt;</literal></entry><entry>Esc u</entry><entry>undelete all messages in subthread</entry></row>
-<row><entry><literal>&lt;undelete-thread&gt;</literal></entry><entry>^U</entry><entry>undelete all messages in thread</entry></row>
-<row><entry><literal>&lt;vfolder-from-query&gt;</literal></entry><entry></entry><entry>generate virtual folder from query</entry></row>
-<row><entry><literal>&lt;vfolder-from-query-readonly&gt;</literal></entry><entry></entry><entry>generate a read-only virtual folder from query</entry></row>
-<row><entry><literal>&lt;view-attachments&gt;</literal></entry><entry>v</entry><entry>show MIME attachments</entry></row>
-<row><entry><literal>&lt;view-raw-message&gt;</literal></entry><entry></entry><entry>show the raw message</entry></row>
-<row><entry><literal>&lt;what-key&gt;</literal></entry><entry></entry><entry>display the keycode for a key press</entry></row>
+<row><entry><literal>&lt;bottom&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>Jump to the bottom of the message</entry></row>
+<row><entry><literal>&lt;bounce-message&gt;</literal></entry><entry>b</entry><entry>Remail a message to another user</entry></row>
+<row><entry><literal>&lt;break-thread&gt;</literal></entry><entry>#</entry><entry>Break the thread in two</entry></row>
+<row><entry><literal>&lt;change-folder&gt;</literal></entry><entry>c</entry><entry>Open a different folder</entry></row>
+<row><entry><literal>&lt;change-folder-readonly&gt;</literal></entry><entry>Esc c</entry><entry>Open a different folder in read only mode</entry></row>
+<row><entry><literal>&lt;change-newsgroup&gt;</literal></entry><entry></entry><entry>Open a different newsgroup</entry></row>
+<row><entry><literal>&lt;change-newsgroup-readonly&gt;</literal></entry><entry></entry><entry>Open a different newsgroup in read only mode</entry></row>
+<row><entry><literal>&lt;change-vfolder&gt;</literal></entry><entry></entry><entry>Open a different virtual folder</entry></row>
+<row><entry><literal>&lt;check-stats&gt;</literal></entry><entry></entry><entry>Calculate message statistics for all mailboxes</entry></row>
+<row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>Check for classic PGP</entry></row>
+<row><entry><literal>&lt;clear-flag&gt;</literal></entry><entry>W</entry><entry>Clear a status flag from a message</entry></row>
+<row><entry><literal>&lt;compose-to-sender&gt;</literal></entry><entry></entry><entry>Compose new message to the current message sender</entry></row>
+<row><entry><literal>&lt;copy-message&gt;</literal></entry><entry>C</entry><entry>Copy a message to a file/mailbox</entry></row>
+<row><entry><literal>&lt;create-alias&gt;</literal></entry><entry>a</entry><entry>Create an alias from a message sender</entry></row>
+<row><entry><literal>&lt;decode-copy&gt;</literal></entry><entry>Esc C</entry><entry>Make decoded (text/plain) copy</entry></row>
+<row><entry><literal>&lt;decode-save&gt;</literal></entry><entry>Esc s</entry><entry>Make decoded copy (text/plain) and delete</entry></row>
+<row><entry><literal>&lt;decrypt-copy&gt;</literal></entry><entry></entry><entry>Make decrypted copy</entry></row>
+<row><entry><literal>&lt;decrypt-save&gt;</literal></entry><entry></entry><entry>Make decrypted copy and delete</entry></row>
+<row><entry><literal>&lt;delete-message&gt;</literal></entry><entry>d</entry><entry>Delete the current entry</entry></row>
+<row><entry><literal>&lt;delete-subthread&gt;</literal></entry><entry>Esc d</entry><entry>Delete all messages in subthread</entry></row>
+<row><entry><literal>&lt;delete-thread&gt;</literal></entry><entry>^D</entry><entry>Delete all messages in thread</entry></row>
+<row><entry><literal>&lt;display-address&gt;</literal></entry><entry>@</entry><entry>Display full address of sender</entry></row>
+<row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>Display message and toggle header weeding</entry></row>
+<row><entry><literal>&lt;edit&gt;</literal></entry><entry></entry><entry>Edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
+<row><entry><literal>&lt;edit-label&gt;</literal></entry><entry>Y</entry><entry>Add, change, or delete a message's label</entry></row>
+<row><entry><literal>&lt;edit-or-view-raw-message&gt;</literal></entry><entry>e</entry><entry>Edit the raw message if the mailbox is not read-only, otherwise view it</entry></row>
+<row><entry><literal>&lt;edit-raw-message&gt;</literal></entry><entry></entry><entry>Edit the raw message (edit and edit-raw-message are synonyms)</entry></row>
+<row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>Edit attachment content type</entry></row>
+<row><entry><literal>&lt;enter-command&gt;</literal></entry><entry>:</entry><entry>Enter a neomuttrc command</entry></row>
+<row><entry><literal>&lt;entire-thread&gt;</literal></entry><entry></entry><entry>Read entire thread of the current message</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>x</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>Extract supported public keys</entry></row>
+<row><entry><literal>&lt;flag-message&gt;</literal></entry><entry>F</entry><entry>Toggle a message's 'important' flag</entry></row>
+<row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>Followup to newsgroup</entry></row>
+<row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>Wipe passphrases from memory</entry></row>
+<row><entry><literal>&lt;forward-message&gt;</literal></entry><entry>f</entry><entry>Forward a message with comments</entry></row>
+<row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>Forward to newsgroup</entry></row>
+<row><entry><literal>&lt;group-chat-reply&gt;</literal></entry><entry></entry><entry>Reply to all recipients preserving To/Cc</entry></row>
+<row><entry><literal>&lt;group-reply&gt;</literal></entry><entry>g</entry><entry>Reply to all recipients</entry></row>
+<row><entry><literal>&lt;half-down&gt;</literal></entry><entry></entry><entry>Scroll down 1/2 page</entry></row>
+<row><entry><literal>&lt;half-up&gt;</literal></entry><entry></entry><entry>Scroll up 1/2 page</entry></row>
+<row><entry><literal>&lt;help&gt;</literal></entry><entry>?</entry><entry>This screen</entry></row>
+<row><entry><literal>&lt;imap-fetch-mail&gt;</literal></entry><entry></entry><entry>Force retrieval of mail from IMAP server</entry></row>
+<row><entry><literal>&lt;imap-logout-all&gt;</literal></entry><entry></entry><entry>Logout from all IMAP servers</entry></row>
+<row><entry><literal>&lt;jump&gt;</literal></entry><entry></entry><entry>Jump to an index number</entry></row>
+<row><entry><literal>&lt;link-threads&gt;</literal></entry><entry>&amp;</entry><entry>Link tagged message to the current one</entry></row>
+<row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>Reply to specified mailing list</entry></row>
+<row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>Subscribe to a mailing list</entry></row>
+<row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>Unsubscribe from a mailing list</entry></row>
+<row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>Compose a new mail message</entry></row>
+<row><entry><literal>&lt;mail-key&gt;</literal></entry><entry>Esc k</entry><entry>Mail a PGP public key</entry></row>
+<row><entry><literal>&lt;mailbox-list&gt;</literal></entry><entry>.</entry><entry>List mailboxes with new mail</entry></row>
+<row><entry><literal>&lt;mark-as-new&gt;</literal></entry><entry>N</entry><entry>Toggle a message's 'new' flag</entry></row>
+<row><entry><literal>&lt;modify-labels&gt;</literal></entry><entry></entry><entry>Modify (notmuch/imap) tags</entry></row>
+<row><entry><literal>&lt;modify-labels-then-hide&gt;</literal></entry><entry></entry><entry>Modify (notmuch/imap) tags and then hide message</entry></row>
+<row><entry><literal>&lt;modify-tags&gt;</literal></entry><entry></entry><entry>Modify (notmuch/imap) tags</entry></row>
+<row><entry><literal>&lt;modify-tags-then-hide&gt;</literal></entry><entry></entry><entry>Modify (notmuch/imap) tags and then hide message</entry></row>
+<row><entry><literal>&lt;next-entry&gt;</literal></entry><entry>J</entry><entry>Move to the next entry</entry></row>
+<row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>Scroll down one line</entry></row>
+<row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>Scroll down one line</entry></row>
+<row><entry><literal>&lt;next-line&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>Scroll down one line</entry></row>
+<row><entry><literal>&lt;next-new&gt;</literal></entry><entry></entry><entry>Jump to the next new message</entry></row>
+<row><entry><literal>&lt;next-new-then-unread&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>Jump to the next new or unread message</entry></row>
+<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Pagedown&gt;</entry><entry>Move to the next page</entry></row>
+<row><entry><literal>&lt;next-page&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>Move to the next page</entry></row>
+<row><entry><literal>&lt;next-subthread&gt;</literal></entry><entry>Esc n</entry><entry>Jump to the next subthread</entry></row>
+<row><entry><literal>&lt;next-thread&gt;</literal></entry><entry>^N</entry><entry>Jump to the next thread</entry></row>
+<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>Move to the next undeleted message</entry></row>
+<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>Move to the next undeleted message</entry></row>
+<row><entry><literal>&lt;next-undeleted&gt;</literal></entry><entry>j</entry><entry>Move to the next undeleted message</entry></row>
+<row><entry><literal>&lt;next-unread&gt;</literal></entry><entry></entry><entry>Jump to the next unread message</entry></row>
+<row><entry><literal>&lt;next-unread-mailbox&gt;</literal></entry><entry></entry><entry>Open next mailbox with new mail</entry></row>
+<row><entry><literal>&lt;parent-message&gt;</literal></entry><entry>P</entry><entry>Jump to parent message in thread</entry></row>
+<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>Pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>Pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;post-message&gt;</literal></entry><entry></entry><entry>Post message to newsgroup</entry></row>
+<row><entry><literal>&lt;previous-entry&gt;</literal></entry><entry>K</entry><entry>Move to the previous entry</entry></row>
+<row><entry><literal>&lt;previous-line&gt;</literal></entry><entry>&lt;Backspace&gt;</entry><entry>Scroll up one line</entry></row>
+<row><entry><literal>&lt;previous-new&gt;</literal></entry><entry></entry><entry>Jump to the previous new message</entry></row>
+<row><entry><literal>&lt;previous-new-then-unread&gt;</literal></entry><entry></entry><entry>Jump to the previous new or unread message</entry></row>
+<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>&lt;Pageup&gt;</entry><entry>Move to the previous page</entry></row>
+<row><entry><literal>&lt;previous-page&gt;</literal></entry><entry>-</entry><entry>Move to the previous page</entry></row>
+<row><entry><literal>&lt;previous-subthread&gt;</literal></entry><entry>Esc p</entry><entry>Jump to previous subthread</entry></row>
+<row><entry><literal>&lt;previous-thread&gt;</literal></entry><entry>^P</entry><entry>Jump to previous thread</entry></row>
+<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>Move to the previous undeleted message</entry></row>
+<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>Move to the previous undeleted message</entry></row>
+<row><entry><literal>&lt;previous-undeleted&gt;</literal></entry><entry>k</entry><entry>Move to the previous undeleted message</entry></row>
+<row><entry><literal>&lt;previous-unread&gt;</literal></entry><entry></entry><entry>Jump to the previous unread message</entry></row>
+<row><entry><literal>&lt;print-entry&gt;</literal></entry><entry></entry><entry>Print the current entry</entry></row>
+<row><entry><literal>&lt;print-message&gt;</literal></entry><entry>p</entry><entry>Print the current entry</entry></row>
+<row><entry><literal>&lt;purge-message&gt;</literal></entry><entry></entry><entry>Delete the current entry, bypassing the trash folder</entry></row>
+<row><entry><literal>&lt;purge-thread&gt;</literal></entry><entry></entry><entry>Delete the current thread, bypassing the trash folder</entry></row>
+<row><entry><literal>&lt;quasi-delete&gt;</literal></entry><entry></entry><entry>Delete from NeoMutt, don't touch on disk</entry></row>
+<row><entry><literal>&lt;quit&gt;</literal></entry><entry>Q</entry><entry>Save changes to mailbox and quit</entry></row>
+<row><entry><literal>&lt;read-subthread&gt;</literal></entry><entry>Esc r</entry><entry>Mark the current subthread as read</entry></row>
+<row><entry><literal>&lt;read-thread&gt;</literal></entry><entry>^R</entry><entry>Mark the current thread as read</entry></row>
+<row><entry><literal>&lt;recall-message&gt;</literal></entry><entry>R</entry><entry>Recall a postponed message</entry></row>
+<row><entry><literal>&lt;reconstruct-thread&gt;</literal></entry><entry></entry><entry>Reconstruct thread containing current message</entry></row>
+<row><entry><literal>&lt;redraw-screen&gt;</literal></entry><entry>^L</entry><entry>Clear and redraw the screen</entry></row>
+<row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>Reply to a message</entry></row>
+<row><entry><literal>&lt;resend-message&gt;</literal></entry><entry>Esc e</entry><entry>Use the current message as a template for a new one</entry></row>
+<row><entry><literal>&lt;root-message&gt;</literal></entry><entry></entry><entry>Jump to root message in thread</entry></row>
+<row><entry><literal>&lt;save-entry&gt;</literal></entry><entry></entry><entry>Save message/attachment to a mailbox/file</entry></row>
+<row><entry><literal>&lt;save-message&gt;</literal></entry><entry>s</entry><entry>Save message/attachment to a mailbox/file</entry></row>
+<row><entry><literal>&lt;search&gt;</literal></entry><entry>/</entry><entry>Search for a regular expression</entry></row>
+<row><entry><literal>&lt;search-next&gt;</literal></entry><entry>n</entry><entry>Search for next match</entry></row>
+<row><entry><literal>&lt;search-opposite&gt;</literal></entry><entry></entry><entry>Search for next match in opposite direction</entry></row>
+<row><entry><literal>&lt;search-reverse&gt;</literal></entry><entry>Esc /</entry><entry>Search backwards for a regular expression</entry></row>
+<row><entry><literal>&lt;search-toggle&gt;</literal></entry><entry>\\</entry><entry>Toggle search pattern coloring</entry></row>
+<row><entry><literal>&lt;set-flag&gt;</literal></entry><entry>w</entry><entry>Set a status flag on a message</entry></row>
+<row><entry><literal>&lt;shell-escape&gt;</literal></entry><entry>!</entry><entry>Invoke a command in a subshell</entry></row>
+<row><entry><literal>&lt;show-log-messages&gt;</literal></entry><entry></entry><entry>Show log (and debug) messages</entry></row>
+<row><entry><literal>&lt;show-version&gt;</literal></entry><entry>V</entry><entry>Show the NeoMutt version number and date</entry></row>
+<row><entry><literal>&lt;skip-headers&gt;</literal></entry><entry>H</entry><entry>Jump to first line after headers</entry></row>
+<row><entry><literal>&lt;skip-quoted&gt;</literal></entry><entry>S</entry><entry>Skip beyond quoted text</entry></row>
+<row><entry><literal>&lt;sort-mailbox&gt;</literal></entry><entry>o</entry><entry>Sort messages</entry></row>
+<row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>Sort messages in reverse order</entry></row>
+<row><entry><literal>&lt;sync-mailbox&gt;</literal></entry><entry>$</entry><entry>Save changes to mailbox</entry></row>
+<row><entry><literal>&lt;tag-message&gt;</literal></entry><entry>t</entry><entry>Tag the current entry</entry></row>
+<row><entry><literal>&lt;toggle-quoted&gt;</literal></entry><entry>T</entry><entry>Toggle display of quoted text</entry></row>
+<row><entry><literal>&lt;toggle-write&gt;</literal></entry><entry>%</entry><entry>Toggle whether the mailbox will be rewritten</entry></row>
+<row><entry><literal>&lt;top&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>Jump to the top of the message</entry></row>
+<row><entry><literal>&lt;top&gt;</literal></entry><entry>^</entry><entry>Jump to the top of the message</entry></row>
+<row><entry><literal>&lt;undelete-message&gt;</literal></entry><entry>u</entry><entry>Undelete the current entry</entry></row>
+<row><entry><literal>&lt;undelete-subthread&gt;</literal></entry><entry>Esc u</entry><entry>Undelete all messages in subthread</entry></row>
+<row><entry><literal>&lt;undelete-thread&gt;</literal></entry><entry>^U</entry><entry>Undelete all messages in thread</entry></row>
+<row><entry><literal>&lt;vfolder-from-query&gt;</literal></entry><entry></entry><entry>Generate virtual folder from query</entry></row>
+<row><entry><literal>&lt;vfolder-from-query-readonly&gt;</literal></entry><entry></entry><entry>Generate a read-only virtual folder from query</entry></row>
+<row><entry><literal>&lt;view-attachments&gt;</literal></entry><entry>v</entry><entry>Show MIME attachments</entry></row>
+<row><entry><literal>&lt;view-raw-message&gt;</literal></entry><entry></entry><entry>Show the raw message</entry></row>
+<row><entry><literal>&lt;what-key&gt;</literal></entry><entry></entry><entry>Display the keycode for a key press</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -30981,16 +31026,16 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;limit&gt;</literal></entry><entry>l</entry><entry>show only messages matching a pattern</entry></row>
-<row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
-<row><entry><literal>&lt;sort-alias&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
-<row><entry><literal>&lt;sort-alias-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
-<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>tag the current entry</entry></row>
-<row><entry><literal>&lt;tag-pattern&gt;</literal></entry><entry>T</entry><entry>tag non-hidden messages matching a pattern</entry></row>
-<row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
-<row><entry><literal>&lt;untag-pattern&gt;</literal></entry><entry>^T</entry><entry>untag non-hidden messages matching a pattern</entry></row>
+<row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>Delete the current entry</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;limit&gt;</literal></entry><entry>l</entry><entry>Show only messages matching a pattern</entry></row>
+<row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>Compose a new mail message</entry></row>
+<row><entry><literal>&lt;sort-alias&gt;</literal></entry><entry>o</entry><entry>Sort messages</entry></row>
+<row><entry><literal>&lt;sort-alias-reverse&gt;</literal></entry><entry>O</entry><entry>Sort messages in reverse order</entry></row>
+<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>Tag the current entry</entry></row>
+<row><entry><literal>&lt;tag-pattern&gt;</literal></entry><entry>T</entry><entry>Tag non-hidden messages matching a pattern</entry></row>
+<row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>Undelete the current entry</entry></row>
+<row><entry><literal>&lt;untag-pattern&gt;</literal></entry><entry>^T</entry><entry>Untag non-hidden messages matching a pattern</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -31008,65 +31053,65 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;create-alias&gt;</literal></entry><entry>a</entry><entry>create an alias from a message sender</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;limit&gt;</literal></entry><entry>l</entry><entry>show only messages matching a pattern</entry></row>
-<row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>compose a new mail message</entry></row>
-<row><entry><literal>&lt;query&gt;</literal></entry><entry>Q</entry><entry>query external program for addresses</entry></row>
-<row><entry><literal>&lt;query-append&gt;</literal></entry><entry>A</entry><entry>append new query results to current results</entry></row>
-<row><entry><literal>&lt;sort&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
-<row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
-<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>tag the current entry</entry></row>
-<row><entry><literal>&lt;tag-pattern&gt;</literal></entry><entry>T</entry><entry>tag non-hidden messages matching a pattern</entry></row>
-<row><entry><literal>&lt;untag-pattern&gt;</literal></entry><entry>^T</entry><entry>untag non-hidden messages matching a pattern</entry></row>
+<row><entry><literal>&lt;create-alias&gt;</literal></entry><entry>a</entry><entry>Create an alias from a message sender</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;limit&gt;</literal></entry><entry>l</entry><entry>Show only messages matching a pattern</entry></row>
+<row><entry><literal>&lt;mail&gt;</literal></entry><entry>m</entry><entry>Compose a new mail message</entry></row>
+<row><entry><literal>&lt;query&gt;</literal></entry><entry>Q</entry><entry>Query external program for addresses</entry></row>
+<row><entry><literal>&lt;query-append&gt;</literal></entry><entry>A</entry><entry>Append new query results to current results</entry></row>
+<row><entry><literal>&lt;sort&gt;</literal></entry><entry>o</entry><entry>Sort messages</entry></row>
+<row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>Sort messages in reverse order</entry></row>
+<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>Tag the current entry</entry></row>
+<row><entry><literal>&lt;tag-pattern&gt;</literal></entry><entry>T</entry><entry>Tag non-hidden messages matching a pattern</entry></row>
+<row><entry><literal>&lt;untag-pattern&gt;</literal></entry><entry>^T</entry><entry>Untag non-hidden messages matching a pattern</entry></row>
 </tbody>
 </tgroup>
 </table>
 
 </sect2>
 
-<sect2 id="attachment-map">
-<title>Attachment Menu</title>
+<sect2 id="attach-map">
+<title>Attach Menu</title>
 
 
-<table id="tab-attachment-bindings">
-<title>Default Attachment Menu Bindings</title>
+<table id="tab-attach-bindings">
+<title>Default Attach Menu Bindings</title>
 <tgroup cols="3">
 <thead>
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;bounce-message&gt;</literal></entry><entry>b</entry><entry>remail a message to another user</entry></row>
-<row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>check for classic PGP</entry></row>
-<row><entry><literal>&lt;collapse-parts&gt;</literal></entry><entry>v</entry><entry>toggle display of subparts</entry></row>
-<row><entry><literal>&lt;compose-to-sender&gt;</literal></entry><entry></entry><entry>compose new message to the current message sender</entry></row>
-<row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
-<row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>display message and toggle header weeding</entry></row>
-<row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>edit attachment content type</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>extract supported public keys</entry></row>
-<row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>followup to newsgroup</entry></row>
-<row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>wipe passphrases from memory</entry></row>
-<row><entry><literal>&lt;forward-message&gt;</literal></entry><entry>f</entry><entry>forward a message with comments</entry></row>
-<row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>forward to newsgroup</entry></row>
-<row><entry><literal>&lt;group-chat-reply&gt;</literal></entry><entry></entry><entry>reply to all recipients preserving To/Cc</entry></row>
-<row><entry><literal>&lt;group-reply&gt;</literal></entry><entry>g</entry><entry>reply to all recipients</entry></row>
-<row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>reply to specified mailing list</entry></row>
-<row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>subscribe to a mailing list</entry></row>
-<row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>unsubscribe from a mailing list</entry></row>
-<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
-<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
-<row><entry><literal>&lt;print-entry&gt;</literal></entry><entry>p</entry><entry>print the current entry</entry></row>
-<row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>reply to a message</entry></row>
-<row><entry><literal>&lt;resend-message&gt;</literal></entry><entry>Esc e</entry><entry>use the current message as a template for a new one</entry></row>
-<row><entry><literal>&lt;save-entry&gt;</literal></entry><entry>s</entry><entry>save message/attachment to a mailbox/file</entry></row>
-<row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
-<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
-<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
-<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
-<row><entry><literal>&lt;view-mailcap&gt;</literal></entry><entry>m</entry><entry>force viewing of attachment using mailcap</entry></row>
-<row><entry><literal>&lt;view-pager&gt;</literal></entry><entry></entry><entry>view attachment in pager using copiousoutput mailcap</entry></row>
-<row><entry><literal>&lt;view-text&gt;</literal></entry><entry>T</entry><entry>view attachment as text</entry></row>
+<row><entry><literal>&lt;bounce-message&gt;</literal></entry><entry>b</entry><entry>Remail a message to another user</entry></row>
+<row><entry><literal>&lt;check-traditional-pgp&gt;</literal></entry><entry>Esc P</entry><entry>Check for classic PGP</entry></row>
+<row><entry><literal>&lt;collapse-parts&gt;</literal></entry><entry>v</entry><entry>Toggle display of subparts</entry></row>
+<row><entry><literal>&lt;compose-to-sender&gt;</literal></entry><entry></entry><entry>Compose new message to the current message sender</entry></row>
+<row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>Delete the current entry</entry></row>
+<row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>Display message and toggle header weeding</entry></row>
+<row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^E</entry><entry>Edit attachment content type</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;extract-keys&gt;</literal></entry><entry>^K</entry><entry>Extract supported public keys</entry></row>
+<row><entry><literal>&lt;followup-message&gt;</literal></entry><entry></entry><entry>Followup to newsgroup</entry></row>
+<row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>Wipe passphrases from memory</entry></row>
+<row><entry><literal>&lt;forward-message&gt;</literal></entry><entry>f</entry><entry>Forward a message with comments</entry></row>
+<row><entry><literal>&lt;forward-to-group&gt;</literal></entry><entry></entry><entry>Forward to newsgroup</entry></row>
+<row><entry><literal>&lt;group-chat-reply&gt;</literal></entry><entry></entry><entry>Reply to all recipients preserving To/Cc</entry></row>
+<row><entry><literal>&lt;group-reply&gt;</literal></entry><entry>g</entry><entry>Reply to all recipients</entry></row>
+<row><entry><literal>&lt;list-reply&gt;</literal></entry><entry>L</entry><entry>Reply to specified mailing list</entry></row>
+<row><entry><literal>&lt;list-subscribe&gt;</literal></entry><entry></entry><entry>Subscribe to a mailing list</entry></row>
+<row><entry><literal>&lt;list-unsubscribe&gt;</literal></entry><entry></entry><entry>Unsubscribe from a mailing list</entry></row>
+<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>Pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>Pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;print-entry&gt;</literal></entry><entry>p</entry><entry>Print the current entry</entry></row>
+<row><entry><literal>&lt;reply&gt;</literal></entry><entry>r</entry><entry>Reply to a message</entry></row>
+<row><entry><literal>&lt;resend-message&gt;</literal></entry><entry>Esc e</entry><entry>Use the current message as a template for a new one</entry></row>
+<row><entry><literal>&lt;save-entry&gt;</literal></entry><entry>s</entry><entry>Save message/attachment to a mailbox/file</entry></row>
+<row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>Undelete the current entry</entry></row>
+<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>View attachment using mailcap entry if necessary</entry></row>
+<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>View attachment using mailcap entry if necessary</entry></row>
+<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>View attachment using mailcap entry if necessary</entry></row>
+<row><entry><literal>&lt;view-mailcap&gt;</literal></entry><entry>m</entry><entry>Force viewing of attachment using mailcap</entry></row>
+<row><entry><literal>&lt;view-pager&gt;</literal></entry><entry></entry><entry>View attachment in pager using copiousoutput mailcap</entry></row>
+<row><entry><literal>&lt;view-text&gt;</literal></entry><entry>T</entry><entry>View attachment as text</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -31084,68 +31129,68 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;attach-file&gt;</literal></entry><entry>a</entry><entry>attach files to this message</entry></row>
-<row><entry><literal>&lt;attach-key&gt;</literal></entry><entry>Esc k</entry><entry>attach a PGP public key</entry></row>
-<row><entry><literal>&lt;attach-message&gt;</literal></entry><entry>A</entry><entry>attach messages to this message</entry></row>
-<row><entry><literal>&lt;attach-news-message&gt;</literal></entry><entry></entry><entry>attach news articles to this message</entry></row>
-<row><entry><literal>&lt;autocrypt-menu&gt;</literal></entry><entry>o</entry><entry>show autocrypt compose menu options</entry></row>
-<row><entry><literal>&lt;copy-file&gt;</literal></entry><entry>C</entry><entry>save message/attachment to a mailbox/file</entry></row>
-<row><entry><literal>&lt;detach-file&gt;</literal></entry><entry>D</entry><entry>delete the current entry</entry></row>
-<row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>display message and toggle header weeding</entry></row>
-<row><entry><literal>&lt;edit-bcc&gt;</literal></entry><entry>b</entry><entry>edit the BCC list</entry></row>
-<row><entry><literal>&lt;edit-cc&gt;</literal></entry><entry>c</entry><entry>edit the CC list</entry></row>
-<row><entry><literal>&lt;edit-content-id&gt;</literal></entry><entry>Esc i</entry><entry>edit the 'Content-ID' of the attachment</entry></row>
-<row><entry><literal>&lt;edit-description&gt;</literal></entry><entry>d</entry><entry>edit attachment description</entry></row>
-<row><entry><literal>&lt;edit-encoding&gt;</literal></entry><entry>^E</entry><entry>edit attachment transfer-encoding</entry></row>
-<row><entry><literal>&lt;edit-fcc&gt;</literal></entry><entry>f</entry><entry>enter a file to save a copy of this message in</entry></row>
-<row><entry><literal>&lt;edit-file&gt;</literal></entry><entry>Esc e</entry><entry>edit the file to be attached</entry></row>
-<row><entry><literal>&lt;edit-followup-to&gt;</literal></entry><entry></entry><entry>edit the Followup-To field</entry></row>
-<row><entry><literal>&lt;edit-from&gt;</literal></entry><entry>Esc f</entry><entry>edit the from field</entry></row>
-<row><entry><literal>&lt;edit-headers&gt;</literal></entry><entry>E</entry><entry>edit the message with headers</entry></row>
-<row><entry><literal>&lt;edit-language&gt;</literal></entry><entry>^L</entry><entry>edit the 'Content-Language' of the attachment</entry></row>
-<row><entry><literal>&lt;edit-message&gt;</literal></entry><entry>e</entry><entry>edit the message</entry></row>
-<row><entry><literal>&lt;edit-mime&gt;</literal></entry><entry>m</entry><entry>edit attachment using mailcap entry</entry></row>
-<row><entry><literal>&lt;edit-newsgroups&gt;</literal></entry><entry></entry><entry>edit the newsgroups list</entry></row>
-<row><entry><literal>&lt;edit-reply-to&gt;</literal></entry><entry>r</entry><entry>edit the Reply-To field</entry></row>
-<row><entry><literal>&lt;edit-subject&gt;</literal></entry><entry>s</entry><entry>edit the subject of this message</entry></row>
-<row><entry><literal>&lt;edit-to&gt;</literal></entry><entry>t</entry><entry>edit the TO list</entry></row>
-<row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^T</entry><entry>edit attachment content type</entry></row>
-<row><entry><literal>&lt;edit-x-comment-to&gt;</literal></entry><entry></entry><entry>edit the X-Comment-To field</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;filter-entry&gt;</literal></entry><entry>F</entry><entry>filter attachment through a shell command</entry></row>
-<row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>wipe passphrases from memory</entry></row>
-<row><entry><literal>&lt;get-attachment&gt;</literal></entry><entry>G</entry><entry>get a temporary copy of an attachment</entry></row>
-<row><entry><literal>&lt;group-alternatives&gt;</literal></entry><entry>&amp;</entry><entry>group tagged attachments as 'multipart/alternative'</entry></row>
-<row><entry><literal>&lt;group-multilingual&gt;</literal></entry><entry>^</entry><entry>group tagged attachments as 'multipart/multilingual'</entry></row>
-<row><entry><literal>&lt;group-related&gt;</literal></entry><entry>%</entry><entry>group tagged attachments as 'multipart/related'</entry></row>
-<row><entry><literal>&lt;ispell&gt;</literal></entry><entry>i</entry><entry>run ispell on the message</entry></row>
-<row><entry><literal>&lt;move-down&gt;</literal></entry><entry>+</entry><entry>move an attachment down in the attachment list</entry></row>
-<row><entry><literal>&lt;move-up&gt;</literal></entry><entry>-</entry><entry>move an attachment up in the attachment list</entry></row>
-<row><entry><literal>&lt;new-mime&gt;</literal></entry><entry>n</entry><entry>compose new attachment using mailcap entry</entry></row>
-<row><entry><literal>&lt;pgp-menu&gt;</literal></entry><entry>p</entry><entry>show PGP options</entry></row>
-<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
-<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>pipe message/attachment to a shell command</entry></row>
-<row><entry><literal>&lt;postpone-message&gt;</literal></entry><entry>P</entry><entry>save this message to send later</entry></row>
-<row><entry><literal>&lt;preview-page-down&gt;</literal></entry><entry>&lt;Pagedown&gt;</entry><entry>show the next page of the message</entry></row>
-<row><entry><literal>&lt;preview-page-up&gt;</literal></entry><entry>&lt;Pageup&gt;</entry><entry>show the previous page of the message</entry></row>
-<row><entry><literal>&lt;print-entry&gt;</literal></entry><entry>l</entry><entry>print the current entry</entry></row>
-<row><entry><literal>&lt;rename-attachment&gt;</literal></entry><entry>^O</entry><entry>send attachment with a different name</entry></row>
-<row><entry><literal>&lt;rename-file&gt;</literal></entry><entry>R</entry><entry>rename/move an attached file</entry></row>
-<row><entry><literal>&lt;send-message&gt;</literal></entry><entry>y</entry><entry>send the message</entry></row>
-<row><entry><literal>&lt;smime-menu&gt;</literal></entry><entry>S</entry><entry>show S/MIME options</entry></row>
-<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>T</entry><entry>tag the current entry</entry></row>
-<row><entry><literal>&lt;toggle-disposition&gt;</literal></entry><entry>^D</entry><entry>toggle disposition between inline/attachment</entry></row>
-<row><entry><literal>&lt;toggle-recode&gt;</literal></entry><entry></entry><entry>toggle recoding of this attachment</entry></row>
-<row><entry><literal>&lt;toggle-unlink&gt;</literal></entry><entry>u</entry><entry>toggle whether to delete file after sending it</entry></row>
-<row><entry><literal>&lt;ungroup-attachment&gt;</literal></entry><entry>#</entry><entry>ungroup 'multipart' attachment</entry></row>
-<row><entry><literal>&lt;update-encoding&gt;</literal></entry><entry>U</entry><entry>update an attachment's encoding info</entry></row>
-<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
-<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
-<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>view attachment using mailcap entry if necessary</entry></row>
-<row><entry><literal>&lt;view-mailcap&gt;</literal></entry><entry></entry><entry>force viewing of attachment using mailcap</entry></row>
-<row><entry><literal>&lt;view-pager&gt;</literal></entry><entry></entry><entry>view attachment in pager using copiousoutput mailcap</entry></row>
-<row><entry><literal>&lt;view-text&gt;</literal></entry><entry></entry><entry>view attachment as text</entry></row>
-<row><entry><literal>&lt;write-fcc&gt;</literal></entry><entry>w</entry><entry>write the message to a folder</entry></row>
+<row><entry><literal>&lt;attach-file&gt;</literal></entry><entry>a</entry><entry>Attach files to this message</entry></row>
+<row><entry><literal>&lt;attach-key&gt;</literal></entry><entry>Esc k</entry><entry>Attach a PGP public key</entry></row>
+<row><entry><literal>&lt;attach-message&gt;</literal></entry><entry>A</entry><entry>Attach messages to this message</entry></row>
+<row><entry><literal>&lt;attach-news-message&gt;</literal></entry><entry></entry><entry>Attach news articles to this message</entry></row>
+<row><entry><literal>&lt;autocrypt-menu&gt;</literal></entry><entry>o</entry><entry>Show autocrypt compose menu options</entry></row>
+<row><entry><literal>&lt;copy-file&gt;</literal></entry><entry>C</entry><entry>Save message/attachment to a mailbox/file</entry></row>
+<row><entry><literal>&lt;detach-file&gt;</literal></entry><entry>D</entry><entry>Delete the current entry</entry></row>
+<row><entry><literal>&lt;display-toggle-weed&gt;</literal></entry><entry>h</entry><entry>Display message and toggle header weeding</entry></row>
+<row><entry><literal>&lt;edit-bcc&gt;</literal></entry><entry>b</entry><entry>Edit the BCC list</entry></row>
+<row><entry><literal>&lt;edit-cc&gt;</literal></entry><entry>c</entry><entry>Edit the CC list</entry></row>
+<row><entry><literal>&lt;edit-content-id&gt;</literal></entry><entry>Esc i</entry><entry>Edit the 'Content-ID' of the attachment</entry></row>
+<row><entry><literal>&lt;edit-description&gt;</literal></entry><entry>d</entry><entry>Edit attachment description</entry></row>
+<row><entry><literal>&lt;edit-encoding&gt;</literal></entry><entry>^E</entry><entry>Edit attachment transfer-encoding</entry></row>
+<row><entry><literal>&lt;edit-fcc&gt;</literal></entry><entry>f</entry><entry>Enter a file to save a copy of this message in</entry></row>
+<row><entry><literal>&lt;edit-file&gt;</literal></entry><entry>Esc e</entry><entry>Edit the file to be attached</entry></row>
+<row><entry><literal>&lt;edit-followup-to&gt;</literal></entry><entry></entry><entry>Edit the Followup-To field</entry></row>
+<row><entry><literal>&lt;edit-from&gt;</literal></entry><entry>Esc f</entry><entry>Edit the from field</entry></row>
+<row><entry><literal>&lt;edit-headers&gt;</literal></entry><entry>E</entry><entry>Edit the message with headers</entry></row>
+<row><entry><literal>&lt;edit-language&gt;</literal></entry><entry>^L</entry><entry>Edit the 'Content-Language' of the attachment</entry></row>
+<row><entry><literal>&lt;edit-message&gt;</literal></entry><entry>e</entry><entry>Edit the message</entry></row>
+<row><entry><literal>&lt;edit-mime&gt;</literal></entry><entry>m</entry><entry>Edit attachment using mailcap entry</entry></row>
+<row><entry><literal>&lt;edit-newsgroups&gt;</literal></entry><entry></entry><entry>Edit the newsgroups list</entry></row>
+<row><entry><literal>&lt;edit-reply-to&gt;</literal></entry><entry>r</entry><entry>Edit the Reply-To field</entry></row>
+<row><entry><literal>&lt;edit-subject&gt;</literal></entry><entry>s</entry><entry>Edit the subject of this message</entry></row>
+<row><entry><literal>&lt;edit-to&gt;</literal></entry><entry>t</entry><entry>Edit the TO list</entry></row>
+<row><entry><literal>&lt;edit-type&gt;</literal></entry><entry>^T</entry><entry>Edit attachment content type</entry></row>
+<row><entry><literal>&lt;edit-x-comment-to&gt;</literal></entry><entry></entry><entry>Edit the X-Comment-To field</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;filter-entry&gt;</literal></entry><entry>F</entry><entry>Filter attachment through a shell command</entry></row>
+<row><entry><literal>&lt;forget-passphrase&gt;</literal></entry><entry>^F</entry><entry>Wipe passphrases from memory</entry></row>
+<row><entry><literal>&lt;get-attachment&gt;</literal></entry><entry>G</entry><entry>Get a temporary copy of an attachment</entry></row>
+<row><entry><literal>&lt;group-alternatives&gt;</literal></entry><entry>&amp;</entry><entry>Group tagged attachments as 'multipart/alternative'</entry></row>
+<row><entry><literal>&lt;group-multilingual&gt;</literal></entry><entry>^</entry><entry>Group tagged attachments as 'multipart/multilingual'</entry></row>
+<row><entry><literal>&lt;group-related&gt;</literal></entry><entry>%</entry><entry>Group tagged attachments as 'multipart/related'</entry></row>
+<row><entry><literal>&lt;ispell&gt;</literal></entry><entry>i</entry><entry>Run ispell on the message</entry></row>
+<row><entry><literal>&lt;move-down&gt;</literal></entry><entry>+</entry><entry>Move an attachment down in the attachment list</entry></row>
+<row><entry><literal>&lt;move-up&gt;</literal></entry><entry>-</entry><entry>Move an attachment up in the attachment list</entry></row>
+<row><entry><literal>&lt;new-mime&gt;</literal></entry><entry>n</entry><entry>Compose new attachment using mailcap entry</entry></row>
+<row><entry><literal>&lt;pgp-menu&gt;</literal></entry><entry>p</entry><entry>Show PGP options</entry></row>
+<row><entry><literal>&lt;pipe-entry&gt;</literal></entry><entry>|</entry><entry>Pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;pipe-message&gt;</literal></entry><entry>|</entry><entry>Pipe message/attachment to a shell command</entry></row>
+<row><entry><literal>&lt;postpone-message&gt;</literal></entry><entry>P</entry><entry>Save this message to send later</entry></row>
+<row><entry><literal>&lt;preview-page-down&gt;</literal></entry><entry>&lt;Pagedown&gt;</entry><entry>Show the next page of the message</entry></row>
+<row><entry><literal>&lt;preview-page-up&gt;</literal></entry><entry>&lt;Pageup&gt;</entry><entry>Show the previous page of the message</entry></row>
+<row><entry><literal>&lt;print-entry&gt;</literal></entry><entry>l</entry><entry>Print the current entry</entry></row>
+<row><entry><literal>&lt;rename-attachment&gt;</literal></entry><entry>^O</entry><entry>Send attachment with a different name</entry></row>
+<row><entry><literal>&lt;rename-file&gt;</literal></entry><entry>R</entry><entry>Rename/move an attached file</entry></row>
+<row><entry><literal>&lt;send-message&gt;</literal></entry><entry>y</entry><entry>Send the message</entry></row>
+<row><entry><literal>&lt;smime-menu&gt;</literal></entry><entry>S</entry><entry>Show S/MIME options</entry></row>
+<row><entry><literal>&lt;tag-entry&gt;</literal></entry><entry>T</entry><entry>Tag the current entry</entry></row>
+<row><entry><literal>&lt;toggle-disposition&gt;</literal></entry><entry>^D</entry><entry>Toggle disposition between inline/attachment</entry></row>
+<row><entry><literal>&lt;toggle-recode&gt;</literal></entry><entry></entry><entry>Toggle recoding of this attachment</entry></row>
+<row><entry><literal>&lt;toggle-unlink&gt;</literal></entry><entry>u</entry><entry>Toggle whether to delete file after sending it</entry></row>
+<row><entry><literal>&lt;ungroup-attachment&gt;</literal></entry><entry>#</entry><entry>Ungroup 'multipart' attachment</entry></row>
+<row><entry><literal>&lt;update-encoding&gt;</literal></entry><entry>U</entry><entry>Update an attachment's encoding info</entry></row>
+<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Enter&gt;</entry><entry>View attachment using mailcap entry if necessary</entry></row>
+<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Keypadenter&gt;</entry><entry>View attachment using mailcap entry if necessary</entry></row>
+<row><entry><literal>&lt;view-attach&gt;</literal></entry><entry>&lt;Return&gt;</entry><entry>View attachment using mailcap entry if necessary</entry></row>
+<row><entry><literal>&lt;view-mailcap&gt;</literal></entry><entry></entry><entry>Force viewing of attachment using mailcap</entry></row>
+<row><entry><literal>&lt;view-pager&gt;</literal></entry><entry></entry><entry>View attachment in pager using copiousoutput mailcap</entry></row>
+<row><entry><literal>&lt;view-text&gt;</literal></entry><entry></entry><entry>View attachment as text</entry></row>
+<row><entry><literal>&lt;write-fcc&gt;</literal></entry><entry>w</entry><entry>Write the message to a folder</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -31163,9 +31208,9 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>delete the current entry</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>undelete the current entry</entry></row>
+<row><entry><literal>&lt;delete-entry&gt;</literal></entry><entry>d</entry><entry>Delete the current entry</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;undelete-entry&gt;</literal></entry><entry>u</entry><entry>Undelete the current entry</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -31183,31 +31228,31 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;catchup&gt;</literal></entry><entry></entry><entry>mark all articles in newsgroup as read</entry></row>
-<row><entry><literal>&lt;change-dir&gt;</literal></entry><entry>c</entry><entry>change directories</entry></row>
-<row><entry><literal>&lt;check-new&gt;</literal></entry><entry></entry><entry>check mailboxes for new mail</entry></row>
-<row><entry><literal>&lt;create-mailbox&gt;</literal></entry><entry>C</entry><entry>create a new mailbox (IMAP only)</entry></row>
-<row><entry><literal>&lt;delete-mailbox&gt;</literal></entry><entry>d</entry><entry>delete the current mailbox (IMAP only)</entry></row>
-<row><entry><literal>&lt;descend-directory&gt;</literal></entry><entry></entry><entry>descend into a directory</entry></row>
-<row><entry><literal>&lt;display-filename&gt;</literal></entry><entry>@</entry><entry>display the currently selected file's name</entry></row>
-<row><entry><literal>&lt;enter-mask&gt;</literal></entry><entry>m</entry><entry>enter a file mask</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;goto-folder&gt;</literal></entry><entry>=</entry><entry>swap the current folder position with $folder if it exists</entry></row>
-<row><entry><literal>&lt;goto-parent&gt;</literal></entry><entry>p</entry><entry>go to parent directory</entry></row>
-<row><entry><literal>&lt;mailbox-list&gt;</literal></entry><entry>.</entry><entry>list mailboxes with new mail</entry></row>
-<row><entry><literal>&lt;reload-active&gt;</literal></entry><entry></entry><entry>load list of all newsgroups from NNTP server</entry></row>
-<row><entry><literal>&lt;rename-mailbox&gt;</literal></entry><entry>r</entry><entry>rename the current mailbox (IMAP only)</entry></row>
-<row><entry><literal>&lt;select-new&gt;</literal></entry><entry>N</entry><entry>select a new file in this directory</entry></row>
-<row><entry><literal>&lt;sort&gt;</literal></entry><entry>o</entry><entry>sort messages</entry></row>
-<row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>sort messages in reverse order</entry></row>
-<row><entry><literal>&lt;subscribe&gt;</literal></entry><entry>s</entry><entry>subscribe to current mbox (IMAP/NNTP only)</entry></row>
-<row><entry><literal>&lt;subscribe-pattern&gt;</literal></entry><entry></entry><entry>subscribe to newsgroups matching a pattern</entry></row>
-<row><entry><literal>&lt;toggle-mailboxes&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>toggle whether to browse mailboxes or all files</entry></row>
-<row><entry><literal>&lt;toggle-subscribed&gt;</literal></entry><entry>T</entry><entry>toggle view all/subscribed mailboxes (IMAP only)</entry></row>
-<row><entry><literal>&lt;uncatchup&gt;</literal></entry><entry></entry><entry>mark all articles in newsgroup as unread</entry></row>
-<row><entry><literal>&lt;unsubscribe&gt;</literal></entry><entry>u</entry><entry>unsubscribe from current mbox (IMAP/NNTP only)</entry></row>
-<row><entry><literal>&lt;unsubscribe-pattern&gt;</literal></entry><entry></entry><entry>unsubscribe from newsgroups matching a pattern</entry></row>
-<row><entry><literal>&lt;view-file&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>view file</entry></row>
+<row><entry><literal>&lt;catchup&gt;</literal></entry><entry></entry><entry>Mark all articles in newsgroup as read</entry></row>
+<row><entry><literal>&lt;change-dir&gt;</literal></entry><entry>c</entry><entry>Change directories</entry></row>
+<row><entry><literal>&lt;check-new&gt;</literal></entry><entry></entry><entry>Check mailboxes for new mail</entry></row>
+<row><entry><literal>&lt;create-mailbox&gt;</literal></entry><entry>C</entry><entry>Create a new mailbox (IMAP only)</entry></row>
+<row><entry><literal>&lt;delete-mailbox&gt;</literal></entry><entry>d</entry><entry>Delete the current mailbox (IMAP only)</entry></row>
+<row><entry><literal>&lt;descend-directory&gt;</literal></entry><entry></entry><entry>Descend into a directory</entry></row>
+<row><entry><literal>&lt;display-filename&gt;</literal></entry><entry>@</entry><entry>Display the currently selected file's name</entry></row>
+<row><entry><literal>&lt;enter-mask&gt;</literal></entry><entry>m</entry><entry>Enter a file mask</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;goto-folder&gt;</literal></entry><entry>=</entry><entry>Swap the current folder position with $folder if it exists</entry></row>
+<row><entry><literal>&lt;goto-parent&gt;</literal></entry><entry>p</entry><entry>Go to parent directory</entry></row>
+<row><entry><literal>&lt;mailbox-list&gt;</literal></entry><entry>.</entry><entry>List mailboxes with new mail</entry></row>
+<row><entry><literal>&lt;reload-active&gt;</literal></entry><entry></entry><entry>Load list of all newsgroups from NNTP server</entry></row>
+<row><entry><literal>&lt;rename-mailbox&gt;</literal></entry><entry>r</entry><entry>Rename the current mailbox (IMAP only)</entry></row>
+<row><entry><literal>&lt;select-new&gt;</literal></entry><entry>N</entry><entry>Select a new file in this directory</entry></row>
+<row><entry><literal>&lt;sort&gt;</literal></entry><entry>o</entry><entry>Sort messages</entry></row>
+<row><entry><literal>&lt;sort-reverse&gt;</literal></entry><entry>O</entry><entry>Sort messages in reverse order</entry></row>
+<row><entry><literal>&lt;subscribe&gt;</literal></entry><entry>s</entry><entry>Subscribe to current mbox (IMAP/NNTP only)</entry></row>
+<row><entry><literal>&lt;subscribe-pattern&gt;</literal></entry><entry></entry><entry>Subscribe to newsgroups matching a pattern</entry></row>
+<row><entry><literal>&lt;toggle-mailboxes&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>Toggle whether to browse mailboxes or all files</entry></row>
+<row><entry><literal>&lt;toggle-subscribed&gt;</literal></entry><entry>T</entry><entry>Toggle view all/subscribed mailboxes (IMAP only)</entry></row>
+<row><entry><literal>&lt;uncatchup&gt;</literal></entry><entry></entry><entry>Mark all articles in newsgroup as unread</entry></row>
+<row><entry><literal>&lt;unsubscribe&gt;</literal></entry><entry>u</entry><entry>Unsubscribe from current mbox (IMAP/NNTP only)</entry></row>
+<row><entry><literal>&lt;unsubscribe-pattern&gt;</literal></entry><entry></entry><entry>Unsubscribe from newsgroups matching a pattern</entry></row>
+<row><entry><literal>&lt;view-file&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>View file</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -31225,9 +31270,9 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;verify-key&gt;</literal></entry><entry>c</entry><entry>verify a public key</entry></row>
-<row><entry><literal>&lt;view-name&gt;</literal></entry><entry>%</entry><entry>view the key's user id</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;verify-key&gt;</literal></entry><entry>c</entry><entry>Verify a public key</entry></row>
+<row><entry><literal>&lt;view-name&gt;</literal></entry><entry>%</entry><entry>View the key's user id</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -31245,9 +31290,9 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;verify-key&gt;</literal></entry><entry>c</entry><entry>verify a public key</entry></row>
-<row><entry><literal>&lt;view-name&gt;</literal></entry><entry>%</entry><entry>view the key's user id</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;verify-key&gt;</literal></entry><entry>c</entry><entry>Verify a public key</entry></row>
+<row><entry><literal>&lt;view-name&gt;</literal></entry><entry>%</entry><entry>View the key's user id</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -31265,40 +31310,40 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;backspace&gt;</literal></entry><entry>&lt;Backspace&gt;</entry><entry>delete the char in front of the cursor</entry></row>
-<row><entry><literal>&lt;backspace&gt;</literal></entry><entry>&lt;Delete&gt;</entry><entry>delete the char in front of the cursor</entry></row>
-<row><entry><literal>&lt;backward-char&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>move the cursor one character to the left</entry></row>
-<row><entry><literal>&lt;backward-char&gt;</literal></entry><entry>^B</entry><entry>move the cursor one character to the left</entry></row>
-<row><entry><literal>&lt;backward-word&gt;</literal></entry><entry>Esc b</entry><entry>move the cursor to the beginning of the word</entry></row>
-<row><entry><literal>&lt;bol&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>jump to the beginning of the line</entry></row>
-<row><entry><literal>&lt;bol&gt;</literal></entry><entry>^A</entry><entry>jump to the beginning of the line</entry></row>
-<row><entry><literal>&lt;capitalize-word&gt;</literal></entry><entry>Esc c</entry><entry>capitalize the word</entry></row>
-<row><entry><literal>&lt;complete&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>complete filename or alias</entry></row>
-<row><entry><literal>&lt;complete-query&gt;</literal></entry><entry>^T</entry><entry>complete address with query</entry></row>
-<row><entry><literal>&lt;delete-char&gt;</literal></entry><entry>&lt;Delete&gt;</entry><entry>delete the char under the cursor</entry></row>
-<row><entry><literal>&lt;delete-char&gt;</literal></entry><entry>^D</entry><entry>delete the char under the cursor</entry></row>
-<row><entry><literal>&lt;downcase-word&gt;</literal></entry><entry>Esc l</entry><entry>convert the word to lower case</entry></row>
-<row><entry><literal>&lt;eol&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>jump to the end of the line</entry></row>
-<row><entry><literal>&lt;eol&gt;</literal></entry><entry>^E</entry><entry>jump to the end of the line</entry></row>
-<row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>move the cursor one character to the right</entry></row>
-<row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>^F</entry><entry>move the cursor one character to the right</entry></row>
-<row><entry><literal>&lt;forward-word&gt;</literal></entry><entry>Esc f</entry><entry>move the cursor to the end of the word</entry></row>
-<row><entry><literal>&lt;help&gt;</literal></entry><entry>Esc ?</entry><entry>this screen</entry></row>
-<row><entry><literal>&lt;history-down&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>scroll down through the history list</entry></row>
-<row><entry><literal>&lt;history-down&gt;</literal></entry><entry>^N</entry><entry>scroll down through the history list</entry></row>
-<row><entry><literal>&lt;history-search&gt;</literal></entry><entry>^R</entry><entry>search through the history list</entry></row>
-<row><entry><literal>&lt;history-up&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>scroll up through the history list</entry></row>
-<row><entry><literal>&lt;history-up&gt;</literal></entry><entry>^P</entry><entry>scroll up through the history list</entry></row>
-<row><entry><literal>&lt;kill-eol&gt;</literal></entry><entry>^K</entry><entry>delete chars from cursor to end of line</entry></row>
-<row><entry><literal>&lt;kill-eow&gt;</literal></entry><entry>Esc d</entry><entry>delete chars from the cursor to the end of the word</entry></row>
-<row><entry><literal>&lt;kill-line&gt;</literal></entry><entry>^U</entry><entry>delete chars from cursor to beginning the line</entry></row>
-<row><entry><literal>&lt;kill-whole-line&gt;</literal></entry><entry></entry><entry>delete all chars on the line</entry></row>
-<row><entry><literal>&lt;kill-word&gt;</literal></entry><entry>^W</entry><entry>delete the word in front of the cursor</entry></row>
-<row><entry><literal>&lt;mailbox-cycle&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>cycle among incoming mailboxes</entry></row>
-<row><entry><literal>&lt;quote-char&gt;</literal></entry><entry>^V</entry><entry>quote the next typed key</entry></row>
-<row><entry><literal>&lt;redraw-screen&gt;</literal></entry><entry>^L</entry><entry>clear and redraw the screen</entry></row>
-<row><entry><literal>&lt;transpose-chars&gt;</literal></entry><entry></entry><entry>transpose character under cursor with previous</entry></row>
-<row><entry><literal>&lt;upcase-word&gt;</literal></entry><entry>Esc u</entry><entry>convert the word to upper case</entry></row>
+<row><entry><literal>&lt;backspace&gt;</literal></entry><entry>&lt;Backspace&gt;</entry><entry>Delete the char in front of the cursor</entry></row>
+<row><entry><literal>&lt;backspace&gt;</literal></entry><entry>&lt;Delete&gt;</entry><entry>Delete the char in front of the cursor</entry></row>
+<row><entry><literal>&lt;backward-char&gt;</literal></entry><entry>&lt;Left&gt;</entry><entry>Move the cursor one character to the left</entry></row>
+<row><entry><literal>&lt;backward-char&gt;</literal></entry><entry>^B</entry><entry>Move the cursor one character to the left</entry></row>
+<row><entry><literal>&lt;backward-word&gt;</literal></entry><entry>Esc b</entry><entry>Move the cursor to the beginning of the word</entry></row>
+<row><entry><literal>&lt;bol&gt;</literal></entry><entry>&lt;Home&gt;</entry><entry>Jump to the beginning of the line</entry></row>
+<row><entry><literal>&lt;bol&gt;</literal></entry><entry>^A</entry><entry>Jump to the beginning of the line</entry></row>
+<row><entry><literal>&lt;capitalize-word&gt;</literal></entry><entry>Esc c</entry><entry>Capitalize the word</entry></row>
+<row><entry><literal>&lt;complete&gt;</literal></entry><entry>&lt;Tab&gt;</entry><entry>Complete filename or alias</entry></row>
+<row><entry><literal>&lt;complete-query&gt;</literal></entry><entry>^T</entry><entry>Complete address with query</entry></row>
+<row><entry><literal>&lt;delete-char&gt;</literal></entry><entry>&lt;Delete&gt;</entry><entry>Delete the char under the cursor</entry></row>
+<row><entry><literal>&lt;delete-char&gt;</literal></entry><entry>^D</entry><entry>Delete the char under the cursor</entry></row>
+<row><entry><literal>&lt;downcase-word&gt;</literal></entry><entry>Esc l</entry><entry>Convert the word to lower case</entry></row>
+<row><entry><literal>&lt;eol&gt;</literal></entry><entry>&lt;End&gt;</entry><entry>Jump to the end of the line</entry></row>
+<row><entry><literal>&lt;eol&gt;</literal></entry><entry>^E</entry><entry>Jump to the end of the line</entry></row>
+<row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>&lt;Right&gt;</entry><entry>Move the cursor one character to the right</entry></row>
+<row><entry><literal>&lt;forward-char&gt;</literal></entry><entry>^F</entry><entry>Move the cursor one character to the right</entry></row>
+<row><entry><literal>&lt;forward-word&gt;</literal></entry><entry>Esc f</entry><entry>Move the cursor to the end of the word</entry></row>
+<row><entry><literal>&lt;help&gt;</literal></entry><entry>Esc ?</entry><entry>This screen</entry></row>
+<row><entry><literal>&lt;history-down&gt;</literal></entry><entry>&lt;Down&gt;</entry><entry>Scroll down through the history list</entry></row>
+<row><entry><literal>&lt;history-down&gt;</literal></entry><entry>^N</entry><entry>Scroll down through the history list</entry></row>
+<row><entry><literal>&lt;history-search&gt;</literal></entry><entry>^R</entry><entry>Search through the history list</entry></row>
+<row><entry><literal>&lt;history-up&gt;</literal></entry><entry>&lt;Up&gt;</entry><entry>Scroll up through the history list</entry></row>
+<row><entry><literal>&lt;history-up&gt;</literal></entry><entry>^P</entry><entry>Scroll up through the history list</entry></row>
+<row><entry><literal>&lt;kill-eol&gt;</literal></entry><entry>^K</entry><entry>Delete chars from cursor to end of line</entry></row>
+<row><entry><literal>&lt;kill-eow&gt;</literal></entry><entry>Esc d</entry><entry>Delete chars from the cursor to the end of the word</entry></row>
+<row><entry><literal>&lt;kill-line&gt;</literal></entry><entry>^U</entry><entry>Delete chars from cursor to beginning the line</entry></row>
+<row><entry><literal>&lt;kill-whole-line&gt;</literal></entry><entry></entry><entry>Delete all chars on the line</entry></row>
+<row><entry><literal>&lt;kill-word&gt;</literal></entry><entry>^W</entry><entry>Delete the word in front of the cursor</entry></row>
+<row><entry><literal>&lt;mailbox-cycle&gt;</literal></entry><entry>&lt;Space&gt;</entry><entry>Cycle among incoming mailboxes</entry></row>
+<row><entry><literal>&lt;quote-char&gt;</literal></entry><entry>^V</entry><entry>Quote the next typed key</entry></row>
+<row><entry><literal>&lt;redraw-screen&gt;</literal></entry><entry>^L</entry><entry>Clear and redraw the screen</entry></row>
+<row><entry><literal>&lt;transpose-chars&gt;</literal></entry><entry></entry><entry>Transpose character under cursor with previous</entry></row>
+<row><entry><literal>&lt;upcase-word&gt;</literal></entry><entry>Esc u</entry><entry>Convert the word to upper case</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -31316,19 +31361,19 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;sidebar-abort-search&gt;</literal></entry><entry></entry><entry>close the sidebar search</entry></row>
-<row><entry><literal>&lt;sidebar-first&gt;</literal></entry><entry></entry><entry>move the highlight to the first mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-last&gt;</literal></entry><entry></entry><entry>move the highlight to the last mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-next&gt;</literal></entry><entry></entry><entry>move the highlight to next mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-next-new&gt;</literal></entry><entry></entry><entry>move the highlight to next mailbox with new mail</entry></row>
-<row><entry><literal>&lt;sidebar-open&gt;</literal></entry><entry></entry><entry>open highlighted mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-page-down&gt;</literal></entry><entry></entry><entry>scroll the sidebar down 1 page</entry></row>
-<row><entry><literal>&lt;sidebar-page-up&gt;</literal></entry><entry></entry><entry>scroll the sidebar up 1 page</entry></row>
-<row><entry><literal>&lt;sidebar-prev&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox</entry></row>
-<row><entry><literal>&lt;sidebar-prev-new&gt;</literal></entry><entry></entry><entry>move the highlight to previous mailbox with new mail</entry></row>
-<row><entry><literal>&lt;sidebar-start-search&gt;</literal></entry><entry></entry><entry>fuzzy search the sidebar</entry></row>
-<row><entry><literal>&lt;sidebar-toggle-virtual&gt;</literal></entry><entry></entry><entry>toggle between mailboxes and virtual mailboxes</entry></row>
-<row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>make the sidebar (in)visible</entry></row>
+<row><entry><literal>&lt;sidebar-abort-search&gt;</literal></entry><entry></entry><entry>Close the sidebar search</entry></row>
+<row><entry><literal>&lt;sidebar-first&gt;</literal></entry><entry></entry><entry>Move the highlight to the first mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-last&gt;</literal></entry><entry></entry><entry>Move the highlight to the last mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-next&gt;</literal></entry><entry></entry><entry>Move the highlight to next mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-next-new&gt;</literal></entry><entry></entry><entry>Move the highlight to next mailbox with new mail</entry></row>
+<row><entry><literal>&lt;sidebar-open&gt;</literal></entry><entry></entry><entry>Open highlighted mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-page-down&gt;</literal></entry><entry></entry><entry>Scroll the sidebar down 1 page</entry></row>
+<row><entry><literal>&lt;sidebar-page-up&gt;</literal></entry><entry></entry><entry>Scroll the sidebar up 1 page</entry></row>
+<row><entry><literal>&lt;sidebar-prev&gt;</literal></entry><entry></entry><entry>Move the highlight to previous mailbox</entry></row>
+<row><entry><literal>&lt;sidebar-prev-new&gt;</literal></entry><entry></entry><entry>Move the highlight to previous mailbox with new mail</entry></row>
+<row><entry><literal>&lt;sidebar-start-search&gt;</literal></entry><entry></entry><entry>Fuzzy search the sidebar</entry></row>
+<row><entry><literal>&lt;sidebar-toggle-virtual&gt;</literal></entry><entry></entry><entry>Toggle between mailboxes and virtual mailboxes</entry></row>
+<row><entry><literal>&lt;sidebar-toggle-visible&gt;</literal></entry><entry></entry><entry>Make the sidebar (in)visible</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -31346,11 +31391,11 @@ bindings for all menus (except as noted).
 <row><entry>Function</entry><entry>Default key</entry><entry>Description</entry></row>
 </thead>
 <tbody>
-<row><entry><literal>&lt;create-account&gt;</literal></entry><entry>c</entry><entry>create a new autocrypt account</entry></row>
-<row><entry><literal>&lt;delete-account&gt;</literal></entry><entry>D</entry><entry>delete the current account</entry></row>
-<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>exit this menu</entry></row>
-<row><entry><literal>&lt;toggle-active&gt;</literal></entry><entry>a</entry><entry>toggle the current account active/inactive</entry></row>
-<row><entry><literal>&lt;toggle-prefer-encrypt&gt;</literal></entry><entry>p</entry><entry>toggle the current account prefer-encrypt flag</entry></row>
+<row><entry><literal>&lt;create-account&gt;</literal></entry><entry>c</entry><entry>Create a new autocrypt account</entry></row>
+<row><entry><literal>&lt;delete-account&gt;</literal></entry><entry>D</entry><entry>Delete the current account</entry></row>
+<row><entry><literal>&lt;exit&gt;</literal></entry><entry>q</entry><entry>Exit this menu</entry></row>
+<row><entry><literal>&lt;toggle-active&gt;</literal></entry><entry>a</entry><entry>Toggle the current account active/inactive</entry></row>
+<row><entry><literal>&lt;toggle-prefer-encrypt&gt;</literal></entry><entry>p</entry><entry>Toggle the current account prefer-encrypt flag</entry></row>
 </tbody>
 </tgroup>
 </table>
